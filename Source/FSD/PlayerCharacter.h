@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/Character.h"
+#include "Item.h"
 #include "PlayerCharacter.generated.h"
 
 UCLASS()
@@ -29,4 +30,7 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) UCameraComponent* FirstPersonCamera;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) UCameraComponent* ThirdPersonCamera;
+
+	UFUNCTION(BlueprintCallable)
+		AItem* GetEquippedItem() { return NULL; };
 };
