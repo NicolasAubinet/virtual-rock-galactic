@@ -79,3 +79,4 @@ DerivedDataCache/*
 update.bat
 input.txt
 Package/*
+autoupdate.py
