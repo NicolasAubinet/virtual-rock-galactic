@@ -1,25 +1,132 @@
 {
-	"name": "Default bindings for Vive",
+	"name": "Default bindings for Vive Controllers",
 	"controller_type": "vive_controller",
-	"last_edited_by": "UnrealEngine",
 	"bindings":
 	{
-		"/actions/main":
-		{
-			"sources": [
-				{
-					"mode": "button",
-					"path": "/user/hand/right/input/grip",
-					"inputs":
-					{
-						"click":
-						{
-							"output": "/actions/main/in/GrabRight"
-						}
+	"/actions/main": {
+		"sources": [
+			{
+				"path": "/user/hand/left/input/grip",
+				"mode": "button",
+				"inputs": {
+					"click": {
+						"output": "/actions/main/in/leftgrip"
 					}
 				}
-			],
-			"poses": [
+			},
+			{
+				"path": "/user/hand/left/input/application_menu",
+				"mode": "button",
+				"inputs": {
+					"click": {
+						"output": "/actions/main/in/leftbuttonb"
+					}
+				}
+			},
+			{
+				"path": "/user/hand/left/input/trigger",
+				"mode": "trigger",
+				"inputs": {
+					"click": {
+						"output": "/actions/main/in/lefttriggerclick"
+					},
+					"pull": {
+						"output": "/actions/main/in/lefttriggerpull axis"
+					}
+				}
+			},
+			{
+				"path": "/user/hand/left/input/trackpad",
+				"mode": "dpad",
+				"parameters": {
+					"sub_mode": "click"
+				},
+				"inputs": {
+					"north": {
+						"output": "/actions/main/in/leftthumbstick"
+					},
+					"south": {
+						"output": "/actions/main/in/leftbuttona"
+					},
+					"east" :  {
+						"output": "/actions/main/in/leftthumbstick"
+					},
+					"west" :  {
+						"output": "/actions/main/in/leftthumbstick"
+					}
+				}
+			},
+			{
+				"path": "/user/hand/right/input/grip",
+				"mode": "button",
+				"inputs": {
+					"click": {
+						"output": "/actions/main/in/rightgrip"
+					}
+				}
+			},
+			{
+				"path": "/user/hand/right/input/application_menu",
+				"mode": "button",
+				"inputs": {
+					"click": {
+						"output": "/actions/main/in/rightbuttonb"
+					}
+				}
+			},
+			{
+				"path": "/user/hand/right/input/trigger",
+				"mode": "trigger",
+				"inputs": {
+					"click": {
+						"output": "/actions/main/in/righttriggerclick"
+					},
+					"pull": {
+						"output": "/actions/main/in/righttriggerpull axis"
+					}
+				}
+			},
+			{
+				"path": "/user/hand/right/input/trackpad",
+				"mode": "dpad",
+				"parameters": {
+					"sub_mode": "click"
+				},
+				"inputs": {
+					"north": {
+						"output": "/actions/main/in/rightthumbstick"
+					},
+					"south": {
+						"output": "/actions/main/in/rightbuttona"
+					},
+					"east":  {
+						"output": "/actions/main/in/rightthumbstick"
+					},
+					"west":  {
+						"output": "/actions/main/in/rightthumbstick"
+					}
+				}
+			},
+			{
+				"path": "/user/hand/left/input/trackpad",
+				"mode": "trackpad",
+				"inputs": {
+					"position": {
+						"output": "/actions/main/in/motioncontrollerthumbleft_x,motioncontrollerthumbleft_y x y_axis2d"
+					}
+				}
+			},
+			{
+				"path": "/user/hand/right/input/trackpad",
+				"mode": "trackpad",
+				"inputs": {
+					"position": {
+						"output": "/actions/main/in/motioncontrollerthumbright_x,motioncontrollerthumbright_y x y_axis2d"
+					}
+				}
+			}
+		],
+		"poses": [
 				{
 					"output": "/actions/main/in/controllerleft",
 					"path": "/user/hand/left/pose/raw",
@@ -50,7 +157,7 @@
 					"path": "/user/hand/right/output/haptic"
 				}
 			]
-		}
-	},
-	"description": "FSD-14469661"
+	}
+},
+	"description": "Contractors VR"
 }

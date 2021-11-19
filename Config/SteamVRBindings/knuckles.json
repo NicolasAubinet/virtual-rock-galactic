@@ -1,24 +1,10 @@
 {
-	"name": "Default bindings for ValveIndex",
+	"name": "Default bindings for Index Controllers",
 	"controller_type": "knuckles",
-	"last_edited_by": "UnrealEngine",
 	"bindings":
 	{
-		"/actions/main":
+		"/actions/main": 
 		{
-			"sources": [
-				{
-					"mode": "trigger",
-					"path": "/user/hand/right/input/grip",
-					"inputs":
-					{
-						"click":
-						{
-							"output": "/actions/main/in/GrabRight"
-						}
-					}
-				}
-			],
 			"poses": [
 				{
 					"output": "/actions/main/in/controllerleft",
@@ -30,16 +16,6 @@
 					"path": "/user/hand/right/pose/raw"
 				}
 			],
-			"skeleton": [
-				{
-					"output": "/actions/main/in/skeletonleft",
-					"path": "/user/hand/left/input/skeleton/left"
-				},
-				{
-					"output": "/actions/main/in/skeletonright",
-					"path": "/user/hand/right/input/skeleton/right"
-				}
-			],
 			"haptics": [
 				{
 					"output": "/actions/main/out/vibrateleft",
@@ -49,8 +25,152 @@
 					"output": "/actions/main/out/vibrateright",
 					"path": "/user/hand/right/output/haptic"
 				}
+			],
+			"sources": [
+				{
+					"path": "/user/hand/left/input/trigger",
+					"mode": "trigger",
+					"inputs": {
+						"click": {
+							"output": "/actions/main/in/LeftTriggerClick"
+						},
+						"pull": {
+							"output": "/actions/main/in/LeftTriggerPull axis"
+						}
+					}
+				},
+				{
+					"path": "/user/hand/right/input/trigger",
+					"mode": "trigger",
+					"inputs": {
+						"click": {
+							"output": "/actions/main/in/RightTriggerClick"
+						},
+						"pull": {
+							"output": "/actions/main/in/RightTriggerPull axis"
+						}
+					}
+				},
+				{
+					"path": "/user/hand/left/input/thumbstick",
+					"mode": "button",
+					"inputs": {
+						"click": {
+							"output": "/actions/main/in/LeftThumbStick"
+						}
+					}
+				},
+				{
+					"path": "/user/hand/left/input/a",
+					"mode": "button",
+					"inputs": {
+						"click": {
+							"output": "/actions/main/in/LeftButtonA"
+						}
+					}
+				},
+				{
+					"path": "/user/hand/left/input/b",
+					"mode": "button",
+					"inputs": {
+						"click": {
+							"output": "/actions/main/in/LeftButtonB"
+						}
+					}
+				},
+				{
+					"path": "/user/hand/right/input/thumbstick",
+					"mode": "button",
+					"inputs": {
+						"click": {
+							"output": "/actions/main/in/RightThumbStick"
+						}
+					}
+				},
+				{
+					"path": "/user/hand/right/input/a",
+					"mode": "button",
+					"inputs": {
+						"click": {
+							"output": "/actions/main/in/RightButtonA"
+						}
+					}
+				},
+				{
+					"path": "/user/hand/right/input/b",
+					"mode": "button",
+					"inputs": {
+						"click": {
+							"output": "/actions/main/in/RightButtonB"
+						}
+					}
+				},
+				{
+					"path": "/user/hand/left/input/thumbstick",
+					"mode": "joystick",
+					"inputs": {
+						"position": {
+							"output": "/actions/main/in/MotionControllerThumbLeft_X,MotionControllerThumbLeft_Y X Y_axis2d"
+						}
+					}
+				},
+				{
+					"path": "/user/hand/right/input/thumbstick",
+					"mode": "joystick",
+					"inputs": {
+						"position": {
+							"output": "/actions/main/in/MotionControllerThumbRight_X,MotionControllerThumbRight_Y X Y_axis2d"
+						}
+					}
+				},
+				{
+					"path": "/user/hand/right/input/grip",
+					"mode": "button",
+					"parameters": {
+						"click_activate_threshold": "0.99",
+						"touch_activate_threshold": "0.99",
+						"click_deactivate_threshold": "0.95",
+						"touch_deactivate_threshold": "0.95"
+					},
+					"inputs": {
+						"click": {
+							"output": "/actions/main/in/rightgrip"
+						},
+						"touch": {
+							"output": "/actions/main/in/rightgrip"
+						}
+					}
+				},
+				{
+					"path": "/user/hand/left/input/grip",
+					"mode": "button",
+					"parameters": {
+						"click_activate_threshold": "0.99",
+						"touch_activate_threshold": "0.99",
+						"click_deactivate_threshold": "0.95",
+						"touch_deactivate_threshold": "0.95"
+					},
+					"inputs": {
+						"click": {
+							"output": "/actions/main/in/leftgrip"
+						},
+						"touch": {
+							"output": "/actions/main/in/leftgrip"
+						}
+					}
+				}
+			],
+			"skeleton": [
+				{
+					"output": "/actions/main/in/skeletonleft",
+					"path": "/user/hand/left/input/skeleton/left"
+				},
+				{
+					"output": "/actions/main/in/skeletonright",
+					"path": "/user/hand/right/input/skeleton/right"
+				}
 			]
 		}
 	},
-	"description": "FSD-14469661"
+	"description": "Contractors VR"
 }

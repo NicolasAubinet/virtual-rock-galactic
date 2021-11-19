@@ -1,7 +1,6 @@
 {
-	"name": "Default bindings for Vive Headset",
+	"name": "Default bindings for Vive",
 	"controller_type": "vive",
-	"last_edited_by": "UnrealEngine",
 	"bindings":
 	{
 		"/actions/main":
@@ -9,5 +8,5 @@
 			"sources": []
 		}
 	},
-	"description": "FSD-14469661"
+	"description": "Contractors VR"
 }

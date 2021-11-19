@@ -6,19 +6,7 @@
 	{
 		"/actions/main":
 		{
-			"sources": [
-				{
-					"mode": "button",
-					"path": "/user/hand/right/input/grip",
-					"inputs":
-					{
-						"click":
-						{
-							"output": "/actions/main/in/GrabRight"
-						}
-					}
-				}
-			],
+			"sources": [],
 			"poses": [
 				{
 					"output": "/actions/main/in/controllerleft",
@@ -52,5 +40,5 @@
 			]
 		}
 	},
-	"description": "FSD-14469661"
+	"description": ""
 }
