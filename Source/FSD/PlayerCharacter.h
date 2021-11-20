@@ -31,6 +31,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) UCameraComponent* FirstPersonCamera;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) UCameraComponent* ThirdPersonCamera;
 
-	UFUNCTION(BlueprintCallable)
-		AItem* GetEquippedItem() { return NULL; };
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) USkeletalMeshComponent* FPMesh;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) bool IsPressingMovementInputKey;
+	UFUNCTION(BlueprintCallable) void JumpPress() {};
+	UFUNCTION(BlueprintCallable) void JumpRelease() {};
+
+	
+	UFUNCTION(BlueprintCallable) AItem* GetEquippedItem() { return NULL; };
 };
