@@ -1,211 +1,199 @@
 {
-	"name": "Default bindings for Oculus Touch",
+	"name": "Default bindings for OculusTouch",
 	"controller_type": "oculus_touch",
+	"last_edited_by": "UnrealEngine",
 	"bindings":
 	{
-	"/actions/main": {
-		"poses": [
-			{
-				"output": "/actions/main/in/controllerleft",
-				"path": "/user/hand/left/pose/raw",
-				"requirement": "optional"
-			},
-			{
-				"output": "/actions/main/in/controllerright",
-				"path": "/user/hand/right/pose/raw"
-			}
-		],
-		"haptics": [
-			{
-				"output": "/actions/main/out/vibrateleft",
-				"path": "/user/hand/left/output/haptic"
-			},
-			{
-				"output": "/actions/main/out/vibrateright",
-				"path": "/user/hand/right/output/haptic"
-			}
-		],
-		"sources": [
-			{
-				"path": "/user/hand/right/input/trigger",
-				"mode": "trigger",
-				"inputs": {
-					"click": {
-						"output": "/actions/main/in/righttriggerclick"
-					},
-					"pull": {
-						"output": "/actions/main/in/righttriggerpull axis"
+		"/actions/main":
+		{
+			"sources": [
+				{
+					"mode": "trigger",
+					"path": "/user/hand/left/input/grip",
+					"inputs":
+					{
+						"click":
+						{
+							"output": "/actions/main/in/LeftGrip"
+						}
+					}
+				},
+				{
+					"mode": "trigger",
+					"path": "/user/hand/right/input/grip",
+					"inputs":
+					{
+						"click":
+						{
+							"output": "/actions/main/in/RightGrip"
+						}
+					}
+				},
+				{
+					"mode": "trigger",
+					"path": "/user/hand/left/input/trigger",
+					"inputs":
+					{
+						"click":
+						{
+							"output": "/actions/main/in/LeftTriggerClick"
+						}
+					}
+				},
+				{
+					"mode": "trigger",
+					"path": "/user/hand/right/input/trigger",
+					"inputs":
+					{
+						"click":
+						{
+							"output": "/actions/main/in/RightTriggerClick"
+						}
+					}
+				},
+				{
+					"mode": "button",
+					"path": "/user/hand/left/input/x",
+					"inputs":
+					{
+						"click":
+						{
+							"output": "/actions/main/in/LeftButtonA"
+						}
+					}
+				},
+				{
+					"mode": "button",
+					"path": "/user/hand/right/input/a",
+					"inputs":
+					{
+						"click":
+						{
+							"output": "/actions/main/in/RightButtonA"
+						}
+					}
+				},
+				{
+					"mode": "button",
+					"path": "/user/hand/left/input/y",
+					"inputs":
+					{
+						"click":
+						{
+							"output": "/actions/main/in/LeftButtonB"
+						}
+					}
+				},
+				{
+					"mode": "button",
+					"path": "/user/hand/right/input/b",
+					"inputs":
+					{
+						"click":
+						{
+							"output": "/actions/main/in/RightButtonB"
+						}
+					}
+				},
+				{
+					"mode": "joystick",
+					"path": "/user/hand/left/input/joystick",
+					"inputs":
+					{
+						"click":
+						{
+							"output": "/actions/main/in/Sprint"
+						}
+					}
+				},
+				{
+					"mode": "joystick",
+					"path": "/user/hand/right/input/joystick",
+					"inputs":
+					{
+						"click":
+						{
+							"output": "/actions/main/in/RightThumbStick"
+						}
+					}
+				},
+				{
+					"mode": "trigger",
+					"path": "/user/hand/left/input/trigger",
+					"inputs":
+					{
+						"pull":
+						{
+							"output": "/actions/main/in/LeftTriggerPull axis"
+						}
+					}
+				},
+				{
+					"mode": "trigger",
+					"path": "/user/hand/right/input/trigger",
+					"inputs":
+					{
+						"pull":
+						{
+							"output": "/actions/main/in/RightTriggerPull axis"
+						}
+					}
+				},
+				{
+					"mode": "joystick",
+					"path": "/user/hand/left/input/joystick",
+					"inputs":
+					{
+						"position":
+						{
+							"output": "/actions/main/in/MotionControllerThumbLeft_X,MotionControllerThumbLeft_Y X Y_axis2d"
+						}
+					}
+				},
+				{
+					"mode": "joystick",
+					"path": "/user/hand/right/input/joystick",
+					"inputs":
+					{
+						"position":
+						{
+							"output": "/actions/main/in/MotionControllerThumbRight_X,MotionControllerThumbRight_Y X Y_axis2d"
+						}
 					}
 				}
-			},
-			{
-				"path": "/user/hand/left/input/trigger",
-				"mode": "trigger",
-				"inputs": {
-					"click": {
-						"output": "/actions/main/in/lefttriggerclick"
-					},
-					"pull": {
-						"output": "/actions/main/in/lefttriggerpull axis"
-					}
+			],
+			"poses": [
+				{
+					"output": "/actions/main/in/controllerleft",
+					"path": "/user/hand/left/pose/raw",
+					"requirement": "optional"
+				},
+				{
+					"output": "/actions/main/in/controllerright",
+					"path": "/user/hand/right/pose/raw"
 				}
-			},
-			{
-				"path": "/user/hand/left/input/thumbstick",
-				"mode": "button",
-				"inputs": {
-					"click": {
-						"output": "/actions/main/in/TeleportLeft"
-					}
+			],
+			"skeleton": [
+				{
+					"output": "/actions/main/in/skeletonleft",
+					"path": "/user/hand/left/input/skeleton/left"
+				},
+				{
+					"output": "/actions/main/in/skeletonright",
+					"path": "/user/hand/right/input/skeleton/right"
 				}
-			},
-			{
-				"path": "/user/hand/left/input/a",
-				"mode": "button",
-				"inputs": {
-					"click": {
-						"output": "/actions/main/in/TeleportLeft"
-					}
+			],
+			"haptics": [
+				{
+					"output": "/actions/main/out/vibrateleft",
+					"path": "/user/hand/left/output/haptic"
+				},
+				{
+					"output": "/actions/main/out/vibrateright",
+					"path": "/user/hand/right/output/haptic"
 				}
-			},
-			{
-				"path": "/user/hand/right/input/thumbstick",
-				"mode": "button",
-				"inputs": {
-					"click": {
-						"output": "/actions/main/in/TeleportRight"
-					}
-				}
-			},
-			{
-				"path": "/user/hand/left/input/thumbstick",
-				"mode": "joystick",
-				"inputs": {
-					"position": {
-						"output": "/actions/main/in/MotionControllerThumbLeft_X,MotionControllerThumbLeft_Y X Y_axis2d"
-					}
-				}
-			},
-			{
-				"path": "/user/hand/right/input/thumbstick",
-				"mode": "joystick",
-				"inputs": {
-					"position": {
-						"output": "/actions/main/in/MotionControllerThumbRight_X,MotionControllerThumbRight_Y X Y_axis2d"
-					}
-				}
-			},
-			{
-				"path": "/user/hand/left/input/joystick",
-				"mode": "joystick",
-				"inputs": {
-					"click": {
-						"output": "/actions/main/in/leftthumbstick"
-					},
-					"position": {
-						"output": "/actions/main/in/motioncontrollerthumbleft_x,motioncontrollerthumbleft_y x y_axis2d"
-					}
-				}
-			},
-			{
-				"path": "/user/hand/right/input/joystick",
-				"mode": "joystick",
-				"inputs": {
-					"click": {
-						"output": "/actions/main/in/rightthumbstick"
-					},
-					"position": {
-						"output": "/actions/main/in/motioncontrollerthumbright_x,motioncontrollerthumbright_y x y_axis2d"
-					}
-				}
-			},
-			{
-				"path": "/user/hand/left/input/grip",
-				"mode": "button",
-				"inputs": {
-					"click": {
-						"output": "/actions/main/in/leftgrip"
-					}
-				}
-			},
-			{
-				"path": "/user/hand/right/input/grip",
-				"mode": "button",
-				"inputs": {
-					"click": {
-						"output": "/actions/main/in/rightgrip"
-					}
-				}
-			},
-			{
-				"path": "/user/hand/left/input/x",
-				"mode": "button",
-				"inputs": {
-					"click": {
-						"output": "/actions/main/in/leftbuttona"
-					}
-				}
-			},
-			{
-				"path": "/user/hand/right/input/a",
-				"mode": "button",
-				"inputs": {
-					"click": {
-						"output": "/actions/main/in/rightbuttona"
-					}
-				}
-			},
-			{
-				"path": "/user/hand/left/input/y",
-				"mode": "button",
-				"inputs": {
-					"click": {
-						"output": "/actions/main/in/leftbuttonb"
-					}
-				}
-			},
-			{
-				"path": "/user/hand/right/input/b",
-				"mode": "button",
-				"inputs": {
-					"click": {
-						"output": "/actions/main/in/rightbuttonb"
-					}
-				}
-			}
-		],
-		"poses": [
-			{
-				"output": "/actions/main/in/controllerleft",
-				"path": "/user/hand/left/pose/raw",
-				"requirement": "optional"
-			},
-			{
-				"output": "/actions/main/in/controllerright",
-				"path": "/user/hand/right/pose/raw"
-			}
-		],
-		"skeleton": [
-			{
-				"output": "/actions/main/in/skeletonleft",
-				"path": "/user/hand/left/input/skeleton/left"
-			},
-			{
-				"output": "/actions/main/in/skeletonright",
-				"path": "/user/hand/right/input/skeleton/right"
-			}
-		],
-		"haptics": [
-			{
-				"output": "/actions/main/out/vibrateleft",
-				"path": "/user/hand/left/output/haptic"
-			},
-			{
-				"output": "/actions/main/out/vibrateright",
-				"path": "/user/hand/right/output/haptic"
-			}
-		]
-	}
-},
-	"description": "Contractors VR"
+			]
+		}
+	},
+	"description": "FSD-0"
 }

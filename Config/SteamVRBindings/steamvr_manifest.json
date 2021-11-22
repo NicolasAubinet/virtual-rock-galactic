@@ -63,11 +63,6 @@
 			"requirement": "optional"
 		},
 		{
-			"name": "/actions/main/in/open_console",
-			"type": "boolean",
-			"requirement": "optional"
-		},
-		{
 			"name": "/actions/main/out/vibrateleft",
 			"type": "vibration",
 			"requirement": "optional"
@@ -75,6 +70,11 @@
 		{
 			"name": "/actions/main/out/vibrateright",
 			"type": "vibration",
+			"requirement": "optional"
+		},
+		{
+			"name": "/actions/main/in/open_console",
+			"type": "boolean",
 			"requirement": "optional"
 		},
 		{
@@ -86,16 +86,8 @@
 			"type": "boolean"
 		},
 		{
-			"name": "/actions/main/in/LeftTriggerPull axis",
-			"type": "vector1"
-		},
-		{
 			"name": "/actions/main/in/LeftTriggerClick",
 			"type": "boolean"
-		},
-		{
-			"name": "/actions/main/in/RightTriggerPull axis",
-			"type": "vector1"
 		},
 		{
 			"name": "/actions/main/in/RightTriggerClick",
@@ -118,12 +110,20 @@
 			"type": "boolean"
 		},
 		{
-			"name": "/actions/main/in/LeftThumbStick",
+			"name": "/actions/main/in/Sprint",
 			"type": "boolean"
 		},
 		{
 			"name": "/actions/main/in/RightThumbStick",
 			"type": "boolean"
+		},
+		{
+			"name": "/actions/main/in/LeftTriggerPull axis",
+			"type": "vector1"
+		},
+		{
+			"name": "/actions/main/in/RightTriggerPull axis",
+			"type": "vector1"
 		},
 		{
 			"name": "/actions/main/in/MotionControllerThumbLeft_X,MotionControllerThumbLeft_Y X Y_axis2d",
@@ -142,8 +142,48 @@
 	],
 	"default_bindings": [
 		{
-			"controller_type": "index_hmd",
-			"binding_url": "index_hmd.json"
+			"controller_type": "gamepad",
+			"binding_url": "gamepad.json"
+		},
+		{
+			"controller_type": "holographic_controller",
+			"binding_url": "holographic_controller.json"
+		},
+		{
+			"controller_type": "indexhmd",
+			"binding_url": "indexhmd.json"
+		},
+		{
+			"controller_type": "knuckles",
+			"binding_url": "knuckles.json"
+		},
+		{
+			"controller_type": "oculus_touch",
+			"binding_url": "oculus_touch.json"
+		},
+		{
+			"controller_type": "rift",
+			"binding_url": "rift.json"
+		},
+		{
+			"controller_type": "vive",
+			"binding_url": "vive.json"
+		},
+		{
+			"controller_type": "vive_controller",
+			"binding_url": "vive_controller.json"
+		},
+		{
+			"controller_type": "vive_cosmos_controller",
+			"binding_url": "vive_cosmos_controller.json"
+		},
+		{
+			"controller_type": "vive_pro",
+			"binding_url": "vive_pro.json"
+		},
+		{
+			"controller_type": "vive_tracker_camera",
+			"binding_url": "vive_tracker_camera.json"
 		},
 		{
 			"controller_type": "knuckles",
@@ -154,12 +194,8 @@
 			"binding_url": "vive_controller.json"
 		},
 		{
-			"controller_type": "vive_tracker",
-			"binding_url": "vive_tracker.json"
-		},
-		{
-			"controller_type": "vive",
-			"binding_url": "vive.json"
+			"controller_type": "vive_cosmos_controller",
+			"binding_url": "vive_cosmos_controller.json"
 		},
 		{
 			"controller_type": "oculus_touch",
@@ -168,6 +204,26 @@
 		{
 			"controller_type": "holographic_controller",
 			"binding_url": "holographic_controller.json"
+		},
+		{
+			"controller_type": "indexhmd",
+			"binding_url": "indexhmd.json"
+		},
+		{
+			"controller_type": "vive",
+			"binding_url": "vive.json"
+		},
+		{
+			"controller_type": "vive_pro",
+			"binding_url": "vive_pro.json"
+		},
+		{
+			"controller_type": "rift",
+			"binding_url": "rift.json"
+		},
+		{
+			"controller_type": "vive_tracker_camera",
+			"binding_url": "vive_tracker_camera.json"
 		},
 		{
 			"controller_type": "gamepad",
@@ -189,21 +245,21 @@
 			"/actions/main/in/special8": "Special 8 [Tracker]",
 			"/actions/main/in/skeletonleft": "Skeleton (Left)",
 			"/actions/main/in/skeletonright": "Skeleton (Right)",
-			"/actions/main/in/open_console": "Open Console",
 			"/actions/main/out/vibrateleft": "Haptic (Left)",
 			"/actions/main/out/vibrateright": "Haptic (Right)",
+			"/actions/main/in/open_console": "Open Console",
 			"/actions/main/in/LeftGrip": "LeftGrip",
 			"/actions/main/in/RightGrip": "RightGrip",
-			"/actions/main/in/LeftTriggerPull axis": "LeftTriggerPull",
 			"/actions/main/in/LeftTriggerClick": "LeftTriggerClick",
-			"/actions/main/in/RightTriggerPull axis": "RightTriggerPull",
 			"/actions/main/in/RightTriggerClick": "RightTriggerClick",
 			"/actions/main/in/LeftButtonA": "LeftButtonA",
 			"/actions/main/in/RightButtonA": "RightButtonA",
 			"/actions/main/in/LeftButtonB": "LeftButtonB",
 			"/actions/main/in/RightButtonB": "RightButtonB",
-			"/actions/main/in/LeftThumbStick": "LeftThumbStick",
+			"/actions/main/in/Sprint": "Sprint",
 			"/actions/main/in/RightThumbStick": "RightThumbStick",
+			"/actions/main/in/LeftTriggerPull axis": "LeftTriggerPull",
+			"/actions/main/in/RightTriggerPull axis": "RightTriggerPull",
 			"/actions/main/in/MotionControllerThumbLeft_X,MotionControllerThumbLeft_Y X Y_axis2d": "MotionControllerThumbLeft",
 			"/actions/main/in/MotionControllerThumbRight_X,MotionControllerThumbRight_Y X Y_axis2d": "MotionControllerThumbRight",
 			"/actions/main": "Main Game Actions"

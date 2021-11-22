@@ -1,6 +1,7 @@
 {
 	"name": "Default bindings for Gamepads",
 	"controller_type": "gamepad",
+	"last_edited_by": "UnrealEngine",
 	"bindings":
 	{
 		"/actions/main":
@@ -8,5 +9,5 @@
 			"sources": []
 		}
 	},
-	"description": "Contractors VR"
+	"description": "FSD-0"
 }
