@@ -1,4 +1,4 @@
-<img src="https://github.com/NicolasAubinet/virtual-rock-galactic/raw/main/Content/VRG/logo.png" width="128" align="left"></img>
+<img src="https://github.com/NicolasAubinet/virtual-rock-galactic/raw/main/FSD.png" width="128" align="left"></img>
 # Virtual Rock Galactic
 A VR mod for [Deep Rock Galactic](https://store.steampowered.com/app/548430/Deep_Rock_Galactic/)
 
