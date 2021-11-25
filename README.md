@@ -8,6 +8,6 @@ Did you ever hear the tragedy of Darth Plagueis The Wise? I thought not. It’s 
 
 ---
 
-Made with ❤ by [NicolasAubinet](https://github.com/NicolasAubinet), [PinkMilkProductions](https://github.com/PinkMilkProductions) & [Robert-K](https://github.com/Robert-K)
+Made with ❤ by [KI2T](https://github.com/ki2t), [NicolasAubinet](https://github.com/NicolasAubinet), [PinkMilkProductions](https://github.com/PinkMilkProductions) & [Robert-K](https://github.com/Robert-K)
 
 ⛏ ROCK & STONE!!! 🍻
