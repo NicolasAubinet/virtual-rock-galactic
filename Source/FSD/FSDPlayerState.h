@@ -7,6 +7,7 @@
 #include "FSDPlayerState.generated.h"
 
 UDELEGATE(BlueprintAuthorityOnly) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnPlayerCharacterSpawned);
+UDELEGATE(BlueprintAuthorityOnly) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnSelectedCharacterChanged);
 
 UCLASS()
 class FSD_API AFSDPlayerState : public APlayerState
@@ -15,6 +16,8 @@ class FSD_API AFSDPlayerState : public APlayerState
 	
 public:
 	UPROPERTY(BlueprintAssignable) FOnPlayerCharacterSpawned OnPlayerCharacterSpawned;
+	UPROPERTY(BlueprintAssignable) FOnSelectedCharacterChanged OnSelectedCharacterChanged;
 	UPROPERTY(BlueprintReadWrite) bool HasSelectedCharacter;
 	UPROPERTY(BlueprintReadWrite) bool bIsServer;
+	UPROPERTY(BlueprintReadWrite) bool bIsOnSpaceRig;
 };
