@@ -38,5 +38,4 @@ public:
 	UFUNCTION(BlueprintCallable) void JumpRelease() {};
 
 	
-	UFUNCTION(BlueprintCallable) AItem* GetEquippedItem() { return NULL; };
-};
+	UFUNCTION(BlueprintCallable) AItem* GetEquippedItem() { return NULL; };};
