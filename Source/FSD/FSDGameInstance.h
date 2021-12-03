@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "WindowWidget.h"
 #include "FSDGameInstance.generated.h"
 
 UDELEGATE(BlueprintAuthorityOnly) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnLocalPlayerCharacterSet);
@@ -12,4 +13,6 @@ class FSD_API UFSDGameInstance : public UGameInstance
 
 public:
 	UPROPERTY(BlueprintAssignable) FOnLocalPlayerCharacterSet OnLocalPlayerCharacterSet;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) TWeakObjectPtr<UWindowWidget> ActiveEscapeMenu;
 };

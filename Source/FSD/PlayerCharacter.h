@@ -6,6 +6,7 @@
 #include "Camera/CameraComponent.h"
 #include "GameFramework/Character.h"
 #include "Item.h"
+#include "Components/WidgetInteractionComponent.h"
 #include "PlayerCharacter.generated.h"
 
 UCLASS()
@@ -37,5 +38,6 @@ public:
 	UFUNCTION(BlueprintCallable) void JumpPress() {};
 	UFUNCTION(BlueprintCallable) void JumpRelease() {};
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) UWidgetInteractionComponent* WidgetInteraction;
 	
-	UFUNCTION(BlueprintCallable) AItem* GetEquippedItem() { return NULL; };};
+	UFUNCTION(BlueprintCallable) AItem* GetEquippedItem() { return nullptr; };};
