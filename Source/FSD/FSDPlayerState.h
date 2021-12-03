@@ -19,5 +19,5 @@ public:
 	UPROPERTY(BlueprintAssignable) FOnSelectedCharacterChanged OnSelectedCharacterChanged;
 	UPROPERTY(BlueprintReadWrite) bool HasSelectedCharacter;
 	UPROPERTY(BlueprintReadWrite) bool bIsServer;
-	UPROPERTY(BlueprintReadWrite) bool bIsOnSpaceRig;
+	UPROPERTY(BlueprintReadWrite) bool IsOnSpaceRig;
 };
