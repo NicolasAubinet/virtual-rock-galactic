@@ -5,7 +5,7 @@
 #include "CappedResource.h"
 #include "ResourcesComponent.generated.h"
 
-UDELEGATE(BlueprintAuthorityOnly) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FResourceChanged, UCappedResource*, Resource, float, currentAmount);
+UDELEGATE(BlueprintAuthorityOnly) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnResourceChanged);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class FSD_API UResourcesComponent : public UActorComponent
@@ -14,5 +14,5 @@ class FSD_API UResourcesComponent : public UActorComponent
 
 public:
     UPROPERTY(BlueprintReadWrite) TArray<UCappedResource*> Resources;
-    //UPROPERTY(BlueprintAssignable) FResourceChanged ResourceChanged(UCappedResource* Resource, float currentAmount) {};
+    UPROPERTY(BlueprintAssignable) FOnResourceChanged OnResourceChanged;
 };
