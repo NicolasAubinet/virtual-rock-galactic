@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerState.h"
+#include "PlayerResourceComponent.h"
 #include "FSDPlayerState.generated.h"
 
 UDELEGATE(BlueprintAuthorityOnly) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnPlayerCharacterSpawned);
@@ -20,4 +21,5 @@ public:
 	UPROPERTY(BlueprintReadWrite) bool HasSelectedCharacter;
 	UPROPERTY(BlueprintReadWrite) bool bIsServer;
 	UPROPERTY(BlueprintReadWrite) bool IsOnSpaceRig;
+	UPROPERTY(BlueprintReadWrite) UPlayerResourceComponent* PlayerResources;
 };
