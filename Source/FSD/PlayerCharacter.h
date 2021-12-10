@@ -8,6 +8,7 @@
 #include "Item.h"
 #include "PlayerHealthComponent.h"
 #include "Components/WidgetInteractionComponent.h"
+#include "InventoryComponent.h"
 #include "PlayerCharacter.generated.h"
 
 UCLASS()
@@ -33,6 +34,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) UCameraComponent* FirstPersonCamera;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) UCameraComponent* ThirdPersonCamera;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) UPlayerHealthComponent* HealthComponent;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) UInventoryComponent* InventoryComponent;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) USkeletalMeshComponent* FPMesh;
 
