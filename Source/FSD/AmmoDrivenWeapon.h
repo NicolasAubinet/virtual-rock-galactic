@@ -17,6 +17,7 @@ class FSD_API AAmmoDrivenWeapon : public AAnimatedItem
 
 	UFUNCTION(BlueprintCallable) void OnWeaponFireEnded() {};
 	UFUNCTION(BlueprintCallable) void OnWeaponFired(FVector Location) {};
+	UFUNCTION(BlueprintCallable) void RecieveFiredWeapon() {};
 	UFUNCTION(BlueprintCallable) void InstantlyReload() {};
 	UFUNCTION(BlueprintCallable) void All_StartReload() {};
 	UFUNCTION(BlueprintCallable) void Server_StopReload() {};
@@ -25,6 +26,16 @@ class FSD_API AAmmoDrivenWeapon : public AAnimatedItem
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) UWeaponFireComponent* WeaponFire;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) UAnimMontage* FP_FireAnimation;
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite) int AmmoCount;
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite) int ClipCount;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) UAnimMontage* WPN_Fire;
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite) UFXSystemAsset* CasingParticles;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) bool UseTriggeredCasingParticleSystem;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) UForceFeedbackEffect* FireForceFeedbackEffect;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) int32 MaxAmmo;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) int32 ClipSize;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) int32 ShotCost;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) int32 AmmoCount;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) int32 ClipCount;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) float RateOfFire;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) bool HasAutomaticFire;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) float ReloadTimeLeft;
 };

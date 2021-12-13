@@ -41,6 +41,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) bool IsPressingMovementInputKey;
 	UFUNCTION(BlueprintCallable) void JumpPress() {};
 	UFUNCTION(BlueprintCallable) void JumpRelease() {};
+	UFUNCTION(BlueprintCallable) void ThrowFlareReleased() {};
+	UFUNCTION(BlueprintCallable) void ThrowFlarePressed() {};
+	UFUNCTION(BlueprintCallable) void ThrowFlare() {};
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) UWidgetInteractionComponent* WidgetInteraction;
 	

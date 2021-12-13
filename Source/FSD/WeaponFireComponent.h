@@ -24,6 +24,6 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	UFUNCTION(BlueprintCallable)
-	void Fire(FVector Origin, FVector_NetQuantizeNormal Direction) {};
+	UFUNCTION(BlueprintCallable) void Fire(FVector Origin, FVector_NetQuantizeNormal Direction) {};
+	UFUNCTION(BlueprintCallable) void StopFire() {};
 };
