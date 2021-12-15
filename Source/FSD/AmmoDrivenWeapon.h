@@ -29,7 +29,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) UAnimMontage* WPN_Fire;
 	//UPROPERTY(EditAnywhere, BlueprintReadWrite) UFXSystemAsset* CasingParticles;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) bool UseTriggeredCasingParticleSystem;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) UForceFeedbackEffect* FireForceFeedbackEffect;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) ULightComponent* MuzzleFlashLight;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) FRuntimeFloatCurve MuzzleFlashLightCurve;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) int32 BulletsRemainingForNearEmptySound;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) int32 MaxAmmo;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) int32 ClipSize;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) int32 ShotCost;
