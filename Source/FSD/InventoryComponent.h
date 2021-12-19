@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Templates/SubclassOf.h"
 #include "Components/ActorComponent.h"
 #include "Item.h"
 #include "PickaxeItem.h"
@@ -29,8 +30,8 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<AItem*> Items;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) APickaxeItem* MiningItem;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) AThrownGrenadeItem* GrenadeItem;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) AFlare* FlareClass;
+	UPROPERTY(BlueprintReadOnly, Transient) AThrownGrenadeItem* GrenadeItem;
+	UPROPERTY(BlueprintReadOnly, Transient) TSubclassOf<AFlare> flareClass;
 
 	UFUNCTION(BlueprintCallable) void Equip(AItem* Item, bool ignoreIsUsing, bool ignoreConditions) {};
 	UFUNCTION(BlueprintCallable) void Server_Equip(AItem* Item) {};

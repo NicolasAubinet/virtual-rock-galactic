@@ -14,4 +14,6 @@ class FSD_API APickaxeItem : public AItem
 {
 	GENERATED_BODY()
 	
+public:
+	UPROPERTY(BlueprintReadWrite) USceneComponent* FP_Root;
 };
