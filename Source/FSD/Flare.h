@@ -13,8 +13,10 @@ class FSD_API AFlare : public AFSDPhysicsActor
 	
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) TSubclassOf<AItem> LoadoutItem;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite) TSubclassOf<AActor> WeaponPreviewClass;
+	UPROPERTY(BlueprintReadOnly, EditAnywhere) TSubclassOf<AActor> WeaponPreviewClass;
 
 	UFUNCTION(BlueprintCallable) void ActivateFlare() {}
 	UFUNCTION(BlueprintCallable) static AFlare* GetFlareDefaultObject(TSubclassOf<AFlare> flareClass) { return nullptr; }
+
+	UFUNCTION(BlueprintCallable) void Inhibit() {}
 };
