@@ -18,6 +18,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)	USkeletalMeshComponent* FPMesh;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) USkeletalMeshComponent* TPMesh;
 
-	UFUNCTION(BlueprintCallable) FTransform GetMuzzle() { FTransform dummy; return dummy; };
+	UFUNCTION(BlueprintPure) FTransform GetMuzzle() { FTransform dummy; return dummy; };
 	
 };
