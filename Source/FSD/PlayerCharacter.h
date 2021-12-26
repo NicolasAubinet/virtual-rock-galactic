@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -47,4 +45,8 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) UWidgetInteractionComponent* WidgetInteraction;
 	
-	UFUNCTION(BlueprintCallable) AItem* GetEquippedItem() { return nullptr; };};
+	UFUNCTION(BlueprintCallable) AItem* GetEquippedItem() { return nullptr; }
+
+	UFUNCTION(BlueprintCallable) bool IsMovementInputPressed() { return false; }
+	UFUNCTION(BlueprintCallable) void ForceIsPressingMovementInputKey() {}
+};
