@@ -15,4 +15,6 @@ public:
 	UPROPERTY(Export, Transient) UStaticMeshComponent* GrenadeMeshInstance;
 
 	UPROPERTY(BlueprintReadOnly, Transient) TSubclassOf<AGrenade> GrenadeClass;
+
+	UFUNCTION(BlueprintCallable) void Server_ThrowGrenade() {}
 };
