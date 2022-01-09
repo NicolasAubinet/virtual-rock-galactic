@@ -1,13 +1,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Camera/CameraComponent.h"
 #include "GameFramework/Character.h"
-#include "Item.h"
-#include "PlayerHealthComponent.h"
-#include "Components/WidgetInteractionComponent.h"
-#include "InventoryComponent.h"
 #include "PlayerCharacter.generated.h"
+
+class UCameraComponent;
+class UPlayerHealthComponent;
+class UInventoryComponent;
+class UWidgetInteractionComponent;
+class AItem;
 
 UCLASS()
 class FSD_API APlayerCharacter : public ACharacter
