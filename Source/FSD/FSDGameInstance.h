@@ -4,6 +4,8 @@
 #include "WindowWidget.h"
 #include "FSDGameInstance.generated.h"
 
+class UGeneratedMission;
+
 UDELEGATE(BlueprintAuthorityOnly) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnLocalPlayerCharacterSet);
 
 UCLASS()
@@ -15,4 +17,6 @@ public:
 	UPROPERTY(BlueprintAssignable) FOnLocalPlayerCharacterSet OnLocalPlayerCharacterSet;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) TWeakObjectPtr<UWindowWidget> ActiveEscapeMenu;
+
+	UFUNCTION(BlueprintCallable) void SetSelectedMission(UGeneratedMission* mission, bool updateSessionSettings) {}
 };
