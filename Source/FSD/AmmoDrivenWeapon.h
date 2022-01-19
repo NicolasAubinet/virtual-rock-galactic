@@ -27,6 +27,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) UWeaponFireComponent* WeaponFire;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) UAnimMontage* FP_FireAnimation;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) UAnimMontage* WPN_Fire;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) UAnimMontage* WPN_Reload;
 	//UPROPERTY(EditAnywhere, BlueprintReadWrite) UFXSystemAsset* CasingParticles;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) bool UseTriggeredCasingParticleSystem;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) ULightComponent* MuzzleFlashLight;

@@ -10,12 +10,18 @@ class UInventoryComponent;
 class UWidgetInteractionComponent;
 class AItem;
 
+UDELEGATE(BlueprintAuthorityOnly) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnManualMiningBegin);
+UDELEGATE(BlueprintAuthorityOnly) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnManualMiningEnd);
+
 UCLASS()
 class FSD_API APlayerCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
 public:	
+	UPROPERTY(BlueprintAssignable) FOnManualMiningBegin OnManualMiningBegin;
+	UPROPERTY(BlueprintAssignable) FOnManualMiningEnd OnManualMiningEnd;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) UCameraComponent* FirstPersonCamera;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) UCameraComponent* ThirdPersonCamera;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) UPlayerHealthComponent* HealthComponent;
