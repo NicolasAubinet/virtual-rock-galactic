@@ -41,4 +41,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) float RateOfFire;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) bool HasAutomaticFire;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) float ReloadTimeLeft;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) float FireSoundFadeDuration;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) float FireSoundDelayToTail;
 };
