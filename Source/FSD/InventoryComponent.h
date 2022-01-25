@@ -8,9 +8,9 @@
 #include "Item.h"
 #include "PickaxeItem.h"
 #include "ThrownGrenadeItem.h"
+#include "RessuplyPodItem.h"
 #include "Flare.h"
 #include "InventoryComponent.generated.h"
-
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class FSD_API UInventoryComponent : public UActorComponent
@@ -30,6 +30,7 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) TArray<AItem*> Items;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) APickaxeItem* MiningItem;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) ARessuplyPodItem* ResupplyItem;
 	UPROPERTY(BlueprintReadOnly, Transient) AThrownGrenadeItem* GrenadeItem;
 	UPROPERTY(BlueprintReadOnly, Transient) TSubclassOf<AFlare> flareClass;
 
