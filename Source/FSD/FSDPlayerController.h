@@ -14,4 +14,6 @@ class FSD_API AFSDPlayerController : public AFSDPlayerControllerBase
 {
 	GENERATED_BODY()
 	
+public:
+	UFUNCTION(BlueprintCallable) void ReadyToContinueFromEndScreen() {}
 };

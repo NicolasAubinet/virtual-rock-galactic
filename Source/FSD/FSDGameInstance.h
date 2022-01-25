@@ -7,6 +7,7 @@
 class UGeneratedMission;
 
 UDELEGATE(BlueprintAuthorityOnly) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnLocalPlayerCharacterSet);
+UDELEGATE(BlueprintAuthorityOnly) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFSDGameInstanceOnShowEndScreen);
 
 UCLASS()
 class FSD_API UFSDGameInstance : public UGameInstance
@@ -15,6 +16,7 @@ class FSD_API UFSDGameInstance : public UGameInstance
 
 public:
 	UPROPERTY(BlueprintAssignable) FOnLocalPlayerCharacterSet OnLocalPlayerCharacterSet;
+	UPROPERTY(BlueprintAssignable) FFSDGameInstanceOnShowEndScreen OnShowEndScreen;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) TWeakObjectPtr<UWindowWidget> ActiveEscapeMenu;
 
