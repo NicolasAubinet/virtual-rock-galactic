@@ -39,6 +39,10 @@ public:
 	UFUNCTION(BlueprintCallable) void Server_SetUsing(bool characterIsUsing) {}
 	UFUNCTION(BlueprintCallable) void Server_ThrowCarriedItem(FVector_NetQuantize force) {}
 
+	UFUNCTION(BlueprintCallable) bool IsFirstPerson() { return false; }
+	UFUNCTION(BlueprintCallable) bool IsDown() { return false; }
+	UFUNCTION(BlueprintCallable) bool IsAlive() { return false; }
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) UWidgetInteractionComponent* WidgetInteraction;
 	
 	UFUNCTION(BlueprintCallable) AItem* GetEquippedItem() { return nullptr; }
