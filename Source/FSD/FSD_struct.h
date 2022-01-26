@@ -21,3 +21,14 @@ enum class EInputKeys : uint8 {
 	Mine = 2,
 	EInputKeys_MAX = 255
 };
+
+UENUM(BlueprintType)
+enum class EAmmoWeaponState : uint8 {
+	Equipping = 0,
+	Ready = 1,
+	Cycling = 2,
+	Reloading = 3,
+	BurstCycling = 4,
+    EAmmoWeaponState_MAX = 5,
+};
+};

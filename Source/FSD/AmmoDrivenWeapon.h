@@ -1,15 +1,11 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
 #include "AnimatedItem.h"
 #include "WeaponFireComponent.h"
+#include "FSD_struct.h"
 #include "AmmoDrivenWeapon.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class FSD_API AAmmoDrivenWeapon : public AAnimatedItem
 {
@@ -43,4 +39,5 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) float ReloadTimeLeft;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) float FireSoundFadeDuration;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) float FireSoundDelayToTail;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) EAmmoWeaponState WeaponState;
 };
