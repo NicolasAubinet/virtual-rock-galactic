@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "FSD_struct.h"
 #include "GameFramework/Character.h"
 #include "PlayerCharacter.generated.h"
 
@@ -12,6 +13,7 @@ class AItem;
 
 UDELEGATE(BlueprintAuthorityOnly) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnManualMiningBegin);
 UDELEGATE(BlueprintAuthorityOnly) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnManualMiningEnd);
+UDELEGATE(BlueprintAuthorityOnly) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerCharacterOnCharacterStateChanged, ECharacterState, NewState);
 
 UCLASS()
 class FSD_API APlayerCharacter : public ACharacter
@@ -21,6 +23,7 @@ class FSD_API APlayerCharacter : public ACharacter
 public:	
 	UPROPERTY(BlueprintAssignable) FOnManualMiningBegin OnManualMiningBegin;
 	UPROPERTY(BlueprintAssignable) FOnManualMiningEnd OnManualMiningEnd;
+	UPROPERTY(BlueprintAssignable) FPlayerCharacterOnCharacterStateChanged OnCharacterStateChanged;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) UCameraComponent* FirstPersonCamera;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) UCameraComponent* ThirdPersonCamera;
@@ -46,6 +49,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) UWidgetInteractionComponent* WidgetInteraction;
 	
 	UFUNCTION(BlueprintCallable) AItem* GetEquippedItem() { return nullptr; }
+
+	UFUNCTION(BlueprintCallable) ECharacterState GetPreviousState() { return ECharacterState::Invalid; }
+	UFUNCTION(BlueprintCallable) ECharacterState GetCurrentState() { return ECharacterState::Invalid; }
 
 	UFUNCTION(BlueprintCallable) bool IsMovementInputPressed() { return false; }
 	UFUNCTION(BlueprintCallable) void ForceIsPressingMovementInputKey() {}

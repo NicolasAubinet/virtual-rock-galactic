@@ -16,4 +16,5 @@ public:
 
 	UFUNCTION(BlueprintCallable) float GetHealth() { return 0; }
 	UFUNCTION(BlueprintCallable) float GetHealthPct() { return 0; }
+	UFUNCTION(BlueprintCallable) void Kill(AActor* DamageCauser) {}
 };
