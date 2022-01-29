@@ -18,6 +18,7 @@ class FSD_API AAmmoDrivenWeapon : public AAnimatedItem
 	UFUNCTION(BlueprintCallable) void All_StartReload() {};
 	UFUNCTION(BlueprintCallable) void Server_StopReload() {};
 	UFUNCTION(BlueprintCallable) void Server_ReloadWeapon() {};
+	UFUNCTION(BlueprintCallable) void Server_PlayBurstFire(int shotCount) {};
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) UWeaponFireComponent* WeaponFire;
@@ -34,6 +35,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) int32 ShotCost;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) int32 AmmoCount;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) int32 ClipCount;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) int32 BurstCount;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) float BurstCycleTime;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) float RateOfFire;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) bool HasAutomaticFire;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) float ReloadTimeLeft;
