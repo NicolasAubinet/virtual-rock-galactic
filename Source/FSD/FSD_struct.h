@@ -55,3 +55,31 @@ enum class ECharacterState : uint8 {
     Invalid = 18,
     ECharacterState_MAX = 19,
 };
+
+UENUM(BlueprintType)
+enum class EShoutType : uint8 {
+    Attention = 0,
+    Follow = 1,
+    StandingDown = 2,
+    Downed = 3,
+    RequestRevive = 4,
+    Revived = 5,
+    Resupply = 6,
+    FriendlyFire = 7,
+    KillCry = 8,
+    Dead = 9,
+    Cheating = 10,
+    ResourceFull = 11,
+    ResourceFullNoDonkey = 12,
+    CallDonkey = 13,
+    CallDonkey_NotInMission = 14,
+    Depositing = 15,
+    DepositingNoDonkey = 16,
+    OutOfAmmo = 17,
+    Reloading = 18,
+    CharacterSelected = 19,
+    UpgradeBought = 20,
+    WaitingInDropPod = 21,
+    Carrying = 22,
+    EShoutType_MAX = 23,
+};

@@ -9,6 +9,7 @@ class UCameraComponent;
 class UPlayerHealthComponent;
 class UInventoryComponent;
 class UWidgetInteractionComponent;
+class UCommunicationComponent;
 class AItem;
 
 UDELEGATE(BlueprintAuthorityOnly) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnManualMiningBegin);
@@ -29,6 +30,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) UCameraComponent* ThirdPersonCamera;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) UPlayerHealthComponent* HealthComponent;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) UInventoryComponent* InventoryComponent;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) UCommunicationComponent* CommunicationComponent;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) USkeletalMeshComponent* FPMesh;
 
