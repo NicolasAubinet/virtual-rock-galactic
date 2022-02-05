@@ -5,6 +5,7 @@
 #include "FSDGameInstance.generated.h"
 
 class UGeneratedMission;
+class AMolly;
 
 UDELEGATE(BlueprintAuthorityOnly) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnLocalPlayerCharacterSet);
 UDELEGATE(BlueprintAuthorityOnly) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFSDGameInstanceOnShowEndScreen);
@@ -19,6 +20,7 @@ public:
 	UPROPERTY(BlueprintAssignable) FFSDGameInstanceOnShowEndScreen OnShowEndScreen;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) TWeakObjectPtr<UWindowWidget> ActiveEscapeMenu;
+	UPROPERTY(BlueprintReadOnly) TWeakObjectPtr<class AMolly> Donkey;
 
 	UFUNCTION(BlueprintCallable) void SetSelectedMission(UGeneratedMission* mission, bool updateSessionSettings) {}
 };
