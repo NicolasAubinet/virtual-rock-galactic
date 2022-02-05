@@ -6,6 +6,7 @@
 
 class UGeneratedMission;
 class AMolly;
+class UMouseCursorWidget;
 
 UDELEGATE(BlueprintAuthorityOnly) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnLocalPlayerCharacterSet);
 UDELEGATE(BlueprintAuthorityOnly) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFSDGameInstanceOnShowEndScreen);
@@ -21,6 +22,7 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) TWeakObjectPtr<UWindowWidget> ActiveEscapeMenu;
 	UPROPERTY(BlueprintReadOnly) TWeakObjectPtr<class AMolly> Donkey;
+	UPROPERTY(BlueprintReadOnly) TWeakObjectPtr<class UMouseCursorWidget> MouseCursorWidget;
 
 	UFUNCTION(BlueprintCallable) void SetSelectedMission(UGeneratedMission* mission, bool updateSessionSettings) {}
 };
