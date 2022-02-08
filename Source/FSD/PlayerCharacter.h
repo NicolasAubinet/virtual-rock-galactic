@@ -35,6 +35,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) USkeletalMeshComponent* FPMesh;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite) bool IsPressingMovementInputKey;
+	UPROPERTY(BlueprintReadOnly) bool CanMove;
 	UFUNCTION(BlueprintCallable) void JumpPress() {}
 	UFUNCTION(BlueprintCallable) void JumpRelease() {}
 	UFUNCTION(BlueprintCallable) void ThrowFlareReleased() {}
