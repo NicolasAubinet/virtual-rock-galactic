@@ -34,6 +34,12 @@ public:
 	UPROPERTY(BlueprintReadOnly, Transient) AThrownGrenadeItem* GrenadeItem;
 	UPROPERTY(BlueprintReadOnly, Transient) TSubclassOf<AFlare> flareClass;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) float FlareProductionTime;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) float FlareProductionTimeLeft;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) int32 MaxFlares;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite) int32 Flares;
+
+
 	UFUNCTION(BlueprintCallable) void Equip(AItem* Item, bool ignoreIsUsing) {}
 	UFUNCTION(BlueprintCallable) void Server_Equip(AItem* Item) {}
 	UFUNCTION(BlueprintCallable) void Server_ThrowFlare() {}
