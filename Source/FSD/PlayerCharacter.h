@@ -58,6 +58,7 @@ public:
 
 	UFUNCTION(BlueprintCallable) bool IsMovementInputPressed() { return false; }
 	UFUNCTION(BlueprintCallable) void ForceIsPressingMovementInputKey() {}
+	UFUNCTION(BlueprintCallable) void Server_SetIsPressingMovementInput(bool aIsPushingInput) {}
 
 	UFUNCTION(BlueprintCallable) void Server_CallDonkey() {}
 };
