@@ -1,1 +1,0 @@
-#include "CommunicationComponent.h"
