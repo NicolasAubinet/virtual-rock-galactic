@@ -688,7 +688,7 @@ protected:
     UPROPERTY(EditAnywhere)
     UDialogDataAsset* DrinkShout;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadOnly, Transient)
     UAnimMontage* CurrentSaluteMontage;
     
     UPROPERTY(Transient)
