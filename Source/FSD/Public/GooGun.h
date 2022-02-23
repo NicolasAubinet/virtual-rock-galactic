@@ -46,7 +46,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere)
     int32 ShotCostCycle;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     EGooGunFireMode FireMode;
     
     UPROPERTY(EditAnywhere)
