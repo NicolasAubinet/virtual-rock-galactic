@@ -89,16 +89,16 @@ protected:
     UPROPERTY(BlueprintReadOnly, Transient)
     float CooldownLeft;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient)
     TArray<ADetPack*> ThrownPacks;
     
     UPROPERTY(Transient)
     TArray<UItemUpgrade*> DetPackUpgrades;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_IsDetonatorOut)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_IsDetonatorOut)
     bool IsDetonatorOut;
     
-    UPROPERTY(BlueprintReadOnly, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient)
     bool HasThrownPack;
     
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
