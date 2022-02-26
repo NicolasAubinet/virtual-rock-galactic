@@ -27,13 +27,13 @@ class AFlameThrowerItem : public AAmmoDrivenWeapon {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient)
     UParticleSystemComponent* FlameParticleComponent;
     
     UPROPERTY(Export, VisibleAnywhere)
     UDamageComponent* DamageComponent;
     
-    UPROPERTY(Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere)
     UStickyFlameSpawner* StickyFlames;
     
     UPROPERTY(Export, VisibleAnywhere)
@@ -45,7 +45,7 @@ protected:
     UPROPERTY(Export, VisibleAnywhere)
     UMotionAudioController* MotionAudio;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     int32 ShotCostProjectile;
     
     UPROPERTY(EditAnywhere)
@@ -57,37 +57,37 @@ protected:
     UPROPERTY(Transient)
     float CurrentDecalDelay;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     UParticleSystem* ImpactParticles;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient)
     UParticleSystemComponent* ImpactParticleInstance;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     UParticleSystem* FP_LongReachParticles;
     
     UPROPERTY(EditAnywhere)
     UParticleSystem* TP_LongReachParticles;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     float VeryLongReachThreshold;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     UParticleSystem* FP_VeryLongReachParticles;
     
     UPROPERTY(EditAnywhere)
     UParticleSystem* TP_VeryLongReachParticles;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     TArray<FName> FlameParameterNames;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     float DamageSphereRadius;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     float MaxFlameDistance;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     float FlameGrowthPerSecond;
     
     UPROPERTY(EditAnywhere)
@@ -117,7 +117,7 @@ protected:
     UPROPERTY(Transient)
     TArray<UItemUpgrade*> upgrades;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient)
     bool LongReachEnabled;
     
     UPROPERTY(Transient)
@@ -126,10 +126,10 @@ protected:
     UPROPERTY(Transient)
     float KilledTargetsExplosionChance;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient)
     float ShowDamageParticle;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     UParticleSystem* DamangeTargetsParticles;
     
     UPROPERTY(EditAnywhere)
@@ -138,7 +138,7 @@ protected:
     UPROPERTY(EditAnywhere)
     USoundCue* KilledTargetsExplodingSound;
     
-    UPROPERTY(Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere)
     UProjectileLauncherBaseComponent* ProjectileLancher;
     
     UFUNCTION(BlueprintCallable)
