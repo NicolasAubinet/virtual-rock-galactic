@@ -27,10 +27,10 @@ protected:
     UPROPERTY(Export, VisibleAnywhere)
     UProjectileLauncherComponent* ProjectileLauncher;
     
-    UPROPERTY(Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere)
     UDamageComponent* DamageComponent;
     
-    UPROPERTY(Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere)
     UStickyFlameSpawner* StickyFlames;
     
     UPROPERTY(Export, VisibleAnywhere)
@@ -39,16 +39,16 @@ protected:
     UPROPERTY(Export, VisibleAnywhere)
     UMotionAudioController* VelocityAudio;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient)
     UParticleSystemComponent* FlameParticleComponent;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient)
     bool PressurizedProjectileEnabled;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     float PressurizedProjectileDelay;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     int32 PressurizeProjectileFullCost;
     
     UPROPERTY(EditAnywhere)
@@ -60,7 +60,7 @@ protected:
     UPROPERTY(EditAnywhere)
     FDecalData ImpactDecal;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     float DecalDelay;
     
     UPROPERTY(EditAnywhere)
@@ -69,25 +69,25 @@ protected:
     UPROPERTY(Export, Transient)
     UParticleSystemComponent* ImpactParticleInstance;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     TArray<FName> FlameParameterNames;
     
     UPROPERTY(EditAnywhere)
     float DamageSphereRadius;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     float MaxFlameDistance;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     float FlameGrowthPerSecond;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     float friendlyFireModifier;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     float ChargeupTime;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     float ChargeDownTime;
     
     UPROPERTY(Transient, ReplicatedUsing=OnRep_IsCharging)
@@ -99,40 +99,40 @@ protected:
     UPROPERTY(BlueprintReadOnly, Transient)
     bool bRepressurerising;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     float RepressurerisingDoneAtPct;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     float ChargeUpFadeOutTime;
     
     UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
     UFSDAudioComponent* ChargeUpAudioComponent;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     float PressureTime;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     float PressureDropMultiplier;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     float PressureGainMultiplier;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient)
     float CurrentPressure;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     float RePressureDuration;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient)
     float RePressureProgress;
     
     UPROPERTY(Transient)
     TArray<UItemUpgrade*> upgrades;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient)
     bool LongReachEnabled;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient)
     bool AoEColdEnabled;
     
     UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
