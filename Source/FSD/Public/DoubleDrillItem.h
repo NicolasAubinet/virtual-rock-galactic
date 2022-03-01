@@ -132,7 +132,7 @@ public:
     UPROPERTY(BlueprintReadOnly, EditAnywhere)
     float MaxFuel;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient)
     float Fuel;
     
     UPROPERTY(BlueprintReadOnly, EditAnywhere)

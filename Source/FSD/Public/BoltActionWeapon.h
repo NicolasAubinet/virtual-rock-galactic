@@ -62,7 +62,7 @@ protected:
     UPROPERTY(EditAnywhere)
     float ChargeSpeed;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     float ChargeAmmoCost;
     
     UPROPERTY(EditAnywhere)
@@ -95,7 +95,7 @@ protected:
     UPROPERTY(EditAnywhere)
     float SlowMovementAtCharge;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     float FullChargeDamageBonus;
     
     UPROPERTY(EditAnywhere)
@@ -116,7 +116,7 @@ protected:
     UPROPERTY(Replicated, Transient)
     bool IsMovementSlowed;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     bool ChargeAffectsDamage;
     
     UPROPERTY(BlueprintReadOnly, Transient)
