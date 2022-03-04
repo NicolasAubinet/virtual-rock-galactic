@@ -65,10 +65,10 @@ public:
     UTerrainType* TerrainType;
     
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     FText InGameName;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     FText InGameDescription;
     
     UPROPERTY(EditAnywhere)

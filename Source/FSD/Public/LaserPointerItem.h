@@ -34,14 +34,13 @@ public:
     UPROPERTY(BlueprintAssignable)
     FLaserPointerItemOnMarkerPlaced OnMarkerPlaced;
     
-protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     TSubclassOf<ALaserPointerMarker> MarkerType;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     TSubclassOf<ALaserPointerMarker> SecondaryMarkerType;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient)
     TWeakObjectPtr<ALaserPointerMarker> ActiveMarker;
     
     UPROPERTY(EditAnywhere)
@@ -77,7 +76,7 @@ protected:
     UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
     USceneComponent* PointerComponent;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient)
     FHitResult LookAtHit;
     
     UPROPERTY(BlueprintReadOnly, Export, Transient)
@@ -101,11 +100,9 @@ protected:
     UFUNCTION(BlueprintCallable)
     void UnlockToMinersManual(UObject* WorldContextObject, FGuid ObjectID);
     
-public:
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     void ToggleLaserVisible(bool aVisible);
     
-protected:
     UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
     void ServerPlaceMarker(FVector Location, AActor* Actor, UPrimitiveComponent* Cmponent, UTerrainMaterial* TerrainMaterial, ELaserPointerMarkerType eMarkerType);
     
@@ -121,7 +118,6 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent, BlueprintPure)
     void GetPointTransform(FTransform& PointTransform);
     
-public:
     ALaserPointerItem();
 };
 
