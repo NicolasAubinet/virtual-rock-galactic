@@ -45,7 +45,7 @@ protected:
     UPROPERTY(BlueprintReadOnly, Replicated, Transient)
     bool AutoFire;
     
-    UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_State)
+    UPROPERTY(BlueprintReadWrite, ReplicatedUsing=OnRep_State)
     FGraplingGunState State;
     
     UPROPERTY(BlueprintReadOnly)
