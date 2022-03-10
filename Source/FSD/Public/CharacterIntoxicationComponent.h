@@ -28,7 +28,7 @@ protected:
     UPROPERTY(BlueprintReadOnly, Transient)
     APlayerCharacter* Character;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient)
     EIntoxicationState CurrentState;
     
     UPROPERTY(Replicated, Transient)
