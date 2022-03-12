@@ -394,7 +394,7 @@ protected:
     UPROPERTY(EditAnywhere)
     float EquipLaserpointerHoldDuration;
     
-    UPROPERTY(Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient)
     bool IsPressingMovementInputKey;
     
     UPROPERTY(BlueprintReadOnly, EditAnywhere)

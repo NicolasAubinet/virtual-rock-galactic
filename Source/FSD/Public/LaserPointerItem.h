@@ -79,16 +79,16 @@ public:
     UPROPERTY(BlueprintReadWrite, Transient)
     FHitResult LookAtHit;
     
-    UPROPERTY(BlueprintReadOnly, Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient)
     TWeakObjectPtr<UObjectInfoComponent> LookAtInfo;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient)
     TWeakObjectPtr<UTerrainMaterial> LookAtTerrainMaterial;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient)
     FLaserPointerData LookAtData;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient)
     float LookAtDistance;
     
     UPROPERTY(BlueprintReadOnly, Transient)
