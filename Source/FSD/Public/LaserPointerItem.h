@@ -58,13 +58,13 @@ public:
     UPROPERTY(EditAnywhere)
     float MarkerLifeTime;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadOnly, EditAnywhere)
     FLinearColor ColorMinerals;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadOnly, EditAnywhere)
     FLinearColor ColorEnemy;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadOnly, EditAnywhere)
     FLinearColor ColorOther;
     
     UPROPERTY(EditAnywhere)
