@@ -40,10 +40,10 @@ protected:
     UPROPERTY(BlueprintReadOnly, EditAnywhere)
     float ThrowAngle;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient)
     int32 MaxGrenades;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_GrenadeCount)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_GrenadeCount)
     int32 Grenades;
     
     UPROPERTY(BlueprintReadOnly, Transient)
@@ -52,13 +52,13 @@ protected:
     UPROPERTY(Transient, ReplicatedUsing=OnRep_State)
     EThrownGrenadeItemState State;
     
-    UPROPERTY(Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient)
     TSubclassOf<AGrenade> GrenadeClass;
     
     UPROPERTY(EditAnywhere)
     UGrenadeAnimationSet* DefaultGrenadeAnimationSet;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient)
     UStaticMeshComponent* GrenadeMeshInstance;
     
     UPROPERTY(Replicated, Transient)

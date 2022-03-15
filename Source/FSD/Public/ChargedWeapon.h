@@ -52,19 +52,19 @@ protected:
     UPROPERTY(BlueprintReadOnly, Transient)
     float ChargeProgress;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     int32 ShotCostAtBelowFullCharge;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     int32 ShotCostAtFullCharge;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     bool ChargedShotsOnly;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     bool AutoFireWhenOverheated;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient)
     float TotalHeat;
     
     UPROPERTY(BlueprintReadOnly, EditAnywhere)
