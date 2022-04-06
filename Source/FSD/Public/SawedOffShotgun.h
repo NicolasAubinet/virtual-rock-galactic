@@ -22,10 +22,10 @@ protected:
     UPROPERTY(EditAnywhere)
     float FearFactorOnFireRadius;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     bool ShotgunJumpEnabled;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere)
     float ShotgunJumpForce;
     
     UPROPERTY(EditAnywhere)
