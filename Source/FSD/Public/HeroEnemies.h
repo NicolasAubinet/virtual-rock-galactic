@@ -13,16 +13,17 @@ class UHeroEnemies : public URunningMissionBP {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagQuery AllowedQuery;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<UEnemyDescriptor*, FEliteEnemyEntry> Entries;
-    
-    UFUNCTION(BlueprintCallable)
-    void OnEnemySpawned(APawn* enemy, UEnemyDescriptor* descriptor);
     
 public:
     UHeroEnemies();
+protected:
+    UFUNCTION(BlueprintCallable)
+    void OnEnemySpawned(APawn* enemy, UEnemyDescriptor* descriptor);
+    
 };
 

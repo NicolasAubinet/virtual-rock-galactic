@@ -1,5 +1,7 @@
 #include "TreasureContainer.h"
 #include "Net/UnrealNetwork.h"
+#include "Components/SceneComponent.h"
+#include "OncePerPlayerUsableComponent.h"
 
 class APlayerCharacter;
 
@@ -39,6 +41,8 @@ void ATreasureContainer::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& O
 }
 
 ATreasureContainer::ATreasureContainer() {
+    this->Root = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
+    this->CollectUsable = CreateDefaultSubobject<UOncePerPlayerUsableComponent>(TEXT("CollectUsable"));
     this->AquisitionSource = NULL;
     this->LastJoiner = NULL;
     this->TreasureRewarder = NULL;

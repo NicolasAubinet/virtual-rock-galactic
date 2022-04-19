@@ -3,12 +3,12 @@
 #include "Blueprint/UserWidget.h"
 #include "LookingAtWidget.generated.h"
 
-class APlayerCharacter;
-class UCharacterSightComponent;
 class UPawnAfflictionComponent;
-class AActor;
 class UHealth;
 class IHealth;
+class UCharacterSightComponent;
+class APlayerCharacter;
+class AActor;
 class UHealthComponentBase;
 
 UCLASS(EditInlineNew)
@@ -16,36 +16,39 @@ class ULookingAtWidget : public UUserWidget {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float TargetSelectDuration;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float TargetLostDuration;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<APlayerCharacter> Character;
     
-    UPROPERTY(BlueprintReadOnly, Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UCharacterSightComponent> CharacterSight;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<AActor> CurrentTarget;
     
-    UPROPERTY(BlueprintReadOnly, Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UPawnAfflictionComponent> CurrentTargetAfflictions;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TScriptInterface<IHealth> CurrentTargetHealth;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool CanCurrentTargetTakeDamage;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float TargetLostTime;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool bTargetSet;
     
+public:
+    ULookingAtWidget();
+protected:
     UFUNCTION(BlueprintCallable)
     void SetCurrentTarget(AActor* NewActor, const TScriptInterface<IHealth>& HealthComponent, float OverrideTargetLostTime);
     
@@ -76,7 +79,5 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetCharacterTemperatureEffect(float& TemperatureEffect) const;
     
-public:
-    ULookingAtWidget();
 };
 

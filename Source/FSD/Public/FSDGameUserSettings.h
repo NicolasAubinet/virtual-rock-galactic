@@ -1,19 +1,30 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "CharacterOptions.h"
-#include "EConsoleGraphicsMode.h"
 #include "GameFramework/GameUserSettings.h"
-#include "ControllerSettings.h"
-#include "ModdingUISettings.h"
-#include "HUDElements.h"
-#include "UObject/NoExportTypes.h"
-#include "EFSDInputSource.h"
-#include "UObject/NoExportTypes.h"
-#include "GameFramework/GameUserSettings.h"
+#include "BoolConfigChangedDelegate.h"
+#include "FloatConfigChangedDelegate.h"
+#include "StringConfigChangedDelegate.h"
 #include "CustomKeyBinding.h"
-#include "EVolumeType.h"
+#include "LanguageChangedDelegate.h"
 #include "ESteamSearchRegion.h"
+#include "ModdingUISettings.h"
+#include "ChatFontSizeChangedDelegate.h"
+#include "ModdingSettingsChangedDelegate.h"
+#include "UDLSSMode.h"
+#include "EConsoleGraphicsMode.h"
 #include "ESaveSlotChangeProcedure.h"
+#include "CharacterOptions.h"
+#include "HUDElements.h"
+#include "InputSourceChangedSignatureDelegate.h"
+#include "Int32ConfigChangedDelegate.h"
+#include "UObject/NoExportTypes.h"
+#include "GameFramework/GameUserSettings.h"
+#include "CustomKeyBindingsChangedDelegate.h"
+#include "EFSDInputSource.h"
+#include "ControllerSettings.h"
+#include "UObject/NoExportTypes.h"
+#include "EVolumeType.h"
+#include "ETurn180Mode.h"
 #include "FSDGameUserSettings.generated.h"
 
 class USoundClass;
@@ -22,336 +33,339 @@ class UObject;
 class UDifficultySetting;
 class UFSDGameUserSettings;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDGameUserSettingsOnFontSizeChanged, int32, NewValue);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDGameUserSettingsOnShowFPSChanged, bool, NewValue);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDGameUserSettingsOnUseHoldToRunChanged, bool, NewValue);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDGameUserSettingsOnFOVChanged, float, NewValue);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFSDGameUserSettingsOnModdingSettingsChanged);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDGameUserSettingsOnLanguageChanged, const FString&, Culture);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDGameUserSettingsOnJukeboxStreamerModeChanged, bool, NewValue);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDGameUserSettingsOnGameServerNameChanged, const FString&, NewValue);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDGameUserSettingsOnCanShowBloodChanged, bool, NewValue);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDGameUserSettingsOnInputSourceChanged, EFSDInputSource, InputSource);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDGameUserSettingsOnEnableTutorialHintsChanged, bool, NewValue);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDGameUserSettingsOnShowNetInfoLevelChanged, int32, NewValue);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDGameUserSettingsOnDx12Enabled, bool, NewValue);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDGameUserSettingsOnShowUpgradeExtraDetailsChanged, bool, NewValue);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFSDGameUserSettingsOnCustomKeyBindingsChanged);
-
 UCLASS()
 class UFSDGameUserSettings : public UGameUserSettings {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FFSDGameUserSettingsOnUseHoldToRunChanged OnUseHoldToRunChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FBoolConfigChanged OnUseHoldToRunChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDGameUserSettingsOnFOVChanged OnFOVChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FFloatConfigChanged OnFOVChanged;
     
-    UPROPERTY(BlueprintAssignable, BlueprintCallable)
-    FFSDGameUserSettingsOnLanguageChanged OnLanguageChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FLanguageChanged OnLanguageChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDGameUserSettingsOnGameServerNameChanged OnGameServerNameChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FStringConfigChanged OnGameServerNameChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDGameUserSettingsOnFontSizeChanged OnFontSizeChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FChatFontSizeChanged OnFontSizeChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDGameUserSettingsOnJukeboxStreamerModeChanged OnJukeboxStreamerModeChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FBoolConfigChanged OnJukeboxStreamerModeChanged;
     
-    UPROPERTY(BlueprintReadOnly, Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     bool bJukeboxStreamerMode;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool bGraphicSettingsChanged;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     FString CurrentUserSetSaveSlotName;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDGameUserSettingsOnCanShowBloodChanged OnCanShowBloodChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FBoolConfigChanged OnCanShowBloodChanged;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     TMap<FName, bool> NamedBoolSettings;
     
-    UPROPERTY(BlueprintReadOnly, Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     FModdingUISettings ModdingUISettings;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     int32 ServerSearchRegion;
     
-    UPROPERTY(BlueprintReadOnly, Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     bool ServerSearchPasswordRequired;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDGameUserSettingsOnModdingSettingsChanged OnModdingSettingsChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FModdingSettingsChanged OnModdingSettingsChanged;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     float volumeCharacterVoice;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     float volumeMissionControl;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     float volumeMaster;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     float volumeSFX;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     float volumeMusic;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     FString CurrentAudioOutputDeviceId;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     bool UseDefaultAudioOutputDevice;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     float Sharpening;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     int32 AntiAliasingType;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     bool TemporalAAUpsamplingEnabled;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     float volumeVoice;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
+    int32 UpscalingType;
+    
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
+    int32 AmdFsrMode;
+    
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
+    float AmdFsrSharpness;
+    
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
+    UDLSSMode NvidiaDlssMode;
+    
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
+    float NvidiaDlssSharpness;
+    
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
+    float FSDResolutionScale;
+    
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     USoundClass* soundClassCharacterVoices;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     USoundClass* soundClassMissionControl;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     USoundClass* soundClassMaster;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     USoundClass* soundClassSFX;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     USoundClass* soundClassUI;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     USoundClass* soundClassMusic;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     USoundClass* soundClassVoice;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     int32 ChatFontSize;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     bool bUseVoiceChat;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     bool bUsePushToTalk;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     FString LocalGameServerName;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     FString LocalGameServerNameFiltered;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     bool AppearOffline;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     bool AutoRefreshServerlist;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     float MouseXSensitivity;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     float MouseYSensitivity;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     bool UseSeperateSensetivity;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     bool InvertMouse;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     bool InvertScroolWheel;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     bool UseHoldToRun;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     bool UseToggleLaserpointer;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     float FOV;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     float HeadbobbingScale;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     float CameraShakeScale;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     float ChatFadeTime;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     bool UseStreamerProgram;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     bool SoundOnChatMessage;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     bool PhotosensitiveMode;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     bool ShowUIAnimations;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     bool UseProfanityFilter;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     float ForceFeedbackScale;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     bool InvertFlightControls;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     bool EnableDx12ByDefault;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     float HDRColorGamma;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     EConsoleGraphicsMode ConsoleGraphicsMode;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     FHUDElements HUDElements;
     
-    UPROPERTY(BlueprintReadWrite, Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     FCharacterOptions CharacterOptions;
     
 protected:
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     float DownedTurnDirection_Controller;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     float DownedTurnDirection_Mouse;
     
 public:
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     float UIDPIScale;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool EnableCustomUIScale;
     
-    UPROPERTY(BlueprintAssignable, Transient)
-    FFSDGameUserSettingsOnInputSourceChanged OnInputSourceChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    FInputSourceChangedSignature OnInputSourceChanged;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     bool CheckCursorOutOfBounds;
     
-    UPROPERTY(BlueprintAssignable, Transient)
-    FFSDGameUserSettingsOnEnableTutorialHintsChanged OnEnableTutorialHintsChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    FBoolConfigChanged OnEnableTutorialHintsChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDGameUserSettingsOnShowFPSChanged OnShowFPSChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FBoolConfigChanged OnShowFPSChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDGameUserSettingsOnShowNetInfoLevelChanged OnShowNetInfoLevelChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FInt32ConfigChanged OnShowNetInfoLevelChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDGameUserSettingsOnDx12Enabled OnDx12Enabled;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FBoolConfigChanged OnDx12Enabled;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FIntPoint ResolutionToBeApplied;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool VSyncToBeApplied;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool Dx12ToBeApplied;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TEnumAsByte<EWindowMode::Type> InFullscreenModeToBeApplied;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool InFullscreenModeToBeAppliedValid;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool VSyncToBeAppliedValid;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool Dx12ToBeAppliedValid;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool ResolutionToBeAppliedValid;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool EscMenuActive;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool bShowUpgradeExtraDetails;
     
-    UPROPERTY(BlueprintAssignable, Transient)
-    FFSDGameUserSettingsOnShowUpgradeExtraDetailsChanged OnShowUpgradeExtraDetailsChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    FBoolConfigChanged OnShowUpgradeExtraDetailsChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDGameUserSettingsOnCustomKeyBindingsChanged OnCustomKeyBindingsChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FCustomKeyBindingsChanged OnCustomKeyBindingsChanged;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     int32 LastNiagaraShaderVerions;
     
 protected:
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     EFSDInputSource CurrentInputSource;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     EFSDInputSource RequestedInputSource;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     TArray<FCustomKeyBinding> CustomKeyBindings;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     TArray<FCustomKeyBinding> CustomControllerBindings;
     
-    UPROPERTY(BlueprintReadOnly, Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     bool SwapControllerThumbsticks;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     bool bTutorialHintsEnabled;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     bool bShowSubtitles;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     bool bShowFPS;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     int32 ShowNetInfoLevel;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     bool bCanShowBlood;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     bool PreventLatejoinCharacterDuplication;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     bool TranslatorDebugModeEnabled;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FString PreviousCulture;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     FControllerSettings ControllerSettings;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     TArray<FGuid> SelectedDifficultyLevels;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     TArray<FGuid> DifficultyLevelsAddedByDefault;
     
 public:
+    UFSDGameUserSettings();
     UFUNCTION(BlueprintCallable)
     void UpdateVolumeSettings(USoundClass* CharacterVoices, USoundClass* MissionControl, USoundClass* Master, USoundClass* Music, USoundClass* SFX, USoundClass* UI, USoundClass* Voice);
     
@@ -404,10 +418,16 @@ public:
     void SetUseCustomUIScale(bool UseCustomScale);
     
     UFUNCTION(BlueprintCallable)
+    void SetUpscalingType(int32 Type);
+    
+    UFUNCTION(BlueprintCallable)
     void SetUIDPIScale(float uiscale);
     
     UFUNCTION(BlueprintCallable)
     void SetTutorialHintsEnabled(bool Enabled);
+    
+    UFUNCTION(BlueprintCallable)
+    void SetTurn180Mode(ETurn180Mode InMode);
     
     UFUNCTION(BlueprintCallable)
     void SetTemporalAAUpscalingEnabled(bool bEnable);
@@ -446,6 +466,9 @@ public:
     void SetPushToTalk(bool bEnable);
     
     UFUNCTION(BlueprintCallable)
+    void SetPreviousItemEnabledOnController(bool InEnabled);
+    
+    UFUNCTION(BlueprintCallable)
     void SetPreventLatejoinCharacterDuplication(bool prevent);
     
     UFUNCTION(BlueprintCallable)
@@ -453,6 +476,12 @@ public:
     
     UFUNCTION(BlueprintCallable)
     void SetPhotosensitiveMode(bool modeOn);
+    
+    UFUNCTION(BlueprintCallable)
+    void SetNvidiaDlssSharpness(float Sharpness);
+    
+    UFUNCTION(BlueprintCallable)
+    void SetNvidiaDlssMode(UDLSSMode Mode);
     
     UFUNCTION(BlueprintCallable)
     void SetMouseYSensitivity(float newSensitivity);
@@ -556,6 +585,12 @@ public:
     void SetAntiAliasingType(int32 NewAntiAliasingType);
     
     UFUNCTION(BlueprintCallable)
+    void SetAMDFSRSharpness(float Sharpness);
+    
+    UFUNCTION(BlueprintCallable)
+    void SetAMDFSRMode(int32 Mode);
+    
+    UFUNCTION(BlueprintCallable)
     void SetAimSensitivity(float NewValue);
     
     UFUNCTION(BlueprintCallable)
@@ -575,6 +610,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsVoiceChatEnabled() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsUpscalingTypeSupported(int32 Type) const;
     
 protected:
     UFUNCTION(BlueprintCallable)
@@ -629,10 +667,16 @@ public:
     bool GetUseCustomUIScale();
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    int32 GetUpscalingType() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetUIDPIScale() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetTutorialHintsEnabled() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    ETurn180Mode GetTurn180Mode() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetTemporalAAUpscalingEnabled() const;
@@ -665,6 +709,9 @@ public:
     bool GetPushToTalk() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool GetPreviousItemEnabledOnController() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetPreventLatejoinCharacterDuplication() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -672,6 +719,12 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetPhotosensitiveMode() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    float GetNvidiaDlssSharpness() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UDLSSMode GetNvidiaDlssMode() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetMouseYSensitivity() const;
@@ -784,6 +837,12 @@ public:
     int32 GetAntiAliasingType() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    float GetAMDFSRSharpness() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    int32 GetAMDFSRMode() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetAimSensitivity() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -797,6 +856,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FString GameServerName() const;
+    
+    UFUNCTION(BlueprintCallable)
+    void FSDSetResolutionScale(float NewScaleNormalized);
     
     UFUNCTION(BlueprintCallable)
     static bool FSDSetCurrentLanguage(UObject* WorldContextObject, const FString& Culture);
@@ -819,6 +881,5 @@ public:
     UFUNCTION(BlueprintCallable)
     void ApplyConsoleGraphicsMode();
     
-    UFSDGameUserSettings();
 };
 

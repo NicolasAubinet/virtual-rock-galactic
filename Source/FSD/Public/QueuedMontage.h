@@ -8,10 +8,10 @@ USTRUCT(BlueprintType)
 struct FQueuedMontage {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UAnimMontage* Montage;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool ForceUpdate;
     
     FSD_API FQueuedMontage();

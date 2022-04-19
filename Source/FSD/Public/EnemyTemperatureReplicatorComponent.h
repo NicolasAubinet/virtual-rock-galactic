@@ -1,40 +1,42 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "FloatDelegateDelegate.h"
 #include "Components/ActorComponent.h"
 #include "EnemyTemperatureReplicatorComponent.generated.h"
 
 class UEnemyTemperatureComponent;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FEnemyTemperatureReplicatorComponentOnIsOnFireChanged, float, FloatValue);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FEnemyTemperatureReplicatorComponentOnTemperatureEffectChanged, float, FloatValue);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FEnemyTemperatureReplicatorComponentOnIsFrozenChanged, float, FloatValue);
-
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UEnemyTemperatureReplicatorComponent : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FEnemyTemperatureReplicatorComponentOnTemperatureEffectChanged OnTemperatureEffectChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FFloatDelegate OnTemperatureEffectChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FEnemyTemperatureReplicatorComponentOnIsFrozenChanged OnIsFrozenChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FFloatDelegate OnIsFrozenChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FEnemyTemperatureReplicatorComponentOnIsOnFireChanged OnIsOnFireChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FFloatDelegate OnIsOnFireChanged;
     
 protected:
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UEnemyTemperatureComponent> EnemyTemperatureComponent;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_TemperatureEffect)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_TemperatureEffect, meta=(AllowPrivateAccess=true))
     int32 TemperatureEffect;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_IsFrozen)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_IsFrozen, meta=(AllowPrivateAccess=true))
     bool bIsFrozen;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_IsOnFire)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_IsOnFire, meta=(AllowPrivateAccess=true))
     bool bIsOnFire;
     
+public:
+    UEnemyTemperatureReplicatorComponent();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_TemperatureEffect();
     
@@ -54,8 +56,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetTemperatureEffect() const;
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    UEnemyTemperatureReplicatorComponent();
 };
 

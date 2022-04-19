@@ -1,7 +1,7 @@
 #include "ProjectileSpawnData.h"
 
 FProjectileSpawnData::FProjectileSpawnData() {
-    this->projectileClass = NULL;
+    this->ProjectileClass = NULL;
     this->IsBallistic = false;
 }
 

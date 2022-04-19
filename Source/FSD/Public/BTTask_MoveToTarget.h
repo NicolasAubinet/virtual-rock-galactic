@@ -8,11 +8,8 @@ class UBTTask_MoveToTarget : public UBTTask_BlackboardBase {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float AcceptableRadius;
-    
-    UPROPERTY(EditAnywhere)
-    bool EnterAttackStanceOnMoveFinished;
     
 public:
     UBTTask_MoveToTarget();

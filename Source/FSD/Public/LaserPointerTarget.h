@@ -9,13 +9,13 @@ USTRUCT(BlueprintType)
 struct FLaserPointerTarget {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FHitResult HitInfo;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     AActor* Target;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     AActor* ExtraTarget;
     
     FSD_API FLaserPointerTarget();

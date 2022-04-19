@@ -1,42 +1,43 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Engine/DataAsset.h"
 #include "DialogStruct.h"
+#include "Engine/DataAsset.h"
 #include "DialogDataAsset.generated.h"
 
-class UObject;
 class USoundSubmixBase;
+class UObject;
 
 UCLASS(BlueprintType)
 class UDialogDataAsset : public UDataAsset {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool Enabled;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool AudioOnly;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ShoutDelay;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ShoutCoolDown;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ShoutChance;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FDialogStruct> Entries;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<USoundSubmixBase*> SubmixSends;
     
 protected:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<int32> ShuffledIndices;
     
 public:
+    UDialogDataAsset();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 SelectIndex(UObject* WorldContext);
     
@@ -46,6 +47,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FDialogStruct GetShout(int32 Index) const;
     
-    UDialogDataAsset();
 };
 

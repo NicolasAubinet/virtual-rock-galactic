@@ -1,3 +1,3 @@
 #include "Modules/ModuleManager.h"
 
-IMPLEMENT_PRIMARY_GAME_MODULE(FDefaultGameModuleImpl, FSD, "FSD");
+IMPLEMENT_PRIMARY_GAME_MODULE(FDefaultGameModuleImpl, FSD, FSD);

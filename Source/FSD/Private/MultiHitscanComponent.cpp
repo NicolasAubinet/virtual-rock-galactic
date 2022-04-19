@@ -11,7 +11,7 @@ void UMultiHitscanComponent::All_ShowHit_Implementation(const FMultiHitScanHits&
 
 UMultiHitscanComponent::UMultiHitscanComponent() {
     this->BulletsPerShot = 0;
-    this->MuzzleRadius = 0.00f;
     this->GeneralImpactAudioVolume = 1.00f;
+    this->CountMultiHits = false;
 }
 

@@ -6,7 +6,7 @@ USTRUCT(BlueprintType)
 struct FGameActivitySubTask {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FString SubActivityId;
     
     FSD_API FGameActivitySubTask();

@@ -6,21 +6,21 @@
 #include "UpgradeValues.h"
 #include "ProjectileLauncherBaseUpgrade.generated.h"
 
-class AFSDPlayerState;
 class AItem;
+class AFSDPlayerState;
 
 UCLASS(EditInlineNew, MinimalAPI)
 class UProjectileLauncherBaseUpgrade : public UStandardItemUpgrade {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EProjectileLauncherBaseUpgradeType upgradeType;
     
 public:
+    UProjectileLauncherBaseUpgrade();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static FUpgradeValues GetUpgradedValue(TSubclassOf<AItem> Item, AFSDPlayerState* Player, EProjectileLauncherBaseUpgradeType NewUpgradeType);
     
-    UProjectileLauncherBaseUpgrade();
 };
 

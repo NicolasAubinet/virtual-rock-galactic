@@ -3,20 +3,20 @@
 #include "DeepDiveTesterItem.generated.h"
 
 class UMissionTemplate;
-class UMissionWarning;
 class UMissionMutator;
+class UMissionWarning;
 
 USTRUCT(BlueprintType)
 struct FDeepDiveTesterItem {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UMissionTemplate* mission;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UMissionMutator* Mutator;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UMissionWarning* Warning;
     
     FSD_API FDeepDiveTesterItem();

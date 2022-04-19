@@ -10,7 +10,7 @@ UCLASS()
 class UBoscoSpawnActorAbillity : public UBoscoAbillity {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<AActor> SpawnedActorClass;
     
     UBoscoSpawnActorAbillity();

@@ -14,13 +14,13 @@ class UHitscanBaseUpgrade : public UStandardItemUpgrade {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EHitScanBaseUpgradeType upgradeType;
     
 public:
+    UHitscanBaseUpgrade();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static FUpgradeValues GetUpgradedValue(TSubclassOf<AItem> Item, AFSDPlayerState* Player, EHitScanBaseUpgradeType NewUpgradeType);
     
-    UHitscanBaseUpgrade();
 };
 

@@ -4,14 +4,14 @@
 #include "BinaryTerrainMaterialCombiner.h"
 #include "SimpleMeshWithCachedTreeComponent.generated.h"
 
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class USimpleMeshWithCachedTreeComponent : public UCSGBaseComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FBinaryTerrainMaterialCombiner Materials;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool InvertCSG;
     
     USimpleMeshWithCachedTreeComponent();

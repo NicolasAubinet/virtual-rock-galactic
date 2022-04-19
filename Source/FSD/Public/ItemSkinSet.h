@@ -3,12 +3,23 @@
 #include "Engine/DataAsset.h"
 #include "ItemSkinSet.generated.h"
 
+class UDynamicIcon;
+
 UCLASS(BlueprintType)
-class UItemSkinSet : public UDataAsset {
+class FSD_API UItemSkinSet : public UDataAsset {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ColorIsLockedToSet;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FText SkinName;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
+    UDynamicIcon* PaintJobDynamicIcon;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
+    UDynamicIcon* FrameworkDynamicIcon;
     
     UItemSkinSet();
 };

@@ -1,5 +1,8 @@
 #include "DetPackItem.h"
 #include "Net/UnrealNetwork.h"
+#include "CapacityHoldingItemAggregator.h"
+#include "FirstPersonSkeletalMeshComponent.h"
+#include "Components/SkeletalMeshComponent.h"
 
 void ADetPackItem::Simulate_ThrowGrenade_Implementation() {
 }
@@ -49,7 +52,10 @@ ADetPackItem::ADetPackItem() {
     this->WPN_DetonateAnim = NULL;
     this->FP_EquipDetonatorAnimation = NULL;
     this->WPN_EquipDetonatorAnimation = NULL;
+    this->DetonatorFPMesh = CreateDefaultSubobject<UFirstPersonSkeletalMeshComponent>(TEXT("DetonatorFPMesh"));
+    this->DetonatorTPMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("DetonatorTPMesh"));
     this->DetonatorTriggerForceFeedback = NULL;
+    this->Capacity = CreateDefaultSubobject<UCapacityHoldingItemAggregator>(TEXT("Aggregator"));
     this->SupplyStatusWeight = 1.00f;
     this->ThrowVelocity = 0.00f;
     this->EnheiritOwnerVelocityScale = 0.00f;

@@ -1,66 +1,70 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "ObjectiveMissionIcon.h"
 #include "Components/ActorComponent.h"
+#include "ObjectiveUpdatedSignatureDelegate.h"
+#include "ObjectiveMissionIcon.h"
 #include "MissionShouts.h"
 #include "CreditsReward.h"
 #include "Objective.generated.h"
 
-class UMissionStat;
-class UTexture2D;
-class UObjective;
 class UObjectiveWidget;
 class UResourceData;
-class UOptionalObjectiveWidget;
+class UMissionStat;
 class UBiome;
+class UOptionalObjectiveWidget;
+class UTexture2D;
+class UObjective;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FObjectiveOnObjectiveUpdated, UObjective*, Objective);
-
-UCLASS(Abstract, Blueprintable)
-class UObjective : public UActorComponent {
+UCLASS(Abstract, Blueprintable, meta=(BlueprintSpawnableComponent))
+class FSD_API UObjective : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FObjectiveOnObjectiveUpdated OnObjectiveUpdated;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FObjectiveUpdatedSignature OnObjectiveUpdated;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UObjectiveWidget> ObjectiveWidgetClass;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FMissionShouts MissionShouts;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText MissionDescription;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 CompletionRewardInCredits;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 CompletionRewardInXP;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ScaleObjectiveToMission;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool RequiredReturnObjectiveCompleted;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UMissionStat* ObjectiveCompletedStat;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<UOptionalObjectiveWidget> OptionalObjectiveWidgetClass;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_IsPrimaryObjective)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_IsPrimaryObjective, meta=(AllowPrivateAccess=true))
     int32 IsPrimaryObjective;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float MissionScale;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UBiome*> BannedInBiomes;
     
+public:
+    UObjective();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+protected:
     UFUNCTION(BlueprintCallable)
     void SignalObjectiveUpdated();
     
@@ -88,6 +92,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool HasReplicated() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+    void HandleMissionEnded(bool MissionSuccess) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TSubclassOf<UObjectiveWidget> GetWidgetClassOrDefault(TSubclassOf<UObjectiveWidget> DefaultWidgetClass);
@@ -134,8 +141,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent, BlueprintPure)
     UTexture2D* GetInMissionCounterIcon() const;
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    UObjective();
 };
 

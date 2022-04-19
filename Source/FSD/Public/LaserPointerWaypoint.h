@@ -4,33 +4,34 @@
 #include "UObject/NoExportTypes.h"
 #include "LaserPointerWaypoint.generated.h"
 
-class ALaserPointerItem;
 class APlayerCharacter;
+class ALaserPointerItem;
 
 UCLASS(Abstract)
 class ALaserPointerWaypoint : public AActor {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<APlayerCharacter> Character;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<ALaserPointerItem> LaserPointer;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FVector Normal;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     int32 Index;
     
+public:
+    ALaserPointerWaypoint();
+protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnShow();
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnHide();
     
-public:
-    ALaserPointerWaypoint();
 };
 

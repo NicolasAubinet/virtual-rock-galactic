@@ -2,6 +2,8 @@
 
 UBTServer_ChaseTarget::UBTServer_ChaseTarget() {
     this->MustBeAlive = false;
+    this->MustBeUnparalyzed = false;
+    this->PreferNewTarget = false;
     this->IsFlying = false;
     this->CanShoot = false;
     this->TargetingRange = 3500.00f;

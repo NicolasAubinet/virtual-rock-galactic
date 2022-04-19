@@ -1,4 +1,6 @@
 #include "VanityCharacter.h"
+#include "Components/ChildActorComponent.h"
+#include "Components/SkeletalMeshComponent.h"
 
 void AVanityCharacter::DisplayVanity() {
 }
@@ -7,6 +9,7 @@ void AVanityCharacter::Clean() {
 }
 
 AVanityCharacter::AVanityCharacter() {
+    this->ChildActorComponent = CreateDefaultSubobject<UChildActorComponent>(TEXT("ItemInstance"));
     this->Animation = NULL;
     this->skinColor = NULL;
     this->BeardColor = NULL;
@@ -18,6 +21,8 @@ AVanityCharacter::AVanityCharacter() {
     this->Beard = NULL;
     this->Armor = NULL;
     this->ArmorColor = NULL;
+    this->Mesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("CharacterMesh0"));
+    this->BodyMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("BodyMesh"));
     this->DefaultHairColor = NULL;
     this->DefaultArmorMaterial = NULL;
     this->itemClass = NULL;

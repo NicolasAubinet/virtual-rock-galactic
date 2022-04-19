@@ -1,10 +1,11 @@
 #include "Item.h"
 #include "Net/UnrealNetwork.h"
 #include "Templates/SubclassOf.h"
+#include "UpgradableItemComponent.h"
 
 class USoundBase;
-class UAudioComponent;
 class USceneComponent;
+class UAudioComponent;
 class USoundAttenuation;
 class USoundConcurrency;
 class AActor;
@@ -119,6 +120,7 @@ AItem::AItem() {
     this->EnableDangerousSaveGameIDEditing = false;
     this->ItemID = NULL;
     this->Character = NULL;
+    this->UpgradableItem = CreateDefaultSubobject<UUpgradableItemComponent>(TEXT("Upgradable"));
     this->CameraShake = NULL;
     this->CameraShakeOnStartUsing = false;
     this->CameraShakeOnEquip = false;

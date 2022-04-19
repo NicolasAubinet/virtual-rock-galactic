@@ -4,22 +4,25 @@
 #include "WeaponHitCounterComponent.generated.h"
 
 class UWeaponHitCountEffect;
-class UFSDPhysicalMaterial;
 class UHealthComponentBase;
 class UPrimitiveComponent;
+class UFSDPhysicalMaterial;
 class AActor;
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UWeaponHitCounterComponent : public UActorComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere, Instanced)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UWeaponHitCountEffect* HitEffect;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool RequiresWeakpointHit;
     
+public:
+    UWeaponHitCounterComponent();
+protected:
     UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
     void Server_OnReloading();
     
@@ -35,7 +38,5 @@ protected:
     UFUNCTION(NetMulticast, Unreliable)
     void All_ShowDamageEffects(const TArray<TWeakObjectPtr<AActor>>& Targets);
     
-public:
-    UWeaponHitCounterComponent();
 };
 

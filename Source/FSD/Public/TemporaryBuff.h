@@ -3,8 +3,8 @@
 #include "Engine/DataAsset.h"
 #include "TemporaryBuff.generated.h"
 
-class UTexture2D;
 class AFSDPlayerController;
+class UTexture2D;
 class APlayerCharacter;
 
 UCLASS(Abstract, BlueprintType)
@@ -12,13 +12,14 @@ class UTemporaryBuff : public UDataAsset {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText Description;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftObjectPtr<UTexture2D> Icon;
     
 public:
+    UTemporaryBuff();
     UFUNCTION(BlueprintCallable, BlueprintPure=false)
     void DeActivateBuff(AFSDPlayerController* Player) const;
     
@@ -28,6 +29,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure=false)
     void ActivateBuffOnController(AFSDPlayerController* Player) const;
     
-    UTemporaryBuff();
 };
 

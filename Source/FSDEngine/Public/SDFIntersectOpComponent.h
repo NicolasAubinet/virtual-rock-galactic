@@ -4,11 +4,11 @@
 #include "SDFSmoothingProperties.h"
 #include "SDFIntersectOpComponent.generated.h"
 
-UCLASS()
-class USDFIntersectOpComponent : public USDFBaseComponent {
+UCLASS(meta=(BlueprintSpawnableComponent))
+class FSDENGINE_API USDFIntersectOpComponent : public USDFBaseComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSDFSmoothingProperties Properties;
     
     USDFIntersectOpComponent();

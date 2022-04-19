@@ -1,14 +1,21 @@
 #include "PipelineSegment.h"
 #include "Net/UnrealNetwork.h"
+#include "Components/SplineMeshComponent.h"
+#include "DroneUseComponent.h"
+#include "SingleUsableComponent.h"
+#include "SimpleHealthComponent.h"
+#include "Components/SplineComponent.h"
+#include "Components/SkeletalMeshComponent.h"
+#include "Components/StaticMeshComponent.h"
+#include "PathfinderSplineSegmentCollisionComponent.h"
 
-class APlayerCharacter;
-class UTrackBuilderUsable;
-class USplineMeshComponent;
-class ATrackBuilderSegment;
 class UMaterialInterface;
+class APlayerCharacter;
+class ATrackBuilderSegment;
 class APipelineStart;
 class APipelineSegment;
 class UHealthComponentBase;
+class UTrackBuilderUsable;
 
 void APipelineSegment::UpdateSplineMesh(USplineMeshComponent* InMesh, float InProgress, bool InMoveEndCap) {
 }
@@ -80,6 +87,19 @@ APipelineSegment::APipelineSegment() {
     this->StaticMeshFinal = NULL;
     this->CarvingTraceType = TraceTypeQuery1;
     this->NumberMaterial = NULL;
+    this->RepairSegmentUsable = CreateDefaultSubobject<USingleUsableComponent>(TEXT("RepairSegmentUsable"));
+    this->ActivateSegmentUsable = CreateDefaultSubobject<USingleUsableComponent>(TEXT("ActivateSegmentUsable"));
+    this->DroneUsable = CreateDefaultSubobject<UDroneUseComponent>(TEXT("DroneUseComponent"));
+    this->SegmentHealthComponent = CreateDefaultSubobject<USimpleHealthComponent>(TEXT("SegmentHealthComponent"));
+    this->MovementSpline = CreateDefaultSubobject<USplineComponent>(TEXT("MovementSpline"));
+    this->MovementSplineRight = CreateDefaultSubobject<USplineComponent>(TEXT("MovementSplineRight"));
+    this->MovementSplineLeft = CreateDefaultSubobject<USplineComponent>(TEXT("MovementSplineLeft"));
+    this->PipelineMesh = CreateDefaultSubobject<USplineMeshComponent>(TEXT("PipelineMesh"));
+    this->PipelineOuterMesh = CreateDefaultSubobject<USplineMeshComponent>(TEXT("PipelineOuterMesh"));
+    this->PipelineCapMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("PipelineCapMesh"));
+    this->EndPostMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("EndPostMesh"));
+    this->EndPostMeshStatic = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("EndPostMeshStatic"));
+    this->PathfinderComponent = CreateDefaultSubobject<UPathfinderSplineSegmentCollisionComponent>(TEXT("PathfinderComponent"));
     this->bSegmentBroken = false;
     this->SegmentActivatedProgress = 0.00f;
     this->PipelineState = EPipelineBuildState::BeginBuilt;

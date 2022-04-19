@@ -1,18 +1,18 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "RandRange.h"
 #include "DebrisActorComponent.h"
+#include "RandRange.h"
 #include "DebrisProbabilityComponent.generated.h"
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UDebrisProbabilityComponent : public UDebrisActorComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FRandRange ProbabilityRange;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool IsProbabilityShared;
     
 public:

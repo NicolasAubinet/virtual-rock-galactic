@@ -12,6 +12,6 @@ void UZiplineLauncherComponent::All_ShowHit_Implementation() {
 UZiplineLauncherComponent::UZiplineLauncherComponent() {
     this->HitCollisionChannel = ECC_GameTraceChannel7;
     this->ProjectileLocationOffset = 25.00f;
-    this->projectileClass = NULL;
+    this->ProjectileClass = NULL;
 }
 

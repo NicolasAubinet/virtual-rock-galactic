@@ -8,7 +8,7 @@ USTRUCT(BlueprintType)
 struct FAvoidActorEntry {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     AActor* Actor;
     
     FSD_API FAvoidActorEntry();

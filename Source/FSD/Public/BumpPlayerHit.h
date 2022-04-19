@@ -9,10 +9,10 @@ USTRUCT(BlueprintType)
 struct FBumpPlayerHit {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FVector_NetQuantize force;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     APlayerCharacter* Player;
     
     FSD_API FBumpPlayerHit();

@@ -5,32 +5,32 @@
 #include "ECarveFilterType.h"
 #include "RandomizedInstantMeshCarver.generated.h"
 
-class UStaticMeshCarver;
 class UStaticMesh;
-class USTLMeshCarver;
 class UTerrainMaterialBase;
+class USTLMeshCarver;
+class UStaticMeshCarver;
 
 UCLASS()
 class ARandomizedInstantMeshCarver : public AActor {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UStaticMesh*> CarvingMeshes;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<USTLMeshCarver*> STLCarvingMeshes;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UStaticMeshCarver*> StaticMeshCarvers;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FRandRange RandomScale;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UTerrainMaterialBase* TerrainMaterial;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     ECarveFilterType Filter;
     
 public:

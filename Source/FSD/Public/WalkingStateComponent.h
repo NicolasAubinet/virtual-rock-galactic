@@ -1,49 +1,52 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EInputKeys.h"
 #include "CharacterStateComponent.h"
+#include "EInputKeys.h"
 #include "WalkingStateComponent.generated.h"
 
-class APlayerCharacter;
-class UAudioComponent;
 class USoundBase;
 class UTrackBuilderMovement;
+class APlayerCharacter;
+class UAudioComponent;
 
-UCLASS(MinimalAPI)
+UCLASS(MinimalAPI, meta=(BlueprintSpawnableComponent))
 class UWalkingStateComponent : public UCharacterStateComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool SlidingEnabled;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ShowDebug;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float SlideAngle;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float SlideAcceleration;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxSlideSpeed;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxClimbDistance;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundBase* AudioSliding;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundBase* IceSliding;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UAudioComponent* AudioComponentSliding;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UAudioComponent* AudioComponentIceSliding;
     
+public:
+    UWalkingStateComponent();
+protected:
     UFUNCTION(BlueprintCallable)
     void TrackGrindCallback(APlayerCharacter* User, EInputKeys Key);
     
@@ -57,6 +60,5 @@ public:
     UFUNCTION(BlueprintCallable)
     void JumpPress();
     
-    UWalkingStateComponent();
 };
 

@@ -3,14 +3,14 @@
 #include "CharacterStateComponent.h"
 #include "NoMovementStateComponent.generated.h"
 
-UCLASS(MinimalAPI)
+UCLASS(MinimalAPI, meta=(BlueprintSpawnableComponent))
 class UNoMovementStateComponent : public UCharacterStateComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool DisableHeadLightOnEnter;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool EnableHeadLightOnExit;
     
     UNoMovementStateComponent();

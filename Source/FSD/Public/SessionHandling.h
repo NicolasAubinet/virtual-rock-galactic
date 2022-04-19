@@ -1,23 +1,23 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "Kismet/BlueprintFunctionLibrary.h"
-#include "EServerDistance.h"
-#include "EDisconnectReason.h"
-#include "EServerSortOrder.h"
 #include "FindSessionsCallbackProxy.h"
+#include "EServerSortOrder.h"
+#include "Kismet/BlueprintFunctionLibrary.h"
+#include "EDisconnectReason.h"
 #include "EFSDNATType.h"
 #include "EMissionStructure.h"
 #include "FriendInfo.h"
 #include "EFSDMissionStatus.h"
+#include "EServerDistance.h"
 #include "UObject/NoExportTypes.h"
 #include "SessionHandling.generated.h"
 
-class UFSDGameInstance;
 class UObject;
-class UDifficultySetting;
+class UFSDGameInstance;
 class UPlayerCharacterID;
 class APlayerCharacter;
+class UDifficultySetting;
 class UBiome;
 class UMissionTemplate;
 
@@ -25,6 +25,7 @@ UCLASS(BlueprintType)
 class USessionHandling : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    USessionHandling();
     UFUNCTION(BlueprintCallable)
     static void StopVoice(UObject* WorldContextObject);
     
@@ -134,9 +135,6 @@ public:
     static bool FSDHasGameStarted(const FBlueprintSessionResult& Result);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    static TArray<FString> FSDGetVerifiedModsInstalled(const FBlueprintSessionResult& Result);
-    
-    UFUNCTION(BlueprintCallable, BlueprintPure)
     static bool FSDGetServerStartTime(const FBlueprintSessionResult& Result, FDateTime& StartTime);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -149,6 +147,9 @@ public:
     static FString FSDGetServerID(const FBlueprintSessionResult& Result);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    static TArray<FString> FSDGetRequiredModsToDownload(const FBlueprintSessionResult& Result);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     static FString FSDGetRegion(const FBlueprintSessionResult& Result);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -156,6 +157,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static TArray<TSubclassOf<APlayerCharacter>> FSDGetPlayerClasses(const FBlueprintSessionResult& Result);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    static TArray<FString> FSDGetOptionalModsInstalled(const FBlueprintSessionResult& Result, bool ExcludeVerifiedMods);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static int32 FSDGetNumPlayers(const FBlueprintSessionResult& Result);
@@ -196,6 +200,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static bool AllowLinkToExternalFeedback(UObject* WorldContextObject);
     
-    USessionHandling();
 };
 

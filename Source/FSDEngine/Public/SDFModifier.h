@@ -1,14 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "SDFModifierProperties.h"
 #include "SDFSingleChildBase.h"
+#include "SDFModifierProperties.h"
 #include "SDFModifier.generated.h"
 
 UCLASS()
-class USDFModifier : public USDFSingleChildBase {
+class FSDENGINE_API USDFModifier : public USDFSingleChildBase {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSDFModifierProperties Properties;
     
     USDFModifier();

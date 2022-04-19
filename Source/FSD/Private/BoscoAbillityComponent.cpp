@@ -9,7 +9,7 @@ int32 UBoscoAbillityComponent::GetCharges() const {
 }
 
 UBoscoAbillityComponent::UBoscoAbillityComponent() {
-    this->projectileClass = NULL;
+    this->ProjectileClass = NULL;
     this->Animation = NULL;
     this->VoiceOnUse = NULL;
 }

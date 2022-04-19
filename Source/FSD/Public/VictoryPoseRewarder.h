@@ -6,14 +6,14 @@
 class UVictoryPose;
 class UPlayerCharacterID;
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UVictoryPoseRewarder : public UTreasureRewarder {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UVictoryPose* GivenPose;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UPlayerCharacterID* GivenCharacterID;
     
     UVictoryPoseRewarder();

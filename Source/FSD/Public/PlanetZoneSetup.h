@@ -3,21 +3,21 @@
 #include "Engine/DataAsset.h"
 #include "PlanetZoneSetup.generated.h"
 
-class UBiome;
 class UPlanetZone;
+class UBiome;
 
 UCLASS(BlueprintType)
 class UPlanetZoneSetup : public UDataAsset {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UPlanetZone*> PlanetZones;
     
 public:
+    UPlanetZoneSetup();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UPlanetZone* GetPlanetZoneForBiome(UBiome* Biome) const;
     
-    UPlanetZoneSetup();
 };
 

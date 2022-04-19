@@ -1,28 +1,26 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerStart.h"
+#include "PlayerSpawnInHubDelegate.h"
 #include "ESpacerigStartType.h"
 #include "SpacerigStart.generated.h"
 
 class AFSDPlayerController;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSpacerigStartOnPlayerLeave, AFSDPlayerController*, Controller);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSpacerigStartOnPlayerSpawn, AFSDPlayerController*, Controller);
-
 UCLASS()
 class ASpacerigStart : public APlayerStart {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FSpacerigStartOnPlayerSpawn OnPlayerSpawn;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FPlayerSpawnInHub OnPlayerSpawn;
     
-    UPROPERTY(BlueprintAssignable, BlueprintCallable)
-    FSpacerigStartOnPlayerLeave OnPlayerLeave;
+    UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FPlayerSpawnInHub OnPlayerLeave;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     AFSDPlayerController* usedBy;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     ESpacerigStartType StartType;
     
     ASpacerigStart();

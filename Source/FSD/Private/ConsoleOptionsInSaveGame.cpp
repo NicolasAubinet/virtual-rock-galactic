@@ -36,5 +36,11 @@ FConsoleOptionsInSaveGame::FConsoleOptionsInSaveGame() {
     this->HDRColorGamma = 0.00f;
     this->ConsoleGraphicsMode = EConsoleGraphicsMode::Fidelity;
     this->SwapControllerThumbsticks = false;
+    this->FSDResolutionScale = 0.00f;
+    this->UpscalingType = 0;
+    this->AmdFsrMode = 0;
+    this->NvidiaDlssMode = UDLSSMode::Off;
+    this->AmdFsrSharpness = 0.00f;
+    this->NvidiaDlssSharpness = 0.00f;
 }
 

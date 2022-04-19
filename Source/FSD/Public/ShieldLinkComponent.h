@@ -4,33 +4,34 @@
 #include "FloatPerkComponent.h"
 #include "ShieldLinkComponent.generated.h"
 
-class APlayerCharacter;
 class UStatusEffect;
+class APlayerCharacter;
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UShieldLinkComponent : public UFloatPerkComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UStatusEffect> BoostedStatusEffect;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UStatusEffect* BoostedStatusEffectInstance;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float LinkDistance;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TSet<APlayerCharacter*> LinkedCharacters;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UStatusEffect> LinkStatusEffect;
-    
-    UFUNCTION(BlueprintCallable)
-    void TimerFunction();
     
 public:
     UShieldLinkComponent();
+protected:
+    UFUNCTION(BlueprintCallable)
+    void TimerFunction();
+    
 };
 

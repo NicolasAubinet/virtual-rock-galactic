@@ -1,25 +1,24 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "ItemAggregator.h"
+#include "AggregatorVisibilityChangedDelegateDelegate.h"
 #include "UsableAggregator.generated.h"
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FUsableAggregatorOnVisibilityChanged, bool, IsVisible);
-
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UUsableAggregator : public UItemAggregator {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FUsableAggregatorOnVisibilityChanged OnVisibilityChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FAggregatorVisibilityChangedDelegate OnVisibilityChanged;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText UsingText;
     
 public:
+    UUsableAggregator();
     UFUNCTION(BlueprintCallable)
     float GetProgress();
     
-    UUsableAggregator();
 };
 

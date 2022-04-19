@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "UObject/NoExportTypes.h"
 #include "SavableDataAsset.h"
+#include "UObject/NoExportTypes.h"
 #include "VanityNode.h"
 #include "TreeOfVanity.generated.h"
 
@@ -11,15 +11,15 @@ UCLASS(EditInlineNew)
 class UTreeOfVanity : public USavableDataAsset {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FVanityNode> Nodes;
     
+    UTreeOfVanity();
     UFUNCTION(BlueprintCallable)
     void ClearNodes();
     
     UFUNCTION(BlueprintCallable)
     void AddNode(UReward* Reward, int32 NodeID, TArray<int32> ConnectedNodes, bool isStartingNode, bool isBig, FVector2D Position);
     
-    UTreeOfVanity();
 };
 

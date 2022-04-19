@@ -1,43 +1,44 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "Engine/EngineTypes.h"
+#include "DelegateDelegate.h"
 #include "UObject/NoExportTypes.h"
+#include "Engine/EngineTypes.h"
 #include "FrozenPawnImpactComponent.generated.h"
 
 class UPhysicsAsset;
-class UPhysicalMaterial;
-class UPrimitiveComponent;
-class USoundCue;
 class UParticleSystem;
+class USoundCue;
+class UPrimitiveComponent;
+class UPhysicalMaterial;
 class AActor;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFrozenPawnImpactComponentOnStartFallingEvent);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFrozenPawnImpactComponentOnFreezeImpactEvent);
-
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UFrozenPawnImpactComponent : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FFrozenPawnImpactComponentOnStartFallingEvent OnStartFallingEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDelegate OnStartFallingEvent;
     
-    UPROPERTY(BlueprintAssignable)
-    FFrozenPawnImpactComponentOnFreezeImpactEvent OnFreezeImpactEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDelegate OnFreezeImpactEvent;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UPhysicalMaterial* FrozenMaterial;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UPhysicsAsset* FrozenAsset;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundCue* FrozenDeathSound;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UParticleSystem* FrozenDeathparticles;
     
+public:
+    UFrozenPawnImpactComponent();
+protected:
     UFUNCTION(BlueprintCallable)
     void TriggerFrozenRagdoll();
     
@@ -47,7 +48,5 @@ protected:
     UFUNCTION(BlueprintCallable)
     void OnFreezeImpact(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
     
-public:
-    UFrozenPawnImpactComponent();
 };
 

@@ -10,13 +10,13 @@ class UVanitySchematicItem : public USchematicItem {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UVanityItem* Item;
     
 public:
+    UVanitySchematicItem();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UVanityItem* GetVanityItem();
     
-    UVanitySchematicItem();
 };
 

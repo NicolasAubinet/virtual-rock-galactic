@@ -1,8 +1,8 @@
 #include "FlameThrowerUpgrade.h"
 #include "Templates/SubclassOf.h"
 
-class AFSDPlayerState;
 class AItem;
+class AFSDPlayerState;
 
 FUpgradeValues UFlameThrowerUpgrade::GetUpgradedValue(TSubclassOf<AItem> Item, AFSDPlayerState* Player, EFlameThrowerUpgradeType NewUpgradeType) {
     return FUpgradeValues{};

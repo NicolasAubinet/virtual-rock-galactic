@@ -9,16 +9,16 @@ class UMissionNameBank : public UDataAsset {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FText> FirstNames;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FText> LastNames;
     
 public:
+    UMissionNameBank();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<FText> GetRandomGeneratedNames(UPARAM(Ref) FRandomStream& Random, int32 count) const;
     
-    UMissionNameBank();
 };
 

@@ -3,8 +3,8 @@
 #include "FSDHUD.h"
 #include "SpaceRigHUD.generated.h"
 
-class UObject;
 class UDialogDataAsset;
+class UObject;
 class UWindowWidget;
 
 UCLASS(NonTransient)
@@ -12,13 +12,14 @@ class ASpaceRigHUD : public AFSDHUD {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<UObject*> NotificationQueue;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool bNotificationQueueActive;
     
 public:
+    ASpaceRigHUD();
     UFUNCTION(BlueprintCallable)
     void SetNotificationQueueActive(bool Inactive);
     
@@ -48,6 +49,5 @@ public:
     UFUNCTION(BlueprintCallable)
     UObject* DequeueNotificationObject();
     
-    ASpaceRigHUD();
 };
 

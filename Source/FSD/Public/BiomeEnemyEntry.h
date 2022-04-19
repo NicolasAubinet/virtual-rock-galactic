@@ -8,10 +8,10 @@ USTRUCT(BlueprintType)
 struct FBiomeEnemyEntry {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UEnemyDescriptor* enemy;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool IsDistruptive;
     
     FSD_API FBiomeEnemyEntry();

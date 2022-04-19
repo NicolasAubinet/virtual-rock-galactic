@@ -1,5 +1,6 @@
 #include "SentryGun.h"
 #include "Net/UnrealNetwork.h"
+#include "Components/SkeletalMeshComponent.h"
 
 class AActor;
 
@@ -63,7 +64,8 @@ void ASentryGun::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifeti
 }
 
 ASentryGun::ASentryGun() {
-    this->projectileClass = NULL;
+    this->SentryGunMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("SentryGunMesh"));
+    this->ProjectileClass = NULL;
     this->ShootingSound = NULL;
     this->MuzzleFlash = NULL;
     this->Tracer = NULL;

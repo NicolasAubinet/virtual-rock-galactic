@@ -23,6 +23,7 @@ float UHitscanBaseComponent::GetCurrentHorizontalSpread() const {
 UHitscanBaseComponent::UHitscanBaseComponent() {
     this->SpreadPerShot = 2.00f;
     this->DamageComponent = NULL;
+    this->UseDamageComponent = true;
     this->Damage = 0.00f;
     this->ArmorDamageMultiplier = 1.00f;
     this->DamageClass = NULL;

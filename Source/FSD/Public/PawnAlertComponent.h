@@ -1,30 +1,29 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "DelegateDelegate.h"
+#include "DamageData.h"
 #include "PawnAlertComponent.generated.h"
 
-class UDamageClass;
 class APawn;
-class AActor;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPawnAlertComponentOnAlertedFromDamage);
-
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UPawnAlertComponent : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable, BlueprintAuthorityOnly)
-    FPawnAlertComponentOnAlertedFromDamage OnAlertedFromDamage;
+    UPROPERTY(BlueprintAssignable, BlueprintAuthorityOnly, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDelegate OnAlertedFromDamage;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool AutoAlertAI;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ShouldAlertNearby;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float AlertRadius;
     
+    UPawnAlertComponent();
     UFUNCTION(BlueprintCallable)
     void StopAutoAlerting();
     
@@ -33,7 +32,7 @@ protected:
     void OnPawnSeen(APawn* Pawn);
     
     UFUNCTION(BlueprintCallable)
-    void OnHit(float Damage, UDamageClass* DamageClass, AActor* DamageCauser, bool anyHealthLost);
+    void OnHit(float Damage, const FDamageData& DamageData, bool anyHealthLost);
     
     UFUNCTION(BlueprintCallable)
     void OnAlerted();
@@ -42,6 +41,5 @@ public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void AleartNearby();
     
-    UPawnAlertComponent();
 };
 

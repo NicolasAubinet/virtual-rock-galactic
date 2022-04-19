@@ -9,10 +9,10 @@ USTRUCT(BlueprintType)
 struct FTreasureWeight {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float Weight;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UTreasureRewarder> RewarderClass;
     
     FSD_API FTreasureWeight();

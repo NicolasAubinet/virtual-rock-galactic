@@ -5,26 +5,26 @@
 
 class UItemUpgrade;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FItemUpgradePreviewComponentOnPreviewUpgradeChanged, UItemUpgrade*, PreviewUpgrade);
-
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UItemUpgradePreviewComponent : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FItemUpgradePreviewComponentOnPreviewUpgradeChanged OnPreviewUpgradeChanged;
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FItemUpgradeDelegate, UItemUpgrade*, PreviewUpgrade);
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FItemUpgradeDelegate OnPreviewUpgradeChanged;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UItemUpgrade* PreviewUpgrade;
     
 public:
+    UItemUpgradePreviewComponent();
     UFUNCTION(BlueprintCallable)
     void SetPreviewUpgrade(UItemUpgrade* InUpgrade);
     
     UFUNCTION(BlueprintCallable)
     void RefreshPreviewUpgrade();
     
-    UItemUpgradePreviewComponent();
 };
 

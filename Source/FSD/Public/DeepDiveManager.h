@@ -1,60 +1,59 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "UObject/Object.h"
-#include "DeepDiveBank.h"
 #include "UObject/NoExportTypes.h"
+#include "DeepDiveBank.h"
+#include "UObject/Object.h"
 #include "DeepDiveManager.generated.h"
 
-class UGeneratedMission;
+class UFSDEventsHandler;
 class UDeepDive;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDeepDiveManagerOnDeepDivesRefresh);
+class UGeneratedMission;
 
 UCLASS(BlueprintType)
 class UDeepDiveManager : public UObject {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FDeepDiveManagerOnDeepDivesRefresh OnDeepDivesRefresh;
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDeepDiveRefreshDelegate);
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDeepDiveRefreshDelegate OnDeepDivesRefresh;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, Transient)
-    UDeepDive* ActiveNormalDeepDive;
-    
-    UPROPERTY(BlueprintReadOnly, Transient)
-    UDeepDive* ActiveHardDeepDive;
-    
-    UPROPERTY(BlueprintReadOnly, Transient)
-    UDeepDive* ActiveDeepDive;
-    
-    UPROPERTY(BlueprintReadOnly, Transient)
-    UGeneratedMission* CurrentMission;
-    
-    UPROPERTY(BlueprintReadOnly, Transient)
-    float currentDepth;
-    
-    UPROPERTY(Transient)
-    TMap<int32, FDeepDiveBank> DeepDiveBank;
-    
-    UPROPERTY(Transient)
-    int32 NumFailedRequests;
-    
-    UPROPERTY(Transient)
-    int32 BackendDataValid;
-    
-    UPROPERTY(Transient)
-    int32 BackendSeed;
-    
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool LockSeed;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UFSDEventsHandler* EventsHandler;
+    
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UDeepDive* ActiveNormalDeepDive;
+    
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UDeepDive* ActiveHardDeepDive;
+    
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UDeepDive* ActiveDeepDive;
+    
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UGeneratedMission* CurrentMission;
+    
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    float currentDepth;
+    
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    TMap<int32, FDeepDiveBank> DeepDiveBank;
+    
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    int32 BackendDataValid;
+    
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FDateTime BackendExpirationTime;
     
-    UPROPERTY(Transient)
-    FDateTime LastRequestTime;
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    int32 BackendSeed;
     
 public:
+    UDeepDiveManager();
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void StartDeepDive(UDeepDive* DeepDive);
     
@@ -63,12 +62,6 @@ public:
     
     UFUNCTION(BlueprintCallable)
     void MarkGivenRewards();
-    
-    UFUNCTION(BlueprintCallable, BlueprintPure)
-    bool IsEliteDeepDive(UGeneratedMission* mission) const;
-    
-    UFUNCTION(BlueprintCallable, BlueprintPure)
-    UDeepDive* GetDeepDiveFromMission(UGeneratedMission* mission) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UGeneratedMission* GetCurrentSingleMission() const;
@@ -91,6 +84,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool AreAllSelectedClassesQualified() const;
     
-    UDeepDiveManager();
 };
 

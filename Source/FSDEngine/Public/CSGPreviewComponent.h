@@ -4,27 +4,27 @@
 #include "ChunkId.h"
 #include "CSGPreviewComponent.generated.h"
 
+class UDeepProceduralMeshComponent;
 class ACSGBuilderBase;
 class UBakeConfig;
-class UDeepProceduralMeshComponent;
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class FSDENGINE_API UCSGPreviewComponent : public USceneComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     ACSGBuilderBase* BaseBuilder;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UBakeConfig* CurrentBakeConfig;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     TMap<FChunkId, UDeepProceduralMeshComponent*> Meshes;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool UsePreviewScene;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     int32 ChangeCount;
     
     UCSGPreviewComponent();

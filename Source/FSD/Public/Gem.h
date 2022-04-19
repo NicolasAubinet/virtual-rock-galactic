@@ -3,33 +3,33 @@
 #include "CarriableItem.h"
 #include "Gem.generated.h"
 
-class UResourceData;
 class UCarriableInstantUsable;
+class UResourceData;
 
 UCLASS(Abstract)
-class AGem : public ACarriableItem {
+class FSD_API AGem : public ACarriableItem {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UCarriableInstantUsable* Usable;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UResourceData* ResourceType;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float ResourceAmount;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool hasBeenReleased;
     
 public:
+    AGem();
     UFUNCTION(BlueprintCallable)
     void SetHasBeenReleased(bool NewHasBeenReleased);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetHasBeenReleased() const;
     
-    AGem();
 };
 

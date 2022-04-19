@@ -4,11 +4,11 @@
 #include "MeshBaseProperties.h"
 #include "CSGBaseComponent.generated.h"
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UCSGBaseComponent : public UCSGBuilderBaseSceneComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FMeshBaseProperties BaseProperties;
     
     UCSGBaseComponent();

@@ -1,5 +1,6 @@
 #include "DefensePointActor.h"
 #include "Net/UnrealNetwork.h"
+#include "SingleUsableComponent.h"
 
 class APlayerCharacter;
 
@@ -25,5 +26,6 @@ ADefensePointActor::ADefensePointActor() {
     this->DefenseEvent = NULL;
     this->ActiveDefenceEvent = NULL;
     this->DefendState = EDefendPointState::Idle;
+    this->DefendPointUsable = CreateDefaultSubobject<USingleUsableComponent>(TEXT("DefendPointUsable"));
 }
 

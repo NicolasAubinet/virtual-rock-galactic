@@ -6,21 +6,21 @@
 #include "UpgradeValues.h"
 #include "DualMachinePistolsUpgrade.generated.h"
 
-class AFSDPlayerState;
 class AItem;
+class AFSDPlayerState;
 
 UCLASS(EditInlineNew, MinimalAPI)
 class UDualMachinePistolsUpgrade : public UStandardItemUpgrade {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EDualMachinePistolsUpgrades upgradeType;
     
 public:
+    UDualMachinePistolsUpgrade();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static FUpgradeValues GetUpgradedValue(TSubclassOf<AItem> Item, AFSDPlayerState* Player, EDualMachinePistolsUpgrades NewUpgradeType);
     
-    UDualMachinePistolsUpgrade();
 };
 

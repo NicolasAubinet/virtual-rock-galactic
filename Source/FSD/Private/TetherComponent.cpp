@@ -1,8 +1,8 @@
 #include "TetherComponent.h"
 #include "Net/UnrealNetwork.h"
 
-class UMeshComponent;
 class UTetherComponent;
+class UMeshComponent;
 
 void UTetherComponent::ToggleConnectionValidation(bool Enabled, bool reactivate) {
 }

@@ -5,9 +5,9 @@
 #include "QueuedMontage.h"
 #include "EnemyPawn.generated.h"
 
+class UPawnStatsComponent;
 class UEnemyHealthComponent;
 class UEnemyPawnAfflictionComponent;
-class UPawnStatsComponent;
 class UEnemyComponent;
 class UMaterialInterface;
 class UMeshComponent;
@@ -20,27 +20,32 @@ class AEnemyPawn : public AFSDPawn, public INetMontageAble {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UEnemyHealthComponent* Health;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UPawnStatsComponent* Stats;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UEnemyPawnAfflictionComponent* Affliction;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UEnemyComponent* enemy;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FName CenterMassSocketName;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_QueuedMontage)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_QueuedMontage, meta=(AllowPrivateAccess=true))
     FQueuedMontage QueuedMontage;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<UMaterialInterface*> CachedMaterials;
     
+public:
+    AEnemyPawn();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     UMeshComponent* Receive_GetMeshComponent() const;
     
@@ -50,12 +55,9 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     USkeletalMeshComponent* GetMesh() const;
     
-public:
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    AEnemyPawn();
     
     // Fix for true pure virtual functions not being implemented
+public:
     UFUNCTION(BlueprintCallable)
     float QueueMontage(UAnimMontage* Montage) override PURE_VIRTUAL(QueueMontage, return 0.0f;);
     

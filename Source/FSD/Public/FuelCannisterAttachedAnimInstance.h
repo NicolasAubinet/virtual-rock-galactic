@@ -8,13 +8,13 @@ class UFuelCannisterAttachedAnimInstance : public UAnimInstance {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere, Transient)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool CanBeTaken;
     
 public:
+    UFuelCannisterAttachedAnimInstance();
     UFUNCTION(BlueprintCallable)
     void SetCanBeTaken(bool canBeTakenValue);
     
-    UFuelCannisterAttachedAnimInstance();
 };
 

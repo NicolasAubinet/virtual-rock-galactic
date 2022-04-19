@@ -10,7 +10,7 @@ class UProjectileUpgradeElement : public UItemUpgradeElement {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UParticleSystem* NewTrailParticle;
     
 public:

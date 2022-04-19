@@ -12,6 +12,7 @@ UDamageSettings::UDamageSettings() {
     this->TemperatureShockFromFrozenStatusEffect = NULL;
     this->TemperatureShockFromBurningStatusEffect = NULL;
     this->ArmorShatterDamage = NULL;
+    this->ChemicalExplosionDamage = NULL;
     this->ArmorShatterEmitter = NULL;
     this->ArmorShatterSound = NULL;
     this->ImpactDecals.AddDefaulted(3);
@@ -19,6 +20,12 @@ UDamageSettings::UDamageSettings() {
     this->DetonateOnFire = NULL;
     this->DirectHit = NULL;
     this->MeltTarget = NULL;
+    this->CookTarget = NULL;
+    this->GibTarget = NULL;
+    this->ExplodeOnDeath = NULL;
     this->IgnoreBodypartDamageReduction = NULL;
+    this->DefaultDamageImpulse = NULL;
+    this->DoTDamageImpulse = NULL;
+    this->RagdollGlobalForceMultiplier = 8000.00f;
 }
 

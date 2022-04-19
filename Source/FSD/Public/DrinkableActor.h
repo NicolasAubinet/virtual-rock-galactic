@@ -11,10 +11,13 @@ class ADrinkableActor : public AActor {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere, ReplicatedUsing=OnRep_DrinkableData)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_DrinkableData, meta=(AllowPrivateAccess=true))
     UDrinkableDataAsset* DrinkableData;
     
 public:
+    ADrinkableActor();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void Pickup(APlayerCharacter* byCharacter);
     
@@ -26,8 +29,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void Fill();
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    ADrinkableActor();
 };
 

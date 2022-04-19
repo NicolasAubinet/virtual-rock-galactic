@@ -1,4 +1,5 @@
 #include "AdicPuddle.h"
+#include "Components/SphereComponent.h"
 
 class UPrimitiveComponent;
 class AActor;
@@ -10,6 +11,7 @@ void AAdicPuddle::OnPuddleBeginOverLap(UPrimitiveComponent* OverlappedComponent,
 }
 
 AAdicPuddle::AAdicPuddle() {
+    this->SphereTrigger = CreateDefaultSubobject<USphereComponent>(TEXT("SphereTrigger"));
     this->SpawnSound = NULL;
     this->InflictedStatusEffect = NULL;
     this->LifeTime = 0.00f;

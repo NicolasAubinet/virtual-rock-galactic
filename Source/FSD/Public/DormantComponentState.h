@@ -9,19 +9,19 @@ USTRUCT()
 struct FDormantComponentState {
     GENERATED_BODY()
 public:
-    UPROPERTY(Export)
+    UPROPERTY(Export, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UActorComponent> Component;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     TEnumAsByte<ECollisionEnabled::Type> Collision;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     FName CollisionProfileName;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     uint8 Active: 1;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     uint8 Visible: 1;
     
     FSD_API FDormantComponentState();

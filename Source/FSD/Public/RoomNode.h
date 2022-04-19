@@ -1,8 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "ERoomType.h"
-#include "RoomNodeBase.h"
 #include "UObject/NoExportTypes.h"
+#include "RoomNodeBase.h"
 #include "RoomEntrance.h"
 #include "GeneratedRoom.h"
 #include "RoomGeneratorItem.h"
@@ -12,43 +11,43 @@ USTRUCT(BlueprintType)
 struct FRoomNode : public FRoomNodeBase {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, Transient, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Transient, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     int32 ID;
     
-    UPROPERTY(BlueprintReadWrite, Transient, VisibleAnywhere)
-    ERoomType RoomType;
-    
-    UPROPERTY(BlueprintReadWrite, Transient, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Transient, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     int32 CarvePass;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FVector Position;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float Radius;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<int32> EntranceIDs;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<int32> ExitIDs;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FRoomEntrance> RoomEntrances;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool CanHaveEnemies;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FGeneratedRoom> Rooms;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float ResourceMultiplier;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    bool CanBeUsedForRoomBasedDistribution;
+    
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float WeightedResourceAmount;
     
-    UPROPERTY(Transient)
+    UPROPERTY(Transient, meta=(AllowPrivateAccess=true))
     TArray<FRoomGeneratorItem> RoomGenerators;
     
     FSD_API FRoomNode();

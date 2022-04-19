@@ -2,35 +2,35 @@
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintAsyncActionBase.h"
 #include "YesNoPromptSettings.h"
+#include "YesNoPromptWidget.h"
 #include "YesNoPromptAction.generated.h"
 
 class UYesNoPromptWidget;
 class UYesNoPromptAction;
-class UObject;
 class UResourceData;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FYesNoPromptActionYes);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_DELEGATE_OneParam(FYesNoPromptActionYesNoDelegate, bool, Yes);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FYesNoPromptActionNo);
+class UObject;
 
 UCLASS()
 class UYesNoPromptAction : public UBlueprintAsyncActionBase {
     GENERATED_BODY()
 public:
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FYesNoOutputPin);
+    
 protected:
-    UPROPERTY(BlueprintAssignable)
-    FYesNoPromptActionYes Yes;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FYesNoOutputPin Yes;
     
-    UPROPERTY(BlueprintAssignable)
-    FYesNoPromptActionNo No;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FYesNoOutputPin No;
     
-    UPROPERTY()
-    FYesNoPromptActionYesNoDelegate YesNoDelegate;
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UYesNoPromptWidget::FOnYesNoClickedDelegate YesNoDelegate;
     
-    UPROPERTY(Export)
+    UPROPERTY(BlueprintReadWrite, Export, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UYesNoPromptWidget> ActivePrompt;
     
 public:
+    UYesNoPromptAction();
     UFUNCTION(BlueprintCallable)
     static UYesNoPromptAction* PromptYesNo(UObject* WorldContext, FYesNoPromptSettings Prompt);
     
@@ -41,7 +41,5 @@ protected:
     UFUNCTION(BlueprintCallable)
     void PromptCallback(bool YesClicked);
     
-public:
-    UYesNoPromptAction();
 };
 

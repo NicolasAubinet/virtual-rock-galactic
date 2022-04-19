@@ -8,6 +8,7 @@ UCLASS(BlueprintType)
 class UFSDRichTextFunctionlibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    UFSDRichTextFunctionlibrary();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static void SplitRichText(const FRichTextParseResult& Parser, int32 SplitIndex, bool bKeepLeftFormatting, bool bKeepRightFormatting, FText& OutLeftText, FText& OutRightText);
     
@@ -17,6 +18,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static FText MidRichText(const FRichTextParseResult& Parser, int32 StartIndex, int32 count, bool bKeepFormatting);
     
-    UFSDRichTextFunctionlibrary();
 };
 

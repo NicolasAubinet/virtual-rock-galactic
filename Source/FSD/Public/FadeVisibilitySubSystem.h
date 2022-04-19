@@ -4,14 +4,15 @@
 #include "UObject/NoExportTypes.h"
 #include "FadeVisibilitySubSystem.generated.h"
 
-class UMeshComponent;
-class UPrimitiveComponent;
 class ULightComponent;
+class UPrimitiveComponent;
+class UMeshComponent;
 
 UCLASS(BlueprintType)
 class UFadeVisibilitySubSystem : public UWorldSubsystem {
     GENERATED_BODY()
 public:
+    UFadeVisibilitySubSystem();
     UFUNCTION(BlueprintCallable)
     static void ScalePrimitive(UPrimitiveComponent* Component, FVector StartScale, FVector EndScale, float Duration);
     
@@ -33,6 +34,5 @@ public:
     UFUNCTION(BlueprintCallable)
     static void FadeInLight(ULightComponent* Light, float Duration);
     
-    UFadeVisibilitySubSystem();
 };
 

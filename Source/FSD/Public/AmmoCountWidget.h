@@ -3,24 +3,33 @@
 #include "Blueprint/UserWidget.h"
 #include "AmmoCountWidget.generated.h"
 
-class UItemAggregator;
-class APlayerCharacter;
 class AItem;
+class APlayerCharacter;
+class UItemAggregator;
 
 UCLASS(Abstract, EditInlineNew)
 class UAmmoCountWidget : public UUserWidget {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     APlayerCharacter* Character;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     AItem* Item;
     
-    UPROPERTY(BlueprintReadOnly, Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UItemAggregator* Aggregator;
     
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    bool ShowClipAndTotalAsOne;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 CountThreshold;
+    
+public:
+    UAmmoCountWidget();
+protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnVisibleChanged(bool Visible, bool showClipCount);
     
@@ -45,7 +54,5 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void DoItemEquipped();
     
-public:
-    UAmmoCountWidget();
 };
 

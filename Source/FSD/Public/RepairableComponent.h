@@ -1,40 +1,39 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "RepairedDelegateDelegate.h"
 #include "RepairableComponent.generated.h"
 
 class UGemResourceData;
-class URepairableComponent;
 class APlayerCharacter;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FRepairableComponentOnFullyRepairedEvent, URepairableComponent*, Component);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FRepairableComponentOnAllResourcesAquiredEvent, URepairableComponent*, Component);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FRepairableComponentOnRepairedEvent, URepairableComponent*, Component);
-
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class URepairableComponent : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FRepairableComponentOnFullyRepairedEvent OnFullyRepairedEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FRepairedDelegate OnFullyRepairedEvent;
     
-    UPROPERTY(BlueprintAssignable)
-    FRepairableComponentOnAllResourcesAquiredEvent OnAllResourcesAquiredEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FRepairedDelegate OnAllResourcesAquiredEvent;
     
-    UPROPERTY(BlueprintAssignable)
-    FRepairableComponentOnRepairedEvent OnRepairedEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FRepairedDelegate OnRepairedEvent;
     
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UGemResourceData* RequiresCarriedResource;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere, ReplicatedUsing=OnRep_ResourcesRequired)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_ResourcesRequired, meta=(AllowPrivateAccess=true))
     int32 ResourcesRequired;
     
-    UPROPERTY(BlueprintReadOnly, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     bool IsFullyRepaired;
     
 public:
+    URepairableComponent();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     bool TryRepair(APlayerCharacter* User);
     
@@ -49,8 +48,5 @@ public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void Cheat_Repair();
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    URepairableComponent();
 };
 

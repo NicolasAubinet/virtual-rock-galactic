@@ -5,16 +5,16 @@
 #include "SDFSubOp.generated.h"
 
 UCLASS()
-class USDFSubOp : public USDFBase {
+class FSDENGINE_API USDFSubOp : public USDFBase {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FSDFSmoothingProperties Properties;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     USDFBase* A;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     USDFBase* B;
     
     USDFSubOp();

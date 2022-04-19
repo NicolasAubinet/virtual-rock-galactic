@@ -1,9 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
 #include "EnemyPawn.h"
-#include "TentacleTarget.h"
-#include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "TentacleBase.generated.h"
 
@@ -15,72 +14,57 @@ UCLASS(Abstract)
 class ATentacleBase : public AEnemyPawn {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, Export)
+    UPROPERTY(BlueprintReadWrite, Export, meta=(AllowPrivateAccess=true))
     USplineComponent* SplineComponent;
     
 protected:
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FTransform RestTransform;
     
-    UPROPERTY(BlueprintReadWrite)
-    FTransform LastTransform;
-    
-    UPROPERTY(BlueprintReadWrite)
-    FTransform DesiredTransform;
-    
-    UPROPERTY(ReplicatedUsing=OnRep_DesiredTarget)
-    FTentacleTarget DesiredTarget;
-    
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FVector TargetLocation;
     
-    UPROPERTY(BlueprintReadWrite)
-    float MovementAlpha;
-    
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     float HeadMovementDuration;
     
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     float CanSwayCooldown;
     
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FVector2D SwayRange;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float NeckBaseTangentLength;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FVector NeckBasePositionOffset;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FVector NeckBaseTangentOffset;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float NeckTopTangentLength;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
-    FVector NeckTopPositionOffset;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
-    FVector NeckTopTangentOffset;
-    
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DurationTentacleRetract;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DurationTentacleFoldout;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     USceneComponent* HeadRoot;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     USceneComponent* HeadRotator;
     
+public:
+    ATentacleBase();
+    UFUNCTION(BlueprintCallable)
+    void SetRestingTransform(const FTransform& restingTransform, bool startAtRest);
+    
+protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void Recieve_OnRep_Owner();
-    
-    UFUNCTION(BlueprintCallable)
-    void OnRep_DesiredTarget();
     
 public:
     UFUNCTION(BlueprintCallable)
@@ -96,9 +80,5 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     USceneComponent* GetHeadRoot();
     
-public:
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    ATentacleBase();
 };
 

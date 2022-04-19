@@ -1,77 +1,79 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Components/ActorComponent.h"
-#include "TetherMessageSettings.h"
-#include "ETetherMessageDirection.h"
-#include "ETetherConnectionMode.h"
 #include "UObject/NoExportTypes.h"
+#include "TetherConnectionChanged_DeletageDelegate.h"
+#include "Components/ActorComponent.h"
+#include "TeherMessage_DelegateDelegate.h"
+#include "TetherPowerChanged_DelegateDelegate.h"
+#include "TetherRangeChangedDelegate.h"
+#include "ETetherConnectionMode.h"
+#include "ETetherMessageDirection.h"
+#include "TetherMessageSettings.h"
 #include "TetherComponent.generated.h"
 
 class UTetherComponent;
 class UMeshComponent;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FTetherComponentOnPowerChanged, bool, hasPower);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FTetherComponentOnConnectionRangeUpdated, float, range);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FTetherComponentOnConnectionChanged, UTetherComponent*, frontConnection, UTetherComponent*, backConnection);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FTetherComponentOnTetherMessage, const FName&, Message);
-
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class FSD_API UTetherComponent : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FTetherComponentOnPowerChanged OnPowerChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FTetherPowerChanged_Delegate OnPowerChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FTetherComponentOnConnectionChanged OnConnectionChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FTetherConnectionChanged_Deletage OnConnectionChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FTetherComponentOnTetherMessage OnTetherMessage;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FTeherMessage_Delegate OnTetherMessage;
     
-    UPROPERTY(BlueprintAssignable)
-    FTetherComponentOnConnectionRangeUpdated OnConnectionRangeUpdated;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FTetherRangeChanged OnConnectionRangeUpdated;
     
 protected:
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UMeshComponent* TetherMesh;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool AutoSetup;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     TArray<UTetherComponent*> ConnectionHistory;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FName ConnectionPointName;
     
-    UPROPERTY(Export, Transient, ReplicatedUsing=OnRep_ForwardConnection)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, ReplicatedUsing=OnRep_ForwardConnection, meta=(AllowPrivateAccess=true))
     UTetherComponent* ForwardConnection;
     
-    UPROPERTY(Export, Transient, ReplicatedUsing=OnRep_BackConnection)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, ReplicatedUsing=OnRep_BackConnection, meta=(AllowPrivateAccess=true))
     UTetherComponent* backConnection;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ConnectionDistance;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     ETetherConnectionMode ConnectionMode;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 ConnectionPriority;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 ConnectionHistorySize;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool GeneratesPower;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool PeriodicConnectionValidation;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_HasPower)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_HasPower, meta=(AllowPrivateAccess=true))
     bool hasPower;
     
 public:
+    UTetherComponent();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintCallable)
     void ToggleConnectionValidation(bool Enabled, bool reactivate);
     
@@ -148,8 +150,5 @@ public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     bool ConnectToTetherLine();
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    UTetherComponent();
 };
 

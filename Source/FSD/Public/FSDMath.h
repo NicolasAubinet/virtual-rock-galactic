@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "UObject/NoExportTypes.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "FSDMath.generated.h"
 
@@ -9,6 +9,7 @@ UCLASS(BlueprintType)
 class UFSDMath : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    UFSDMath();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static FVector SphericalToCartesian(float Radius, float azimuth, float elecation);
     
@@ -27,6 +28,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static void CartesianToSpherical(FVector Location, float& outAzimuth, float& outElevation, float& outRadius);
     
-    UFSDMath();
 };
 

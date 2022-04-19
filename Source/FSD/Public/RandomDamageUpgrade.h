@@ -6,21 +6,21 @@
 #include "UpgradeValues.h"
 #include "RandomDamageUpgrade.generated.h"
 
-class AActor;
 class AFSDPlayerState;
+class AActor;
 
 UCLASS(EditInlineNew, MinimalAPI)
 class URandomDamageUpgrade : public UItemUpgrade {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FRandRange DamageRange;
     
 public:
+    URandomDamageUpgrade();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static FUpgradeValues GetUpgradedValue(TSubclassOf<AActor> Item, AFSDPlayerState* Player);
     
-    URandomDamageUpgrade();
 };
 

@@ -1,37 +1,44 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EPickaxePartLocation.h"
 #include "SavablePrimaryDataAsset.h"
+#include "EPickaxePartLocation.h"
 #include "PickaxePart.generated.h"
 
-class UItemAquisitionSource;
+class UItemAquisitionBase;
 class UPickaxePartItem;
+class UItemAquisitionSource;
 class UDLCBase;
 
 UCLASS(BlueprintType)
-class UPickaxePart : public USavablePrimaryDataAsset {
+class FSD_API UPickaxePart : public USavablePrimaryDataAsset {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText Title;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere, Instanced)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
+    UItemAquisitionBase* Aquisition;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UPickaxePartItem* Item;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(AdvancedDisplay, BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UItemAquisitionSource* AquisitionSource;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(AdvancedDisplay, BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     bool UnlockedFromStart;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(AdvancedDisplay, BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UDLCBase* RequiredDLC;
     
 public:
+    UPickaxePart();
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool GetUnlockedFromStart() const;
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     EPickaxePartLocation GetPrefferedLocation() const;
     
-    UPickaxePart();
 };
 

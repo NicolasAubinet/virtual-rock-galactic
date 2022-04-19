@@ -2,71 +2,74 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "GameFramework/Actor.h"
-#include "UObject/NoExportTypes.h"
 #include "Engine/NetSerialization.h"
+#include "UObject/NoExportTypes.h"
 #include "ElectroBeam.generated.h"
 
-class USceneComponent;
 class UCapsuleComponent;
-class UStatusEffect;
 class UParticleSystemComponent;
+class USceneComponent;
 class UAudioComponent;
+class UStatusEffect;
 class UHealthComponentBase;
 
 UCLASS(Abstract)
 class AElectroBeam : public AActor {
     GENERATED_BODY()
 public:
-    UPROPERTY(Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UCapsuleComponent* collider;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<AActor*> ParentPlants;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FVector LocationOffset;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_SourceLocation)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_SourceLocation, meta=(AllowPrivateAccess=true))
     FVector_NetQuantize SourceLocation;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_TargetLocation)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_TargetLocation, meta=(AllowPrivateAccess=true))
     FVector_NetQuantize TargetLocation;
     
-    UPROPERTY(Export, Transient, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USceneComponent* DelaySource;
     
-    UPROPERTY(Export, Transient, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USceneComponent* DelayTarget;
     
-    UPROPERTY(Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UParticleSystemComponent* BeamEffect;
     
-    UPROPERTY(Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UAudioComponent* ZappSound;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSubclassOf<UStatusEffect>> StatusEffectsToApply;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxLitTime;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MinLitTime;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxUnlitTime;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MinUnlitTime;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ShouldFlicker;
     
 private:
-    UPROPERTY(ReplicatedUsing=OnRep_Flag)
+    UPROPERTY(BlueprintReadWrite, ReplicatedUsing=OnRep_Flag, meta=(AllowPrivateAccess=true))
     bool IsLit;
     
 public:
+    AElectroBeam();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintCallable)
     void SetTarget(USceneComponent* TargetPoint);
     
@@ -91,10 +94,7 @@ private:
     
 public:
     UFUNCTION(BlueprintCallable)
-    void OnParentTwoDeath(UHealthComponentBase* HealthComponent);
-    
-    UFUNCTION(BlueprintCallable)
-    void OnParentOneDeath(UHealthComponentBase* HealthComponent);
+    void OnParentDeath(UHealthComponentBase* HealthComponent);
     
     UFUNCTION(BlueprintCallable)
     UParticleSystemComponent* GetParticleEffect();
@@ -114,8 +114,5 @@ public:
     UFUNCTION(BlueprintCallable)
     void DeactivateCollisionAndEffect();
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    AElectroBeam();
 };
 

@@ -8,7 +8,7 @@ USTRUCT(BlueprintType)
 struct FPawnAfflictionItem {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<UAfflictionEffect*> Afflictions;
     
     FSD_API FPawnAfflictionItem();

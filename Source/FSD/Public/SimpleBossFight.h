@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "BossFightInterface.h"
 #include "UObject/Object.h"
+#include "BossFightInterface.h"
 #include "BossFight.h"
 #include "SimpleBossFight.generated.h"
 
@@ -9,7 +9,7 @@ UCLASS(BlueprintType)
 class USimpleBossFight : public UObject, public IBossFightInterface {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FBossFight BossFight;
     
     USimpleBossFight();

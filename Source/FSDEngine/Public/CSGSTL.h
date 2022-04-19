@@ -8,7 +8,7 @@ UCLASS()
 class UCSGSTL : public USimpleMeshWithCachedTree {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FCSGSTLProperties Properties;
     
     UCSGSTL();

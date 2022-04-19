@@ -3,30 +3,33 @@
 #include "Objective.h"
 #include "DefenseObjective.generated.h"
 
-class UDebrisPositioning;
 class ADefensePointActor;
+class UDebrisPositioning;
 
-UCLASS(Abstract)
+UCLASS(Abstract, meta=(BlueprintSpawnableComponent))
 class UDefenseObjective : public UObjective {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere, Replicated)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
     int32 DefensePoints;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_PointsRepaired)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_PointsRepaired, meta=(AllowPrivateAccess=true))
     int32 PointsDefended;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSoftClassPtr<ADefensePointActor>> ObjectiveDefenseClasses;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<ADefensePointActor*> ActiveObjectiveDefenseActors;
     
-    UPROPERTY(EditAnywhere, Instanced)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UDebrisPositioning* DebrisPositioning;
     
 public:
+    UDefenseObjective();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void PointDefended();
     
@@ -38,8 +41,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnDefensePointsSpawned();
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    UDefenseObjective();
 };
 

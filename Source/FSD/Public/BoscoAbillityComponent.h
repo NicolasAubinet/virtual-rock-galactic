@@ -1,55 +1,54 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
+#include "ABillityChargeProgressDelegate.h"
 #include "Components/ActorComponent.h"
+#include "AbillityChargeUsedSigDelegate.h"
 #include "BoscoAbillityComponent.generated.h"
 
 class UItemUpgrade;
 class AProjectileBase;
-class ABosco;
 class UAnimSequenceBase;
-class USoundBase;
 class AActor;
+class USoundBase;
+class ABosco;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FBoscoAbillityComponentOnAbillityChargeProgress, float, aProgress, int32, aNextIndex);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FBoscoAbillityComponentOnAbillityChargeUsed, int32, aCurrentCharges);
-
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UBoscoAbillityComponent : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FBoscoAbillityComponentOnAbillityChargeProgress OnAbillityChargeProgress;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FABillityChargeProgress OnAbillityChargeProgress;
     
-    UPROPERTY(BlueprintAssignable)
-    FBoscoAbillityComponentOnAbillityChargeUsed OnAbillityChargeUsed;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FAbillityChargeUsedSig OnAbillityChargeUsed;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<UItemUpgrade*> upgrades;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
-    TSubclassOf<AProjectileBase> projectileClass;
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    TSubclassOf<AProjectileBase> ProjectileClass;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UAnimSequenceBase* Animation;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     USoundBase* VoiceOnUse;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<AActor> Target;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<ABosco> AbillityOwner;
     
 public:
+    UBoscoAbillityComponent();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetMaxCharges() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetCharges() const;
     
-    UBoscoAbillityComponent();
 };
 

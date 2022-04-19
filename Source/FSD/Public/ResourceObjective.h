@@ -6,32 +6,37 @@
 class UResourceData;
 class UCappedResource;
 
-UCLASS(Abstract)
-class UResourceObjective : public UResourceBasedObjective {
+UCLASS(Abstract, meta=(BlueprintSpawnableComponent))
+class FSD_API UResourceObjective : public UResourceBasedObjective {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UResourceData* Resource;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ResourcesRequired;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_ResourcesCollected)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_ResourcesCollected, meta=(AllowPrivateAccess=true))
     float ResourcesCollected;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ResourceBuffer;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float RoundToNearest;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText ObjectivesText;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText CreditsRewardText;
     
+public:
+    UResourceObjective();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+protected:
     UFUNCTION(BlueprintCallable)
     void OnResourceChanged(UCappedResource* CappedResource, float Amount);
     
@@ -42,8 +47,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetRequiredAmount(float missionScaling) const;
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    UResourceObjective();
 };
 

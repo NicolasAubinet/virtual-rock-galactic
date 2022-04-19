@@ -9,6 +9,7 @@ UCLASS(BlueprintType)
 class FSD_API UDLCBase : public UDataAsset {
     GENERATED_BODY()
 public:
+    UDLCBase();
     UFUNCTION(BlueprintCallable)
     static void QueryAllDLC();
     
@@ -18,6 +19,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static bool IsDLCUnLocked(UDLCBase* dlc);
     
-    UDLCBase();
 };
 

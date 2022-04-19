@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "FakeMoveState.h"
 #include "ProjectileBase.h"
 #include "FakeMoverState.h"
-#include "FakeMoveState.h"
 #include "Engine/EngineTypes.h"
 #include "FakePhysicsProjectile.generated.h"
 
@@ -14,23 +14,26 @@ UCLASS()
 class AFakePhysicsProjectile : public AProjectileBase {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FFakeMoverState MoverState;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_PosVel)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_PosVel, meta=(AllowPrivateAccess=true))
     FFakeMoveState posVel;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UFakeMoverSettings* MoveSettings;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float InitialSpeed;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DampOmega;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float SyncTime;
+    
+    AFakePhysicsProjectile();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
     
 private:
     UFUNCTION(BlueprintCallable)
@@ -40,8 +43,5 @@ public:
     UFUNCTION(BlueprintCallable)
     void OnRep_PosVel(const FFakeMoveState& NewPosVel);
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    AFakePhysicsProjectile();
 };
 

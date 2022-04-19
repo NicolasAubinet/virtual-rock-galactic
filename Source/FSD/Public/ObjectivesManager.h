@@ -1,43 +1,43 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "DelegateEventDelegate.h"
 #include "ObjectivesManager.generated.h"
 
 class UObjective;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FObjectivesManagerOnObjectivesCompleted);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FObjectivesManagerOnObjectivesChanged);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FObjectivesManagerOnAllRequiredReturnObjectivesCompleted);
-
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UObjectivesManager : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FObjectivesManagerOnObjectivesCompleted OnObjectivesCompleted;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDelegateEvent OnObjectivesCompleted;
     
-    UPROPERTY(BlueprintAssignable)
-    FObjectivesManagerOnObjectivesChanged OnObjectivesChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDelegateEvent OnObjectivesChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FObjectivesManagerOnAllRequiredReturnObjectivesCompleted OnAllRequiredReturnObjectivesCompleted;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDelegateEvent OnAllRequiredReturnObjectivesCompleted;
     
 protected:
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UObjective* Objective;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     TArray<UObjective*> SecondaryObjectives;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool ObjectivesInitialized;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool ObjectivesStarted;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool bCheatObjectivesCompleted;
     
+public:
+    UObjectivesManager();
+protected:
     UFUNCTION(BlueprintCallable)
     void OnObjectiveChanged(UObjective* obj);
     
@@ -57,6 +57,5 @@ public:
     UFUNCTION(BlueprintCallable)
     void DropPodExited();
     
-    UObjectivesManager();
 };
 

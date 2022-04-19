@@ -5,30 +5,31 @@
 #include "UObject/NoExportTypes.h"
 #include "AttackBaseComponent.generated.h"
 
-class UAttackBaseComponent;
 class AActor;
+class UAttackBaseComponent;
 
-UCLASS(Abstract, Blueprintable)
+UCLASS(Abstract, Blueprintable, meta=(BlueprintSpawnableComponent))
 class UAttackBaseComponent : public UActorComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FName AttackName;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxSurfaceAngle;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
     FFloatInterval range;
     
-    UPROPERTY(VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     float MinRange;
     
-    UPROPERTY(VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     float MaxRange;
     
 public:
+    UAttackBaseComponent();
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     UAttackBaseComponent* ReplaceAttackComponent(UAttackBaseComponent* componentToReplace, TSubclassOf<UAttackBaseComponent> newComponentClass);
     
@@ -42,6 +43,14 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ReceiveAbortAttack();
     
+public:
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    float GetMinRange() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    float GetMaxRange() const;
+    
+protected:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void CompleteAttack(bool success);
     
@@ -52,6 +61,5 @@ public:
     UFUNCTION(BlueprintCallable)
     void AbortAttack();
     
-    UAttackBaseComponent();
 };
 

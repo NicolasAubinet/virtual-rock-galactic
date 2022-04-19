@@ -10,7 +10,7 @@ class ASentryElectroBeam : public AElectroBeam {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<ARedeployableSentryGun*> Sentries;
     
 public:

@@ -1,0 +1,15 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.DLSSBlueprint.cpp.obj": [
+			"DLSSBlueprintModule.cpp.obj",
+			"DLSSLibrary.cpp.obj"
+		],
+		"Module.DLSSBlueprint.gen.cpp.obj": [
+			"DLSSBlueprint.init.gen.cpp.obj",
+			"DLSSLibrary.gen.cpp.obj",
+			"UDLSSMode.gen.cpp.obj",
+			"UDLSSSupport.gen.cpp.obj"
+		]
+	}
+}

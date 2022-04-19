@@ -6,7 +6,7 @@ USTRUCT(BlueprintType)
 struct FEncodedChunkId {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     uint32 ID;
     
     FSDENGINE_API FEncodedChunkId();

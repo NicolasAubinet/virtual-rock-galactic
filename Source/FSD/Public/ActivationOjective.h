@@ -3,26 +3,27 @@
 #include "Objective.h"
 #include "ActivationOjective.generated.h"
 
-UCLASS(Abstract)
+UCLASS(Abstract, meta=(BlueprintSpawnableComponent))
 class UActivationOjective : public UObjective {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_ObjectivesFound)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_ObjectivesFound, meta=(AllowPrivateAccess=true))
     int32 ObjectivesFound;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_ObjectivesToFind)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_ObjectivesToFind, meta=(AllowPrivateAccess=true))
     int32 ObjectivesToFind;
     
+public:
+    UActivationOjective();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_ObjectivesToFind(int32 prevAmount);
     
     UFUNCTION(BlueprintCallable)
     void OnRep_ObjectivesFound(int32 prevAmount);
     
-public:
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    UActivationOjective();
 };
 

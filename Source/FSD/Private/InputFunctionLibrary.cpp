@@ -1,6 +1,7 @@
 #include "InputFunctionLibrary.h"
 
 class APlayerController;
+class UTexture2D;
 
 void UInputFunctionLibrary::SetMouseSmoothingOn(bool smoothingOn) {
 }
@@ -43,6 +44,10 @@ bool UInputFunctionLibrary::GetActionMapping(FName InActionName, bool InGamepadK
 
 bool UInputFunctionLibrary::FindInputDisplay(const APlayerController* PlayerController, FName InputName, EFSDInputSource InputSource, int32 LayoutIndex, FInputDisplay& OutInputDisplay) {
     return false;
+}
+
+UTexture2D* UInputFunctionLibrary::FindActionIcon(FName InActionName, bool InGamepadKeys) {
+    return NULL;
 }
 
 UInputFunctionLibrary::UInputFunctionLibrary() {

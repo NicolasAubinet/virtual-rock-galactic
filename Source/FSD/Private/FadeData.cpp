@@ -12,6 +12,6 @@ FFadeData::FFadeData() {
     this->bFadeWorldOnly = false;
     this->bCapFramerate = false;
     this->bToSpaceRig = false;
-    this->loadingImage = NULL;
+    this->LoadingImage = NULL;
 }
 

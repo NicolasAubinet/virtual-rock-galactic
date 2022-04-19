@@ -1,134 +1,132 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "ReleasedActorSigDelegate.h"
 #include "Components/ActorComponent.h"
 #include "GameplayTagContainer.h"
-#include "EUseRestriction.h"
+#include "GrabbedActorSigDelegate.h"
 #include "EOutline.h"
 #include "EGrabbedStateCameraMode.h"
 #include "GrabberComponent.generated.h"
 
-class USkeletalMeshComponent;
-class AActor;
-class ADeepPathfinderCharacter;
+class UAudioComponent;
 class USoundCue;
-class UPrimitiveComponent;
+class USkeletalMeshComponent;
+class ADeepPathfinderCharacter;
 class UDialogDataAsset;
+class AActor;
+class UPrimitiveComponent;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FGrabberComponentOnReleasedActor, AActor*, aGrabbedActor);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FGrabberComponentOnGrabbedActor, AActor*, aGrabbedActor);
-
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UGrabberComponent : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FGrabberComponentOnGrabbedActor OnGrabbedActor;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FGrabbedActorSig OnGrabbedActor;
     
-    UPROPERTY(BlueprintAssignable)
-    FGrabberComponentOnReleasedActor OnReleasedActor;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FReleasedActorSig OnReleasedActor;
     
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagQuery TagFilter;
     
-    UPROPERTY(Transient)
-    TWeakObjectPtr<AActor> GrabbedActor;
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
+    UAudioComponent* GrabLoopSoundInstance;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<ADeepPathfinderCharacter> PathfinderOwner;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<USkeletalMeshComponent> OwnerMesh;
     
-    UPROPERTY(Export, Transient)
-    TArray<UPrimitiveComponent*> TargetClippingWith;
-    
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundCue* BeginGrabedSound;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundCue* GrabedLoopSound;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundCue* EndGrabedSound;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDialogDataAsset* BeginGrabbedShout;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDialogDataAsset* EndGrabbedShout;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDialogDataAsset* AttentionGrabbedShout;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_CurrentlyGrabbed)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_CurrentlyGrabbed, meta=(AllowPrivateAccess=true))
     AActor* CurrentlyGrabbed;
     
-    UPROPERTY(EditAnywhere)
-    EUseRestriction UseRestriction;
-    
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FName GrabAttachName;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float GrabTime;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float CarryCooldown;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float RevivedGravePeriod;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EOutline PlayerOutlineOnGrab;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EGrabbedStateCameraMode CameraMode;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool TrackPlayerCollision;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ManualGrabTime;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool CanPlayerShoot;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool HeightenSensesImmune;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool NeedsPathToTarget;
     
-    UFUNCTION(BlueprintCallable)
-    void SetPlayerReleased();
+public:
+    UGrabberComponent();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
     
+protected:
     UFUNCTION(BlueprintCallable)
-    bool SetPlayerGrabbed();
+    void Timer_ReleaseTarget();
     
 public:
-    UFUNCTION(BlueprintCallable)
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void ReleaseTarget();
     
 protected:
     UFUNCTION(BlueprintCallable)
-    void OnRep_CurrentlyGrabbed();
+    void OnRep_CurrentlyGrabbed(AActor* oldCurrentlyGrabbed);
     
     UFUNCTION(BlueprintCallable)
     void OnPrimWake(UPrimitiveComponent* WakingComponent, FName BoneName);
     
 public:
-    UFUNCTION(BlueprintCallable)
-    void OnParentDestroyed(AActor* Actor);
-    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsGrabbedTargetValid() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool HasGrabbed() const;
     
-    UFUNCTION(BlueprintCallable)
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     bool GrabTarget(AActor* aGrabTarget);
+    
+    UFUNCTION(BlueprintCallable)
+    AActor* GetGrabbedActor();
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool CanGrabTarget(AActor* aTarget) const;
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    UGrabberComponent();
 };
 

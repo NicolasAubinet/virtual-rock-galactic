@@ -8,7 +8,7 @@ USTRUCT()
 struct FFormation {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
+    UPROPERTY(Transient, meta=(AllowPrivateAccess=true))
     UFormationData* FormationData;
     
     FSD_API FFormation();

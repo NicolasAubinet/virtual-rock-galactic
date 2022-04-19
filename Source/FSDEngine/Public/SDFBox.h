@@ -8,7 +8,7 @@ UCLASS()
 class FSDENGINE_API USDFBox : public USDFBaseWithTransform {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSDFBoxProperties Properties;
     
     USDFBox();

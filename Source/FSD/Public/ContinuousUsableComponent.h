@@ -1,33 +1,29 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UsableComponent.h"
-#include "EInputKeys.h"
+#include "UsedBySignatureDelegate.h"
 #include "ContinuousUsableComponent.generated.h"
 
-class APlayerCharacter;
-
-UDELEGATE(BlueprintAuthorityOnly, BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FContinuousUsableComponentUseTick, APlayerCharacter*, User, EInputKeys, Key);
-
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UContinuousUsableComponent : public UUsableComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FContinuousUsableComponentUseTick UseTick;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FUsedBySignature UseTick;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float TimeBetweenTicks;
     
-    UPROPERTY(BlueprintReadWrite, Replicated)
+    UPROPERTY(BlueprintReadWrite, Replicated, meta=(AllowPrivateAccess=true))
     bool Usable;
     
 public:
+    UContinuousUsableComponent();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetCanUse(bool CanUse);
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    UContinuousUsableComponent();
 };
 

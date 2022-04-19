@@ -6,31 +6,32 @@
 #include "IconGeneratable.h"
 #include "ItemPreviewActor.generated.h"
 
-class USkinEffect;
-class UItemSkin;
 class UIconGenerationCameraKey;
+class UItemSkin;
+class USkinEffect;
 
 UCLASS()
 class AItemPreviewActor : public AActor, public ISkinnable, public IIconGeneratable {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UItemSkin* CurrentSkinColor;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UItemSkin* CurrentSkinMesh;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TSubclassOf<AActor> itemClass;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UIconGenerationCameraKey* CameraKey_Normal;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UIconGenerationCameraKey* CameraKey_CloseUp;
     
 public:
+    AItemPreviewActor();
     UFUNCTION(BlueprintCallable)
     void SkinItem(USkinEffect* Skin);
     
@@ -50,8 +51,6 @@ protected:
     UFUNCTION(BlueprintCallable)
     void ChangeSkin(UItemSkin* skinMesh, UItemSkin* skinColor, bool isPreview);
     
-public:
-    AItemPreviewActor();
     
     // Fix for true pure virtual functions not being implemented
 };

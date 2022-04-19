@@ -6,18 +6,18 @@
 class UAnimMontage;
 class UParticleSystem;
 
-UCLASS(MinimalAPI)
+UCLASS(MinimalAPI, meta=(BlueprintSpawnableComponent))
 class UDeadStateComponent : public UCharacterStateComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     float respawnDelay;
     
 public:
+    UDeadStateComponent();
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void SetDeathParameters(float NewRespawnDelay, float effectDelay, UAnimMontage* deathMontage, UParticleSystem* deathEffect, bool useAnimationTimeAsRespawnTime);
     
-    UDeadStateComponent();
 };
 

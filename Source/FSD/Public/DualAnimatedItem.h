@@ -3,54 +3,55 @@
 #include "Item.h"
 #include "DualAnimatedItem.generated.h"
 
-class UAnimMontage;
 class UAnimInstance;
 class UPlayerAnimInstance;
-class UItemCharacterAnimationSet;
 class USkeletalMeshComponent;
+class UAnimMontage;
+class UItemCharacterAnimationSet;
 
 UCLASS(Abstract)
 class ADualAnimatedItem : public AItem {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UAnimInstance* FPAnimInstance;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UPlayerAnimInstance* TPAnimInstance;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* FPRMesh;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* FPLMesh;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* TPRMesh;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* TPLMesh;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UAnimMontage* FP_EquipAnimation;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UAnimMontage* TP_EquipAnimation;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float EquipDuration;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UItemCharacterAnimationSet* CharacterAnimationSet;
     
+public:
+    ADualAnimatedItem();
+protected:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     USkeletalMeshComponent* GetRItemMesh() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     USkeletalMeshComponent* GetLItemMesh() const;
     
-public:
-    ADualAnimatedItem();
 };
 

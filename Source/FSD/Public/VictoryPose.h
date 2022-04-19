@@ -1,46 +1,52 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "SavablePrimaryDataAsset.h"
+#include "Aquisitionable.h"
 #include "VictoryPose.generated.h"
 
 class AActor;
-class UObject;
 class UAnimSequence;
+class UItemAquisitionBase;
+class UObject;
 class UPlayerCharacterID;
 
 UCLASS(BlueprintType)
-class UVictoryPose : public USavablePrimaryDataAsset {
+class UVictoryPose : public USavablePrimaryDataAsset, public IAquisitionable {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+protected:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText Title;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText Description;
     
-protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
+    UItemAquisitionBase* Aquisition;
+    
+    UPROPERTY(AdvancedDisplay, BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     bool UnlockedFromStart;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSoftObjectPtr<UAnimSequence>> Walks;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftObjectPtr<UAnimSequence> pose;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<AActor> Prop_Actor;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftObjectPtr<UAnimSequence> Prop_Walk;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftObjectPtr<UAnimSequence> Prop_Pose;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftObjectPtr<UAnimSequence> Prop_Idle;
     
 public:
+    UVictoryPose();
     UFUNCTION(BlueprintCallable, BlueprintPure=false)
     void Unlock(UObject* WorldContextObject, UPlayerCharacterID* characterID) const;
     
@@ -56,6 +62,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure=false)
     void Equip(UObject* WorldContextObject, UPlayerCharacterID* characterID) const;
     
-    UVictoryPose();
+    
+    // Fix for true pure virtual functions not being implemented
 };
 

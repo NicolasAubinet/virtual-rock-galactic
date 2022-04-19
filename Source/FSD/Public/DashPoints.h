@@ -1,75 +1,76 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Curves/CurveFloat.h"
-#include "Components/ActorComponent.h"
-#include "Engine/NetSerialization.h"
-#include "EDashPointsGenerationMode.h"
 #include "UObject/NoExportTypes.h"
+#include "Engine/NetSerialization.h"
+#include "Components/ActorComponent.h"
+#include "DashSigDelegate.h"
+#include "Curves/CurveFloat.h"
+#include "EDashPointsGenerationMode.h"
 #include "DashPoints.generated.h"
 
 class UHealthComponentBase;
 class AActor;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDashPointsOnStopDashEvent);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDashPointsOnStartDashEvent);
-
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UDashPoints : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FDashPointsOnStartDashEvent OnStartDashEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDashSig OnStartDashEvent;
     
-    UPROPERTY(BlueprintAssignable)
-    FDashPointsOnStopDashEvent OnStopDashEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDashSig OnStopDashEvent;
     
 protected:
-    UPROPERTY(Replicated)
+    UPROPERTY(BlueprintReadWrite, Replicated, meta=(AllowPrivateAccess=true))
     FVector_NetQuantize DashLocation;
     
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     FRuntimeFloatCurve DashSpeedCurve;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float PointOffset;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxRangeFromPlayer;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MinRangeFromPlayer;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MinHeightAboveTarget;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxHeightAboveTarget;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float safeReduction;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float AcceptedDashradius;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DashSpeed;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float SlowdownRadius;
     
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     int32 IgnoreTheClosestPoints;
     
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     EDashPointsGenerationMode GenerationMode;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_Dashing)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_Dashing, meta=(AllowPrivateAccess=true))
     bool IsDashing;
     
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     bool IgnoreRules;
     
 public:
+    UDashPoints();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintCallable)
     void UpdateDashPointData();
     
@@ -90,8 +91,5 @@ public:
     UFUNCTION(BlueprintCallable)
     FVector GetDashPoint(AActor* fromTarget, bool& success);
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    UDashPoints();
 };
 

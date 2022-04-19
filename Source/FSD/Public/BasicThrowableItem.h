@@ -1,58 +1,59 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "CarriableItem.h"
-#include "Engine/EngineTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "EInputKeys.h"
+#include "Engine/EngineTypes.h"
 #include "BasicThrowableItem.generated.h"
 
-class UFirstPersonStaticMeshComponent;
-class USphereComponent;
-class UBoxComponent;
-class UCarriableComponent;
-class USoundCue;
-class UPrimitiveComponent;
-class UInstantUsable;
 class UStaticMeshComponent;
+class UInstantUsable;
+class UBoxComponent;
+class USoundCue;
+class UCarriableComponent;
+class USphereComponent;
+class UFirstPersonStaticMeshComponent;
 class APlayerCharacter;
+class UPrimitiveComponent;
 class AActor;
 
 UCLASS(Abstract)
 class ABasicThrowableItem : public ACarriableItem {
     GENERATED_BODY()
 public:
-    UPROPERTY(Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UBoxComponent* BoxComp;
     
-    UPROPERTY(Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USphereComponent* UseSphere;
     
-    UPROPERTY(Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UCarriableComponent* CarriableComp;
     
-    UPROPERTY(Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UInstantUsable* UsableComp;
     
-    UPROPERTY(Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UStaticMeshComponent* WorldMeshComp;
     
-    UPROPERTY(Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UFirstPersonStaticMeshComponent* ViewMeshComp;
     
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundCue* ImpactSound;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float SquaredMinImpactForce;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ImpactAudioResetTime;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float SquaredMinThrowforce;
     
 public:
+    ABasicThrowableItem();
     UFUNCTION(BlueprintCallable)
     void ThrowItem(const FVector& throwForce);
     
@@ -76,6 +77,5 @@ public:
     UFUNCTION(BlueprintCallable)
     void OnComponentHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
     
-    ABasicThrowableItem();
 };
 

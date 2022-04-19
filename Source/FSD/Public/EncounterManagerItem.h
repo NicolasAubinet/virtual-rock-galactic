@@ -1,31 +1,28 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "PrePlacedEncounterItem.h"
 #include "ManagedEncounterItem.h"
+#include "EnemySpawnedDelegateDelegate.h"
+#include "PrePlacedEncounterItem.h"
 #include "EncounterManagerItem.generated.h"
-
-class APawn;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_DELEGATE_OneParam(FEncounterManagerItemCallback, APawn*, enemy);
 
 USTRUCT(BlueprintType)
 struct FEncounterManagerItem {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FManagedEncounterItem> ManagedEcnounterItems;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FPrePlacedEncounterItem> PrePlacedEncounterItems;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     int32 ID;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool IsRoom;
     
-    UPROPERTY(Transient)
-    FEncounterManagerItemCallback Callback;
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    FEnemySpawnedDelegate Callback;
     
     FSD_API FEncounterManagerItem();
 };

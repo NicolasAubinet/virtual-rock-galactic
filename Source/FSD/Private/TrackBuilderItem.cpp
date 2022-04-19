@@ -1,6 +1,7 @@
 #include "TrackBuilderItem.h"
 #include "Net/UnrealNetwork.h"
 #include "Templates/SubclassOf.h"
+#include "CrosshairAggregator.h"
 
 class UTrackBuilderConnectPoint;
 class UTrackBuilderUsable;
@@ -59,6 +60,7 @@ void ATrackBuilderItem::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Ou
 }
 
 ATrackBuilderItem::ATrackBuilderItem() {
+    this->CrosshairAggregator = CreateDefaultSubobject<UCrosshairAggregator>(TEXT("CrosshairAggregator"));
     this->ObstructionType = EPlaceableObstructionType::Valid;
     this->DefaultSegmentType = NULL;
     this->NextSegment = NULL;

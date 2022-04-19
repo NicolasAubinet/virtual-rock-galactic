@@ -14,10 +14,10 @@ class ISpawnReleasedActor : public IInterface {
     GENERATED_BODY()
 public:
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-    bool Released();
+    bool OnSpawnRelease_Released();
     
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-    bool Attached(AActor* Parent);
+    bool OnSpawnRelease_Attached(AActor* Parent);
     
 };
 

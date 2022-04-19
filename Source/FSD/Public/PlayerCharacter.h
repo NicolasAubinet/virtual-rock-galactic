@@ -1,745 +1,720 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "GameplayTagContainer.h"
 #include "GameFramework/Character.h"
-#include "Targetable.h"
+#include "HoldButton.h"
+#include "HeadlightOnChangedEventDelegate.h"
 #include "GameplayTagAssetInterface.h"
+#include "CameraModeChangedDelegate.h"
+#include "Targetable.h"
+#include "AcceptInviteSignatureDelegate.h"
 #include "RejoinListener.h"
 #include "PlaySoundInterface.h"
-#include "UObject/NoExportTypes.h"
-#include "ECharacterCameraMode.h"
-#include "ECharacterState.h"
-#include "CoolDownProgressStyle.h"
-#include "LaserPointerTarget.h"
-#include "UObject/NoExportTypes.h"
-#include "PlatformComponent.h"
+#include "SchematicEventDelegate.h"
+#include "CharacterDelegateDelegate.h"
+#include "OnCharacterDeathChangeSignatureDelegate.h"
+#include "BoolDelegateDelegate.h"
+#include "OnCharacterStateChangedSignatureDelegate.h"
+#include "DelegateDelegate.h"
+#include "CollectedEverythingEventDelegate.h"
 #include "DownCameraSettings.h"
+#include "SkinEventDelegate.h"
+#include "CollectedDrinkDelegateDelegate.h"
+#include "CollectedVictoryPoseEventDelegate.h"
+#include "UObject/NoExportTypes.h"
+#include "CollectedPickaxePartDelegateDelegate.h"
+#include "CollectedVanityItemDeledateDelegate.h"
+#include "DownCameraTargetChangedDelegate.h"
+#include "ActionHoldEventDelegate.h"
+#include "OnJumpReleasedSignatureDelegate.h"
+#include "ThrowCarriableDelegateDelegate.h"
+#include "SaluteEventDelegate.h"
+#include "DamagedEnemyEventDelegate.h"
+#include "OnJumpPressedSignatureDelegate.h"
+#include "LaserPointerSecondaryDelegate.h"
+#include "OnMinePressedSignatureDelegate.h"
+#include "OnLaserPointerPressedSignatureDelegate.h"
+#include "OnFlareThrownDelegate.h"
+#include "UpdateMeshesSignatureDelegate.h"
+#include "CoolDownProgressDelegateDelegate.h"
+#include "OpenChatSignatureDelegate.h"
+#include "UObject/NoExportTypes.h"
+#include "RejectInviteSignatureDelegate.h"
+#include "IgnoreInviteSignatureDelegate.h"
+#include "ToggleMapToolSignatureDelegate.h"
+#include "DepthSignatureDelegate.h"
+#include "LaserPointerEventDelegate.h"
+#include "OnPlayerShoutEventDelegate.h"
+#include "ReviveCallEventDelegate.h"
+#include "PlayerCharacterEventDelegate.h"
+#include "OnCallDonkeySignatureDelegate.h"
+#include "GameplayTagContainer.h"
+#include "OnPerkActivationTimerFinishedDelegate.h"
+#include "PlatformComponent.h"
+#include "Engine/EngineTypes.h"
 #include "AnalogAimSettings.h"
-#include "HoldButton.h"
-#include "Engine/NetSerialization.h"
-#include "HeroInfo.h"
+#include "ECharacterCameraMode.h"
 #include "CameraSpringSettings.h"
 #include "UObject/NoExportTypes.h"
-#include "Engine/NetSerialization.h"
-#include "Engine/EngineTypes.h"
-#include "EInputKeys.h"
-#include "UObject/NoExportTypes.h"
 #include "GameplayTagContainer.h"
+#include "EInputKeys.h"
+#include "Engine/NetSerialization.h"
+#include "Engine/NetSerialization.h"
+#include "ECharacterState.h"
+#include "HeroInfo.h"
+#include "UObject/NoExportTypes.h"
 #include "PlayerCharacter.generated.h"
 
-class UAudioComponent;
-class USchematic;
-class UPhysicsAsset;
 class AItem;
-class UPlayerAttackPositionComponent;
-class UPerkHUDActivationWidget;
-class UItemSkin;
-class UItemID;
-class UTexture2D;
-class UDrinkableDataAsset;
-class UVictoryPose;
-class USpringArmComponent;
-class UPlayerCharacterID;
-class UPickaxePart;
-class UVanityItem;
-class UCharacterStateComponent;
-class APlayerCharacter;
-class UHealth;
-class IHealth;
-class UPlayerTPAnimInstance;
-class ATutorialManager;
 class AActor;
-class UPlayerAfflictionComponent;
-class UZipLineStateComponent;
-class UPlayerReactiveTerrainTrackerComponent;
-class UPawnAffliction;
-class USoundCue;
-class UInventoryComponent;
-class UObject;
-class UPlayerTemperatureComponent;
-class UPlayerHealthComponent;
-class UWidgetInteractionComponent;
-class UCameraComponent;
-class USingleUsableComponent;
-class AShieldGeneratorActor;
+class ATutorialManager;
+class UPlayerTPAnimInstance;
+class UHeightenedSenseComponent;
+class UStatusEffectsComponent;
+class UPerkHUDActivationWidget;
 class UPawnStatsComponent;
+class UMissionStatsCollector;
+class AShieldGeneratorActor;
+class UCommunicationComponent;
+class UMaterialInstanceDynamic;
+class USoundConcurrency;
+class UWidgetInteractionComponent;
+class UPlayerCharacterID;
+class UZipLineStateComponent;
 class USkeletalMeshComponent;
-class UCharacterIntoxicationComponent;
+class UCameraComponent;
+class UAudioComponent;
+class USoundCue;
 class USceneComponent;
 class UActorTrackingComponent;
-class UMissionStatsCollector;
+class UCharacterIntoxicationComponent;
+class USpringArmComponent;
 class UPointLightComponent;
 class UCharacterCameraController;
+class UPlayerHealthComponent;
 class UCharacterSightComponent;
+class UInventoryComponent;
 class UCharacterUseComponent;
+class USingleUsableComponent;
 class UOutlineComponent;
-class UParticleSystem;
-class UTrailComponent;
+class UObject;
 class UCharacterRecoilComponent;
-class UStatusEffectsComponent;
-class UCommunicationComponent;
+class UPlayerAfflictionComponent;
+class UPlayerInfoComponent;
+class UPlayerAttackPositionComponent;
+class UPlayerTemperatureComponent;
+class UPlayerReactiveTerrainTrackerComponent;
 class UInstantUsable;
+class UParticleSystem;
+class UPawnAffliction;
+class UPhysicsAsset;
 class UStatusEffect;
+class UCharacterStateComponent;
 class UFSDAchievement;
 class UAnimMontage;
 class UDialogDataAsset;
 class UMaterialInterface;
-class UMaterialInstanceDynamic;
 class UFSDPhysicalMaterial;
 class UCharacterVanityComponent;
 class AZipLineProjectile;
 class USoundBase;
 class USoundAttenuation;
-class USoundConcurrency;
 class APlayerController;
 class AEventRewardDispenser;
-class UInventoryList;
+class USchematic;
+class APlayerCharacter;
 class AFSDPhysicsActor;
 class UCappedResource;
 class AFSDPlayerState;
 class AFSDPlayerController;
+class UInventoryList;
+class UTexture2D;
 class UPlayerFPAnimInstance;
+class ULightComponent;
+class UUsableComponent;
 class UPlayerAnimInstance;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerCharacterOnStoppedUsingItem, AItem*, Item);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerCharacterOnStartedUsingItem, AItem*, Item);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerCharacterOnCollectedEverything, FText, InMessage);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPlayerCharacterOnSaluteEvent);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerCharacterOnToggleMapTool, bool, Visible);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPlayerCharacterOnFirePressed);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPlayerCharacterOnFireReleased);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FPlayerCharacterOnCollectedSkin, UItemSkin*, Skin, UItemID*, ItemID);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPlayerCharacterOnPerkInitialized);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FPlayerCharacterOnCameraModeChanged, ECharacterCameraMode, NewCameraMode, ECharacterCameraMode, OldCameraMode);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerCharacterOnGrenadePressed, bool, boolValue);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerCharacterOnInstantRevivePossibleEvent, bool, boolValue);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerCharacterOnDownCameraTargetChanged, APlayerCharacter*, Target);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerCharacterOnCollectedSchematic, USchematic*, Schematic);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerCharacterOnReviveCallEvent, AActor*, ReviveTarget);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerCharacterOnCollectedDrink, UDrinkableDataAsset*, Drinkable);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FPlayerCharacterOnCollectedVictoryPose, UVictoryPose*, pose, UPlayerCharacterID*, characterID);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerCharacterOnToggleScanTool, bool, Visible);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerCharacterOnCollectedPickaxePart, UPickaxePart*, PickaxePart);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FPlayerCharacterOnCollectedVanityItem, UVanityItem*, Item, UPlayerCharacterID*, characterID);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FPlayerCharacterOnSecondaryLaserPointerEvent, AActor*, aTarget, const FVector&, aTargetLocation);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FPlayerCharacterOnActionHoldProgress, FText, Description, float, Progress);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FPlayerCharacterOnThrowCarriableProgress, float, Progress, float, timeToCancel, bool, isDone);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerCharacterOnCanEscapeGrabberChanged, bool, bCanEscape);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPlayerCharacterOnJumpPressed);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPlayerCharacterOnTerrainScannerPressed);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPlayerCharacterOnJumpReleased);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPlayerCharacterOnDropItem);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPlayerCharacterOnSecondaryFirePressed);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPlayerCharacterOnSecondaryFireReleased);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPlayerCharacterOnManualMiningBegin);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPlayerCharacterOnLaserPointerReleased);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPlayerCharacterOnManualMiningEnd);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerCharacterOnCharacterStateChanged, ECharacterState, NewState);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPlayerCharacterOnFlareThrown);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPlayerCharacterOnLaserPointerPressed);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPlayerCharacterOnUpdateMeshes);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPlayerCharacterOnTerrainScannerReleased);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPlayerCharacterOnOpenChat);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPlayerCharacterOnAcceptInvite);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerCharacterOnPlayerShout, APlayerCharacter*, ShoutingPlayer);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPlayerCharacterOnRejectInvite);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPlayerCharacterOnIgnoreInvite);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerCharacterOnToggleOutline, bool, Visible);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerCharacterOnDepthChanged, int32, Depth);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerCharacterOnCharacterDeathChange, APlayerCharacter*, Character);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPlayerCharacterOnPerkActivationTimerFinished);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_SixParams(FPlayerCharacterOnDamagedEnemy, const TScriptInterface<IHealth>&, EnemyHealth, float, Damage, float, DamageModifier, float, HealthRemaining, bool, IsWeakPoint, bool, IsRadial);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerCharacterOnLaserPointerEvent, const FLaserPointerTarget&, HitInfo);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPlayerCharacterOnCallDonkey);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerCharacterOnBoscoSalute, APlayerCharacter*, ShoutingPlayer);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPlayerCharacterOnRevivedEvent);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPlayerCharacterOnRevivedOtherCharacter);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerCharacterOnHeadlightOnChanged, bool, IsOn);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerCharacterOnEnemyStartedTracking, AActor*, InTrackingEnemy);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerCharacterOnEnemyEndedTracking, AActor*, InTrackingEnemy);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerCharacterOnKilledGrabber, AActor*, Grabber);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FPlayerCharacterOnCoolDownProgress, UObject*, CoolDownObject, const FCoolDownProgressStyle&, Style, float, Progress);
 
 UCLASS(Abstract)
 class FSD_API APlayerCharacter : public ACharacter, public IGameplayTagAssetInterface, public ITargetable, public IRejoinListener, public IPlaySoundInterface {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnStartedUsingItem OnStartedUsingItem;
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FKilledGrabber, AActor*, Grabber);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FItemUseDelegate, AItem*, Item);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFirePressedDelegate);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FCanEscapeGrabberDelegate, bool, bCanEscape);
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnStoppedUsingItem OnStoppedUsingItem;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FItemUseDelegate OnStartedUsingItem;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnFirePressed OnFirePressed;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FItemUseDelegate OnStoppedUsingItem;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnFireReleased OnFireReleased;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FFirePressedDelegate OnFirePressed;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnGrenadePressed OnGrenadePressed;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FFirePressedDelegate OnFireReleased;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnPerkInitialized OnPerkInitialized;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FBoolDelegate OnGrenadePressed;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnInstantRevivePossibleEvent OnInstantRevivePossibleEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDelegate OnPerkInitialized;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnCollectedEverything OnCollectedEverything;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FBoolDelegate OnInstantRevivePossibleEvent;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnCollectedSchematic OnCollectedSchematic;
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
+    UHeightenedSenseComponent* HeightenedSenseComponent;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnCollectedSkin OnCollectedSkin;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FCollectedEverythingEvent OnCollectedEverything;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnCollectedDrink OnCollectedDrink;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FSchematicEvent OnCollectedSchematic;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnCollectedVictoryPose OnCollectedVictoryPose;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FSkinEvent OnCollectedSkin;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnCollectedPickaxePart OnCollectedPickaxePart;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FCollectedDrinkDelegate OnCollectedDrink;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnCollectedVanityItem OnCollectedVanityItem;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FCollectedVictoryPoseEvent OnCollectedVictoryPose;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnCameraModeChanged OnCameraModeChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FCollectedPickaxePartDelegate OnCollectedPickaxePart;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnDownCameraTargetChanged OnDownCameraTargetChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FCollectedVanityItemDeledate OnCollectedVanityItem;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnActionHoldProgress OnActionHoldProgress;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FCameraModeChanged OnCameraModeChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnThrowCarriableProgress OnThrowCarriableProgress;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDownCameraTargetChanged OnDownCameraTargetChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnJumpPressed OnJumpPressed;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FActionHoldEvent OnActionHoldProgress;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnJumpReleased OnJumpReleased;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FThrowCarriableDelegate OnThrowCarriableProgress;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnSecondaryFirePressed OnSecondaryFirePressed;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnJumpPressedSignature OnJumpPressed;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnSecondaryFireReleased OnSecondaryFireReleased;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnJumpReleasedSignature OnJumpReleased;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnManualMiningBegin OnManualMiningBegin;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnMinePressedSignature OnSecondaryFirePressed;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnManualMiningEnd OnManualMiningEnd;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnMinePressedSignature OnSecondaryFireReleased;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnLaserPointerPressed OnLaserPointerPressed;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnMinePressedSignature OnManualMiningBegin;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnLaserPointerReleased OnLaserPointerReleased;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnMinePressedSignature OnManualMiningEnd;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnTerrainScannerPressed OnTerrainScannerPressed;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnLaserPointerPressedSignature OnLaserPointerPressed;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnTerrainScannerReleased OnTerrainScannerReleased;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnLaserPointerPressedSignature OnLaserPointerReleased;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnFlareThrown OnFlareThrown;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnLaserPointerPressedSignature OnTerrainScannerPressed;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnDropItem OnDropItem;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnLaserPointerPressedSignature OnTerrainScannerReleased;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnUpdateMeshes OnUpdateMeshes;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnFlareThrown OnFlareThrown;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnOpenChat OnOpenChat;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FUpdateMeshesSignature OnUpdateMeshes;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnAcceptInvite OnAcceptInvite;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOpenChatSignature OnOpenChat;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnRejectInvite OnRejectInvite;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FAcceptInviteSignature OnAcceptInvite;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnIgnoreInvite OnIgnoreInvite;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FRejectInviteSignature OnRejectInvite;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnToggleOutline OnToggleOutline;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FIgnoreInviteSignature OnIgnoreInvite;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnToggleMapTool OnToggleMapTool;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FToggleMapToolSignature OnToggleMapTool;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnToggleScanTool OnToggleScanTool;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FToggleMapToolSignature OnToggleScanTool;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnDepthChanged OnDepthChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDepthSignature OnDepthChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnCharacterStateChanged OnCharacterStateChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnCharacterStateChangedSignature OnCharacterStateChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnCharacterDeathChange OnCharacterDeathChange;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnCharacterDeathChangeSignature OnCharacterDeathChange;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnDamagedEnemy OnDamagedEnemy;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDamagedEnemyEvent OnDamagedEnemy;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnLaserPointerEvent OnLaserPointerEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FLaserPointerEvent OnLaserPointerEvent;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnSecondaryLaserPointerEvent OnSecondaryLaserPointerEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FLaserPointerSecondary OnSecondaryLaserPointerEvent;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnSaluteEvent OnSaluteEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FSaluteEvent OnSaluteEvent;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnPlayerShout OnPlayerShout;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnPlayerShoutEvent OnPlayerShout;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnBoscoSalute OnBoscoSalute;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnPlayerShoutEvent OnBoscoSalute;
     
-    UPROPERTY(BlueprintAssignable, BlueprintAuthorityOnly)
-    FPlayerCharacterOnRevivedEvent OnRevivedEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintAuthorityOnly, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FCharacterDelegate OnRevivedEvent;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnReviveCallEvent OnReviveCallEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FReviveCallEvent OnReviveCallEvent;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnRevivedOtherCharacter OnRevivedOtherCharacter;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FPlayerCharacterEvent OnRevivedOtherCharacter;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnHeadlightOnChanged OnHeadlightOnChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FHeadlightOnChangedEvent OnHeadlightOnChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnCallDonkey OnCallDonkey;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnCallDonkeySignature OnCallDonkey;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagContainer GameplayTags;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UZipLineStateComponent* ZipLineStateComponent;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<TSubclassOf<AActor>> EscapableGrabberEnemies;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnEnemyStartedTracking OnEnemyStartedTracking;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FKilledGrabber OnKilledGrabber;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnEnemyEndedTracking OnEnemyEndedTracking;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnPerkActivationTimerFinished OnPerkActivationTimerFinished;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnKilledGrabber OnKilledGrabber;
-    
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnPerkActivationTimerFinished OnPerkActivationTimerFinished;
-    
-    UPROPERTY(BlueprintReadOnly, Export)
+    UPROPERTY(BlueprintReadWrite, Export, meta=(AllowPrivateAccess=true))
     UPerkHUDActivationWidget* BoundPerkActivationW;
     
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     float PerkActivationTimer;
     
 protected:
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnCanEscapeGrabberChanged OnCanEscapeGrabberChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FCanEscapeGrabberDelegate OnCanEscapeGrabberChanged;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TSubclassOf<AActor> GrabbedByClass;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
-    USoundCue* PowerAttackRefreshedSound;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FCoolDownProgressDelegate OnCoolDownProgress;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerCharacterOnCoolDownProgress OnCoolDownProgress;
-    
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool bIsBeingBittenByCaveLeech;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UWidgetInteractionComponent* WidgetInteraction;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     TArray<FPlatformComponent> PlatformComponentClasses;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FDownCameraSettings DownCameraSettings;
     
-    UPROPERTY(Transient)
+    UPROPERTY(Transient, meta=(AllowPrivateAccess=true))
     TArray<TWeakObjectPtr<AShieldGeneratorActor>> ActiveShieldGenerators;
     
-    UPROPERTY(EditAnywhere)
-    FGuid SaveGameID;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FGuid SavegameID;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FVector EstimatedVelocity;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FHoldButton FlareHeadlightButton;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FHoldButton CycleItemButton;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FHoldButton ToggleHUDButton;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float EquipLaserpointerHoldDuration;
     
-    UPROPERTY(BlueprintReadWrite, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     bool IsPressingMovementInputKey;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UPlayerCharacterID* characterID;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<ATutorialManager> TutorialManagerType;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<ATutorialManager> TutorialManagerSpacerig;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* FPMesh;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UCameraComponent* FirstPersonCamera;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USceneComponent* FirstPersonRoot;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UActorTrackingComponent* ActorTracking;
     
-    UPROPERTY(BlueprintReadOnly, Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UCharacterIntoxicationComponent* IntoxicationComponent;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UMissionStatsCollector* MissionStatsCollector;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USpringArmComponent* ThirdPersonSpringArm;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UCameraComponent* ThirdPersonCamera;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UPointLightComponent* ThirdPersonLight;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USpringArmComponent* FollowSpringArm;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UCameraComponent* FollowCamera;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UCameraComponent* DownCamera;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UCharacterCameraController* CameraController;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UPlayerHealthComponent* HealthComponent;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UCharacterSightComponent* SightComponent;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UInventoryComponent* InventoryComponent;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
-    UCharacterUseComponent* UseComponent;
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UCharacterUseComponent* UseComponentNew;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USingleUsableComponent* UsableComponent;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UOutlineComponent* OutlineComponent;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
-    UTrailComponent* TrailComponent;
-    
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UCharacterRecoilComponent* RecoilComponent;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UStatusEffectsComponent* StatusEffectsComponent;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UPawnStatsComponent* PawnStatsComponent;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UPlayerAfflictionComponent* PawnAfflictionComponent;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPlayerInfoComponent* PlayerInfoComponent;
+    
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UPlayerAttackPositionComponent* AttackerPositioningComponent;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UCommunicationComponent* CommunicationComponent;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UPlayerTemperatureComponent* TemperatureComponent;
     
-    UPROPERTY(Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UPlayerReactiveTerrainTrackerComponent* ReactiveTerrainTracker;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UInstantUsable* TrackGrindUsableComponent;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float RunningSpeed;
     
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     float RunBoost;
     
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     float RunBoostChargeTime;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundCue* RunBoostActivationSound;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UParticleSystem* RunBoostParticles;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UPawnAffliction* RunBoostAffliction;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UPhysicsAsset* HangingPhysicsAsset;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float HangingSimulationBlend;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool IsPlayableCharacter;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UAudioComponent* SprintSoundComponent;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundCue* SpringSound;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FAnalogAimSettings AimSettings;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DownedCameraMinPitch;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DownedCameraMaxPitch;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float TurnToFaceScannerAngularSpeed;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float Turn180Time;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float CarryingMovementSpeedPenalty;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float CarryingMaxFallVelocity;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxThrowProgress;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxThrowHoldDuration;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float CarryingThrowMinForce;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float CarryingThrowMaxForce;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UStatusEffect> CarryingThrowingStatusEffect;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float ThrowCarriableProgress;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     TMap<uint8, UCharacterStateComponent*> CharacterStates;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<ATutorialManager> TutorialManager;
     
-    UPROPERTY(Export, Transient, ReplicatedUsing=OnRep_CharacterState)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, ReplicatedUsing=OnRep_CharacterState, meta=(AllowPrivateAccess=true))
     UCharacterStateComponent* ActiveCharacterState;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool IsInDropPod;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool IsInEscapePod;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ButtonMemoryDuration;
     
-    UPROPERTY(BlueprintReadOnly, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     bool IsRunning;
     
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool CanDash;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DashInputWindow;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DashFowardMovementMinRequirement;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DashRightMovementMaxRequirement;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DashControllerMinValueRequired;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float DashCooldown;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UStatusEffect> DashStatusEffect;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float ForwardInput;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float RightInput;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    float ControllerForwardInput;
+    
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    float ControllerRightInput;
+    
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float StoppedRunningTime;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float ShoutPressedTime;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool bIsUsingItemPressed;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool bIsUsingPressed;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float UsingDelay;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_HeadLightOn)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_HeadLightOn, meta=(AllowPrivateAccess=true))
     bool HeadLightOn;
     
-    UPROPERTY(BlueprintReadOnly, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     bool IsUsing;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float JumpPressedTime;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool CanMove;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool CanAim;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool CanUseItem;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool CanChangeItems;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool CanMine;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_IsStandingDown)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_IsStandingDown, meta=(AllowPrivateAccess=true))
     bool IsStandingDown;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool InDanceRange;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_IsDancing)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_IsDancing, meta=(AllowPrivateAccess=true))
     bool IsDancing;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float DanceStartTime;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UFSDAchievement* HappyFeetAchievement;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_DanceMove)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_DanceMove, meta=(AllowPrivateAccess=true))
     int32 DanceMove;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     ECharacterCameraMode CameraMode;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool IsInCharacterSelectionWorld;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float IdleTime;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UAnimMontage* FPDrinkSalute;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UAnimMontage* TPDrinkSalute;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDialogDataAsset* SaluteShout;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDialogDataAsset* DrinkShout;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UAnimMontage* CurrentSaluteMontage;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<UMaterialInterface*> CachedMaterials;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool BlockTrackGrindOnLanded;
     
-    UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
-    FHeroInfo HeroInfo;
-    
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FString SteamClassID;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UMaterialInstanceDynamic* RadarMaterialInstance;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     int32 RadarMaterialAngleParameterIndex;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FVector LastUpdateVisibiltyPos;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FVector SpawnLocation;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UFSDPhysicalMaterial* FallbackPhysicalMaterial;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool ClientReady;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UCharacterStateComponent* NextCharacterState;
     
-    UPROPERTY(BlueprintReadWrite, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     bool PlayerIsLeavingInDroppod;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool CanInstantRevive;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool HasInitializedPerks;
     
-    UPROPERTY(Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UCharacterVanityComponent* CharacterVanity;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FCameraSpringSettings CameraSpringSettings;
     
 public:
+    APlayerCharacter();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintCallable)
     void UseZipLine(AZipLineProjectile* ZipLine, const FVector& Start, const FVector& End);
     
@@ -830,11 +805,6 @@ protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_TriggerDash();
     
-public:
-    UFUNCTION(BlueprintCallable, Reliable, Server)
-    void Server_ThrowCarriedItem(FVector_NetQuantize force);
-    
-protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_StartSalute(UAnimMontage* startSalute);
     
@@ -879,6 +849,20 @@ protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_EscapeFromGrabber();
     
+public:
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_CheatRevive();
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_CheatKillAll();
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_CheatGodMode();
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_CheatFlyMode(bool Active);
+    
+protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_CancelThrowingCarriable();
     
@@ -1017,10 +1001,16 @@ public:
     bool IsFirstPerson() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsEquipepdActor(AActor* Actor) const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsDown() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsAlive() const;
+    
+    UFUNCTION(BlueprintCallable)
+    void InstantRevive(APlayerCharacter* ReviveTarget, EInputKeys Key);
     
 protected:
     UFUNCTION(BlueprintCallable)
@@ -1031,7 +1021,7 @@ public:
     bool HasBeenRevived() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    UTrailComponent* GetTrailComponent() const;
+    UCharacterUseComponent* GetUseComponent() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UPlayerTPAnimInstance* GetTPAnimInstance() const;
@@ -1061,6 +1051,9 @@ public:
     FText GetHeroName() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    FHeroInfo GetHeroInfo() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     UTexture2D* GetHeroIcon() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -1084,8 +1077,14 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     USceneComponent* GetDownCameraAttachPoint();
     
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, BlueprintPure)
+    ULightComponent* GetDebugPointLightComponent() const;
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     ECharacterState GetCurrentState() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UCommunicationComponent* GetCommunicationComponent() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetClassXP();
@@ -1098,6 +1097,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetBeginRevivedProgress() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, BlueprintPure)
+    UUsableComponent* GetBeastMasterUsableComponent() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FString GetAnalyticsClass() const;
@@ -1150,12 +1152,6 @@ protected:
     void CheckWithoutAPaddleAchievement();
     
 public:
-    UFUNCTION(BlueprintCallable, Reliable, Server)
-    void CheatRevive();
-    
-    UFUNCTION(BlueprintCallable, Reliable, Server)
-    void CheatGodMode();
-    
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void ChangeState(ECharacterState NewState);
     
@@ -1202,9 +1198,6 @@ public:
     UFUNCTION(BlueprintCallable)
     void AddImpulseFromDirectionAndForce(const FVector& Direction, float force);
     
-    UFUNCTION(BlueprintCallable)
-    float AddClassXP(float Amount);
-    
 protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void AcknowledgeCharacterState(ECharacterState eState);
@@ -1212,12 +1205,9 @@ protected:
     UFUNCTION(BlueprintCallable)
     void AcceptInvite();
     
-public:
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    APlayerCharacter();
     
     // Fix for true pure virtual functions not being implemented
+public:
     UFUNCTION(BlueprintCallable)
     bool HasMatchingGameplayTag(FGameplayTag TagToCheck) const override PURE_VIRTUAL(HasMatchingGameplayTag, return false;);
     

@@ -11,19 +11,22 @@ class AThrowableActor : public AActor {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UProjectileMovementComponent* Movement;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_IsMoving)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_IsMoving, meta=(AllowPrivateAccess=true))
     bool IsMoving;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool IgnoreFellOutOfWorld;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool IgnoreOwnersCollision;
     
 public:
+    AThrowableActor();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ReceiveIgnoreCharacter(APlayerCharacter* Character);
     
@@ -34,9 +37,5 @@ protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_IsMoving();
     
-public:
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    AThrowableActor();
 };
 

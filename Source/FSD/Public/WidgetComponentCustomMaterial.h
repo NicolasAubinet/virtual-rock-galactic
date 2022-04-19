@@ -5,12 +5,12 @@
 
 class UMaterialInterface;
 
-UCLASS(EditInlineNew)
+UCLASS(EditInlineNew, meta=(BlueprintSpawnableComponent))
 class UWidgetComponentCustomMaterial : public UWidgetComponent {
     GENERATED_BODY()
 public:
 private:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UMaterialInterface* CustomMaterial;
     
 public:

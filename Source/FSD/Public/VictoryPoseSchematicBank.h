@@ -11,10 +11,10 @@ UCLASS()
 class FSD_API UVictoryPoseSchematicBank : public USchematicBankBase {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USchematicCategory* SchematicCategory;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<UVictoryPose*, FSchematicBankItem> VictoryPoses;
     
     UVictoryPoseSchematicBank();

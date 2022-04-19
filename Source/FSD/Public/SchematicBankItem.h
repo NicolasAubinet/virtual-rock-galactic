@@ -2,21 +2,21 @@
 #include "CoreMinimal.h"
 #include "SchematicBankItem.generated.h"
 
+class USchematic;
 class USchematicPricingTier;
 class USchematicRarity;
-class USchematic;
 
 USTRUCT(BlueprintType)
 struct FSchematicBankItem {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USchematicPricingTier* PricingTier;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USchematicRarity* Rarity;
     
-    UPROPERTY(VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     TArray<USchematic*> Schematics;
     
     FSD_API FSchematicBankItem();

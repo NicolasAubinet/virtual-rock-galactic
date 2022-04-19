@@ -2,11 +2,11 @@
 #include "CoreMinimal.h"
 #include "StopSessionResponse.generated.h"
 
-USTRUCT()
+USTRUCT(BlueprintType)
 struct FStopSessionResponse {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool success;
     
     FSD_API FStopSessionResponse();

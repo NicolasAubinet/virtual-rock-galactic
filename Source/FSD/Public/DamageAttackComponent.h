@@ -5,12 +5,12 @@
 
 class UDamageComponent;
 
-UCLASS(Abstract)
+UCLASS(Abstract, meta=(BlueprintSpawnableComponent))
 class UDamageAttackComponent : public UAttackBaseComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere, Instanced)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UDamageComponent* Damage;
     
 public:

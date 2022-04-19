@@ -1,16 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "RDGExplodeDelegateDelegate.h"
 #include "RDGComponent.generated.h"
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FRDGComponentOnDetonated);
-
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class URDGComponent : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FRDGComponentOnDetonated OnDetonated;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FRDGExplodeDelegate OnDetonated;
     
     URDGComponent();
 };

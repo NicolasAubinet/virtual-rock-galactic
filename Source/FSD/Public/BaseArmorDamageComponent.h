@@ -1,36 +1,31 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "UObject/NoExportTypes.h"
+#include "ArmorShatterDelegateDelegate.h"
+#include "ArmorDamageEffects.h"
 #include "BaseArmorDamageComponent.generated.h"
 
-class USkeletalMeshComponent;
-class UParticleSystem;
 class UFSDPhysicalMaterial;
+class USkeletalMeshComponent;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FBaseArmorDamageComponentOnArmorShatteredEvent, const FVector&, Location);
-
-UCLASS(Abstract, BlueprintType)
+UCLASS(Abstract, BlueprintType, meta=(BlueprintSpawnableComponent))
 class UBaseArmorDamageComponent : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool ArmorDamageEnabled;
     
-    UPROPERTY(BlueprintAssignable)
-    FBaseArmorDamageComponentOnArmorShatteredEvent OnArmorShatteredEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FArmorShatterDelegate OnArmorShatteredEvent;
     
 protected:
-    UPROPERTY(EditAnywhere)
-    TArray<UParticleSystem*> ArmorBreakParticles;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FArmorDamageEffects ArmorBreakEffects;
     
-    UPROPERTY(EditAnywhere)
-    TArray<UParticleSystem*> ArmorDisolveParticles;
-    
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UFSDPhysicalMaterial*> ArmorPhysMats;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* Mesh;
     
 public:

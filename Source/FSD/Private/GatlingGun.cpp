@@ -1,5 +1,6 @@
 #include "GatlingGun.h"
 #include "Net/UnrealNetwork.h"
+#include "DamageComponent.h"
 
 class AActor;
 class UFSDPhysicalMaterial;
@@ -16,7 +17,7 @@ void AGatlingGun::OnRep_HotShellsTracerOn() {
 void AGatlingGun::OnGatlingTemperatureChanged(float Temperature, bool isOverheated) {
 }
 
-void AGatlingGun::OnEnemyKilled(AActor* Target, UFSDPhysicalMaterial* PhysMat) {
+void AGatlingGun::OnEnemyKilled(AActor* Target, UFSDPhysicalMaterial* PhysMat, bool wasDirectHit) {
 }
 
 void AGatlingGun::Client_RemoveHeat_Implementation() {
@@ -40,5 +41,7 @@ AGatlingGun::AGatlingGun() {
     this->CriticalOverheatEnabled = false;
     this->HotShellsOn = false;
     this->HotShellsTemperatureRequired = 200.00f;
+    this->DamageComponent = CreateDefaultSubobject<UDamageComponent>(TEXT("DamageComponent"));
+    this->BarrelProximityDamageComponent = CreateDefaultSubobject<UDamageComponent>(TEXT("BarrelProximityDamage"));
 }
 

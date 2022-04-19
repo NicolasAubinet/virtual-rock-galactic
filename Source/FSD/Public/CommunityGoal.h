@@ -1,53 +1,56 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Engine/DataAsset.h"
 #include "UObject/NoExportTypes.h"
-#include "ECommunityGoalTier.h"
+#include "Engine/DataAsset.h"
 #include "ECommunityGoalType.h"
+#include "ECommunityGoalTier.h"
 #include "CommunityGoal.generated.h"
 
-class UObject;
 class UCommunityGoalCategory;
 class UCommnuityRewardSetup;
+class UObject;
 
 UCLASS(BlueprintType)
 class UCommunityGoal : public UDataAsset {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool TierValuesAreInitialized;
     
-    UPROPERTY(VisibleAnywhere)
-    FGuid SaveGameID;
+    UPROPERTY(BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    FGuid SavegameID;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool Active;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText Title;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText MetaDescription;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UCommunityGoalCategory* Category;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     ECommunityGoalType CommunityGoalType;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float GoalPerMemberTier1;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float GoalPerMemberTier2;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float GoalPerMemberTier3;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UCommnuityRewardSetup* RewardSetup;
     
+public:
+    UCommunityGoal();
+protected:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float TotalTierProgress(float Value, int32 Members);
     
@@ -76,6 +79,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool AreTiersInitialized() const;
     
-    UCommunityGoal();
 };
 

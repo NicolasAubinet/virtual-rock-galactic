@@ -8,10 +8,10 @@ USTRUCT(BlueprintType)
 struct FUDebrisCarveMesh {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UStaticMesh* Mesh;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float Probablity;
     
     FSD_API FUDebrisCarveMesh();

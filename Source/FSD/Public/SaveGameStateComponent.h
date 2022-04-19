@@ -2,84 +2,85 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "Components/ActorComponent.h"
-#include "ItemLoadout.h"
-#include "PlayerProgress.h"
-#include "ActiveCampaingMission.h"
-#include "SaveGameStatePerkItem.h"
-#include "ItemUpgradeSelection.h"
+#include "LoadoutChangedDelegateDelegate.h"
 #include "CharacterProgress.h"
+#include "ItemUpgradesChangedDelegateDelegate.h"
+#include "PlayerProgressChangedSignatureDelegate.h"
+#include "CharacterProgressChangedSignatureDelegate.h"
+#include "PlayerProgress.h"
+#include "SaveGameStatePerkItem.h"
+#include "ItemLoadout.h"
+#include "ActiveCampaingMission.h"
+#include "ItemUpgradeSelection.h"
 #include "SaveGameStateComponent.generated.h"
 
-class UItemUpgrade;
 class AActor;
-class AFSDPlayerState;
 class UVictoryPose;
+class UItemUpgrade;
 class UPlayerCharacterID;
 class UGeneratedMission;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FSaveGameStateComponentOnCreditsChanged);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FSaveGameStateComponentOnPlayerProgressChanged, AFSDPlayerState*, PlayerState, FPlayerProgress, Progress);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FSaveGameStateComponentOnItemUpgradeEquipped, TSubclassOf<AActor>, itemClass, UItemUpgrade*, Upgrade);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FSaveGameStateComponentOnEquippedPerksChanged);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FSaveGameStateComponentOnLoadoutChangedEvent);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSaveGameStateComponentOnItemUpgradeCrafted, UItemUpgrade*, Upgrade);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FSaveGameStateComponentOnItemUpgradeUnequipped, TSubclassOf<AActor>, itemClass, UItemUpgrade*, Upgrade);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSaveGameStateComponentOnCharacterStatsChanged, AFSDPlayerState*, PlayerState);
-
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class USaveGameStateComponent : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FSaveGameStateComponentOnEquippedPerksChanged OnEquippedPerksChanged;
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FItemUpgradeEquipSignature, TSubclassOf<AActor>, itemClass, UItemUpgrade*, Upgrade);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FItemUpgradeCraftSignature, UItemUpgrade*, Upgrade);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FCreditsChangedDelegate);
     
-    UPROPERTY(BlueprintAssignable)
-    FSaveGameStateComponentOnItemUpgradeCrafted OnItemUpgradeCrafted;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FItemUpgradesChangedDelegate OnEquippedPerksChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FSaveGameStateComponentOnItemUpgradeEquipped OnItemUpgradeEquipped;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FItemUpgradeCraftSignature OnItemUpgradeCrafted;
     
-    UPROPERTY(BlueprintAssignable)
-    FSaveGameStateComponentOnItemUpgradeUnequipped OnItemUpgradeUnequipped;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FItemUpgradeEquipSignature OnItemUpgradeEquipped;
     
-    UPROPERTY(BlueprintAssignable)
-    FSaveGameStateComponentOnPlayerProgressChanged OnPlayerProgressChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FItemUpgradeEquipSignature OnItemUpgradeUnequipped;
     
-    UPROPERTY(BlueprintAssignable)
-    FSaveGameStateComponentOnLoadoutChangedEvent OnLoadoutChangedEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FPlayerProgressChangedSignature OnPlayerProgressChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FSaveGameStateComponentOnCharacterStatsChanged OnCharacterStatsChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FLoadoutChangedDelegate OnLoadoutChangedEvent;
     
-    UPROPERTY(BlueprintAssignable)
-    FSaveGameStateComponentOnCreditsChanged OnCreditsChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FCharacterProgressChangedSignature OnCharacterStatsChanged;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FCreditsChangedDelegate OnCreditsChanged;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_Credits)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_Credits, meta=(AllowPrivateAccess=true))
     int32 Credits;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FSaveGameStatePerkItem> EquippedPerks;
     
-    UPROPERTY(BlueprintReadOnly, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     UVictoryPose* VictoryPose;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FItemLoadout EquippedLoadout;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_ActiveCampaignMission)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_ActiveCampaignMission, meta=(AllowPrivateAccess=true))
     FActiveCampaingMission ActiveCampaignMission;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_ItemUpgradeSelections)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_ItemUpgradeSelections, meta=(AllowPrivateAccess=true))
     TArray<FItemUpgradeSelection> ItemUpgradeSelections;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_PlayerProgress)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_PlayerProgress, meta=(AllowPrivateAccess=true))
     FPlayerProgress PlayerProgress;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_CharacterStats)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_CharacterStats, meta=(AllowPrivateAccess=true))
     TArray<FCharacterProgress> CharacterStats;
     
 public:
+    USaveGameStateComponent();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintCallable)
     void SetCampaign();
     
@@ -132,8 +133,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UGeneratedMission* GetActiveCampaignMission() const;
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    USaveGameStateComponent();
 };
 

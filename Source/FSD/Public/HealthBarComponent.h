@@ -3,7 +3,7 @@
 #include "WidgetComponentCustomMaterial.h"
 #include "HealthBarComponent.generated.h"
 
-UCLASS(EditInlineNew)
+UCLASS(EditInlineNew, meta=(BlueprintSpawnableComponent))
 class UHealthBarComponent : public UWidgetComponentCustomMaterial {
     GENERATED_BODY()
 public:

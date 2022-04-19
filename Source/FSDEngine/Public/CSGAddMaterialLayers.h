@@ -8,7 +8,7 @@ UCLASS(BlueprintType)
 class UCSGAddMaterialLayers : public UCSGSingleChildBase {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FCSGAddMaterialLayersProperties Properties;
     
     UCSGAddMaterialLayers();

@@ -10,10 +10,11 @@ class UProfilingSubSystem : public UWorldSubsystem {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FProfileEntry> Entries;
     
 public:
+    UProfilingSubSystem();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetTotalTime() const;
     
@@ -23,6 +24,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<FProfileCategoryTiming> GetCategoryTimings() const;
     
-    UProfilingSubSystem();
 };
 

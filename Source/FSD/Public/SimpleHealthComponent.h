@@ -4,42 +4,47 @@
 #include "UObject/NoExportTypes.h"
 #include "SimpleHealthComponent.generated.h"
 
-class UEnemyComponent;
 class UPawnStat;
 class UDamageTag;
+class UEnemyComponent;
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class USimpleHealthComponent : public UHealthComponentBase {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_Damage)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_Damage, meta=(AllowPrivateAccess=true))
     float Damage;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxHealth;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool InvulnerableToNonDefinedResistances;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bShowHealthBar;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FVector HealthBarOffsetWorld;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UEnemyComponent> EnemyComponent;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<UPawnStat*, float> Resistances;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UDamageTag*> RequiredDamageTags;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool AutomaticFlushNetDormancy;
     
+public:
+    USimpleHealthComponent();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_Damage(float oldDamage);
     
@@ -47,8 +52,5 @@ public:
     UFUNCTION(BlueprintCallable)
     float HealFromDeath(float Amount);
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    USimpleHealthComponent();
 };
 

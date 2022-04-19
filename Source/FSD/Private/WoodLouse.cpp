@@ -1,5 +1,7 @@
 #include "WoodLouse.h"
 #include "Net/UnrealNetwork.h"
+#include "Components/SceneComponent.h"
+#include "Perception/PawnSensingComponent.h"
 
 class APawn;
 
@@ -45,6 +47,8 @@ void AWoodLouse::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifeti
 }
 
 AWoodLouse::AWoodLouse() {
+    this->RollingCenter = CreateDefaultSubobject<USceneComponent>(TEXT("RollingCenter"));
+    this->PawnSensing = CreateDefaultSubobject<UPawnSensingComponent>(TEXT("Sensing"));
     this->forceState = EWoodLouseState::Size;
     this->RollingCenterOffsetOnStanding = 60.00f;
     this->RollingCenterOffsetOnFold = 80.00f;

@@ -5,12 +5,12 @@
 
 class USkeletalMeshComponent;
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UAnimatedObjectAfflictionComponent : public UPawnAfflictionComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, Export)
+    UPROPERTY(BlueprintReadWrite, Export, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* Mesh;
     
 public:

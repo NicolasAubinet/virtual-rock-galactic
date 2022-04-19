@@ -1,52 +1,56 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Animation/AnimInstance.h"
+#include "AnimNotifyDelegateDelegate.h"
+#include "NameDelegateDelegate.h"
+#include "IsAttackingChangedDelegateDelegate.h"
 #include "EnemyAnimInstance.generated.h"
 
 class UHealthComponentBase;
 class USkeletalMeshComponent;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FEnemyAnimInstanceOnIsAttackingChanged, bool, IsAttacking);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FEnemyAnimInstanceOnRangedAttackNotify);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FEnemyAnimInstanceOnStopLeadingNotify);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FEnemyAnimInstanceOnMeleeAttackNotify, FName, nameValue);
-
 UCLASS(NonTransient)
 class UEnemyAnimInstance : public UAnimInstance {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable, BlueprintReadOnly)
-    FEnemyAnimInstanceOnRangedAttackNotify OnRangedAttackNotify;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FAnimNotifyDelegate OnRangedAttackNotify;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadOnly)
-    FEnemyAnimInstanceOnMeleeAttackNotify OnMeleeAttackNotify;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FNameDelegate OnMeleeAttackNotify;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadOnly)
-    FEnemyAnimInstanceOnStopLeadingNotify OnStopLeadingNotify;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FAnimNotifyDelegate OnStopLeadingNotify;
     
-    UPROPERTY(BlueprintAssignable)
-    FEnemyAnimInstanceOnIsAttackingChanged OnIsAttackingChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FIsAttackingChangedDelegate OnIsAttackingChanged;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool IsAttacking;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere, Transient)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool IsAlive;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float RandomStartPosition;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UHealthComponentBase* HealthComponent;
     
 public:
+    UEnemyAnimInstance();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsSlotPlayingAnyAnimation(FName SlotNodeName) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsNotAttacking() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsDead() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     USkeletalMeshComponent* GetSkeletalMesh() const;
     
-    UEnemyAnimInstance();
 };
 

@@ -1,18 +1,18 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "CSGBaseComponent.h"
-#include "GeneralTerrainMaterialCombiner.h"
 #include "CSGChildInstanceProperties.h"
+#include "GeneralTerrainMaterialCombiner.h"
 #include "CSGChildInstanceComponent.generated.h"
 
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UCSGChildInstanceComponent : public UCSGBaseComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FCSGChildInstanceProperties Properties;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGeneralTerrainMaterialCombiner Materials;
     
     UCSGChildInstanceComponent();

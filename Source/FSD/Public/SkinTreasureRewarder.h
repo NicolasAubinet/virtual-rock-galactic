@@ -6,14 +6,14 @@
 class UItemSkin;
 class UItemID;
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class USkinTreasureRewarder : public UTreasureRewarder {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UItemSkin* GivenSkin;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UItemID* GivenSkinID;
     
     USkinTreasureRewarder();

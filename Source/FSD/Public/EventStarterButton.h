@@ -1,40 +1,41 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "BootUpDelegateDelegate.h"
 #include "EInputKeys.h"
 #include "EventStarterButton.generated.h"
 
-class USceneComponent;
 class USingleUsableComponent;
-class AEventStarterButton;
 class APlayerCharacter;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FEventStarterButtonOnBootupEvent, AEventStarterButton*, pushedButton);
+class USceneComponent;
 
 UCLASS()
 class AEventStarterButton : public AActor {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USceneComponent* Root;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USingleUsableComponent* Usable;
     
-    UPROPERTY()
-    FEventStarterButtonOnBootupEvent OnBootupEvent;
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FBootUpDelegate OnBootupEvent;
     
 protected:
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_Booted)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_Booted, meta=(AllowPrivateAccess=true))
     bool Booted;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_OpenForUse)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_OpenForUse, meta=(AllowPrivateAccess=true))
     bool IsOpenForUse;
     
-    UPROPERTY(Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     bool IsEventActive;
     
 public:
+    AEventStarterButton();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintCallable)
     void SetIsEventActive(bool NewIsEventActive);
     
@@ -60,11 +61,8 @@ public:
     UFUNCTION(BlueprintCallable)
     void CloseForUse(APlayerCharacter* User, EInputKeys Key);
     
-    UFUNCTION(BlueprintCallable)
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void BootUpEvent();
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    AEventStarterButton();
 };
 

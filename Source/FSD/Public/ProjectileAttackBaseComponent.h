@@ -1,45 +1,50 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "AttackBaseComponent.h"
+#include "ProjectileAttackDelegateDelegate.h"
+#include "EProjectileAttackRotationType.h"
+#include "ProjetileSpawnedDelegateDelegate.h"
 #include "ProjectileAttackBaseComponent.generated.h"
 
-class UProjectileAttack;
 class UAnimMontage;
+class UProjectileAttack;
 class AActor;
 
-UDELEGATE(BlueprintAuthorityOnly, BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FProjectileAttackBaseComponentOnProjectileFiredEvent);
-UDELEGATE(BlueprintAuthorityOnly, BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FProjectileAttackBaseComponentOnAttackStartedEvent);
-UDELEGATE(BlueprintAuthorityOnly, BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FProjectileAttackBaseComponentOnAttackEndedEvent);
-
-UCLASS(Abstract)
+UCLASS(Abstract, meta=(BlueprintSpawnableComponent))
 class UProjectileAttackBaseComponent : public UAttackBaseComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere, Export)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     TArray<UProjectileAttack*> Projectiles;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UAnimMontage*> Montages;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FName SocketName;
     
-    UPROPERTY(EditAnywhere)
-    bool UseSocketForRotation;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    EProjectileAttackRotationType RotationHandling;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ProjectilesIgnoreEachOther;
     
-    UPROPERTY(BlueprintAssignable)
-    FProjectileAttackBaseComponentOnAttackStartedEvent OnAttackStartedEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FProjectileAttackDelegate OnAttackStartedEvent;
     
-    UPROPERTY(BlueprintAssignable)
-    FProjectileAttackBaseComponentOnProjectileFiredEvent OnProjectileFiredEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FProjectileAttackDelegate OnProjectileFiredEvent;
     
-    UPROPERTY(BlueprintAssignable)
-    FProjectileAttackBaseComponentOnAttackEndedEvent OnAttackEndedEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FProjectileAttackDelegate OnAttackEndedEvent;
     
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FProjetileSpawnedDelegate OnProjectileSpawnedEvent;
+    
+public:
+    UProjectileAttackBaseComponent();
+protected:
     UFUNCTION(BlueprintCallable)
     bool TriggerMontage(AActor* Target);
     
@@ -58,7 +63,5 @@ protected:
     UFUNCTION(BlueprintCallable)
     void CancelMontage();
     
-public:
-    UProjectileAttackBaseComponent();
 };
 

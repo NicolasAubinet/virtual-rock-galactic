@@ -1,35 +1,35 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Engine/DataAsset.h"
 #include "UObject/NoExportTypes.h"
+#include "Engine/DataAsset.h"
 #include "OptionalUICategory.generated.h"
 
-class UObject;
 class UOptionalUICategory;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOptionalUICategoryOnVisibilityChanged, UOptionalUICategory*, Category, bool, IsVisible);
+class UObject;
 
 UCLASS(BlueprintType)
 class UOptionalUICategory : public UDataAsset {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FOptionalUICategoryOnVisibilityChanged OnVisibilityChanged;
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FVisibilityChanged, UOptionalUICategory*, Category, bool, IsVisible);
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FVisibilityChanged OnVisibilityChanged;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     FGuid Guid;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText Description;
     
 public:
+    UOptionalUICategory();
     UFUNCTION(BlueprintCallable)
     void SetVisible(UObject* WorldContext, bool IsCategoryVisible);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsVisible(UObject* WorldContext) const;
     
-    UOptionalUICategory();
 };
 

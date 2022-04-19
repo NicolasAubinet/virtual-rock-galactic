@@ -5,15 +5,20 @@
 #include "UObject/NoExportTypes.h"
 #include "PlayerCharacterData.generated.h"
 
+class UPlayerCharacterID;
 class UTexture2D;
 
 UCLASS(BlueprintType)
-class UPlayerCharacterData : public UDataAsset {
+class FSD_API UPlayerCharacterData : public UPrimaryDataAsset {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPlayerCharacterID* characterID;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FHeroInfo HeroInfo;
     
+    UPlayerCharacterData();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FText GetSwitchToMessage() const;
     
@@ -38,6 +43,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FLinearColor GetColor() const;
     
-    UPlayerCharacterData();
 };
 

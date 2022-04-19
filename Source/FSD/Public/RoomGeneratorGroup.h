@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "GameplayTagContainer.h"
 #include "Engine/DataAsset.h"
 #include "RoomGeneratorGroupInstance.h"
-#include "GameplayTagContainer.h"
 #include "UObject/NoExportTypes.h"
 #include "RoomGeneratorGroup.generated.h"
 
@@ -12,9 +12,10 @@ UCLASS(BlueprintType)
 class URoomGeneratorGroup : public UDataAsset {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<URoomGenerator*> Rooms;
     
+    URoomGeneratorGroup();
     UFUNCTION(BlueprintCallable)
     static URoomGenerator* GetRandomRoomWithTags(UPARAM(Ref) FRoomGeneratorGroupInstance& groupInstance, const FGameplayTagQuery& queury, UPARAM(Ref) FRandomStream& RandomStream);
     
@@ -24,6 +25,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FRoomGeneratorGroupInstance CreateGroupInstance() const;
     
-    URoomGeneratorGroup();
 };
 

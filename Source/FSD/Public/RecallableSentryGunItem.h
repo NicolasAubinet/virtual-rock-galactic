@@ -4,60 +4,63 @@
 #include "RecallableItem.h"
 #include "RecallableSentryGunItem.generated.h"
 
+class UCapacityHoldingItemAggregator;
+class ARecallableSentryGun;
 class UItemPlacerAggregator;
 class ARecallableSentryGunItem;
-class ARecallableSentryGun;
-class UCapacityHoldingItemAggregator;
 class UItemUpgrade;
 class AItem;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FRecallableSentryGunItemOnActiveItemsChanged, ARecallableSentryGunItem*, Item);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FRecallableSentryGunItemOnSelectedItemChanged, ARecallableSentryGun*, SentryGun);
 
 UCLASS()
 class ARecallableSentryGunItem : public ARecallableItem {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FRecallableSentryGunItemOnActiveItemsChanged OnActiveItemsChanged;
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FRecallableSentryGunSignature, ARecallableSentryGun*, SentryGun);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FRecallableSentryGunItemSignature, ARecallableSentryGunItem*, Item);
     
-    UPROPERTY(BlueprintAssignable)
-    FRecallableSentryGunItemOnSelectedItemChanged OnSelectedItemChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FRecallableSentryGunItemSignature OnActiveItemsChanged;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FRecallableSentryGunSignature OnSelectedItemChanged;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 MaxSentryCount;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MinDistanceBetweenSentries;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText RecallHoldDescription;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float RecallHoldDuration;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UCapacityHoldingItemAggregator* AmmoCapacity;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UItemPlacerAggregator* ItemPlacer;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<UItemUpgrade*> upgrades;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<AItem> LoadoutClass;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float SupplyStatusWeight;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float SentryAngleRestriction;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool bIsUpgraded;
     
+public:
+    ARecallableSentryGunItem();
+protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ReceiveItemUpgraded();
     
@@ -74,6 +77,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool AreAllSentriesPlaced() const;
     
-    ARecallableSentryGunItem();
 };
 

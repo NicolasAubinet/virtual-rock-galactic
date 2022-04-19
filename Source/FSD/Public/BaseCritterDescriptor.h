@@ -4,25 +4,25 @@
 #include "DeepPathFinderType.h"
 #include "BaseCritterDescriptor.generated.h"
 
-class UBiome;
-class AFSDPawn;
 class UDebrisPositioning;
+class AFSDPawn;
+class UBiome;
 
 UCLASS(Abstract)
 class UBaseCritterDescriptor : public UDataAsset {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<AFSDPawn> CritterClass;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<UBiome*, TSoftClassPtr<AFSDPawn>> BiomeClassOverrides;
     
-    UPROPERTY(EditAnywhere, Instanced)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UDebrisPositioning* Positioning;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     DeepPathFinderType PathfinderType;
     
 public:

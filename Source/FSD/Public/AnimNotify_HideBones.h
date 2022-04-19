@@ -7,7 +7,7 @@ UCLASS(CollapseCategories, MinimalAPI)
 class UAnimNotify_HideBones : public UAnimNotify {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FName> TargetBoneNames;
     
     UAnimNotify_HideBones();

@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "RoomFeature.h"
 #include "UObject/NoExportTypes.h"
+#include "RoomFeature.h"
 #include "GameplayTagContainer.h"
 #include "UObject/NoExportTypes.h"
 #include "RandomSubRoomFeature.generated.h"
@@ -13,22 +13,22 @@ class URandomSubRoomFeature : public URoomFeature {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     URoomGeneratorGroup* RoomGroup;
     
-    UPROPERTY(VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagQuery tagQuery;
     
-    UPROPERTY(VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     int32 Layer;
     
-    UPROPERTY(VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     FVector Location;
     
-    UPROPERTY(VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     FRotator Rotation;
     
-    UPROPERTY(VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     float Scale;
     
 public:

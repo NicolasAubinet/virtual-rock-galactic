@@ -8,10 +8,10 @@ USTRUCT(BlueprintType)
 struct FDeepDiveBank {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UDeepDive* NormalDeepDive;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UDeepDive* HardDeepDive;
     
     FSD_API FDeepDiveBank();

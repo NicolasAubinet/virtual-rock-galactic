@@ -1,19 +1,20 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "GeneratedDebrisItem.h"
+#include "TunnelNode.h"
+#include "EDebrisItemPass.h"
 #include "Components/ActorComponent.h"
 #include "LevelGenerationCarverLists.h"
-#include "EDebrisItemPass.h"
 #include "RoomNode.h"
-#include "TunnelNode.h"
 #include "PathObstacle.h"
+#include "GeneratedDebrisItem.h"
 #include "GeneratedInfluenceSets.h"
 #include "ProceduralController.generated.h"
 
-UCLASS(Blueprintable)
+UCLASS(Blueprintable, meta=(BlueprintSpawnableComponent))
 class UProceduralController : public UActorComponent {
     GENERATED_BODY()
 public:
+    UProceduralController();
     UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
     void Server_RequestTunnelData();
     
@@ -39,17 +40,17 @@ public:
     
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-    void ReceivedTunnelData(const TArray<FTunnelNode>& Tunnels);
+    void ReceivedTunnelData(const TArray<FTunnelNode>& tunnels);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-    void ReceivedRoomData(int32 Seed, const TArray<FRoomNode>& Rooms, const TArray<FPathObstacle>& obstacles);
+    void ReceivedRoomData(int32 Seed, const TArray<FRoomNode>& Rooms, const TArray<FPathObstacle>& Obstacles);
     
 public:
     UFUNCTION(BlueprintCallable, Client, Reliable)
-    void Client_SendTunnelData(const TArray<FTunnelNode>& Tunnels);
+    void Client_SendTunnelData(const TArray<FTunnelNode>& tunnels);
     
     UFUNCTION(BlueprintCallable, Client, Reliable)
-    void Client_SendRoomData(int32 Seed, const TArray<FRoomNode>& Rooms, const TArray<FPathObstacle>& obstacles);
+    void Client_SendRoomData(int32 Seed, const TArray<FRoomNode>& Rooms, const TArray<FPathObstacle>& Obstacles);
     
 protected:
     UFUNCTION(BlueprintCallable, Client, Reliable)
@@ -64,7 +65,5 @@ protected:
     UFUNCTION(BlueprintCallable, Client, Reliable)
     void Client_ReceivePLSDebris(const TArray<FGeneratedDebrisItem>& levelDebris);
     
-public:
-    UProceduralController();
 };
 

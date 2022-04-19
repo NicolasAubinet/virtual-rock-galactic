@@ -4,7 +4,7 @@
 class AProjectile;
 class AActor;
 
-void AJellyBreeder::SpawnEnemies(AProjectile* egg, int32 AmountToSpawn) {
+void AJellyBreeder::SpawnEnemies(AProjectile* Egg, int32 AmountToSpawn) {
 }
 
 void AJellyBreeder::PlaySpawnEggAnim_Implementation() {

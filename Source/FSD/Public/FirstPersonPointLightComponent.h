@@ -3,7 +3,7 @@
 #include "Components/PointLightComponent.h"
 #include "FirstPersonPointLightComponent.generated.h"
 
-UCLASS(EditInlineNew)
+UCLASS(EditInlineNew, meta=(BlueprintSpawnableComponent))
 class UFirstPersonPointLightComponent : public UPointLightComponent {
     GENERATED_BODY()
 public:

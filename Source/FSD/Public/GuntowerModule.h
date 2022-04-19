@@ -1,17 +1,17 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "UObject/NoExportTypes.h"
 #include "FSDPawn.h"
 #include "EventParticipant.h"
+#include "UObject/NoExportTypes.h"
 #include "GuntowerModule.generated.h"
 
-class UAnimSequenceBase;
-class AActor;
-class USoundCue;
 class UParticleSystem;
+class USoundCue;
+class AActor;
+class UAnimSequenceBase;
 class UStaticMeshComponent;
-class UGunTowerHealthComponent;
 class USkeletalMeshComponent;
+class UGunTowerHealthComponent;
 class AGuntowerEvent;
 class AGuntowerModule;
 
@@ -20,91 +20,94 @@ class AGuntowerModule : public AFSDPawn, public IEventParticipant {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundCue* ExposeWeakpointSound;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundCue* deathSound;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UParticleSystem* deathParticles;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<AActor*> WeakpointActors;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FName BodyBone;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FName TopConnectionPointName;
     
-    UPROPERTY(BlueprintReadWrite, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     FRotator CurrentTurretRotation;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UAnimSequenceBase* IntroductionAnimation;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UStaticMeshComponent* ArmorPiece1;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UStaticMeshComponent* ArmorPiece2;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UStaticMeshComponent* ArmorPiece3;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* ModuleMesh;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UGunTowerHealthComponent* GuntowerModuleHealth;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     AGuntowerEvent* OwningEvent;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     AGuntowerModule* ChildModule;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float WeakpointsExposedTime;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float WeakpointsExposedTimeSolo;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float HideArmorTime;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ArmorShootoutDelay;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ArmorLaunchPower;
     
-    UPROPERTY(Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     int32 ModuleID;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool IsPassiveModule;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_IsModuleActive)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_IsModuleActive, meta=(AllowPrivateAccess=true))
     bool ModuleIsActive;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_AreWeakpointExposed)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_AreWeakpointExposed, meta=(AllowPrivateAccess=true))
     bool AreWeakpointsExposed;
     
-    UPROPERTY(Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     bool AreWeaponsExposed;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ConstantRotation;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_IsArmorOff)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_IsArmorOff, meta=(AllowPrivateAccess=true))
     bool IsArmorOff;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_Exploded)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_Exploded, meta=(AllowPrivateAccess=true))
     bool Exploded;
     
 public:
+    AGuntowerModule();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintCallable)
     void ShootOutArmor();
     
@@ -161,9 +164,6 @@ public:
     UFUNCTION(BlueprintCallable)
     void ActivateTowerModule();
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    AGuntowerModule();
     
     // Fix for true pure virtual functions not being implemented
 };

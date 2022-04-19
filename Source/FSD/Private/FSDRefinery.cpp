@@ -1,8 +1,9 @@
 #include "FSDRefinery.h"
 #include "Net/UnrealNetwork.h"
+#include "SingleUsableComponent.h"
 
-class APipelineStart;
 class APlayerCharacter;
+class APipelineStart;
 
 void AFSDRefinery::SetRefineryState(ERefineryState InState) {
 }
@@ -40,6 +41,8 @@ void AFSDRefinery::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLife
 }
 
 AFSDRefinery::AFSDRefinery() {
+    this->UsableStartRefining = CreateDefaultSubobject<USingleUsableComponent>(TEXT("UsableStartRefining"));
+    this->UsableLaunchRocket = CreateDefaultSubobject<USingleUsableComponent>(TEXT("UsableLaunchRocket"));
     this->LaunchRocketButtonPressedShout = NULL;
     this->BuilderItem = NULL;
     this->RefiningTotalDuration = 120.00f;

@@ -6,13 +6,13 @@ USTRUCT()
 struct FCommunityFactionResponse {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     TArray<FString> Goals;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     TArray<float> Values;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     TArray<float> Members;
     
     FSD_API FCommunityFactionResponse();

@@ -5,84 +5,90 @@
 #include "Caretaker.generated.h"
 
 class UCaretakerActionComponent;
-class UHealthDamageTracker;
-class USceneComponent;
-class USkeletalMeshComponent;
 class UPassthroughSubHealthComponent;
-class UEnemyHealthComponent;
+class USceneComponent;
+class UHealthDamageTracker;
+class USkeletalMeshComponent;
 class UPawnStatsComponent;
+class UEnemyHealthComponent;
 class UAnimSequenceBase;
 
 UCLASS()
 class FSD_API ACaretaker : public AFSDPawn {
     GENERATED_BODY()
 public:
-    UPROPERTY(Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USceneComponent* Root;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* Body;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     TArray<USkeletalMeshComponent*> Eyes;
     
-    UPROPERTY(Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UPassthroughSubHealthComponent*> subHealth;
     
-    UPROPERTY(Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UHealthDamageTracker* DamageTracker;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UEnemyHealthComponent* Health;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UPawnStatsComponent* PawnStats;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     TArray<UCaretakerActionComponent*> Actions;
     
-    UPROPERTY(BlueprintReadWrite, Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UCaretakerActionComponent* CurrentAction;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UAnimSequenceBase*> HitReactions;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_CurrentStage)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_CurrentStage, meta=(AllowPrivateAccess=true))
     int32 CurrentStage;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, Replicated, meta=(AllowPrivateAccess=true))
+    int32 TargetRotationRate;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<float> RotationRates;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_CurrentRotation)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_Server_Rotation, meta=(AllowPrivateAccess=true))
     float Server_Rotation;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool IsInStageCooldown;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool IsWeakpointAVisible;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool IsWeakpointBVisible;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool IsWeakpointCVisible;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool IsWeakpointDVisible;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     ECaretakerSpawnType ActiveSpawnType;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     int32 AoEStage;
     
 private:
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_OpenEye)
+    UPROPERTY(Transient, ReplicatedUsing=OnRep_OpenEye, meta=(AllowPrivateAccess=true))
     int8 OpenEye;
     
 public:
+    ACaretaker();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void WakeUp();
     
@@ -97,6 +103,10 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnStartHideFromDamage();
     
+private:
+    UFUNCTION(BlueprintCallable)
+    void OnRep_Server_Rotation();
+    
 protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_OpenEye();
@@ -104,9 +114,6 @@ protected:
 private:
     UFUNCTION(BlueprintCallable)
     void OnRep_CurrentStage();
-    
-    UFUNCTION(BlueprintCallable)
-    void OnRep_CurrentRotation();
     
 public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
@@ -140,8 +147,5 @@ public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void CloseAllEyes();
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    ACaretaker();
 };
 

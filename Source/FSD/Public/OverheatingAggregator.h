@@ -3,32 +3,37 @@
 #include "ItemAggregator.h"
 #include "OverheatingAggregator.generated.h"
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOverheatingAggregatorOnOverheatingProgressChanged, float, Progress);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOverheatingAggregatorOnOverheatedChanged, bool, Overheated);
-
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UOverheatingAggregator : public UItemAggregator {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FOverheatingAggregatorOnOverheatingProgressChanged OnOverheatingProgressChanged;
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOverheatingProgressChanged, float, Progress);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOverheatedChanged, bool, Overheated);
     
-    UPROPERTY(BlueprintAssignable)
-    FOverheatingAggregatorOnOverheatedChanged OnOverheatedChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOverheatingProgressChanged OnOverheatingProgressChanged;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOverheatedChanged OnOverheatedChanged;
     
 protected:
-    UPROPERTY(EditAnywhere, Replicated)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
     float HeatLossPerSecond;
     
-    UPROPERTY(EditAnywhere, Replicated)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
     float OverheatedDuration;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_IsOverheated)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_IsOverheated, meta=(AllowPrivateAccess=true))
     bool bIsOverheated;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_Temperature)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_Temperature, meta=(AllowPrivateAccess=true))
     float Temperature;
     
+public:
+    UOverheatingAggregator();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+protected:
     UFUNCTION(BlueprintCallable, Server, Unreliable, WithValidation)
     void Server_SetTemperature(float NewTemperature);
     
@@ -51,8 +56,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetIsOverheated() const;
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    UOverheatingAggregator();
 };
 

@@ -14,13 +14,13 @@ class UBoscoUpgrade : public UStandardItemUpgrade {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EBoscoUpgrades upgradeType;
     
 public:
+    UBoscoUpgrade();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static FUpgradeValues GetUpgradedValue(AFSDPlayerState* Player, TSubclassOf<AActor> Item, EBoscoUpgrades NewUpgradeType);
     
-    UBoscoUpgrade();
 };
 

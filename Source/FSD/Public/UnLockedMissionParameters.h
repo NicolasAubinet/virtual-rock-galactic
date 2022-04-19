@@ -7,10 +7,10 @@ USTRUCT(BlueprintType)
 struct FUnLockedMissionParameters {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TArray<FGuid> UnLockedComplexities;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TArray<FGuid> UnLockedDurations;
     
     FSD_API FUnLockedMissionParameters();

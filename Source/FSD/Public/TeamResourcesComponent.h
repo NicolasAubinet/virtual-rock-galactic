@@ -3,7 +3,7 @@
 #include "ResourcesComponent.h"
 #include "TeamResourcesComponent.generated.h"
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UTeamResourcesComponent : public UResourcesComponent {
     GENERATED_BODY()
 public:

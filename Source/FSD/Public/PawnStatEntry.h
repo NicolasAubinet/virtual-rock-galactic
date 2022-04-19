@@ -9,10 +9,10 @@ USTRUCT(BlueprintType)
 struct FPawnStatEntry : public FFastArraySerializerItem {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UPawnStat* PawnStat;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float Value;
     
     FSD_API FPawnStatEntry();

@@ -6,38 +6,41 @@ USTRUCT()
 struct FFSDServerListRequest {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     FString AuthenticationTicket;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     FString IgnoreId;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     int32 Distance;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     int32 DRG_PWREQUIRED;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     FString DRG_REGION;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     int32 DRG_VERSION;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     int32 DifficultyBitset;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     int32 MissionSeed;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     int32 GlobalMissionSeed;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     FString SearchString;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     bool DeepDive;
+    
+    UPROPERTY(meta=(AllowPrivateAccess=true))
+    FString Platform;
     
     FSD_API FFSDServerListRequest();
 };

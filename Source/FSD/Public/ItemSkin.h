@@ -1,65 +1,71 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "SavablePrimaryDataAsset.h"
 #include "EItemSkinType.h"
+#include "SavablePrimaryDataAsset.h"
+#include "Aquisitionable.h"
 #include "ItemSkin.generated.h"
 
-class UMaterialInterface;
 class UItemSkin;
+class UItemAquisitionBase;
 class UDLCBase;
-class UItemID;
 class UItemSkinSet;
+class UDynamicIcon;
 class USkinEffect;
+class UItemID;
 class UPlayerCharacterID;
 class UObject;
 class AFSDPlayerState;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FItemSkinOnSkinEquipped, const UItemSkin*, Skin);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FItemSkinOnSkinUnlocked, UItemSkin*, Skin);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FItemSkinOnSkinUnequipped, const UItemSkin*, Skin);
+class UMaterialInstanceDynamic;
 
 UCLASS(BlueprintType, EditInlineNew)
-class FSD_API UItemSkin : public USavablePrimaryDataAsset {
+class FSD_API UItemSkin : public USavablePrimaryDataAsset, public IAquisitionable {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable, Transient)
-    FItemSkinOnSkinUnlocked OnSkinUnlocked;
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FItemSkinSignature, UItemSkin*, Skin);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FItemSkinEquipSignature, const UItemSkin*, Skin);
     
-    UPROPERTY(BlueprintAssignable, Transient)
-    FItemSkinOnSkinEquipped OnSkinEquipped;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    FItemSkinSignature OnSkinUnlocked;
     
-    UPROPERTY(BlueprintAssignable, Transient)
-    FItemSkinOnSkinUnequipped OnSkinUnequipped;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    FItemSkinEquipSignature OnSkinEquipped;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    FItemSkinEquipSignature OnSkinUnequipped;
     
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
+    UItemAquisitionBase* Aquisition;
+    
+    UPROPERTY(AdvancedDisplay, BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     bool UnlockedFromStart;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(AdvancedDisplay, BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UDLCBase* RequiredDLC;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     EItemSkinType SkinType;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText SkinName;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UItemSkinSet* SkinSet;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
-    UMaterialInterface* SkinIconMaterial;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
+    UDynamicIcon* DynamicIcon;
     
-    UPROPERTY(EditAnywhere, Export)
-    TArray<USkinEffect*> SkinEffects;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
+    USkinEffect* SkinEffect;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UItemID* OwningItem;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UPlayerCharacterID* OwningCharacter;
     
 public:
+    UItemSkin();
     UFUNCTION(BlueprintCallable)
     bool Unlock(UObject* WorldContext, UItemID* ItemID, bool broadcast);
     
@@ -73,11 +79,21 @@ public:
     bool IsEquippedOnItem(UItemID* ItemID, AFSDPlayerState* PlayerState) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    EItemSkinType GetSkinType() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    FText GetSkinName() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     UItemID* GetOwningItem() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UPlayerCharacterID* GetOwningCharacter() const;
     
-    UItemSkin();
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UMaterialInstanceDynamic* CreateIcon(UObject* Owner) const;
+    
+    
+    // Fix for true pure virtual functions not being implemented
 };
 

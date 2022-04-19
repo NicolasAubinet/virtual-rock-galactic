@@ -7,6 +7,7 @@ enum class ESonyInputSettingsBools : uint8 {
     MotionControlEnabled,
     MotionControlFlight,
     MotionControlSalute,
+    MotionControlPrecisionMode,
     AdaptiveTriggersEnabled,
     TouchPadTerrainScannerEnabled,
     TouchPadGesturesEnabled,

@@ -7,7 +7,7 @@ UCLASS(CollapseCategories, MinimalAPI)
 class UAnimNotify_UnHideBone : public UAnimNotify {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FName BoneName;
     
     UAnimNotify_UnHideBone();

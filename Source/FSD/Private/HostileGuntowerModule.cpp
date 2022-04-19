@@ -1,5 +1,8 @@
 #include "HostileGuntowerModule.h"
 #include "Net/UnrealNetwork.h"
+#include "Components/SkeletalMeshComponent.h"
+#include "Particles/ParticleSystemComponent.h"
+#include "EnemyComponent.h"
 
 class UHealthComponentBase;
 
@@ -20,6 +23,9 @@ void AHostileGuntowerModule::GetLifetimeReplicatedProps(TArray<FLifetimeProperty
 }
 
 AHostileGuntowerModule::AHostileGuntowerModule() {
+    this->DestroyedMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("DestroyedMesh"));
+    this->DestroyedSmoke = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("DestroyedSmoke"));
+    this->EnemyComponent = CreateDefaultSubobject<UEnemyComponent>(TEXT("EnemyComponent"));
     this->ModuleMaxHealth = 1.00f;
 }
 

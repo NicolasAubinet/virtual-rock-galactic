@@ -1,12 +1,9 @@
 #include "ItemUpgrade.h"
 #include "Templates/SubclassOf.h"
 
-class AFSDPlayerController;
 class AActor;
-class UItemID;
 class AFSDPlayerState;
 class UItemUpgrade;
-class APlayerCharacter;
 
 void UItemUpgrade::UnequipUpgrade(TSubclassOf<AActor> itemClass, AFSDPlayerState* PlayerState) {
 }
@@ -36,9 +33,6 @@ float UItemUpgrade::GetCreditsCost() const {
 }
 
 void UItemUpgrade::EquipUpgrade(TSubclassOf<AActor> itemClass, AFSDPlayerState* PlayerState) {
-}
-
-void UItemUpgrade::CraftItem(UItemID* ItemID, AFSDPlayerController* PlayerController, TSubclassOf<APlayerCharacter> previewedCharacter) {
 }
 
 UItemUpgrade::UItemUpgrade() {

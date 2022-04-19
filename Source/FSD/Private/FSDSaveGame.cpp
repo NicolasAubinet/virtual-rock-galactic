@@ -1,13 +1,13 @@
 #include "FSDSaveGame.h"
 #include "Templates/SubclassOf.h"
 
-class UResourceData;
-class UFSDSaveGame;
-class UObject;
-class UPlayerCharacterID;
-class AActor;
 class UFSDGameInstance;
+class UObject;
+class UResourceData;
+class UPlayerCharacterID;
 class UItemID;
+class AActor;
+class UFSDSaveGame;
 
 bool UFSDSaveGame::TrySellResource(UResourceData* Resource, int32 Amount, int32& Price) {
     return false;
@@ -61,6 +61,9 @@ void UFSDSaveGame::SetHasClaimSteamGroupLoot() {
 }
 
 void UFSDSaveGame::SetFaction(EFSDFaction newFaction, bool Reasign) {
+}
+
+void UFSDSaveGame::SetEquippedItemID(EItemCategory Category, UPlayerCharacterID* PlayerId, UItemID* Item) {
 }
 
 void UFSDSaveGame::SetEquippedItem(EItemCategory Category, UPlayerCharacterID* PlayerId, TSubclassOf<AActor> Item) {
@@ -125,6 +128,9 @@ void UFSDSaveGame::MarkRetirementRewardScreenSeen(UPlayerCharacterID* characterI
 void UFSDSaveGame::MarkFirstSchematicMessageSeen() {
 }
 
+void UFSDSaveGame::LevelUpCharacter(UObject* WorldContext, UPlayerCharacterID* characterID) {
+}
+
 bool UFSDSaveGame::IsObsolete() const {
     return false;
 }
@@ -138,6 +144,10 @@ bool UFSDSaveGame::IsFirstRejoinAttempt() {
 }
 
 bool UFSDSaveGame::HasSeenRetirementRewardScreen() const {
+    return false;
+}
+
+bool UFSDSaveGame::HasCredits(int32 Amount) const {
     return false;
 }
 
@@ -332,6 +342,10 @@ int32 UFSDSaveGame::AddCredits(int32 Amount) {
     return 0;
 }
 
+int32 UFSDSaveGame::AddClassXP(UObject* WorldContext, UPlayerCharacterID* characterID, int32 XP) {
+    return 0;
+}
+
 UFSDSaveGame::UFSDSaveGame() {
     this->VersionNumber = 0;
     this->bMilestoneResetShown = false;
@@ -354,7 +368,6 @@ UFSDSaveGame::UFSDSaveGame() {
     this->HasSentSteamInfo = false;
     this->HasClaimedSteamGroupLoot = false;
     this->IsBoscoAllowed = true;
-    this->HasRefundedUpgradeCostDifference = false;
     this->HasJoinedXboxClub = false;
     this->HasSeenAnalyticsPopUp = false;
     this->AllowAnalyticsTracking = true;

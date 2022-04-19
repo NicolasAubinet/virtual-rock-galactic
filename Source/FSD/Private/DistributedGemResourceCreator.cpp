@@ -1,6 +1,6 @@
 #include "DistributedGemResourceCreator.h"
 
 UDistributedGemResourceCreator::UDistributedGemResourceCreator() {
-    this->PlacementDistanceProbabilityCurve = NULL;
+    this->MinDistanceBetweenGems = 0.00f;
 }
 

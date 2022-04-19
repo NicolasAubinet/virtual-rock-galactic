@@ -1,37 +1,23 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "DiscordServerInviteGuildData.h"
 #include "DiscordServerInviteData.generated.h"
 
 USTRUCT(BlueprintType)
 struct FDiscordServerInviteData {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FString code;
     
-    UPROPERTY(BlueprintReadWrite)
-    FString serverID;
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    int32 approximate_presence_count;
     
-    UPROPERTY(BlueprintReadWrite)
-    FString serverDescription;
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    int32 approximate_member_count;
     
-    UPROPERTY(BlueprintReadWrite)
-    FString serverName;
-    
-    UPROPERTY(BlueprintReadWrite)
-    int32 presenceCount;
-    
-    UPROPERTY(BlueprintReadWrite)
-    int32 memberCount;
-    
-    UPROPERTY(BlueprintReadWrite)
-    FString iconKey;
-    
-    UPROPERTY(BlueprintReadWrite)
-    FString bannerKey;
-    
-    UPROPERTY(BlueprintReadWrite)
-    FString splashKey;
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDiscordServerInviteGuildData guild;
     
     FSD_API FDiscordServerInviteData();
 };

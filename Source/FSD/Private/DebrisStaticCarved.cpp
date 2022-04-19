@@ -1,7 +1,7 @@
 #include "DebrisStaticCarved.h"
 
 UDebrisStaticCarved::UDebrisStaticCarved() {
-    this->carverType = EDebrisCarvedType::Large;
+    this->CarverType = EDebrisCarvedType::Large;
     this->TerrainMaterial = NULL;
     this->Filter = ECarveFilterType::ReplaceAll;
     this->CarveOffsetRadius = 0.00f;

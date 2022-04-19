@@ -1,40 +1,40 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "ImpactedSignatureDelegate.h"
+#include "HightAccelerationSignatureDelegate.h"
 #include "ImpactComponent.generated.h"
 
 class USceneComponent;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FImpactComponentOnImpactedEvent);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FImpactComponentOnHighAcceleration);
-
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UImpactComponent : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FImpactComponentOnImpactedEvent OnImpactedEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FImpactedSignature OnImpactedEvent;
     
-    UPROPERTY(BlueprintAssignable)
-    FImpactComponentOnHighAcceleration OnHighAcceleration;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FHightAccelerationSignature OnHighAcceleration;
     
 protected:
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     bool DebugText;
     
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     bool TrackAcceleration;
     
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     bool TrackVelocity;
     
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     float TriggerHighAccelAt;
     
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     float TriggerAtVelocityDifference;
     
 public:
+    UImpactComponent();
     UFUNCTION(BlueprintCallable)
     void SetCheckVelocity(bool aCheckVelocity);
     
@@ -47,6 +47,5 @@ public:
     UFUNCTION(BlueprintCallable)
     void DisableImpactChecking();
     
-    UImpactComponent();
 };
 

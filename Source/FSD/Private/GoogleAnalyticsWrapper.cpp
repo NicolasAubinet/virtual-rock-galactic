@@ -1,10 +1,10 @@
 #include "GoogleAnalyticsWrapper.h"
 
-class AFSDGameState;
-class APlayerController;
-class USeasonChallenge;
-class AActor;
 class AFSDPlayerState;
+class APlayerController;
+class AFSDGameState;
+class AActor;
+class USeasonChallenge;
 
 void UGoogleAnalyticsWrapper::StartMissionPartyInfo(AFSDGameState* GameState) {
 }

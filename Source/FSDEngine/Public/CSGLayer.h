@@ -1,11 +1,11 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "CSGGroup.h"
-#include "MeshLayerProperties.h"
-#include "DeepCSGTree.h"
 #include "UObject/NoExportTypes.h"
 #include "GeneralTerrainMaterialCombiner.h"
+#include "CSGGroup.h"
+#include "MeshLayerProperties.h"
 #include "DeepCSGFloatTree.h"
+#include "DeepCSGTree.h"
 #include "UObject/NoExportTypes.h"
 #include "CSGLayer.generated.h"
 
@@ -13,22 +13,22 @@ UCLASS(BlueprintType)
 class UCSGLayer : public UCSGGroup {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FMeshLayerProperties Properties;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGeneralTerrainMaterialCombiner Materials;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FBox WorldSpaceBoundingBox;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FDeepCSGFloatTree BoundingTree;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FDeepCSGTree TempTree;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FMatrix TransformMatInv;
     
     UCSGLayer();

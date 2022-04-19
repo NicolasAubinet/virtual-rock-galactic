@@ -1,27 +1,27 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Components/ActorComponent.h"
 #include "RandRange.h"
+#include "Components/ActorComponent.h"
 #include "PheromoneSpawnerComponent.generated.h"
 
 class UEnemyDescriptor;
 class AActor;
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UPheromoneSpawnerComponent : public UActorComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FRandRange SpawnInterval;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float AttackPositioningCostModifier;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UEnemyDescriptor* enemy;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TMap<AActor*, float> InfectedActors;
     
 public:

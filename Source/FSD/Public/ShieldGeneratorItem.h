@@ -14,30 +14,35 @@ class AShieldGeneratorItem : public AThrowableItem, public IUpgradableGear, publ
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UCapacityHoldingItemAggregator* ChargeCapacity;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UCapacityHoldingItemAggregator* CarryCapacity;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float RechargeDuration;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_UnchargedCount)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_UnchargedCount, meta=(AllowPrivateAccess=true))
     int32 UnchargedCount;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float RechargeProgress;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float SupplyStatusWeight;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDialogDataAsset* ShoutRecarged;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FCoolDownProgressStyle RechargeProgressUI;
     
+public:
+    AShieldGeneratorItem();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ReceiveGeneratorReturned();
     
@@ -56,10 +61,6 @@ protected:
     UFUNCTION(BlueprintCallable)
     void GeneratorReturned();
     
-public:
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    AShieldGeneratorItem();
     
     // Fix for true pure virtual functions not being implemented
 };

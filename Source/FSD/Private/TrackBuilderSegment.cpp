@@ -1,11 +1,11 @@
 #include "TrackBuilderSegment.h"
 #include "Net/UnrealNetwork.h"
+#include "TrackBuilderUsable.h"
 
-class AItem;
 class UTrackBuilderConnectPoint;
-class UTrackBuilderUsable;
-class ATrackBuilderSegment;
+class AItem;
 class AActor;
+class ATrackBuilderSegment;
 
 bool ATrackBuilderSegment::UpdatePlacement(const FTransform& InTransform, UTrackBuilderConnectPoint* InConnectPoint, bool InPlacementValid, AItem* PlaceableItem) {
     return false;
@@ -67,5 +67,6 @@ void ATrackBuilderSegment::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>&
 }
 
 ATrackBuilderSegment::ATrackBuilderSegment() {
+    this->NextSegmentUsable = CreateDefaultSubobject<UTrackBuilderUsable>(TEXT("NextSegmentUsable"));
 }
 

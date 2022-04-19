@@ -1,31 +1,28 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Net/OnlineBlueprintCallProxyBase.h"
-#include "BlueprintFriend.h"
+#include "BlueprintGetFriendsListDelegateDelegate.h"
 #include "GetFriendsListBlueprintCallProxy.generated.h"
 
 class UGetFriendsListBlueprintCallProxy;
 class UObject;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FGetFriendsListBlueprintCallProxyOnSuccess, const TArray<FBlueprintFriend>&, Results);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FGetFriendsListBlueprintCallProxyOnFailure, const TArray<FBlueprintFriend>&, Results);
-
 UCLASS()
 class UGetFriendsListBlueprintCallProxy : public UOnlineBlueprintCallProxyBase {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FGetFriendsListBlueprintCallProxyOnSuccess OnSuccess;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FBlueprintGetFriendsListDelegate OnSuccess;
     
-    UPROPERTY(BlueprintAssignable)
-    FGetFriendsListBlueprintCallProxyOnFailure OnFailure;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FBlueprintGetFriendsListDelegate OnFailure;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UObject* WorldContextObject;
     
+    UGetFriendsListBlueprintCallProxy();
     UFUNCTION(BlueprintCallable)
     static UGetFriendsListBlueprintCallProxy* GetFriendsList(UObject* NewWorldContextObject, const FString& ListName);
     
-    UGetFriendsListBlueprintCallProxy();
 };
 

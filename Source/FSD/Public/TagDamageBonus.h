@@ -10,7 +10,7 @@ class UTagDamageBonus : public UDamageBonusBase {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UDamageTag*> Tags;
     
 public:

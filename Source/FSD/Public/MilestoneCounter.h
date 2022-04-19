@@ -7,10 +7,10 @@ USTRUCT(BlueprintType)
 struct FMilestoneCounter {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FGuid KPIGuid;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     int32 Tier;
     
     FSD_API FMilestoneCounter();

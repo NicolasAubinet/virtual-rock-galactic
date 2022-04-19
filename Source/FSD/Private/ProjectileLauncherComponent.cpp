@@ -7,6 +7,6 @@ void UProjectileLauncherComponent::SetProjectileClass(TSubclassOf<AProjectileBas
 }
 
 UProjectileLauncherComponent::UProjectileLauncherComponent() {
-    this->projectileClass = NULL;
+    this->ProjectileClass = NULL;
 }
 

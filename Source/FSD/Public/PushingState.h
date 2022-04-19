@@ -5,12 +5,12 @@
 
 class UUseAnimationSetting;
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class FSD_API UPushingState : public UCharacterStateComponent {
     GENERATED_BODY()
 public:
 private:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UUseAnimationSetting* PushingAnimation;
     
 public:

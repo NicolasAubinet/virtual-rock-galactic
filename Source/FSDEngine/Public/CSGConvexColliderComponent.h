@@ -4,11 +4,11 @@
 #include "CSGConvexColliderProperties.h"
 #include "CSGConvexColliderComponent.generated.h"
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UCSGConvexColliderComponent : public UConvexMeshWithCachedTreeComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FCSGConvexColliderProperties Properties;
     
     UCSGConvexColliderComponent();

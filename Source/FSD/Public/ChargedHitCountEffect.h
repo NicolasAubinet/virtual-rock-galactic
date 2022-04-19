@@ -3,25 +3,25 @@
 #include "WeaponHitCountEffect.h"
 #include "ChargedHitCountEffect.generated.h"
 
-class UDamageClass;
-class UParticleSystem;
 class USoundCue;
+class UParticleSystem;
+class UDamageClass;
 
 UCLASS(EditInlineNew, MinimalAPI)
 class UChargedHitCountEffect : public UWeaponHitCountEffect {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DamagePerHit;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDamageClass* DamageClass;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UParticleSystem* DamageParticle;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundCue* DamageSound;
     
 public:

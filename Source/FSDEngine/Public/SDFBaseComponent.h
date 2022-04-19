@@ -4,11 +4,11 @@
 #include "SDFBaseProperties.h"
 #include "SDFBaseComponent.generated.h"
 
-UCLASS()
-class USDFBaseComponent : public UCSGBuilderBaseSceneComponent {
+UCLASS(meta=(BlueprintSpawnableComponent))
+class FSDENGINE_API USDFBaseComponent : public UCSGBuilderBaseSceneComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSDFBaseProperties BaseProperties;
     
     USDFBaseComponent();

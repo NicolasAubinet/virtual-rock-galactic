@@ -10,7 +10,7 @@ class UCreateComponentPerkActivation : public UFloatPerkActivation {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<UFloatPerkComponent> ComponentClass;
     
 public:

@@ -1,12 +1,19 @@
 #include "FSDGameMode.h"
 #include "Templates/SubclassOf.h"
+#include "MissionManager.h"
+#include "CritterManager.h"
+#include "PheromoneSpawnerComponent.h"
+#include "EnemySpawnManager.h"
+#include "ObjectivesManager.h"
+#include "KeepInsideWorld.h"
+#include "FormationsManagerComponent.h"
 
-class AMiningPod;
-class AFSDPlayerController;
 class AActor;
+class AMolly;
+class AMiningPod;
 class AFSDGameMode;
 class UEnemyWaveManager;
-class AMolly;
+class AFSDPlayerController;
 class UEncounterManager;
 class ABosco;
 class UDifficultyManager;
@@ -125,7 +132,14 @@ void AFSDGameMode::AboutMission() {
 
 AFSDGameMode::AFSDGameMode() {
     this->GenerationStarted = false;
+    this->PheromoneComponent = CreateDefaultSubobject<UPheromoneSpawnerComponent>(TEXT("PheromoneManager"));
+    this->EnemySpawnManager = CreateDefaultSubobject<UEnemySpawnManager>(TEXT("EnemySpawnManager"));
+    this->ObjectivesManager = CreateDefaultSubobject<UObjectivesManager>(TEXT("ObjectivesManager"));
+    this->KeepInsideWorld = CreateDefaultSubobject<UKeepInsideWorld>(TEXT("KeepInsideWorld"));
+    this->MissionManager = CreateDefaultSubobject<UMissionManager>(TEXT("MissionManager"));
     this->EncounterManagerComponent = NULL;
+    this->CritterManager = CreateDefaultSubobject<UCritterManager>(TEXT("CritterManager"));
+    this->FormationsManager = CreateDefaultSubobject<UFormationsManagerComponent>(TEXT("FormationsManager"));
     this->ContinueCountdown = 10.00f;
     this->PreventAllLatejoin = false;
     this->PreventLateJoinOnMissionStart = false;

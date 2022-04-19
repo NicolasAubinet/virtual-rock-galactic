@@ -8,16 +8,16 @@ class FSD_API UCombinedUpgrade : public UItemUpgrade {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSoftObjectPtr<UItemUpgrade>> CombinedUpgrades;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<UItemUpgrade*> LoadedUpgrades;
     
 public:
+    UCombinedUpgrade();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<UItemUpgrade*> GetUpgrades() const;
     
-    UCombinedUpgrade();
 };
 

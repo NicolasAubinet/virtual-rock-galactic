@@ -3,15 +3,13 @@
 #include "GemResourceCreator.h"
 #include "DistributedGemResourceCreator.generated.h"
 
-class UCurveFloat;
-
 UCLASS(EditInlineNew)
 class UDistributedGemResourceCreator : public UGemResourceCreator {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
-    UCurveFloat* PlacementDistanceProbabilityCurve;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float MinDistanceBetweenGems;
     
 public:
     UDistributedGemResourceCreator();

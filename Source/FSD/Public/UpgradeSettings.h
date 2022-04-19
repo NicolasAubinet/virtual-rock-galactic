@@ -1,73 +1,57 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
-#include "UpgradeCostItem.h"
 #include "Engine/DataAsset.h"
+#include "UpgradeCostItem.h"
 #include "UpgradeSettings.generated.h"
 
-class UItemUpgrade;
-class AActor;
-
-UCLASS(BlueprintType)
+UCLASS()
 class UUpgradeSettings : public UDataAsset {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
-    TArray<TSoftObjectPtr<UItemUpgrade>> UpgradesToCostRefund;
-    
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<int32> ClassAUpgradeCosts;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<int32> ClassBUpgradeCosts;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<int32> GearAUpgradeCosts;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<int32> GearBUpgradeCosts;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<int32> ArmorUpgradeCosts;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<int32> PickaxeUpgradeCosts;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<int32> ClassBoscoUpgradeCosts;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FUpgradeCostItem> ClassAResourceCosts;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FUpgradeCostItem> ClassBResourceCosts;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FUpgradeCostItem> GearAResourceCosts;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FUpgradeCostItem> GearBResourceCosts;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FUpgradeCostItem> ArmorResourceCosts;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FUpgradeCostItem> PickaxeResourceCosts;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FUpgradeCostItem> ClassBoscoResourceCosts;
     
-    UPROPERTY(EditAnywhere)
-    TArray<FUpgradeCostItem> OldClassAResourceCosts;
-    
-    UPROPERTY(EditAnywhere)
-    TArray<FUpgradeCostItem> OldClassBResourceCosts;
-    
 public:
-    UFUNCTION(BlueprintCallable)
-    static void AddUpgradesFromItems(const TArray<TSubclassOf<AActor>>& Items);
-    
     UUpgradeSettings();
 };
 

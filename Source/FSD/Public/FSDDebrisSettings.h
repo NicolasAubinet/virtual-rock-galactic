@@ -9,10 +9,10 @@ class UFSDDebrisSettings : public UDeveloperSettings {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(Config, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSoftObjectPath DefaultInfluencerDensityCurve;
     
-    UPROPERTY(Config, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSoftObjectPath DefaultInfluencerSizeCurve;
     
 public:

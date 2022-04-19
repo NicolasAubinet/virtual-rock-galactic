@@ -9,13 +9,13 @@ USTRUCT(BlueprintType)
 struct FFloatPerkEffect {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere, Instanced)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UFloatPerkActivation* PerkActivation;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText FormattedDescription;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FFloatPerkRankValue> RankValues;
     
     FSD_API FFloatPerkEffect();

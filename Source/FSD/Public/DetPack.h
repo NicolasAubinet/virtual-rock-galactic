@@ -4,12 +4,12 @@
 #include "EInputKeys.h"
 #include "DetPack.generated.h"
 
-class UProjectileMovementComponent;
-class APlayerCharacter;
-class UExplosionComponent;
 class USingleUsableComponent;
 class USimpleHealthComponent;
+class UProjectileMovementComponent;
+class UExplosionComponent;
 class ADetPackItem;
+class APlayerCharacter;
 class UHealthComponentBase;
 
 UCLASS()
@@ -17,54 +17,59 @@ class ADetPack : public AActor {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float UpgradedStaggerChance;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float UpgradedStaggerDuration;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float UpgradedFearFactor;
     
-    UPROPERTY(BlueprintReadOnly, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     float VisualDamageRadius;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float IncreasedFearRadius;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float IncreasedStaggerRadius;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UProjectileMovementComponent* Movement;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UExplosionComponent* Explosion;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USingleUsableComponent* UseComp;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USimpleHealthComponent* SimpleHealth;
     
-    UPROPERTY(Transient, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Transient, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     ADetPackItem* Detonator;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_HasExploded)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_HasExploded, meta=(AllowPrivateAccess=true))
     bool HasExploded;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_IsMoving)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_IsMoving, meta=(AllowPrivateAccess=true))
     bool IsMoving;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool ExplodesOnDeath;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool HasExtraStaggerRadius;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool HasExtraFearRadius;
     
+public:
+    ADetPack();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+protected:
     UFUNCTION(BlueprintCallable)
     void UseFearStaggerUpgrades();
     
@@ -87,8 +92,5 @@ public:
     UFUNCTION(BlueprintCallable)
     void OnDetPackDeath(UHealthComponentBase* HealthComponent);
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    ADetPack();
 };
 

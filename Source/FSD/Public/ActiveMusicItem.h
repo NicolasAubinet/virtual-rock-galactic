@@ -10,22 +10,22 @@ USTRUCT(BlueprintType)
 struct FActiveMusicItem {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     USoundBase* Sound;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float StartingTime;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float FadeDuration;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool Looping;
     
-    UPROPERTY(NotReplicated, Transient)
+    UPROPERTY(BlueprintReadWrite, NotReplicated, Transient, meta=(AllowPrivateAccess=true))
     FMusicHandle Handle;
     
-    UPROPERTY(NotReplicated, Transient)
+    UPROPERTY(BlueprintReadWrite, NotReplicated, Transient, meta=(AllowPrivateAccess=true))
     UMusicCategory* Category;
     
     FSD_API FActiveMusicItem();

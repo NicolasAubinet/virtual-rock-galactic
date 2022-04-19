@@ -9,10 +9,10 @@ USTRUCT()
 struct FCustomUsable {
     GENERATED_BODY()
 public:
-    UPROPERTY(Export)
+    UPROPERTY(Export, meta=(AllowPrivateAccess=true))
     UUsableComponentBase* Usable;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     ECustomUsableType TerminationType;
     
     FSD_API FCustomUsable();

@@ -8,56 +8,57 @@
 #include "EPickaxePartLocation.h"
 #include "IconGenerationManager.generated.h"
 
-class AIconGenerationPickaxe;
 class AIconGenerationCharacter;
-class UTextureRenderTarget2D;
+class AIconGenerationPickaxe;
+class UPickaxePart;
 class AIconGenerationWeapon;
+class UTextureRenderTarget2D;
 class UVanityItem;
 class AIconGenerationBase;
 class UIconGenerationManager;
 class UItemSkin;
 class UPlayerCharacterID;
-class UPickaxePart;
 
 UCLASS(BlueprintType)
 class UIconGenerationManager : public UObject {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     AIconGenerationCharacter* GeneratorInst;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     AIconGenerationPickaxe* PickaxeGeneratorInst;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     AIconGenerationWeapon* WeaponGeneratorInst;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FGenerateIconInfo> ItemGenerationQueue;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<EVanitySlot> VanitySlots;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UVanityItem*> HairColorHairItems;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<AIconGenerationCharacter> IconCharacter;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<AIconGenerationPickaxe> IconPickaxe;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<AIconGenerationWeapon> IconWeapon;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UTextureRenderTarget2D* LatestGeneratedTexture;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     AIconGenerationBase* ActiveIconGenerator;
     
 public:
+    UIconGenerationManager();
     UFUNCTION(BlueprintCallable)
     static void GenerateWeaponIcon_Async(UIconGenerationManager* Manager, UItemSkin* Item, bool inShowCloseUp, UPlayerCharacterID* Character, UTextureRenderTarget2D*& Icon, FLatentActionInfo LatentInfo);
     
@@ -70,6 +71,5 @@ public:
     UFUNCTION(BlueprintCallable)
     static void GeneratePickaxePartIcon_Async(UIconGenerationManager* Manager, UPickaxePart* part, EPickaxePartLocation PickaxePartLocation, UPlayerCharacterID* Character, UTextureRenderTarget2D*& Icon, FLatentActionInfo LatentInfo);
     
-    UIconGenerationManager();
 };
 

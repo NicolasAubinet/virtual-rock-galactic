@@ -5,5 +5,6 @@
 UENUM()
 enum class EBoltActionWeaponConditions : uint8 {
     WasAimedShot,
+    WasNormalShot,
 };
 

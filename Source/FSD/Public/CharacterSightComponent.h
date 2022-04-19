@@ -1,94 +1,92 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "UObject/NoExportTypes.h"
 #include "Components/ActorComponent.h"
 #include "Engine/EngineTypes.h"
 #include "ReplicatedCharacterData.h"
-#include "UObject/NoExportTypes.h"
 #include "CharacterSightComponent.generated.h"
 
-class UPawnAfflictionComponent;
+class UTemperatureComponent;
 class AActor;
 class UPrimitiveComponent;
 class APlayerCharacter;
-class UTemperatureComponent;
-class USimpleObjectInfoComponent;
 class UHealth;
 class IHealth;
+class USimpleObjectInfoComponent;
+class UPawnAfflictionComponent;
 class UTargetable;
 class ITargetable;
+class UCharacterSightSensorBase;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FCharacterSightComponentOnTargetChanged, AActor*, NewTarget, UPrimitiveComponent*, NewPrimitive);
-
-UCLASS(Blueprintable)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UCharacterSightComponent : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FCharacterSightComponentOnTargetChanged OnTargetChanged;
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FTargetChangedSignature, AActor*, NewTarget, UPrimitiveComponent*, NewPrimitive);
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FTargetChangedSignature OnTargetChanged;
     
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float TargetMaxDistance;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TEnumAsByte<ECollisionChannel> TraceChannel;
     
-    UPROPERTY(Transient)
+    UPROPERTY(Transient, meta=(AllowPrivateAccess=true))
     TArray<TWeakObjectPtr<AActor>> IgnoredActors;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     APlayerCharacter* Character;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<AActor> TargetActor;
     
-    UPROPERTY(BlueprintReadOnly, Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UPrimitiveComponent> TargetPrimitive;
     
-    UPROPERTY(BlueprintReadOnly, Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<USimpleObjectInfoComponent> TargetInfo;
     
-    UPROPERTY(BlueprintReadOnly, Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UTemperatureComponent> TargetTemperature;
     
-    UPROPERTY(BlueprintReadOnly, Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UPawnAfflictionComponent> TargetAfflictions;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TScriptInterface<IHealth> TargetHealth;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TScriptInterface<ITargetable> TargetTargetable;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float TargetTime;
     
-    UPROPERTY(Replicated, Transient)
+    UPROPERTY(meta=(AllowPrivateAccess=true))
+    TArray<TWeakObjectPtr<UCharacterSightSensorBase>> TargetSensors;
+    
+    UPROPERTY(Replicated, Transient, meta=(AllowPrivateAccess=true))
     FReplicatedCharacterData ReplicatedData;
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+public:
+    UCharacterSightComponent();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+protected:
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_UpdateTarget(AActor* NewActor, UPrimitiveComponent* NewPrimitive);
     
 public:
     UFUNCTION(BlueprintCallable)
     void RemoveIgnoreActor(AActor* InActor);
     
-protected:
-    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-    void ReceiveTargetInSightTick(float DeltaTime);
-    
-    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-    void ReceiveTargetChanged();
-    
-public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    void GetSightStartAndEnd(float InMaxDistance, FVector& OutStartLocation, FVector& OutEndLocation);
+    void GetSightStartAndEnd(float InMaxDistance, FVector& OutStartLocation, FVector& OutEndLocation) const;
     
     UFUNCTION(BlueprintCallable)
     void AddIgnoreActor(AActor* InActor);
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    UCharacterSightComponent();
 };
 

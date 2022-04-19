@@ -3,43 +3,48 @@
 #include "Objective.h"
 #include "RepairObjective.generated.h"
 
-class UDebrisPositioning;
 class AActor;
-class URepairableComponent;
 class UGemResourceData;
+class UDebrisPositioning;
+class URepairableComponent;
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class URepairObjective : public UObjective {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_RepairedObjectives)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_RepairedObjectives, meta=(AllowPrivateAccess=true))
     int32 RepairedObjectives;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere, ReplicatedUsing=OnRep_ObjectivesToRepair)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_ObjectivesToRepair, meta=(AllowPrivateAccess=true))
     int32 ObjectivesToRepair;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<AActor> RepairObjectiveClass;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UGemResourceData* RepairObjectiveResource;
     
-    UPROPERTY(EditAnywhere, Instanced)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UDebrisPositioning* Positioning;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 RepairResourcesPerActor;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float RepairResourceDistanceFromActor;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MinRepairObjectiveDistanceToLandingZone;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<AActor*> RepairedObjectivesList;
     
+public:
+    URepairObjective();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_RepairedObjectives();
     
@@ -52,9 +57,5 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void AllObjectivesRepaired();
     
-public:
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    URepairObjective();
 };
 

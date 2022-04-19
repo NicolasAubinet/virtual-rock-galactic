@@ -1,40 +1,41 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "Components/ActorComponent.h"
 #include "Engine/EngineTypes.h"
+#include "Components/ActorComponent.h"
+#include "EffectTriggeredDelegateDelegate.h"
 #include "StatusEffectTriggerComponent.generated.h"
 
-class AActor;
-class UStatusEffect;
 class UPrimitiveComponent;
+class UStatusEffect;
+class AActor;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FStatusEffectTriggerComponentOnEffectTriggered, AActor*, TargetActor, bool, entered);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FStatusEffectTriggerComponentOnActorEnterLeave, AActor*, TargetActor, bool, entered);
-
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UStatusEffectTriggerComponent : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable, BlueprintAuthorityOnly)
-    FStatusEffectTriggerComponentOnEffectTriggered OnEffectTriggered;
+    UPROPERTY(BlueprintAssignable, BlueprintAuthorityOnly, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FEffectTriggeredDelegate OnEffectTriggered;
     
-    UPROPERTY(BlueprintAssignable, BlueprintAuthorityOnly)
-    FStatusEffectTriggerComponentOnActorEnterLeave OnActorEnterLeave;
+    UPROPERTY(BlueprintAssignable, BlueprintAuthorityOnly, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FEffectTriggeredDelegate OnActorEnterLeave;
     
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSubclassOf<UStatusEffect>> StatusEffects;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSubclassOf<UStatusEffect>> LeaveTriggerEffects;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UPrimitiveComponent* collider;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool RemoveStatusEffectOnEndOverlap;
     
+public:
+    UStatusEffectTriggerComponent();
+protected:
     UFUNCTION(BlueprintCallable)
     void OnOverlapEnd(AActor* MyActor, AActor* OtherActor);
     
@@ -47,7 +48,5 @@ protected:
     UFUNCTION(BlueprintCallable)
     void OnComponentOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
     
-public:
-    UStatusEffectTriggerComponent();
 };
 

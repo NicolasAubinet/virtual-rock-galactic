@@ -9,9 +9,9 @@ UCLASS(Abstract, BlueprintType, EditInlineNew)
 class UItemUpgradeElement : public UDataAsset {
     GENERATED_BODY()
 public:
+    UItemUpgradeElement();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool ElementOf(UItemUpgrade* upg) const;
     
-    UItemUpgradeElement();
 };
 

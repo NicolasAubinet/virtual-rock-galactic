@@ -7,10 +7,10 @@ USTRUCT(BlueprintType)
 struct FMissionTypeDescription {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText InfoHeadline;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FSoftMissionStepDescription> Steps;
     
     FSD_API FMissionTypeDescription();

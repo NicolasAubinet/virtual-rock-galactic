@@ -6,7 +6,7 @@ USTRUCT()
 struct FCommunityGoalTierDataRequest {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     FString GoalID;
     
     FSD_API FCommunityGoalTierDataRequest();

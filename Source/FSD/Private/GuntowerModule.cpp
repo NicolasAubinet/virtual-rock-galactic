@@ -1,5 +1,8 @@
 #include "GuntowerModule.h"
 #include "Net/UnrealNetwork.h"
+#include "Components/StaticMeshComponent.h"
+#include "Components/SkeletalMeshComponent.h"
+#include "GunTowerHealthComponent.h"
 
 void AGuntowerModule::ShootOutArmor() {
 }
@@ -63,6 +66,11 @@ AGuntowerModule::AGuntowerModule() {
     this->deathSound = NULL;
     this->deathParticles = NULL;
     this->IntroductionAnimation = NULL;
+    this->ArmorPiece1 = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Armor1"));
+    this->ArmorPiece2 = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Armor2"));
+    this->ArmorPiece3 = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Armor3"));
+    this->ModuleMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("ModuleMesh"));
+    this->GuntowerModuleHealth = CreateDefaultSubobject<UGunTowerHealthComponent>(TEXT("ModuleHealthComponent"));
     this->OwningEvent = NULL;
     this->ChildModule = NULL;
     this->WeakpointsExposedTime = 5.00f;

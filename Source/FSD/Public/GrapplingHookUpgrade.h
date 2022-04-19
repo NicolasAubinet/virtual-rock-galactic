@@ -6,21 +6,21 @@
 #include "UpgradeValues.h"
 #include "GrapplingHookUpgrade.generated.h"
 
-class AActor;
 class AFSDPlayerState;
+class AActor;
 
 UCLASS(EditInlineNew, MinimalAPI)
 class UGrapplingHookUpgrade : public UStandardItemUpgrade {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EGrapplingHookUpgrade upgradeType;
     
 public:
+    UGrapplingHookUpgrade();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static FUpgradeValues GetUpgradedValue(AFSDPlayerState* Player, TSubclassOf<AActor> Item, EGrapplingHookUpgrade NewUpgradeType);
     
-    UGrapplingHookUpgrade();
 };
 

@@ -1,7 +1,7 @@
 #include "IconGenerationManager.h"
 
-class UIconGenerationManager;
 class UPickaxePart;
+class UIconGenerationManager;
 class UItemSkin;
 class UPlayerCharacterID;
 class UTextureRenderTarget2D;

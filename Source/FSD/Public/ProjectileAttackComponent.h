@@ -5,18 +5,19 @@
 
 class UAnimMontage;
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UProjectileAttackComponent : public UProjectileAttackBaseComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ManualyComplete;
-    
-    UFUNCTION(BlueprintCallable)
-    void AddAttackMontage(UAnimMontage* attackMontage);
     
 public:
     UProjectileAttackComponent();
+protected:
+    UFUNCTION(BlueprintCallable)
+    void AddAttackMontage(UAnimMontage* attackMontage);
+    
 };
 

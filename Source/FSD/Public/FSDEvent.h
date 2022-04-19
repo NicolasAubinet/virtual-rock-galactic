@@ -1,52 +1,56 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Engine/DataAsset.h"
-#include "ClaimableRewardView.h"
 #include "UObject/NoExportTypes.h"
+#include "FSDEventActivateChangedDelegate.h"
+#include "ClaimableRewardView.h"
 #include "FSDEvent.generated.h"
 
-class UObject;
-class UWorld;
 class UFSDEvent;
+class UObject;
+class UTexture2D;
 class ADebrisDataActor;
+class UWorld;
 class UCampaign;
 class APlayerController;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FFSDEventOnActiveChanged, const UFSDEvent*, InFsdEvent, bool, InIsActive);
 
 UCLASS(BlueprintType)
 class FSD_API UFSDEvent : public UDataAsset {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FFSDEventOnActiveChanged OnActiveChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FFSDEventActivateChanged OnActiveChanged;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FName EventName;
     
-    UPROPERTY(VisibleAnywhere)
-    FGuid SaveGameID;
+    UPROPERTY(BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    FGuid SavegameID;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool bHasClaimableRewards;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bFreeBeerEvent;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSoftClassPtr<ADebrisDataActor>> EventDebris;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSoftObjectPtr<UWorld>> SpacerigSublevels;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FClaimableRewardView ClaimableRewards;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSoftClassPtr<UCampaign>> Campaigns;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSoftObjectPtr<UTexture2D> TitleScreenOverride;
+    
 public:
+    UFSDEvent();
     UFUNCTION(BlueprintCallable)
     void MarkClaimableRewardsSeen(UObject* WorldContext);
     
@@ -61,9 +65,11 @@ public:
     UFUNCTION(BlueprintCallable)
     bool GiveRewards(APlayerController* PlayerController);
     
+    UFUNCTION(BlueprintCallable)
+    UTexture2D* GetTitleScreenOverride();
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetIsActive(UObject* WorldContext) const;
     
-    UFSDEvent();
 };
 

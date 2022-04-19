@@ -9,10 +9,10 @@ USTRUCT(BlueprintType)
 struct FDrinkableBarSlot {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FVector WorldLocation;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<ADrinkableActor> DrinkableActor;
     
     FSD_API FDrinkableBarSlot();

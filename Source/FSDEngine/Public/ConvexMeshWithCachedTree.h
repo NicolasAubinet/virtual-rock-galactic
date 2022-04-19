@@ -8,7 +8,7 @@ UCLASS(Abstract)
 class UConvexMeshWithCachedTree : public USimpleMeshWithCachedTree {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FConvexNoiseProperties Noise;
     
     UConvexMeshWithCachedTree();

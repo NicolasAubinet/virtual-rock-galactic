@@ -5,25 +5,26 @@
 #include "GameplayTagContainer.h"
 #include "StatusEffectMissionBP.generated.h"
 
-class UStatusEffect;
-class APawn;
 class UEnemyDescriptor;
+class APawn;
+class UStatusEffect;
 
 UCLASS()
 class UStatusEffectMissionBP : public URunningMissionBP {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagQuery EnemyQuery;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UStatusEffect> StatusEffect;
-    
-    UFUNCTION(BlueprintCallable)
-    void OnEnemySpawned(APawn* Pawn, UEnemyDescriptor* descriptor);
     
 public:
     UStatusEffectMissionBP();
+protected:
+    UFUNCTION(BlueprintCallable)
+    void OnEnemySpawned(APawn* Pawn, UEnemyDescriptor* descriptor);
+    
 };
 

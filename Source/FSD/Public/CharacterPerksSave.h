@@ -8,7 +8,7 @@ struct FCharacterPerksSave {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TArray<FPerkEquipEntry> CharacterPerks;
     
 public:

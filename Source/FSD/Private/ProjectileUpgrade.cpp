@@ -10,7 +10,7 @@ FUpgradeValues UProjectileUpgrade::GetUpgradedValue(TSubclassOf<AActor> Item, TS
 
 UProjectileUpgrade::UProjectileUpgrade() {
     this->upgradeType = EProjectileUpgrade::Velocity;
-    this->projectileClass = NULL;
+    this->ProjectileClass = NULL;
     this->Condition = NULL;
 }
 

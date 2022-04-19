@@ -7,7 +7,7 @@ UCLASS()
 class UEscortMissionDNA : public UMissionDNA {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 RefuelLocations;
     
     UEscortMissionDNA();

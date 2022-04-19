@@ -38,5 +38,6 @@ FGDStats::FGDStats() {
     this->MovementSpeedEnvironmentalPenaltyReduction = NULL;
     this->CarriableThrowing = NULL;
     this->HoverBootsDuration = NULL;
+    this->ExplodeOnDeath = NULL;
 }
 

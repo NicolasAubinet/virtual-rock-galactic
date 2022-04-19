@@ -1,7 +1,7 @@
 #include "PickaxeFunctionLibrary.h"
 
-class UPickaxePart;
 class UObject;
+class UPickaxePart;
 class UItemID;
 
 bool UPickaxeFunctionLibrary::RemovePickaxePartFromOwned(UObject* WorldContextObject, const UPickaxePart* part) {
@@ -10,6 +10,9 @@ bool UPickaxeFunctionLibrary::RemovePickaxePartFromOwned(UObject* WorldContextOb
 
 bool UPickaxeFunctionLibrary::IsPickaxePartEquipped(UObject* WorldContextObject, EPickaxePartLocation Location, UPickaxePart* part, UItemID* pickaxeID) {
     return false;
+}
+
+void UPickaxeFunctionLibrary::GivePickaxePart(UObject* WorldContextObject, UPickaxePart* part) {
 }
 
 TArray<UPickaxePart*> UPickaxeFunctionLibrary::GetUnlockedPickaxeParts(UObject* WorldContextObject, EPickaxePartLocation Category) {

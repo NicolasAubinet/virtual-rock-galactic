@@ -10,22 +10,23 @@ class AFSDFlyingBugController : public AFSDAIController {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UBehaviorTree* BehaviourTree;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float UpdateLosInterval;
     
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     bool SetTargetOnAlert;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool SyncTargetWithBB;
-    
-    UFUNCTION(BlueprintCallable)
-    void OnFlyingBugAlerted();
     
 public:
     AFSDFlyingBugController();
+protected:
+    UFUNCTION(BlueprintCallable)
+    void OnFlyingBugAlerted();
+    
 };
 

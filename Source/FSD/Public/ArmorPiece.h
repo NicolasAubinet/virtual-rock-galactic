@@ -1,47 +1,47 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "LoadoutItem.h"
-#include "ItemIDInterface.h"
 #include "GameFramework/Actor.h"
 #include "SaveGameIDInterface.h"
+#include "ItemIDInterface.h"
+#include "LoadoutItem.h"
 #include "ArmorPiece.generated.h"
 
-class AArmorPiece;
-class UItemID;
-class AItem;
-class UUpgradableGearComponent;
 class UPawnStat;
+class UUpgradableGearComponent;
+class UItemID;
 class ALoadoutItemProxy;
+class AArmorPiece;
+class AItem;
 
 UCLASS(Abstract)
 class AArmorPiece : public AActor, public ISaveGameIDInterface, public IItemIDInterface, public ILoadoutItem {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UUpgradableGearComponent* Upgradable;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<UPawnStat*, float> StatModifiers;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<ALoadoutItemProxy> LoadoutProxy;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UItemID* ItemID;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<AActor> WeaponPreviewClass;
     
 public:
+    AArmorPiece();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TSubclassOf<AActor> GetWeaponViewClass() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static AArmorPiece* GetArmorPieceDefaultObject(TSubclassOf<AArmorPiece> armorPieceClass);
     
-    AArmorPiece();
     
     // Fix for true pure virtual functions not being implemented
     UFUNCTION(BlueprintCallable)

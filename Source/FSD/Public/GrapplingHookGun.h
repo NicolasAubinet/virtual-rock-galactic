@@ -6,8 +6,8 @@
 #include "GraplingGunState.h"
 #include "GrapplingHookGun.generated.h"
 
-class AGrapplingHookGun;
 class UCoolDownItemAggregator;
+class AGrapplingHookGun;
 class UAnimMontage;
 
 UCLASS(Abstract)
@@ -15,42 +15,47 @@ class AGrapplingHookGun : public AAnimatedItem, public IUpgradable {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UCoolDownItemAggregator* CoolDownAggregator;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxDistance;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UAnimMontage* FPReloadAnim;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UAnimMontage* TPReloadAnim;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UAnimMontage* FPGunslingAnim;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UAnimMontage* TPGunslingAnim;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxSpeed;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxSpeedReleaseModifier;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float WindUpTime;
     
-    UPROPERTY(BlueprintReadOnly, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     bool AutoFire;
     
-    UPROPERTY(BlueprintReadWrite, ReplicatedUsing=OnRep_State)
+    UPROPERTY(BlueprintReadWrite, ReplicatedUsing=OnRep_State, meta=(AllowPrivateAccess=true))
     FGraplingGunState State;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     float GrapleStartTime;
     
+public:
+    AGrapplingHookGun();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+protected:
     UFUNCTION(BlueprintCallable)
     void StopGrapple();
     
@@ -87,9 +92,6 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static float GetCooldownDuration(TSubclassOf<AGrapplingHookGun> GrapplingHookGun);
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    AGrapplingHookGun();
     
     // Fix for true pure virtual functions not being implemented
 };

@@ -1,104 +1,111 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "ProgressSignatureDelegate.h"
 #include "UsableComponent.h"
+#include "UsedBySignatureDelegate.h"
+#include "UserCountChangedDelegateDelegate.h"
+#include "GenericUsableDelegateDelegate.h"
+#include "UsableChangedSignatureDelegate.h"
+#include "OnFailedDelegate.h"
 #include "EInputKeys.h"
 #include "SingleUsableComponent.generated.h"
 
-class UDialogDataAsset;
-class APlayerCharacter;
 class UAudioComponent;
-class UPawnStat;
 class USoundCue;
+class UDialogDataAsset;
+class UPawnStat;
 class UTexture2D;
+class APlayerCharacter;
 
-UDELEGATE(BlueprintAuthorityOnly, BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FSingleUsableComponentOnUseBegin, APlayerCharacter*, User, EInputKeys, Key);
-UDELEGATE(BlueprintAuthorityOnly, BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FSingleUsableComponentOnUsedBy, APlayerCharacter*, User, EInputKeys, Key);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSingleUsableComponentOnProgress, float, Progress);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSingleUsableComponentOnUsableChanged, bool, CanUse);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSingleUsableComponentOnUserCountChanged, int32, userCount);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FSingleUsableComponentOnFailed);
-
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class USingleUsableComponent : public UUsableComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FSingleUsableComponentOnUsedBy OnUsedBy;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FUsedBySignature OnUsedBy;
     
-    UPROPERTY(BlueprintAssignable)
-    FSingleUsableComponentOnUseBegin OnUseBegin;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FUsedBySignature OnUseBegin;
     
-    UPROPERTY(BlueprintAssignable)
-    FSingleUsableComponentOnProgress OnProgress;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FGenericUsableDelegate OnUseEnd;
     
-    UPROPERTY(BlueprintAssignable)
-    FSingleUsableComponentOnUsableChanged OnUsableChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FProgressSignature OnProgress;
     
-    UPROPERTY(BlueprintAssignable)
-    FSingleUsableComponentOnUserCountChanged OnUserCountChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FUsableChangedSignature OnUsableChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FSingleUsableComponentOnFailed OnFailed;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FUserCountChangedDelegate OnUserCountChanged;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnFailed OnFailed;
     
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundCue* AudioBeginUse;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundCue* AudioFailedUse;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundCue* AudioCompletedUse;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDialogDataAsset* BoscoLaserpointerShout;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool CoopUse;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UPawnStat* UseSpeedStat;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float CoopUseMultiplier;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere, ReplicatedUsing=OnRep_Usable)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_Usable, meta=(AllowPrivateAccess=true))
     bool Usable;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool TurnOffAfterUse;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool MultipleUse;
     
-    UPROPERTY(EditAnywhere)
-    bool CancelUseOnRestrictionChange;
-    
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bShowUsingUI;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftObjectPtr<UTexture2D> UsableIcon;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float useDuration;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float Progress;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_DesiredProgress)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_DesiredProgress, meta=(AllowPrivateAccess=true))
     float DesiredProgress;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_UserCount)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_UserCount, meta=(AllowPrivateAccess=true))
     int32 userCount;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UAudioComponent* AudioBeginUseInstance;
     
 public:
+    USingleUsableComponent();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintCallable)
     void Use(APlayerCharacter* User, EInputKeys Key, float DeltaTime);
     
+protected:
+    UFUNCTION(BlueprintCallable)
+    void SetProgress(float Value);
+    
+public:
     UFUNCTION(BlueprintCallable)
     void SetCanUse(bool CanUse);
     
@@ -120,9 +127,5 @@ protected:
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
     void All_PlayFailedAudio();
     
-public:
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    USingleUsableComponent();
 };
 

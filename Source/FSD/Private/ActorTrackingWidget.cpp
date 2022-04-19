@@ -1,8 +1,8 @@
 #include "ActorTrackingWidget.h"
 #include "Templates/SubclassOf.h"
 
-class AActor;
 class USceneComponent;
+class AActor;
 class APlayerController;
 class UActorTrackingWidget;
 

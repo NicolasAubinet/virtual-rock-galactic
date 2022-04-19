@@ -1,43 +1,39 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "Engine/DataAsset.h"
-#include "SaveGameIDInterface.h"
-#include "UObject/NoExportTypes.h"
+#include "SavableDataAsset.h"
 #include "PlayerCharacterID.generated.h"
 
-class UPlayerCharacterData;
 class APlayerCharacter;
+class UPlayerCharacterData;
 
-UCLASS(BlueprintType)
-class FSD_API UPlayerCharacterID : public UDataAsset, public ISaveGameIDInterface {
+UCLASS()
+class FSD_API UPlayerCharacterID : public USavableDataAsset {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
-    FGuid SaveGameID;
-    
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FName AssetName;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<APlayerCharacter> Character;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FString AnalyticsID;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UPlayerCharacterData* CharacterData;
     
 public:
+    UPlayerCharacterID();
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UPlayerCharacterData* GetCharacterData() const;
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TSubclassOf<APlayerCharacter> GetCharacterClass() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     APlayerCharacter* GetCharacter() const;
     
-    UPlayerCharacterID();
-    
-    // Fix for true pure virtual functions not being implemented
 };
 

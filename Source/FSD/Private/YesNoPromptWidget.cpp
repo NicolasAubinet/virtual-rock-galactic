@@ -1,6 +1,6 @@
 #include "YesNoPromptWidget.h"
 
-void UYesNoPromptWidget::Show(FText Title, FText Message, const FYesNoPromptWidgetOnYesNoClicked& OnYesNoClicked) {
+void UYesNoPromptWidget::Show(FText Title, FText Message, const UYesNoPromptWidget::FOnYesNoClickedDelegate& OnYesNoClicked) {
 }
 
 

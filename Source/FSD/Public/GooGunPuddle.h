@@ -4,42 +4,45 @@
 #include "GameFramework/Actor.h"
 #include "Engine/EngineTypes.h"
 #include "GooPuddleStatusEffectTrigger.h"
+#include "DamageData.h"
 #include "GooGunPuddle.generated.h"
 
+class USoundBase;
 class USphereComponent;
 class USimpleHealthComponent;
 class UPrimitiveComponent;
-class USoundBase;
 class UStatusEffect;
-class UDamageClass;
 
 UCLASS()
 class AGooGunPuddle : public AActor {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USphereComponent* SphereTrigger;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USimpleHealthComponent* SimpleHealth;
     
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     USoundBase* SpawnSound;
     
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     TArray<FGooPuddleStatusEffectTrigger> StatusEffectTriggers;
     
-    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     TArray<TSubclassOf<UStatusEffect>> InflictedStatusEffects;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_ActiveStatusEffectTriggersMask)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_ActiveStatusEffectTriggersMask, meta=(AllowPrivateAccess=true))
     int32 ActiveStatusEffectTriggersMask;
     
-    UPROPERTY(BlueprintReadOnly, Replicated)
+    UPROPERTY(BlueprintReadWrite, Replicated, meta=(AllowPrivateAccess=true))
     float LifeTime;
     
 public:
+    AGooGunPuddle();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintCallable)
     void SetStatusEffect(TSubclassOf<UStatusEffect> NewStatusEffect);
     
@@ -57,14 +60,11 @@ protected:
     void OnPuddleBeginOverLap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
     
     UFUNCTION(BlueprintCallable)
-    void OnHit(float Damage, UDamageClass* DamageClass, AActor* DamageCauser, bool anyHealthLost);
+    void OnHit(float Damage, const FDamageData& DamageData, bool anyHealthLost);
     
 public:
     UFUNCTION(BlueprintCallable)
     void AddStatusEffect(TSubclassOf<UStatusEffect> NewStatusEffect);
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    AGooGunPuddle();
 };
 

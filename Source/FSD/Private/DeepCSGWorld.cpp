@@ -1,14 +1,17 @@
 #include "DeepCSGWorld.h"
+#include "Templates/SubclassOf.h"
+#include "AsyncPathRequests.h"
 
+class USTLMeshCarver;
 class UPrimitiveComponent;
-class UTerrainMaterial;
-class UStaticMesh;
 class ADebrisDataActor;
+class UStaticMesh;
+class UTerrainMaterial;
+class UDebrisBase;
 class AActor;
 class ADeepCSGWorld;
-class USTLMeshCarver;
-class UDebrisBase;
 class UStaticMeshCarver;
+class ACSGBuilder;
 
 void ADeepCSGWorld::UnRegisterScannerComponent(UPrimitiveComponent* Component) {
 }
@@ -34,6 +37,9 @@ void ADeepCSGWorld::TerrainOp_CarveSTLMesh_Implementation(const FCarveWithSTLMes
 void ADeepCSGWorld::TerrainOp_CarveSplineSegment_Implementation(const FSplineSegmentCarveOperationData& Data) {
 }
 
+void ADeepCSGWorld::TerrainOp_CarveCSG_Implementation(const FCSGBuildOperationData& Data) {
+}
+
 void ADeepCSGWorld::TerrainOp_CarveCollider_Implementation(const FCarveWithColliderOperationData& Data) {
 }
 
@@ -41,6 +47,9 @@ void ADeepCSGWorld::TerrainMaterialDataLoaded() {
 }
 
 void ADeepCSGWorld::SetVisibleToScanner(const FVector& Center, const FVector& range) {
+}
+
+void ADeepCSGWorld::SetRockMaterialForTest(UTerrainMaterial* Material) {
 }
 
 void ADeepCSGWorld::SelectDebrisSettings() {
@@ -142,6 +151,9 @@ void ADeepCSGWorld::CarveWithMesh_Wait(ADeepCSGWorld* CSGWorld, UStaticMesh* Sta
 void ADeepCSGWorld::CarveWithMesh(UStaticMesh* StaticMesh, UTerrainMaterial* Material, ECarveFilterType CarveFilter, FVector Pos, FQuat Orientation, FVector Scale, EPreciousMaterialOptions Precious) {
 }
 
+void ADeepCSGWorld::CarveWithCSGBuild(TSubclassOf<ACSGBuilder> CSGModel, const FTransform& Transform) {
+}
+
 float ADeepCSGWorld::CalcApproximateTerrainDensity(FVector Pos, float Radius) {
     return 0.0f;
 }
@@ -171,5 +183,6 @@ ADeepCSGWorld::ADeepCSGWorld() {
     this->DebrisActorInstance = NULL;
     this->DebrisActorIndex = 0;
     this->ProceduralSetup = NULL;
+    this->AsyncPathRequests = CreateDefaultSubobject<UAsyncPathRequests>(TEXT("AsyncPathRequests"));
 }
 

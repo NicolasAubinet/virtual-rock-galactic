@@ -8,7 +8,7 @@ USTRUCT(BlueprintType)
 struct FGDMilestones {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UMilestoneAsset*> Milestones;
     
     FSD_API FGDMilestones();

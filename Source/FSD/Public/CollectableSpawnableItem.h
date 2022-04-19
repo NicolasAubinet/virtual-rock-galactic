@@ -8,10 +8,10 @@ USTRUCT(BlueprintType)
 struct FCollectableSpawnableItem {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UCollectableResourceData* Resource;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     int32 Amount;
     
     FSD_API FCollectableSpawnableItem();

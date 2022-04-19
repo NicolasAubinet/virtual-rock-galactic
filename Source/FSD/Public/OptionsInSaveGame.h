@@ -6,10 +6,10 @@ USTRUCT(BlueprintType)
 struct FOptionsInSaveGame {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool SaveGameOptionsValid;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     int32 ScreenMode;
     
     FSD_API FOptionsInSaveGame();

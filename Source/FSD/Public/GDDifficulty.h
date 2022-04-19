@@ -8,7 +8,7 @@ USTRUCT(BlueprintType)
 struct FGDDifficulty {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UDifficultySetting*> DifficultySettings;
     
     FSD_API FGDDifficulty();

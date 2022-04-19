@@ -1,4 +1,5 @@
 #include "DeepDiveManager.h"
+#include "FSDEventsHandler.h"
 
 class UDeepDive;
 class UGeneratedMission;
@@ -10,14 +11,6 @@ void UDeepDiveManager::ReInitialize() {
 }
 
 void UDeepDiveManager::MarkGivenRewards() {
-}
-
-bool UDeepDiveManager::IsEliteDeepDive(UGeneratedMission* mission) const {
-    return false;
-}
-
-UDeepDive* UDeepDiveManager::GetDeepDiveFromMission(UGeneratedMission* mission) const {
-    return NULL;
 }
 
 UGeneratedMission* UDeepDiveManager::GetCurrentSingleMission() const {
@@ -49,14 +42,14 @@ bool UDeepDiveManager::AreAllSelectedClassesQualified() const {
 }
 
 UDeepDiveManager::UDeepDiveManager() {
+    this->LockSeed = false;
+    this->EventsHandler = CreateDefaultSubobject<UFSDEventsHandler>(TEXT("EventsHandler"));
     this->ActiveNormalDeepDive = NULL;
     this->ActiveHardDeepDive = NULL;
     this->ActiveDeepDive = NULL;
     this->CurrentMission = NULL;
     this->currentDepth = 0.00f;
-    this->NumFailedRequests = 0;
     this->BackendDataValid = 0;
     this->BackendSeed = -1;
-    this->LockSeed = false;
 }
 

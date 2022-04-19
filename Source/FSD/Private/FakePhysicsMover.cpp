@@ -1,5 +1,6 @@
 #include "FakePhysicsMover.h"
 #include "Net/UnrealNetwork.h"
+#include "Components/SceneComponent.h"
 
 class UFakeMoverSettings;
 
@@ -23,6 +24,7 @@ void AFakePhysicsMover::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Ou
 }
 
 AFakePhysicsMover::AFakePhysicsMover() {
+    this->Root = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
     this->MoveSettings = NULL;
     this->SyncTime = 0.00f;
 }

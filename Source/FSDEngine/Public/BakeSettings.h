@@ -1,24 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "UObject/NoExportTypes.h"
+#include "BakeSetting.h"
 #include "BakeSettings.generated.h"
 
 USTRUCT(BlueprintType)
-struct FBakeSettings {
+struct FSDENGINE_API FBakeSettings {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
-    TMap<FName, bool> Bools;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FBakeSetting> Pairs;
     
-    UPROPERTY(EditAnywhere)
-    TMap<FName, int32> Ints;
-    
-    UPROPERTY(EditAnywhere)
-    TMap<FName, float> Floats;
-    
-    UPROPERTY(EditAnywhere)
-    TMap<FName, FVector> Vectors;
-    
-    FSDENGINE_API FBakeSettings();
+    FBakeSettings();
 };
 

@@ -1,5 +1,11 @@
 #include "Tether.h"
 #include "Net/UnrealNetwork.h"
+#include "Components/SkeletalMeshComponent.h"
+#include "InstantUsable.h"
+#include "NiagaraComponent.h"
+#include "Components/SphereComponent.h"
+#include "CarriableComponent.h"
+#include "DamageComponent.h"
 
 void ATether::SetIsOnGround(bool NewIsOnGround) {
 }
@@ -17,6 +23,13 @@ void ATether::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeP
 }
 
 ATether::ATether() {
+    this->BaseMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("BaseMesh"));
+    this->UsableComponent = CreateDefaultSubobject<UInstantUsable>(TEXT("Usable"));
+    this->Carry = CreateDefaultSubobject<UCarriableComponent>(TEXT("CarryComponent"));
+    this->UseTrigger = CreateDefaultSubobject<USphereComponent>(TEXT("UseTrigger"));
+    this->TetherBeam = CreateDefaultSubobject<UNiagaraComponent>(TEXT("TetherBeam"));
+    this->PysicalCollision = CreateDefaultSubobject<USphereComponent>(TEXT("PhysCollision"));
+    this->ExplosionDamage = CreateDefaultSubobject<UDamageComponent>(TEXT("ExplosionDamage"));
     this->ExplosionParticle = NULL;
     this->ExplosionSound = NULL;
     this->IsOnGround = false;

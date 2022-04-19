@@ -5,12 +5,12 @@
 
 class AActor;
 
-UCLASS(Abstract)
+UCLASS(Abstract, meta=(BlueprintSpawnableComponent))
 class UKillNearbyCreaturePerkComponent : public UFloatPerkComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<AActor> EnemyClass;
     
 public:

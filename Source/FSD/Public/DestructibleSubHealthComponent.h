@@ -3,38 +3,41 @@
 #include "SubHealthComponent.h"
 #include "DestructibleSubHealthComponent.generated.h"
 
-class USceneComponent;
 class UDestructibleSubHealthComponent;
+class USceneComponent;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FDestructibleSubHealthComponentOnDestroyed, UDestructibleSubHealthComponent*, subHealth);
-
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UDestructibleSubHealthComponent : public USubHealthComponent {
     GENERATED_BODY()
 public:
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSubHealthDestroyed, UDestructibleSubHealthComponent*, subHealth);
+    
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxHealth;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float RadialDamageResistance;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool AllowInderectDamage;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool PassthroughDamageWhenDisabled;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_Damage)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_Damage, meta=(AllowPrivateAccess=true))
     float Damage;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USceneComponent* ArmorComponent;
     
-    UPROPERTY(BlueprintAssignable)
-    FDestructibleSubHealthComponentOnDestroyed OnDestroyed;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FSubHealthDestroyed OnDestroyed;
     
 public:
+    UDestructibleSubHealthComponent();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintCallable)
     void ResetHealth();
     
@@ -42,9 +45,5 @@ protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_Damage(float oldDamage);
     
-public:
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    UDestructibleSubHealthComponent();
 };
 

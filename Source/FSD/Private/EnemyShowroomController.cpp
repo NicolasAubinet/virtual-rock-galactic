@@ -1,8 +1,8 @@
 #include "EnemyShowroomController.h"
 
 class UAnimSequenceBase;
-class AEnemyShowroomItem;
 class UObject;
+class AEnemyShowroomItem;
 class UEnemyShowroomController;
 
 

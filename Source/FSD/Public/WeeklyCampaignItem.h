@@ -6,13 +6,13 @@ USTRUCT(BlueprintType)
 struct FWeeklyCampaignItem {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     int32 LastCompletedWeek;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     int32 LastStartedWeek;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     int32 RewardedProgress;
     
     FSD_API FWeeklyCampaignItem();

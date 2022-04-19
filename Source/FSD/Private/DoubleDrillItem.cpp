@@ -1,8 +1,12 @@
 #include "DoubleDrillItem.h"
 #include "Net/UnrealNetwork.h"
+#include "FSDAudioComponent.h"
+#include "FirstPersonParticleSystemComponent.h"
+#include "DoubleDrillAggregator.h"
+#include "DamageComponent.h"
 
-class UFSDPhysicalMaterial;
 class AActor;
+class UFSDPhysicalMaterial;
 
 void ADoubleDrillItem::Server_StopMining_Implementation() {
 }
@@ -28,7 +32,7 @@ bool ADoubleDrillItem::Server_DigBlock_Validate(FVector_NetQuantize Start, FVect
     return true;
 }
 
-void ADoubleDrillItem::OnTargetKilled(AActor* Target, UFSDPhysicalMaterial* PhysMat) {
+void ADoubleDrillItem::OnTargetKilled(AActor* Target, UFSDPhysicalMaterial* PhysMat, bool wasDirectHit) {
 }
 
 
@@ -63,6 +67,11 @@ void ADoubleDrillItem::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 }
 
 ADoubleDrillItem::ADoubleDrillItem() {
+    this->FP_Left_DrillParticles = CreateDefaultSubobject<UFirstPersonParticleSystemComponent>(TEXT("FP_Left_DrillParticles"));
+    this->FP_Right_DrillParticles = CreateDefaultSubobject<UFirstPersonParticleSystemComponent>(TEXT("FP_Right_DrillParticles"));
+    this->DamageComponent = CreateDefaultSubobject<UDamageComponent>(TEXT("Damage"));
+    this->AudioComponent = CreateDefaultSubobject<UFSDAudioComponent>(TEXT("Audio"));
+    this->Aggregator = CreateDefaultSubobject<UDoubleDrillAggregator>(TEXT("Aggregator"));
     this->FPMineMontage = NULL;
     this->TPMineMontage = NULL;
     this->FPOverheat = NULL;

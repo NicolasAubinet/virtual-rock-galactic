@@ -1,60 +1,61 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Engine/DataAsset.h"
 #include "DamageTypeDescription.h"
+#include "UObject/NoExportTypes.h"
+#include "Engine/DataAsset.h"
+#include "MissionStepDescription.h"
 #include "MissionTypeDescription.h"
 #include "BiomeFeatures.h"
-#include "MissionStepDescription.h"
-#include "UObject/NoExportTypes.h"
 #include "EDamageType.h"
 #include "MinersManual.generated.h"
 
 class UBiome;
-class UObject;
-class ULoreScreenMasterWidget;
 class UEnemyMinersManualData;
+class ULoreScreenMasterWidget;
 class UMissionTemplate;
+class UObject;
 class UMinersManualData;
 
 UCLASS(BlueprintType)
 class UMinersManual : public UDataAsset {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSoftClassPtr<ULoreScreenMasterWidget>> BasicsPages;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<int32, FText> BasicsPageHeaders;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSoftClassPtr<ULoreScreenMasterWidget>> CombatPages;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSoftClassPtr<ULoreScreenMasterWidget>> ExtraMissionPages;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSoftClassPtr<ULoreScreenMasterWidget>> ResourcePages;
     
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UEnemyMinersManualData*> Enemies;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSoftObjectPtr<UBiome>> BiomeReferences;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSoftObjectPtr<UMissionTemplate>> MissionReferences;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FDamageTypeDescription> DamageTypeInfo;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<int32, FMissionTypeDescription> MissionDescriptions;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<int32, FBiomeFeatures> BiomeFeatureDescriptions;
     
 public:
+    UMinersManual();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsObjectInMinersManual(UObject* WorldContext, UObject* Object);
     
@@ -97,6 +98,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<FDamageTypeDescription> GetAllDamageTypeDescriptions();
     
-    UMinersManual();
 };
 

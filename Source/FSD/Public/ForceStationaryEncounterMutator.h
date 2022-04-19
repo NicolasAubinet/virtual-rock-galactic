@@ -10,10 +10,10 @@ UCLASS(EditInlineNew)
 class UForceStationaryEncounterMutator : public UMutator {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UEnemyGroupDescriptor* EnemyGroup;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FIRandRange GroupSize;
     
     UForceStationaryEncounterMutator();

@@ -1,31 +1,28 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Net/OnlineBlueprintCallProxyBase.h"
-#include "FindSessionsCallbackProxy.h"
+#include "BlueprintFindFriendSessionsResultDelegateDelegate.h"
 #include "FindFriendSessionsBlueprintCallProxy.generated.h"
 
 class UObject;
 class UFindFriendSessionsBlueprintCallProxy;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFindFriendSessionsBlueprintCallProxyOnSuccess, const TArray<FBlueprintSessionResult>&, Results);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFindFriendSessionsBlueprintCallProxyOnFailure, const TArray<FBlueprintSessionResult>&, Results);
-
 UCLASS()
 class UFindFriendSessionsBlueprintCallProxy : public UOnlineBlueprintCallProxyBase {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FFindFriendSessionsBlueprintCallProxyOnSuccess OnSuccess;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FBlueprintFindFriendSessionsResultDelegate OnSuccess;
     
-    UPROPERTY(BlueprintAssignable)
-    FFindFriendSessionsBlueprintCallProxyOnFailure OnFailure;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FBlueprintFindFriendSessionsResultDelegate OnFailure;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UObject* WorldContextObject;
     
+    UFindFriendSessionsBlueprintCallProxy();
     UFUNCTION(BlueprintCallable)
     static UFindFriendSessionsBlueprintCallProxy* FindFriendSessions(UObject* NewWorldContextObject, const FString& FriendId);
     
-    UFindFriendSessionsBlueprintCallProxy();
 };
 

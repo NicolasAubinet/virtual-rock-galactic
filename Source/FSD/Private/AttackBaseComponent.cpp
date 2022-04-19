@@ -11,6 +11,14 @@ UAttackBaseComponent* UAttackBaseComponent::ReplaceAttackComponent(UAttackBaseCo
 
 
 
+float UAttackBaseComponent::GetMinRange() const {
+    return 0.0f;
+}
+
+float UAttackBaseComponent::GetMaxRange() const {
+    return 0.0f;
+}
+
 void UAttackBaseComponent::CompleteAttack(bool success) {
 }
 

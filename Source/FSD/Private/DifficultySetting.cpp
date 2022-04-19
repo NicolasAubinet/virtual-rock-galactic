@@ -21,6 +21,7 @@ UDifficultySetting::UDifficultySetting() {
     this->EnemyDamageResistance.AddDefaulted(4);
     this->SmallEnemyDamageResistance.AddDefaulted(4);
     this->EnemyDamageModifier.AddDefaulted(4);
+    this->EnemyToEnemyDamageModifier = 1.00f;
     this->EnemyCountModifier.AddDefaulted(4);
     this->BossDifficultyScaler = 1.00f;
     this->PointExtractionScaler = 1.00f;
@@ -34,7 +35,6 @@ UDifficultySetting::UDifficultySetting() {
     this->ProjectileSpeedModifier = 1.00f;
     this->DifficultyGroup = 0;
     this->DifficultyGroupIndex = 0;
-    this->UseSharedHealthPool = false;
     this->HeathRegenerationMax = 0.25f;
     this->ReviveHealthRatio = 0.40f;
     this->EliteChanceModifier = 0.00f;

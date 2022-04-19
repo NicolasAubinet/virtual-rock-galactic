@@ -13,9 +13,9 @@ bool UControllerIconSettings::FindControllerKeyIcon(FKey Key, FActionIconMapping
 }
 
 UControllerIconSettings::UControllerIconSettings() {
-    this->Xbox_KeyIcons.AddDefaulted(19);
-    this->Playstation_KeyIcons.AddDefaulted(19);
-    this->Playstation5_KeyIcons.AddDefaulted(19);
+    this->Xbox_KeyIcons.AddDefaulted(20);
+    this->Playstation_KeyIcons.AddDefaulted(20);
+    this->Playstation5_KeyIcons.AddDefaulted(20);
     this->MouseKeyboard_KeyIcons.AddDefaulted(58);
 }
 

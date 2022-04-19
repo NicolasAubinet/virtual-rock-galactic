@@ -7,7 +7,7 @@ UCLASS()
 class ASpawnTrigger : public AActor {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FName Message;
     
     ASpawnTrigger();

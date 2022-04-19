@@ -1,55 +1,56 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "Engine/DataAsset.h"
 #include "EHUDVisibilityPresets.h"
 #include "EHUDVisibilityGroups.h"
-#include "Engine/DataAsset.h"
-#include "HUDVisibilityRegisteredWidget.h"
 #include "EHUDVisibilityMode.h"
+#include "HUDVisibilityRegisteredWidget.h"
 #include "Components/SlateWrapperTypes.h"
 #include "HUDVisibilityGroup.generated.h"
 
 class UHUDVisibilityGroup;
 class UWidget;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FHUDVisibilityGroupOnModeChanged, UHUDVisibilityGroup*, Group, EHUDVisibilityMode, Mode);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FHUDVisibilityGroupOnVisibilityChanged, UHUDVisibilityGroup*, Group, bool, IsVisible);
-
 UCLASS(BlueprintType)
 class FSD_API UHUDVisibilityGroup : public UDataAsset {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FHUDVisibilityGroupOnModeChanged OnModeChanged;
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FVisibilityDelegate, UHUDVisibilityGroup*, Group, bool, IsVisible);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FModeDelegate, UHUDVisibilityGroup*, Group, EHUDVisibilityMode, Mode);
     
-    UPROPERTY(BlueprintAssignable)
-    FHUDVisibilityGroupOnVisibilityChanged OnVisibilityChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FModeDelegate OnModeChanged;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FVisibilityDelegate OnVisibilityChanged;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EHUDVisibilityGroups GroupID;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText Title;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool AllowDynamicMode;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool AllowHiddenMode;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool bDynamicallyVisible;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FHUDVisibilityRegisteredWidget> RegisteredWidgets;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EHUDVisibilityMode RecommendedMode;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EHUDVisibilityMode MinimalMode;
     
 public:
+    UHUDVisibilityGroup();
     UFUNCTION(BlueprintCallable)
     void SetModeFromPreset(EHUDVisibilityPresets Preset);
     
@@ -93,7 +94,5 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<EHUDVisibilityMode> GetAllowedModes() const;
     
-public:
-    UHUDVisibilityGroup();
 };
 

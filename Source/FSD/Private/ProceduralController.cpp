@@ -18,10 +18,10 @@ void UProceduralController::SendRequestedCarverData(EDebrisItemPass pass) {
 
 
 
-void UProceduralController::Client_SendTunnelData_Implementation(const TArray<FTunnelNode>& Tunnels) {
+void UProceduralController::Client_SendTunnelData_Implementation(const TArray<FTunnelNode>& tunnels) {
 }
 
-void UProceduralController::Client_SendRoomData_Implementation(int32 Seed, const TArray<FRoomNode>& Rooms, const TArray<FPathObstacle>& obstacles) {
+void UProceduralController::Client_SendRoomData_Implementation(int32 Seed, const TArray<FRoomNode>& Rooms, const TArray<FPathObstacle>& Obstacles) {
 }
 
 void UProceduralController::Client_RecieveCarverSizes_Implementation(int32 pass, int32 carverCount) {

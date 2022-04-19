@@ -4,35 +4,35 @@
 #include "Engine/DataAsset.h"
 #include "VictoryPoseSettings.generated.h"
 
-class UActorComponent;
-class UTexture2D;
 class UVictoryPose;
+class UTexture2D;
+class UActorComponent;
 class AActor;
 
 UCLASS(BlueprintType)
 class UVictoryPoseSettings : public UDataAsset {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UTexture2D* GenericVictoryPoseIcon;
     
 protected:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<UVictoryPose*> LoadedVictoryPoses;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UVictoryPose* RandomVictoryPose;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSubclassOf<UActorComponent>> ModReferencesHack;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSubclassOf<AActor>> ModProxyHack;
     
 public:
+    UVictoryPoseSettings();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<UVictoryPose*> GetVictoryPoses() const;
     
-    UVictoryPoseSettings();
 };
 

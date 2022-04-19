@@ -1,8 +1,10 @@
 #include "Molly.h"
 #include "Net/UnrealNetwork.h"
+#include "ResourceBank.h"
+#include "OutlineComponent.h"
 
-class UDialogDataAsset;
 class APlayerCharacter;
+class UDialogDataAsset;
 
 void AMolly::SetOpenForDeposit(bool Open) {
 }
@@ -26,5 +28,7 @@ void AMolly::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimePr
 }
 
 AMolly::AMolly() {
+    this->ResourceBank = CreateDefaultSubobject<UResourceBank>(TEXT("ResourceBank"));
+    this->OutlineComponent = CreateDefaultSubobject<UOutlineComponent>(TEXT("OutlineComponent"));
 }
 

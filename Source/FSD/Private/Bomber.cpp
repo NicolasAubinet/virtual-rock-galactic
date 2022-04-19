@@ -1,5 +1,7 @@
 #include "Bomber.h"
 #include "Net/UnrealNetwork.h"
+#include "Particles/ParticleSystemComponent.h"
+#include "Components/AudioComponent.h"
 
 class UPrimitiveComponent;
 class AActor;
@@ -47,6 +49,9 @@ void ABomber::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeP
 }
 
 ABomber::ABomber() {
+    this->GooSoundComponent = CreateDefaultSubobject<UAudioComponent>(TEXT("GooAudioComponent"));
+    this->AcidEmitterLeft = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("GooEmitterLeft"));
+    this->AcidEmitterRight = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("GooEmitterRight"));
     this->AcidProjectile = NULL;
     this->deathParticles = NULL;
     this->deathSound = NULL;

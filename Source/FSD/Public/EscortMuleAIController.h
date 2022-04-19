@@ -1,9 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "UObject/NoExportTypes.h"
 #include "FSDAIController.h"
 #include "UObject/NoExportTypes.h"
 #include "AsyncPathRequestsInterface.h"
+#include "UObject/NoExportTypes.h"
 #include "EscortMuleAIController.generated.h"
 
 class UEscortObjective;
@@ -13,31 +13,32 @@ class AEscortMuleAIController : public AFSDAIController, public IAsyncPathReques
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TArray<FVector> CurrentPath;
     
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TArray<FVector> GaragePath;
     
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     int32 PathIndex;
     
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     int32 CurrentRoom;
     
-    UPROPERTY(BlueprintReadWrite, Export)
+    UPROPERTY(BlueprintReadWrite, Export, meta=(AllowPrivateAccess=true))
     UEscortObjective* EscortObj;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     int32 TunnelStartIndex;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     int32 TunnelEndIndex;
     
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FRandomStream RandomStream;
     
 public:
+    AEscortMuleAIController();
     UFUNCTION(BlueprintCallable)
     void SetDozerNextPathSegment();
     
@@ -55,7 +56,6 @@ public:
     UFUNCTION(BlueprintCallable)
     void FindDozerPath(FVector StartPosition);
     
-    AEscortMuleAIController();
     
     // Fix for true pure virtual functions not being implemented
 };

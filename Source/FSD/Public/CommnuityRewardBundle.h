@@ -11,13 +11,13 @@ class UCommnuityRewardBundle : public UDataAsset {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FCommunityReward> Rewards;
     
 public:
+    UCommnuityRewardBundle();
     UFUNCTION(BlueprintCallable)
     void AwardRewards(UObject* WorldContext);
     
-    UCommnuityRewardBundle();
 };
 

@@ -1,46 +1,60 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "UObject/NoExportTypes.h"
 #include "Subsystems/GameInstanceSubsystem.h"
+#include "BackendNotificationEvent.h"
+#include "FSDEventActivateChangedDelegate.h"
+#include "UObject/NoExportTypes.h"
 #include "FSDEventManager.generated.h"
 
 class UFSDEvent;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFSDEventManagerOnFSDEventsRefresh);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FFSDEventManagerOnEventActiveChanged, const UFSDEvent*, InFsdEvent, bool, InIsActive);
 
 UCLASS(BlueprintType)
 class UFSDEventManager : public UGameInstanceSubsystem {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FFSDEventManagerOnFSDEventsRefresh OnFSDEventsRefresh;
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFSDEventsRefreshDelegate);
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDEventManagerOnEventActiveChanged OnEventActiveChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FFSDEventsRefreshDelegate OnFSDEventsRefresh;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FFSDEventActivateChanged OnEventActiveChanged;
     
 protected:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TSet<FName> PendingActiveEvents;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TSet<FName> ActiveEvents;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     int32 NumFailedRequests;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool BackendDataValid;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FDateTime LastRequestTime;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float NextCheckTime;
     
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    FDateTime SeasonExpirationTime;
+    
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    bool SeasonExpirationTimeValid;
+    
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    bool BackendNotificationEventValid;
+    
 public:
+    UFSDEventManager();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsEventActive(const UFSDEvent* FSDEvent) const;
+    
+    UFUNCTION(BlueprintCallable)
+    bool GetBackendNotificationEvent(FBackendNotificationEvent& Notification);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<UFSDEvent*> GetActiveEventHandlers() const;
@@ -48,6 +62,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool FSDEventsReady() const;
     
-    UFSDEventManager();
 };
 

@@ -8,7 +8,7 @@ UCLASS(BlueprintType)
 class USDFRandomDisable : public USDFSingleChildBase {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSDFRandomDisableProperties Properties;
     
     USDFRandomDisable();

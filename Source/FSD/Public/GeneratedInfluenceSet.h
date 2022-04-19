@@ -9,13 +9,13 @@ USTRUCT(BlueprintType)
 struct FGeneratedInfluenceSet {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UObject* CaveInfluencer;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     int32 NetworkID;
     
-    UPROPERTY(Transient)
+    UPROPERTY(Transient, meta=(AllowPrivateAccess=true))
     TArray<FCaveInfluence> CaveInfluences;
     
     FSD_API FGeneratedInfluenceSet();

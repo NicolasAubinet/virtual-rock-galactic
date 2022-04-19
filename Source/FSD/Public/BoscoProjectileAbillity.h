@@ -10,8 +10,8 @@ UCLASS()
 class UBoscoProjectileAbillity : public UBoscoAbillity {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
-    TSubclassOf<AProjectile> projectileClass;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<AProjectile> ProjectileClass;
     
     UBoscoProjectileAbillity();
 };

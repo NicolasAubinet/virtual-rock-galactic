@@ -10,7 +10,7 @@ void ARadialFireModule::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Ou
 }
 
 ARadialFireModule::ARadialFireModule() {
-    this->projectileClass = NULL;
+    this->ProjectileClass = NULL;
     this->RotationSpeedTurret = 0.00f;
     this->DelayBetweenShots = 0.00f;
     this->IsAttacking = false;

@@ -1,29 +1,29 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Components/ActorComponent.h"
 #include "UObject/NoExportTypes.h"
+#include "Components/ActorComponent.h"
 #include "HugeExplosionComponent.generated.h"
 
 class UParticleSystem;
 
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UHugeExplosionComponent : public UActorComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UParticleSystem* ExplosionEffect;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ExplosionSpeed;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ExplosionSize;
     
 public:
+    UHugeExplosionComponent();
     UFUNCTION(BlueprintCallable)
     void TriggerExplosion(FVector Location);
     
-    UHugeExplosionComponent();
 };
 

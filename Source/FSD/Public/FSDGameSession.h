@@ -9,7 +9,7 @@ class AFSDGameSession : public AGameSession {
     GENERATED_BODY()
 public:
 private:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FUniqueNetIdRepl> BannedPlayers;
     
 public:

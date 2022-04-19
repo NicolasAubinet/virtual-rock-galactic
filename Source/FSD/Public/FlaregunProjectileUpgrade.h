@@ -14,16 +14,16 @@ class UFlaregunProjectileUpgrade : public UStandardItemUpgrade {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EFlaregunProjectileUpgrades upgradeType;
     
-    UPROPERTY(EditAnywhere)
-    TSubclassOf<AActor> projectileClass;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<AActor> ProjectileClass;
     
 public:
+    UFlaregunProjectileUpgrade();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static FUpgradeValues GetUpgradedValue(TSubclassOf<AActor> Item, TSubclassOf<AActor> upgradedItem, AFSDPlayerState* Player, EFlaregunProjectileUpgrades NewUpgradeType);
     
-    UFlaregunProjectileUpgrade();
 };
 

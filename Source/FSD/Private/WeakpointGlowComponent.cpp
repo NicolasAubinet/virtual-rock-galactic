@@ -1,19 +1,19 @@
 #include "WeakpointGlowComponent.h"
 
-class UPrimitiveComponent;
-class UCurveFloat;
+class USkeletalMeshComponent;
 class UHealthComponentBase;
-class UFSDPhysicalMaterial;
+class UCurveFloat;
 class UMeshComponent;
+class UFSDPhysicalMaterial;
 
 bool UWeakpointGlowComponent::StopLoopingGlow(int32 aGlowID, bool aFade) {
     return false;
 }
 
-void UWeakpointGlowComponent::ShowBodypartHit(float Amount, float BaseAmount, UPrimitiveComponent* Component, UFSDPhysicalMaterial* PhysMat, const FName& BoneName) {
+void UWeakpointGlowComponent::ShowBodypartHit(float Amount, float BaseAmount, const FDamageData& DamageData) {
 }
 
-void UWeakpointGlowComponent::SetUpWeakPointGlowOnMeshByBone(UMeshComponent*& Mesh, int32 MaterialIndex, FName Bone, UHealthComponentBase* HealthComponent) {
+void UWeakpointGlowComponent::SetUpWeakPointGlowOnMeshByBone(USkeletalMeshComponent*& Mesh, int32 MaterialIndex, FName Bone, UHealthComponentBase* HealthComponent) {
 }
 
 int32 UWeakpointGlowComponent::SetUpWeakPointGlowOnMesh(UMeshComponent* Mesh, int32 MaterialIndex, UFSDPhysicalMaterial* PhysicalMaterial, UHealthComponentBase* HealthComponent) {
@@ -29,11 +29,12 @@ void UWeakpointGlowComponent::EnableWeakpointRegistration(bool Enabled) {
 void UWeakpointGlowComponent::All_ShowWeakPointHit_Implementation(uint8 Channel) {
 }
 
-void UWeakpointGlowComponent::AddWeakpointGlow(bool loopIndefinitely, float loopTime, UCurveFloat* GrowCurve, UCurveFloat* FadeCurve, int32 UniqueId, int32 Channel) {
+void UWeakpointGlowComponent::AddWeakpointGlow(bool loopIndefinitely, float LoopTime, UCurveFloat* GrowCurve, UCurveFloat* FadeCurve, int32 UniqueId, int32 Channel) {
 }
 
 UWeakpointGlowComponent::UWeakpointGlowComponent() {
     this->EmissiveParam = TEXT("Dynamic Emissive Multiplier");
+    this->CurveMultiplier = 1.00f;
     this->WeakPointMaterial = NULL;
     this->AddFirstChannelAutomatically = true;
     this->ReplaceMatIndex = 0;

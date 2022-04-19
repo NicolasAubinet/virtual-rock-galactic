@@ -10,16 +10,16 @@ class USpaceRigBarMenuItem : public UFSDUserWidget {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDrinkableDataAsset* Drink;
     
 public:
+    USpaceRigBarMenuItem();
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void Unselect();
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void Select();
     
-    USpaceRigBarMenuItem();
 };
 

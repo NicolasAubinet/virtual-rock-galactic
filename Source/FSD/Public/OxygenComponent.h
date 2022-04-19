@@ -1,55 +1,57 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
+#include "OxygenTriggerDelegateDelegate.h"
 #include "Components/ActorComponent.h"
+#include "OxygenDelegateDelegate.h"
+#include "OxygenActiveDelegateDelegate.h"
 #include "OxygenCallback.h"
 #include "OxygenComponent.generated.h"
 
 class UStatusEffect;
 class UHealthComponentBase;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOxygenComponentOnOxygenChanged, int32, oxygenLevel);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOxygenComponentOnOxygenReplenishingEvent, bool, IsActive);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_DELEGATE(FOxygenComponentOxygenCallback);
-
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UOxygenComponent : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FOxygenComponentOnOxygenChanged OnOxygenChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOxygenDelegate OnOxygenChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FOxygenComponentOnOxygenReplenishingEvent OnOxygenReplenishingEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOxygenActiveDelegate OnOxygenReplenishingEvent;
     
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float OxygenGivenOnRevive;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float CurrentOxygen;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float OxygenReplinishmentRate;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_NetworkedOxygen)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_NetworkedOxygen, meta=(AllowPrivateAccess=true))
     int32 NetworkedOxygen;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_IsReplenishingOxygen)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_IsReplenishingOxygen, meta=(AllowPrivateAccess=true))
     bool IsReplenishingOxygen;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float OxygenDepletionPersecond;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FOxygenCallback> Callbacks;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UStatusEffect> NoOxygenStatusEffect;
     
 public:
+    UOxygenComponent();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintCallable)
-    void RegisterOxygenEvent(FOxygenComponentOxygenCallback OxygenCallback, float oxygenLevel, bool triggerOnOxygenLoss);
+    void RegisterOxygenEvent(FOxygenTriggerDelegate OxygenCallback, float oxygenLevel, bool triggerOnOxygenLoss);
     
 protected:
     UFUNCTION(BlueprintCallable)
@@ -64,9 +66,5 @@ protected:
     UFUNCTION(BlueprintCallable)
     void OnDeath(UHealthComponentBase* HealthComponent);
     
-public:
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    UOxygenComponent();
 };
 

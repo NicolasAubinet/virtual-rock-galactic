@@ -7,10 +7,10 @@ USTRUCT(BlueprintType)
 struct FPerkClaimEntry {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FGuid PerkID;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     int32 currentRank;
     
     FSD_API FPerkClaimEntry();

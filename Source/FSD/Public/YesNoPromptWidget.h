@@ -5,26 +5,26 @@
 
 class UResourceData;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_DELEGATE_OneParam(FYesNoPromptWidgetOnClickedCallback, bool, Yes);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_DELEGATE_OneParam(FYesNoPromptWidgetOnYesNoClicked, bool, Yes);
-
 UCLASS(EditInlineNew)
 class UYesNoPromptWidget : public UWindowWidget {
     GENERATED_BODY()
 public:
+    DECLARE_DYNAMIC_DELEGATE_OneParam(FOnYesNoClickedDelegate, bool, Yes);
+    
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bDestroyOnClick;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bCloseAllWindows;
     
-    UPROPERTY(Transient)
-    FYesNoPromptWidgetOnClickedCallback OnClickedCallback;
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    FOnYesNoClickedDelegate OnClickedCallback;
     
 public:
+    UYesNoPromptWidget();
     UFUNCTION(BlueprintCallable)
-    void Show(FText Title, FText Message, const FYesNoPromptWidgetOnYesNoClicked& OnYesNoClicked);
+    void Show(FText Title, FText Message, const UYesNoPromptWidget::FOnYesNoClickedDelegate& OnYesNoClicked);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void SetMappedResources(const TMap<UResourceData*, int32>& Resources);
@@ -39,7 +39,5 @@ protected:
     UFUNCTION(BlueprintCallable)
     void Clicked(bool YesClicked);
     
-public:
-    UYesNoPromptWidget();
 };
 

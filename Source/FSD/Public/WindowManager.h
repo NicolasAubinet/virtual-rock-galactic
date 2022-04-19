@@ -2,6 +2,7 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "Components/ActorComponent.h"
+#include "WindowManagerDelegateDelegate.h"
 #include "Components/SlateWrapperTypes.h"
 #include "WindowManager.generated.h"
 
@@ -9,36 +10,34 @@ class USoundCue;
 class UWindowWidget;
 class UUserWidget;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FWindowManagerOnFirstWindowOpened);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FWindowManagerOnLastWindowClosed);
-
-UCLASS(BlueprintType)
-class UWindowManager : public UActorComponent {
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
+class FSD_API UWindowManager : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FWindowManagerOnFirstWindowOpened OnFirstWindowOpened;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FWindowManagerDelegate OnFirstWindowOpened;
     
-    UPROPERTY(BlueprintAssignable)
-    FWindowManagerOnLastWindowClosed OnLastWindowClosed;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FWindowManagerDelegate OnLastWindowClosed;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundCue* AudioWindowOpen;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     TArray<UWindowWidget*> WindowStack;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     TMap<TSubclassOf<UWindowWidget>, UWindowWidget*> WindowList;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(Export, Transient, meta=(AllowPrivateAccess=true))
     TMap<TSubclassOf<UUserWidget>, TWeakObjectPtr<UUserWidget>> WidgetSingletonCache;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool ResolutionDownscaleActive;
     
 public:
+    UWindowManager();
     UFUNCTION(BlueprintCallable)
     void SetSingletonWidgetVisibility(TSubclassOf<UUserWidget> WidgetClass, ESlateVisibility Visibility);
     
@@ -83,6 +82,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool AnyWindowsOpen() const;
     
-    UWindowManager();
 };
 

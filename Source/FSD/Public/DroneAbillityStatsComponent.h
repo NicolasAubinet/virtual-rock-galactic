@@ -3,12 +3,12 @@
 #include "Components/ActorComponent.h"
 #include "DroneAbillityStatsComponent.generated.h"
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UDroneAbillityStatsComponent : public UActorComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool UseOwnArmorDamageMultiplier;
     
 public:

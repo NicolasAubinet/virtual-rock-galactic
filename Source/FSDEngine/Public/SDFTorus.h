@@ -8,7 +8,7 @@ UCLASS()
 class FSDENGINE_API USDFTorus : public USDFBaseWithTransform {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSDFTorusProperties Properties;
     
     USDFTorus();

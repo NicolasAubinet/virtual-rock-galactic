@@ -14,17 +14,18 @@ class AMagazine : public AActor, public ISkinnable {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundCue* ImpactGroundSound;
     
+public:
+    AMagazine();
+protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnItemSkinned(USkinEffect* Skin);
     
     UFUNCTION(BlueprintCallable)
     void ActorWasHit(AActor* SelfActor, AActor* OtherActor, FVector NormalImpulse, const FHitResult& Hit);
     
-public:
-    AMagazine();
     
     // Fix for true pure virtual functions not being implemented
 };

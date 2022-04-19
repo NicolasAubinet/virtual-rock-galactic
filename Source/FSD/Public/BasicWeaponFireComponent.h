@@ -3,10 +3,11 @@
 #include "WeaponFireComponent.h"
 #include "BasicWeaponFireComponent.generated.h"
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UBasicWeaponFireComponent : public UWeaponFireComponent {
     GENERATED_BODY()
 public:
+    UBasicWeaponFireComponent();
 protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_FireWeapon();
@@ -17,7 +18,5 @@ protected:
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
     void All_WeaponFired();
     
-public:
-    UBasicWeaponFireComponent();
 };
 

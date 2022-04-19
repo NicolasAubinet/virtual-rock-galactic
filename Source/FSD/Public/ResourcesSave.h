@@ -9,11 +9,11 @@ USTRUCT(BlueprintType)
 struct FResourcesSave {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TMap<FGuid, float> OwnedResources;
     
 private:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TMap<UResourceData*, float> Resources;
     
 public:

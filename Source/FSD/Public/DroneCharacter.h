@@ -3,22 +3,22 @@
 #include "DeepPathfinderCharacter.h"
 #include "DroneCharacter.generated.h"
 
-class USimpleObjectInfoComponent;
 class UOutlineComponent;
 class UHealthComponent;
+class USimpleObjectInfoComponent;
 
 UCLASS(Abstract)
 class ADroneCharacter : public ADeepPathfinderCharacter {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UHealthComponent* HealthComponent;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UOutlineComponent* OutlineComponent;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USimpleObjectInfoComponent* ObjectInfo;
     
 public:

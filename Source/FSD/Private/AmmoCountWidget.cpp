@@ -20,5 +20,7 @@ UAmmoCountWidget::UAmmoCountWidget() : UUserWidget(FObjectInitializer::Get()) {
     this->Character = NULL;
     this->Item = NULL;
     this->Aggregator = NULL;
+    this->ShowClipAndTotalAsOne = false;
+    this->CountThreshold = -1;
 }
 

@@ -12,16 +12,18 @@ class UMicroMissileLauncherAnimInstance : public UAnimInstance, public ICopyBone
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     AMicroMissileLauncher* Weapon;
-    
-    UFUNCTION(BlueprintCallable)
-    void OnMontageEndedInternal(UAnimMontage* Montage, bool interrupted);
     
 public:
     UMicroMissileLauncherAnimInstance();
+protected:
+    UFUNCTION(BlueprintCallable)
+    void OnMontageEndedInternal(UAnimMontage* Montage, bool interrupted);
+    
     
     // Fix for true pure virtual functions not being implemented
+public:
     UFUNCTION(BlueprintCallable)
     void CopyBoneVisibilityCompleted(int32 BoneIndex) override PURE_VIRTUAL(CopyBoneVisibilityCompleted,);
     

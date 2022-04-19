@@ -8,10 +8,10 @@ USTRUCT(BlueprintType)
 struct FEnemyDebris {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float InfluenceRange;
     
-    UPROPERTY(EditAnywhere, Export)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     TArray<UDebrisBase*> Debris;
     
     FSD_API FEnemyDebris();

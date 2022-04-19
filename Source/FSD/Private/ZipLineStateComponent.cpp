@@ -1,9 +1,6 @@
 #include "ZipLineStateComponent.h"
 #include "Net/UnrealNetwork.h"
 
-class UDamageClass;
-class AActor;
-
 void UZipLineStateComponent::ServerSetSpeedBoostActivated_Implementation(bool InBoostActivated) {
 }
 bool UZipLineStateComponent::ServerSetSpeedBoostActivated_Validate(bool InBoostActivated) {
@@ -33,7 +30,7 @@ bool UZipLineStateComponent::ServerChangeDirection_Validate() {
 void UZipLineStateComponent::OnRep_ZipLine() {
 }
 
-void UZipLineStateComponent::OnPlayerHit(float Damage, UDamageClass* DamageClass, AActor* DamageCauser, bool anyHealthLost) {
+void UZipLineStateComponent::OnPlayerHit(float Damage, const FDamageData& DamageData, bool anyHealthLost) {
 }
 
 bool UZipLineStateComponent::GetSpeedBoostActivated() const {
@@ -53,6 +50,7 @@ bool UZipLineStateComponent::All_SpeedBoostChanged_Validate(bool bActive) {
 void UZipLineStateComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
     Super::GetLifetimeReplicatedProps(OutLifetimeProps);
     
+    DOREPLIFETIME(UZipLineStateComponent, ZipLineProjectile);
     DOREPLIFETIME(UZipLineStateComponent, ZipLine);
 }
 
@@ -81,6 +79,7 @@ UZipLineStateComponent::UZipLineStateComponent() {
     this->AudioOnSpeedBoostActivated = NULL;
     this->ShoutStartUsing = NULL;
     this->ShoutSpeedBoostActivated = NULL;
+    this->ZipLineProjectile = NULL;
     this->DamageBeforeFalling = 25.00f;
     this->friendlyFireModifier = 0.50f;
     this->DamageResetTime = 2.00f;

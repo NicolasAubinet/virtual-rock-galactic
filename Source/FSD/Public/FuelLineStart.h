@@ -3,39 +3,44 @@
 #include "GameFramework/Actor.h"
 #include "FuelLineStart.generated.h"
 
-class ATrackBuilderSegment;
 class UOutlineComponent;
+class UTrackBuilderUsable;
+class UStaticMeshComponent;
 class AFuelLineStart;
 class USimpleObjectInfoComponent;
-class UStaticMeshComponent;
 class UFuelLineStartUsable;
-class UTrackBuilderUsable;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFuelLineStartOnFuelLineConnected, AFuelLineStart*, InFuelLineStart);
+class ATrackBuilderSegment;
 
 UCLASS(Abstract)
 class FSD_API AFuelLineStart : public AActor {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FFuelLineStartOnFuelLineConnected OnFuelLineConnected;
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFuelLineStartDelegate, AFuelLineStart*, InFuelLineStart);
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FFuelLineStartDelegate OnFuelLineConnected;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UStaticMeshComponent* StaticMesh;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UOutlineComponent* OutlineComponent;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USimpleObjectInfoComponent* ObjectInfoComponent;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UFuelLineStartUsable* UsableStartFuelLine;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_FuelLineConnected)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_FuelLineConnected, meta=(AllowPrivateAccess=true))
     bool bFuelLineConnected;
     
+public:
+    AFuelLineStart();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ReceiveFuelLineConnected();
     
@@ -45,9 +50,5 @@ protected:
     UFUNCTION(BlueprintCallable)
     void CallbackNextSegmentChanged(UTrackBuilderUsable* InUsable, ATrackBuilderSegment* InSegment);
     
-public:
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    AFuelLineStart();
 };
 

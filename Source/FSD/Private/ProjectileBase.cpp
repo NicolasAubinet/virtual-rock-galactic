@@ -1,9 +1,10 @@
 #include "ProjectileBase.h"
 #include "Net/UnrealNetwork.h"
+#include "Components/SphereComponent.h"
 
 class UTerrainMaterial;
-class UPrimitiveComponent;
 class UDamageComponent;
+class UPrimitiveComponent;
 class AProjectileBase;
 class AActor;
 
@@ -96,10 +97,11 @@ AProjectileBase::AProjectileBase() {
     this->DoOnImpact2 = false;
     this->DoOnImpact3 = false;
     this->DoOnSpawnVar = false;
+    this->GravityMultiplier = 1.00f;
     this->IsDorment = false;
+    this->CollisionComponent = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComponent"));
     this->LifeSpan = 60.00f;
     this->VelocityMultiplier = 1.00f;
-    this->GravityMultiplier = 1.00f;
     this->AffectedByDifficultySpeedModifier = false;
     this->SetInitialSpeedToMaxSpeed = false;
     this->AutoDisableCollisionOnImpact = true;

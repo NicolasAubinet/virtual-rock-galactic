@@ -7,7 +7,7 @@ UCLASS()
 class UBTDecorator_AttackInRange : public UBTDecorator_BlackboardBase {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FName AttackName;
     
     UBTDecorator_AttackInRange();

@@ -7,10 +7,10 @@ USTRUCT(BlueprintType)
 struct FDrinkSave {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TSet<FGuid> UnlockedDrinks;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool HasUnlockedSpecial;
     
     FSD_API FDrinkSave();

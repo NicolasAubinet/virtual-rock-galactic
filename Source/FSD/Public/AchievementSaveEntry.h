@@ -7,13 +7,13 @@ USTRUCT(BlueprintType)
 struct FAchievementSaveEntry {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FGuid AchievementSaveID;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     float HighestSavedProgress;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     float CurrentProgress;
     
     FSD_API FAchievementSaveEntry();

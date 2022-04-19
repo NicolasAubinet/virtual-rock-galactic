@@ -2,29 +2,29 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "StandardItemUpgrade.h"
-#include "UpgradeValues.h"
 #include "EZiplineGunUpgrades.h"
+#include "UpgradeValues.h"
 #include "ZiplineGunUpgrade.generated.h"
 
-class AActor;
 class AZipLineProjectile;
 class AFSDPlayerState;
+class AActor;
 
 UCLASS(EditInlineNew, MinimalAPI)
 class UZiplineGunUpgrade : public UStandardItemUpgrade {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EZiplineGunUpgrades upgradeType;
     
-    UPROPERTY(EditAnywhere)
-    TSubclassOf<AZipLineProjectile> projectileClass;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<AZipLineProjectile> ProjectileClass;
     
 public:
+    UZiplineGunUpgrade();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static FUpgradeValues GetUpgradedValue(AFSDPlayerState* Player, TSubclassOf<AActor> Item, EZiplineGunUpgrades NewUpgradeType);
     
-    UZiplineGunUpgrade();
 };
 

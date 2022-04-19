@@ -1,43 +1,43 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
+#include "GameplayTagContainer.h"
 #include "Engine/DataAsset.h"
-#include "RandFloatInterval.h"
 #include "RandRange.h"
 #include "EliteEnemyEntry.h"
-#include "GameplayTagContainer.h"
+#include "RandFloatInterval.h"
 #include "EnemySettings.generated.h"
 
-class UDamageComponent;
 class UEnemyDescriptor;
 class UEnemyID;
+class UDamageComponent;
 
 UCLASS()
 class UEnemySettings : public UDataAsset {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UEnemyDescriptor*> EnemiesAllowedInWaves;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FRandRange EnemyWaveRange;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TMap<UEnemyID*, UEnemyDescriptor*> EnemyDescriptor;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagQuery EliteAllowQuery;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<UEnemyDescriptor*, FEliteEnemyEntry> HeroEnemies;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FRandFloatInterval HeroEnemySpawn;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 EliteRequiredCampaignProgress;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSubclassOf<UDamageComponent>> ExplodingEnemiesDamageComponents;
     
     UEnemySettings();

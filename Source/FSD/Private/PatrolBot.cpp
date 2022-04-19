@@ -1,9 +1,20 @@
 #include "PatrolBot.h"
 #include "Net/UnrealNetwork.h"
+#include "HackingUsableComponent.h"
+#include "Perception/PawnSensingComponent.h"
+#include "Components/SphereComponent.h"
+#include "Particles/ParticleSystemComponent.h"
+#include "EnemyComponent.h"
+#include "DamageComponent.h"
+#include "PawnAlertComponent.h"
+#include "PlayerImpactCooldownComponent.h"
+#include "AvoidCeilingComponent.h"
+#include "Components/AudioComponent.h"
+#include "ProjectileAttackComponent.h"
 
+class AActor;
 class UHealthComponentBase;
 class UPrimitiveComponent;
-class AActor;
 
 void APatrolBot::SetIsPatrolling(bool patroling) {
 }
@@ -81,7 +92,23 @@ void APatrolBot::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifeti
 }
 
 APatrolBot::APatrolBot() {
+    this->HackingUsable = CreateDefaultSubobject<UHackingUsableComponent>(TEXT("HackingUsable"));
+    this->PawnSensing = CreateDefaultSubobject<UPawnSensingComponent>(TEXT("PawnSensing"));
+    this->CollisionSphere = CreateDefaultSubobject<USphereComponent>(TEXT("CollisionSphere"));
     this->NearTargetSphere = NULL;
+    this->LaserBeam = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("LaserBeamIndicator"));
+    this->TearingGroundParticles = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("TearingGroundParticles"));
+    this->EnemyComponent = CreateDefaultSubobject<UEnemyComponent>(TEXT("EnemyComponent"));
+    this->Damage = CreateDefaultSubobject<UDamageComponent>(TEXT("Damage"));
+    this->BumpDamage = CreateDefaultSubobject<UDamageComponent>(TEXT("BumpDamage"));
+    this->Alert = CreateDefaultSubobject<UPawnAlertComponent>(TEXT("Alert"));
+    this->ImpactCooldown = CreateDefaultSubobject<UPlayerImpactCooldownComponent>(TEXT("ImpactCooldown"));
+    this->CeilingAvoidance = CreateDefaultSubobject<UAvoidCeilingComponent>(TEXT("CeilingAvoidance"));
+    this->RollingAudio = CreateDefaultSubobject<UAudioComponent>(TEXT("RollingAudioComponent"));
+    this->FlyingAudio = CreateDefaultSubobject<UAudioComponent>(TEXT("FlyingAudioComponent"));
+    this->RollingRangedAttack = CreateDefaultSubobject<UProjectileAttackComponent>(TEXT("RangedAttack"));
+    this->FlyingRangedAttack = CreateDefaultSubobject<UProjectileAttackComponent>(TEXT("FlyingRangedAttack"));
+    this->MissileAttack = CreateDefaultSubobject<UProjectileAttackComponent>(TEXT("MissileAttack"));
     this->MaxMotionSoundVelThresholdFlying = 400.00f;
     this->MaxMotionSoundVelThreshold = 400.00f;
     this->MaxTurningMotionSoundVelThreshold = 400.00f;

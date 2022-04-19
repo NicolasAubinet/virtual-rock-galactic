@@ -1,4 +1,7 @@
 #include "DeepPathfinderCharacter.h"
+#include "DeepPathfinderMovement.h"
+#include "Components/SkeletalMeshComponent.h"
+#include "DeepPatherFinderCharacterAfflictionComponent.h"
 
 bool ADeepPathfinderCharacter::TryJoinFormation() {
     return false;
@@ -15,6 +18,9 @@ void ADeepPathfinderCharacter::LeaveFormation() {
 }
 
 ADeepPathfinderCharacter::ADeepPathfinderCharacter() {
+    this->PathfinderMovement = CreateDefaultSubobject<UDeepPathfinderMovement>(TEXT("PathfinderMovement"));
+    this->Mesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Mesh"));
+    this->Affliction = CreateDefaultSubobject<UDeepPatherFinderCharacterAfflictionComponent>(TEXT("Affliction"));
     this->AnimationOffset = 0.00f;
     this->CanPlayerStandOn = false;
     this->UseDormancy = false;

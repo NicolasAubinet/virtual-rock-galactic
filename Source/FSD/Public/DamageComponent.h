@@ -1,118 +1,128 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "Components/ActorComponent.h"
+#include "OnNoTargetHitDelegate.h"
 #include "GameplayTagContainer.h"
+#include "Components/ActorComponent.h"
+#include "OnEnemyDamagedDelegateDelegate.h"
+#include "OnEnemyKilledDelegateDelegate.h"
+#include "OnAsyncAoE_CompleteDelegate.h"
 #include "EDamageComponentType.h"
-#include "Engine/EngineTypes.h"
+#include "EArmorDamageType.h"
 #include "UObject/NoExportTypes.h"
+#include "Engine/EngineTypes.h"
 #include "DamageComponent.generated.h"
 
-class UDamageTag;
-class AActor;
-class UHealthComponentBase;
-class UFSDPhysicalMaterial;
-class UPrimitiveComponent;
+class UDamageImpulse;
 class UDamageClass;
 class UDamageBonusBase;
+class AActor;
 class UDamageModifier;
+class UDamageTag;
 class UDamageComponent;
+class UPrimitiveComponent;
+class UFSDPhysicalMaterial;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FDamageComponentOnTargetKilledEvent, AActor*, Target, UFSDPhysicalMaterial*, PhysicalMaterial);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_FourParams(FDamageComponentOnTargetDamagedEvent, UHealthComponentBase*, Health, float, Amount, UPrimitiveComponent*, Component, UFSDPhysicalMaterial*, PhysicalMaterial);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDamageComponentOnNoTargetHitEvent);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDamageComponentOnHitDeadTarget);
-
-UCLASS(BlueprintType, EditInlineNew)
+UCLASS(BlueprintType, EditInlineNew, meta=(BlueprintSpawnableComponent))
 class UDamageComponent : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable, BlueprintAuthorityOnly)
-    FDamageComponentOnTargetKilledEvent OnTargetKilledEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintAuthorityOnly, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnEnemyKilledDelegate OnTargetKilledEvent;
     
-    UPROPERTY(BlueprintAssignable, BlueprintAuthorityOnly)
-    FDamageComponentOnTargetDamagedEvent OnTargetDamagedEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintAuthorityOnly, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnEnemyDamagedDelegate OnTargetDamagedEvent;
     
-    UPROPERTY(BlueprintAssignable, BlueprintAuthorityOnly)
-    FDamageComponentOnNoTargetHitEvent OnNoTargetHitEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintAuthorityOnly, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnNoTargetHit OnNoTargetHitEvent;
     
-    UPROPERTY(BlueprintAssignable, BlueprintAuthorityOnly)
-    FDamageComponentOnHitDeadTarget OnHitDeadTarget;
+    UPROPERTY(BlueprintAssignable, BlueprintAuthorityOnly, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnNoTargetHit OnHitDeadTarget;
+    
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnAsyncAoE_Complete OnAsyncAoE_Complete;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EDamageComponentType DamageComponentType;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UDamageImpulse* DamageImpulse;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float Damage;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ArmorDamageMultiplier;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ShattersArmor;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDamageClass* DamageClass;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    EArmorDamageType ArmorDamageType;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float WeakpointDamageMultiplier;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float FrozenDamageBonusScale;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float friendlyFireModifier;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float SelfFriendlyFireMultiplier;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTag FriendlyFireTag;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool StaggerOnlyOnWeakpointHit;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float StaggerChance;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float StaggerDuration;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float FearFactor;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere, Export)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     TArray<UDamageBonusBase*> DamageBonuses;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere, Export)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     TArray<UDamageModifier*> DamageModifiers;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
-    TArray<UDamageTag*> DamageTags;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<UDamageTag*> damageTags;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool UseAreaOfEffect;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float RadialDamage;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool NoFriendlyFireFromRadial;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDamageClass* RadialDamageClass;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MinDamagePct;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DamageRadius;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxDamageRadius;
     
 public:
+    UDamageComponent();
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void PreTestDamageConditions();
     
@@ -125,8 +135,11 @@ public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, BlueprintPure=false)
     void DamageTargetFromHit(const FHitResult& HitResult) const;
     
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
+    void DamageTarget_CDO(const FVector& Location, AActor* Owner, AActor* hitActor);
+    
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, BlueprintPure=false)
-    void DamageTarget(AActor* Target, const FVector& Location, UPrimitiveComponent* HitComponent, UFSDPhysicalMaterial* PhysMat) const;
+    void DamageTarget(AActor* Target, const FVector& Location, UPrimitiveComponent* HitComponent, UFSDPhysicalMaterial* PhysMat, int32 BoneIndex) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure=false)
     void DamageArmor_Server(AActor* Target, UPrimitiveComponent* collider, int32 BoneIndex, const FVector& impactLocation) const;
@@ -137,6 +150,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool ArmorSupportsLocalOnlyCall(AActor* Target) const;
     
-    UDamageComponent();
 };
 

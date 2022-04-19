@@ -8,10 +8,10 @@ USTRUCT(BlueprintType)
 struct FCSGAddMaterialLayersProperties {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FCSGLayers> Layers;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FBinaryTerrainMaterialCombiner Inner;
     
     FSDENGINE_API FCSGAddMaterialLayersProperties();

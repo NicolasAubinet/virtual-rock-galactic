@@ -6,31 +6,35 @@
 
 class UActorTrackingWidget;
 
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UActorTrackingComponent : public USceneComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UActorTrackingWidget> WidgetType;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool VisibleOnHoldTAB;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool VisibleFromStart;
     
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool bIconHidden;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UActorTrackingWidget> Widget;
     
 public:
+    UActorTrackingComponent();
     UFUNCTION(BlueprintCallable)
     void ToggleIcon(bool Visible);
     
 protected:
+    UFUNCTION(BlueprintCallable)
+    void ShowAlwaysOn();
+    
     UFUNCTION(BlueprintCallable)
     void OnHoldTAB(bool IsDown);
     
@@ -38,6 +42,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsIconVisible() const;
     
-    UActorTrackingComponent();
 };
 

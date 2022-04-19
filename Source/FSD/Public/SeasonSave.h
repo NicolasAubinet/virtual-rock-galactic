@@ -9,7 +9,7 @@ struct FSeasonSave {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TMap<FGuid, FSeasonSaveEntry> Seasons;
     
 public:

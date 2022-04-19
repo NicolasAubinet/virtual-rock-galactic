@@ -3,44 +3,45 @@
 #include "EnemyPawn.h"
 #include "ParasiteEnemy.generated.h"
 
-class USkeletalMeshComponent;
-class UOutlineComponent;
+class UParticleSystem;
 class USceneComponent;
+class USoundBase;
+class UOutlineComponent;
+class USkeletalMeshComponent;
 class UHealthComponentBase;
 class UStaticMeshComponent;
-class UParticleSystem;
-class USoundBase;
 
 UCLASS()
 class AParasiteEnemy : public AEnemyPawn {
     GENERATED_BODY()
 public:
-    UPROPERTY(Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USceneComponent* Root;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* Mesh;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UStaticMeshComponent* Tentacles1;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UStaticMeshComponent* Tentacles2;
     
-    UPROPERTY(Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UOutlineComponent* outline;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     UParticleSystem* deathParticles;
     
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     USoundBase* deathSound;
-    
-    UFUNCTION(BlueprintCallable)
-    void OnSelfDeath(UHealthComponentBase* aHealthComponent);
     
 public:
     AParasiteEnemy();
+protected:
+    UFUNCTION(BlueprintCallable)
+    void OnSelfDeath(UHealthComponentBase* aHealthComponent);
+    
 };
 

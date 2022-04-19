@@ -4,6 +4,7 @@ FSonyInputSettings::FSonyInputSettings() {
     this->MotionControlEnabled = false;
     this->MotionControlXSensitivity = 0.00f;
     this->MotionControlYSensitivity = 0.00f;
+    this->MotionControlPrecisionMode = false;
     this->MotionControlSalute = false;
     this->MotionControlFlight = false;
     this->MotionXMapping = ESonyControllerMotionMapping::Yaw;

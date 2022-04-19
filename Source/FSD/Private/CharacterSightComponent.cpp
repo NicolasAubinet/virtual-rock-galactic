@@ -6,16 +6,11 @@ class UPrimitiveComponent;
 
 void UCharacterSightComponent::Server_UpdateTarget_Implementation(AActor* NewActor, UPrimitiveComponent* NewPrimitive) {
 }
-bool UCharacterSightComponent::Server_UpdateTarget_Validate(AActor* NewActor, UPrimitiveComponent* NewPrimitive) {
-    return true;
-}
 
 void UCharacterSightComponent::RemoveIgnoreActor(AActor* InActor) {
 }
 
-
-
-void UCharacterSightComponent::GetSightStartAndEnd(float InMaxDistance, FVector& OutStartLocation, FVector& OutEndLocation) {
+void UCharacterSightComponent::GetSightStartAndEnd(float InMaxDistance, FVector& OutStartLocation, FVector& OutEndLocation) const {
 }
 
 void UCharacterSightComponent::AddIgnoreActor(AActor* InActor) {

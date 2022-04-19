@@ -1,39 +1,39 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "IRandRange.h"
 #include "DebrisActorComponent.h"
 #include "DebrisItemActorItem.h"
 #include "EDebrisItemPass.h"
-#include "IRandRange.h"
 #include "DebrisItemComponent.generated.h"
 
 class UDebrisPositioning;
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UDebrisItemComponent : public UDebrisActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere, Instanced)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UDebrisPositioning* Debris;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FDebrisItemActorItem> Actors;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EDebrisItemPass ItemPass;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float InfluenceRange;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MinDistanceToImportantLocations;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool UseAmount;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FIRandRange Amount;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 AmountSearchMultiplier;
     
     UDebrisItemComponent();

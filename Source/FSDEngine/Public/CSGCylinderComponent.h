@@ -1,14 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "CSGCylinderProperties.h"
 #include "ConvexMeshWithCachedTreeComponent.h"
+#include "CSGCylinderProperties.h"
 #include "CSGCylinderComponent.generated.h"
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UCSGCylinderComponent : public UConvexMeshWithCachedTreeComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FCSGCylinderProperties Properties;
     
     UCSGCylinderComponent();

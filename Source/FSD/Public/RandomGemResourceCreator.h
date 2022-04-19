@@ -10,7 +10,7 @@ class URandomGemResourceCreator : public UGemResourceCreator {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UCurveFloat* PlacementDistanceProbabilityCurve;
     
 public:

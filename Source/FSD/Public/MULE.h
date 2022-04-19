@@ -3,24 +3,27 @@
 #include "DeepPathfinderCharacter.h"
 #include "MULE.generated.h"
 
-class USimpleObjectInfoComponent;
 class UHealthComponent;
+class USimpleObjectInfoComponent;
 
 UCLASS(Abstract)
-class AMULE : public ADeepPathfinderCharacter {
+class FSD_API AMULE : public ADeepPathfinderCharacter {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UHealthComponent* HealthComponent;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USimpleObjectInfoComponent* ObjectInfo;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere, ReplicatedUsing=OnRep_IsDown)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_IsDown, meta=(AllowPrivateAccess=true))
     bool IsDown;
     
 public:
+    AMULE();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintCallable)
     void SetIsDown(bool NewIsDown);
     
@@ -31,9 +34,5 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnRep_IsDown();
     
-public:
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    AMULE();
 };
 

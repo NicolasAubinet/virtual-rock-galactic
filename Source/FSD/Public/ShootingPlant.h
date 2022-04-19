@@ -10,13 +10,16 @@ class AShootingPlant : public AEnemyPawn {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     bool IsVisible;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_Target)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_Target, meta=(AllowPrivateAccess=true))
     AActor* Target;
     
 public:
+    AShootingPlant();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintCallable)
     void SetTarget(AActor* NewTarget);
     
@@ -24,9 +27,5 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     void OnRep_Target();
     
-public:
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    AShootingPlant();
 };
 

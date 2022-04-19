@@ -1,5 +1,10 @@
 #include "EscortMule.h"
 #include "Net/UnrealNetwork.h"
+#include "RestrictedResourceBank.h"
+#include "SimpleObjectInfoComponent.h"
+#include "FriendlyHealthComponent.h"
+#include "Components/SkeletalMeshComponent.h"
+#include "OutlineComponent.h"
 
 class APlayerCharacter;
 class UInstantUsable;
@@ -63,7 +68,12 @@ void AEscortMule::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifet
 }
 
 AEscortMule::AEscortMule() {
+    this->HealthComponent = CreateDefaultSubobject<UFriendlyHealthComponent>(TEXT("HealthComponent2"));
+    this->ObjectInfo = CreateDefaultSubobject<USimpleObjectInfoComponent>(TEXT("ObjectInfo"));
+    this->ResourceBank = CreateDefaultSubobject<URestrictedResourceBank>(TEXT("RestrictedResourceBank"));
     this->SpeedModifier = 1.00f;
+    this->Mesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Mesh"));
+    this->OutlineComponent = CreateDefaultSubobject<UOutlineComponent>(TEXT("OutlineComponent"));
     this->HealPerTickNormal = 0.00f;
     this->HealPerTickUnderAttack = 0.00f;
     this->CannisterVisible_Left = false;

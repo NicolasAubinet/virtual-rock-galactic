@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "VanityTestCharacterItem.h"
 #include "GameFramework/Character.h"
 #include "EVanitySlot.h"
+#include "VanityTestCharacterItem.h"
 #include "VanityTestCharacter.generated.h"
 
 class USkeletalMesh;
@@ -12,25 +12,25 @@ class AVanityTestCharacter : public ACharacter {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ArmorThickness;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float BeardThickness;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ArmorCoversBeard;
     
-    UPROPERTY(EditAnywhere)
-    TMap<EVanitySlot, FVanityTestCharacterItem> vanityItems;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TMap<EVanitySlot, FVanityTestCharacterItem> VanityItems;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USkeletalMesh* WeaponMesh;
     
 public:
+    AVanityTestCharacter();
     UFUNCTION(BlueprintCallable)
     void SetupVanity();
     
-    AVanityTestCharacter();
 };
 

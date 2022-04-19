@@ -6,10 +6,10 @@ USTRUCT(BlueprintType)
 struct FCharacterOptions {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool GrapplingHookAutoSwitch;
     
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool ZiplineGunAutoSwitch;
     
     FSD_API FCharacterOptions();

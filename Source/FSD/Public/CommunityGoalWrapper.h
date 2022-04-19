@@ -1,65 +1,64 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "UICheckDelegateDelegate.h"
 #include "UObject/Object.h"
-#include "CommunityGoalStateData.h"
-#include "CommunityFactionData.h"
 #include "CommunityRewardNotification.h"
+#include "CommunityGoalStateData.h"
+#include "OnFreeBeersChangedDelegateDelegate.h"
+#include "CommunityFactionData.h"
+#include "FactionsDataDelegateDelegate.h"
+#include "GoalStateDelegateDelegate.h"
 #include "CommunityGoalWrapper.generated.h"
 
-class UCommunityGoalFaction;
 class UCommunityGoal;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FCommunityGoalWrapperOnFreeBeerRewardChanged, bool, IsBeersFree);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FCommunityGoalWrapperOnFactionsDataReceived, const TArray<FString>&, Goals, const TArray<float>&, Values, const TArray<int32>&, Members);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FCommunityGoalWrapperOnDiscordCGSDataEvent, bool, stateReceived);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FCommunityGoalWrapperUICheck);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FCommunityGoalWrapperOnGoalsInitializedDelegate);
+class UCommunityGoalFaction;
 
 UCLASS(BlueprintType)
 class UCommunityGoalWrapper : public UObject {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool HasCGS;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FCommunityGoalStateData CGSData;
     
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     int32 LastCollectedRewardID;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FCommunityFactionData FactionData;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool FreeBeerRewardActive;
     
-    UPROPERTY(BlueprintAssignable)
-    FCommunityGoalWrapperOnFreeBeerRewardChanged OnFreeBeerRewardChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnFreeBeersChangedDelegate OnFreeBeerRewardChanged;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FString SteamTicket;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FString SteamBranch;
     
-    UPROPERTY(BlueprintAssignable)
-    FCommunityGoalWrapperOnFactionsDataReceived OnFactionsDataReceived;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FFactionsDataDelegate OnFactionsDataReceived;
     
-    UPROPERTY(BlueprintAssignable)
-    FCommunityGoalWrapperOnDiscordCGSDataEvent OnDiscordCGSDataEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FGoalStateDelegate OnDiscordCGSDataEvent;
     
-    UPROPERTY(BlueprintAssignable)
-    FCommunityGoalWrapperUICheck UICheck;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FUICheckDelegate UICheck;
     
-    UPROPERTY(BlueprintAssignable)
-    FCommunityGoalWrapperOnGoalsInitializedDelegate OnGoalsInitializedDelegate;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FUICheckDelegate OnGoalsInitializedDelegate;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool AreAllGoalsInitialized;
     
 public:
+    UCommunityGoalWrapper();
     UFUNCTION(BlueprintCallable)
     void UpdateAllGoalsInitialized();
     
@@ -90,6 +89,5 @@ public:
     UFUNCTION(BlueprintCallable)
     void CheckUI();
     
-    UCommunityGoalWrapper();
 };
 

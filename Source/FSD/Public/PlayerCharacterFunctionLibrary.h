@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "UObject/NoExportTypes.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "UObject/NoExportTypes.h"
 #include "PlayerCharacterFunctionLibrary.generated.h"
 
 class UObject;
@@ -13,6 +13,7 @@ UCLASS(BlueprintType)
 class UPlayerCharacterFunctionLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    UPlayerCharacterFunctionLibrary();
     UFUNCTION(BlueprintCallable)
     static bool SetPlayerVoiceMuted(UObject* WorldContextObject, AFSDPlayerState* PlayerState, bool Mute, bool TrySystemWide, int32 localUserNum);
     
@@ -34,6 +35,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static APlayerCharacter* GetNearestPlayer(AActor* From, float MaxDistance, bool MustBeAlive, bool MustBeUnparalyzed, bool XYOnly);
     
-    UPlayerCharacterFunctionLibrary();
 };
 

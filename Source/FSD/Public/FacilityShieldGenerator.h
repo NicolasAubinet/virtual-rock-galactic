@@ -11,7 +11,7 @@ class AFacilityShieldGenerator : public AActor, public IGameplayTagAssetInterfac
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagContainer GameplayTags;
     
 public:

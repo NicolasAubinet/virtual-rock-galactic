@@ -1,11 +1,10 @@
 #include "TentacleBase.h"
-#include "Net/UnrealNetwork.h"
 
 class AStabberVineRoot;
 
-
-void ATentacleBase::OnRep_DesiredTarget() {
+void ATentacleBase::SetRestingTransform(const FTransform& restingTransform, bool startAtRest) {
 }
+
 
 void ATentacleBase::MoveHydraHead(FTransform newDesiredTransform, float newCanSwayCooldown, float newHeadMovementDuration, bool UseSpring) {
 }
@@ -16,15 +15,8 @@ AStabberVineRoot* ATentacleBase::GetStabberVineRoot() const {
 
 
 
-void ATentacleBase::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
-    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-    
-    DOREPLIFETIME(ATentacleBase, DesiredTarget);
-}
-
 ATentacleBase::ATentacleBase() {
     this->SplineComponent = NULL;
-    this->MovementAlpha = 0.00f;
     this->HeadMovementDuration = 0.00f;
     this->CanSwayCooldown = 0.00f;
     this->NeckBaseTangentLength = 0.00f;

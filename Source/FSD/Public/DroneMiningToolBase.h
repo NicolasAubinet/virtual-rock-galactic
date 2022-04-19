@@ -1,35 +1,34 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Components/ActorComponent.h"
-#include "UObject/NoExportTypes.h"
 #include "Engine/NetSerialization.h"
+#include "Components/ActorComponent.h"
+#include "MineHitEventDelegate.h"
 #include "DroneMiningToolBase.generated.h"
 
 class UTerrainMaterial;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FDroneMiningToolBaseHitSomething, UTerrainMaterial*, TerrainMaterial, const FVector&, Location);
-
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UDroneMiningToolBase : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY()
-    FDroneMiningToolBaseHitSomething HitSomething;
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FMineHitEvent HitSomething;
     
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float range;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float SameHitDistance;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MineRadius;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 MineStrength;
     
 public:
+    UDroneMiningToolBase();
     UFUNCTION(BlueprintCallable)
     void StopMining();
     
@@ -39,6 +38,5 @@ public:
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
     void SpawnEffects(UTerrainMaterial* aTerrainMaterial, bool aParialHit, FVector_NetQuantize aLocation, FVector_NetQuantize aImpactNormal);
     
-    UDroneMiningToolBase();
 };
 

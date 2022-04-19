@@ -1,77 +1,73 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
+#include "EUpgradeClass.h"
 #include "SavableDataAsset.h"
 #include "RefundableInterface.h"
 #include "EUpgradeTiers.h"
-#include "EUpgradeClass.h"
-#include "CraftingCost.h"
 #include "ItemUpgradeStatText.h"
+#include "CraftingCost.h"
 #include "UpgradeValues.h"
 #include "ItemUpgrade.generated.h"
 
-class UItemUpgradeElement;
-class UItemUpgrade;
-class UItemID;
-class UItemUpgradeCategory;
 class UResourceData;
-class AActor;
+class UItemUpgrade;
+class UItemUpgradeCategory;
+class UItemUpgradeElement;
 class AFSDPlayerState;
-class AFSDPlayerController;
-class APlayerCharacter;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FItemUpgradeOnCrafted, UItemUpgrade*, Upgrade);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FItemUpgradeOnEquipped, UItemUpgrade*, Upgrade);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FItemUpgradeOnUnequipped, UItemUpgrade*, Upgrade);
+class AActor;
 
 UCLASS(EditInlineNew)
 class FSD_API UItemUpgrade : public USavableDataAsset, public IRefundableInterface {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable, Transient)
-    FItemUpgradeOnCrafted OnCrafted;
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FItemUpgradeSignature, UItemUpgrade*, Upgrade);
     
-    UPROPERTY(BlueprintAssignable, Transient)
-    FItemUpgradeOnEquipped OnEquipped;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    FItemUpgradeSignature OnCrafted;
     
-    UPROPERTY(BlueprintAssignable, Transient)
-    FItemUpgradeOnUnequipped OnUnequipped;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    FItemUpgradeSignature OnEquipped;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    FItemUpgradeSignature OnUnequipped;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText Name;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText Description;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 Cost;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool UseOldCost;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EUpgradeTiers UpgradeTier;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EUpgradeClass upgradeClass;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UItemUpgradeCategory* Category;
     
-    UPROPERTY(VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     TMap<UResourceData*, float> UpgradeCraftingCost;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UResourceData*> ResourceCost;
     
-    UPROPERTY(EditAnywhere, Export)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     TArray<UItemUpgradeElement*> Elements;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FItemUpgradeStatText> StatTexts;
     
 public:
+    UItemUpgrade();
     UFUNCTION(BlueprintCallable)
     void UnequipUpgrade(TSubclassOf<AActor> itemClass, AFSDPlayerState* PlayerState);
     
@@ -96,10 +92,6 @@ public:
     UFUNCTION(BlueprintCallable)
     void EquipUpgrade(TSubclassOf<AActor> itemClass, AFSDPlayerState* PlayerState);
     
-    UFUNCTION(BlueprintCallable)
-    void CraftItem(UItemID* ItemID, AFSDPlayerController* PlayerController, TSubclassOf<APlayerCharacter> previewedCharacter);
-    
-    UItemUpgrade();
     
     // Fix for true pure virtual functions not being implemented
 };

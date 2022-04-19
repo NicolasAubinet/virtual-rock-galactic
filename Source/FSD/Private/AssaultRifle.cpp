@@ -6,7 +6,7 @@ class UFSDPhysicalMaterial;
 void AAssaultRifle::OnTimerElapsed() {
 }
 
-void AAssaultRifle::OnEnemyKilled(AActor* Target, UFSDPhysicalMaterial* PhysMat) {
+void AAssaultRifle::OnEnemyKilled(AActor* Target, UFSDPhysicalMaterial* PhysMat, bool wasDirectHit) {
 }
 
 void AAssaultRifle::Client_ResetAccuracy_Implementation() {

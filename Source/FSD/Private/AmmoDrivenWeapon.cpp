@@ -1,8 +1,9 @@
 #include "AmmoDrivenWeapon.h"
 #include "Net/UnrealNetwork.h"
+#include "AmmoDriveWeaponAggregator.h"
 
 
-void AAmmoDrivenWeapon::Server_StopReload_Implementation() {
+void AAmmoDrivenWeapon::Server_StopReload_Implementation(float BlendOutTime) {
 }
 
 void AAmmoDrivenWeapon::Server_ReloadWeapon_Implementation() {
@@ -44,7 +45,7 @@ void AAmmoDrivenWeapon::InstantlyReload() {
 void AAmmoDrivenWeapon::Client_RefillAmmo_Implementation(float percentage) {
 }
 
-void AAmmoDrivenWeapon::All_StopReload_Implementation() {
+void AAmmoDrivenWeapon::All_StopReload_Implementation(float BlendOutTime) {
 }
 
 void AAmmoDrivenWeapon::All_StartReload_Implementation() {
@@ -65,6 +66,7 @@ void AAmmoDrivenWeapon::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Ou
 
 AAmmoDrivenWeapon::AAmmoDrivenWeapon() {
     this->WeaponFire = NULL;
+    this->Aggregator = CreateDefaultSubobject<UAmmoDriveWeaponAggregator>(TEXT("Aggregator"));
     this->LoopFireAnimation = false;
     this->LoopFireAnimationBlendoutTime = 0.25f;
     this->FP_FireAnimation = NULL;
@@ -96,6 +98,7 @@ AAmmoDrivenWeapon::AAmmoDrivenWeapon() {
     this->FireSoundFadeDuration = 0.20f;
     this->ReloadSound = NULL;
     this->BulletsRemainingForNearEmptySound = 0;
+    this->PlayEmptySoundsIn3D = false;
     this->NearEmptySound = NULL;
     this->WeaponEmptySound = NULL;
     this->ShoutShotFired = NULL;

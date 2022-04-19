@@ -9,12 +9,12 @@ UCLASS()
 class URoomGenerator : public URoomGeneratorBase {
     GENERATED_BODY()
 public:
-    UPROPERTY(Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     TArray<URoomFeature*> RoomFeatures;
     
+    URoomGenerator();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<URoomFeature*> GetAllRoomFeatures() const;
     
-    URoomGenerator();
 };
 

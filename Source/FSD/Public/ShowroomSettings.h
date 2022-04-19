@@ -3,21 +3,21 @@
 #include "Engine/DataAsset.h"
 #include "ShowroomSettings.generated.h"
 
-class UCharacterShowroomController;
 class AShowroomStage;
 class UEnemyShowroomController;
+class UCharacterShowroomController;
 
 UCLASS()
 class UShowroomSettings : public UDataAsset {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<UEnemyShowroomController> EnemyShowroomController;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<UCharacterShowroomController> CharacterShowroomController;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<AShowroomStage> CharacterStage;
     
     UShowroomSettings();

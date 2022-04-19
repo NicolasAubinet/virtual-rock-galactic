@@ -9,7 +9,7 @@ UCLASS()
 class APillarGenerationItem : public AGenerationItem {
     GENERATED_BODY()
 public:
-    UPROPERTY(Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UPillarGenerationComponent* PillarComponent;
     
     APillarGenerationItem();

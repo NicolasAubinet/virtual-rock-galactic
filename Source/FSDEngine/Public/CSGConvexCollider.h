@@ -8,7 +8,7 @@ UCLASS()
 class UCSGConvexCollider : public UConvexMeshWithCachedTree {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FCSGConvexColliderProperties Properties;
     
     UCSGConvexCollider();

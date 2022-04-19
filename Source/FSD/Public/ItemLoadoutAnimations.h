@@ -9,10 +9,10 @@ USTRUCT(BlueprintType)
 struct FItemLoadoutAnimations {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UAnimMontage* Loadout;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UAnimSequence*> Loadout_IdleBreaks;
     
     FSD_API FItemLoadoutAnimations();

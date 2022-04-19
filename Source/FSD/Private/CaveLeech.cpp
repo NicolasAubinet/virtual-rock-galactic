@@ -1,5 +1,8 @@
 #include "CaveLeech.h"
 #include "Net/UnrealNetwork.h"
+#include "Components/SkeletalMeshComponent.h"
+#include "GrabberComponent.h"
+#include "Components/SceneComponent.h"
 
 class AActor;
 class UHealthComponentBase;
@@ -37,6 +40,8 @@ void ACaveLeech::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifeti
 }
 
 ACaveLeech::ACaveLeech() {
+    this->SkeletalMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("NewMesh"));
+    this->GrabberComponent = CreateDefaultSubobject<UGrabberComponent>(TEXT("Grabber"));
     this->BiteDamage = 10.00f;
     this->BitesPerSecond = 1.00f;
     this->MaxDistanceXY = 300.00f;
@@ -57,5 +62,6 @@ ACaveLeech::ACaveLeech() {
     this->StateTime = 0.00f;
     this->State = ECaveLeechState::Idle;
     this->HealthTarget = NULL;
+    this->TentacleHead = CreateDefaultSubobject<USceneComponent>(TEXT("TentacleHead"));
 }
 

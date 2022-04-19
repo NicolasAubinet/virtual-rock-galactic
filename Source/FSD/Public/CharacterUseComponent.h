@@ -1,107 +1,60 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "CharacterUseState.h"
 #include "Components/ActorComponent.h"
-#include "UsableRepliactional.h"
-#include "EUseRestriction.h"
-#include "ECharacterState.h"
+#include "EndUsingDelegateDelegate.h"
+#include "BeginUsingDelegateDelegate.h"
+#include "DepositingEventDelegate.h"
 #include "ECustomUsableType.h"
 #include "CharacterUseComponent.generated.h"
 
-class UResourceBank;
-class USceneComponent;
 class UUsableComponentBase;
-class USphereComponent;
-class USoundBase;
-class APlayerCharacter;
 class AActor;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FCharacterUseComponentOnDepositingEnd, UResourceBank*, ResourceBank);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FCharacterUseComponentOnDepositingBegin, UResourceBank*, ResourceBank);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FCharacterUseComponentOnEndUsingEvent);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FCharacterUseComponentOnBeginUsingEvent, UUsableComponentBase*, Component);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FCharacterUseComponentOnEndHoveringEvent);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FCharacterUseComponentOnBeginHoveringEvent, UUsableComponentBase*, Component);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FCharacterUseComponentOnEndUseNoUsable);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FCharacterUseComponentOnBeginUseNoUsable);
-
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UCharacterUseComponent : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FCharacterUseComponentOnDepositingBegin OnDepositingBegin;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FBeginUsingDelegate OnBeginHoveringEvent;
     
-    UPROPERTY(BlueprintAssignable)
-    FCharacterUseComponentOnDepositingEnd OnDepositingEnd;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FEndUsingDelegate OnEndHoveringEvent;
     
-    UPROPERTY(BlueprintAssignable)
-    FCharacterUseComponentOnBeginHoveringEvent OnBeginHoveringEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FBeginUsingDelegate OnBeginUsingEvent;
     
-    UPROPERTY(BlueprintAssignable)
-    FCharacterUseComponentOnEndHoveringEvent OnEndHoveringEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FEndUsingDelegate OnEndUsingEvent;
     
-    UPROPERTY(BlueprintAssignable)
-    FCharacterUseComponentOnBeginUsingEvent OnBeginUsingEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDepositingEvent OnDepositingBegin;
     
-    UPROPERTY(BlueprintAssignable)
-    FCharacterUseComponentOnEndUsingEvent OnEndUsingEvent;
-    
-    UPROPERTY(BlueprintAssignable)
-    FCharacterUseComponentOnBeginUseNoUsable OnBeginUseNoUsable;
-    
-    UPROPERTY(BlueprintAssignable)
-    FCharacterUseComponentOnEndUseNoUsable OnEndUseNoUsable;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDepositingEvent OnDepositingEnd;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_ActiveUsablee)
-    FUsableRepliactional ActiveUsablee;
-    
-    UPROPERTY(BlueprintReadOnly, Export, Transient)
-    UUsableComponentBase* HoveringUsable;
-    
-    UPROPERTY(BlueprintReadOnly, Export, Transient)
-    USceneComponent* HoveringUsableCollider;
-    
-    UPROPERTY(Export, Transient)
-    USceneComponent* ActiveUsableCollider;
-    
-    UPROPERTY(Export, Transient)
-    USphereComponent* UseCollider;
-    
-    UPROPERTY(EditAnywhere)
-    USoundBase* AudioBeginDepositing;
-    
-    UPROPERTY(EditAnywhere)
-    USoundBase* AudioEndDepositing;
-    
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float UseDistance;
     
-    UPROPERTY(BlueprintReadOnly, Replicated, Transient)
-    EUseRestriction UseRestriction;
-    
-    UPROPERTY(Transient)
-    APlayerCharacter* Character;
-    
-    UPROPERTY(Transient)
-    TMap<UUsableComponentBase*, float> UseCooldownTracker;
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_State, meta=(AllowPrivateAccess=true))
+    FCharacterUseState State;
     
 public:
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
-    void Server_SetCanUse(EUseRestriction NewUseRestriction);
+    UCharacterUseComponent();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
-    void Server_EndUse();
+protected:
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_SetState(const FCharacterUseState& NewState);
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
-    void Server_BeginUse(uint8 Key, UUsableComponentBase* Usable, USceneComponent* UsableCollider);
+public:
+    UFUNCTION(BlueprintCallable)
+    void RemoveCustomUsableComponent(UUsableComponentBase* Usable);
     
 protected:
     UFUNCTION(BlueprintCallable)
-    void OnRep_ActiveUsablee(FUsableRepliactional lastUsable);
-    
-    UFUNCTION(BlueprintCallable)
-    void OnCharacterStateChanged(ECharacterState NewState);
+    void OnRep_State(const FCharacterUseState& oldState);
     
 public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -122,14 +75,19 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetIsDepositing();
     
-    UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
-    void All_PlaySingleUse(uint8 Key, UUsableComponentBase* Usable);
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UUsableComponentBase* GetHoveringUsable() const;
     
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UUsableComponentBase* GetActiveUsable() const;
+    
+protected:
+    UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
+    void All_UseEnded(const FCharacterUseState& oldState);
+    
+public:
     UFUNCTION(BlueprintCallable)
     void AddCustomUsableComponent(UUsableComponentBase* Usable, ECustomUsableType eType);
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    UCharacterUseComponent();
 };
 

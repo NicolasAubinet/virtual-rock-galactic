@@ -1,38 +1,38 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "DamageAttackComponent.h"
+#include "MeleeAttackDelegateDelegate.h"
 #include "MeleeAttackComponent.generated.h"
 
-class UAnimMontage;
 class UAttackEffect;
+class UAnimMontage;
 
-UDELEGATE(BlueprintAuthorityOnly, BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FMeleeAttackComponentOnAttackStartedEvent);
-UDELEGATE(BlueprintAuthorityOnly, BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FMeleeAttackComponentOnAttackEndedEvent);
-UDELEGATE(BlueprintAuthorityOnly, BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FMeleeAttackComponentOnDamageAppliedEvent);
-
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UMeleeAttackComponent : public UDamageAttackComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UAnimMontage*> Montages;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool CenterOnTarget;
     
-    UPROPERTY(EditAnywhere, Export)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     TArray<UAttackEffect*> AttackEffects;
     
-    UPROPERTY(BlueprintAssignable)
-    FMeleeAttackComponentOnAttackStartedEvent OnAttackStartedEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FMeleeAttackDelegate OnAttackStartedEvent;
     
-    UPROPERTY(BlueprintAssignable)
-    FMeleeAttackComponentOnDamageAppliedEvent OnDamageAppliedEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FMeleeAttackDelegate OnDamageAppliedEvent;
     
-    UPROPERTY(BlueprintAssignable)
-    FMeleeAttackComponentOnAttackEndedEvent OnAttackEndedEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FMeleeAttackDelegate OnAttackEndedEvent;
     
+public:
+    UMeleeAttackComponent();
+protected:
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     UAnimMontage* SelectMontage() const;
     
@@ -42,7 +42,5 @@ protected:
     UFUNCTION(BlueprintCallable)
     void OnMontageEnded(UAnimMontage* Montage, bool interrupted);
     
-public:
-    UMeleeAttackComponent();
 };
 

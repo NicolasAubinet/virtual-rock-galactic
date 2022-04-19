@@ -8,7 +8,7 @@ class UPerkHUDIconWidget : public UPerkHUDWidget {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float CoolDownProgress;
     
 public:

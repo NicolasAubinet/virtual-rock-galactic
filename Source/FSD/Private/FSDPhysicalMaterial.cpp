@@ -1,9 +1,9 @@
 #include "FSDPhysicalMaterial.h"
 
 class UObject;
-class UPrimitiveComponent;
-class UFXSystemComponent;
 class UFSDPhysicalMaterial;
+class UFXSystemComponent;
+class UPrimitiveComponent;
 
 UFXSystemComponent* UFSDPhysicalMaterial::SpawnImpactParticlesFromHit(UObject* WorldContextObject, const FHitResult& HitResult) {
     return NULL;
@@ -42,7 +42,7 @@ UFSDPhysicalMaterial::UFSDPhysicalMaterial() {
     this->ExtraFallVelocity = 0.00f;
     this->FallImpactEffect = NULL;
     this->FallImpactSound = NULL;
-    this->AlwaysPenetrate = false;
+    this->alwaysPenetrate = false;
     this->ReactiveTerrain = NULL;
 }
 

@@ -1,14 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EFSDTargetPlatform.h"
 #include "DLCBase.h"
+#include "EFSDTargetPlatform.h"
 #include "PlatformExclusiveDLC.generated.h"
 
 UCLASS()
 class UPlatformExclusiveDLC : public UDLCBase {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EFSDTargetPlatform Platform;
     
     UPlatformExclusiveDLC();

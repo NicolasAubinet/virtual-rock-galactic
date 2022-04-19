@@ -7,15 +7,15 @@ UCLASS()
 class AFSDPhysicsActor : public AActor {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     int32 MovementUpdateFrequency;
     
-    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     int32 MovementUpdateEventTriggeredFrequency;
     
+    AFSDPhysicsActor();
     UFUNCTION(BlueprintCallable)
     void ForceMovementUpdate();
     
-    AFSDPhysicsActor();
 };
 

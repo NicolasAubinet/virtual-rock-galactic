@@ -1,66 +1,65 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "DiscordEoMData.h"
+#include "OnDiscordServerInfoLoadedDelegate.h"
+#include "ResponseSuccessChangedDelegate.h"
 #include "UObject/Object.h"
 #include "DiscordServerInviteData.h"
+#include "DiscordEoMDataDelegateDelegate.h"
 #include "DiscordRewardNotification.h"
-#include "DiscordServerData.h"
-#include "DiscordEoMData.h"
+#include "OnDiscordServerCountLoadedDelegate.h"
+#include "OnDiscordUserInServerDelegate.h"
 #include "DiscordWrapper.generated.h"
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FDiscordWrapperOnResponseSuccessChanged, bool, resp);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FDiscordWrapperOnDiscordUserInServer, bool, isInServer);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FDiscordWrapperOnDiscordEoMDataEvent, bool, HasEoM);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDiscordWrapperOnDiscordServerInfoLoaded);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FDiscordWrapperOnDiscordServerCountLoaded, const FDiscordServerData&, discordServerCount);
 
 UCLASS(BlueprintType)
 class UDiscordWrapper : public UObject {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FDiscordServerInviteData ServerInfo;
     
-    UPROPERTY(BlueprintAssignable)
-    FDiscordWrapperOnResponseSuccessChanged OnResponseSuccessChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FResponseSuccessChanged OnResponseSuccessChanged;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool LastResponseSuccessful;
     
-    UPROPERTY(BlueprintAssignable)
-    FDiscordWrapperOnDiscordEoMDataEvent OnDiscordEoMDataEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDiscordEoMDataDelegate OnDiscordEoMDataEvent;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool UserIn;
     
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FDiscordRewardNotification rewardNotification;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     int32 UserInStatus;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool HasEoM;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FDiscordEoMData EoMData;
     
 public:
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool IsConnected;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool ServerInfoLoaded;
     
-    UPROPERTY(BlueprintAssignable)
-    FDiscordWrapperOnDiscordServerInfoLoaded OnDiscordServerInfoLoaded;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnDiscordServerInfoLoaded OnDiscordServerInfoLoaded;
     
-    UPROPERTY(BlueprintAssignable)
-    FDiscordWrapperOnDiscordServerCountLoaded OnDiscordServerCountLoaded;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnDiscordServerCountLoaded OnDiscordServerCountLoaded;
     
-    UPROPERTY(BlueprintAssignable)
-    FDiscordWrapperOnDiscordUserInServer OnDiscordUserInServer;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnDiscordUserInServer OnDiscordUserInServer;
     
+    UDiscordWrapper();
     UFUNCTION(BlueprintCallable)
     void RequestUserInServer();
     
@@ -88,6 +87,5 @@ public:
     UFUNCTION(BlueprintCallable)
     void AcceptInviteSignature();
     
-    UDiscordWrapper();
 };
 

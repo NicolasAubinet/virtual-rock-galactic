@@ -9,9 +9,9 @@ UCLASS(Abstract)
 class AStabberVineRoot : public AEnemyPawn {
     GENERATED_BODY()
 public:
+    AStabberVineRoot();
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void RemoveVine(AStabberVine* vine);
     
-    AStabberVineRoot();
 };
 

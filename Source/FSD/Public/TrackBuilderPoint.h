@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Engine/NetSerialization.h"
 #include "ETrackBuildPlacementState.h"
+#include "Engine/NetSerialization.h"
 #include "TrackBuilderPoint.generated.h"
 
 class UTrackBuilderConnectPoint;
@@ -10,19 +10,19 @@ USTRUCT(BlueprintType)
 struct FTrackBuilderPoint {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     ETrackBuildPlacementState PlacementState;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FVector_NetQuantize Location;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FVector_NetQuantize EulerRotation;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool bPointValid;
     
-    UPROPERTY(Export)
+    UPROPERTY(BlueprintReadWrite, Export, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UTrackBuilderConnectPoint> ConnectPoint;
     
     FSD_API FTrackBuilderPoint();

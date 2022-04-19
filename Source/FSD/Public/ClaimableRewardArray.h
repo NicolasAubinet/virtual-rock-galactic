@@ -7,7 +7,7 @@ USTRUCT(BlueprintType)
 struct FClaimableRewardArray {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FClaimableRewardEntry> Entries;
     
     FSD_API FClaimableRewardArray();

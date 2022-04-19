@@ -6,16 +6,16 @@ USTRUCT()
 struct FLookupSessionResponse {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     bool Valid;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     FString LobbyId;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     FString P2PAddr;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     int32 P2PPORT;
     
     FSD_API FLookupSessionResponse();

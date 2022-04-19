@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
 #include "Targetable.h"
+#include "GameFramework/Actor.h"
 #include "GameplayTagAssetInterface.h"
 #include "GameplayTagContainer.h"
 #include "GameplayTagContainer.h"
@@ -12,7 +12,7 @@ class ATargetDummyPawn : public AActor, public IGameplayTagAssetInterface, publi
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagContainer GameplayTags;
     
 public:

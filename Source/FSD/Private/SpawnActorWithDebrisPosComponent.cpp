@@ -1,12 +1,12 @@
 #include "SpawnActorWithDebrisPosComponent.h"
 #include "Templates/SubclassOf.h"
 
-class AActor;
 class AProceduralSetup;
+class AActor;
 class UDebrisPositioning;
 class UCurveFloat;
 
-bool USpawnActorWithDebrisPosComponent::PlaceActorsWithCallback(int32 NumToSpawn, int32 NumToSpawnMin, int32 NumAllowedChecks, TSubclassOf<AActor> SpawnedActorClass, AProceduralSetup* setup, float Radius, UDebrisPositioning* DebrisPositioning, const TArray<FVector>& locationsToAvoid, UCurveFloat* AvoidCostCurve, FSpawnActorWithDebrisPosComponentOnSpawned OnSpawned, FVector CustomLocation) {
+bool USpawnActorWithDebrisPosComponent::PlaceActorsWithCallback(int32 NumToSpawn, int32 NumToSpawnMin, int32 NumAllowedChecks, TSubclassOf<AActor> SpawnedActorClass, AProceduralSetup* setup, float Radius, UDebrisPositioning* DebrisPositioning, const TArray<FVector>& locationsToAvoid, UCurveFloat* AvoidCostCurve, FSpawnActorDelegate OnSpawned, FVector CustomLocation) {
     return false;
 }
 

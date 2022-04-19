@@ -7,7 +7,7 @@ UCLASS()
 class APathfinderDebugProbe : public AActor {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     AActor* Dest;
     
     APathfinderDebugProbe();

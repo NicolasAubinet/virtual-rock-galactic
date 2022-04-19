@@ -1,17 +1,27 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/Object.h"
+#include "NewFSDSessionIDDelegate.h"
 #include "FSDSessionUpdater.generated.h"
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDSessionUpdaterOnNewFSDSessionID, const FString&, sessionId);
+class UFSDLobbyHandler;
+class UFSDSessionHandler;
 
 UCLASS()
 class UFSDSessionUpdater : public UObject {
     GENERATED_BODY()
 public:
-    UPROPERTY()
-    FFSDSessionUpdaterOnNewFSDSessionID OnNewFSDSessionID;
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FNewFSDSessionID OnNewFSDSessionID;
     
+private:
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UFSDSessionHandler* SessionHandler;
+    
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UFSDLobbyHandler* LobbyHandler;
+    
+public:
     UFSDSessionUpdater();
 };
 

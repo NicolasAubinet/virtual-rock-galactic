@@ -7,7 +7,7 @@ UCLASS(BlueprintType)
 class UNewsTextHeadlines : public UDataAsset {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FText> MineralTradeTicker;
     
     UNewsTextHeadlines();

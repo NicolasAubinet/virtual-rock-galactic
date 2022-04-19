@@ -3,7 +3,7 @@
 #include "CharacterStateComponent.h"
 #include "FlyingStateComponent.generated.h"
 
-UCLASS(MinimalAPI)
+UCLASS(MinimalAPI, meta=(BlueprintSpawnableComponent))
 class UFlyingStateComponent : public UCharacterStateComponent {
     GENERATED_BODY()
 public:

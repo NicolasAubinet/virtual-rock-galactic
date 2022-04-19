@@ -1,8 +1,8 @@
 #include "FSDGameUserSettings.h"
 
+class UObject;
 class USoundClass;
 class APlayerController;
-class UObject;
 class UDifficultySetting;
 class UFSDGameUserSettings;
 
@@ -59,10 +59,16 @@ void UFSDGameUserSettings::SetUseDefaultAudioOutputDevice(UObject* WorldContextO
 void UFSDGameUserSettings::SetUseCustomUIScale(bool UseCustomScale) {
 }
 
+void UFSDGameUserSettings::SetUpscalingType(int32 Type) {
+}
+
 void UFSDGameUserSettings::SetUIDPIScale(float uiscale) {
 }
 
 void UFSDGameUserSettings::SetTutorialHintsEnabled(bool Enabled) {
+}
+
+void UFSDGameUserSettings::SetTurn180Mode(ETurn180Mode InMode) {
 }
 
 void UFSDGameUserSettings::SetTemporalAAUpscalingEnabled(bool bEnable) {
@@ -101,6 +107,9 @@ void UFSDGameUserSettings::SetScreenResolutionToBeApplied(FIntPoint Resolution) 
 void UFSDGameUserSettings::SetPushToTalk(bool bEnable) {
 }
 
+void UFSDGameUserSettings::SetPreviousItemEnabledOnController(bool InEnabled) {
+}
+
 void UFSDGameUserSettings::SetPreventLatejoinCharacterDuplication(bool prevent) {
 }
 
@@ -108,6 +117,12 @@ void UFSDGameUserSettings::SetPlaySoundOnChatMessage(bool playSoundOnMessage) {
 }
 
 void UFSDGameUserSettings::SetPhotosensitiveMode(bool modeOn) {
+}
+
+void UFSDGameUserSettings::SetNvidiaDlssSharpness(float Sharpness) {
+}
+
+void UFSDGameUserSettings::SetNvidiaDlssMode(UDLSSMode Mode) {
 }
 
 void UFSDGameUserSettings::SetMouseYSensitivity(float newSensitivity) {
@@ -211,6 +226,12 @@ void UFSDGameUserSettings::SetAppearOffline(bool bEnable) {
 void UFSDGameUserSettings::SetAntiAliasingType(int32 NewAntiAliasingType) {
 }
 
+void UFSDGameUserSettings::SetAMDFSRSharpness(float Sharpness) {
+}
+
+void UFSDGameUserSettings::SetAMDFSRMode(int32 Mode) {
+}
+
 void UFSDGameUserSettings::SetAimSensitivity(float NewValue) {
 }
 
@@ -230,6 +251,10 @@ void UFSDGameUserSettings::PostInitFSDUserSettings(UObject* WorldContextObject) 
 }
 
 bool UFSDGameUserSettings::IsVoiceChatEnabled() const {
+    return false;
+}
+
+bool UFSDGameUserSettings::IsUpscalingTypeSupported(int32 Type) const {
     return false;
 }
 
@@ -296,12 +321,20 @@ bool UFSDGameUserSettings::GetUseCustomUIScale() {
     return false;
 }
 
+int32 UFSDGameUserSettings::GetUpscalingType() const {
+    return 0;
+}
+
 float UFSDGameUserSettings::GetUIDPIScale() const {
     return 0.0f;
 }
 
 bool UFSDGameUserSettings::GetTutorialHintsEnabled() const {
     return false;
+}
+
+ETurn180Mode UFSDGameUserSettings::GetTurn180Mode() const {
+    return ETurn180Mode::PressRun;
 }
 
 bool UFSDGameUserSettings::GetTemporalAAUpscalingEnabled() const {
@@ -344,6 +377,10 @@ bool UFSDGameUserSettings::GetPushToTalk() const {
     return false;
 }
 
+bool UFSDGameUserSettings::GetPreviousItemEnabledOnController() const {
+    return false;
+}
+
 bool UFSDGameUserSettings::GetPreventLatejoinCharacterDuplication() const {
     return false;
 }
@@ -354,6 +391,14 @@ bool UFSDGameUserSettings::GetPlaySoundOnChatMessage() const {
 
 bool UFSDGameUserSettings::GetPhotosensitiveMode() const {
     return false;
+}
+
+float UFSDGameUserSettings::GetNvidiaDlssSharpness() const {
+    return 0.0f;
+}
+
+UDLSSMode UFSDGameUserSettings::GetNvidiaDlssMode() const {
+    return UDLSSMode::Off;
 }
 
 float UFSDGameUserSettings::GetMouseYSensitivity() const {
@@ -500,6 +545,14 @@ int32 UFSDGameUserSettings::GetAntiAliasingType() const {
     return 0;
 }
 
+float UFSDGameUserSettings::GetAMDFSRSharpness() const {
+    return 0.0f;
+}
+
+int32 UFSDGameUserSettings::GetAMDFSRMode() const {
+    return 0;
+}
+
 float UFSDGameUserSettings::GetAimSensitivity() const {
     return 0.0f;
 }
@@ -518,6 +571,9 @@ FString UFSDGameUserSettings::GameServerNameFiltered() const {
 
 FString UFSDGameUserSettings::GameServerName() const {
     return TEXT("");
+}
+
+void UFSDGameUserSettings::FSDSetResolutionScale(float NewScaleNormalized) {
 }
 
 bool UFSDGameUserSettings::FSDSetCurrentLanguage(UObject* WorldContextObject, const FString& Culture) {
@@ -548,20 +604,25 @@ void UFSDGameUserSettings::ApplyConsoleGraphicsMode() {
 UFSDGameUserSettings::UFSDGameUserSettings() {
     this->bJukeboxStreamerMode = false;
     this->bGraphicSettingsChanged = false;
-    this->CurrentUserSetSaveSlotName = TEXT("Modded_Sandbox");
     this->ServerSearchRegion = 3;
     this->ServerSearchPasswordRequired = false;
-    this->volumeCharacterVoice = 100.00f;
-    this->volumeMissionControl = 100.00f;
-    this->volumeMaster = 35.62f;
-    this->volumeSFX = 100.21f;
-    this->volumeMusic = 93.75f;
+    this->volumeCharacterVoice = 98.51f;
+    this->volumeMissionControl = 95.95f;
+    this->volumeMaster = 19.78f;
+    this->volumeSFX = 200.00f;
+    this->volumeMusic = 94.21f;
     this->CurrentAudioOutputDeviceId = TEXT("{0.0.0.00000000}.{2a5cebd2-74c5-49ee-b332-663973012ccd}");
     this->UseDefaultAudioOutputDevice = true;
     this->Sharpening = 0.00f;
     this->AntiAliasingType = 1;
     this->TemporalAAUpsamplingEnabled = true;
-    this->volumeVoice = 100.00f;
+    this->volumeVoice = 102.89f;
+    this->UpscalingType = 0;
+    this->AmdFsrMode = 1;
+    this->AmdFsrSharpness = 0.20f;
+    this->NvidiaDlssMode = UDLSSMode::Auto;
+    this->NvidiaDlssSharpness = 0.50f;
+    this->FSDResolutionScale = 1.00f;
     this->soundClassCharacterVoices = NULL;
     this->soundClassMissionControl = NULL;
     this->soundClassMaster = NULL;

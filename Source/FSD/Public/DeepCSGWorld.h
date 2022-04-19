@@ -1,183 +1,185 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "Templates/SubclassOf.h"
 #include "GameFramework/Actor.h"
-#include "DebrisWhenCarving.h"
-#include "CarveOptionsCellSize.h"
-#include "DrillOperationData.h"
-#include "MeltOperationData.h"
 #include "VisualLogger/VisualLoggerDebugSnapshotInterface.h"
+#include "UObject/NoExportTypes.h"
+#include "CSGRaycastHitInfo.h"
+#include "DebrisWhenCarving.h"
+#include "PickaxeDigOperationData.h"
+#include "Engine/LatentActionManager.h"
+#include "TerrainBaseDoneDelegate.h"
+#include "CSGBuildOperationData.h"
 #include "TerrainLateJoinData.h"
 #include "EncodedChunkId.h"
 #include "RemoveFloatingIslandOperationData.h"
-#include "PickaxeDigOperationData.h"
-#include "GrenadeExplodeOperationData.h"
-#include "CarveWithSTLMeshOperationData.h"
-#include "SplineSegmentCarveOperationData.h"
+#include "UObject/NoExportTypes.h"
+#include "MeltOperationData.h"
 #include "CarveWithColliderOperationData.h"
-#include "UObject/NoExportTypes.h"
-#include "CSGRaycastHitInfo.h"
-#include "ELandscapeCellFilter.h"
-#include "UObject/NoExportTypes.h"
-#include "ECarveFilterType.h"
-#include "UObject/NoExportTypes.h"
-#include "EPreciousMaterialOptions.h"
-#include "Engine/LatentActionManager.h"
+#include "GrenadeExplodeOperationData.h"
+#include "DrillOperationData.h"
+#include "CarveWithSTLMeshOperationData.h"
 #include "CarveSplineSegment.h"
+#include "SplineSegmentCarveOperationData.h"
+#include "UObject/NoExportTypes.h"
+#include "ELandscapeCellFilter.h"
+#include "EPreciousMaterialOptions.h"
+#include "ECarveFilterType.h"
+#include "CarveOptionsCellSize.h"
 #include "DeepCSGWorld.generated.h"
 
+class ACSGBuilder;
 class UMaterialInterface;
-class UDebrisSet;
-class UTerrainType;
-class UTerrainMaterial;
 class UTerrainMaterialsCollection;
-class UStaticMeshCarver;
+class UTerrainMaterial;
+class UTerrainType;
+class UDebrisSet;
 class UDebrisBase;
-class AProceduralSetup;
 class ADebrisDataActor;
-class UObject;
+class AProceduralSetup;
 class UAsyncPathRequests;
+class UObject;
+class ADeepCSGWorld;
 class UDebrisInstances;
 class UPrimitiveComponent;
-class UStaticMesh;
-class ADeepCSGWorld;
 class USTLMeshCarver;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDeepCSGWorldOnBaseLayerCommitDone);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDeepCSGWorldOnBaseLayerFinalCommitDone);
+class UStaticMesh;
+class UStaticMeshCarver;
 
 UCLASS()
-class ADeepCSGWorld : public AActor, public IVisualLoggerDebugSnapshotInterface {
+class FSD_API ADeepCSGWorld : public AActor, public IVisualLoggerDebugSnapshotInterface {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UTerrainMaterial* DebugCarveInsideTerrainMaterial;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UTerrainMaterial* DebugCarveOutsizeTerrainMaterial;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UTerrainMaterial* DebugCarveEdgeTerrainMaterial;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UTerrainMaterial* GoldTerrainMaterial;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UTerrainMaterial* MOMTerrrainMaterial;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UTerrainMaterial* NitraTerrrainMaterial;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UTerrainMaterial* EmptyTerrainMaterial;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UTerrainMaterial* DefaultBurntTerrainMaterial;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UTerrainMaterial* DefaultHardRockMaterial;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UTerrainMaterial* DefaultBedRockMaterial;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UTerrainType* GoldTerrainType;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UTerrainType* MOMTerrainType;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UTerrainType* RockTerrainType;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UTerrainType* CrystalTerrainType;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UTerrainType* EmptyTerrainType;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UTerrainType* DirtTerrainType;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UTerrainType* DefaultBurntTerrainType;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UTerrainMaterialsCollection* TerrainMaterials;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UDebrisSet*> StandardDebrisSets;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<UDebrisBase*> AddedDebris;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<UDebrisBase*> DebrisLevelGenerationCarved;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<UDebrisBase*> DebrisLargeCarved;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<UDebrisBase*> DebrisSmallCarved;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<UDebrisBase*> DebrisMeshes;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UMaterialInterface* DefaultScannerMaterial;
     
 protected:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     ADebrisDataActor* DebrisActorInstance;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     int32 DebrisActorIndex;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     AProceduralSetup* ProceduralSetup;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<UObject*> TerrainMaterialAssets;
     
 private:
-    UPROPERTY(Export)
+    UPROPERTY(BlueprintReadWrite, Export, meta=(AllowPrivateAccess=true))
     UAsyncPathRequests* AsyncPathRequests;
     
-    UPROPERTY(BlueprintAssignable)
-    FDeepCSGWorldOnBaseLayerCommitDone OnBaseLayerCommitDone;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FTerrainBaseDone OnBaseLayerCommitDone;
     
-    UPROPERTY(BlueprintAssignable)
-    FDeepCSGWorldOnBaseLayerFinalCommitDone OnBaseLayerFinalCommitDone;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FTerrainBaseDone OnBaseLayerFinalCommitDone;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<AActor*> TerrainAttachedActors;
     
-    UPROPERTY(Transient)
+    UPROPERTY(Transient, meta=(AllowPrivateAccess=true))
     TArray<TWeakObjectPtr<UObject>> TerrainListeners;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<UDebrisBase*> RegisteredDebrisList;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FDebrisWhenCarving> DebrisWhenCarvingList;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     TArray<UDebrisInstances*> DebrisInstanceList;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(Export, Transient, meta=(AllowPrivateAccess=true))
     TArray<TWeakObjectPtr<UPrimitiveComponent>> ShowAlwaysScannerComponents;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(Export, Transient, meta=(AllowPrivateAccess=true))
     TArray<TWeakObjectPtr<UPrimitiveComponent>> FogOfWarScannerComponents;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<UDebrisBase*> DebrisHandles;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FTerrainLateJoinData LateJoinData;
     
-    UPROPERTY(Transient)
-    TArray<FEncodedChunkId> visibleChunks;
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    TArray<FEncodedChunkId> VisibleChunks;
     
 public:
+    ADeepCSGWorld();
     UFUNCTION(BlueprintCallable)
     void UnRegisterScannerComponent(UPrimitiveComponent* Component);
     
@@ -203,6 +205,9 @@ public:
     void TerrainOp_CarveSplineSegment(const FSplineSegmentCarveOperationData& Data);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void TerrainOp_CarveCSG(const FCSGBuildOperationData& Data);
+    
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void TerrainOp_CarveCollider(const FCarveWithColliderOperationData& Data);
     
 protected:
@@ -212,6 +217,9 @@ protected:
 public:
     UFUNCTION(BlueprintCallable)
     void SetVisibleToScanner(const FVector& Center, const FVector& range);
+    
+    UFUNCTION(BlueprintCallable)
+    void SetRockMaterialForTest(UTerrainMaterial* Material);
     
     UFUNCTION(BlueprintCallable)
     void SelectDebrisSettings();
@@ -304,6 +312,9 @@ public:
     void CarveWithMesh(UStaticMesh* StaticMesh, UTerrainMaterial* Material, ECarveFilterType CarveFilter, FVector Pos, FQuat Orientation, FVector Scale, EPreciousMaterialOptions Precious);
     
     UFUNCTION(BlueprintCallable)
+    void CarveWithCSGBuild(TSubclassOf<ACSGBuilder> CSGModel, const FTransform& Transform);
+    
+    UFUNCTION(BlueprintCallable)
     float CalcApproximateTerrainDensity(FVector Pos, float Radius);
     
     UFUNCTION(BlueprintCallable)
@@ -318,7 +329,6 @@ public:
     UFUNCTION(BlueprintCallable)
     void ApplyBaseDebrisCarvers(const TArray<UDebrisBase*>& Carvers);
     
-    ADeepCSGWorld();
     
     // Fix for true pure virtual functions not being implemented
 };

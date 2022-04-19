@@ -1,24 +1,26 @@
 #include "FSDGameInstance.h"
 #include "Templates/SubclassOf.h"
+#include "FSDCloudLoadSave.h"
+#include "FSDSessionUpdater.h"
+#include "FSDSendToURL.h"
 
-class AProceduralSetup;
-class AFSDPlayerController;
-class AActor;
+class UTemporaryBuff;
 class UGeneratedMission;
-class UMutator;
-class UFSDSaveGame;
-class UObject;
+class AActor;
+class USoundBase;
+class AProceduralSetup;
 class UTexture2D;
+class UObject;
+class UFSDSaveGame;
 class UHUDWarningWidget;
 class ACharacterSelectionSwitcher;
 class UWorld;
 class UNetDriver;
-class UTemporaryBuff;
+class UMutator;
 class APlayerCharacter;
+class AFSDPlayerController;
 class UIconGenerationManager;
-class UTexture;
 class UItemSkin;
-class USoundBase;
 
 void UFSDGameInstance::UpdateGlobelMissionSeed() {
 }
@@ -139,18 +141,6 @@ void UFSDGameInstance::OnNetworkFailure(UWorld* World, UNetDriver* NetDriver, TE
 void UFSDGameInstance::LoadSaveGame(UFSDSaveGame* toLoad) {
 }
 
-bool UFSDGameInstance::IsScreenFadingToBlack(UObject* WorldContext) {
-    return false;
-}
-
-bool UFSDGameInstance::IsScreenFadingFromBlack(UObject* WorldContext) {
-    return false;
-}
-
-bool UFSDGameInstance::IsScreenFading(UObject* WorldContext) {
-    return false;
-}
-
 bool UFSDGameInstance::IsPendingInvitePasswordProtected() {
     return false;
 }
@@ -168,6 +158,10 @@ bool UFSDGameInstance::IsGameModded() {
 }
 
 bool UFSDGameInstance::IsFreeBeerRewardActive() const {
+    return false;
+}
+
+bool UFSDGameInstance::IsCharacterSelectionWorldVisible() const {
     return false;
 }
 
@@ -217,10 +211,6 @@ bool UFSDGameInstance::GetPendingRewards(FPendingRewardsStats& OutStats, FPendin
     return false;
 }
 
-bool UFSDGameInstance::GetNextSpaceRigNotification(FSpaceRigNotification& NextNotification) {
-    return false;
-}
-
 TArray<UMutator*> UFSDGameInstance::GetMutators(TSubclassOf<UMutator> mutatorClass) const {
     return TArray<UMutator*>();
 }
@@ -257,8 +247,8 @@ UMutator* UFSDGameInstance::GetFirstMutator(TSubclassOf<UMutator> mutatorClass) 
     return NULL;
 }
 
-float UFSDGameInstance::GetCurrentFadeAmount() const {
-    return 0.0f;
+FString UFSDGameInstance::GetDisconnectErrorCode() const {
+    return TEXT("");
 }
 
 TArray<FNetworkConnectionInfo> UFSDGameInstance::GetConnectionInfo() {
@@ -272,31 +262,19 @@ APlayerCharacter* UFSDGameInstance::GetCharacterSelectorCharacter() {
 void UFSDGameInstance::GameUserSettingsChanged() {
 }
 
-void UFSDGameInstance::FadeScreenToBlack(UObject* WorldContext, float FadeTime, float Delay, bool ResetExistingFades, bool CapFramerate, bool FadeWorldOnly, bool ToSpaceRig, UTexture* loadingImage) {
-}
-
-void UFSDGameInstance::FadeScreenFromBlack(UObject* WorldContext, float FadeTime, float Delay, bool ResetExistingFades, bool CapFramerate, bool FadeWorldOnly, bool ToSpaceRig) {
-}
-
 void UFSDGameInstance::CloseSessionLobby() {
 }
 
 void UFSDGameInstance::ClearPendingRewards() {
 }
 
-void UFSDGameInstance::ClearGameStateSeamlessTravelStorage() {
-}
-
-void UFSDGameInstance::ClearCampaignNotifications() {
+void UFSDGameInstance::ClearDisconnectError() {
 }
 
 void UFSDGameInstance::ChangeSkinPreview(UItemSkin* PreviewSkin) {
 }
 
 void UFSDGameInstance::CancelJoin() {
-}
-
-void UFSDGameInstance::BlackoutScreen(UObject* WorldContext, bool FadeWorldOnly) {
 }
 
 UHUDWarningWidget* UFSDGameInstance::AddWarningToHUD(TSubclassOf<UHUDWarningWidget> WidgetClass, UTexture2D* Texture, USoundBase* PingSound) {
@@ -310,9 +288,6 @@ void UFSDGameInstance::AddStatValue(const FString& Key, float Value) {
 }
 
 void UFSDGameInstance::AddStatCount(const FString& Key, int32 count) {
-}
-
-void UFSDGameInstance::AddSpaceRigNotification(FSpaceRigNotification NewNotification, const FString& ID, bool TriggerEvent) {
 }
 
 UFSDGameInstance::UFSDGameInstance() {
@@ -340,7 +315,6 @@ UFSDGameInstance::UFSDGameInstance() {
     this->ForcedSpecialEvent = NULL;
     this->ShowMinerManualWorkInProgress = false;
     this->LastDreadnaughtKillTime = -1.00f;
-    this->CampaignNotification = NULL;
     this->CharacterSelectionSwitcher = NULL;
     this->bGameSettingsChanged = false;
     this->ServerSearchActive = false;
@@ -367,6 +341,9 @@ UFSDGameInstance::UFSDGameInstance() {
     this->MovieModeStartAtOrigin = false;
     this->MovieModeStartWithCameraShake = false;
     this->ActiveForgeSchematic = NULL;
+    this->FSDCloudLoadSave = CreateDefaultSubobject<UFSDCloudLoadSave>(TEXT("FSDCloudLoadSave"));
+    this->SessionUpdater = CreateDefaultSubobject<UFSDSessionUpdater>(TEXT("SessionUpdater"));
+    this->SendToURL = CreateDefaultSubobject<UFSDSendToURL>(TEXT("FSDSendToURL"));
     this->FriendsAndInvites = NULL;
     this->SessionStartTime = 0.00f;
     this->SessionStartTimestamp = 0;

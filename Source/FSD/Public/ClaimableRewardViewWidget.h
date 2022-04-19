@@ -9,9 +9,12 @@ class UClaimableRewardViewWidget : public UUserWidget {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FClaimableRewardView Data;
     
+public:
+    UClaimableRewardViewWidget();
+protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ReceiveEndFlow();
     
@@ -28,6 +31,5 @@ public:
     UFUNCTION(BlueprintCallable)
     void BeginRewardFlow(FClaimableRewardView InViewData);
     
-    UClaimableRewardViewWidget();
 };
 

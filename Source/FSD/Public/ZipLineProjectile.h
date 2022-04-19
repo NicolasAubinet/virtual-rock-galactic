@@ -2,56 +2,56 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "GameFramework/Actor.h"
+#include "Components/TimelineComponent.h"
 #include "UObject/NoExportTypes.h"
 #include "ZipLineProjectile.generated.h"
 
-class UTimelineComponent;
-class UCurveFloat;
-class UMaterialInstanceDynamic;
 class UPointLightComponent;
+class UMaterialInstanceDynamic;
+class UTimelineComponent;
 class UStatusEffect;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_DELEGATE_OneParam(FZipLineProjectileCallback, float, Output);
+class UCurveFloat;
 
 UCLASS(Abstract)
 class AZipLineProjectile : public AActor {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UTimelineComponent* Timeline;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float LightIntensity;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaterialGlow;
     
-    UPROPERTY()
-    FZipLineProjectileCallback Callback;
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnTimelineFloat Callback;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UCurveFloat* LightCurve;
     
-    UPROPERTY(BlueprintReadWrite, Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     TArray<UPointLightComponent*> PointLights;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<UMaterialInstanceDynamic*> MaterialInstances;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UStatusEffect> OnUseStatusEffect;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UStatusEffect> OnReleaseStatusEffect;
     
+public:
+    AZipLineProjectile();
+protected:
     UFUNCTION(BlueprintCallable)
     void OnTimelineTick(float NewValue);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnShoot(FVector Origin, FVector EndLocation);
     
-public:
-    AZipLineProjectile();
 };
 

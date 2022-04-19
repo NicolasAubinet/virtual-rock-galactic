@@ -3,7 +3,7 @@
 #include "Components/ActorComponent.h"
 #include "TreasureRewarder.generated.h"
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UTreasureRewarder : public UActorComponent {
     GENERATED_BODY()
 public:

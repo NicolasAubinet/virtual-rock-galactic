@@ -1,6 +1,7 @@
 #include "MiningPod.h"
 #include "Net/UnrealNetwork.h"
 #include "Templates/SubclassOf.h"
+#include "AutoCarverComponent.h"
 
 class UObject;
 class AMiningPod;
@@ -87,6 +88,7 @@ void AMiningPod::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifeti
 
 AMiningPod::AMiningPod() {
     this->DropHeight = 3500.00f;
+    this->AutoCarver = CreateDefaultSubobject<UAutoCarverComponent>(TEXT("AutoCarver"));
     this->DropCurve = NULL;
     this->DepartCurve = NULL;
     this->CarverDropCurve = NULL;

@@ -1,92 +1,107 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "AmmoDrivenWeapon.h"
+#include "ChargeChangedSignatureDelegate.h"
 #include "ChargedWeapon.generated.h"
 
+class USoundCue;
 class UAnimMontage;
 class UFXSystemAsset;
 class UFXSystemComponent;
-class USoundCue;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FChargedWeaponOnChargeChanged, float, charge);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FChargedWeaponOnHeatChanged, float, charge);
 
 UCLASS(Abstract)
 class AChargedWeapon : public AAmmoDrivenWeapon {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FChargedWeaponOnChargeChanged OnChargeChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FChargeChangedSignature OnChargeChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FChargedWeaponOnHeatChanged OnHeatChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FChargeChangedSignature OnHeatChanged;
     
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UAnimMontage* FP_OverheatAnim;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UAnimMontage* WeaponOverheatAnim;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UAnimMontage* FP_ChargeupMontage;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UAnimMontage* TP_ChargeupMontage;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UFXSystemAsset* ChargeupParticles;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UFXSystemComponent* ChargeupParticleInstance;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UFXSystemAsset* ChargeupFireMuzzleFlash;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     USoundCue* NormalFiresound;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundCue* FullyChargedFireSound;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ChargeSpeed;
     
-    UPROPERTY(BlueprintReadOnly, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_Charging, meta=(AllowPrivateAccess=true))
     bool Charging;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float ChargeProgress;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 ShotCostAtBelowFullCharge;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 ShotCostAtFullCharge;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ChargedShotsOnly;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool AutoFireWhenOverheated;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float TotalHeat;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float CoolingRate;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float HeatPerSecondWhileCharging;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float HeatPerSecondWhenCharged;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float HeatPerNormalShot;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float HeatPerChargedShot;
     
+public:
+    AChargedWeapon();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+protected:
     UFUNCTION(BlueprintCallable)
     void SetOverheated(bool isOverheated);
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
-    void Server_SetIsCharging(bool isChargingValue);
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_SetIsCharging(bool isCharging);
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void RecieveStoppedCharging(float NewChargeProgress);
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void RecieveStartedCharging();
     
 public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
@@ -95,11 +110,13 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ReceiveOverheatedChanged(bool isOverheated);
     
+protected:
+    UFUNCTION(BlueprintCallable)
+    void OnRep_Charging();
+    
+public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetIsCharging() const;
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    AChargedWeapon();
 };
 

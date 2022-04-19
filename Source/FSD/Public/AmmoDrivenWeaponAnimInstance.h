@@ -10,25 +10,28 @@ class UAmmoDrivenWeaponAnimInstance : public UAnimInstance {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     AAmmoDrivenWeapon* Weapon;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool IsFiring;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float ClipFullPercentage;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool Overheated;
     
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    float Temperature;
+    
 public:
+    UAmmoDrivenWeaponAnimInstance();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsFull() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool isEmpty() const;
     
-    UAmmoDrivenWeaponAnimInstance();
 };
 

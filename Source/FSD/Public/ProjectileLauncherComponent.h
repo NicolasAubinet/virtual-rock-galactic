@@ -6,18 +6,18 @@
 
 class AProjectileBase;
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UProjectileLauncherComponent : public UProjectileLauncherBaseComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
-    TSubclassOf<AProjectileBase> projectileClass;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<AProjectileBase> ProjectileClass;
     
 public:
+    UProjectileLauncherComponent();
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetProjectileClass(TSubclassOf<AProjectileBase> NewProjectileClass);
     
-    UProjectileLauncherComponent();
 };
 

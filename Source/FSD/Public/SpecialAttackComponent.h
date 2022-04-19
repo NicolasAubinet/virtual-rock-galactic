@@ -1,23 +1,25 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "NameDelegateDelegate.h"
 #include "AttackBaseComponent.h"
 #include "SpecialAttackComponent.generated.h"
 
 class UAnimMontage;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSpecialAttackComponentOnAttackActionNotify, FName, nameValue);
-
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class USpecialAttackComponent : public UAttackBaseComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UAnimMontage*> Montages;
     
-    UPROPERTY(BlueprintAssignable)
-    FSpecialAttackComponentOnAttackActionNotify OnAttackActionNotify;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FNameDelegate OnAttackActionNotify;
     
+public:
+    USpecialAttackComponent();
+protected:
     UFUNCTION(BlueprintCallable)
     void TriggerAttack(FName Name);
     
@@ -36,7 +38,5 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     void OnFrozen(bool IsFrozen);
     
-public:
-    USpecialAttackComponent();
 };
 

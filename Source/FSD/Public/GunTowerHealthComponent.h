@@ -3,7 +3,7 @@
 #include "EnemyHealthComponent.h"
 #include "GunTowerHealthComponent.generated.h"
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UGunTowerHealthComponent : public UEnemyHealthComponent {
     GENERATED_BODY()
 public:

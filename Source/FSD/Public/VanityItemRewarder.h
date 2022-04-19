@@ -6,14 +6,14 @@
 class UVanityItem;
 class UPlayerCharacterID;
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UVanityItemRewarder : public UTreasureRewarder {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UVanityItem* GivenVanityItem;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UPlayerCharacterID* GivenCharacterID;
     
     UVanityItemRewarder();

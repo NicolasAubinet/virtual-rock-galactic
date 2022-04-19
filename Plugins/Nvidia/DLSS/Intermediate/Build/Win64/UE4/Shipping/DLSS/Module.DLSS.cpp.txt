@@ -1,0 +1,10 @@
+C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Intermediate\Build\Win64\UE4\Shipping\DLSS\Definitions.DLSS.h
+C:/Users/Nico/Documents/Unreal Projects/DRG Modding/FSD/Plugins/Nvidia/DLSS/Source/DLSS/Private/DLSSModule.cpp
+C:/Users/Nico/Documents/Unreal Projects/DRG Modding/FSD/Plugins/Nvidia/DLSS/Source/DLSS/Private/DLSSOverrideSettings.cpp
+C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Source\DLSS\Public\DLSSOverrideSettings.h
+C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Source\DLSS\Public\EDLSSSettingOverride.h
+C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Intermediate\Build\Win64\UE4\Inc\DLSS\EDLSSSettingOverride.generated.h
+C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Intermediate\Build\Win64\UE4\Inc\DLSS\DLSSOverrideSettings.generated.h
+C:/Users/Nico/Documents/Unreal Projects/DRG Modding/FSD/Plugins/Nvidia/DLSS/Source/DLSS/Private/DLSSSettings.cpp
+C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Source\DLSS\Public\DLSSSettings.h
+C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Intermediate\Build\Win64\UE4\Inc\DLSS\DLSSSettings.generated.h

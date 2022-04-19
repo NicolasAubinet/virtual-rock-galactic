@@ -10,7 +10,7 @@ class AFlameWallSegment : public AActor {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, Export, VisibleDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleDefaultsOnly, meta=(AllowPrivateAccess=true))
     USphereComponent* CollisionComponent;
     
 public:

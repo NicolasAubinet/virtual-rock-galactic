@@ -8,7 +8,7 @@ USTRUCT(BlueprintType)
 struct FCSGConvexColliderProperties {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UStaticMesh* collider;
     
     FSDENGINE_API FCSGConvexColliderProperties();

@@ -4,8 +4,8 @@
 #include "EnemyPawn.h"
 #include "InsectSwarmSpawner.generated.h"
 
-class AInsectSwarmEnemy;
 class UStaticMeshComponent;
+class AInsectSwarmEnemy;
 class AActor;
 
 UCLASS(Abstract)
@@ -13,21 +13,24 @@ class AInsectSwarmSpawner : public AEnemyPawn {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<AInsectSwarmEnemy> SwarmType;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float SpawnHeightOffset;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float AlertDistance;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float respawnDelay;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<AInsectSwarmEnemy> SwarmInstance;
     
+public:
+    AInsectSwarmSpawner();
+protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     UStaticMeshComponent* Receive_GetStaticMesh() const;
     
@@ -37,7 +40,5 @@ protected:
     UFUNCTION(BlueprintCallable)
     void OnSwarmDestroyed(AActor* DestroyedActor);
     
-public:
-    AInsectSwarmSpawner();
 };
 

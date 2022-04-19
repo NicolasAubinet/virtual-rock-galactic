@@ -5,25 +5,25 @@
 #include "UpgradeValues.h"
 #include "PushDynamicStatusEffectDamageBonusUpgrade.generated.h"
 
+class AFSDPlayerState;
 class UStatusEffectItem;
 class AActor;
-class AFSDPlayerState;
 
 UCLASS(EditInlineNew, MinimalAPI)
 class UPushDynamicStatusEffectDamageBonusUpgrade : public UItemUpgrade {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FName Key;
     
-    UPROPERTY(EditAnywhere, Instanced)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UStatusEffectItem* StatusEffectItem;
     
 public:
+    UPushDynamicStatusEffectDamageBonusUpgrade();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static FUpgradeValues GetUpgradedValue(TSubclassOf<AActor> Item, AFSDPlayerState* Player, FName NewKey);
     
-    UPushDynamicStatusEffectDamageBonusUpgrade();
 };
 

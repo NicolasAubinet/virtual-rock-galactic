@@ -6,13 +6,13 @@ USTRUCT()
 struct FChunkOffset {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     int16 X;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     int16 Y;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     int16 Z;
     
     FSDENGINE_API FChunkOffset();

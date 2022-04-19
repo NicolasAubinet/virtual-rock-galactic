@@ -1,9 +1,11 @@
 #include "RedeployableSentryGun.h"
 #include "Net/UnrealNetwork.h"
+#include "OutlineComponent.h"
+#include "ActorTrackingComponent.h"
 
 class APlayerCharacter;
-class AActor;
 class USkeletalMeshComponent;
+class AActor;
 
 void ARedeployableSentryGun::ToggleOutlineAndIcon(bool Visible) {
 }
@@ -59,6 +61,8 @@ void ARedeployableSentryGun::GetLifetimeReplicatedProps(TArray<FLifetimeProperty
 }
 
 ARedeployableSentryGun::ARedeployableSentryGun() {
+    this->ActorTrackingIcon = CreateDefaultSubobject<UActorTrackingComponent>(TEXT("ActorTrackingIcon"));
+    this->outline = CreateDefaultSubobject<UOutlineComponent>(TEXT("outline"));
     this->bOutlineAndIconVisible = false;
     this->State = ERedeployableSentryGunState::Deploying;
     this->PlasmaLineMaxRange = 1000.00f;

@@ -9,7 +9,7 @@ class AEnemyShowroomItem : public AShowroomItem {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EShowroomScaling Scaling;
     
 public:

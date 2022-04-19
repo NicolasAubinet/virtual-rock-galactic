@@ -1,9 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Components/RichTextBlock.h"
-#include "TextStyleOverride.h"
-#include "Fonts/SlateFontInfo.h"
 #include "Styling/SlateColor.h"
+#include "Fonts/SlateFontInfo.h"
+#include "TextStyleOverride.h"
 #include "RichTextStylable.generated.h"
 
 UCLASS()
@@ -11,13 +11,13 @@ class URichTextStylable : public URichTextBlock {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSlateFontInfo Font;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSlateColor FontColor;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<FName, FTextStyleOverride> Styles;
     
 public:

@@ -12,9 +12,9 @@ UCLASS(EditInlineNew, MinimalAPI)
 class UCooldownUpgrade : public UStandardItemUpgrade {
     GENERATED_BODY()
 public:
+    UCooldownUpgrade();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static FUpgradeValues GetUpgradedValue(TSubclassOf<AActor> Item, AFSDPlayerState* Player);
     
-    UCooldownUpgrade();
 };
 

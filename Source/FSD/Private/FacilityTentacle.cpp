@@ -10,6 +10,9 @@ void AFacilityTentacle::PlayHitReaction(float Amount) {
 void AFacilityTentacle::OnRep_TentacleState() {
 }
 
+void AFacilityTentacle::OnRep_DesiredTarget() {
+}
+
 bool AFacilityTentacle::FindBurrowLocation(UDebrisPositioning* Debris, const FVector& Origin, float Radius, FVector& OutLocation) {
     return false;
 }
@@ -18,6 +21,7 @@ void AFacilityTentacle::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Ou
     Super::GetLifetimeReplicatedProps(OutLifetimeProps);
     
     DOREPLIFETIME(AFacilityTentacle, TentacleState);
+    DOREPLIFETIME(AFacilityTentacle, DesiredTarget);
 }
 
 AFacilityTentacle::AFacilityTentacle() {

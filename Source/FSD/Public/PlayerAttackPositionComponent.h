@@ -3,15 +3,15 @@
 #include "AttackerPositioningComponent.h"
 #include "PlayerAttackPositionComponent.generated.h"
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UPlayerAttackPositionComponent : public UAttackerPositioningComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float OnZiplineFlyingModifier;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float OnZiplineWalkingModifier;
     
 public:

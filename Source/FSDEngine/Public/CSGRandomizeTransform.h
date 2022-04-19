@@ -8,7 +8,7 @@ UCLASS(BlueprintType)
 class UCSGRandomizeTransform : public UCSGSingleChildBase {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FCSGRandomizeTransformProperties Properties;
     
     UCSGRandomizeTransform();

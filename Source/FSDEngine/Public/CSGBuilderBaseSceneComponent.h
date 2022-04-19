@@ -3,7 +3,7 @@
 #include "Components/SceneComponent.h"
 #include "CSGBuilderBaseSceneComponent.generated.h"
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UCSGBuilderBaseSceneComponent : public USceneComponent {
     GENERATED_BODY()
 public:

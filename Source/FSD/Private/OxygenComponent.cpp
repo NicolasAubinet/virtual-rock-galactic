@@ -3,7 +3,7 @@
 
 class UHealthComponentBase;
 
-void UOxygenComponent::RegisterOxygenEvent(FOxygenComponentOxygenCallback OxygenCallback, float oxygenLevel, bool triggerOnOxygenLoss) {
+void UOxygenComponent::RegisterOxygenEvent(FOxygenTriggerDelegate OxygenCallback, float oxygenLevel, bool triggerOnOxygenLoss) {
 }
 
 void UOxygenComponent::OnRevived() {

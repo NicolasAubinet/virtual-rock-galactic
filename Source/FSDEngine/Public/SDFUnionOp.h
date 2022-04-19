@@ -5,13 +5,13 @@
 #include "SDFUnionOp.generated.h"
 
 UCLASS()
-class USDFUnionOp : public USDFBase {
+class FSDENGINE_API USDFUnionOp : public USDFBase {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FSDFSmoothingProperties Properties;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TArray<USDFBase*> Arguments;
     
     USDFUnionOp();

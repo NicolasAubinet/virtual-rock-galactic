@@ -8,13 +8,13 @@ USTRUCT(BlueprintType)
 struct FMissionShoutQueueItem {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TSoftObjectPtr<USoundBase> AudioPtr;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FText Text;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     USoundBase* LoadedAudio;
     
     FSD_API FMissionShoutQueueItem();

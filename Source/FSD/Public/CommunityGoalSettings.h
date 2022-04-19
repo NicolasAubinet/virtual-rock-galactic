@@ -11,23 +11,23 @@ UCLASS(BlueprintType)
 class UCommunityGoalSettings : public UDataAsset {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UCommunityGoalFaction*> ActiveCommunityFactions;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UCommunityGoal*> ActiveCommunityGoals;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UCommunityGoal* DSMUGoal;
     
 public:
+    UCommunityGoalSettings();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UCommunityGoal* GetGoal(ECommunityGoalIndex Goal) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UCommunityGoal* FindGoal(const FString& Goal) const;
     
-    UCommunityGoalSettings();
 };
 

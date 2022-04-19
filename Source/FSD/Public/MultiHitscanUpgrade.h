@@ -6,21 +6,21 @@
 #include "UpgradeValues.h"
 #include "MultiHitscanUpgrade.generated.h"
 
-class AFSDPlayerState;
 class AItem;
+class AFSDPlayerState;
 
 UCLASS(EditInlineNew, MinimalAPI)
 class UMultiHitscanUpgrade : public UStandardItemUpgrade {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EMultiHitscanUpgradeType upgradeType;
     
 public:
+    UMultiHitscanUpgrade();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static FUpgradeValues GetUpgradedValue(TSubclassOf<AItem> Item, AFSDPlayerState* Player, EMultiHitscanUpgradeType NewUpgradeType);
     
-    UMultiHitscanUpgrade();
 };
 

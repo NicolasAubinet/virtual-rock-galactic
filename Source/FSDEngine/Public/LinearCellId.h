@@ -6,13 +6,13 @@ USTRUCT()
 struct FLinearCellId {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     uint16 X;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     uint16 Y;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     uint16 Z;
     
     FSDENGINE_API FLinearCellId();

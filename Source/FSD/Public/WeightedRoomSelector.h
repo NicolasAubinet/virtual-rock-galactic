@@ -7,7 +7,7 @@ USTRUCT(BlueprintType)
 struct FWeightedRoomSelector {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FWeightedRoomSelectorItem> Items;
     
     FSD_API FWeightedRoomSelector();

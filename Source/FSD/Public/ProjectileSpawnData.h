@@ -10,19 +10,19 @@ USTRUCT(BlueprintType)
 struct FProjectileSpawnData {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
-    TSubclassOf<AProjectile> projectileClass;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<AProjectile> ProjectileClass;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
     FFloatInterval HorizontalAngleOffset;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
     FFloatInterval VerticalAngleOffset;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
     FFloatInterval Delay;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool IsBallistic;
     
     FSD_API FProjectileSpawnData();

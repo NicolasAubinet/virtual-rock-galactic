@@ -8,13 +8,13 @@ USTRUCT(BlueprintType)
 struct FDeepCSGFloatPlane {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FVector4 Plane;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FDeepCSGNode Top;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FDeepCSGNode Bottom;
     
     FSDENGINE_API FDeepCSGFloatPlane();

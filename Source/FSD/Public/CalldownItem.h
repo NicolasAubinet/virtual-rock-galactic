@@ -5,47 +5,48 @@
 #include "UObject/NoExportTypes.h"
 #include "CalldownItem.generated.h"
 
-class AActor;
-class UResourceData;
 class UItemPlacerAggregator;
 class ARessuplyPod;
+class UResourceData;
+class AActor;
 
 UCLASS()
 class ACalldownItem : public AAnimatedItem {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UItemPlacerAggregator> ItemPlacerClass;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<ARessuplyPod> SupplyPodClass;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UResourceData* ResouceRequired;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText OrderDescription;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText LogText;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<AActor> ResupplyBeacon;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UItemPlacerAggregator* ItemPlacerInstance;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float CoolDown;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float CooldownRemaining;
-    
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
-    void Server_Call_Resupply(const FVector& Location);
     
 public:
     ACalldownItem();
+protected:
+    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    void Server_Call_Resupply(const FVector& Location);
+    
 };
 

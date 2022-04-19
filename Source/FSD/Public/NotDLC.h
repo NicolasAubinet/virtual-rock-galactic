@@ -7,7 +7,7 @@ UCLASS()
 class UNotDLC : public UDLCBase {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDLCBase* dlc;
     
     UNotDLC();

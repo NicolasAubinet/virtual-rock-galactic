@@ -2,8 +2,8 @@
 
 class APlayerCharacter;
 class AActor;
-class UHealthComponentBase;
 class AFSDPlayerState;
+class UHealthComponentBase;
 
 void ABoscoController::ReviveTarget() {
 }

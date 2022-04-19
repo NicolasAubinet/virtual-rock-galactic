@@ -6,22 +6,22 @@ USTRUCT()
 struct FCloudSaveRequest {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     FString SteamTicket;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     FString PSTicket;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     int32 PlayerRank;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     int32 SaveToDiskCounter;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     FString RawData;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     FString Branch;
     
     FSD_API FCloudSaveRequest();

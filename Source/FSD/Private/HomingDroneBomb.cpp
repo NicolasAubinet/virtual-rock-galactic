@@ -1,5 +1,6 @@
 #include "HomingDroneBomb.h"
 #include "Net/UnrealNetwork.h"
+#include "EnemyHealthComponent.h"
 
 void AHomingDroneBomb::UpdateHomingSpeed() {
 }
@@ -17,6 +18,7 @@ void AHomingDroneBomb::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 }
 
 AHomingDroneBomb::AHomingDroneBomb() {
+    this->Health = CreateDefaultSubobject<UEnemyHealthComponent>(TEXT("Health"));
     this->ArmingSound = NULL;
     this->HomingUpdateInterval = 3.00f;
     this->TargetSearchInterval = 0.50f;

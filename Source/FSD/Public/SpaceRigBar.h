@@ -8,39 +8,44 @@
 
 class UDrinkableDataAsset;
 class UInstantUsable;
-class UBoxComponent;
 class UBarMenuWidget;
+class UBoxComponent;
 class APlayerCharacter;
 class ADrinkableActor;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSpaceRigBarOnNewDrinkableSpecial, UDrinkableDataAsset*, Drinkable);
 
 UCLASS(Abstract)
 class ASpaceRigBar : public AActor {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FSpaceRigBarOnNewDrinkableSpecial OnNewDrinkableSpecial;
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FDrinkableSignature, UDrinkableDataAsset*, Drinkable);
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDrinkableSignature OnNewDrinkableSpecial;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UInstantUsable* BarUsable;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UBoxComponent* BarUsableCollider;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UBarMenuWidget> BarMenuWidget;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FVector> DrinkServingLocations;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FDrinkableBarSlot> DrinkableBarSlots;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_DrinkableSpecial)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_DrinkableSpecial, meta=(AllowPrivateAccess=true))
     UDrinkableDataAsset* DrinkableSpecial;
     
+public:
+    ASpaceRigBar();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+protected:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SpawnDrinkables(UDrinkableDataAsset* Drinkable, APlayerCharacter* User);
     
@@ -71,9 +76,5 @@ protected:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, BlueprintPure)
     int32 GetAvailableDrinkableSlots() const;
     
-public:
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    ASpaceRigBar();
 };
 

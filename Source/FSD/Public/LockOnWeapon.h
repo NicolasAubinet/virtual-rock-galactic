@@ -3,159 +3,163 @@
 #include "Templates/SubclassOf.h"
 #include "AmmoDrivenWeapon.h"
 #include "UObject/NoExportTypes.h"
+#include "LockCounter.h"
 #include "TracerData.h"
 #include "UObject/NoExportTypes.h"
-#include "LockCounter.h"
 #include "Engine/EngineTypes.h"
 #include "LockOnWeapon.generated.h"
 
-class UDamageComponent;
-class UStatusEffect;
-class UActorTrackingWidget;
 class AActor;
-class UHitscanComponent;
+class UActorTrackingWidget;
 class ALockOnBeam;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FLockOnWeaponOnLockonTargetRotationUpdated, bool, hasTargetLockon, FRotator, socketRotation);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FLockOnWeaponOnLockingStopped);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FLockOnWeaponOnLockingStarted);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FLockOnWeaponOnMaxTargetsChanged, int32, InMaxTargets);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FLockOnWeaponOnLockOnCountChanged, int32, InCurrentCount);
+class UStatusEffect;
+class UDamageComponent;
+class UHitscanComponent;
 
 UCLASS(Abstract)
 class FSD_API ALockOnWeapon : public AAmmoDrivenWeapon {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FLockOnWeaponOnLockingStarted OnLockingStarted;
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FMaxTargetsDelegate, int32, InMaxTargets);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FLockonTargetRotationUpdated, bool, hasTargetLockon, FRotator, socketRotation);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FLockOnRifleLockingOnState);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FLockOnCountDelegate, int32, InCurrentCount);
     
-    UPROPERTY(BlueprintAssignable)
-    FLockOnWeaponOnLockingStopped OnLockingStopped;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FLockOnRifleLockingOnState OnLockingStarted;
     
-    UPROPERTY(BlueprintAssignable)
-    FLockOnWeaponOnMaxTargetsChanged OnMaxTargetsChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FLockOnRifleLockingOnState OnLockingStopped;
     
-    UPROPERTY(BlueprintAssignable)
-    FLockOnWeaponOnLockOnCountChanged OnLockOnCountChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FMaxTargetsDelegate OnMaxTargetsChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FLockOnWeaponOnLockonTargetRotationUpdated OnLockonTargetRotationUpdated;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FLockOnCountDelegate OnLockOnCountChanged;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FLockonTargetRotationUpdated OnLockonTargetRotationUpdated;
     
 protected:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     AActor* AimTarget;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float LockOnDamageMultiplier;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 ShotsPerTarget;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 MaxTargets;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float TimeBetweenLockedShots;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float LockOnTime;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxLockOnDegree;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float LoseLockOnDegree;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DegreeTolerance;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxLockOnRange;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bPrioritizeLowHitPoint;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bAlwaysHitTarget;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxLockOnDuration;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bLockOnControlsSentryGun;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bSentryGunShootsOnLockedShot;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UActorTrackingWidget> TrackingWidgetClass;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<ALockOnBeam> LockOnBeamClass;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<AActor> AoeActorClass;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 AoeHitCountThreshhold;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool UseLockOnTargetStatusEffect;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UStatusEffect> LockOnTargetStatusEffect;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 PushStatusEffectEveryXLock;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     int32 LockOnCount;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UDamageComponent* DamageComponent;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UHitscanComponent* HitscanComponent;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FTracerData ChargedShotTracer;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ChargeSpeed;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float SlowMovementAtCharge;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool FearEnabled;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float FearFactorBase;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float FearFactorPerShotBonus;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float FearRange;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float FearRangePerShotBonus;
     
-    UPROPERTY(Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     bool IsMovementSlowed;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool Charging;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float ChargeProgress;
     
-    UPROPERTY(Replicated)
+    UPROPERTY(BlueprintReadWrite, Replicated, meta=(AllowPrivateAccess=true))
     bool LastShotWasLockedOn;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float LockOnRecoilMult;
     
+public:
+    ALockOnWeapon();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+protected:
     UFUNCTION(BlueprintCallable)
     void UpdateRifleEye();
     
@@ -202,7 +206,7 @@ protected:
     void OnHitDeadTarget();
     
     UFUNCTION(BlueprintCallable)
-    void OnHit(const FHitResult& Hit, bool AlwaysPenetrate);
+    void OnHit(const FHitResult& Hit, bool alwaysPenetrate);
     
     UFUNCTION(BlueprintCallable)
     void OnAsyncFireComplete();
@@ -210,9 +214,5 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void MuzzleLerpToTarget(FVector TargetLocation);
     
-public:
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    ALockOnWeapon();
 };
 

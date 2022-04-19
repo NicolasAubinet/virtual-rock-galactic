@@ -5,63 +5,66 @@
 #include "JellyBreeder.generated.h"
 
 class UPhysicalMaterial;
-class UAnimSequenceBase;
 class AProjectile;
-class UParticleSystem;
-class USoundBase;
+class UAnimSequenceBase;
 class UEnemyDescriptor;
+class UParticleSystem;
 class AActor;
+class USoundBase;
 
 UCLASS()
 class AJellyBreeder : public AAFlyingBug {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UAnimSequenceBase* EggSpawnAnimation;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UParticleSystem* EggParticles;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundBase* EggSound;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UEnemyDescriptor* EnemyToSpawn;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<AProjectile> EggClass;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float TimeBetweenBursts;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float TimeBetweenEggs;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float CloseToSpawnEggTime;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UPhysicalMaterial* WeakPointMaterial;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UPhysicalMaterial* UnWeakPointMaterial;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 EggBurstSize;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 MaxJellies;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MultiplierOnHighPlayerCount;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_BreedMode)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_BreedMode, meta=(AllowPrivateAccess=true))
     bool IsInBreedMode;
     
 public:
+    AJellyBreeder();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintCallable)
-    void SpawnEnemies(AProjectile* egg, int32 AmountToSpawn);
+    void SpawnEnemies(AProjectile* Egg, int32 AmountToSpawn);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
     void PlaySpawnEggAnim();
@@ -77,8 +80,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void BreedModeFlipped(bool aIsLayingEggs);
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    AJellyBreeder();
 };
 

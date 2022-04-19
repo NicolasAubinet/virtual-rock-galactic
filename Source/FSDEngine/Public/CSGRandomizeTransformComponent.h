@@ -4,11 +4,11 @@
 #include "CSGRandomizeTransformProperties.h"
 #include "CSGRandomizeTransformComponent.generated.h"
 
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UCSGRandomizeTransformComponent : public UCSGBaseComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FCSGRandomizeTransformProperties Properties;
     
     UCSGRandomizeTransformComponent();

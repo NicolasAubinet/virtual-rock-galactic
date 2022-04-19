@@ -8,10 +8,10 @@ USTRUCT(BlueprintType)
 struct FPickaxeMeshInstance {
     GENERATED_BODY()
 public:
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UMeshComponent* FP_Mesh;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UMeshComponent* TP_Mesh;
     
     FSD_API FPickaxeMeshInstance();

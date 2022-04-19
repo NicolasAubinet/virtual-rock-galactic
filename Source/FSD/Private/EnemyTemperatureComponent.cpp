@@ -1,17 +1,13 @@
 #include "EnemyTemperatureComponent.h"
 
-class UDamageTag;
-class AActor;
 class UHealthComponent;
-class UDamageClass;
-class UFSDPhysicalMaterial;
-class AController;
+class UDamageTag;
 class UStatusEffectsComponent;
 
 void UEnemyTemperatureComponent::TimerCallback() {
 }
 
-void UEnemyTemperatureComponent::OnDeath(UHealthComponent* HealthComponent, float damageAmount, UDamageClass* DamageClass, AActor* damageCause, AController* Instigator, UFSDPhysicalMaterial* PhysicalMaterial, bool IsRadial, const TArray<UDamageTag*>& Tags) {
+void UEnemyTemperatureComponent::OnDeath(UHealthComponent* HealthComponent, float damageAmount, const FDamageData& DamageData, const TArray<UDamageTag*>& Tags) {
 }
 
 void UEnemyTemperatureComponent::DoTemperatureShock(UStatusEffectsComponent* Status) {

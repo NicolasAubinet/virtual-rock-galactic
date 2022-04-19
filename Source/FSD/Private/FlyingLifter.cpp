@@ -1,24 +1,22 @@
 #include "FlyingLifter.h"
 #include "Net/UnrealNetwork.h"
+#include "Components/PointLightComponent.h"
+#include "GrabberComponent.h"
+#include "Components/CapsuleComponent.h"
+#include "Components/AudioComponent.h"
+#include "InDangerComponent.h"
 
-class UPointLightComponent;
 class AActor;
 class UPrimitiveComponent;
-
-void AFlyingLifter::SetLight(UPointLightComponent* ALight) {
-}
 
 bool AFlyingLifter::SelectAnotherTarget() {
     return false;
 }
 
-void AFlyingLifter::OnStateBroke(AActor* aReleasedPlayer) {
+void AFlyingLifter::OnStateBroke(AActor* aReleasedPlayer, bool fullGrabElapsed) {
 }
 
-void AFlyingLifter::OnRep_State() {
-}
-
-void AFlyingLifter::OnRep_ShouldScream() {
+void AFlyingLifter::OnRep_State(EGrabberState oldState) {
 }
 
 void AFlyingLifter::OnInDanger() {
@@ -43,13 +41,17 @@ void AFlyingLifter::ChangeState(EGrabberState aGrabberState) {
 void AFlyingLifter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
     Super::GetLifetimeReplicatedProps(OutLifetimeProps);
     
-    DOREPLIFETIME(AFlyingLifter, ShouldScream);
     DOREPLIFETIME(AFlyingLifter, GrabberState);
 }
 
 AFlyingLifter::AFlyingLifter() {
+    this->GrabLight = CreateDefaultSubobject<UPointLightComponent>(TEXT("GrabberLight"));
+    this->GrabberComp = CreateDefaultSubobject<UGrabberComponent>(TEXT("GrabberComponent"));
+    this->GrabCapsule = CreateDefaultSubobject<UCapsuleComponent>(TEXT("GrabCapsuleComponent"));
+    this->GrabbedIdleLoop = CreateDefaultSubobject<UAudioComponent>(TEXT("GrabLoopSound"));
+    this->InDanger = CreateDefaultSubobject<UInDangerComponent>(TEXT("InDangerComponent"));
+    this->ScreamComponent = CreateDefaultSubobject<UAudioComponent>(TEXT("ScreamAudio"));
     this->PreventGrabAfterSpawn = 3.00f;
-    this->ShouldScream = false;
     this->GrabberState = EGrabberState::StandBy;
     this->WanderingSpeed = 0.00f;
     this->WanderingAcceleration = 0.00f;
@@ -60,13 +62,10 @@ AFlyingLifter::AFlyingLifter() {
     this->FleeSpeed = 0.00f;
     this->FleeAcceleration = 0.00f;
     this->CarryCooldown = 12.00f;
-    this->ScreamSound = NULL;
     this->FleeSound = NULL;
     this->FleeAnimation = NULL;
-    this->GrabberCollider = NULL;
     this->ParalyzeOnGrab = true;
     this->ExtraUpForce = 10.00f;
     this->ScreamDistance = 1000.00f;
-    this->GrabLight = NULL;
 }
 

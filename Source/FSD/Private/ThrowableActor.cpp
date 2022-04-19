@@ -1,5 +1,6 @@
 #include "ThrowableActor.h"
 #include "Net/UnrealNetwork.h"
+#include "GameFramework/ProjectileMovementComponent.h"
 
 
 
@@ -13,6 +14,7 @@ void AThrowableActor::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutL
 }
 
 AThrowableActor::AThrowableActor() {
+    this->Movement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovement"));
     this->IsMoving = true;
     this->IgnoreFellOutOfWorld = false;
     this->IgnoreOwnersCollision = true;

@@ -2,70 +2,66 @@
 #include "CoreMinimal.h"
 #include "Engine/DataAsset.h"
 #include "UObject/NoExportTypes.h"
+#include "OnMilestoneReachedDelegate.h"
 #include "MilestoneTier.h"
+#include "OnMilestoneClaimedDelegate.h"
 #include "MilestoneAsset.generated.h"
 
-class UFSDGameInstance;
-class UObject;
-class UMissionStat;
-class UTexture2D;
 class UMilestoneAsset;
+class UMissionStat;
+class UObject;
+class UTexture2D;
 class UPlayerCharacterID;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FMilestoneAssetOnMilestoneClaimed, UMilestoneAsset*, Milestone, int32, ClaimedTier);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FMilestoneAssetOnMilestoneReached, UMilestoneAsset*, Milestone, int32, ReachedTier);
 
 UCLASS(BlueprintType)
 class UMilestoneAsset : public UDataAsset {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable, Transient)
-    FMilestoneAssetOnMilestoneClaimed OnMilestoneClaimed;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    FOnMilestoneClaimed OnMilestoneClaimed;
     
-    UPROPERTY(BlueprintAssignable, Transient)
-    FMilestoneAssetOnMilestoneReached OnMilestoneReached;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    FOnMilestoneReached OnMilestoneReached;
     
 protected:
-    UPROPERTY(VisibleAnywhere)
-    FGuid SaveGameID;
+    UPROPERTY(BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    FGuid SavegameID;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UTexture2D* LargeImage;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText FormattedTitle;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 FormattedValueOffset;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool CountValueAsTotal;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UMissionStat* TrackingStat;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UPlayerCharacterID* TrackingCharacterID;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FMilestoneTier> Tiers;
     
-    UPROPERTY(Transient)
-    UFSDGameInstance* GameInstance;
-    
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     int32 LastTierReached;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool bPendingMilestoneReached;
     
 public:
+    UMilestoneAsset();
     UFUNCTION(BlueprintCallable)
     static TArray<UMilestoneAsset*> SortMilestonesByProgress(UObject* WorldContext, UPARAM(Ref) TArray<UMilestoneAsset*>& Milestones);
     
 protected:
     UFUNCTION(BlueprintCallable)
-    void OnMissionStatChanged(UMissionStat* Stat, float Value);
+    void OnMissionStatChanged(UObject* WorldContext, UMissionStat* Stat, float Value);
     
 public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -103,6 +99,5 @@ public:
     UFUNCTION(BlueprintCallable)
     int32 ClaimNextTier(UObject* WorldContext);
     
-    UMilestoneAsset();
 };
 

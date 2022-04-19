@@ -10,13 +10,14 @@ class URewardWidget : public UUserWidget {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     UReward* Reward;
-    
-    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-    void PlayReceiveAnim();
     
 public:
     URewardWidget();
+protected:
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void PlayReceiveAnim();
+    
 };
 

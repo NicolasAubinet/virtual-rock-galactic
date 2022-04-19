@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "CSGBase.h"
-#include "MeshCellNoiseProperties.h"
 #include "DeepCSGFloatTree.h"
+#include "MeshCellNoiseProperties.h"
 #include "BinaryTerrainMaterialCombiner.h"
 #include "DeepCSGNode.h"
 #include "UObject/NoExportTypes.h"
@@ -12,22 +12,22 @@ UCLASS(BlueprintType)
 class UCSGCellNoise : public UCSGBase {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FMeshCellNoiseProperties Properties;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FBinaryTerrainMaterialCombiner Materials;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FVector ReciprocalCellSize;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FDeepCSGFloatTree ApplyTree;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FVector> CellPositions;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FDeepCSGNode> CellLeaves;
     
     UCSGCellNoise();

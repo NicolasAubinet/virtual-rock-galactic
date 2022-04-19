@@ -6,14 +6,17 @@
 
 class UObject;
 
-UCLASS(Abstract)
+UCLASS(Abstract, meta=(BlueprintSpawnableComponent))
 class UTutorialHintComponent : public UTutorialComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FTutorialHint Hint;
     
+public:
+    UTutorialHintComponent();
+protected:
     UFUNCTION(BlueprintCallable)
     void SetRemainingVisibleTime(float remainingTime);
     
@@ -23,7 +26,5 @@ protected:
     UFUNCTION(BlueprintCallable)
     void ChangeHint(const FTutorialHint& NewHint);
     
-public:
-    UTutorialHintComponent();
 };
 

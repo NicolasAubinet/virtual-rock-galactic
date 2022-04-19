@@ -6,7 +6,7 @@ USTRUCT(BlueprintType)
 struct FMatrixWithExactSync {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     float Values[16];
     
     FSDENGINE_API FMatrixWithExactSync();

@@ -4,11 +4,11 @@
 #include "CSGSTLProperties.h"
 #include "CSGSTLComponent.generated.h"
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UCSGSTLComponent : public USimpleMeshWithCachedTreeComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FCSGSTLProperties Properties;
     
     UCSGSTLComponent();

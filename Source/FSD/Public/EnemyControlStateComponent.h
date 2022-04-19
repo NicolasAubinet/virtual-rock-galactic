@@ -1,34 +1,39 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "CharacterStateComponent.h"
-#include "EEnemyControlState.h"
 #include "ControlEnemyState.h"
+#include "EEnemyControlState.h"
 #include "UObject/NoExportTypes.h"
 #include "EnemyControlStateComponent.generated.h"
 
-class UAIPlayerControlComponent;
 class UAnimMontage;
+class UAIPlayerControlComponent;
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class FSD_API UEnemyControlStateComponent : public UCharacterStateComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool UseThirdPersonCam;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_StateData)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_StateData, meta=(AllowPrivateAccess=true))
     FControlEnemyState StateData;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_ControlState)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_ControlState, meta=(AllowPrivateAccess=true))
     EEnemyControlState ControlState;
     
-    UPROPERTY(Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     FQuat AngularVelocity;
     
-    UPROPERTY(Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     FQuat ControlRotation;
     
+public:
+    UEnemyControlStateComponent();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+protected:
     UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
     void ServerExit();
     
@@ -53,9 +58,5 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UAIPlayerControlComponent* GetAiPlayerControlComponent();
     
-public:
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    UEnemyControlStateComponent();
 };
 

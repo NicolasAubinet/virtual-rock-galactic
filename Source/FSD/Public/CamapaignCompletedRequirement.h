@@ -7,11 +7,11 @@
 class UCampaign;
 
 UCLASS(EditInlineNew)
-class UCamapaignCompletedRequirement : public UCampaignRequirement {
+class FSD_API UCamapaignCompletedRequirement : public UCampaignRequirement {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UCampaign> Campaign;
     
 public:

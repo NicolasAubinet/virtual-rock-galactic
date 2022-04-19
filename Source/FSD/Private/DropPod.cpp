@@ -1,6 +1,7 @@
 #include "DropPod.h"
 #include "Net/UnrealNetwork.h"
 #include "Templates/SubclassOf.h"
+#include "AutoCarverComponent.h"
 
 class ADropPod;
 class UObject;
@@ -34,6 +35,7 @@ void ADropPod::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetime
 
 ADropPod::ADropPod() {
     this->DropHeight = 3500.00f;
+    this->AutoCarver = CreateDefaultSubobject<UAutoCarverComponent>(TEXT("AutoCarver"));
     this->DepartCurve = NULL;
     this->CarverRotationSpeed = 100.00f;
     this->DepartureTime = -1.00f;

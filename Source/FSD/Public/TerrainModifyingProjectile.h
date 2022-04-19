@@ -1,50 +1,50 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "UObject/NoExportTypes.h"
 #include "Projectile.h"
+#include "RevertToNormalDelegate.h"
+#include "UObject/NoExportTypes.h"
 #include "TerrainModifyingProjectile.generated.h"
 
 class UTerrainMaterial;
 class UStaticMesh;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FTerrainModifyingProjectileOnRevertToNormal);
-
 UCLASS()
 class ATerrainModifyingProjectile : public AProjectile {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FTerrainModifyingProjectileOnRevertToNormal OnRevertToNormal;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FRevertToNormal OnRevertToNormal;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     UTerrainMaterial* Terrain;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UTerrainMaterial* OriginalGroundMaterial;
     
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     UStaticMesh* CarveMesh;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FVector CarveMeshScale;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FVector LastHitLocation;
     
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     float Radius;
     
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     bool Revert;
     
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     float TimeOnGround;
     
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     float ExpensiveCarveNoise;
     
 public:
+    ATerrainModifyingProjectile();
     UFUNCTION(BlueprintCallable)
     void Tick(float DeltaSeconds);
     
@@ -54,6 +54,5 @@ public:
     UFUNCTION(BlueprintCallable)
     void BeginPlay();
     
-    ATerrainModifyingProjectile();
 };
 

@@ -7,7 +7,7 @@ USTRUCT(BlueprintType)
 struct FSDFBoxProperties {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FVector HalfSize;
     
     FSDENGINE_API FSDFBoxProperties();

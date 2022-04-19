@@ -2,11 +2,11 @@
 #include "Net/UnrealNetwork.h"
 #include "Templates/SubclassOf.h"
 
+class UTexture2D;
 class UResourceData;
 class UObjectiveWidget;
 class UOptionalObjectiveWidget;
 class UObjective;
-class UTexture2D;
 
 void UObjective::SignalObjectiveUpdated() {
 }
@@ -37,6 +37,9 @@ bool UObjective::IsCompleted() const {
 
 bool UObjective::HasReplicated() const {
     return false;
+}
+
+void UObjective::HandleMissionEnded_Implementation(bool MissionSuccess) const {
 }
 
 TSubclassOf<UObjectiveWidget> UObjective::GetWidgetClassOrDefault(TSubclassOf<UObjectiveWidget> DefaultWidgetClass) {

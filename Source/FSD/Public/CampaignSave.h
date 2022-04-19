@@ -1,28 +1,28 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "WeeklyCampaignItem.h"
-#include "ActiveCampaignItem.h"
 #include "UObject/NoExportTypes.h"
+#include "ActiveCampaignItem.h"
+#include "WeeklyCampaignItem.h"
 #include "CampaignSave.generated.h"
 
 USTRUCT(BlueprintType)
 struct FCampaignSave {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FActiveCampaignItem ActiveCampaign;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TArray<FGuid> CompletedCampaigns;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     int32 ActiveCampaignWeek;
     
 protected:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FWeeklyCampaignItem WeeklySave;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FWeeklyCampaignItem MaxtrixCoreHuntSave;
     
 public:

@@ -1,47 +1,50 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "EInputKeys.h"
 #include "TreasureWeight.h"
+#include "EInputKeys.h"
 #include "TreasureContainer.generated.h"
 
-class UItemAquisitionSource;
-class USceneComponent;
-class APlayerCharacter;
-class UOncePerPlayerUsableComponent;
 class UTreasureRewarder;
+class APlayerCharacter;
+class USceneComponent;
+class UOncePerPlayerUsableComponent;
+class UItemAquisitionSource;
 
 UCLASS()
 class FSD_API ATreasureContainer : public AActor {
     GENERATED_BODY()
 public:
-    UPROPERTY(Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USceneComponent* Root;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UOncePerPlayerUsableComponent* CollectUsable;
     
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UItemAquisitionSource* AquisitionSource;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_Collectors)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_Collectors, meta=(AllowPrivateAccess=true))
     TArray<APlayerCharacter*> Collectors;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_LastJoiner)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_LastJoiner, meta=(AllowPrivateAccess=true))
     APlayerCharacter* LastJoiner;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FTreasureWeight> PossibleRewarders;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UTreasureRewarder* TreasureRewarder;
     
 private:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool PreventLatejoiners;
     
 public:
+    ATreasureContainer();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintCallable)
     void TestAwardTreasure();
     
@@ -79,8 +82,5 @@ public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, BlueprintPure)
     bool GetPreventFurtherLatejoiners() const;
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    ATreasureContainer();
 };
 

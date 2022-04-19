@@ -1,9 +1,9 @@
 #include "MissionStat.h"
 #include "Templates/SubclassOf.h"
 
-class UObject;
 class UTexture2D;
 class UMissionStat;
+class UObject;
 class APlayerCharacter;
 class UPlayerCharacterID;
 

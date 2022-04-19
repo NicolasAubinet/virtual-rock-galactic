@@ -4,11 +4,11 @@
 #include "CSGCircleDuplicatorProperties.h"
 #include "CSGCircleDuplicatorComponent.generated.h"
 
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UCSGCircleDuplicatorComponent : public UCSGBaseComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FCSGCircleDuplicatorProperties Properties;
     
     UCSGCircleDuplicatorComponent();

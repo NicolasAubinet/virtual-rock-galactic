@@ -1,19 +1,28 @@
 #include "Biome.h"
 #include "Templates/SubclassOf.h"
 
+class UObject;
+class UTexture2D;
 class ADebrisDataActor;
 class UTerrainMaterial;
+class UMaterialInstance;
 class AActor;
-class UTexture2D;
-class UParticleSystem;
 class UUserWidget;
+class UParticleSystem;
 class USoundCue;
+
+void UBiome::StartPreload(UObject* WorldContext) const {
+}
 
 UTerrainMaterial* UBiome::GetRockMaterial() const {
     return NULL;
 }
 
 TSoftClassPtr<AActor> UBiome::GetPostProcessActorClass_Soft() const {
+    return NULL;
+}
+
+UMaterialInstance* UBiome::GetFlavorMaterial() const {
     return NULL;
 }
 
@@ -75,6 +84,7 @@ USoundCue* UBiome::GetAmbientSounds() const {
 
 UBiome::UBiome() {
     this->BiomeIndex = 0;
+    this->IsTutorialBiome = false;
     this->ExtraCaveSize = 0.00f;
     this->RockMaterial = NULL;
     this->DirtMaterial = NULL;
@@ -99,7 +109,6 @@ UBiome::UBiome() {
     this->MediumCaveReverb = NULL;
     this->LargeCaveReverbVolume = 1.00f;
     this->LargeCaveReverb = NULL;
-    this->TunnelAmbience = NULL;
     this->PlanetZoneSelectionWeight = 1.00f;
 }
 

@@ -1,29 +1,29 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Components/ActorComponent.h"
-#include "FlareMeta.h"
 #include "UObject/NoExportTypes.h"
+#include "Components/ActorComponent.h"
+#include "ShadowQualityChangedDelegate.h"
+#include "FlareMeta.h"
 #include "FlareController.generated.h"
 
-class AFlareGunProjectile;
-class AFlare;
 class AActor;
+class AFlare;
+class AFlareGunProjectile;
 class UObject;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFlareControllerOnShadowQualityChanged);
-
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UFlareController : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable, BlueprintCallable)
-    FFlareControllerOnShadowQualityChanged OnShadowQualityChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FShadowQualityChanged OnShadowQualityChanged;
     
 protected:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FFlareMeta> FlaresMeta;
     
 public:
+    UFlareController();
     UFUNCTION(BlueprintCallable)
     static void UnregisterFlareGunProjectile(AFlareGunProjectile* flareprj);
     
@@ -39,6 +39,5 @@ public:
     UFUNCTION(BlueprintCallable)
     static AActor* FindFlareNear(UObject* WorldContextObject, FVector Pos, bool allowMoving, float maxLightRadiusFraction);
     
-    UFlareController();
 };
 

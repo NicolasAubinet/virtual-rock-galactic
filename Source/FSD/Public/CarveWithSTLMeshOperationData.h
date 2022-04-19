@@ -1,37 +1,37 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "MatrixWithExactSync.h"
-#include "ECarveFilterType.h"
 #include "EPreciousMaterialOptions.h"
+#include "ECarveFilterType.h"
+#include "MatrixWithExactSync.h"
 #include "CarveWithSTLMeshOperationData.generated.h"
 
-class UTerrainMaterial;
 class USTLMeshCarver;
 class UStaticMeshCarver;
+class UTerrainMaterial;
 
 USTRUCT(BlueprintType)
 struct FCarveWithSTLMeshOperationData {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 OperationNumber;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USTLMeshCarver* STLMeshCarver;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UStaticMeshCarver* StaticMeshCarver;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UTerrainMaterial* Material;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     ECarveFilterType CarveFilter;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EPreciousMaterialOptions Precious;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FMatrixWithExactSync Transform;
     
     FSD_API FCarveWithSTLMeshOperationData();

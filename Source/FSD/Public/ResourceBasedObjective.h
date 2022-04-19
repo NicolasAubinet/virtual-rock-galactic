@@ -3,7 +3,7 @@
 #include "Objective.h"
 #include "ResourceBasedObjective.generated.h"
 
-UCLASS(Abstract)
+UCLASS(Abstract, meta=(BlueprintSpawnableComponent))
 class UResourceBasedObjective : public UObjective {
     GENERATED_BODY()
 public:

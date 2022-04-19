@@ -5,12 +5,12 @@
 
 class UResourceData;
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class URestrictedResourceBank : public UResourceBank {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UResourceData* RequiredResource;
     
 public:

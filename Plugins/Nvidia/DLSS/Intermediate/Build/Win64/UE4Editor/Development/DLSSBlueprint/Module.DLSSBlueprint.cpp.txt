@@ -1,0 +1,15 @@
+C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Intermediate\Build\Win64\UE4Editor\Development\DLSSBlueprint\Definitions.DLSSBlueprint.h
+C:/Users/Nico/Documents/Unreal Projects/DRG Modding/FSD/Plugins/Nvidia/DLSS/Source/DLSSBlueprint/Private/DLSSBlueprintModule.cpp
+C:/Users/Nico/Documents/Unreal Projects/DRG Modding/FSD/Plugins/Nvidia/DLSS/Source/DLSSBlueprint/Private/DLSSLibrary.cpp
+C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Source\DLSSBlueprint\Public\DLSSLibrary.h
+C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Source\DLSSBlueprint\Public\UDLSSMode.h
+C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Intermediate\Build\Win64\UE4Editor\Inc\DLSSBlueprint\UDLSSMode.generated.h
+C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Source\DLSSBlueprint\Public\UDLSSSupport.h
+C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Intermediate\Build\Win64\UE4Editor\Inc\DLSSBlueprint\UDLSSSupport.generated.h
+E:\EpicGames\UE_4.27\Engine\Source\Runtime\CoreUObject\Public\UObject/NoExportTypes.h
+E:\EpicGames\UE_4.27\Engine\Source\Runtime\CoreUObject\Public\UObject/PropertyAccessUtil.h
+E:\EpicGames\UE_4.27\Engine\Source\Runtime\Core\Public\Math/UnitConversion.h
+E:\EpicGames\UE_4.27\Engine\Source\Runtime\Core\Public\Math/UnitConversion.inl
+E:\EpicGames\UE_4.27\Engine\Source\Runtime\Core\Public\Internationalization/PolyglotTextData.h
+E:\EpicGames\UE_4.27\Engine\Source\Runtime\CoreUObject\Public\AssetRegistry/ARFilter.h
+C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Intermediate\Build\Win64\UE4Editor\Inc\DLSSBlueprint\DLSSLibrary.generated.h

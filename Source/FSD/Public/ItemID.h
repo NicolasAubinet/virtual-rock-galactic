@@ -1,29 +1,37 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "EItemCategory.h"
 #include "SavableDataAsset.h"
+#include "EItemCategory.h"
 #include "ItemID.generated.h"
 
 class AActor;
 class UPlayerCharacterID;
 class AItem;
+class UItemData;
 
 UCLASS()
 class FSD_API UItemID : public USavableDataAsset {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<AActor> Item;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UPlayerCharacterID* ItemOwner;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EItemCategory ItemCategory;
     
 public:
+    UItemID();
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsItemClassChildOf(TSubclassOf<AActor> InParentClass) const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UItemData* GetItemData() const;
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TSubclassOf<AItem> GetItemClass() const;
     
@@ -39,6 +47,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     AActor* GetActor() const;
     
-    UItemID();
 };
 

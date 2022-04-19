@@ -11,7 +11,7 @@ class USpawnOnImpactDamageBonus : public UDamageBonusBase {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<AActor> ActorToSpawn;
     
 public:

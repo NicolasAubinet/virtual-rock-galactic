@@ -8,7 +8,7 @@ struct FGeneratedInstantCarvers {
     GENERATED_BODY()
 public:
 private:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FLevelCarverPass> LevelCarverPasses;
     
 public:

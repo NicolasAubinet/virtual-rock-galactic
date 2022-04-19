@@ -9,10 +9,10 @@ class UGameAnimationsSettings : public UDeveloperSettings {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(Config, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSoftObjectPath FootstepTestingSound;
     
-    UPROPERTY(Config, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSoftObjectPath FootstepTestingParticles;
     
 public:

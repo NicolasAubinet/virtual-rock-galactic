@@ -1,42 +1,39 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UsableComponent.h"
-#include "EInputKeys.h"
+#include "UsedBySignatureDelegate.h"
+#include "UsableChangedSignatureDelegate.h"
 #include "InstantUsable.generated.h"
 
-class APlayerCharacter;
 class USoundCue;
 
-UDELEGATE(BlueprintAuthorityOnly, BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FInstantUsableOnUsedBy, APlayerCharacter*, User, EInputKeys, Key);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FInstantUsableOnUsableChanged, bool, CanUse);
-
-UCLASS()
-class UInstantUsable : public UUsableComponent {
+UCLASS(meta=(BlueprintSpawnableComponent))
+class FSD_API UInstantUsable : public UUsableComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FInstantUsableOnUsedBy OnUsedBy;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FUsedBySignature OnUsedBy;
     
-    UPROPERTY(BlueprintAssignable)
-    FInstantUsableOnUsableChanged OnUsableChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FUsableChangedSignature OnUsableChanged;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bShowUsingUI;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
-    bool AllowUseWhileCarrying;
-    
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundCue* AudioCompletedUse;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere, ReplicatedUsing=OnRep_Usable)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_Usable, meta=(AllowPrivateAccess=true))
     bool Usable;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool TurnOffAfterUse;
     
 public:
+    UInstantUsable();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintCallable)
     void SetCanUse(bool CanUse);
     
@@ -44,9 +41,5 @@ protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_Usable();
     
-public:
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    UInstantUsable();
 };
 

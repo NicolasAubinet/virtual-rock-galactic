@@ -4,7 +4,7 @@ class UObject;
 class UPlayerCharacterID;
 class UVanityItem;
 
-void UCharacterVanityItems::SortVanityItems(UObject* WorldContextObject, UPlayerCharacterID* characterID, TArray<UVanityItem*>& vanityItems) {
+void UCharacterVanityItems::SortVanityItems(UObject* WorldContextObject, UPlayerCharacterID* characterID, TArray<UVanityItem*>& VanityItems) {
 }
 
 TArray<UVanityItem*> UCharacterVanityItems::GetVanityItems(UObject* WorldContextObject, EVanitySlot Slot, bool onlyStoreItems, UPlayerCharacterID* characterID) {
@@ -31,9 +31,6 @@ UVanityItem* UCharacterVanityItems::GetDefaultVanityItem(UObject* WorldContext, 
     return NULL;
 }
 
-void UCharacterVanityItems::Clean() {
-}
-
 UCharacterVanityItems::UCharacterVanityItems() {
     this->HeadSchematicBank = NULL;
     this->BeardSchematicBank = NULL;
@@ -42,5 +39,6 @@ UCharacterVanityItems::UCharacterVanityItems() {
     this->SideburnSchematicBank = NULL;
     this->BeardMaterialSchematicBank = NULL;
     this->SkinMaterialSchematicBank = NULL;
+    this->OwningCharacter = NULL;
 }
 

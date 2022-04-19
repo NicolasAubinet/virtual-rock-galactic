@@ -10,7 +10,7 @@ class AIconGenerationWeapon : public AIconGenerationBase {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     TArray<UWeaponIconSceneCaptureComponent*> CaptureComponents;
     
 public:

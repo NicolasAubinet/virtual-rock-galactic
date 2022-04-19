@@ -9,7 +9,7 @@ class UAnimNotifyState_OverrideItemOffset : public UAnimNotifyState {
     GENERATED_BODY()
 public:
 private:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FVector CameraOffset;
     
 public:

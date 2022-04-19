@@ -1,6 +1,7 @@
 #include "GrapplingHookGun.h"
 #include "Net/UnrealNetwork.h"
 #include "Templates/SubclassOf.h"
+#include "CoolDownItemAggregator.h"
 
 class AGrapplingHookGun;
 
@@ -40,6 +41,7 @@ void AGrapplingHookGun::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Ou
 }
 
 AGrapplingHookGun::AGrapplingHookGun() {
+    this->CoolDownAggregator = CreateDefaultSubobject<UCoolDownItemAggregator>(TEXT("CoolDownAggregator"));
     this->MaxDistance = 2000.00f;
     this->FPReloadAnim = NULL;
     this->TPReloadAnim = NULL;

@@ -1,53 +1,53 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Engine/DataAsset.h"
 #include "Curves/CurveFloat.h"
 #include "ETreasureType.h"
+#include "Engine/DataAsset.h"
 #include "TreasureSettings.generated.h"
 
-class UItemSkinSet;
-class UDrinkableDataAsset;
-class USpecialEvent;
 class UVictoryPose;
 class UItemAquisitionSource;
+class UItemSkinSet;
+class USpecialEvent;
+class UDrinkableDataAsset;
 
 UCLASS()
 class UTreasureSettings : public UDataAsset {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
-    TArray<UItemSkinSet*> SkinSets;
-    
-    UPROPERTY(EditAnywhere)
-    TArray<UDrinkableDataAsset*> Drinks;
-    
-    UPROPERTY(EditAnywhere)
-    TArray<UVictoryPose*> VictoryPoses;
-    
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<ETreasureType> CrateTreasureTypes;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText CrateTreasureEmptyMsg;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<ETreasureType> LostPackTreasureTypes;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText LostPackEmptyMsg;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UItemAquisitionSource* CrateAquisitionSource;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UItemAquisitionSource* LostPackAquisitionSource;
     
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FRuntimeFloatCurve TreasureChanceMissionLengthCurve;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<USpecialEvent*> TreasureEvents;
+    
+    UPROPERTY(BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<UVictoryPose*> VictoryPoses;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<UItemSkinSet*> SkinSets;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<UDrinkableDataAsset*> Drinks;
     
 public:
     UTreasureSettings();

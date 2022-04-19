@@ -1,22 +1,22 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "ExampleUpdatedDelegateDelegate.h"
 #include "ExampleActor.generated.h"
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FExampleActorOnExampleUpdatedEvent);
 
 UCLASS()
 class AExampleActor : public AActor {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FExampleActorOnExampleUpdatedEvent OnExampleUpdatedEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FExampleUpdatedDelegate OnExampleUpdatedEvent;
     
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float Field;
     
 public:
+    AExampleActor();
     UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
     void Server_ExampleFunction();
     
@@ -26,6 +26,5 @@ public:
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
     void All_ExampleFunction();
     
-    AExampleActor();
 };
 

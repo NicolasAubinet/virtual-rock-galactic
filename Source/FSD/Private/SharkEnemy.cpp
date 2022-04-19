@@ -1,5 +1,12 @@
 #include "SharkEnemy.h"
 #include "Net/UnrealNetwork.h"
+#include "Perception/PawnSensingComponent.h"
+#include "Components/SphereComponent.h"
+#include "Particles/ParticleSystemComponent.h"
+#include "InDangerComponent.h"
+#include "EnemyComponent.h"
+#include "DamageComponent.h"
+#include "FakePhysGrabberComponent.h"
 
 class AActor;
 class APawn;
@@ -9,7 +16,7 @@ class UHealthComponentBase;
 void ASharkEnemy::SetVulnerable() {
 }
 
-void ASharkEnemy::ReleasePlayer(AActor* playerchar) {
+void ASharkEnemy::ReleasePlayer(AActor* playerchar, bool fullGrabElapsed) {
 }
 
 void ASharkEnemy::PopRecentlyBumpedPlayer() {
@@ -69,6 +76,16 @@ void ASharkEnemy::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifet
 }
 
 ASharkEnemy::ASharkEnemy() {
+    this->PawnSensing = CreateDefaultSubobject<UPawnSensingComponent>(TEXT("PawnSensing"));
+    this->CollisionSphere = CreateDefaultSubobject<USphereComponent>(TEXT("CollisionSphere"));
+    this->NearTargetSphere = CreateDefaultSubobject<USphereComponent>(TEXT("NearTargetSphere"));
+    this->TearingGroundParticles = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("TearingGroundParticles"));
+    this->AirTrailParticles = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("AirTrailParticles"));
+    this->Danger = CreateDefaultSubobject<UInDangerComponent>(TEXT("Danger"));
+    this->EnemyComponent = CreateDefaultSubobject<UEnemyComponent>(TEXT("EnemyComponent"));
+    this->Damage = CreateDefaultSubobject<UDamageComponent>(TEXT("Damage"));
+    this->BumpDamage = CreateDefaultSubobject<UDamageComponent>(TEXT("BumpDamage"));
+    this->RestrictedGrabberComponent = CreateDefaultSubobject<UFakePhysGrabberComponent>(TEXT("RestrictedGrabberComponent"));
     this->RagdollSpeedFactor = 0.20f;
     this->ImpactCue = NULL;
     this->JumpSound = NULL;

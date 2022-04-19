@@ -1,37 +1,39 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "BaseArmorDamageComponent.h"
 #include "DestructableBodypartItem.h"
+#include "SimpleArmorRadialDamagedDelegateDelegate.h"
+#include "BaseArmorDamageComponent.h"
+#include "ArmorDamageInfo.h"
+#include "EArmorDamageType.h"
 #include "SimpleArmorDamageComponent.generated.h"
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSimpleArmorDamageComponentOnRadialArmorPartsDestroyedEvent, const TArray<uint8>&, destroyedParts);
-
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class USimpleArmorDamageComponent : public UBaseArmorDamageComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FSimpleArmorDamageComponentOnRadialArmorPartsDestroyedEvent OnRadialArmorPartsDestroyedEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FSimpleArmorRadialDamagedDelegate OnRadialArmorPartsDestroyedEvent;
     
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ArmorStrength;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<FName, FDestructableBodypartItem> PhysBoneToArmor;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_ArmorDamageIndexMask)
-    uint32 ArmorDamageIndexMask;
-    
-    UFUNCTION(BlueprintCallable, Reliable, Server)
-    void Server_SetArmorIndexDestroyed(int32 Index, bool Disolved);
-    
-    UFUNCTION()
-    void OnRep_ArmorDamageIndexMask(uint32 OldIndexMask);
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_ArmorDamageInfo, meta=(AllowPrivateAccess=true))
+    FArmorDamageInfo ArmorDamageInfo;
     
 public:
+    USimpleArmorDamageComponent();
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
     
-    USimpleArmorDamageComponent();
+protected:
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_SetArmorIndexDestroyed(int32 Index, EArmorDamageType DamageType);
+    
+    UFUNCTION(BlueprintCallable)
+    void OnRep_ArmorDamageInfo(FArmorDamageInfo OldArmorDamageInfo);
+    
 };
 

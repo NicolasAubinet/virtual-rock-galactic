@@ -3,7 +3,7 @@
 #include "SDFBaseComponent.h"
 #include "SDFBaseWithTransformComponent.generated.h"
 
-UCLASS()
+UCLASS(Abstract, meta=(BlueprintSpawnableComponent))
 class USDFBaseWithTransformComponent : public USDFBaseComponent {
     GENERATED_BODY()
 public:

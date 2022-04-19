@@ -8,7 +8,7 @@ USTRUCT(BlueprintType)
 struct FGeneratedMissionGroup {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<UGeneratedMission*> AvailableMissions;
     
     FSD_API FGeneratedMissionGroup();

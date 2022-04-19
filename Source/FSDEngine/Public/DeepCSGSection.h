@@ -9,7 +9,7 @@ UCLASS()
 class FSDENGINE_API ADeepCSGSection : public AActor {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly, Export)
+    UPROPERTY(BlueprintReadWrite, Export, meta=(AllowPrivateAccess=true))
     UDeepProceduralMeshComponent* DeepMesh;
     
     ADeepCSGSection();

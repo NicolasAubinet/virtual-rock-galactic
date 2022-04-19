@@ -1,4 +1,5 @@
 #include "FSDCloudLoadSave.h"
+#include "FSDCloudSaveHandler.h"
 
 class UObject;
 
@@ -6,6 +7,6 @@ void UFSDCloudLoadSave::StartCloudLoadAll(UObject* WorldContextObject, int32 Ind
 }
 
 UFSDCloudLoadSave::UFSDCloudLoadSave() {
-    this->NumFailedSaves = 0;
+    this->CloudSaveHandler = CreateDefaultSubobject<UFSDCloudSaveHandler>(TEXT("CloudSaveHandler"));
 }
 

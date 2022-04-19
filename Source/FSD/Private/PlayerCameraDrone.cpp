@@ -1,4 +1,5 @@
 #include "PlayerCameraDrone.h"
+#include "GameFramework/FloatingPawnMovement.h"
 
 class UPrimitiveComponent;
 class AActor;
@@ -52,6 +53,7 @@ void APlayerCameraDrone::BeginCountdown_Implementation() {
 }
 
 APlayerCameraDrone::APlayerCameraDrone() {
+    this->Movement = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("Movement"));
     this->MenuTab = 0;
     this->SplineMeshIsVisible = true;
     this->SplineSpeed = 1000.00f;
@@ -62,6 +64,9 @@ APlayerCameraDrone::APlayerCameraDrone() {
     this->UseFreeRotation = false;
     this->UseDOF = false;
     this->VanitySpawnable = NULL;
+    this->VanityWeaponSpawnable = NULL;
+    this->SelectedVanityClassIndex = 0;
+    this->SelectedVanityAnimation = -1;
     this->Flare = NULL;
     this->BounceFlare = NULL;
     this->Spline = NULL;

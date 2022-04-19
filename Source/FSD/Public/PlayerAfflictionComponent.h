@@ -6,33 +6,32 @@
 class UPlayerAfflictionOverlay;
 class APlayerCharacter;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerAfflictionComponentOnShowOverlay, UPlayerAfflictionOverlay*, Overlay);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerAfflictionComponentOnHideOverlay, UPlayerAfflictionOverlay*, Overlay);
-
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UPlayerAfflictionComponent : public UPawnAfflictionComponent {
     GENERATED_BODY()
 public:
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOverlayDelegate, UPlayerAfflictionOverlay*, Overlay);
+    
 protected:
-    UPROPERTY(BlueprintAssignable)
-    FPlayerAfflictionComponentOnShowOverlay OnShowOverlay;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOverlayDelegate OnShowOverlay;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerAfflictionComponentOnHideOverlay OnHideOverlay;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOverlayDelegate OnHideOverlay;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TMap<UPlayerAfflictionOverlay*, int32> ActiveOverlays;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<APlayerCharacter> Character;
     
 public:
+    UPlayerAfflictionComponent();
     UFUNCTION(BlueprintCallable)
     void ShowPlayerOverlay(UPlayerAfflictionOverlay* Overlay);
     
     UFUNCTION(BlueprintCallable)
     void HidePlayerOverlay(UPlayerAfflictionOverlay* Overlay);
     
-    UPlayerAfflictionComponent();
 };
 

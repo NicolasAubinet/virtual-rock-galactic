@@ -11,19 +11,20 @@ class UOptionalUIWidget : public UUserWidget {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UOptionalUICategory* Category;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     ESlateVisibility VisibleFlag;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     ESlateVisibility HiddenFlag;
-    
-    UFUNCTION(BlueprintCallable)
-    void OnVisibilityChanged(UOptionalUICategory* UICategory, bool IsVisible);
     
 public:
     UOptionalUIWidget();
+protected:
+    UFUNCTION(BlueprintCallable)
+    void OnVisibilityChanged(UOptionalUICategory* UICategory, bool IsVisible);
+    
 };
 

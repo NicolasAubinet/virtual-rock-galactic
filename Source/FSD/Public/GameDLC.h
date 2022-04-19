@@ -1,64 +1,65 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "UObject/NoExportTypes.h"
 #include "DLCBase.h"
 #include "SaveGameIDInterface.h"
+#include "UObject/NoExportTypes.h"
 #include "GameDLC.generated.h"
 
+class UObject;
+class UResourceData;
 class UTexture2D;
 class UWindowWidget;
-class UResourceData;
 class UFileMediaSource;
-class UObject;
 
 UCLASS()
 class UGameDLC : public UDLCBase, public ISaveGameIDInterface {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 SteamID;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FString SteamName;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FString OddishID;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FString XBoxDLCName;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<FString, FString> SonyAdditionalContentLabelMap;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FString UWPStoreID;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ShowOnDLCScreen;
     
-    UPROPERTY(EditAnywhere)
-    TSoftObjectPtr<UTexture2D> Banner;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSoftObjectPtr<UTexture2D> banner;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftObjectPtr<UTexture2D> Banner_16_9;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<UWindowWidget> AnnouncementWidget;
     
-    UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
-    FGuid SaveGameID;
+    UPROPERTY(BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    FGuid SavegameID;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<UResourceData*, int32> Resources;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 PerformancePoints;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftObjectPtr<UFileMediaSource> Movie;
     
 public:
+    UGameDLC();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool ShouldBeAnnounced(UObject* WorldContext) const;
     
@@ -77,7 +78,6 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UTexture2D* GetBanner() const;
     
-    UGameDLC();
     
     // Fix for true pure virtual functions not being implemented
 };

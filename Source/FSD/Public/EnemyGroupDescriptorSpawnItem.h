@@ -8,10 +8,10 @@ USTRUCT(BlueprintType)
 struct FEnemyGroupDescriptorSpawnItem {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UEnemyDescriptor* enemy;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     int32 count;
     
     FSD_API FEnemyGroupDescriptorSpawnItem();

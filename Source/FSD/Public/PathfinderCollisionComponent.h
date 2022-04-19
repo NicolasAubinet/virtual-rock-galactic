@@ -4,22 +4,22 @@
 #include "PFCollisionType.h"
 #include "PathfinderCollisionComponent.generated.h"
 
-UCLASS(EditInlineNew)
+UCLASS(EditInlineNew, meta=(BlueprintSpawnableComponent))
 class UPathfinderCollisionComponent : public UStaticMeshComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ActivatePFCollisionAtInit;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     PFCollisionType PFColiType;
     
+    UPathfinderCollisionComponent();
     UFUNCTION(BlueprintCallable)
     void DisablePFCollision();
     
     UFUNCTION(BlueprintCallable)
     void ActivatePFCollision();
     
-    UPathfinderCollisionComponent();
 };
 

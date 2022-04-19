@@ -3,7 +3,7 @@
 #include "EMinersManualSinglePage.generated.h"
 
 UENUM()
-enum class EMinersManualSinglePage {
+enum class EMinersManualSinglePage : uint8 {
     Mutators,
     Warnings,
     DamageTypes,

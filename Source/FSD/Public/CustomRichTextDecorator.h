@@ -10,7 +10,7 @@ class UCustomRichTextDecorator : public URichTextBlockDecorator {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     URichTextBlock* RichTextBlock;
     
 public:

@@ -1,5 +1,7 @@
 #include "SpaceRigBar.h"
 #include "Net/UnrealNetwork.h"
+#include "Components/BoxComponent.h"
+#include "InstantUsable.h"
 
 class UDrinkableDataAsset;
 class APlayerCharacter;
@@ -36,6 +38,8 @@ void ASpaceRigBar::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLife
 }
 
 ASpaceRigBar::ASpaceRigBar() {
+    this->BarUsable = CreateDefaultSubobject<UInstantUsable>(TEXT("BarUsable"));
+    this->BarUsableCollider = CreateDefaultSubobject<UBoxComponent>(TEXT("BarUsableColiider"));
     this->BarMenuWidget = NULL;
     this->DrinkServingLocations.AddDefaulted(4);
     this->DrinkableSpecial = NULL;

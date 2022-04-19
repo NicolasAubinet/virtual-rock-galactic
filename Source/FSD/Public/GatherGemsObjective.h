@@ -6,32 +6,33 @@
 class UGemResourceData;
 class UCappedResource;
 
-UCLASS(Abstract)
-class UGatherGemsObjective : public UResourceBasedObjective {
+UCLASS(Abstract, meta=(BlueprintSpawnableComponent))
+class FSD_API UGatherGemsObjective : public UResourceBasedObjective {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 GemsRequired;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float GemsSpawnedModifier;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_GemsCollected)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_GemsCollected, meta=(AllowPrivateAccess=true))
     int32 GemsCollected;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UGemResourceData* GemResource;
     
+public:
+    UGatherGemsObjective();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+protected:
     UFUNCTION(BlueprintCallable)
     void OnResourceChanged(UCappedResource* CappedResource, float Amount);
     
     UFUNCTION(BlueprintCallable)
     void OnRep_GemsCollected(int32 prevAmount);
     
-public:
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    UGatherGemsObjective();
 };
 

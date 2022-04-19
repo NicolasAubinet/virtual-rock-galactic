@@ -23,6 +23,10 @@ UItemCharacterAnimationSet* UPlayerAnimInstance::GetAnimationSet() const {
     return NULL;
 }
 
+float UPlayerAnimInstance::CalculateDirectionVertical(const FVector& TargetDirection, const FRotator& BaseRotation) const {
+    return 0.0f;
+}
+
 UPlayerAnimInstance::UPlayerAnimInstance() {
     this->IsFirstPerson = false;
     this->WalkTreshhold = 200.00f;
@@ -57,6 +61,10 @@ UPlayerAnimInstance::UPlayerAnimInstance() {
     this->BeingRevived = false;
     this->IsLookingAtMap = false;
     this->IsControllingEnemy = false;
+    this->IsUsingTraversalTool = false;
+    this->TraversalToolTargetHorizontalOffset = 0.00f;
+    this->TraversalToolTargetVerticalOffset = 0.00f;
+    this->TraversalToolSpeedRate = 0.00f;
     this->GliderAnimationLength = 1.00f;
     this->IsAllowedToPlayMovementAnim = false;
     this->CropBeard = 0.00f;

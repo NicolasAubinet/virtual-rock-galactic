@@ -3,7 +3,7 @@
 #include "RadarPointComponent.h"
 #include "NetworkedRadarPointComponent.generated.h"
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UNetworkedRadarPointComponent : public URadarPointComponent {
     GENERATED_BODY()
 public:

@@ -8,7 +8,7 @@ USTRUCT(BlueprintType)
 struct FEnemyGroupDescriptorItem {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UEnemyDescriptor* EnemyDescriptor;
     
     FSD_API FEnemyGroupDescriptorItem();

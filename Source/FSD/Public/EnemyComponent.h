@@ -1,36 +1,36 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "SimpleObjectInfoComponent.h"
+#include "MixerEnemyNameChangeDelegate.h"
 #include "EnemyComponent.generated.h"
 
-class UDialogDataAsset;
 class UEnemyFamily;
 class UTexture2D;
+class UDialogDataAsset;
 class UEnemyID;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FEnemyComponentOnMixerNameChange, const FString&, mixerName);
-
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UEnemyComponent : public USimpleObjectInfoComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UEnemyFamily* Family;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDialogDataAsset* KillShout;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UEnemyID* EnemyID;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FString mixerName;
     
-    UPROPERTY(BlueprintAssignable)
-    FEnemyComponentOnMixerNameChange OnMixerNameChange;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FMixerEnemyNameChange OnMixerNameChange;
     
 public:
+    UEnemyComponent();
     UFUNCTION(BlueprintCallable)
     UEnemyID* GetID();
     
@@ -40,6 +40,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UTexture2D* GetFamilyIcon() const;
     
-    UEnemyComponent();
 };
 

@@ -64,6 +64,8 @@ void AElevatorPlant::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLi
     
     DOREPLIFETIME(AElevatorPlant, RelativeRestLocation);
     DOREPLIFETIME(AElevatorPlant, RelativeDestinationLocation);
+    DOREPLIFETIME(AElevatorPlant, LeafLocationNoise);
+    DOREPLIFETIME(AElevatorPlant, LeafNoiseRotator);
     DOREPLIFETIME(AElevatorPlant, InitialBaseTangentLength);
     DOREPLIFETIME(AElevatorPlant, IsOpen);
     DOREPLIFETIME(AElevatorPlant, Extend);

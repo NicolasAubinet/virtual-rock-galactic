@@ -1,19 +1,20 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "UObject/NoExportTypes.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "UObject/NoExportTypes.h"
 #include "AIFunctionLibrary.generated.h"
 
-class UObject;
-class APlayerCharacter;
-class APawn;
 class UAttackerPositioningComponent;
+class UObject;
+class APawn;
+class APlayerCharacter;
 class AActor;
 
 UCLASS(BlueprintType)
 class UAIFunctionLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    UAIFunctionLibrary();
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     static void SetAICanSense(bool canSense);
     
@@ -44,6 +45,5 @@ public:
     UFUNCTION(BlueprintCallable)
     static void AlertEnemiesInRange(UObject* WorldContextObject, FVector Origin, float range, APawn* alerter);
     
-    UAIFunctionLibrary();
 };
 

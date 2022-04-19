@@ -5,13 +5,13 @@
 #include "SDFOnion.generated.h"
 
 UCLASS()
-class USDFOnion : public USDFBase {
+class FSDENGINE_API USDFOnion : public USDFBase {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSDFOnionProperties Properties;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     USDFBase* Argument;
     
     USDFOnion();

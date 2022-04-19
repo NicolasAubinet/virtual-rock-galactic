@@ -1,16 +1,17 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EVanitySlot.h"
 #include "GameFramework/Actor.h"
+#include "EVanitySlot.h"
 #include "CharacterSelectionSwitcher.generated.h"
 
-class APlayerCharacter;
 class UVictoryPose;
+class APlayerCharacter;
 
 UCLASS()
 class ACharacterSelectionSwitcher : public AActor {
     GENERATED_BODY()
 public:
+    ACharacterSelectionSwitcher();
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnVictoryPoseChanged(UVictoryPose* VictoryPose);
     
@@ -26,6 +27,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     APlayerCharacter* GetActiveCharacter() const;
     
-    ACharacterSelectionSwitcher();
 };
 

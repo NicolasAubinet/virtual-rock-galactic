@@ -3,7 +3,7 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "FSDSkeletalMeshComponent.generated.h"
 
-UCLASS(EditInlineNew)
+UCLASS(EditInlineNew, meta=(BlueprintSpawnableComponent))
 class UFSDSkeletalMeshComponent : public USkeletalMeshComponent {
     GENERATED_BODY()
 public:

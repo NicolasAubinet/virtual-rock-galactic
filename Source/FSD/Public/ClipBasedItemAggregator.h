@@ -1,44 +1,44 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "ItemAggregator.h"
+#include "AmountChangedSignatureDelegate.h"
+#include "ReloadTimeLeftSignatureDelegate.h"
+#include "ReloadCompleteSignatureDelegate.h"
+#include "ReloadStartedSignatureDelegate.h"
 #include "ClipBasedItemAggregator.generated.h"
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FClipBasedItemAggregatorOnReloadStarted);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FClipBasedItemAggregatorOnReloadComplete);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FClipBasedItemAggregatorOnClipAmountChanged, int32, Amount);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FClipBasedItemAggregatorOnMaxAmmoCapacityChanged, int32, Amount);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FClipBasedItemAggregatorOnTotalAmountChanged, int32, Amount);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FClipBasedItemAggregatorOnClipAndTotalChanged, int32, Amount);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FClipBasedItemAggregatorOnReloadTimeChanged, float, Amount);
-
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UClipBasedItemAggregator : public UItemAggregator {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FClipBasedItemAggregatorOnClipAmountChanged OnClipAmountChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FAmountChangedSignature OnClipAmountChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FClipBasedItemAggregatorOnTotalAmountChanged OnTotalAmountChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FAmountChangedSignature OnTotalAmountChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FClipBasedItemAggregatorOnClipAndTotalChanged OnClipAndTotalChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FAmountChangedSignature OnClipAndTotalChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FClipBasedItemAggregatorOnReloadTimeChanged OnReloadTimeChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FReloadTimeLeftSignature OnReloadTimeChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FClipBasedItemAggregatorOnReloadComplete OnReloadComplete;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FReloadCompleteSignature OnReloadComplete;
     
-    UPROPERTY(BlueprintAssignable)
-    FClipBasedItemAggregatorOnReloadStarted OnReloadStarted;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FReloadStartedSignature OnReloadStarted;
     
-    UPROPERTY(BlueprintAssignable)
-    FClipBasedItemAggregatorOnMaxAmmoCapacityChanged OnMaxAmmoCapacityChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FAmountChangedSignature OnMaxAmmoCapacityChanged;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ShowTotalAmount;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool ShowClipAndTotalAsOne;
+    
+    UClipBasedItemAggregator();
     UFUNCTION(BlueprintCallable)
     void ReloadStarted();
     
@@ -51,6 +51,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetClipAmount() const;
     
-    UClipBasedItemAggregator();
 };
 

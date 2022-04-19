@@ -1,5 +1,11 @@
 #include "TowerEventModule.h"
 #include "Net/UnrealNetwork.h"
+#include "Components/SceneComponent.h"
+#include "Components/SkeletalMeshComponent.h"
+#include "Particles/ParticleSystemComponent.h"
+#include "EnemyHealthComponent.h"
+#include "ArmorHealthDamageComponent.h"
+#include "WeakpointGlowComponent.h"
 
 
 void ATowerEventModule::HideArmorPlates() {
@@ -16,6 +22,12 @@ void ATowerEventModule::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Ou
 }
 
 ATowerEventModule::ATowerEventModule() {
+    this->Root = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
+    this->Mesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("MeshComponent"));
+    this->Health = CreateDefaultSubobject<UEnemyHealthComponent>(TEXT("HealthComponent"));
+    this->ArmorDamage = CreateDefaultSubobject<UArmorHealthDamageComponent>(TEXT("ArmorDamageComponent"));
+    this->WeakpointGlow = CreateDefaultSubobject<UWeakpointGlowComponent>(TEXT("WeakpointGlowComponent"));
+    this->SmokeParticles = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("SmokeParticlesComponent"));
     this->DestroyedMesh = NULL;
     this->ExplosionSound = NULL;
     this->ExplosionEffect = NULL;

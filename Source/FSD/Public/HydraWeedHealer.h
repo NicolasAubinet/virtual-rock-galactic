@@ -10,7 +10,7 @@ class AHydraWeedHealer : public AEnemyPawn {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     AHydraWeedCore* Core;
     
 public:

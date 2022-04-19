@@ -5,63 +5,66 @@
 #include "UObject/NoExportTypes.h"
 #include "FacilityGeneratorLine.generated.h"
 
-class UMaterialInterface;
-class UStaticMesh;
-class USplineComponent;
-class USplineDecoratorComponent;
 class ATetherStation;
+class USplineComponent;
+class UMaterialInterface;
+class USplineDecoratorComponent;
+class UStaticMesh;
 
 UCLASS()
 class FSD_API AFacilityGeneratorLine : public AActor {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FTransform StartTransform;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TArray<FTransform> EndTransforms;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float HeightOffsetMin;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float HeightOffsetMax;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxSegmentLength;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float CarveRadius;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USplineComponent* SplineComponent;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USplineDecoratorComponent* SplineDecorator;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftObjectPtr<UStaticMesh> LineMeshPtr;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftObjectPtr<UMaterialInterface> MaterialConnected;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftObjectPtr<UMaterialInterface> MaterialUnconnected;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     ATetherStation* Station;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UStaticMesh* MeshInstance;
     
-    UPROPERTY(ReplicatedUsing=OnRep_Path)
+    UPROPERTY(BlueprintReadWrite, ReplicatedUsing=OnRep_Path, meta=(AllowPrivateAccess=true))
     TArray<FVector> ReplicatedPath;
     
-    UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_Connected)
+    UPROPERTY(BlueprintReadWrite, ReplicatedUsing=OnRep_Connected, meta=(AllowPrivateAccess=true))
     bool Connected;
     
 public:
+    AFacilityGeneratorLine();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetConnected(bool InConnected);
     
@@ -75,9 +78,5 @@ protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_Connected();
     
-public:
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    AFacilityGeneratorLine();
 };
 

@@ -7,7 +7,7 @@ USTRUCT(BlueprintType)
 struct FGDGameStatsTracking {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagContainer TotalEnemyKillsFilter;
     
     FSD_API FGDGameStatsTracking();

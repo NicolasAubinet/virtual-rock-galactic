@@ -1,35 +1,32 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/Object.h"
+#include "EmptyFriendDelegateDelegate.h"
 #include "BlueprintFriend.h"
 #include "FSDFriendsAndInvites.generated.h"
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFSDFriendsAndInvitesOnFriendsChanged);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFSDFriendsAndInvitesOnFriendInvitesChanged);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFSDFriendsAndInvitesOnRequestRefresh);
 
 UCLASS(Blueprintable)
 class UFSDFriendsAndInvites : public UObject {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable, BlueprintCallable)
-    FFSDFriendsAndInvitesOnFriendsChanged OnFriendsChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FEmptyFriendDelegate OnFriendsChanged;
     
-    UPROPERTY(BlueprintAssignable, BlueprintCallable)
-    FFSDFriendsAndInvitesOnFriendInvitesChanged OnFriendInvitesChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FEmptyFriendDelegate OnFriendInvitesChanged;
     
-    UPROPERTY(BlueprintAssignable, BlueprintCallable)
-    FFSDFriendsAndInvitesOnRequestRefresh OnRequestRefresh;
+    UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FEmptyFriendDelegate OnRequestRefresh;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FBlueprintFriend> Friends;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FBlueprintFriend> FriendInvites;
     
+    UFSDFriendsAndInvites();
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void Init();
     
-    UFSDFriendsAndInvites();
 };
 

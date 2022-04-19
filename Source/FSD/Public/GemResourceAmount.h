@@ -8,10 +8,10 @@ USTRUCT(BlueprintType)
 struct FGemResourceAmount {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UGemResourceCreator* GemCreator;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     int32 Amount;
     
     FSD_API FGemResourceAmount();

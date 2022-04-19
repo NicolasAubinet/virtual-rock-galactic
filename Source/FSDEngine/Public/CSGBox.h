@@ -8,7 +8,7 @@ UCLASS()
 class UCSGBox : public UConvexMeshWithCachedTree {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FMeshBoxProperties Properties;
     
     UCSGBox();

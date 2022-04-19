@@ -10,6 +10,7 @@ UCLASS(BlueprintType)
 class UFSDSteamUtils : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    UFSDSteamUtils();
     UFUNCTION(BlueprintCallable)
     static bool PlayerIsFollowingUsOnSteam();
     
@@ -58,6 +59,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static FString FilterProfanityText(const FString& inputMessage);
     
-    UFSDSteamUtils();
 };
 

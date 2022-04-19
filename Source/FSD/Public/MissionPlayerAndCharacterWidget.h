@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Blueprint/UserWidget.h"
 #include "PlayerProgress.h"
+#include "Blueprint/UserWidget.h"
 #include "CharacterProgress.h"
 #include "MissionPlayerAndCharacterWidget.generated.h"
 
@@ -9,6 +9,7 @@ UCLASS(EditInlineNew)
 class UMissionPlayerAndCharacterWidget : public UUserWidget {
     GENERATED_BODY()
 public:
+    UMissionPlayerAndCharacterWidget();
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void UpdateValues(int32 PlayerRank, int32 PlayerStars, int32 CharacterLevel, float CharacterProgress);
@@ -25,7 +26,5 @@ protected:
     UFUNCTION(BlueprintCallable)
     void InitCounter(FPlayerProgress PlayerProgressStart, FCharacterProgress CharacterProgressStart, FPlayerProgress PlayerProgressFinish, FCharacterProgress CharacterProgressFinish);
     
-public:
-    UMissionPlayerAndCharacterWidget();
 };
 

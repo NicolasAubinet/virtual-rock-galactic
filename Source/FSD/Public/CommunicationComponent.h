@@ -1,95 +1,97 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "MixerAnnouncement.h"
 #include "Components/ActorComponent.h"
 #include "GameplayTagContainer.h"
+#include "UObject/NoExportTypes.h"
 #include "ActiveOutline.h"
+#include "MissionShoutDelegateDelegate.h"
+#include "MissionShoutEndDelegateDelegate.h"
+#include "MixerAnnouncementDelegateDelegate.h"
+#include "MixerAnnouncement.h"
 #include "MissionShoutQueueItem.h"
 #include "EShoutType.h"
-#include "UObject/NoExportTypes.h"
 #include "CommunicationComponent.generated.h"
 
 class UShoutWidget;
-class USoundBase;
-class UAudioComponent;
-class UCharacterShoutsData;
-class APlayerCharacter;
 class UDialogDataAsset;
+class UCharacterShoutsData;
+class UAudioComponent;
+class APlayerCharacter;
 class UObject;
+class USoundBase;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FCommunicationComponentOnMissionControlFinished);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FCommunicationComponentOnMissionShout, const FText&, Text, float, Duration);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FCommunicationComponentOnMissionShoutEnd);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FCommunicationComponentOnMixerAnnouncement, const FMixerAnnouncement&, Announcement);
-
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UCommunicationComponent : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FCommunicationComponentOnMissionShout OnMissionShout;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FMissionShoutDelegate OnMissionShout;
     
-    UPROPERTY(BlueprintAssignable)
-    FCommunicationComponentOnMissionShoutEnd OnMissionShoutEnd;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FMissionShoutEndDelegate OnMissionShoutEnd;
     
-    UPROPERTY(BlueprintAssignable)
-    FCommunicationComponentOnMixerAnnouncement OnMixerAnnouncement;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FMixerAnnouncementDelegate OnMixerAnnouncement;
     
-    UPROPERTY(BlueprintAssignable)
-    FCommunicationComponentOnMissionControlFinished OnMissionControlFinished;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FMissionShoutEndDelegate OnMissionControlFinished;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+protected:
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool ShoutingEnabled;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UShoutWidget> ShoutWidgetType;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UCharacterShoutsData* CharacterShouts;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float PitchMultiplier;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MinShoutDelay;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float CloseRangeShoutDistance;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TMap<UDialogDataAsset*, float> DelayedShouts;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagContainer KillShoutAllowedTags;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool bMissionControlPaused;
     
-    UPROPERTY(Export)
+    UPROPERTY(BlueprintReadWrite, Export, meta=(AllowPrivateAccess=true))
     UAudioComponent* MissionControlAudioComponent;
     
-    UPROPERTY(BlueprintReadWrite, Export, Transient)
+private:
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     TMap<APlayerCharacter*, UShoutWidget*> ActiveShouts;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FActiveOutline> ActiveOutlines;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     APlayerCharacter* Character;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UDialogDataAsset* LastShout;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UAudioComponent* ShoutAudioComponent;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TMap<UDialogDataAsset*, float> ShoutHistory;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FMissionShoutQueueItem> MissionShoutQueue;
     
+public:
+    UCommunicationComponent();
     UFUNCTION(BlueprintCallable)
     void ShoutCustomOrDefault(UDialogDataAsset* CustomShout, EShoutType DefaultShout);
     
@@ -153,7 +155,5 @@ protected:
     UFUNCTION(BlueprintCallable, Client, Reliable, WithValidation)
     void ClientMissionShout(UDialogDataAsset* NewShout, int32 Index, bool bPriority);
     
-public:
-    UCommunicationComponent();
 };
 

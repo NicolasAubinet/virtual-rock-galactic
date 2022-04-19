@@ -11,13 +11,14 @@ class UActorContextWidget : public UUserWidget {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     AActor* ContextActor;
     
-    UPROPERTY(BlueprintReadOnly, Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UPrimitiveComponent* ContextPrimitive;
     
 public:
+    UActorContextWidget();
     UFUNCTION(BlueprintCallable)
     void Update(UPrimitiveComponent* InContextPrimitive);
     
@@ -34,7 +35,5 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ReceiveContextActorChanged(AActor* InContextActor);
     
-public:
-    UActorContextWidget();
 };
 

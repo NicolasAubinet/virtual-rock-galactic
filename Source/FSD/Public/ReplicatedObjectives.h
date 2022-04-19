@@ -8,10 +8,10 @@ USTRUCT(BlueprintType)
 struct FReplicatedObjectives {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool HasReplicated;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     TArray<UObjective*> Objectives;
     
     FSD_API FReplicatedObjectives();

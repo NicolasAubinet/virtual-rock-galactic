@@ -1,9 +1,6 @@
 #include "EyeForEyePerkComponent.h"
 
-class UDamageClass;
-class AActor;
-
-void UEyeForEyePerkComponent::OnHit(float Damage, UDamageClass* inDamageClass, AActor* DamageCauser, bool anyHealthLost) {
+void UEyeForEyePerkComponent::OnHit(float Damage, const FDamageData& DamageData, bool anyHealthLost) {
 }
 
 UEyeForEyePerkComponent::UEyeForEyePerkComponent() {

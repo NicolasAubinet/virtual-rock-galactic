@@ -6,28 +6,29 @@
 class APlayerCharacter;
 class UCameraComponent;
 
-UCLASS(BlueprintType, MinimalAPI)
+UCLASS(BlueprintType, MinimalAPI, meta=(BlueprintSpawnableComponent))
 class UCharacterCameraController : public UActorComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     float StartFOV;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     float targetFov;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     float TargetFOVSpeed;
     
 private:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     APlayerCharacter* Character;
     
-    UPROPERTY(Export)
+    UPROPERTY(BlueprintReadWrite, Export, meta=(AllowPrivateAccess=true))
     UCameraComponent* Camera;
     
 public:
+    UCharacterCameraController();
     UFUNCTION(BlueprintCallable)
     void ResetFOV(float FadeSpeed);
     
@@ -40,6 +41,5 @@ public:
     UFUNCTION(BlueprintCallable)
     void FadeToFOV(float NewTargetFov, float FadeSpeed);
     
-    UCharacterCameraController();
 };
 

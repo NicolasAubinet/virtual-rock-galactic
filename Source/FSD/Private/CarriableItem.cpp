@@ -5,5 +5,6 @@
 
 ACarriableItem::ACarriableItem() {
     this->StrictDeposit = false;
+    this->IsDopositable = true;
 }
 

@@ -2,8 +2,8 @@
 
 class UUserWidget;
 class ULocalPlayer;
-class UTextureRenderTarget2D;
 class UMaterialInstanceDynamic;
+class UTextureRenderTarget2D;
 
 void UWidgetToRenderTargetComponent::SetWidget(UUserWidget* NewWidget) {
 }

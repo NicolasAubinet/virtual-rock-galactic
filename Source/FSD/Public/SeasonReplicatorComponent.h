@@ -5,13 +5,13 @@
 
 class USeasonEventData;
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class USeasonReplicatorComponent : public UActorComponent {
     GENERATED_BODY()
 public:
+    USeasonReplicatorComponent();
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void CompleteSeasonEvent(USeasonEventData* inEvent);
     
-    USeasonReplicatorComponent();
 };
 

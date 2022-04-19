@@ -3,7 +3,7 @@
 #include "PawnAfflictionComponent.h"
 #include "EnemyPawnAfflictionComponent.generated.h"
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UEnemyPawnAfflictionComponent : public UPawnAfflictionComponent {
     GENERATED_BODY()
 public:

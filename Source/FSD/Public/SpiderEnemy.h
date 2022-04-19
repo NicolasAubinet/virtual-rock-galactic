@@ -4,48 +4,51 @@
 #include "EnemyAttacker.h"
 #include "SpiderEnemy.generated.h"
 
-class UPawnStatsComponent;
-class UAnimSequenceBase;
 class UStaticMeshComponent;
 class UStaticMesh;
+class UHitReactionComponent;
+class UPawnStatsComponent;
+class AActor;
 
 UCLASS()
 class ASpiderEnemy : public AEnemyDeepPathfinderCharacter, public IEnemyAttacker {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UPawnStatsComponent* PawnStats;
     
-    UPROPERTY(EditAnywhere)
-    TArray<UAnimSequenceBase*> HitReactions;
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UHitReactionComponent* HitReactions;
     
-    UPROPERTY(EditAnywhere)
-    float FirstHitReactBlendIn;
-    
-    UPROPERTY(EditAnywhere)
-    float OverrideHitReactBlendIn;
-    
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UStaticMesh* GoreMesh;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ApplyDifficultySpeedModifier;
     
-    UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     float AttackDamageModifier;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool LimitRagdollSpeed;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxRagdollSpeed;
     
-    UFUNCTION(BlueprintCallable)
-    void PlayHitReaction();
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_LookAtTarget, meta=(AllowPrivateAccess=true))
+    AActor* LookAtTarget;
+    
+public:
+    ASpiderEnemy();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
     
     UFUNCTION(BlueprintCallable)
-    void OnDamaged(float Damage);
+    void SetLookAtTarget(AActor* Target);
+    
+protected:
+    UFUNCTION(BlueprintCallable)
+    void OnRep_LookAtTarget();
     
     UFUNCTION(BlueprintCallable)
     UStaticMeshComponent* CreateHeadGore();
@@ -53,10 +56,9 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void AlertNearbyEnemies();
     
-public:
-    ASpiderEnemy();
     
     // Fix for true pure virtual functions not being implemented
+public:
     UFUNCTION(BlueprintCallable)
     float GetAttackDamageModifier() const override PURE_VIRTUAL(GetAttackDamageModifier, return 0.0f;);
     

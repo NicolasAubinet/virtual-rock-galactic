@@ -1,26 +1,28 @@
 #include "FSDWidgetBlueprintLibrary.h"
 #include "Templates/SubclassOf.h"
 
+class UTexture2D;
 class UObject;
-class UWidget;
-class UHorizontalBox;
-class UUserWidget;
 class UWidgetAnimation;
+class UWidget;
+class UFSDCheatManager;
+class UCanvasPanel;
+class APlayerController;
+class AFSDPlayerState;
 class USizeBox;
 class UPanelWidget;
+class UUserWidget;
 class UTextBlock;
 class UImage;
 class UWindowWidget;
-class AFSDPlayerState;
-class UFSDCheatManager;
-class APlayerController;
+class UUniformGridSlot;
 class UVerticalBox;
 class USpacer;
-class UTexture2D;
+class UHorizontalBox;
 class UHorizontalBoxSlot;
 class UVerticalBoxSlot;
 class UUniformGridPanel;
-class UUniformGridSlot;
+class UCanvasPanelSlot;
 
 void UFSDWidgetBlueprintLibrary::ToggleAnimationLooping(UObject* WorldContext, UWidgetAnimation* InAnimation, FWidgetAnimationSettings InSettings, bool InLoop, bool& OutPlayingChanged, bool& OutIsPlaying) {
 }
@@ -33,14 +35,14 @@ bool UFSDWidgetBlueprintLibrary::TextGreaterThan(const FText& Text1, const FText
     return false;
 }
 
-TArray<UWidget*> UFSDWidgetBlueprintLibrary::SortWidgetArray(const TArray<UWidget*>& InWidgets, const FFSDWidgetBlueprintLibraryInCompareFunction& InCompareFunction) {
+TArray<UWidget*> UFSDWidgetBlueprintLibrary::SortWidgetArray(const TArray<UWidget*>& InWidgets, const UFSDWidgetBlueprintLibrary::FCompareWidgetsDelegate& InCompareFunction) {
     return TArray<UWidget*>();
 }
 
 void UFSDWidgetBlueprintLibrary::SimpleBox(FPaintContext& Context, FVector2D Position, FVector2D Size, FLinearColor Tint) {
 }
 
-FTimerHandle UFSDWidgetBlueprintLibrary::SetTimerForNextTick(UObject* WorldContext, const FFSDWidgetBlueprintLibraryTimerDelegate& TimerDelegate) {
+FTimerHandle UFSDWidgetBlueprintLibrary::SetTimerForNextTick(UObject* WorldContext, const FTimerDynamicDelegate& TimerDelegate) {
     return FTimerHandle{};
 }
 
@@ -172,11 +174,11 @@ USpacer* UFSDWidgetBlueprintLibrary::CreateSpacer(UObject* WorldContext, FVector
     return NULL;
 }
 
-TArray<UUserWidget*> UFSDWidgetBlueprintLibrary::CreateOrReuseChildrenWithCallbackEx(UPanelWidget* Panel, int32 count, TSubclassOf<UUserWidget> WidgetClass, const FFSDWidgetBlueprintLibraryOnCreatedOrReused& OnCreatedOrReused, const FFSDWidgetBlueprintLibraryOnCollapsed& OnCollapsed) {
+TArray<UUserWidget*> UFSDWidgetBlueprintLibrary::CreateOrReuseChildrenWithCallbackEx(UPanelWidget* Panel, int32 count, TSubclassOf<UUserWidget> WidgetClass, const UFSDWidgetBlueprintLibrary::FWidgetCreatedOrReusedDelegate& OnCreatedOrReused, const UFSDWidgetBlueprintLibrary::FWidgetDelegate& OnCollapsed) {
     return TArray<UUserWidget*>();
 }
 
-TArray<UUserWidget*> UFSDWidgetBlueprintLibrary::CreateOrReuseChildrenWithCallback(UPanelWidget* Panel, int32 count, TSubclassOf<UUserWidget> WidgetClass, const FFSDWidgetBlueprintLibraryOnCreatedOrReused& OnCreatedOrReused) {
+TArray<UUserWidget*> UFSDWidgetBlueprintLibrary::CreateOrReuseChildrenWithCallback(UPanelWidget* Panel, int32 count, TSubclassOf<UUserWidget> WidgetClass, const UFSDWidgetBlueprintLibrary::FWidgetCreatedOrReusedDelegate& OnCreatedOrReused) {
     return TArray<UUserWidget*>();
 }
 
@@ -216,6 +218,10 @@ UWidget* UFSDWidgetBlueprintLibrary::AddChildToUniformGridEx(UUniformGridPanel* 
 }
 
 UWidget* UFSDWidgetBlueprintLibrary::AddChildToHorizontalBoxEx(UHorizontalBox* HorizontalBox, UWidget* Widget, TEnumAsByte<EHorizontalAlignment> HorizontalAlignment, TEnumAsByte<EVerticalAlignment> VerticalAlignment, float Size, FMargin Padding, UHorizontalBoxSlot*& OutSlot, UHorizontalBox*& OutHorizontalBox) {
+    return NULL;
+}
+
+UWidget* UFSDWidgetBlueprintLibrary::AddChildToCanvasEx(UCanvasPanel* CanvasPanel, UWidget* Widget, FAnchors Anchors, FMargin Offsets, bool AutoSize, int32 Z_Order, UCanvasPanelSlot*& OutSlot, UCanvasPanel*& OutCanvasPanel) {
     return NULL;
 }
 

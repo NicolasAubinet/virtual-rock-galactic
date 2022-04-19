@@ -1,17 +1,22 @@
 #include "UpgradableGearComponent.h"
 #include "Templates/SubclassOf.h"
 
-class AFSDPlayerState;
-class UItemID;
-class UObject;
 class AActor;
-class UItemUpgrade;
-class UResourceData;
-class UPlayerCharacterID;
+class APlayerCharacter;
+class UItemID;
 class UTexture2D;
+class UObject;
 class AFSDPlayerController;
+class UItemUpgrade;
+class AFSDPlayerState;
+class UPlayerCharacterID;
+class UResourceData;
 
 void UUpgradableGearComponent::SetGearStatText(FGearStatEntry& Entry, FText Text) {
+}
+
+bool UUpgradableGearComponent::PurchaseUpgrade(UItemID* ItemID, UItemUpgrade* Upgrade, AFSDPlayerController* PlayerController, TSubclassOf<APlayerCharacter> previewedCharacter) {
+    return false;
 }
 
 bool UUpgradableGearComponent::PurchaseItem(UObject* WorldContextObject, UItemID* ItemID) {

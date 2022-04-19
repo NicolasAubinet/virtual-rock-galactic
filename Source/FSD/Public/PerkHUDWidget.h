@@ -12,10 +12,11 @@ class UPerkHUDWidget : public UUserWidget {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UPerkAsset* PerkAsset;
     
 public:
+    UPerkHUDWidget();
     UFUNCTION(BlueprintCallable)
     void SetPerkAsset(UPerkAsset* InPerk);
     
@@ -30,6 +31,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     APlayerCharacter* GetCharacter() const;
     
-    UPerkHUDWidget();
 };
 

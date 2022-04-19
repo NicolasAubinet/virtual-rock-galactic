@@ -8,19 +8,20 @@ class UCoreInfuserAnimInstance : public UAnimInstance {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere, Transient)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool PoweredUp;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere, Transient)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool IsOpen;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere, Transient)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool IsRewardSelected;
-    
-    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-    void OnRewardSelected();
     
 public:
     UCoreInfuserAnimInstance();
+protected:
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void OnRewardSelected();
+    
 };
 

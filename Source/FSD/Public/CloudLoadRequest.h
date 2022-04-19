@@ -6,16 +6,16 @@ USTRUCT()
 struct FCloudLoadRequest {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     FString SteamTicket;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     FString PSTicket;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     FString Branch;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     int32 Offset;
     
     FSD_API FCloudLoadRequest();

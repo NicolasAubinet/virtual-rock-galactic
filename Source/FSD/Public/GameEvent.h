@@ -1,126 +1,135 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
+#include "ProgressChangedSigDelegate.h"
 #include "GameFramework/Actor.h"
-#include "UObject/NoExportTypes.h"
 #include "GameplayTagAssetInterface.h"
+#include "DelegateEventDelegate.h"
+#include "StageCompleteSigDelegate.h"
 #include "GameplayTagContainer.h"
 #include "GameplayTagContainer.h"
+#include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "GameEvent.generated.h"
 
-class UChildActorComponent;
-class AEventStarterButton;
-class ARessuplyPod;
-class UDialogDataAsset;
-class AProceduralSetup;
 class UDebrisPositioning;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FGameEventTimeProgressChanged, float, CurrentProgress);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FGameEventStageCompleteDelegate, int32, stageCompleted);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FGameEventEventTriggeredDelegate);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FGameEventEventFinishedDelegate);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FGameEventProgressChangedDelegate, float, CurrentProgress);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FGameEventObjectivesPerStageChanged, int32, stageCompleted);
+class AEventStarterButton;
+class UChildActorComponent;
+class UDialogDataAsset;
+class ARessuplyPod;
+class AProceduralSetup;
 
 UCLASS()
 class AGameEvent : public AActor, public IGameplayTagAssetInterface {
     GENERATED_BODY()
 public:
-    UPROPERTY()
-    FGameEventEventTriggeredDelegate EventTriggeredDelegate;
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDelegateEvent EventTriggeredDelegate;
     
-    UPROPERTY(BlueprintAssignable)
-    FGameEventEventFinishedDelegate EventFinishedDelegate;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDelegateEvent EventFinishedDelegate;
     
-    UPROPERTY()
-    FGameEventStageCompleteDelegate StageCompleteDelegate;
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FStageCompleteSig StageCompleteDelegate;
     
-    UPROPERTY(BlueprintAssignable)
-    FGameEventProgressChangedDelegate ProgressChangedDelegate;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FProgressChangedSig ProgressChangedDelegate;
     
-    UPROPERTY(BlueprintAssignable)
-    FGameEventTimeProgressChanged TimeProgressChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FProgressChangedSig OnProgressBarChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FGameEventObjectivesPerStageChanged ObjectivesPerStageChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FProgressChangedSig TimeProgressChanged;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FStageCompleteSig ObjectivesPerStageChanged;
     
 protected:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TArray<AEventStarterButton*> StarterObjects;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool bGameEventSetup;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText EventName;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText ObjectiveText;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FName AnalyticsName;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagContainer GameplayTags;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UChildActorComponent* StartEventObject;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDialogDataAsset* EventTriggeredShout;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDialogDataAsset* EventFinishedShout;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDialogDataAsset* EventFailedShout;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float EventTriggeredShoutDelay;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float EventFinishedShoutDelay;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_StageProgress)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_StageProgress, meta=(AllowPrivateAccess=true))
     float StageProgress;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float TimeLimit;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DelayUITime;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere, ReplicatedUsing=OnRep_ObjectivesPerStage)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_ObjectivesPerStage, meta=(AllowPrivateAccess=true))
     int32 objectivesPerStage;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_IsEventStartersActive)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_IsEventStartersActive, meta=(AllowPrivateAccess=true))
     bool EventStartersActive;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool StopScriptedWavesWhileActive;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool StopNormalWavesWhileActive;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_EventStarted)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_EventStarted, meta=(AllowPrivateAccess=true))
     bool EventStarted;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_FailedEvent)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_FailedEvent, meta=(AllowPrivateAccess=true))
     bool FailedEvent;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ShowRemainingTimeOnHUD;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ShowScoreStatusOnHUD;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool ShowProgressBar;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float ProgressBarPct;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool SkipEventStarters;
     
 private:
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_EventParticipants)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_EventParticipants, meta=(AllowPrivateAccess=true))
     TArray<AActor*> EventParticipants;
+    
+public:
+    AGameEvent();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
     
 protected:
     UFUNCTION(BlueprintCallable)
@@ -146,6 +155,9 @@ public:
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetStageProgress(float Progress);
+    
+    UFUNCTION(BlueprintCallable)
+    void SetProgressBarPct(float InPct);
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetObjectivesPerStage(int32 NewObjectivesPerStage);
@@ -196,6 +208,9 @@ public:
     void OnEventBooted();
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsEventCompleted() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsEventActive() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -206,6 +221,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetShowScoreOnHUD() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool GetShowProgressBar() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FText GetObjectiveText() const;
@@ -236,9 +254,6 @@ public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void AddStageProgress(float progressToAdd);
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    AGameEvent();
     
     // Fix for true pure virtual functions not being implemented
     UFUNCTION(BlueprintCallable)

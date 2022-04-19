@@ -23,5 +23,6 @@ enum class EDamageType : uint8 {
     Defense,
     TemperatureShock,
     Corrosive,
+    Piercing,
 };
 

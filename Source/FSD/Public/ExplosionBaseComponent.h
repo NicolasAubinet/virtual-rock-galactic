@@ -1,35 +1,36 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Components/ActorComponent.h"
-#include "Engine/EngineTypes.h"
 #include "UObject/NoExportTypes.h"
+#include "Engine/EngineTypes.h"
+#include "Components/ActorComponent.h"
 #include "ExplosionBaseComponent.generated.h"
 
-class UPrimitiveComponent;
 class UDamageComponent;
 class UPhysicalMaterial;
+class UPrimitiveComponent;
 
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UExplosionBaseComponent : public UActorComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float CarveDiameterCM;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float CarveNoiseCM;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float CarveBurnThicknessCM;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float CarveNormalOffsetCM;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float CarveNormalSqueeze;
     
 public:
+    UExplosionBaseComponent();
     UFUNCTION(BlueprintCallable)
     void DamageOnlyFromHit(const FHitResult& HitResult, UPARAM(Ref) UDamageComponent*& DamageComponent);
     
@@ -48,6 +49,5 @@ public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void CarveOnly(FVector Location, FVector ImpactNormal);
     
-    UExplosionBaseComponent();
 };
 

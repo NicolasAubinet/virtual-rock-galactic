@@ -1,14 +1,24 @@
 #include "FSDGameState.h"
 #include "Net/UnrealNetwork.h"
+#include "FlareController.h"
+#include "DifficultyManager.h"
+#include "DynamicMeshScaler.h"
+#include "SpawnEffectsComponent.h"
+#include "GemProximityTracker.h"
+#include "AttackerManagerComponent.h"
+#include "ShowroomManager.h"
+#include "SoundMixManagerComponent.h"
+#include "SeasonReplicatorComponent.h"
+#include "TeamResourcesComponent.h"
+#include "PlayerProximityTracker.h"
 
-class UGeneratedMission;
-class AGameStats;
-class UDifficultySetting;
-class AFSDPlayerState;
-class UObjective;
 class AProceduralSetup;
+class AGameStats;
+class UGeneratedMission;
+class UDifficultySetting;
+class UObjective;
+class AFSDPlayerState;
 class UResourceData;
-class UDifficultyManager;
 class UFSDEvent;
 class USoundCue;
 
@@ -122,7 +132,6 @@ bool AFSDGameState::GetPreventLatejoinCharacterDuplication() const {
 bool AFSDGameState::GetPlayersHaveReachedDroppod() const {
     return false;
 }
-
 
 
 TArray<UObjective*> AFSDGameState::GetObjectives() const {
@@ -239,11 +248,22 @@ AFSDGameState::AFSDGameState() {
     this->ObjectivesXPPenaltyNormal = 0.25f;
     this->ObjectivesXPPenaltyDeepDives = 0.20f;
     this->BoscoReviveCounter = -1;
+    this->SpawnEffects = CreateDefaultSubobject<USpawnEffectsComponent>(TEXT("SpawnEffects"));
+    this->MeshScaler = CreateDefaultSubobject<UDynamicMeshScaler>(TEXT("MeshScaler"));
+    this->FlareController = CreateDefaultSubobject<UFlareController>(TEXT("FlareController"));
+    this->GemProximityTracker = CreateDefaultSubobject<UGemProximityTracker>(TEXT("GemProximityTracker"));
+    this->AttackerManager = CreateDefaultSubobject<UAttackerManagerComponent>(TEXT("AttackerManager"));
+    this->DifficultyManagerComponent = CreateDefaultSubobject<UDifficultyManager>(TEXT("DifficultyManager"));
+    this->SoundMixManager = CreateDefaultSubobject<USoundMixManagerComponent>(TEXT("SoundMixManager"));
+    this->SeasonReplicatorComponent = CreateDefaultSubobject<USeasonReplicatorComponent>(TEXT("SeasonReplicator"));
+    this->TeamResources = CreateDefaultSubobject<UTeamResourcesComponent>(TEXT("TeamResources"));
     this->IsOnSpaceRig = false;
     this->PlayerMadeItToDropPod = true;
     this->objectivesCompleted = false;
     this->CurrentDifficultySetting = NULL;
     this->RememberDifficulty = true;
+    this->ProximityTracker = CreateDefaultSubobject<UPlayerProximityTracker>(TEXT("ProximityTracker"));
+    this->ShowroomManager = CreateDefaultSubobject<UShowroomManager>(TEXT("ShowroomManager"));
     this->GameStats = NULL;
     this->MissionTime = 0;
     this->MissionStartTime = 0;

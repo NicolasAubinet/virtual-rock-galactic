@@ -1,52 +1,51 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "ImpactedSignatureDelegate.h"
+#include "HightAccelerationSignatureDelegate.h"
 #include "WeaponImpactComponent.generated.h"
 
 class USkeletalMeshComponent;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FWeaponImpactComponentOnImpactedEvent);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FWeaponImpactComponentOnHighAcceleration);
-
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UWeaponImpactComponent : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FWeaponImpactComponentOnImpactedEvent OnImpactedEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FImpactedSignature OnImpactedEvent;
     
-    UPROPERTY(BlueprintAssignable)
-    FWeaponImpactComponentOnHighAcceleration OnHighAcceleration;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FHightAccelerationSignature OnHighAcceleration;
     
 protected:
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     bool DebugText;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FName ImpactSocketName;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* ActiveMesh;
     
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     bool TrackAcceleration;
     
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     bool TrackVelocity;
     
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     float TriggerHighAccelAt;
     
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     float TriggerAtVelocityDifference;
     
 public:
+    UWeaponImpactComponent();
     UFUNCTION(BlueprintCallable)
     void EnableImpactCheckhing(USkeletalMeshComponent* cmp);
     
     UFUNCTION(BlueprintCallable)
     void DisableImpactChecking();
     
-    UWeaponImpactComponent();
 };
 

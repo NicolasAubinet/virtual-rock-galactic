@@ -1,15 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "OxygenTriggerDelegateDelegate.h"
 #include "OxygenCallback.generated.h"
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_DELEGATE(FOxygenCallbackDelegate);
 
 USTRUCT(BlueprintType)
 struct FOxygenCallback {
     GENERATED_BODY()
 public:
-    UPROPERTY()
-    FOxygenCallbackDelegate Delegate;
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOxygenTriggerDelegate Delegate;
     
     FSD_API FOxygenCallback();
 };

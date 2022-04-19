@@ -1,309 +1,298 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
+#include "GameEventCompletedDelegateDelegate.h"
 #include "GameFramework/GameState.h"
-#include "GameplayTagContainer.h"
+#include "Int32DelegateEventDelegate.h"
+#include "DelegateEventDelegate.h"
+#include "PlayerDelegateDelegate.h"
+#include "EnemyKilledDelegateDelegate.h"
+#include "PlayerCharacterDelegateDelegate.h"
+#include "BoscoReviveCounterChangedDelegate.h"
 #include "CreditsReward.h"
-#include "GeneratedMissionSeed.h"
+#include "BoolDelegateDelegate.h"
+#include "ObjectivesDelegateDelegate.h"
+#include "DifficultyDelegateDelegate.h"
+#include "CountDownStartedDelegate.h"
+#include "CountdownDelegate.h"
 #include "ReplicatedObjectives.h"
+#include "GeneratedMissionSeed.h"
+#include "CurrentLeaderChangedDelegate.h"
 #include "FSDChatMessage.h"
 #include "FSDLocalizedChatMessage.h"
 #include "ScaledEffect.h"
 #include "Engine/NetSerialization.h"
 #include "FSDGameState.generated.h"
 
-class UGemProximityTracker;
-class APlayerCharacter;
-class AProceduralSetup;
-class AFSDPlayerState;
-class UPrimitiveComponent;
-class UDifficultySetting;
+class UResourceData;
 class AMiningPod;
-class AActor;
-class UObjective;
-class ADeepCSGWorld;
-class USpawnEffectsComponent;
-class UDynamicMeshScaler;
 class UFlareController;
-class USoundMixManagerComponent;
+class UPlayerProximityTracker;
+class AFSDPlayerState;
+class ADeepCSGWorld;
+class AGameStats;
+class AProceduralSetup;
+class UPrimitiveComponent;
+class UDynamicMeshScaler;
+class USpawnEffectsComponent;
+class UGemProximityTracker;
 class UAttackerManagerComponent;
 class UDifficultyManager;
+class UShowroomManager;
+class USoundMixManagerComponent;
 class USeasonReplicatorComponent;
 class UTeamResourcesComponent;
-class UPlayerProximityTracker;
-class UFSDEvent;
-class UShowroomManager;
-class AGameStats;
+class APlayerCharacter;
 class APlayerState;
+class UObjective;
+class UDifficultySetting;
 class UGeneratedMission;
 class UPlayerCharacterID;
-class UResourceData;
+class UFSDEvent;
 class USoundCue;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDGameStateOnMissionTimeUpdated, int32, Value);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDGameStateOnPlayerLeave, AFSDPlayerState*, PlayerState);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDGameStateOnCountdownStarted, const FText&, countdownText);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDGameStateOnPlayerJoined, AFSDPlayerState*, PlayerState);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFSDGameStateOnTerrainGenerated);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFSDGameStateOnTerrainGenerationStarting);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFSDGameStateOnMatchStarted);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFSDGameStateOnMatchEnded);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFSDGameStateOnCountdownFinished);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDGameStateOnGameEventCompletedEvent, FText, GameEventName);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFSDGameStateOnContinueActive);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFSDGameStateOnContinueCountdownChanged);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFSDGameStateOnAllDwarvesDown);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFSDGameStateOnTeamMemberCampaignMissionChanged);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FFSDGameStateOnEnemyKilledEvent, const FGameplayTagContainer&, enemyTags, AActor*, killedEnemy);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDGameStateOnPlayerCharacterRegistered, APlayerCharacter*, PlayerCharacter);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDGameStateOnBoscoReviveCounterChanged, int32, RevivesLeft);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDGameStateOnTeamDown, bool, boolValue);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFSDGameStateOnObjectivesCompleted);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDGameStateOnObjectiveAdded, UObjective*, Objective);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDGameStateOnDifficultyChanged, UDifficultySetting*, Setting);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDGameStateSessionLeaderChanged, const APlayerState*, PlayerState);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDGameStateOnCountdownTimeChanged, int32, SecondsLeft);
 
 UCLASS()
 class FSD_API AFSDGameState : public AGameState {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FFSDGameStateOnMissionTimeUpdated OnMissionTimeUpdated;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FInt32DelegateEvent OnMissionTimeUpdated;
     
-    UPROPERTY(BlueprintAssignable, BlueprintCallable)
-    FFSDGameStateOnTerrainGenerated OnTerrainGenerated;
+    UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDelegateEvent OnTerrainGenerated;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDGameStateOnTerrainGenerationStarting OnTerrainGenerationStarting;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDelegateEvent OnTerrainGenerationStarting;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDGameStateOnMatchStarted OnMatchStarted;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDelegateEvent OnMatchStarted;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDGameStateOnMatchEnded OnMatchEnded;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDelegateEvent OnMatchEnded;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDGameStateOnGameEventCompletedEvent OnGameEventCompletedEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FGameEventCompletedDelegate OnGameEventCompletedEvent;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDGameStateOnPlayerJoined OnPlayerJoined;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FPlayerDelegate OnPlayerJoined;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDGameStateOnPlayerLeave OnPlayerLeave;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FPlayerDelegate OnPlayerLeave;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDGameStateOnContinueActive OnContinueActive;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDelegateEvent OnContinueActive;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDGameStateOnContinueCountdownChanged OnContinueCountdownChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDelegateEvent OnContinueCountdownChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDGameStateOnAllDwarvesDown OnAllDwarvesDown;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDelegateEvent OnAllDwarvesDown;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDGameStateOnTeamMemberCampaignMissionChanged OnTeamMemberCampaignMissionChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDelegateEvent OnTeamMemberCampaignMissionChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDGameStateOnEnemyKilledEvent OnEnemyKilledEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FEnemyKilledDelegate OnEnemyKilledEvent;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDGameStateOnPlayerCharacterRegistered OnPlayerCharacterRegistered;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FPlayerCharacterDelegate OnPlayerCharacterRegistered;
     
-    UPROPERTY(BlueprintReadOnly, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     int32 CurrentLevel;
     
-    UPROPERTY(BlueprintReadOnly, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     AMiningPod* EscapePod;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_FSDSessionID)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_FSDSessionID, meta=(AllowPrivateAccess=true))
     FString FSDSessionID;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDGameStateOnBoscoReviveCounterChanged OnBoscoReviveCounterChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FBoscoReviveCounterChanged OnBoscoReviveCounterChanged;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool bTeamDown;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDGameStateOnTeamDown OnTeamDown;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FBoolDelegate OnTeamDown;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDGameStateOnObjectivesCompleted OnObjectivesCompleted;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDelegateEvent OnObjectivesCompleted;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDGameStateOnObjectiveAdded OnObjectiveAdded;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FObjectivesDelegate OnObjectiveAdded;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDGameStateOnDifficultyChanged OnDifficultyChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDifficultyDelegate OnDifficultyChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDGameStateOnCountdownStarted OnCountdownStarted;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FCountDownStarted OnCountdownStarted;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDGameStateOnCountdownTimeChanged OnCountdownTimeChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FCountdown OnCountdownTimeChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDGameStateOnCountdownFinished OnCountdownFinished;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDelegateEvent OnCountdownFinished;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     ADeepCSGWorld* CSGWorld;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     int32 LastSupplyPodTimeStamp;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     AProceduralSetup* ProceduralSetup;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool DelayLateJoin;
     
-    UPROPERTY(BlueprintReadOnly, Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UPrimitiveComponent* FakeMovementBase;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 PlayerSurvivalCreditBonus;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ResourceAmountPenalty;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ObjectivesCreditPenalty;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ObjectivesXPPenaltyNormal;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ObjectivesXPPenaltyDeepDives;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText TextMissionCompleted;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText TextSecondaryObjective;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText TextSurvivalBonus;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText TextMined;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText TextCollected;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText TextBonus;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_BoscoReviveCounter)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_BoscoReviveCounter, meta=(AllowPrivateAccess=true))
     int32 BoscoReviveCounter;
     
-    UPROPERTY(Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USpawnEffectsComponent* SpawnEffects;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UDynamicMeshScaler* MeshScaler;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UFlareController* FlareController;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UGemProximityTracker* GemProximityTracker;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UAttackerManagerComponent* AttackerManager;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UDifficultyManager* DifficultyManagerComponent;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USoundMixManagerComponent* SoundMixManager;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USeasonReplicatorComponent* SeasonReplicatorComponent;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UTeamResourcesComponent* TeamResources;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool IsOnSpaceRig;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool PlayerMadeItToDropPod;
     
-    UPROPERTY(BlueprintReadOnly, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     TArray<APlayerCharacter*> ActivePlayerCharacters;
     
-    UPROPERTY(Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     FReplicatedObjectives Objectives;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_CompletedGameEvent)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_CompletedGameEvent, meta=(AllowPrivateAccess=true))
     FText CompletedGameEventName;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_GeneratedMissionSeed)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_GeneratedMissionSeed, meta=(AllowPrivateAccess=true))
     FGeneratedMissionSeed GeneratedMissionSeed;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_ObjectivesCompleted)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_ObjectivesCompleted, meta=(AllowPrivateAccess=true))
     bool objectivesCompleted;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere, ReplicatedUsing=OnRep_CurrentDifficultySetting)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_CurrentDifficultySetting, meta=(AllowPrivateAccess=true))
     UDifficultySetting* CurrentDifficultySetting;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool RememberDifficulty;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UPlayerProximityTracker* ProximityTracker;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UShowroomManager* ShowroomManager;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     AGameStats* GameStats;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_MissionTime)
+    UPROPERTY(Transient, ReplicatedUsing=OnRep_MissionTime, meta=(AllowPrivateAccess=true))
     uint32 MissionTime;
     
-    UPROPERTY(Transient)
+    UPROPERTY(Transient, meta=(AllowPrivateAccess=true))
     uint32 MissionStartTime;
     
-    UPROPERTY(Transient)
+    UPROPERTY(Transient, meta=(AllowPrivateAccess=true))
     uint32 MissionHaz;
     
-    UPROPERTY(Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     bool PreventLatejoinCharacterDuplication;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_StartPressed)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_StartPressed, meta=(AllowPrivateAccess=true))
     bool StartPressed;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_ContinuePressed)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_ContinuePressed, meta=(AllowPrivateAccess=true))
     bool ContinuePressed;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_ContinueCountdown)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_ContinueCountdown, meta=(AllowPrivateAccess=true))
     int32 ContinuesCountdown;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_AllDwarvesDown)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_AllDwarvesDown, meta=(AllowPrivateAccess=true))
     bool AllDwarvesDown;
     
-    UPROPERTY(BlueprintReadOnly, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     bool MissionAborted;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_CountdownRemaining)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_CountdownRemaining, meta=(AllowPrivateAccess=true))
     int32 CountdownRemaining;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_CountdownText)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_CountdownText, meta=(AllowPrivateAccess=true))
     FText countdownText;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool CanCarryOverResources;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDGameStateSessionLeaderChanged SessionLeaderChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FCurrentLeaderChanged SessionLeaderChanged;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     APlayerState* CurrentPlayerSessionLeader;
     
 public:
+    AFSDGameState();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintCallable)
     void StartCountdown(int32 Duration, const FText& countdownName);
     
@@ -416,9 +405,6 @@ public:
     bool GetPlayersHaveReachedDroppod() const;
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, BlueprintPure)
-    TArray<TSubclassOf<APlayerCharacter>> GetPlayableCharacters();
-    
-    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, BlueprintPure)
     TArray<UPlayerCharacterID*> GetPlayableCharacterIDs();
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -481,8 +467,5 @@ public:
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
     void All_SpawnScaledEffectAndCueAt(FScaledEffect effect, USoundCue* Audio, FVector_NetQuantize Location);
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    AFSDGameState();
 };
 

@@ -5,8 +5,8 @@
 #include "ActiveAudioItem.h"
 #include "MusicManager.generated.h"
 
-class UMusicCategory;
 class UMusicLibrary;
+class UMusicCategory;
 class USoundBase;
 
 UCLASS(BlueprintType)
@@ -14,10 +14,11 @@ class UMusicManager : public UWorldSubsystem {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TMap<FMusicHandle, FActiveAudioItem> ActiveAudio;
     
 public:
+    UMusicManager();
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void StopHandle(FMusicHandle Handle);
     
@@ -33,6 +34,5 @@ public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     FMusicHandle Play(USoundBase* Music, UMusicCategory* Category);
     
-    UMusicManager();
 };
 

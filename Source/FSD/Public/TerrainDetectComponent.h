@@ -2,33 +2,33 @@
 #include "CoreMinimal.h"
 #include "Components/SceneComponent.h"
 #include "TerrainDetectInterface.h"
+#include "PointRemovedEventDelegate.h"
 #include "UObject/NoExportTypes.h"
 #include "TerrainDetectComponent.generated.h"
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FTerrainDetectComponentOnPointRemoved);
-
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UTerrainDetectComponent : public USceneComponent, public ITerrainDetectInterface {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable, BlueprintCallable)
-    FTerrainDetectComponentOnPointRemoved OnPointRemoved;
+    UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FPointRemovedEvent OnPointRemoved;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool StartDetectOnBeginPlay;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool OnlyDetectOnServer;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool KillActorOnPointRemoved;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FVector ActiveDetectPos;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     int32 DetectorId;
     
+    UTerrainDetectComponent();
     UFUNCTION(BlueprintCallable)
     void UpdateDetectLocation();
     
@@ -38,7 +38,6 @@ public:
     UFUNCTION(BlueprintCallable)
     void StartDetect();
     
-    UTerrainDetectComponent();
     
     // Fix for true pure virtual functions not being implemented
 };

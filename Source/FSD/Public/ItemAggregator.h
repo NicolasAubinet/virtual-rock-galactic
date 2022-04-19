@@ -3,18 +3,18 @@
 #include "Components/ActorComponent.h"
 #include "ItemAggregator.generated.h"
 
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UItemAggregator : public UActorComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FText CounterText;
     
 public:
+    UItemAggregator();
     UFUNCTION(BlueprintCallable)
     void UnbindAllEvents();
     
-    UItemAggregator();
 };
 

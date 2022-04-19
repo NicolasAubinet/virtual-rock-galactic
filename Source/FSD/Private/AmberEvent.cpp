@@ -1,5 +1,6 @@
 #include "AmberEvent.h"
 #include "Net/UnrealNetwork.h"
+#include "DamageComponent.h"
 
 class UHealthComponentBase;
 class APawn;
@@ -17,6 +18,7 @@ void AAmberEvent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifet
 }
 
 AAmberEvent::AAmberEvent() {
+    this->EndExplosionDamage = CreateDefaultSubobject<UDamageComponent>(TEXT("ExplosionDamage"));
     this->InitialDelayBeforeSpawn = 0.00f;
     this->MaxSpawnRange = 0.00f;
 }

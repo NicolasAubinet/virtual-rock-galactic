@@ -8,10 +8,10 @@ USTRUCT()
 struct FInfluenceSphere {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
     UCaveInfluencer* Influencer;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
     float Radius;
     
     FSD_API FInfluenceSphere();

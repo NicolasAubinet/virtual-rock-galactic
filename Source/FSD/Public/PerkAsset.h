@@ -3,16 +3,16 @@
 #include "Templates/SubclassOf.h"
 #include "Engine/DataAsset.h"
 #include "UObject/NoExportTypes.h"
-#include "EPerkHUDActivationLocation.h"
 #include "EPerkUsageType.h"
 #include "EPerkTierState.h"
+#include "EPerkHUDActivationLocation.h"
 #include "PerkAsset.generated.h"
 
 class UPerkHUDActivationWidget;
+class UPerkLogic;
+class UDialogDataAsset;
 class UObject;
 class UTexture2D;
-class UDialogDataAsset;
-class UPerkLogic;
 class UPerkHUDIconWidget;
 class APlayerController;
 class UPlayerCharacterID;
@@ -20,44 +20,45 @@ class UPerkAsset;
 class UPerkDelegateItem;
 
 UCLASS(Abstract, BlueprintType)
-class UPerkAsset : public UDataAsset {
+class FSD_API UPerkAsset : public UDataAsset {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(VisibleAnywhere)
-    FGuid SaveGameID;
+    UPROPERTY(BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    FGuid SavegameID;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText Title;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UTexture2D* Icon;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bIsEquippable;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDialogDataAsset* ShoutOnUseCharge;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSoftClassPtr<UPerkLogic>> PerkLogicClasses;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<UPerkHUDIconWidget> HudIconWidgetClass;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSoftClassPtr<UPerkHUDActivationWidget>> HudActivationWidgets;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 MaxUseCharges;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float CoolDownBetweenUse;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool bIsHighlighted;
     
 public:
+    UPerkAsset();
     UFUNCTION(BlueprintCallable)
     bool UseCharge(APlayerController* PlayerController);
     
@@ -95,30 +96,24 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     EPerkUsageType GetUsageType() const;
     
-protected:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     EPerkTierState GetStateAtTier(UObject* WorldContext, int32 Tier) const;
     
-public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetRemainingUseCharges(APlayerController* PlayerController) const;
     
-protected:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetRankTier(int32 Rank) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FText GetRankDescription(int32 Rank) const;
     
-public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetRankCost(int32 Rank) const;
     
-protected:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetRankAtTier(const int32 Tier, int32& Rank) const;
     
-public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetMaxUseCharges(APlayerController* PlayerController) const;
     
@@ -137,10 +132,10 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetChargesUsed(APlayerController* PlayerController) const;
     
-protected:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FString GetAdditionalRankDescription(int32 Rank) const;
     
+protected:
     UFUNCTION(BlueprintCallable)
     bool Equip(UObject* WorldContext, UPlayerCharacterID* characterID);
     
@@ -148,11 +143,8 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool CanUseCharge(APlayerController* PlayerController) const;
     
-protected:
     UFUNCTION(BlueprintCallable)
     bool BuyPerkAtTier(UObject* WorldContext, int32 Tier);
     
-public:
-    UPerkAsset();
 };
 

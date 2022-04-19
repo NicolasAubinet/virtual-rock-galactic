@@ -1,29 +1,29 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Fonts/SlateFontInfo.h"
 #include "Styling/SlateColor.h"
+#include "Fonts/SlateFontInfo.h"
 #include "TextStyleOverride.generated.h"
 
 USTRUCT(BlueprintType)
 struct FTextStyleOverride {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool bOverrideFont;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSlateFontInfo Font;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool bOverrideColor;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSlateColor Color;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool bOverrideSize;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float SizeScale;
     
     FSD_API FTextStyleOverride();

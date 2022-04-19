@@ -2,7 +2,7 @@
 #include "CoreMinimal.h"
 #include "DeepPathFinderPreference.generated.h"
 
-UENUM()
+UENUM(BlueprintType)
 enum class DeepPathFinderPreference : uint8 {
     None,
     Floor,

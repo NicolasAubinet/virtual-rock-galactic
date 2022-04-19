@@ -4,24 +4,24 @@
 #include "FloatPerkComponent.h"
 #include "BeastMasterComponent.generated.h"
 
-class APlayerCharacter;
+class AFSDPawn;
 class UDamageComponent;
 class UActorComponent;
-class AFSDPawn;
+class APlayerCharacter;
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UBeastMasterComponent : public UFloatPerkComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool ShowCanCharmIcon;
     
+    UBeastMasterComponent();
     UFUNCTION(BlueprintCallable)
     void SetDamage(UDamageComponent* cmp, float dmg);
     
     UFUNCTION(BlueprintCallable)
     static UActorComponent* AddPetComponent(TSubclassOf<UActorComponent> ComponentClass, AFSDPawn* targetPet, APlayerCharacter* petOwner);
     
-    UBeastMasterComponent();
 };
 

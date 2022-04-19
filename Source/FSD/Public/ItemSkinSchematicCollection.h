@@ -4,36 +4,36 @@
 #include "EItemSkinCollectionType.h"
 #include "ItemSkinSchematicCollection.generated.h"
 
+class USchematic;
+class USchematicPricingTier;
 class UItemSkin;
 class USchematicCategory;
-class USchematicPricingTier;
 class USchematicRarity;
-class USchematic;
 
 UCLASS()
 class FSD_API UItemSkinSchematicCollection : public UDataAsset {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UItemSkin* Skin;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USchematicCategory* Category;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USchematicPricingTier* PricingTier;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USchematicRarity* Rarity;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EItemSkinCollectionType CollectionType;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     EItemSkinCollectionType LastGeneratedCollectionType;
     
-    UPROPERTY(Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     TArray<USchematic*> Schematics;
     
 public:

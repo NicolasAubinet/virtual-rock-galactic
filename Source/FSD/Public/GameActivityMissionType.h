@@ -9,7 +9,7 @@ UCLASS()
 class UGameActivityMissionType : public UGameActivityType {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftObjectPtr<UMissionTemplate> ActivityMission;
     
     UGameActivityMissionType();

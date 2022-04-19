@@ -1,8 +1,9 @@
 #include "ItemSkin.h"
 
 class UObject;
-class AFSDPlayerState;
+class UMaterialInstanceDynamic;
 class UItemID;
+class AFSDPlayerState;
 class UPlayerCharacterID;
 
 bool UItemSkin::Unlock(UObject* WorldContext, UItemID* ItemID, bool broadcast) {
@@ -20,6 +21,14 @@ bool UItemSkin::IsEquippedOnItem(UItemID* ItemID, AFSDPlayerState* PlayerState) 
     return false;
 }
 
+EItemSkinType UItemSkin::GetSkinType() const {
+    return EItemSkinType::PaintJob;
+}
+
+FText UItemSkin::GetSkinName() const {
+    return FText::GetEmpty();
+}
+
 UItemID* UItemSkin::GetOwningItem() const {
     return NULL;
 }
@@ -28,12 +37,18 @@ UPlayerCharacterID* UItemSkin::GetOwningCharacter() const {
     return NULL;
 }
 
+UMaterialInstanceDynamic* UItemSkin::CreateIcon(UObject* Owner) const {
+    return NULL;
+}
+
 UItemSkin::UItemSkin() {
+    this->Aquisition = NULL;
     this->UnlockedFromStart = false;
     this->RequiredDLC = NULL;
-    this->SkinType = EItemSkinType::Color;
+    this->SkinType = EItemSkinType::PaintJob;
     this->SkinSet = NULL;
-    this->SkinIconMaterial = NULL;
+    this->DynamicIcon = NULL;
+    this->SkinEffect = NULL;
     this->OwningItem = NULL;
     this->OwningCharacter = NULL;
 }

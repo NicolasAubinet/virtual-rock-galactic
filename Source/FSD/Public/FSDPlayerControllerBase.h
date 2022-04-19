@@ -1,37 +1,43 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EHUDVisibilityReason.h"
 #include "GameFramework/PlayerController.h"
+#include "LocalVoiceStatusDelegate.h"
 #include "PlatformComponent.h"
+#include "EHUDVisibilityReason.h"
+#include "EMinersManualSinglePage.h"
+#include "EMinersManualSection.h"
+#include "UObject/NoExportTypes.h"
 #include "EDisconnectReason.h"
 #include "FSDPlayerControllerBase.generated.h"
 
-class UMaterialParameterCollection;
 class UWindowManager;
+class UMaterialParameterCollection;
 class UPlayerCharacterID;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDPlayerControllerBaseOnPlayerVoiceStatusChanged, bool, voiceChatting);
+class UEscapeMenuWindow;
 
 UCLASS()
 class AFSDPlayerControllerBase : public APlayerController {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UMaterialParameterCollection* GlobalMaterialParameterCollection;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDPlayerControllerBaseOnPlayerVoiceStatusChanged OnPlayerVoiceStatusChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FLocalVoiceStatus OnPlayerVoiceStatusChanged;
     
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bStartWithBlackScreen;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UWindowManager* WindowManager;
     
-    UPROPERTY(Config)
+    UPROPERTY(BlueprintReadWrite, Config, meta=(AllowPrivateAccess=true))
     TArray<FPlatformComponent> PlatformComponentClasses;
     
+public:
+    AFSDPlayerControllerBase();
+protected:
     UFUNCTION(BlueprintCallable)
     void ToggleAnalogCursor(bool Visible);
     
@@ -41,6 +47,9 @@ public:
     
     UFUNCTION(BlueprintCallable)
     void StartAspectRatioAxisConstraint();
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void ShowEscapeMenu();
     
     UFUNCTION(BlueprintCallable)
     void SetHUDVisible(bool IsVisible, EHUDVisibilityReason reason);
@@ -56,12 +65,20 @@ protected:
     void RecieveHUDVisibilityChanged(bool IsVisible);
     
 public:
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void OpenStandaloneMinersManualPage(EMinersManualSinglePage page);
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void OpenStandaloneMinersManual(EMinersManualSection Section, const FGuid& ID);
+    
     UFUNCTION(BlueprintCallable)
     bool IsHUDVisibleFlagSet(EHUDVisibilityReason reason);
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, BlueprintPure)
+    UEscapeMenuWindow* GetEscapeMenu() const;
     
     UFUNCTION(BlueprintCallable, Client, Reliable)
     void Client_WasKicked(EDisconnectReason reason);
     
-    AFSDPlayerControllerBase();
 };
 

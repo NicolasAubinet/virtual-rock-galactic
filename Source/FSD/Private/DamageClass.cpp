@@ -7,5 +7,6 @@ UDamageClass::UDamageClass() {
     this->AffectedByFriendlyFire = true;
     this->IndicatorImage = NULL;
     this->DamageShout = NULL;
+    this->DefaultDamageImpulse = NULL;
 }
 

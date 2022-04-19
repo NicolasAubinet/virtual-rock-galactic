@@ -4,18 +4,18 @@
 #include "SchematicBankInterface.h"
 #include "OverclockBank.generated.h"
 
-class UOverclockUpgrade;
 class USchematic;
 class UItemID;
+class UOverclockUpgrade;
 
 UCLASS()
 class FSD_API UOverclockBank : public UDataAsset, public ISchematicBankInterface {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<UOverclockUpgrade*, USchematic*> Overclocks;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UItemID* OwningItem;
     
     UOverclockBank();

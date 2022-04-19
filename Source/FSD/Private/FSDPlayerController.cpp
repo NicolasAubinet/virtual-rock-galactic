@@ -1,18 +1,19 @@
 #include "FSDPlayerController.h"
 #include "Templates/SubclassOf.h"
+#include "TerrainLatejoinComponent.h"
+#include "PerkUsageComponent.h"
+#include "FSDWidgetEffectsComponent.h"
 
 class UTutorialContentWidget;
-class UTemporaryBuff;
-class UDrinkableDataAsset;
-class UTreasureRewarder;
+class APlayerCharacter;
 class UTexture2D;
+class UTemporaryBuff;
 class AActor;
 class UFSDAchievement;
-class UPlayerCharacterID;
-class APlayerCharacter;
 class AFSDPlayerState;
+class UPlayerCharacterID;
 class USoundCue;
-class UResourceData;
+class UTreasureRewarder;
 class UVanityItem;
 class UVictoryPose;
 class UItemSkin;
@@ -41,15 +42,6 @@ bool AFSDPlayerController::ServerSetUserHoldToRun_Validate(bool Value) {
 }
 
 void AFSDPlayerController::Server_TravelDone_Implementation() {
-}
-bool AFSDPlayerController::Server_TravelDone_Validate() {
-    return true;
-}
-
-void AFSDPlayerController::Server_TerrainLateJoinPartReceived_Implementation() {
-}
-bool AFSDPlayerController::Server_TerrainLateJoinPartReceived_Validate() {
-    return true;
 }
 
 void AFSDPlayerController::Server_SetLateJoinDone_Implementation() {
@@ -108,7 +100,6 @@ bool AFSDPlayerController::Server_ActivateTemporaryBuff_Validate(UTemporaryBuff*
 
 void AFSDPlayerController::SendLevelUpStatistics(const int32 currentRank) {
 }
-
 
 
 
@@ -175,25 +166,10 @@ AActor* AFSDPlayerController::FindPlayerStart(UPlayerCharacterID* characterID) {
 void AFSDPlayerController::EndLevel() {
 }
 
-void AFSDPlayerController::Client_TerrainLateJoinVisibleChunks_Implementation(const TArray<uint32>& visibleChunks) {
-}
-
-void AFSDPlayerController::Client_TerrainLateJoinPart_Implementation(const TArray<FGrenadeExplodeOperationData>& explosions, const TArray<FCarveWithColliderOperationData>& colliderCarves, const TArray<FCarveWithSTLMeshOperationData>& meshCarves, const TArray<FPickaxeDigOperationData>& pickAxe, const TArray<FRemoveFloatingIslandOperationData>& floating, const TArray<FDrillOperationData>& drills, const TArray<FMeltOperationData>& melts, const TArray<FSplineSegmentCarveOperationData>& splines) {
-}
-
-void AFSDPlayerController::Client_TerrainLateJoinDone_Implementation() {
-}
-
-void AFSDPlayerController::Client_TerrainLateJoinDebris_Implementation(const TArray<int32>& instanceComponentPairs) {
-}
-
 void AFSDPlayerController::Client_PlayCue_Implementation(USoundCue* SoundCue) {
 }
 
 void AFSDPlayerController::Client_EndLevel_WaitForData_Implementation(bool areObjectivesCompleted, int32 numberOfPlayersInPod) {
-}
-
-void AFSDPlayerController::Client_DeductResource_Implementation(UResourceData* Resource, int32 Amount) {
 }
 
 void AFSDPlayerController::Client_CollectVanityItem_Implementation(UTreasureRewarder* rewarder, UVanityItem* targetItem, UPlayerCharacterID* targetCharacter) {
@@ -205,9 +181,6 @@ void AFSDPlayerController::Client_CollectTreasureVictoryPose_Implementation(UTre
 void AFSDPlayerController::Client_CollectTreasureSkin_Implementation(UTreasureRewarder* rewarder, UItemSkin* targetSkin, UItemID* targetItem) {
 }
 
-void AFSDPlayerController::Client_CollectTreasureDrink_Implementation(UTreasureRewarder* rewarder, UDrinkableDataAsset* Drinkable) {
-}
-
 void AFSDPlayerController::Client_CollectPickaxePart_Implementation(const UTreasureRewarder* rewarder, UPickaxePart* targetPart) {
 }
 
@@ -215,9 +188,12 @@ void AFSDPlayerController::ApplyPendingRewards() {
 }
 
 AFSDPlayerController::AFSDPlayerController() {
+    this->PerkUsageComponent = CreateDefaultSubobject<UPerkUsageComponent>(TEXT("PerkUsageCompent"));
+    this->LateJoinComponent = CreateDefaultSubobject<UTerrainLatejoinComponent>(TEXT("TerrainLateJoin"));
     this->IsOnSpaceRig = false;
     this->bReceivedEndLevel = false;
     this->ServerTravelDone = true;
+    this->WidgetEffects = CreateDefaultSubobject<UFSDWidgetEffectsComponent>(TEXT("WidgetEffects"));
     this->SpacerigSpawnType = ESpacerigStartType::PlayerHub;
     this->bDetectGravityChanges = false;
 }

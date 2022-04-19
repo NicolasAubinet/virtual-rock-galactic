@@ -7,10 +7,10 @@ USTRUCT()
 struct FEncodedChunkCellId {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     FEncodedChunkId ChunkId;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     uint16 cellOffset;
     
     FSDENGINE_API FEncodedChunkCellId();

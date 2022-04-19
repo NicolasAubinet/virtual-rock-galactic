@@ -2,6 +2,10 @@
 
 class USchematic;
 
+bool USchematicSettings::ValidateVanitySchematics() const {
+    return false;
+}
+
 FSchematicType USchematicSettings::GetSchematicTypeData(ESchematicType InType) {
     return FSchematicType{};
 }
@@ -15,5 +19,14 @@ USchematicSettings::USchematicSettings() {
     this->BlankSchematic = NULL;
     this->EndlessSchematics = NULL;
     this->OverclockPricingTier = NULL;
+    this->VanityCatHeadWear = NULL;
+    this->VanityCatMoustache = NULL;
+    this->VanityCatBeard = NULL;
+    this->VanityCatArmor = NULL;
+    this->VanityCatEyebrow = NULL;
+    this->VanityCatHairColor = NULL;
+    this->VanityCatSideburn = NULL;
+    this->VanityCatSkinColor = NULL;
+    this->VanityCatVictoryPose = NULL;
 }
 

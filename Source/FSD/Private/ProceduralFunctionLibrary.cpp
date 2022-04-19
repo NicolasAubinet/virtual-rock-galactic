@@ -1,11 +1,11 @@
 #include "ProceduralFunctionLibrary.h"
 #include "Templates/SubclassOf.h"
 
-class UBiome;
 class UObject;
+class AProceduralSetup;
 class UFXSystemAsset;
 class UObjective;
-class AProceduralSetup;
+class UBiome;
 class UDebrisPositioning;
 
 void UProceduralFunctionLibrary::SpawnTerrainImpact(UObject* WorldContextObject, UFXSystemAsset* particle, const FVector& Location, FRotator Rotation) {

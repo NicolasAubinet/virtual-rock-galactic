@@ -1,31 +1,31 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "TerrainPlacementBox.h"
-#include "UObject/NoExportTypes.h"
 #include "EDebrisColliderType.h"
 #include "DebrisCapsule.h"
+#include "UObject/NoExportTypes.h"
 #include "TerrainPlacementDebugItem.generated.h"
 
-USTRUCT()
+USTRUCT(BlueprintType)
 struct FTerrainPlacementDebugItem {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FTerrainPlacementBox> TerrainCheckers;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool BoxGood;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool CapsuleGood;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     EDebrisColliderType CapsuleType;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FDebrisCapsule Capsule;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FTransform Transform;
     
     FSD_API FTerrainPlacementDebugItem();

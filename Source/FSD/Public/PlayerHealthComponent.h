@@ -2,107 +2,107 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "HealthComponent.h"
-#include "RejoinListener.h"
 #include "HealthRegenerationParams.h"
+#include "RejoinListener.h"
+#include "FullHealthSignatureDelegate.h"
+#include "HealthRegeneratingChangedDelegate.h"
+#include "HitSigDelegate.h"
 #include "AudioWithCooldown.h"
 #include "PlayerHealthComponent.generated.h"
 
-class AActor;
-class APlayerCharacter;
-class UDamageClass;
 class UCurveFloat;
+class APlayerCharacter;
 class UParticleSystem;
 class UParticleSystemComponent;
 class UPlayerDamageTakenMutator;
 class UStatusEffect;
+class AActor;
 class AController;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_FourParams(FPlayerHealthComponentOnPlayerHit, float, Damage, UDamageClass*, DamageClass, AActor*, DamageCauser, bool, anyHealthLost);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPlayerHealthComponentOnFullHealthCannotHeal);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPlayerHealthComponentOnHealedFromCrystalEvent);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerHealthComponentOnHealthRegeneratingChanged, bool, isRegenerating);
-
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UPlayerHealthComponent : public UHealthComponent, public IRejoinListener {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FPlayerHealthComponentOnFullHealthCannotHeal OnFullHealthCannotHeal;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FFullHealthSignature OnFullHealthCannotHeal;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerHealthComponentOnHealedFromCrystalEvent OnHealedFromCrystalEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FFullHealthSignature OnHealedFromCrystalEvent;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerHealthComponentOnHealthRegeneratingChanged OnHealthRegeneratingChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FHealthRegeneratingChanged OnHealthRegeneratingChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerHealthComponentOnPlayerHit OnPlayerHit;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FHitSig OnPlayerHit;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere, ReplicatedUsing=OnRep_MaxHealth)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_MaxHealth, meta=(AllowPrivateAccess=true))
     float MaxHealth;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere, ReplicatedUsing=OnRep_MaxArmor)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_MaxArmor, meta=(AllowPrivateAccess=true))
     float MaxArmor;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_ArmorDamage)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_ArmorDamage, meta=(AllowPrivateAccess=true))
     float ArmorDamage;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ReviveHealthReturnRatio;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ReviveArmorReturnRatio;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float HealthPerCrystalVolume;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FHealthRegenerationParams HealthRegeneration;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UCurveFloat* ArmorRegenCurve;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ShieldRegenDelay;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     APlayerCharacter* Character;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UParticleSystem* GenericImpactParticles;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UParticleSystem* ShieldLinkEffect;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FAudioWithCooldown AudioFriendlyFire;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UParticleSystemComponent* ShieldLinkInstance;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float InvulnerabilityDuration;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ReviveInvulnerabilityTime;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UPlayerDamageTakenMutator* DamageTakenMutator;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TSubclassOf<UStatusEffect> IronWillStatusEffectClass;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UStatusEffect* IronWillStatusEffect;
     
-    UPROPERTY(Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     bool IronWillActive;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float IronWillTimeToActivate;
     
 public:
+    UPlayerHealthComponent();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     UStatusEffect* SetIronWillStatusEffect(TSubclassOf<UStatusEffect> steClass);
     
@@ -149,9 +149,6 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool CanActivateIronWill() const;
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    UPlayerHealthComponent();
     
     // Fix for true pure virtual functions not being implemented
 };

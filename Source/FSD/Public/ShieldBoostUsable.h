@@ -6,15 +6,14 @@
 
 class APlayerCharacter;
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UShieldBoostUsable : public UInstantUsable {
     GENERATED_BODY()
 public:
+    UShieldBoostUsable();
 protected:
     UFUNCTION(BlueprintCallable)
     void OnCharacterBoosted(APlayerCharacter* User, EInputKeys Key);
     
-public:
-    UShieldBoostUsable();
 };
 

@@ -1,8 +1,8 @@
 #include "AssaultRifleUpgrade.h"
 #include "Templates/SubclassOf.h"
 
-class AFSDPlayerState;
 class AItem;
+class AFSDPlayerState;
 
 FUpgradeValues UAssaultRifleUpgrade::GetUpgradedValue(TSubclassOf<AItem> Item, AFSDPlayerState* Player, EAssaultRifleUpgrade NewUpgradeType) {
     return FUpgradeValues{};

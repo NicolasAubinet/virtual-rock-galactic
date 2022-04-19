@@ -11,22 +11,22 @@ class UVeinResourceData : public UResourceData {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UTerrainMaterial* TerrainMaterial;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float UnitsPerLenth;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ScaleToResourceDistribution;
     
-    UPROPERTY(EditAnywhere, Instanced)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UVeinResourceCreator* ResourceCreator;
     
 public:
+    UVeinResourceData();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UTerrainMaterial* GetTerrainMaterial() const;
     
-    UVeinResourceData();
 };
 

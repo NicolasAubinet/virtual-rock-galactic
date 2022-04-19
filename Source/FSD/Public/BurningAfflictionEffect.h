@@ -9,7 +9,7 @@ class UBurningAfflictionEffect : public UAfflictionEffect {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EFrozenBitsSize FireParticleSize;
     
 public:

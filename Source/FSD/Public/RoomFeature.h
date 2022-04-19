@@ -10,7 +10,7 @@ class URoomFeature : public UObject {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     TArray<URoomFeature*> RoomFeatures;
     
 public:

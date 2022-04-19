@@ -1,36 +1,36 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "TerrainPlacementBox.h"
-#include "Components/SceneComponent.h"
-#include "UObject/NoExportTypes.h"
-#include "EDebrisColliderType.h"
 #include "DebrisCapsule.h"
+#include "Components/SceneComponent.h"
+#include "TerrainPlacementBox.h"
+#include "EDebrisColliderType.h"
+#include "UObject/NoExportTypes.h"
 #include "TerrainPlacementComponent.generated.h"
 
 class AProceduralSetup;
 
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class FSD_API UTerrainPlacementComponent : public USceneComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FTerrainPlacementBox> TerrainCheckers;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EDebrisColliderType CapsuleType;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FDebrisCapsule Capsule;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     int32 BlockerIDHack;
     
+    UTerrainPlacementComponent();
     UFUNCTION(BlueprintCallable)
     void RemoveBlockers();
     
     UFUNCTION(BlueprintCallable)
     void AddBlockers(AProceduralSetup* ProceduralSetup, const FTransform& Transform);
     
-    UTerrainPlacementComponent();
 };
 

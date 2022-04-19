@@ -3,61 +3,60 @@
 #include "UsableComponentBase.h"
 #include "ResourceBank.generated.h"
 
-class APlayerCharacter;
 class AFSDGameState;
+class APlayerCharacter;
 class USoundBase;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FResourceBankOnEndDeposite, APlayerCharacter*, User);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FResourceBankOnBeginDeposite, APlayerCharacter*, User);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FResourceBankOnDepositing, APlayerCharacter*, User);
-
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UResourceBank : public UUsableComponentBase {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FResourceBankOnBeginDeposite OnBeginDeposite;
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FResourceBankEvent, APlayerCharacter*, User);
     
-    UPROPERTY(BlueprintAssignable)
-    FResourceBankOnDepositing OnDepositing;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FResourceBankEvent OnBeginDeposite;
     
-    UPROPERTY(BlueprintAssignable)
-    FResourceBankOnEndDeposite OnEndDeposite;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FResourceBankEvent OnDepositing;
     
-    UPROPERTY(BlueprintReadWrite, Replicated, Transient)
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FResourceBankEvent OnEndDeposite;
+    
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     bool OpenForDeposit;
     
 protected:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     AFSDGameState* GameState;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DepositesPerSecond;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DepositeAmount;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool CanGetStrict;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool AddToTeamInventory;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundBase* AudioBeginDepositing;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundBase* AudioDepositing;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundBase* AudioEndDepositing;
     
+public:
+    UResourceBank();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+protected:
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
     void All_Depositing(APlayerCharacter* Character);
     
-public:
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    UResourceBank();
 };
 

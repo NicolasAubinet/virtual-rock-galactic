@@ -9,7 +9,7 @@ UCLASS()
 class AExplosiveBarrelEvent : public AGameEvent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UDamageComponent* EndDamage;
     
     AExplosiveBarrelEvent();

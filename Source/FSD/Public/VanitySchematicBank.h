@@ -11,15 +11,15 @@ UCLASS()
 class FSD_API UVanitySchematicBank : public USchematicBankBase {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USchematicCategory* SchematicCategory;
     
-    UPROPERTY(EditAnywhere)
-    TMap<UVanityItem*, FSchematicBankItem> vanityItems;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TMap<UVanityItem*, FSchematicBankItem> VanityItems;
     
+    UVanitySchematicBank();
     UFUNCTION(BlueprintCallable)
     void AppendItems(TArray<UVanityItem*>& toArray) const;
     
-    UVanitySchematicBank();
 };
 

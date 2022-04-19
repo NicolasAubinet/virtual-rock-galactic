@@ -10,7 +10,7 @@ class UTrailUpgradeElement : public UItemUpgradeElement {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UFXSystemAsset* Trail;
     
 public:

@@ -9,10 +9,10 @@ USTRUCT(BlueprintType)
 struct FGeneratedDebrisItem {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     UDebrisBase* Debris;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     UObject* Influencer;
     
     FSD_API FGeneratedDebrisItem();

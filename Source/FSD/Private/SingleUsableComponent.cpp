@@ -6,6 +6,9 @@ class APlayerCharacter;
 void USingleUsableComponent::Use(APlayerCharacter* User, EInputKeys Key, float DeltaTime) {
 }
 
+void USingleUsableComponent::SetProgress(float Value) {
+}
+
 void USingleUsableComponent::SetCanUse(bool CanUse) {
 }
 
@@ -43,7 +46,6 @@ USingleUsableComponent::USingleUsableComponent() {
     this->Usable = false;
     this->TurnOffAfterUse = false;
     this->MultipleUse = false;
-    this->CancelUseOnRestrictionChange = false;
     this->bShowUsingUI = true;
     this->useDuration = 0.00f;
     this->Progress = 0.00f;

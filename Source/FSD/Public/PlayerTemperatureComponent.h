@@ -2,88 +2,90 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "TemperatureComponent.h"
+#include "PlayerTemperatureChangeRateSignatureDelegate.h"
+#include "PlayerTemperatureChangedSignatureDelegate.h"
+#include "PlayerTemperatureStateChangedSignatureDelegate.h"
+#include "PlayerDefrostingSignatureDelegate.h"
+#include "PlayerTemperatureShowBarDelegate.h"
 #include "EPlayerTemperatureState.h"
 #include "PlayerTemperatureComponent.generated.h"
 
-class UHealthComponentBase;
 class UStatusEffect;
 class APlayerCharacter;
+class UHealthComponentBase;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FPlayerTemperatureComponentOnTemperatureChanged, float, Temperature, float, Change);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerTemperatureComponentOnTemperatureStateChanged, EPlayerTemperatureState, State);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerTemperatureComponentOnTemperatureChangeRate, int32, ChangeRate);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerTemperatureComponentOnBarVisibilityChanged, bool, barVisible);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerTemperatureComponentOnDefrosting, float, Progress);
-
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UPlayerTemperatureComponent : public UTemperatureComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FPlayerTemperatureComponentOnTemperatureChanged OnTemperatureChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FPlayerTemperatureChangedSignature OnTemperatureChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerTemperatureComponentOnTemperatureStateChanged OnTemperatureStateChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FPlayerTemperatureStateChangedSignature OnTemperatureStateChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerTemperatureComponentOnTemperatureChangeRate OnTemperatureChangeRate;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FPlayerTemperatureChangeRateSignature OnTemperatureChangeRate;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerTemperatureComponentOnDefrosting OnDefrosting;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FPlayerDefrostingSignature OnDefrosting;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerTemperatureComponentOnBarVisibilityChanged OnBarVisibilityChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FPlayerTemperatureShowBar OnBarVisibilityChanged;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MinimumTemperature;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaximumTemperature;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DefrostTemperature;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float BurnTemperature;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DouseFireTemperature;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float TemperaturRegainSpeed;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DefrostingRequired;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UStatusEffect> OnDefrostedStatusEffect;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float NormalTemperature;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_CurrentTemperature)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_CurrentTemperature, meta=(AllowPrivateAccess=true))
     float CurrentTemperature;
     
-    UPROPERTY(BlueprintReadOnly, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     float TargetTemperature;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_TemperatureChangeSpeed)
+    UPROPERTY(Transient, ReplicatedUsing=OnRep_TemperatureChangeSpeed, meta=(AllowPrivateAccess=true))
     int8 TemperatureChangeSpeed;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_DefrostProgress)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_DefrostProgress, meta=(AllowPrivateAccess=true))
     float DefrostProgress;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool barVisible;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     APlayerCharacter* Character;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_TemperatureState)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_TemperatureState, meta=(AllowPrivateAccess=true))
     EPlayerTemperatureState TemperatureState;
     
 public:
+    UPlayerTemperatureComponent();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetNormalTemperature();
     
@@ -119,8 +121,5 @@ public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void Defrost(float Amount);
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    UPlayerTemperatureComponent();
 };
 

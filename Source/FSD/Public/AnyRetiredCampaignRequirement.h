@@ -4,7 +4,7 @@
 #include "AnyRetiredCampaignRequirement.generated.h"
 
 UCLASS(EditInlineNew)
-class UAnyRetiredCampaignRequirement : public UCampaignRequirement {
+class FSD_API UAnyRetiredCampaignRequirement : public UCampaignRequirement {
     GENERATED_BODY()
 public:
     UAnyRetiredCampaignRequirement();

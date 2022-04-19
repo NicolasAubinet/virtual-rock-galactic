@@ -3,7 +3,7 @@
 #include "UpgradableGearComponent.h"
 #include "UpgradableBoscoComponent.generated.h"
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UUpgradableBoscoComponent : public UUpgradableGearComponent {
     GENERATED_BODY()
 public:

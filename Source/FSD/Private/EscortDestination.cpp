@@ -1,5 +1,6 @@
 #include "EscortDestination.h"
 #include "Net/UnrealNetwork.h"
+#include "DamageComponent.h"
 
 class ADeepCSGWorld;
 class UTerrainMaterial;
@@ -26,6 +27,7 @@ void AEscortDestination::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& O
 }
 
 AEscortDestination::AEscortDestination() {
+    this->EndExplosionDamage = CreateDefaultSubobject<UDamageComponent>(TEXT("ExplosionDamage"));
     this->NextBreakpoint = 0.00f;
     this->StageForAnalytics = 0;
     this->SecondsToDestroyHeartstone = 0;

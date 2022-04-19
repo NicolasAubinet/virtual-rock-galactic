@@ -3,7 +3,7 @@
 #include "ConvexMeshWithCachedTreeComponent.h"
 #include "CSGPlaneComponent.generated.h"
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UCSGPlaneComponent : public UConvexMeshWithCachedTreeComponent {
     GENERATED_BODY()
 public:

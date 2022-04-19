@@ -54,7 +54,7 @@ void ALockOnWeapon::RefundAmmo_Implementation() {
 void ALockOnWeapon::OnHitDeadTarget() {
 }
 
-void ALockOnWeapon::OnHit(const FHitResult& Hit, bool AlwaysPenetrate) {
+void ALockOnWeapon::OnHit(const FHitResult& Hit, bool alwaysPenetrate) {
 }
 
 void ALockOnWeapon::OnAsyncFireComplete() {

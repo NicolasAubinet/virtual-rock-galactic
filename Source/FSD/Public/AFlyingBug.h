@@ -1,102 +1,94 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "EnemyDeepPathfinderCharacter.h"
-#include "UObject/NoExportTypes.h"
 #include "Engine/NetSerialization.h"
+#include "DamageData.h"
 #include "AFlyingBug.generated.h"
 
-class UOutlineComponent;
+class UPawnSensingComponent;
 class UEnemyComponent;
 class UPawnStatsComponent;
-class UPawnAlertComponent;
-class UPawnSensingComponent;
-class USphereComponent;
-class USoundBase;
-class UAudioComponent;
-class UFrozenPawnImpactComponent;
-class UAnimSequenceBase;
 class AActor;
-class UPhysicsAsset;
+class UOutlineComponent;
+class UPawnAlertComponent;
+class UAudioComponent;
+class USphereComponent;
+class UFrozenPawnImpactComponent;
+class UHitReactionComponent;
+class USoundBase;
 class UHealthComponentBase;
+class UHealthComponent;
+class UDamageTag;
 
 UCLASS()
 class AAFlyingBug : public AEnemyDeepPathfinderCharacter {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UEnemyComponent* EnemyComponent;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UPawnStatsComponent* PawnStats;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UOutlineComponent* outline;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UPawnSensingComponent* Senses;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UPawnAlertComponent* Alert;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USphereComponent* ExplosionSphere;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UAudioComponent* WingSoundComponent;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UFrozenPawnImpactComponent* FrozenImpact;
     
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UHitReactionComponent* HitReactions;
+    
 protected:
-    UPROPERTY(EditAnywhere)
-    TArray<UAnimSequenceBase*> HitReactions;
-    
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_RagdollImpact)
-    FVector_NetQuantize RagdollImpact;
-    
-    UPROPERTY(Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     AActor* RotateTarget;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
-    UPhysicsAsset* PhysicalAssetAfterDeath;
-    
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     USoundBase* ChatterSound;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
-    float FirstHitReactBlendIn;
-    
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
-    float OverrideHitReactBlendIn;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DistanceForAttackMode;
     
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     float MinChatterDelay;
     
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     float MaxChatterDelay;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float AttackModeRotationSpeed;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool UsesAttackStance;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool SetLifeTime;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_AttackStance)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_AttackStance, meta=(AllowPrivateAccess=true))
     bool AttackStance;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool LookStraight;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool UseDefaultRagdoll;
     
 public:
+    AAFlyingBug();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void StartFizzle();
     
@@ -111,17 +103,11 @@ public:
     
 protected:
     UFUNCTION(BlueprintCallable)
-    void Ragdoll(bool applyForce, const FVector& force);
-    
-    UFUNCTION(BlueprintCallable)
     void PlayVoice();
     
 public:
     UFUNCTION(BlueprintCallable)
     void OnStartFalling();
-    
-    UFUNCTION(BlueprintCallable)
-    void OnRep_RagdollImpact();
     
 protected:
     UFUNCTION(BlueprintCallable)
@@ -135,9 +121,6 @@ public:
     void OnFreezeImpact();
     
     UFUNCTION(BlueprintCallable)
-    void OnDamaged(float Amount);
-    
-    UFUNCTION(BlueprintCallable)
     void OnBugDeath(UHealthComponentBase* Health);
     
 protected:
@@ -148,11 +131,16 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetIsInAttackStance() const;
     
+protected:
+    UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
+    void All_Ragdoll(const FVector_NetQuantize& Location, const FVector_NetQuantize& Impulse, uint8 BoneIndex);
+    
+public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void AlertNearbyEnemies();
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    UFUNCTION(BlueprintCallable)
+    void AddImpulseAndRagdoll(UHealthComponent* Health, float damageAmount, const FDamageData& DamageData, const TArray<UDamageTag*>& damageTags);
     
-    AAFlyingBug();
 };
 

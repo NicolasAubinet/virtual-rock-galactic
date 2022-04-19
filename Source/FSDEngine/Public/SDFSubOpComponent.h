@@ -4,12 +4,12 @@
 #include "SDFSmoothingProperties.h"
 #include "SDFSubOpComponent.generated.h"
 
-UCLASS()
-class USDFSubOpComponent : public USDFBaseComponent {
+UCLASS(meta=(BlueprintSpawnableComponent))
+class FSDENGINE_API USDFSubOpComponent : public USDFBaseComponent {
     GENERATED_BODY()
 public:
 private:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSDFSmoothingProperties Properties;
     
 public:

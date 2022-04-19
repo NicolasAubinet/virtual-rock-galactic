@@ -8,7 +8,7 @@ USTRUCT(BlueprintType)
 struct FEliminationTarget {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<AFSDPawn*> Targets;
     
     FSD_API FEliminationTarget();

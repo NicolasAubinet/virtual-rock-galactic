@@ -8,11 +8,17 @@ USTRUCT(BlueprintType)
 struct FCompositeArmorItem {
     GENERATED_BODY()
 public:
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UPrimitiveComponent* Component;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float Health;
+    
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    bool OverrideAffectedByArmorBreak;
+    
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    bool MyAffectedByAmorBreak;
     
     FSD_API FCompositeArmorItem();
 };

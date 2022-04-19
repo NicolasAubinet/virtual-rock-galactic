@@ -8,7 +8,7 @@ USTRUCT()
 struct FDebrisVeinResource {
     GENERATED_BODY()
 public:
-    UPROPERTY(Export, Transient)
+    UPROPERTY(Export, Transient, meta=(AllowPrivateAccess=true))
     UDebrisVeinComponent* Debris;
     
     FSD_API FDebrisVeinResource();

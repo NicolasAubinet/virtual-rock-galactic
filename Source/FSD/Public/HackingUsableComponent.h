@@ -4,31 +4,36 @@
 #include "HackingUsableState.h"
 #include "HackingUsableComponent.generated.h"
 
-class APlayerCharacter;
 class AHackingToolItem;
+class APlayerCharacter;
 class UHackingToolWidget;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FHackingUsableComponentOnHacked, APlayerCharacter*, InHackedBy);
-
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class FSD_API UHackingUsableComponent : public UInstantUsable {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FHackingUsableComponentOnHacked OnHacked;
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FHackedDelegate, APlayerCharacter*, InHackedBy);
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FHackedDelegate OnHacked;
     
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<AHackingToolItem> ItemType;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<UHackingToolWidget> HackingWidgetType;
     
-    UPROPERTY(ReplicatedUsing=OnRep_HackingState)
+    UPROPERTY(BlueprintReadWrite, ReplicatedUsing=OnRep_HackingState, meta=(AllowPrivateAccess=true))
     FHackingUsableState HackingState;
     
+public:
+    UHackingUsableComponent();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+protected:
     UFUNCTION(BlueprintCallable)
-    void OnRep_HackingState(const FHackingUsableState& oldState) const;
+    void OnRep_HackingState(const FHackingUsableState& oldState);
     
 public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -43,8 +48,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     APlayerCharacter* GetHackedBy() const;
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    UHackingUsableComponent();
 };
 

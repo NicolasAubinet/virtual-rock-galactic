@@ -3,7 +3,7 @@
 #include "AttackerPositioningComponent.h"
 #include "EnemyAttackerPositioningComponent.generated.h"
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UEnemyAttackerPositioningComponent : public UAttackerPositioningComponent {
     GENERATED_BODY()
 public:

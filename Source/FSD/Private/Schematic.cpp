@@ -1,26 +1,14 @@
 #include "Schematic.h"
 
+class UResourceData;
 class USchematicItem;
 class UObject;
-class UResourceData;
 class UTexture;
 
 void USchematic::SetCraftingMaterialCost() {
 }
 
 void USchematic::SetCostLocked(bool IsLocked) {
-}
-
-bool USchematic::HasBeenForged(UObject* WorldContext) const {
-    return false;
-}
-
-bool USchematic::HasBeenAwardedOrForged(UObject* WorldContext) const {
-    return false;
-}
-
-bool USchematic::HasBeenAwarded(UObject* WorldContext) const {
-    return false;
 }
 
 FText USchematic::GetTitle() const {

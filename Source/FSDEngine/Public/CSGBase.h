@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "BuilderBase.h"
 #include "UObject/NoExportTypes.h"
+#include "BuilderBase.h"
 #include "MeshBaseProperties.h"
 #include "CSGBase.generated.h"
 
@@ -9,10 +9,10 @@ UCLASS(Abstract)
 class UCSGBase : public UBuilderBase {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FMeshBaseProperties BaseProperties;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FTransform RelativeTransform;
     
     UCSGBase();

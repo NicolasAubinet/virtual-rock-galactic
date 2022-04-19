@@ -3,10 +3,10 @@
 
 class UAsyncManager;
 class UObject;
-class UPlayerCharacterID;
-class APlayerCharacter;
 class UInventoryList;
+class UPlayerCharacterID;
 class UDifficultySetting;
+class APlayerCharacter;
 class UPerkAsset;
 class UHUDVisibilityGroup;
 class UMissionStat;
@@ -127,6 +127,7 @@ UGameData::UGameData() {
     this->DrinkSettings = NULL;
     this->UpgradeSettings = NULL;
     this->SpawnSettings = NULL;
+    this->VanitySettings = NULL;
     this->KeyBindingSettings = NULL;
     this->DeepDiveSettings = NULL;
     this->EncounterSettings = NULL;
@@ -138,6 +139,7 @@ UGameData::UGameData() {
     this->PickaxeSettings = NULL;
     this->TagSettings = NULL;
     this->ItemSettings = NULL;
+    this->DynamicIconSettings = NULL;
     this->ShowroomSettings = NULL;
     this->VictoryPoseSettings = NULL;
     this->TutorialSettings = NULL;

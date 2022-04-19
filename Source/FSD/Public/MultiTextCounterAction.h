@@ -5,50 +5,49 @@
 #include "MultiTextCounterAction.generated.h"
 
 class UTextBlock;
+class UMultiTextCounterAction;
+class UObject;
 class UAudioComponent;
 class USoundCue;
-class UObject;
-class UMultiTextCounterAction;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FMultiTextCounterActionCompleted);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FMultiTextCounterActionOnTick);
 
 UCLASS()
 class UMultiTextCounterAction : public UTickableActionBase {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FMultiTextCounterActionCompleted Completed;
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FTickDelegate);
     
-    UPROPERTY(BlueprintAssignable)
-    FMultiTextCounterActionOnTick OnTick;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FTickDelegate Completed;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FTickDelegate OnTick;
     
 protected:
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UTextBlock* TotalBlock;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FText TotalFormat;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FTextCounterEntry> Entries;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float CountSpeed;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     USoundCue* CountingSound;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UAudioComponent* AudioComponent;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UObject* WorldContext;
     
 public:
+    UMultiTextCounterAction();
     UFUNCTION(BlueprintCallable)
     static UMultiTextCounterAction* StartMultiTextCounter(UObject* InWorldContext, UTextBlock* InTotalBlock, const FText InTotalFormat, float InCountSpeed, USoundCue* InCountingSound, const TArray<FTextCounterEntry> InEntries);
     
-    UMultiTextCounterAction();
 };
 

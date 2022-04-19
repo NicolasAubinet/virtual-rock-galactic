@@ -11,6 +11,7 @@ FGDMissionStats::FGDMissionStats() {
     this->CharacterLevelUp = NULL;
     this->VanityItemsBought = NULL;
     this->ItemUpgradesBought = NULL;
+    this->CosmeticMasteryLevelledUp = NULL;
     this->DrinkablesConsumed = NULL;
     this->DrinkableRoundsOrdered = NULL;
     this->BartenderCreditsTipped = NULL;

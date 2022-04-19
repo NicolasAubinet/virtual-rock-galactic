@@ -5,42 +5,47 @@
 #include "ResourceChunk.generated.h"
 
 class USimpleObjectInfoComponent;
+class APlayerCharacter;
 class USoundCue;
 class UResourceData;
-class APlayerCharacter;
 
 UCLASS()
-class AResourceChunk : public AFSDPhysicsActor {
+class FSD_API AResourceChunk : public AFSDPhysicsActor {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float CollectDuration;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool CanBeCollectedNormally;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool CanBeCollected;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USimpleObjectInfoComponent* InfoComponent;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float ResourceAmount;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundCue* PickupSound;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UResourceData* ResourceData;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<APlayerCharacter*> OverlappingPlayers;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_CollectedBy)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_CollectedBy, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<APlayerCharacter> CollectedBy;
     
+public:
+    AResourceChunk();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+protected:
     UFUNCTION(BlueprintCallable)
     void SetCollectOpen();
     
@@ -58,9 +63,5 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void CalcMovement(float InProgress, const FVector& InVector, FVector& OutVelocity, FVector& OutAngularVelocity);
     
-public:
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    AResourceChunk();
 };
 

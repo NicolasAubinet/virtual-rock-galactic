@@ -1,8 +1,12 @@
 #include "FlameThrowerItem.h"
+#include "DamageComponent.h"
+#include "StickyFlameSpawner.h"
+#include "MotionAudioController.h"
+#include "ProjectileLauncherComponent.h"
 
-class UHealthComponentBase;
-class UFSDPhysicalMaterial;
 class AActor;
+class UFSDPhysicalMaterial;
+class UHealthComponentBase;
 class UPrimitiveComponent;
 
 void AFlameThrowerItem::TriggerAoEHeat() {
@@ -20,7 +24,7 @@ bool AFlameThrowerItem::ServerDoDamage_Validate(FVector_NetQuantize Start, FVect
     return true;
 }
 
-void AFlameThrowerItem::OnTargetKilled(AActor* Target, UFSDPhysicalMaterial* PhysMat) {
+void AFlameThrowerItem::OnTargetKilled(AActor* Target, UFSDPhysicalMaterial* PhysMat, bool wasDirectHit) {
 }
 
 void AFlameThrowerItem::OnTargetDamaged(UHealthComponentBase* Health, float Amount, UPrimitiveComponent* HitComponent, UFSDPhysicalMaterial* PhysicalMaterial) {
@@ -34,6 +38,11 @@ void AFlameThrowerItem::All_FlameFeedback_Implementation(FVector_NetQuantize Loc
 
 AFlameThrowerItem::AFlameThrowerItem() {
     this->FlameParticleComponent = NULL;
+    this->DamageComponent = CreateDefaultSubobject<UDamageComponent>(TEXT("Damage"));
+    this->StickyFlames = CreateDefaultSubobject<UStickyFlameSpawner>(TEXT("StickyFlames"));
+    this->AoEHeatDamageComponent = CreateDefaultSubobject<UDamageComponent>(TEXT("AoEHeatDamage"));
+    this->ExplodingTargetsDamageComponent = CreateDefaultSubobject<UDamageComponent>(TEXT("ExplodingTargetsDamage"));
+    this->MotionAudio = CreateDefaultSubobject<UMotionAudioController>(TEXT("MotionAudio"));
     this->ShotCostProjectile = 10;
     this->DecalDelay = 0.20f;
     this->CurrentDecalDelay = 0.00f;
@@ -62,5 +71,6 @@ AFlameThrowerItem::AFlameThrowerItem() {
     this->DamangeTargetsParticles = NULL;
     this->KilledTargetsExplodingParticles = NULL;
     this->KilledTargetsExplodingSound = NULL;
+    this->ProjectileLancher = CreateDefaultSubobject<UProjectileLauncherComponent>(TEXT("projectileLauncher"));
 }
 

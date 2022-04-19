@@ -8,7 +8,7 @@ USTRUCT(BlueprintType)
 struct FRetirementCostItem {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<UResourceData*, int32> RetirementCost;
     
     FSD_API FRetirementCostItem();

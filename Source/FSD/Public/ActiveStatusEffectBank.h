@@ -9,13 +9,13 @@ USTRUCT(BlueprintType)
 struct FActiveStatusEffectBank {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UStatusEffect* Key;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UStatusEffect* ActiveEffect;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FActiveStatusEffect> Effects;
     
     FSD_API FActiveStatusEffectBank();

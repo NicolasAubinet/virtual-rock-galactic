@@ -10,8 +10,8 @@ class UActivityCardReward : public UReward {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
-    UGameActivityType* activity;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UGameActivityType* Activity;
     
 public:
     UActivityCardReward();

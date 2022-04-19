@@ -1,17 +1,17 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "ChunkId.h"
 #include "ChunkOffset.h"
+#include "ChunkId.h"
 #include "ChunckIDAndOffset.generated.h"
 
 USTRUCT()
 struct FChunckIDAndOffset {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     FChunkId ChunkId;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     FChunkOffset Offset;
     
     FSDENGINE_API FChunckIDAndOffset();

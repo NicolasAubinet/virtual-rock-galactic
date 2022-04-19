@@ -5,13 +5,13 @@
 #include "SDFIntersectOp.generated.h"
 
 UCLASS()
-class USDFIntersectOp : public USDFBase {
+class FSDENGINE_API USDFIntersectOp : public USDFBase {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FSDFSmoothingProperties Properties;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TArray<USDFBase*> Arguments;
     
     USDFIntersectOp();

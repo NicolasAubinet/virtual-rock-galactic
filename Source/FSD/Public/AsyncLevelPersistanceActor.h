@@ -9,7 +9,7 @@ UCLASS()
 class AAsyncLevelPersistanceActor : public AActor {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<UObject*> References;
     
     AAsyncLevelPersistanceActor();

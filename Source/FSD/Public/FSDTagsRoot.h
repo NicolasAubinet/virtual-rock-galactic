@@ -7,7 +7,7 @@ USTRUCT(BlueprintType)
 struct FFSDTagsRoot {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FFSDTagsAttitude Attitude;
     
     FSD_API FFSDTagsRoot();

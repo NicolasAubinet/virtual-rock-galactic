@@ -11,16 +11,16 @@ USTRUCT(BlueprintType)
 struct FGDCharacterRetirement {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<UPlayerCharacterID*, TSubclassOf<UCampaign>> Campaigns;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<UPlayerCharacterID*, FRetirementCostItem> RetirementCost;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<float> CreditsCostMultipliers;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<float> ResourceCostMultipliers;
     
     FSD_API FGDCharacterRetirement();

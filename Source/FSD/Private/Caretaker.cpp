@@ -1,5 +1,10 @@
 #include "Caretaker.h"
 #include "Net/UnrealNetwork.h"
+#include "Components/SceneComponent.h"
+#include "HealthDamageTracker.h"
+#include "Components/SkeletalMeshComponent.h"
+#include "PawnStatsComponent.h"
+#include "EnemyHealthComponent.h"
 
 class UCaretakerActionComponent;
 
@@ -13,13 +18,13 @@ void ACaretaker::OpenRandomEye(bool forbidLastEye) {
 }
 
 
+void ACaretaker::OnRep_Server_Rotation() {
+}
+
 void ACaretaker::OnRep_OpenEye() {
 }
 
 void ACaretaker::OnRep_CurrentStage() {
-}
-
-void ACaretaker::OnRep_CurrentRotation() {
 }
 
 
@@ -49,15 +54,22 @@ void ACaretaker::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifeti
     Super::GetLifetimeReplicatedProps(OutLifetimeProps);
     
     DOREPLIFETIME(ACaretaker, CurrentStage);
+    DOREPLIFETIME(ACaretaker, TargetRotationRate);
     DOREPLIFETIME(ACaretaker, Server_Rotation);
     DOREPLIFETIME(ACaretaker, OpenEye);
 }
 
 ACaretaker::ACaretaker() {
+    this->Root = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
+    this->Body = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("BodyMesh"));
     this->Eyes.AddDefaulted(4);
     this->subHealth.AddDefaulted(4);
+    this->DamageTracker = CreateDefaultSubobject<UHealthDamageTracker>(TEXT("DamageTracker"));
+    this->Health = CreateDefaultSubobject<UEnemyHealthComponent>(TEXT("Health"));
+    this->PawnStats = CreateDefaultSubobject<UPawnStatsComponent>(TEXT("PawnStats"));
     this->CurrentAction = NULL;
     this->CurrentStage = -1;
+    this->TargetRotationRate = 0;
     this->RotationRates.AddDefaulted(5);
     this->Server_Rotation = 0.00f;
     this->IsInStageCooldown = false;

@@ -1,53 +1,57 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
+#include "SizeBoxSettings.h"
+#include "WidgetAnimationSettings.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "Blueprint/UserWidget.h"
-#include "WidgetAnimationSettings.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "Engine/EngineTypes.h"
-#include "Fonts/SlateFontInfo.h"
-#include "SizeBoxSettings.h"
-#include "Styling/SlateBrush.h"
+#include "Engine/EngineTypes.h"
 #include "Components/SlateWrapperTypes.h"
+#include "Fonts/SlateFontInfo.h"
 #include "InputCoreTypes.h"
+#include "Styling/SlateBrush.h"
 #include "Framework/Text/TextLayout.h"
 #include "Types/SlateEnums.h"
 #include "Types/SlateEnums.h"
 #include "Layout/Margin.h"
+#include "Widgets/Layout/Anchors.h"
 #include "FSDWidgetBlueprintLibrary.generated.h"
 
+class UTexture2D;
+class UObject;
 class UWidget;
-class UHorizontalBox;
 class UUserWidget;
 class UWidgetAnimation;
-class UObject;
+class UFSDCheatManager;
+class UCanvasPanel;
+class APlayerController;
+class AFSDPlayerState;
 class USizeBox;
 class UPanelWidget;
 class UTextBlock;
 class UImage;
 class UWindowWidget;
-class AFSDPlayerState;
-class UFSDCheatManager;
-class APlayerController;
+class UUniformGridSlot;
 class UVerticalBox;
 class USpacer;
-class UTexture2D;
+class UHorizontalBox;
 class UHorizontalBoxSlot;
 class UVerticalBoxSlot;
 class UUniformGridPanel;
-class UUniformGridSlot;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_DELEGATE_RetVal_TwoParams(bool, FFSDWidgetBlueprintLibraryInCompareFunction, const UWidget*, InFirstWidget, const UWidget*, InSecondWidget);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_DELEGATE(FFSDWidgetBlueprintLibraryTimerDelegate);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_DELEGATE_ThreeParams(FFSDWidgetBlueprintLibraryOnCreatedOrReused, bool, WasCreated, UUserWidget*, Widget, int32, ActiveIndex);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_DELEGATE_OneParam(FFSDWidgetBlueprintLibraryOnCollapsed, UUserWidget*, Widget);
+class UCanvasPanelSlot;
 
 UCLASS(BlueprintType)
 class UFSDWidgetBlueprintLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    DECLARE_DYNAMIC_DELEGATE_OneParam(FWidgetDelegate, UUserWidget*, Widget);
+    DECLARE_DYNAMIC_DELEGATE_ThreeParams(FWidgetCreatedOrReusedDelegate, bool, WasCreated, UUserWidget*, Widget, int32, ActiveIndex);
+    DECLARE_DYNAMIC_DELEGATE_RetVal_TwoParams(bool, FCompareWidgetsDelegate, const UWidget*, InFirstWidget, const UWidget*, InSecondWidget);
+    
+    UFSDWidgetBlueprintLibrary();
     UFUNCTION(BlueprintCallable)
     static void ToggleAnimationLooping(UObject* WorldContext, UWidgetAnimation* InAnimation, FWidgetAnimationSettings InSettings, bool InLoop, bool& OutPlayingChanged, bool& OutIsPlaying);
     
@@ -58,13 +62,13 @@ public:
     static bool TextGreaterThan(const FText& Text1, const FText& Text2);
     
     UFUNCTION(BlueprintCallable)
-    static TArray<UWidget*> SortWidgetArray(const TArray<UWidget*>& InWidgets, const FFSDWidgetBlueprintLibraryInCompareFunction& InCompareFunction);
+    static TArray<UWidget*> SortWidgetArray(const TArray<UWidget*>& InWidgets, const UFSDWidgetBlueprintLibrary::FCompareWidgetsDelegate& InCompareFunction);
     
     UFUNCTION(BlueprintCallable)
     static void SimpleBox(UPARAM(Ref) FPaintContext& Context, FVector2D Position, FVector2D Size, FLinearColor Tint);
     
     UFUNCTION(BlueprintCallable)
-    static FTimerHandle SetTimerForNextTick(UObject* WorldContext, const FFSDWidgetBlueprintLibraryTimerDelegate& TimerDelegate);
+    static FTimerHandle SetTimerForNextTick(UObject* WorldContext, const FTimerDynamicDelegate& TimerDelegate);
     
     UFUNCTION(BlueprintCallable)
     static void SetSizeBoxSettings(UPARAM(Ref) USizeBox*& InSizeBox, const FSizeBoxSettings& InSettings);
@@ -169,10 +173,10 @@ public:
     static USpacer* CreateSpacer(UObject* WorldContext, FVector2D Size);
     
     UFUNCTION(BlueprintCallable)
-    static TArray<UUserWidget*> CreateOrReuseChildrenWithCallbackEx(UPanelWidget* Panel, int32 count, TSubclassOf<UUserWidget> WidgetClass, const FFSDWidgetBlueprintLibraryOnCreatedOrReused& OnCreatedOrReused, const FFSDWidgetBlueprintLibraryOnCollapsed& OnCollapsed);
+    static TArray<UUserWidget*> CreateOrReuseChildrenWithCallbackEx(UPanelWidget* Panel, int32 count, TSubclassOf<UUserWidget> WidgetClass, const UFSDWidgetBlueprintLibrary::FWidgetCreatedOrReusedDelegate& OnCreatedOrReused, const UFSDWidgetBlueprintLibrary::FWidgetDelegate& OnCollapsed);
     
     UFUNCTION(BlueprintCallable)
-    static TArray<UUserWidget*> CreateOrReuseChildrenWithCallback(UPanelWidget* Panel, int32 count, TSubclassOf<UUserWidget> WidgetClass, const FFSDWidgetBlueprintLibraryOnCreatedOrReused& OnCreatedOrReused);
+    static TArray<UUserWidget*> CreateOrReuseChildrenWithCallback(UPanelWidget* Panel, int32 count, TSubclassOf<UUserWidget> WidgetClass, const UFSDWidgetBlueprintLibrary::FWidgetCreatedOrReusedDelegate& OnCreatedOrReused);
     
     UFUNCTION(BlueprintCallable)
     static TArray<UUserWidget*> CreateOrReuseChildren(UPanelWidget* Panel, int32 count, TSubclassOf<UUserWidget> WidgetClass);
@@ -204,6 +208,8 @@ public:
     UFUNCTION(BlueprintCallable)
     static UWidget* AddChildToHorizontalBoxEx(UHorizontalBox* HorizontalBox, UWidget* Widget, TEnumAsByte<EHorizontalAlignment> HorizontalAlignment, TEnumAsByte<EVerticalAlignment> VerticalAlignment, float Size, FMargin Padding, UHorizontalBoxSlot*& OutSlot, UHorizontalBox*& OutHorizontalBox);
     
-    UFSDWidgetBlueprintLibrary();
+    UFUNCTION(BlueprintCallable)
+    static UWidget* AddChildToCanvasEx(UCanvasPanel* CanvasPanel, UWidget* Widget, FAnchors Anchors, FMargin Offsets, bool AutoSize, int32 Z_Order, UCanvasPanelSlot*& OutSlot, UCanvasPanel*& OutCanvasPanel);
+    
 };
 

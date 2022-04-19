@@ -1,5 +1,9 @@
 #include "ProceduralSetup.h"
 #include "Net/UnrealNetwork.h"
+#include "PLSEncounterComponent.h"
+#include "NoisyPathfinderComponent.h"
+#include "ProceduralTunnelComponent.h"
+#include "ProceduralObjectColliders.h"
 
 class AProceduralSetup;
 class ADeepCSGWorld;
@@ -36,9 +40,6 @@ void AProceduralSetup::SpawnDebrisItems(EDebrisItemPass pass) {
 void AProceduralSetup::SetSeed(int32 NewSeed) {
 }
 
-void AProceduralSetup::SetObjectivesCompleted() {
-}
-
 
 void AProceduralSetup::RemoveBLockedEntrances() {
 }
@@ -61,7 +62,7 @@ UMissionDNA* AProceduralSetup::GetMissionDNA() const {
     return NULL;
 }
 
-TMap<FString, float> AProceduralSetup::GetGemsResourceAmounts() {
+TMap<FString, float> AProceduralSetup::GetGemsResourceAmounts() const {
     return TMap<FString, float>();
 }
 
@@ -69,7 +70,7 @@ ADeepCSGWorld* AProceduralSetup::GetCSGWorld() const {
     return NULL;
 }
 
-TMap<FString, float> AProceduralSetup::GetCollectablesResourceAmounts() {
+TMap<FString, float> AProceduralSetup::GetCollectablesResourceAmounts() const {
     return TMap<FString, float>();
 }
 
@@ -93,10 +94,10 @@ void AProceduralSetup::GeneratePostCarveRooms() {
 
 
 
-void AProceduralSetup::GenerateDebrisVeins_Async(AProceduralSetup*& setup, EDebrisCarvedType carverType, FLatentActionInfo LatentInfo) {
+void AProceduralSetup::GenerateDebrisVeins_Async(AProceduralSetup*& setup, EDebrisCarvedType CarverType, FLatentActionInfo LatentInfo) {
 }
 
-void AProceduralSetup::GenerateDebrisVeins(EDebrisCarvedType carverType) {
+void AProceduralSetup::GenerateDebrisVeins(EDebrisCarvedType CarverType) {
 }
 
 FVector AProceduralSetup::FindLocationInDirection(FVector Origin, FVector Direction, float horizontalDeviation, float verticalDeviation, FRandRange Distance, float additionalDistance) {
@@ -127,9 +128,6 @@ int32 AProceduralSetup::CreateItemDepths() {
 }
 
 void AProceduralSetup::CreateGeneratedInfluenceSet() {
-}
-
-void AProceduralSetup::CreateAdditionalRooms() {
 }
 
 int32 AProceduralSetup::ConnectRooms(FRoomNode& From, FRoomNode& to, bool hasDirt, UTunnelParameters* tunnelParameterOverride) {
@@ -188,6 +186,10 @@ AProceduralSetup::AProceduralSetup() {
     this->UseRandomSeed = true;
     this->ForcedSpecialEvent = NULL;
     this->ForcedTreasure = NULL;
+    this->NoisyPathfinder = CreateDefaultSubobject<UNoisyPathfinderComponent>(TEXT("NoisyPathfinder"));
+    this->ProceduralTunnel = CreateDefaultSubobject<UProceduralTunnelComponent>(TEXT("ProceduralTunnel"));
+    this->Encounters = CreateDefaultSubobject<UPLSEncounterComponent>(TEXT("Encounters"));
+    this->ObjectColliders = CreateDefaultSubobject<UProceduralObjectColliders>(TEXT("ObjectColliders"));
     this->CSGWorld = NULL;
     this->PathfinderNoise = NULL;
     this->MissionDNA = NULL;

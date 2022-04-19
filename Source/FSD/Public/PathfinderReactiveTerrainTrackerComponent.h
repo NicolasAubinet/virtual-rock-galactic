@@ -7,18 +7,18 @@
 class UFSDPhysicalMaterial;
 class UStatusEffectsComponent;
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UPathfinderReactiveTerrainTrackerComponent : public UReactiveTerrainTrackerComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FRandRange CheckInterval;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UFSDPhysicalMaterial* CurrentPhysicalMaterial;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UStatusEffectsComponent* StatusEffectsComponent;
     
 public:

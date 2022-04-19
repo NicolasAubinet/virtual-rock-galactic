@@ -5,20 +5,23 @@
 
 class APlayerCharacter;
 
-UCLASS(Blueprintable)
+UCLASS(Blueprintable, meta=(BlueprintSpawnableComponent))
 class UDrinkEffectComponent : public UActorComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float BeerEffectDurationSeconds;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool AutoDestroy;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool EffectIsActive;
     
+public:
+    UDrinkEffectComponent();
+protected:
     UFUNCTION(BlueprintCallable)
     void StopEffect();
     
@@ -31,7 +34,5 @@ protected:
     UFUNCTION(BlueprintCallable)
     static void OnChangedCharacter(APlayerCharacter* changedToCharacter, UClass* DrinkEffectClass);
     
-public:
-    UDrinkEffectComponent();
 };
 

@@ -8,27 +8,28 @@
 
 class AZipLineProjectile;
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UZiplineLauncherComponent : public UWeaponFireComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TEnumAsByte<ECollisionChannel> HitCollisionChannel;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ProjectileLocationOffset;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
-    TSubclassOf<AZipLineProjectile> projectileClass;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<AZipLineProjectile> ProjectileClass;
     
+public:
+    UZiplineLauncherComponent();
+protected:
     UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
     void Server_Fire(FVector_NetQuantize Origin, FVector_NetQuantize Destination);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
     void All_ShowHit();
     
-public:
-    UZiplineLauncherComponent();
 };
 

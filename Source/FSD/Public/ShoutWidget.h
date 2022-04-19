@@ -10,18 +10,21 @@ class UShoutWidget : public UUserWidget {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<APlayerCharacter> Sender;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FText Text;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float Duration;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool IsSubtitle;
     
+public:
+    UShoutWidget();
+protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnShout();
     
@@ -36,7 +39,5 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FString GetCountDownString(int32 Seconds) const;
     
-public:
-    UShoutWidget();
 };
 

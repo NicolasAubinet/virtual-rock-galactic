@@ -7,7 +7,7 @@ USTRUCT(BlueprintType)
 struct FEscortMulePath {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TArray<FVector> Path;
     
     FSD_API FEscortMulePath();

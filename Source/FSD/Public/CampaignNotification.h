@@ -3,23 +3,23 @@
 #include "UObject/Object.h"
 #include "CampaignNotification.generated.h"
 
-class UCampaign;
 class UCampaignMission;
+class UCampaign;
 
 UCLASS(BlueprintType)
 class UCampaignNotification : public UObject {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UCampaign* Campaign;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UCampaignMission* mission;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     int32 Progress;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool bIsCampaignCompleted;
     
     UCampaignNotification();

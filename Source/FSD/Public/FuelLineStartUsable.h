@@ -3,7 +3,7 @@
 #include "TrackBuilderUsable.h"
 #include "FuelLineStartUsable.generated.h"
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class FSD_API UFuelLineStartUsable : public UTrackBuilderUsable {
     GENERATED_BODY()
 public:

@@ -4,11 +4,11 @@
 #include "SDFCapsuleProperties.h"
 #include "SDFCapsuleComponent.generated.h"
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class FSDENGINE_API USDFCapsuleComponent : public USDFBaseWithTransformComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSDFCapsuleProperties Properties;
     
     USDFCapsuleComponent();

@@ -1,10 +1,15 @@
 #include "CryosprayItem.h"
 #include "Net/UnrealNetwork.h"
+#include "ProjectileLauncherComponent.h"
+#include "DamageComponent.h"
+#include "StickyFlameSpawner.h"
+#include "MotionAudioController.h"
+#include "FSDAudioComponent.h"
 
-class UFSDPhysicalMaterial;
 class UHealthComponentBase;
 class UPrimitiveComponent;
 class AProjectileBase;
+class UFSDPhysicalMaterial;
 
 void ACryosprayItem::ServerDoDamage_Implementation(FVector_NetQuantize Start, FVector_NetQuantize End, uint8 Power) {
 }
@@ -49,6 +54,11 @@ void ACryosprayItem::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLi
 }
 
 ACryosprayItem::ACryosprayItem() {
+    this->projectileLauncher = CreateDefaultSubobject<UProjectileLauncherComponent>(TEXT("projectileLauncher"));
+    this->DamageComponent = CreateDefaultSubobject<UDamageComponent>(TEXT("DamageComponent"));
+    this->StickyFlames = CreateDefaultSubobject<UStickyFlameSpawner>(TEXT("StickyFlames"));
+    this->AoEColdDamageComponent = CreateDefaultSubobject<UDamageComponent>(TEXT("AoEDamageComponent"));
+    this->VelocityAudio = CreateDefaultSubobject<UMotionAudioController>(TEXT("MotionAudio"));
     this->FlameParticleComponent = NULL;
     this->PressurizedProjectileEnabled = false;
     this->PressurizedProjectileDelay = 1.00f;
@@ -69,6 +79,7 @@ ACryosprayItem::ACryosprayItem() {
     this->bRepressurerising = false;
     this->RepressurerisingDoneAtPct = 0.25f;
     this->ChargeUpFadeOutTime = 0.50f;
+    this->ChargeUpAudioComponent = CreateDefaultSubobject<UFSDAudioComponent>(TEXT("ChargeUpAudioComponent"));
     this->PressureTime = 5.00f;
     this->PressureDropMultiplier = 1.00f;
     this->PressureGainMultiplier = 1.00f;

@@ -1,17 +1,17 @@
 #include "FSDGameplayStatics.h"
 
 class UObject;
-class UFXSystemComponent;
-class UMaterialInterface;
-class AActor;
 class UDecalComponent;
+class UFXSystemComponent;
+class AActor;
+class UMaterialInterface;
 class UAudioComponent;
 
 UFXSystemComponent* UFSDGameplayStatics::SpawnScaledEmitterAtLocation(UObject* WorldContextObject, FScaledEffect ScaledEffect, FVector Location, FRotator Rotation, bool bAutoDestroy) {
     return NULL;
 }
 
-UDecalComponent* UFSDGameplayStatics::SpawnDecalData(const UObject* WorldContextObject, const FVector& Location, const FVector& upVector, const FDecalData& DecalData) {
+UDecalComponent* UFSDGameplayStatics::SpawnDecalData(const UObject* WorldContextObject, const FVector& Location, const FVector& upVector, const FDecalData& DecalData, bool randomRollRotation) {
     return NULL;
 }
 

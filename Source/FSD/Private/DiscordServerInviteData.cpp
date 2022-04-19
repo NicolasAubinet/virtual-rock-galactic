@@ -1,7 +1,7 @@
 #include "DiscordServerInviteData.h"
 
 FDiscordServerInviteData::FDiscordServerInviteData() {
-    this->presenceCount = 0;
-    this->memberCount = 0;
+    this->approximate_presence_count = 0;
+    this->approximate_member_count = 0;
 }
 

@@ -1,5 +1,7 @@
 #include "TerrainScannerItem.h"
 #include "Net/UnrealNetwork.h"
+#include "Components/SceneCaptureComponent2D.h"
+#include "Components/SceneComponent.h"
 
 void ATerrainScannerItem::Server_SetIslookingAtMap_Implementation(bool lookingAtMap) {
 }
@@ -26,5 +28,7 @@ ATerrainScannerItem::ATerrainScannerItem() {
     this->UpdateMapToolActors = false;
     this->EndFP = NULL;
     this->EndTP = NULL;
+    this->TerrainScannerRoot = CreateDefaultSubobject<USceneComponent>(TEXT("TerrainScannerRoot"));
+    this->TerrainScannerCapture = CreateDefaultSubobject<USceneCaptureComponent2D>(TEXT("TerrainScannerCapture"));
 }
 

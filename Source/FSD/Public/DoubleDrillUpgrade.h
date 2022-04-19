@@ -6,21 +6,21 @@
 #include "UpgradeValues.h"
 #include "DoubleDrillUpgrade.generated.h"
 
-class AFSDPlayerState;
 class AItem;
+class AFSDPlayerState;
 
 UCLASS(EditInlineNew, MinimalAPI)
 class UDoubleDrillUpgrade : public UStandardItemUpgrade {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EDoubleDrillUpgradeType upgradeType;
     
 public:
+    UDoubleDrillUpgrade();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static FUpgradeValues GetUpgradedValue(TSubclassOf<AItem> Item, AFSDPlayerState* Player, EDoubleDrillUpgradeType NewUpgradeType);
     
-    UDoubleDrillUpgrade();
 };
 

@@ -1,35 +1,31 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Net/OnlineBlueprintCallProxyBase.h"
-#include "BlueprintFriend.h"
+#include "BlueprintRegisterInvitiNotificationDelegateDelegate.h"
 #include "RegisterInviteNotificationBlueprintCallProxy.generated.h"
 
-class UObject;
 class URegisterInviteNotificationBlueprintCallProxy;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FRegisterInviteNotificationBlueprintCallProxyOnInviteReceived, const FBlueprintFriend&, Results);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FRegisterInviteNotificationBlueprintCallProxyOnInviteAccepted, const FBlueprintFriend&, Results);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FRegisterInviteNotificationBlueprintCallProxyOnInviteRejected, const FBlueprintFriend&, Results);
+class UObject;
 
 UCLASS()
 class URegisterInviteNotificationBlueprintCallProxy : public UOnlineBlueprintCallProxyBase {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FRegisterInviteNotificationBlueprintCallProxyOnInviteReceived OnInviteReceived;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FBlueprintRegisterInvitiNotificationDelegate OnInviteReceived;
     
-    UPROPERTY(BlueprintAssignable)
-    FRegisterInviteNotificationBlueprintCallProxyOnInviteAccepted OnInviteAccepted;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FBlueprintRegisterInvitiNotificationDelegate OnInviteAccepted;
     
-    UPROPERTY(BlueprintAssignable)
-    FRegisterInviteNotificationBlueprintCallProxyOnInviteRejected OnInviteRejected;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FBlueprintRegisterInvitiNotificationDelegate OnInviteRejected;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UObject* WorldContextObject;
     
+    URegisterInviteNotificationBlueprintCallProxy();
     UFUNCTION(BlueprintCallable)
     static URegisterInviteNotificationBlueprintCallProxy* RegisterInvitiNotification(UObject* NewWorldContextObject);
     
-    URegisterInviteNotificationBlueprintCallProxy();
 };
 

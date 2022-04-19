@@ -9,7 +9,7 @@ UCLASS()
 class UProceduralSettings : public UDataAsset {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     URoomDecorationObject* MiningpodCalldownLocationDecoration;
     
     UProceduralSettings();

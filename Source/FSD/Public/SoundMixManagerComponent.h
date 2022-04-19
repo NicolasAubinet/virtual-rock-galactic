@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "SoundMixManagerItem.h"
 #include "Components/ActorComponent.h"
+#include "SoundMixManagerItem.h"
 #include "SoundMixManagerComponent.generated.h"
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class USoundMixManagerComponent : public UActorComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FSoundMixManagerItem> SoundMixes;
     
 public:

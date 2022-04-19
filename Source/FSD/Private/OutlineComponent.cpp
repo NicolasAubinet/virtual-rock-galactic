@@ -1,9 +1,8 @@
 #include "OutlineComponent.h"
 
 class UPrimitiveComponent;
-class AItem;
 class UHealthComponentBase;
-class APlayerCharacter;
+class AItem;
 class AActor;
 
 void UOutlineComponent::UnlockOutline() {
@@ -22,9 +21,6 @@ void UOutlineComponent::OnToggleOutline(bool Visible) {
 }
 
 void UOutlineComponent::OnOwnerDeath(UHealthComponentBase* HealthComponent) {
-}
-
-void UOutlineComponent::OnLocalPlayerSet(APlayerCharacter* PlayerCharacter) {
 }
 
 void UOutlineComponent::OnItemUnequipped(AItem* Item) {

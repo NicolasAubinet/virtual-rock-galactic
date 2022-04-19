@@ -9,10 +9,10 @@ USTRUCT(BlueprintType)
 struct FTunnelSettingItem {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UTunnelSegmentSetting* SegmentSetting;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
     FInt32Interval SegmentSize;
     
     FSD_API FTunnelSettingItem();

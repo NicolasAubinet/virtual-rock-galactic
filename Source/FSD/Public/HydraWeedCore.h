@@ -3,13 +3,14 @@
 #include "EnemyPawn.h"
 #include "HydraWeedCore.generated.h"
 
-class AHydraWeedShooter;
 class AHydraWeedHealer;
+class AHydraWeedShooter;
 
 UCLASS()
 class AHydraWeedCore : public AEnemyPawn {
     GENERATED_BODY()
 public:
+    AHydraWeedCore();
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void WakupCore();
     
@@ -19,6 +20,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnHealerKilled(AHydraWeedHealer* healer);
     
-    AHydraWeedCore();
 };
 

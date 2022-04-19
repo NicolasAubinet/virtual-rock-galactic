@@ -1,11 +1,11 @@
 #include "SessionHandling.h"
 #include "Templates/SubclassOf.h"
 
-class UFSDGameInstance;
 class UObject;
-class UDifficultySetting;
+class UFSDGameInstance;
 class UPlayerCharacterID;
 class APlayerCharacter;
+class UDifficultySetting;
 class UBiome;
 class UMissionTemplate;
 
@@ -145,10 +145,6 @@ bool USessionHandling::FSDHasGameStarted(const FBlueprintSessionResult& Result) 
     return false;
 }
 
-TArray<FString> USessionHandling::FSDGetVerifiedModsInstalled(const FBlueprintSessionResult& Result) {
-    return TArray<FString>();
-}
-
 bool USessionHandling::FSDGetServerStartTime(const FBlueprintSessionResult& Result, FDateTime& StartTime) {
     return false;
 }
@@ -165,6 +161,10 @@ FString USessionHandling::FSDGetServerID(const FBlueprintSessionResult& Result) 
     return TEXT("");
 }
 
+TArray<FString> USessionHandling::FSDGetRequiredModsToDownload(const FBlueprintSessionResult& Result) {
+    return TArray<FString>();
+}
+
 FString USessionHandling::FSDGetRegion(const FBlueprintSessionResult& Result) {
     return TEXT("");
 }
@@ -175,6 +175,10 @@ TArray<UPlayerCharacterID*> USessionHandling::FSDGetPlayerClassIDs(const FBluepr
 
 TArray<TSubclassOf<APlayerCharacter>> USessionHandling::FSDGetPlayerClasses(const FBlueprintSessionResult& Result) {
     return TArray<TSubclassOf<APlayerCharacter>>();
+}
+
+TArray<FString> USessionHandling::FSDGetOptionalModsInstalled(const FBlueprintSessionResult& Result, bool ExcludeVerifiedMods) {
+    return TArray<FString>();
 }
 
 int32 USessionHandling::FSDGetNumPlayers(const FBlueprintSessionResult& Result) {

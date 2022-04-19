@@ -12,16 +12,17 @@ class AActivationObject : public AActor {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USingleUsableComponent* Usable;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool HasBeenUsed;
-    
-    UFUNCTION(BlueprintCallable)
-    void OnUsedBy(APlayerCharacter* User, EInputKeys Key);
     
 public:
     AActivationObject();
+protected:
+    UFUNCTION(BlueprintCallable)
+    void OnUsedBy(APlayerCharacter* User, EInputKeys Key);
+    
 };
 

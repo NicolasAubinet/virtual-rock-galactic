@@ -1,5 +1,8 @@
 #include "TowerModuleBase.h"
 #include "Net/UnrealNetwork.h"
+#include "Components/SceneComponent.h"
+#include "Components/SkeletalMeshComponent.h"
+#include "EnemyHealthComponent.h"
 
 void ATowerModuleBase::SetState(EGuntowerModuleState NewState) {
 }
@@ -19,7 +22,10 @@ void ATowerModuleBase::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 }
 
 ATowerModuleBase::ATowerModuleBase() {
+    this->Root = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
+    this->ModuleMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Mesh"));
     this->ArmorPlates.AddDefaulted(3);
+    this->Health = CreateDefaultSubobject<UEnemyHealthComponent>(TEXT("Heath"));
     this->DestroyedMesh = NULL;
     this->deathSound = NULL;
     this->deathParticles = NULL;

@@ -10,10 +10,10 @@ USTRUCT(BlueprintType)
 struct FVanityTestCharacterItem {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USkeletalMesh* Mesh;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UVanityAnimInstance> AnimBP;
     
     FSD_API FVanityTestCharacterItem();

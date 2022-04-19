@@ -1,15 +1,15 @@
 #include "FSDCheatManager.h"
 #include "Templates/SubclassOf.h"
 
-class UResourceData;
-class UBaseCritterDescriptor;
 class UPlayerCharacterID;
-class UEnemyDescriptor;
 class APlayerCharacter;
+class UEnemyDescriptor;
+class UBaseCritterDescriptor;
 class APawn;
 class AFSDAIController;
 class AActor;
 class UObject;
+class UResourceData;
 
 void UFSDCheatManager::SwitchCharacter(UPlayerCharacterID* characterID) {
 }
@@ -103,6 +103,14 @@ void UFSDCheatManager::R_Add_Aquarq(int32 Amount) {
 }
 
 bool UFSDCheatManager::IsInGodMode() {
+    return false;
+}
+
+bool UFSDCheatManager::IsFlyModeActive() const {
+    return false;
+}
+
+bool UFSDCheatManager::IsFastMovementActive() const {
     return false;
 }
 
@@ -215,6 +223,12 @@ void UFSDCheatManager::C_Windows_PrintStack() const {
 void UFSDCheatManager::C_Windows_CloseAll() const {
 }
 
+void UFSDCheatManager::C_VanityMasteryResetXP() {
+}
+
+void UFSDCheatManager::C_VanityMasteryAddXP(int32 Number) {
+}
+
 void UFSDCheatManager::C_UnlockOverclocking() {
 }
 
@@ -263,7 +277,7 @@ void UFSDCheatManager::C_UnlockAll() {
 void UFSDCheatManager::C_Unlock_Facility() {
 }
 
-void UFSDCheatManager::C_Treasures_Track(bool Track) {
+void UFSDCheatManager::C_Treasures_Track(int32 Mode) {
 }
 
 void UFSDCheatManager::C_Treasures_Reward(int32 count) {
@@ -303,6 +317,9 @@ void UFSDCheatManager::C_SetUseSavedCheatsByDefault(bool useSavedCheats) {
 }
 
 void UFSDCheatManager::C_SetTestMission(int32 missionIndex) {
+}
+
+void UFSDCheatManager::C_SetTestingCharacter(UPlayerCharacterID* characterID) {
 }
 
 void UFSDCheatManager::C_SetSavedCheats() {

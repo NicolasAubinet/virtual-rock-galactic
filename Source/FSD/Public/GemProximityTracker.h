@@ -1,19 +1,19 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "TrackPositionList.h"
 #include "Components/ActorComponent.h"
+#include "TrackPositionList.h"
 #include "GemProximityTracker.generated.h"
 
 class UGemTracker;
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UGemProximityTracker : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(Export, Transient)
+    UPROPERTY(Export, Transient, meta=(AllowPrivateAccess=true))
     TArray<TWeakObjectPtr<UGemTracker>> Trackers;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FTrackPositionList> TrackerLists;
     
     UGemProximityTracker();

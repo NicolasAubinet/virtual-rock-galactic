@@ -1,14 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "SDFBaseComponent.h"
 #include "SDFOnionProperties.h"
+#include "SDFBaseComponent.h"
 #include "SDFOnionComponent.generated.h"
 
-UCLASS()
-class USDFOnionComponent : public USDFBaseComponent {
+UCLASS(meta=(BlueprintSpawnableComponent))
+class FSDENGINE_API USDFOnionComponent : public USDFBaseComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSDFOnionProperties Properties;
     
     USDFOnionComponent();

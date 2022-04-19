@@ -2,70 +2,71 @@
 #include "CoreMinimal.h"
 #include "UObject/Object.h"
 #include "PartyAnalyticsInformation.h"
-#include "DeepDiveAnalyticsInformation.h"
 #include "EFSDGoogleAnalyticsProperties.h"
+#include "DeepDiveAnalyticsInformation.h"
 #include "GoogleAnalyticsWrapper.generated.h"
 
-class AFSDGameState;
-class APlayerController;
-class USeasonChallenge;
 class AActor;
 class AFSDPlayerState;
+class APlayerController;
+class AFSDGameState;
+class USeasonChallenge;
 
 UCLASS(BlueprintType)
 class UGoogleAnalyticsWrapper : public UObject {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FString LastUnlockedWeapons;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FString LastKnownClass;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FString BoscoLoadOut;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool WasCampaign;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FString LastCampaignName;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     int32 LastCampaignProgress;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool WasLastCampaignMission;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     int32 LastCampaignSize;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FString LastWeaponsLoadout;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FString LastUpgradesLoadout;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FString SchematicInformation;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FPartyAnalyticsInformation PartyInfo;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FDeepDiveAnalyticsInformation DeepDiveInfo;
     
 protected:
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FString DiscordCommunityTrackingID;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FString CommunityGoalsTrackingID;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool ShouldUpdateSchematicTrackingInformation;
     
 public:
+    UGoogleAnalyticsWrapper();
     UFUNCTION(BlueprintCallable)
     void StartMissionPartyInfo(AFSDGameState* GameState);
     
@@ -147,6 +148,5 @@ public:
     UFUNCTION(BlueprintCallable)
     void EndMissionPartyInfo();
     
-    UGoogleAnalyticsWrapper();
 };
 

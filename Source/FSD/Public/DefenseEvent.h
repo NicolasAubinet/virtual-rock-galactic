@@ -11,21 +11,22 @@ class ADefenseEvent : public AGameEvent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DefendDuration;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UWidget> DefendWidget;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_Progress)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_Progress, meta=(AllowPrivateAccess=true))
     float Progress;
     
+public:
+    ADefenseEvent();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_Progress(float OldValue);
     
-public:
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    ADefenseEvent();
 };
 

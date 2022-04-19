@@ -1,69 +1,69 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
+#include "ItemFilterDelegateDelegate.h"
 #include "Engine/DataAsset.h"
 #include "EItemCategory.h"
 #include "InventoryList.generated.h"
 
 class UObject;
 class UTexture2D;
-class AActor;
-class UMaterialInterface;
 class UItemID;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_DELEGATE_TwoParams(FInventoryListFilter, TSubclassOf<AActor>, itemClass, bool&, Result);
+class UMaterialInterface;
+class AActor;
 
 UCLASS(BlueprintType)
 class FSD_API UInventoryList : public UDataAsset {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftObjectPtr<UTexture2D> IconWeaponSetOutline;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftObjectPtr<UTexture2D> IconWeaponSetFill;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftObjectPtr<UMaterialInterface> LaserpointerMarkerMaterial;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftObjectPtr<UMaterialInterface> LaserpointerBeamMaterial;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UItemID* LaserPointerItem;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UItemID* TerrainScannerItem;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UItemID* ResupplyItem;
     
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UItemID*> PrimaryWeapons;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UItemID*> SecondaryWeapons;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UItemID*> TraversalTools;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UItemID*> ClassTools;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UItemID*> Armors;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UItemID*> Flares;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UItemID*> Grenades;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UItemID*> MiningTools;
     
 public:
+    UInventoryList();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UItemID* GetPreviousUnlockedItem(UObject* WorldContextObject, EItemCategory Category, UItemID* currentItem) const;
     
@@ -80,7 +80,7 @@ public:
     UItemID* GetNextItem(EItemCategory Category, UItemID* currentItem) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    TArray<TSubclassOf<AActor>> GetLoadedItemListFiltered(EItemCategory Category, FInventoryListFilter Filter) const;
+    TArray<TSubclassOf<AActor>> GetLoadedItemListFiltered(EItemCategory Category, FItemFilterDelegate Filter) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<TSubclassOf<AActor>> GetLoadedItemList(EItemCategory Category) const;
@@ -97,6 +97,5 @@ public:
     UFUNCTION(BlueprintCallable)
     void CheckForInventoryAchievements(UObject* WorldContextObject);
     
-    UInventoryList();
 };
 

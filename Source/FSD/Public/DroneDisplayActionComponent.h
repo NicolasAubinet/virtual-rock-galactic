@@ -6,18 +6,18 @@
 
 class UTextRenderComponent;
 
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UDroneDisplayActionComponent : public USceneComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere, Export)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UTextRenderComponent* DisplayText;
     
 public:
+    UDroneDisplayActionComponent();
     UFUNCTION(BlueprintCallable)
     void SetMode(EDroneActions droneAction);
     
-    UDroneDisplayActionComponent();
 };
 

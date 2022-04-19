@@ -1,10 +1,10 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-#include "UObject/NoExportTypes.h"
 #include "Styling/SlateTypes.h"
 #include "EFSDInputSource.h"
 #include "InputDisplay.h"
+#include "UObject/NoExportTypes.h"
 #include "RichTextInputWidget.generated.h"
 
 class URichTextBlock;
@@ -15,24 +15,27 @@ class URichTextInputWidget : public UUserWidget {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FName InputName;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<FName, FString> MetaData;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText Content;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FTextBlockStyle TextStyle;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EFSDInputSource InputSource;
     
-    UPROPERTY(BlueprintReadOnly, Export)
+    UPROPERTY(BlueprintReadWrite, Export, meta=(AllowPrivateAccess=true))
     URichTextBlock* RichTextBlock;
     
+public:
+    URichTextInputWidget();
+protected:
     UFUNCTION(BlueprintCallable)
     void ScaleTextBlockToHeight(UTextBlock* InTextBlock, float LineHeight);
     
@@ -57,7 +60,5 @@ protected:
     UFUNCTION(BlueprintCallable)
     void ApplyTextStyle(UTextBlock* InTextBlock, const FTextBlockStyle& InTextStyle);
     
-public:
-    URichTextInputWidget();
 };
 

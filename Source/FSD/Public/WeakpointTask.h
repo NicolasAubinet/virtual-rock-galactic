@@ -3,14 +3,14 @@
 #include "Curves/RichCurve.h"
 #include "WeakpointTask.generated.h"
 
-USTRUCT()
+USTRUCT(BlueprintType)
 struct FWeakpointTask {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
+    UPROPERTY(Transient, meta=(AllowPrivateAccess=true))
     FRichCurve GrowCurve;
     
-    UPROPERTY(Transient)
+    UPROPERTY(Transient, meta=(AllowPrivateAccess=true))
     FRichCurve FadeCurve;
     
     FSD_API FWeakpointTask();

@@ -13,6 +13,7 @@ void AGameStats::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifeti
     DOREPLIFETIME(AGameStats, TotalGoldMined);
     DOREPLIFETIME(AGameStats, TotalEnemiesKilled);
     DOREPLIFETIME(AGameStats, MissionHaz);
+    DOREPLIFETIME(AGameStats, EventKeys);
 }
 
 AGameStats::AGameStats() {

@@ -3,18 +3,18 @@
 #include "UnlockReward.h"
 #include "UnlockDurationReward.generated.h"
 
-class UMissionTemplate;
 class UMissionDuration;
+class UMissionTemplate;
 
 UCLASS(BlueprintType, EditInlineNew)
 class UUnlockDurationReward : public UUnlockReward {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UMissionTemplate* mission;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UMissionDuration* Duration;
     
 public:

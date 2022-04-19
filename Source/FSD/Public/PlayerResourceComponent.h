@@ -3,16 +3,16 @@
 #include "ResourcesComponent.h"
 #include "PlayerResourceComponent.generated.h"
 
-class APlayerCharacter;
 class UPlayerResourceComponent;
+class APlayerCharacter;
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UPlayerResourceComponent : public UResourcesComponent {
     GENERATED_BODY()
 public:
+    UPlayerResourceComponent();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static UPlayerResourceComponent* GetFromPlayer(APlayerCharacter* PlayerCharacter);
     
-    UPlayerResourceComponent();
 };
 

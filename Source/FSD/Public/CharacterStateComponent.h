@@ -1,37 +1,39 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "PlaySoundInterface.h"
 #include "Components/ActorComponent.h"
+#include "PlaySoundInterface.h"
 #include "CharacterStateComponent.generated.h"
 
 class UDialogDataAsset;
 class APlayerCharacter;
 class UPlayerMovementComponent;
 
-UCLASS(Abstract, Blueprintable)
+UCLASS(Abstract, Blueprintable, meta=(BlueprintSpawnableComponent))
 class UCharacterStateComponent : public UActorComponent, public IPlaySoundInterface {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     uint8 StateId;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     APlayerCharacter* Character;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDialogDataAsset* EnterStateShout;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDialogDataAsset* ExitStateShout;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDialogDataAsset* AttentionShout;
     
 private:
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UPlayerMovementComponent* PlayerMovement;
     
+public:
+    UCharacterStateComponent();
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ReceiveStateTick(float DeltaTime);
@@ -62,8 +64,6 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UPlayerMovementComponent* GetCharacterMovement() const;
     
-public:
-    UCharacterStateComponent();
     
     // Fix for true pure virtual functions not being implemented
 };

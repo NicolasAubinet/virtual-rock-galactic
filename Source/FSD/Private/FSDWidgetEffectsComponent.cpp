@@ -8,7 +8,7 @@ class UWidget;
 void UFSDWidgetEffectsComponent::StartTextCounter(UObject* WorldContext, UTextBlock*& Widget, float Start, float End, float Duration, int32 MaxDigits, float StartDelay) {
 }
 
-void UFSDWidgetEffectsComponent::StartCounter(UObject* WorldContext, UObject* Owner, float Start, float End, float Duration, const FFSDWidgetEffectsComponentOnCount& OnCount, float StartDelay) {
+void UFSDWidgetEffectsComponent::StartCounter(UObject* WorldContext, UObject* Owner, float Start, float End, float Duration, const FCustomCounterDelegate& OnCount, float StartDelay) {
 }
 
 void UFSDWidgetEffectsComponent::PingWidget(UObject* WorldContext, UWidget* Widget, float Amount, float Duration, EPingType PingType, float StartDelay) {

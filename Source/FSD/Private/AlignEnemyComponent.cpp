@@ -15,5 +15,6 @@ void UAlignEnemyComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>&
 
 UAlignEnemyComponent::UAlignEnemyComponent() {
     this->RotateWhileStationary = false;
+    this->IncludePitch = false;
 }
 

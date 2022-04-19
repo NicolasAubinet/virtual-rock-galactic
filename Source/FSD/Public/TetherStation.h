@@ -5,31 +5,34 @@
 #include "UObject/NoExportTypes.h"
 #include "TetherStation.generated.h"
 
-class USceneComponent;
-class USkeletalMeshComponent;
 class AFacilityGeneratorLine;
+class USkeletalMeshComponent;
+class USceneComponent;
 
 UCLASS()
 class FSD_API ATetherStation : public AActor {
     GENERATED_BODY()
 public:
-    UPROPERTY(Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USceneComponent* SceneRoot;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* BaseMesh;
     
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<AFacilityGeneratorLine> FacilityGeneratorLineType;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_AreGeneratorsReady)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_AreGeneratorsReady, meta=(AllowPrivateAccess=true))
     bool AreGeneratorsReady;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=Onrep_FacilityActive)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=Onrep_FacilityActive, meta=(AllowPrivateAccess=true))
     bool FacilityActive;
     
 public:
+    ATetherStation();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SpawnGeneratorLines(const FTransform& startL, const FTransform& startR, const TArray<FTransform>& endL, const TArray<FTransform>& endR, AFacilityGeneratorLine*& outLineL, AFacilityGeneratorLine*& outLineR);
     
@@ -58,8 +61,5 @@ public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void ActivateFacility();
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    ATetherStation();
 };
 

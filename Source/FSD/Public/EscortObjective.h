@@ -1,126 +1,128 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "UObject/NoExportTypes.h"
 #include "Objective.h"
+#include "ShellBreakTimerSignatureDelegate.h"
+#include "UObject/NoExportTypes.h"
+#include "ShellBreakPauseChangeSignatureDelegate.h"
+#include "MuleRefueledDelegate.h"
 #include "EEscortMissionState.h"
+#include "CannisterRegisteredDelegate.h"
 #include "EscortObjective.generated.h"
 
-class AEscortDestination;
-class UDebrisPositioning;
 class UDebrisBase;
-class AExtractorItem;
 class UCurveFloat;
+class UDebrisPositioning;
+class UCappedResource;
 class AActor;
+class AExtractorItem;
+class AEscortDestination;
+class AEscortMule;
 class UCarvedResourceData;
 class UResourceData;
-class AEscortMule;
-class UCappedResource;
 class UHealthComponentBase;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FEscortObjectiveOnProgressUpdated, float, Progress);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FEscortObjectiveOnMuleRefueled);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FEscortObjectiveOnShellBreakPauseChange, bool, IsPaused);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FEscortObjectiveOnCannisterRegistered, AExtractorItem*, Item);
-
-UCLASS(Abstract)
-class UEscortObjective : public UObjective {
+UCLASS(Abstract, meta=(BlueprintSpawnableComponent))
+class FSD_API UEscortObjective : public UObjective {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FEscortObjectiveOnProgressUpdated OnProgressUpdated;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FShellBreakTimerSignature OnProgressUpdated;
     
-    UPROPERTY(BlueprintAssignable)
-    FEscortObjectiveOnShellBreakPauseChange OnShellBreakPauseChange;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FShellBreakPauseChangeSignature OnShellBreakPauseChange;
     
-    UPROPERTY(BlueprintAssignable)
-    FEscortObjectiveOnMuleRefueled OnMuleRefueled;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FMuleRefueled OnMuleRefueled;
     
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool DidRescueDorettaHead;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_AreasToScan)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_AreasToScan, meta=(AllowPrivateAccess=true))
     int32 AreasToScan;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     int32 ScanCount;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FVector> ScanLocations;
     
-    UPROPERTY(EditAnywhere, Instanced)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UDebrisPositioning* Positioning;
     
-    UPROPERTY(EditAnywhere, Instanced)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UDebrisPositioning* EscortMulePositioning;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UCurveFloat* CostDistanceCurve;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DebrisRadius;
     
-    UPROPERTY(EditAnywhere, Export)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     TArray<UDebrisBase*> ObjectDebris;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<AActor> RefuelObjectClass;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<AEscortDestination> DestinationClass;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_AreasScanned)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_AreasScanned, meta=(AllowPrivateAccess=true))
     int32 AreasScanned;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_EscortState)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_EscortState, meta=(AllowPrivateAccess=true))
     EEscortMissionState State;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool FinalBattle;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UCarvedResourceData* FuelResource;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UResourceData* GemResource;
     
-    UPROPERTY(BlueprintAssignable)
-    FEscortObjectiveOnCannisterRegistered OnCannisterRegistered;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FCannisterRegistered OnCannisterRegistered;
     
-    UPROPERTY(Replicated)
+    UPROPERTY(BlueprintReadWrite, Replicated, meta=(AllowPrivateAccess=true))
     float ServerShellProgress;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 SecondsToDestroyHeartstone;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 FullCanistersRequired;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_FullCanisters)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_FullCanisters, meta=(AllowPrivateAccess=true))
     int32 FullCanisters;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 FuelResourceAmount;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<AActor> GarageDropCarver;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<AActor> EscortMuleDropBeaconClass;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<AActor> GarageClass;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FVector EscortMuleDropLocation;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_EscortMule)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_EscortMule, meta=(AllowPrivateAccess=true))
     AEscortMule* EscortMule;
     
-    UPROPERTY(BlueprintReadOnly, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     AEscortDestination* EscortDestination;
     
 public:
+    UEscortObjective();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintCallable)
     void SyncProgressTimer();
     
@@ -183,8 +185,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool DoesPathExist(FVector Start, FVector End);
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    UEscortObjective();
 };
 

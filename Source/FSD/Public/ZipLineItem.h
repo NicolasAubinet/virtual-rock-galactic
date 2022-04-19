@@ -11,25 +11,26 @@ class AZipLineItem : public AAmmoDrivenWeapon {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxDistance;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MinDistance;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MinAngle;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxAngle;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagQuery ExcludeSurfaceTags;
-    
-    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-    bool CanFireWeapon(FText& FailMsg, UDialogDataAsset*& FailShout);
     
 public:
     AZipLineItem();
+protected:
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    bool CanFireWeapon(FText& FailMsg, UDialogDataAsset*& FailShout);
+    
 };
 

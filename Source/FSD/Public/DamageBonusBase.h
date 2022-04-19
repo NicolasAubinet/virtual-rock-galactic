@@ -4,22 +4,22 @@
 #include "Engine/DataAsset.h"
 #include "DamageBonusBase.generated.h"
 
-class UDamageComponent;
 class UDamageCondition;
 class UDamageBonusBase;
+class UDamageComponent;
 
 UCLASS(Abstract, BlueprintType, EditInlineNew)
 class UDamageBonusBase : public UDataAsset {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere, Instanced)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UDamageCondition* Condition;
     
 public:
+    UDamageBonusBase();
     UFUNCTION(BlueprintCallable)
     static UDamageBonusBase* AddDamageBonusToComponent(TSubclassOf<UDamageBonusBase> damageBonusClass, UDamageComponent* DamageComponent);
     
-    UDamageBonusBase();
 };
 

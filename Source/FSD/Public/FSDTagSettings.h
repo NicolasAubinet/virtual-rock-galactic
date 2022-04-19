@@ -1,24 +1,24 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "FSDTagsRoot.h"
-#include "Engine/DataAsset.h"
 #include "GameplayTagContainer.h"
+#include "Engine/DataAsset.h"
+#include "FSDTagsRoot.h"
 #include "FSDTagSettings.generated.h"
 
 UCLASS()
 class UFSDTagSettings : public UDataAsset {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagQuery IsFriendlyQuery;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagQuery IsNeutralQuery;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagQuery IsHostileQuery;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FFSDTagsRoot Root;
     
     UFSDTagSettings();

@@ -8,10 +8,10 @@ USTRUCT(BlueprintType)
 struct FPerkUsage {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     UPerkAsset* Perk;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     int32 UsedCount;
     
     FSD_API FPerkUsage();

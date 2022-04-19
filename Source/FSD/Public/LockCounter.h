@@ -8,10 +8,10 @@ USTRUCT(BlueprintType)
 struct FLockCounter {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     int32 LockCount;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<AActor> LockedActor;
     
     FSD_API FLockCounter();

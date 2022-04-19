@@ -1,12 +1,12 @@
 #include "ElectroBeam.h"
 #include "Net/UnrealNetwork.h"
+#include "Components/AudioComponent.h"
+#include "Particles/ParticleSystemComponent.h"
+#include "Components/CapsuleComponent.h"
 
-class AActor;
 class USceneComponent;
+class AActor;
 class UHealthComponentBase;
-class UParticleSystemComponent;
-class UCapsuleComponent;
-class UAudioComponent;
 
 void AElectroBeam::SetTarget(USceneComponent* TargetPoint) {
 }
@@ -29,10 +29,7 @@ void AElectroBeam::OnRep_SourceLocation() {
 void AElectroBeam::OnRep_Flag() {
 }
 
-void AElectroBeam::OnParentTwoDeath(UHealthComponentBase* HealthComponent) {
-}
-
-void AElectroBeam::OnParentOneDeath(UHealthComponentBase* HealthComponent) {
+void AElectroBeam::OnParentDeath(UHealthComponentBase* HealthComponent) {
 }
 
 UParticleSystemComponent* AElectroBeam::GetParticleEffect() {
@@ -65,8 +62,11 @@ void AElectroBeam::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLife
 }
 
 AElectroBeam::AElectroBeam() {
+    this->collider = CreateDefaultSubobject<UCapsuleComponent>(TEXT("collider"));
     this->DelaySource = NULL;
     this->DelayTarget = NULL;
+    this->BeamEffect = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("BeamEffect"));
+    this->ZappSound = CreateDefaultSubobject<UAudioComponent>(TEXT("ZappSound"));
     this->MaxLitTime = 0.00f;
     this->MinLitTime = 0.00f;
     this->MaxUnlitTime = 0.00f;

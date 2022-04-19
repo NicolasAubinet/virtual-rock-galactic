@@ -1,19 +1,19 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "ECaveEntranceType.h"
 #include "Components/PrimitiveComponent.h"
 #include "ECaveEntrancePriority.h"
+#include "ECaveEntranceType.h"
 #include "CaveEntranceComponent.generated.h"
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UCaveEntranceComponent : public UPrimitiveComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     ECaveEntranceType Direction;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     ECaveEntrancePriority Priority;
     
 public:

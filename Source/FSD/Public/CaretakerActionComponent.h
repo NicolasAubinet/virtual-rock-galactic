@@ -5,18 +5,21 @@
 
 class ACaretaker;
 
-UCLASS(Abstract, Blueprintable)
+UCLASS(Abstract, Blueprintable, meta=(BlueprintSpawnableComponent))
 class UCaretakerActionComponent : public UActorComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool StartTickOnUse;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_IsUsing)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_IsUsing, meta=(AllowPrivateAccess=true))
     bool IsUsing;
     
 public:
+    UCaretakerActionComponent();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void UseAction();
     
@@ -46,8 +49,5 @@ public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, BlueprintNativeEvent, BlueprintPure)
     bool CanUse() const;
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    UCaretakerActionComponent();
 };
 

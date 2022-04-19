@@ -5,10 +5,11 @@
 
 class APlayerCharacter;
 
-UCLASS(Abstract, Blueprintable)
-class UPerkLogic : public UActorComponent {
+UCLASS(Abstract, Blueprintable, meta=(BlueprintSpawnableComponent))
+class FSD_API UPerkLogic : public UActorComponent {
     GENERATED_BODY()
 public:
+    UPerkLogic();
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void StartLogic(int32 Rank);
@@ -20,6 +21,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     FText GetAdditionalText(int32 Rank) const;
     
-    UPerkLogic();
 };
 

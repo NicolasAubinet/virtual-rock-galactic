@@ -2,34 +2,35 @@
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
 #include "EFSDInputSource.h"
-#include "Fonts/SlateFontInfo.h"
-#include "ActionIconMapping.h"
 #include "UObject/NoExportTypes.h"
+#include "ActionIconMapping.h"
+#include "Fonts/SlateFontInfo.h"
 #include "FSDAdvancedLabel.generated.h"
 
-class UHorizontalBox;
-class UTexture2D;
 class UTextBlock;
+class UTexture2D;
 class UImage;
+class UHorizontalBox;
 
 UCLASS(Abstract, EditInlineNew)
 class UFSDAdvancedLabel : public UUserWidget {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText FormattedText;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText ControllerOverrideText;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool UpperCase;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EFSDInputSource PreviewAs;
     
 public:
+    UFSDAdvancedLabel();
     UFUNCTION(BlueprintCallable)
     void SetText(FText NewText, FText OverrideControllerText);
     
@@ -86,7 +87,5 @@ protected:
     UFUNCTION(BlueprintCallable)
     UHorizontalBox* CreateHorizontalBox();
     
-public:
-    UFSDAdvancedLabel();
 };
 

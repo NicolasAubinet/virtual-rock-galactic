@@ -3,34 +3,35 @@
 #include "Components/ActorComponent.h"
 #include "DifficultyManager.generated.h"
 
-class AFSDGameMode;
 class AFSDGameState;
+class AFSDGameMode;
 class UDifficultySetting;
 
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UDifficultyManager : public UActorComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MinModifierEnemyCount;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MinModifierAttackCooldown;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MinModifierSpeed;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     int32 ForcedPlayerCount;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     AFSDGameMode* GameMode;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     AFSDGameState* GameState;
     
 public:
+    UDifficultyManager();
     UFUNCTION(BlueprintCallable)
     UDifficultySetting* SelectDifficulty(int32 Index);
     
@@ -67,6 +68,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetBossDifficultyScaler() const;
     
-    UDifficultyManager();
 };
 

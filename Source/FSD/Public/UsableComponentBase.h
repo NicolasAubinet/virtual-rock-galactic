@@ -1,65 +1,56 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Components/ActorComponent.h"
 #include "EInputKeys.h"
-#include "EUseRestriction.h"
+#include "Components/ActorComponent.h"
+#include "UsedBySignatureDelegate.h"
 #include "UsableComponentBase.generated.h"
 
-class UTexture2D;
 class APlayerCharacter;
-class UUseAnimationSetting;
 class USceneComponent;
+class UUseAnimationSetting;
+class UUseConditionSet;
+class UTexture2D;
 
-UDELEGATE(BlueprintAuthorityOnly, BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FUsableComponentBaseOnClientBeginUse, APlayerCharacter*, User, EInputKeys, Key);
-
-UCLASS(Abstract, Blueprintable)
-class UUsableComponentBase : public UActorComponent {
+UCLASS(Abstract, Blueprintable, meta=(BlueprintSpawnableComponent))
+class FSD_API UUsableComponentBase : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FUsableComponentBaseOnClientBeginUse OnClientBeginUse;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FUsedBySignature OnClientBeginUse;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 CallbackKeys;
     
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float UseCooldown;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
-    bool MustBeGroundedToUse;
-    
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
-    bool CanUseStrict;
-    
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
-    bool StrictOnlyAfterPickup;
-    
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UUseAnimationSetting* AnimationSettings;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 Priority;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
-    bool UseableByOwnerOnly;
-    
-    UPROPERTY(BlueprintReadWrite, Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     USceneComponent* RestrictToCollider;
     
-    UPROPERTY(EditAnywhere)
-    EUseRestriction UseRestrictionAllowance;
-    
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool IsRayTraceTriggered;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ResetUsingOnCompletion;
     
-    UPROPERTY(EditAnywhere)
-    bool EquipOnEndUse;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UUseConditionSet* UseConditions;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool IsClientPredictive;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool ThirdPersonWhileUsing;
     
 public:
+    UUsableComponentBase();
     UFUNCTION(BlueprintCallable)
     void SetRayTraceTriggered(bool rayTraceTriggered);
     
@@ -90,6 +81,5 @@ public:
     UFUNCTION(BlueprintCallable)
     void BeginUse(APlayerCharacter* User, EInputKeys Key);
     
-    UUsableComponentBase();
 };
 

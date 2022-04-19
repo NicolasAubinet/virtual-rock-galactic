@@ -7,17 +7,18 @@
 class UGeneratedMission;
 
 UCLASS(BlueprintType)
-class UMissionGenerationManager : public UGameInstanceSubsystem {
+class FSD_API UMissionGenerationManager : public UGameInstanceSubsystem {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TMap<int32, FGeneratedMissionGroup> AllMissionGroups;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ResetSelectedMission;
     
 public:
+    UMissionGenerationManager();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<UGeneratedMission*> GetMissions(int32 Seed);
     
@@ -27,6 +28,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<UGeneratedMission*> GetAvailableMissions();
     
-    UMissionGenerationManager();
 };
 

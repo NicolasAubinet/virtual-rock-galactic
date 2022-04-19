@@ -9,12 +9,15 @@ class UMouseCursorWidget : public UFSDUserWidget {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EFSDInputSource TargetInput;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool bIsHovering;
     
+public:
+    UMouseCursorWidget();
+protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnUnhover();
     
@@ -24,7 +27,5 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnHover();
     
-public:
-    UMouseCursorWidget();
 };
 

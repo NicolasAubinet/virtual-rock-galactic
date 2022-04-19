@@ -6,14 +6,15 @@
 #include "EPerkUsageType.h"
 #include "PerkFunctionLibrary.generated.h"
 
-class UPerkAsset;
 class UObject;
+class UPerkAsset;
 class APlayerCharacter;
 
 UCLASS(BlueprintType)
 class UPerkFunctionLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    UPerkFunctionLibrary();
     UFUNCTION(BlueprintCallable)
     static void SplitPerksByUsage(const TArray<UPerkAsset*>& perks, TArray<UPerkAsset*>& OutPassivePerks, TArray<UPerkAsset*>& OutActivePerks);
     
@@ -35,6 +36,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static FText FormatRichText(const FText& SourceText, bool UpperCase, const TMap<FString, FString> CharTagMap);
     
-    UPerkFunctionLibrary();
 };
 

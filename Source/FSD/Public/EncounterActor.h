@@ -9,11 +9,10 @@ UCLASS()
 class AEncounterActor : public AActor {
     GENERATED_BODY()
 public:
+    AEncounterActor();
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void Receive_EncounterHasSpawned(APawn* spawnedPawn);
     
-public:
-    AEncounterActor();
 };
 

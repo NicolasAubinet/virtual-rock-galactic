@@ -8,7 +8,7 @@ UCLASS()
 class UCSGCylinder : public UConvexMeshWithCachedTree {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FCSGCylinderProperties Properties;
     
     UCSGCylinder();

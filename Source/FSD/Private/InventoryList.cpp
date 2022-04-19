@@ -25,7 +25,7 @@ UItemID* UInventoryList::GetNextItem(EItemCategory Category, UItemID* currentIte
     return NULL;
 }
 
-TArray<TSubclassOf<AActor>> UInventoryList::GetLoadedItemListFiltered(EItemCategory Category, FInventoryListFilter Filter) const {
+TArray<TSubclassOf<AActor>> UInventoryList::GetLoadedItemListFiltered(EItemCategory Category, FItemFilterDelegate Filter) const {
     return TArray<TSubclassOf<AActor>>();
 }
 

@@ -1,79 +1,80 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "GameplayTagContainer.h"
 #include "ItemAggregator.h"
 #include "UObject/NoExportTypes.h"
+#include "GameplayTagContainer.h"
 #include "ItemPlacerAggregator.generated.h"
 
 class AActor;
-class AItem;
 class AItemMarker;
 class UDialogDataAsset;
+class AItem;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FItemPlacerAggregatorOnMarkerSpawned, AItemMarker*, Marker);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FItemPlacerAggregatorOnPlacementChanged, bool, InPlacementValid, const FTransform&, InPlacement);
-
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UItemPlacerAggregator : public UItemAggregator {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FPlacementUpdatedDelegate, bool, InPlacementValid, const FTransform&, InPlacement);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FMarkerDelegate, AItemMarker*, Marker);
+    
+    UPROPERTY(Transient, meta=(AllowPrivateAccess=true))
     TArray<TWeakObjectPtr<AActor>> IgnoreActors;
     
 protected:
-    UPROPERTY(BlueprintAssignable)
-    FItemPlacerAggregatorOnMarkerSpawned OnMarkerSpawned;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FMarkerDelegate OnMarkerSpawned;
     
-    UPROPERTY(BlueprintAssignable)
-    FItemPlacerAggregatorOnPlacementChanged OnPlacementChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FPlacementUpdatedDelegate OnPlacementChanged;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float PlacementDistance;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxOffsetZ;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MinOffsetZ;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ItemHeight;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDialogDataAsset* ShoutOnPlaced;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<AItemMarker> MarkerType;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool CanOnlyPlaceOnTerrain;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagQuery ExcludeTags;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     AItemMarker* PlacementMarker;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     AItem* Item;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool bIsPlacementActive;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool bIsMarkerHidden;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool bIsMarkerValid;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool bCanPlaceMarker;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FTransform LastPlacement;
     
 public:
+    UItemPlacerAggregator();
     UFUNCTION(BlueprintCallable)
     void ToggleValid(bool Valid);
     
@@ -95,6 +96,5 @@ public:
     UFUNCTION(BlueprintCallable)
     void AddIgnoredActor(AActor* InActor);
     
-    UItemPlacerAggregator();
 };
 

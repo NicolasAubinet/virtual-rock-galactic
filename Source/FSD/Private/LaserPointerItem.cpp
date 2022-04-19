@@ -1,10 +1,10 @@
 #include "LaserPointerItem.h"
+#include "Components/SceneComponent.h"
 
 class UObject;
+class UTerrainMaterial;
 class AActor;
 class UPrimitiveComponent;
-class UTerrainMaterial;
-class UHealthComponentBase;
 
 void ALaserPointerItem::UnlockToMinersManual(UObject* WorldContextObject, FGuid ObjectID) {
 }
@@ -25,9 +25,6 @@ bool ALaserPointerItem::Server_SecondaryUse_Validate() {
 }
 
 
-void ALaserPointerItem::OnDeath(UHealthComponentBase* Health) {
-}
-
 void ALaserPointerItem::GetPointTransform_Implementation(FTransform& PointTransform) {
 }
 
@@ -40,6 +37,7 @@ ALaserPointerItem::ALaserPointerItem() {
     this->MarkerLifeTime = 4.00f;
     this->DefaultLookAtShout = NULL;
     this->DefaultEnemyShout = NULL;
+    this->PointerComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Pointer"));
     this->LookAtDistance = 0.00f;
     this->LookAtShout = NULL;
     this->GameState = NULL;

@@ -4,31 +4,31 @@
 #include "IconGenerationCharacter.generated.h"
 
 class UMaterialInterface;
-class UIconSceneCaptureComponent;
-class UBeardColorVanityItem;
 class USkeletalMeshComponent;
+class UBeardColorVanityItem;
+class UIconSceneCaptureComponent;
 
 UCLASS()
 class AIconGenerationCharacter : public AIconGenerationBase {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UMaterialInterface* OrigBaseMaterial;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* Mesh;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* BodyMesh;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UBeardColorVanityItem* HairColor;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UMaterialInterface* ArmorMaterial;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     TArray<UIconSceneCaptureComponent*> CaptureComponents;
     
 public:

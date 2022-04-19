@@ -1,6 +1,6 @@
 #include "CSGBake.h"
 
-void UCSGBake::Bake() {
+void UCSGBake::BakeCSG() {
 }
 
 UCSGBake::UCSGBake() {

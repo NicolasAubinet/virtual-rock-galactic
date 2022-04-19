@@ -2,8 +2,8 @@
 #include "Templates/SubclassOf.h"
 
 class UDamageComponent;
-class UPrimitiveComponent;
 class AActor;
+class UPrimitiveComponent;
 class UFSDPhysicalMaterial;
 
 void UDamageComponent::PreTestDamageConditions() {
@@ -20,7 +20,10 @@ float UDamageComponent::GetDamage() const {
 void UDamageComponent::DamageTargetFromHit(const FHitResult& HitResult) const {
 }
 
-void UDamageComponent::DamageTarget(AActor* Target, const FVector& Location, UPrimitiveComponent* HitComponent, UFSDPhysicalMaterial* PhysMat) const {
+void UDamageComponent::DamageTarget_CDO(const FVector& Location, AActor* Owner, AActor* hitActor) {
+}
+
+void UDamageComponent::DamageTarget(AActor* Target, const FVector& Location, UPrimitiveComponent* HitComponent, UFSDPhysicalMaterial* PhysMat, int32 BoneIndex) const {
 }
 
 void UDamageComponent::DamageArmor_Server(AActor* Target, UPrimitiveComponent* collider, int32 BoneIndex, const FVector& impactLocation) const {
@@ -35,10 +38,12 @@ bool UDamageComponent::ArmorSupportsLocalOnlyCall(AActor* Target) const {
 
 UDamageComponent::UDamageComponent() {
     this->DamageComponentType = EDamageComponentType::Primary;
+    this->DamageImpulse = NULL;
     this->Damage = 5.00f;
     this->ArmorDamageMultiplier = 1.00f;
     this->ShattersArmor = false;
     this->DamageClass = NULL;
+    this->ArmorDamageType = EArmorDamageType::Normal;
     this->WeakpointDamageMultiplier = 1.00f;
     this->FrozenDamageBonusScale = 1.00f;
     this->friendlyFireModifier = 1.00f;

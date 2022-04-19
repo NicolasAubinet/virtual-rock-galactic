@@ -1,74 +1,64 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "SavableDataAsset.h"
-#include "UObject/NoExportTypes.h"
 #include "ESchematicState.h"
+#include "UObject/NoExportTypes.h"
 #include "Schematic.generated.h"
 
+class USchematicPricingTier;
 class USchematic;
 class USchematicCategory;
-class USchematicPricingTier;
-class USchematicRarity;
-class UResourceData;
-class UPlayerCharacterID;
-class UObject;
 class USchematicItem;
+class UObject;
+class USchematicRarity;
+class UPlayerCharacterID;
+class UResourceData;
 class UTexture;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSchematicOnSchematicAddedToInventory, USchematic*, Schematic);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSchematicOnSchematicReset, USchematic*, Schematic);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSchematicOnSchematicBuilt, USchematic*, Schematic);
 
 UCLASS(EditInlineNew)
 class FSD_API USchematic : public USavableDataAsset {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FSchematicOnSchematicAddedToInventory OnSchematicAddedToInventory;
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSchematicDelegate, USchematic*, Schematic);
     
-    UPROPERTY(BlueprintAssignable)
-    FSchematicOnSchematicReset OnSchematicReset;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FSchematicDelegate OnSchematicAddedToInventory;
     
-    UPROPERTY(BlueprintAssignable)
-    FSchematicOnSchematicBuilt OnSchematicBuilt;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FSchematicDelegate OnSchematicReset;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FSchematicDelegate OnSchematicBuilt;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USchematicCategory* Category;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USchematicPricingTier* PricingTier;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USchematicRarity* Rarity;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UPlayerCharacterID* UsedByCharacter;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere, Instanced)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USchematicItem* Item;
     
-    UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     TMap<UResourceData*, int32> CraftingCost;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool CostIsLocked;
     
 public:
+    USchematic();
     UFUNCTION(BlueprintCallable)
     void SetCraftingMaterialCost();
     
     UFUNCTION(BlueprintCallable)
     void SetCostLocked(bool IsLocked);
-    
-    UFUNCTION(BlueprintCallable, BlueprintPure)
-    bool HasBeenForged(UObject* WorldContext) const;
-    
-    UFUNCTION(BlueprintCallable, BlueprintPure)
-    bool HasBeenAwardedOrForged(UObject* WorldContext) const;
-    
-    UFUNCTION(BlueprintCallable, BlueprintPure)
-    bool HasBeenAwarded(UObject* WorldContext) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FText GetTitle() const;
@@ -100,6 +90,5 @@ public:
     UFUNCTION(BlueprintCallable)
     void AddSchematicToPlayerInventory(UObject* WorldContext);
     
-    USchematic();
 };
 

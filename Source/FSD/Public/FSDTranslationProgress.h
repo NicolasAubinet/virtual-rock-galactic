@@ -6,10 +6,10 @@ USTRUCT(BlueprintType)
 struct FFSDTranslationProgress {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FString CodeName;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 TranslatedPercent;
     
     FSD_API FFSDTranslationProgress();

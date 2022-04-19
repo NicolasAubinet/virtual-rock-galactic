@@ -4,24 +4,25 @@
 #include "IRandRange.h"
 #include "WeeklyResourceReward.generated.h"
 
-class UResourceData;
 class AFSDPlayerController;
+class UResourceData;
 
 UCLASS(BlueprintType, EditInlineNew)
 class UWeeklyResourceReward : public UReward {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 ResourceCount;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FIRandRange Amount;
-    
-    UFUNCTION(BlueprintCallable, BlueprintPure)
-    TMap<UResourceData*, float> GetRewards(AFSDPlayerController* Player) const;
     
 public:
     UWeeklyResourceReward();
+protected:
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    TMap<UResourceData*, float> GetRewards(AFSDPlayerController* Player) const;
+    
 };
 

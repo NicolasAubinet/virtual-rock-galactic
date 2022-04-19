@@ -3,10 +3,10 @@
 #include "Templates/SubclassOf.h"
 
 class URepairableComponent;
-class AProceduralSetup;
-class UDebrisPositioning;
 class AActor;
+class AProceduralSetup;
 class UCurveFloat;
+class UDebrisPositioning;
 
 void USalvageObjective::PointRepaired() {
 }
@@ -50,5 +50,6 @@ USalvageObjective::USalvageObjective() {
     this->RepairPoints = 3;
     this->PointsRepaired = 0;
     this->MinSalvageActorDistanceToLandingZone = 1000.00f;
+    this->HasMuleReturnedToPod = false;
 }
 

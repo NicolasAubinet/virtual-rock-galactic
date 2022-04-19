@@ -8,7 +8,7 @@ USTRUCT(BlueprintType)
 struct FEliminationDescriptors {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UEnemyDescriptor*> Descriptors;
     
     FSD_API FEliminationDescriptors();

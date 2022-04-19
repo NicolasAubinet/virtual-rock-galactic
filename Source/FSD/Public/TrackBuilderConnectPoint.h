@@ -9,31 +9,36 @@
 class UTrackBuilderConnectPoint;
 class ATrackBuilderSegment;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FTrackBuilderConnectPointOnConnectedWithSegment, UTrackBuilderConnectPoint*, InConnectPoint, ATrackBuilderSegment*, InSegment);
-
-UCLASS(Blueprintable, EditInlineNew)
+UCLASS(Blueprintable, EditInlineNew, meta=(BlueprintSpawnableComponent))
 class FSD_API UTrackBuilderConnectPoint : public USphereComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FTrackBuilderConnectPointOnConnectedWithSegment OnConnectedWithSegment;
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FConnectionDelegate, UTrackBuilderConnectPoint*, InConnectPoint, ATrackBuilderSegment*, InSegment);
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FConnectionDelegate OnConnectedWithSegment;
     
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<ATrackBuilderSegment> ConnectType;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_ConnectedSegment)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_ConnectedSegment, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<ATrackBuilderSegment> ConnectedSegment;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxConnectRadius;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ConnectDistance;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FVector MaxAngles;
     
+public:
+    UTrackBuilderConnectPoint();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_ConnectedSegment();
     
@@ -50,8 +55,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent, BlueprintPure)
     bool CanConnectWith(ATrackBuilderSegment* InSegment, const FTransform& FromWorldTransform);
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    UTrackBuilderConnectPoint();
 };
 

@@ -1,378 +1,381 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "MilestoneSave.h"
 #include "GameFramework/SaveGame.h"
-#include "GDKWinOptionsInSaveGame.h"
-#include "ConsoleOptionsInSaveGame.h"
-#include "MissionStatSave.h"
-#include "ESonyInputSettingsFloats.h"
+#include "OptionsInSaveGame.h"
+#include "ItemUINotifications.h"
+#include "VanityMasterySave.h"
+#include "VanityMasteryResult.h"
+#include "CharacterSave.h"
+#include "EventRewardSave.h"
+#include "DeepDiveSave.h"
+#include "DrinkSave.h"
+#include "FSDEventRewardsSave.h"
+#include "ItemNotificationInfo.h"
+#include "EFSDFaction.h"
+#include "UpgradeLoadout.h"
+#include "SkinList.h"
 #include "UObject/NoExportTypes.h"
-#include "ResourcesSave.h"
+#include "MissionStatSave.h"
+#include "MilestoneSave.h"
 #include "PerkClaimsSave.h"
 #include "CharacterPerksSave.h"
+#include "ESonyControllerMotionMapping.h"
 #include "AchievementSave.h"
 #include "SchematicSave.h"
-#include "WatchedTutorial.h"
 #include "PromotionRewardsSave.h"
-#include "FSDEventRewardsSave.h"
-#include "OptionsInSaveGame.h"
 #include "SeasonSave.h"
-#include "GameDLCSave.h"
 #include "UnLockedMissionParameters.h"
-#include "EFSDFaction.h"
+#include "GameDLCSave.h"
 #include "UObject/NoExportTypes.h"
-#include "ESonyControllerLightMode.h"
 #include "CampaignSave.h"
-#include "ESonyInputSettingsBools.h"
-#include "DeepDiveSave.h"
-#include "CharacterSave.h"
-#include "DrinkSave.h"
 #include "ForgingSave.h"
 #include "ItemUpgradeSelection.h"
-#include "UpgradeLoadout.h"
-#include "ItemNotificationInfo.h"
-#include "SkinList.h"
-#include "EventRewardSave.h"
-#include "ItemUINotifications.h"
+#include "WatchedTutorial.h"
+#include "ResourcesSave.h"
+#include "ConsoleOptionsInSaveGame.h"
+#include "ESonyInputSettingsBools.h"
+#include "GDKWinOptionsInSaveGame.h"
 #include "SonyInputSettings.h"
-#include "ESonyControllerMotionMapping.h"
+#include "ESonyControllerLightMode.h"
 #include "EItemCategory.h"
+#include "ESonyInputSettingsFloats.h"
 #include "FSDSaveGame.generated.h"
 
-class APlayerCharacter;
-class UResourceData;
 class UItemSkin;
 class UItemID;
-class UFSDGameInstance;
-class UVanityItem;
-class UPlayerCharacterID;
-class UFSDSaveGame;
+class APlayerCharacter;
+class UResourceData;
 class UObject;
+class UFSDGameInstance;
+class UPlayerCharacterID;
+class UVanityItem;
 class AActor;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FFSDSaveGameOnPlayerProgressChanged, int32, Rank, int32, Stars);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FFSDSaveGameOnResourceAmountChanged, UResourceData*, Resource, float, currentAmount);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDSaveGameOnCreditsChanged, int32, Credits);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFSDSaveGameOnTutorialsReset);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FFSDSaveGameOnCharacterSaveChanged, TSubclassOf<APlayerCharacter>, CharacterClass, int32, Level, float, Progress);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FFSDSaveGameOnCharacterRetired, TSubclassOf<APlayerCharacter>, CharacterClass, int32, RetirementCount);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDSaveGameOnCharacterCanRetire, TSubclassOf<APlayerCharacter>, CharacterClass);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDSaveGameOnPersonalMetricsChanged, bool, AllowPersonalMetrics);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FFSDSaveGameOnSkinUnlocked, UItemSkin*, Skin, UItemID*, ItemID);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDSaveGameOnAnonymousMetricsChanged, bool, AllowAnonymousMetrics);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFSDSaveGameOnItemUnlocked);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFSDSaveGameOnItemPurchased);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFSDSaveGameOnItemUINotificationChange);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDSaveGameOnForgingXPChanged, float, XP);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FFSDSaveGameOnPerkPointsChanged, int32, PerkPoints, int32, Change);
+class UFSDSaveGame;
 
 UCLASS(BlueprintType)
-class UFSDSaveGame : public USaveGame {
+class FSD_API UFSDSaveGame : public USaveGame {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable, Transient)
-    FFSDSaveGameOnCreditsChanged OnCreditsChanged;
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FTutorialsResetDelegate);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FSkinSignature, UItemSkin*, Skin, UItemID*, ItemID);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FRetirementSignature, TSubclassOf<APlayerCharacter>, CharacterClass, int32, RetirementCount);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FResourceAmountChangedDelegate, UResourceData*, Resource, float, currentAmount);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FPlayerProgressChangedSignature, int32, Rank, int32, Stars);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPersonalMatricsChangedSignature, bool, AllowPersonalMetrics);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FPerkPointsChangedSignature, int32, PerkPoints, int32, Change);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FItemUnlockedDelegate);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FItemUINotificationDelegate);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FForgingXPDelegate, float, XP);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FCreditsChangedSignature, int32, Credits);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FCraftingMasteryChanged, FVanityMasteryResult, Result);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FCharacterSignature, TSubclassOf<APlayerCharacter>, CharacterClass);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FCharacterProgressChangedSignature, TSubclassOf<APlayerCharacter>, CharacterClass, int32, Level, float, Progress);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FAnonymousMatricsChangedSignature, bool, AllowAnonymousMetrics);
     
-    UPROPERTY(BlueprintAssignable, Transient)
-    FFSDSaveGameOnCharacterSaveChanged OnCharacterSaveChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    FCreditsChangedSignature OnCreditsChanged;
     
-    UPROPERTY(BlueprintAssignable, Transient)
-    FFSDSaveGameOnCharacterCanRetire OnCharacterCanRetire;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    FCharacterProgressChangedSignature OnCharacterSaveChanged;
     
-    UPROPERTY(BlueprintAssignable, Transient)
-    FFSDSaveGameOnCharacterRetired OnCharacterRetired;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    FCharacterSignature OnCharacterCanRetire;
     
-    UPROPERTY(BlueprintAssignable, Transient)
-    FFSDSaveGameOnPlayerProgressChanged OnPlayerProgressChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    FRetirementSignature OnCharacterRetired;
     
-    UPROPERTY(BlueprintAssignable, Transient)
-    FFSDSaveGameOnTutorialsReset OnTutorialsReset;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    FPlayerProgressChangedSignature OnPlayerProgressChanged;
     
-    UPROPERTY(BlueprintAssignable, Transient)
-    FFSDSaveGameOnPersonalMetricsChanged OnPersonalMetricsChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    FTutorialsResetDelegate OnTutorialsReset;
     
-    UPROPERTY(BlueprintAssignable, Transient)
-    FFSDSaveGameOnAnonymousMetricsChanged OnAnonymousMetricsChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    FPersonalMatricsChangedSignature OnPersonalMetricsChanged;
     
-    UPROPERTY(BlueprintAssignable, Transient)
-    FFSDSaveGameOnItemUnlocked OnItemUnlocked;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    FAnonymousMatricsChangedSignature OnAnonymousMetricsChanged;
     
-    UPROPERTY(BlueprintAssignable, Transient)
-    FFSDSaveGameOnItemPurchased OnItemPurchased;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    FItemUnlockedDelegate OnItemUnlocked;
     
-    UPROPERTY(BlueprintAssignable, Transient)
-    FFSDSaveGameOnItemUINotificationChange OnItemUINotificationChange;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    FItemUnlockedDelegate OnItemPurchased;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    FItemUINotificationDelegate OnItemUINotificationChange;
+    
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     int32 VersionNumber;
     
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool bMilestoneResetShown;
     
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool bYearTwoGiftClaimed;
     
-    UPROPERTY(BlueprintAssignable, Transient)
-    FFSDSaveGameOnForgingXPChanged OnForgingXPChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    FForgingXPDelegate OnForgingXPChanged;
     
-    UPROPERTY(BlueprintAssignable, Transient)
-    FFSDSaveGameOnResourceAmountChanged OnResourceAmountChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    FResourceAmountChangedDelegate OnResourceAmountChanged;
     
-    UPROPERTY(BlueprintAssignable, Transient)
-    FFSDSaveGameOnSkinUnlocked OnSkinUnlocked;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    FSkinSignature OnSkinUnlocked;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FDateTime SaveSlotTimeStamp;
     
-    UPROPERTY(BlueprintAssignable, Transient)
-    FFSDSaveGameOnPerkPointsChanged OnPerkPointsChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    FPerkPointsChangedSignature OnPerkPointsChanged;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FMissionStatSave MissionStatsSave;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FMilestoneSave Milestones;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FPerkClaimsSave OwnedPerks;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FCharacterPerksSave EquippedPerks;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FAchievementSave AchievementSave;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TArray<FCharacterPerksSave> EquippedPerkLoadouts;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FVanityMasterySave VanityMasterySave;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FCraftingMasteryChanged OnVanityMasteryChanged;
+    
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FSchematicSave SchematicSave;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FPromotionRewardsSave PromotionRewardsSave;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FFSDEventRewardsSave FSDEventRewardsSave;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FSeasonSave SeasonSave;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FGameDLCSave GameDLCSave;
     
 protected:
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     int32 SaveCreatedInPatch;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FString AnonymousID;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     int32 PerkPoints;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool HasRecievedDiscordReward;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     EFSDFaction Faction;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TArray<FGuid> UnLockedMissions;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TMap<FGuid, FUnLockedMissionParameters> UnLockedMissionParameters;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TArray<FGuid> UnLockedPlanetZones;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FCampaignSave CampaignSave;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FDeepDiveSave DeepDiveSave;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TArray<FCharacterSave> CharacterSaves;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     int32 Credits;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     int32 LastBoughtDailyDealSeed;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FForgingSave Forging;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FDrinkSave Drinks;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TMap<FGuid, FItemUpgradeSelection> ItemUpgradeSelections;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TArray<FUpgradeLoadout> ItemUpgradeLoadouts;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TArray<FGuid> PurchasedItemUpgrades;
     
-    UPROPERTY()
-    TArray<FGuid> UnLockedItemUpgrades;
-    
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TArray<FGuid> UnlockedItems;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TArray<FGuid> OwnedItems;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TMap<FGuid, int32> EnemiesKilled;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TMap<FGuid, FItemNotificationInfo> ItemsWithNotification;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TMap<FGuid, FSkinList> UnlockedItemSkins;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TSet<FGuid> UnlockedPickaxeParts;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TArray<UVanityItem*> UnLockedVanityItems;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TArray<FGuid> UnLockedVanityItemIDs;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TArray<FGuid> HiddenUICategories;
     
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     int32 LastCollectedCommunityRewardPeriodID;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TSet<FGuid> MinersManualKnownObjects;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FEventRewardSave EventRewardSave;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FItemUINotifications ItemUINotifications;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FString RejoinSessionId;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool FirstRejoinAttempt;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool HaveSkinsBeenReset;
     
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool bHasOpenedDeepDiveTerminal;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FResourcesSave Resources;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool FirstSession;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TArray<FWatchedTutorial> WatchedTutorials;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FConsoleOptionsInSaveGame ConsoleOptions;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FGDKWinOptionsInSaveGame WinGDKOptions;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FOptionsInSaveGame WindowsOptions;
     
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool HasCompletedTutorial;
     
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool HasPlayedTutorial;
     
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool ShowHowToRestartTutorialPrompt;
     
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool HasPlayedIntroMessage;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool HasSentSteamInfo;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool HasClaimedSteamGroupLoot;
     
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool IsBoscoAllowed;
     
-    UPROPERTY()
-    bool HasRefundedUpgradeCostDifference;
-    
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool HasJoinedXboxClub;
     
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool HasSeenAnalyticsPopUp;
     
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool AllowAnalyticsTracking;
     
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool AllowPersonalAnalyticsTracking;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool IsModded;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     int32 Index;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FString Name;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     float TotalPlayTimeSeconds;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TMap<FGuid, int32> SelectedLoadout;
     
-    UPROPERTY(Transient)
+    UPROPERTY(Transient, meta=(AllowPrivateAccess=true))
     uint32 userIdx;
     
-    UPROPERTY(Transient)
+    UPROPERTY(Transient, meta=(AllowPrivateAccess=true))
     uint32 CurrLoadoutIdx;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     uint32 SaveToDiskCounter;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     uint32 BackupSaveIndex;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     uint32 ExternalBackupSaveIndex;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     int32 NumberOfGamesPlayed;
     
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     UPlayerCharacterID* LastPlayedCharacter;
     
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool ShowInfoScreen;
     
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FString LastShownVersion;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FSonyInputSettings SonyInputSettings;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UFSDGameInstance* FSDGameInstance;
     
 public:
+    UFSDSaveGame();
     UFUNCTION(BlueprintCallable)
     bool TrySellResource(UResourceData* Resource, int32 Amount, int32& Price);
     
@@ -420,6 +423,9 @@ public:
     
     UFUNCTION(BlueprintCallable)
     void SetFaction(EFSDFaction newFaction, bool Reasign);
+    
+    UFUNCTION(BlueprintCallable)
+    void SetEquippedItemID(EItemCategory Category, UPlayerCharacterID* PlayerId, UItemID* Item);
     
     UFUNCTION(BlueprintCallable)
     void SetEquippedItem(EItemCategory Category, UPlayerCharacterID* PlayerId, TSubclassOf<AActor> Item);
@@ -478,6 +484,9 @@ public:
     UFUNCTION(BlueprintCallable)
     void MarkFirstSchematicMessageSeen();
     
+    UFUNCTION(BlueprintCallable)
+    void LevelUpCharacter(UObject* WorldContext, UPlayerCharacterID* characterID);
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsObsolete() const;
     
@@ -489,6 +498,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool HasSeenRetirementRewardScreen() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool HasCredits(int32 Amount) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool HasCharacterRetired(UPlayerCharacterID* characterID) const;
@@ -639,6 +651,8 @@ public:
     UFUNCTION(BlueprintCallable)
     int32 AddCredits(int32 Amount);
     
-    UFSDSaveGame();
+    UFUNCTION(BlueprintCallable)
+    int32 AddClassXP(UObject* WorldContext, UPlayerCharacterID* characterID, int32 XP);
+    
 };
 

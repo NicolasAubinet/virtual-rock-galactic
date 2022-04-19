@@ -5,31 +5,38 @@
 #include "QueuedMontage.h"
 #include "EnemyDeepPathfinderCharacter.generated.h"
 
-class UAnimMontage;
-class UEnemyHealthComponent;
-class UAnimInstance;
 class USkeletalMeshComponent;
+class UMeshComponent;
+class UEnemyHealthComponent;
+class UMaterialInterface;
+class UAnimMontage;
+class UAnimInstance;
 
 UCLASS()
 class AEnemyDeepPathfinderCharacter : public ADeepPathfinderCharacter, public INetMontageAble {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UEnemyHealthComponent* HealthComponent;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_QueuedMontage)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_QueuedMontage, meta=(AllowPrivateAccess=true))
     FQueuedMontage QueuedMontage;
+    
+public:
+    AEnemyDeepPathfinderCharacter();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+protected:
+    UFUNCTION(BlueprintCallable, BlueprintPure=false)
+    void SwitchToDynamicBaseShader(UMaterialInterface* baseShader, UMeshComponent* MeshComponent) const;
     
     UFUNCTION(BlueprintCallable)
     void OnRep_QueuedMontage();
     
-public:
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    AEnemyDeepPathfinderCharacter();
     
     // Fix for true pure virtual functions not being implemented
+public:
     UFUNCTION(BlueprintCallable)
     float QueueMontage(UAnimMontage* Montage) override PURE_VIRTUAL(QueueMontage, return 0.0f;);
     

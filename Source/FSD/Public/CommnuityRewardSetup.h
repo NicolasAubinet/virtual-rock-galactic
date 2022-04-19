@@ -3,8 +3,8 @@
 #include "Engine/DataAsset.h"
 #include "CommnuityRewardSetup.generated.h"
 
-class UObject;
 class UCommnuityRewardBundle;
+class UObject;
 class UResourceData;
 
 UCLASS(BlueprintType)
@@ -12,10 +12,11 @@ class UCommnuityRewardSetup : public UDataAsset {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UCommnuityRewardBundle*> TierRewards;
     
 public:
+    UCommnuityRewardSetup();
     UFUNCTION(BlueprintCallable)
     TMap<UResourceData*, int32> GetResourcesTierOnlyReward(int32 Tier);
     
@@ -25,6 +26,5 @@ public:
     UFUNCTION(BlueprintCallable)
     void AwardTierRewards(UObject* WorldContext, int32 Tier);
     
-    UCommnuityRewardSetup();
 };
 

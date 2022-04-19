@@ -8,7 +8,7 @@ UCLASS()
 class UCSGSphere : public UConvexMeshWithCachedTree {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FCSGSphereProperties Properties;
     
     UCSGSphere();

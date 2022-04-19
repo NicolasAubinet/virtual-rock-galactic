@@ -11,10 +11,11 @@ class UMinersManualData : public UDataAsset {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSoftMinersManualDescription Description;
     
 public:
+    UMinersManualData();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     void GetText(FText& Headline, FText& richText);
     
@@ -24,6 +25,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UTexture2D* GetBackgroundImage();
     
-    UMinersManualData();
 };
 

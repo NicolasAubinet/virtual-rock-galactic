@@ -1,10 +1,12 @@
 #include "FSDPawn.h"
 #include "Net/UnrealNetwork.h"
+#include "EnemyTemperatureComponent.h"
+#include "StatusEffectsComponent.h"
 
-class AActor;
-class AFSDAIController;
 class USkeletalMeshComponent;
+class AActor;
 class UHealthComponentBase;
+class AFSDAIController;
 
 void AFSDPawn::UnFreeze() {
 }
@@ -74,6 +76,8 @@ void AFSDPawn::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetime
 }
 
 AFSDPawn::AFSDPawn() {
+    this->StatusEffects = CreateDefaultSubobject<UStatusEffectsComponent>(TEXT("StatusEffects"));
+    this->Temperature = CreateDefaultSubobject<UEnemyTemperatureComponent>(TEXT("Temperature"));
     this->SpawnedFromDescriptor = NULL;
     this->IsFrozen = false;
     this->CanFlee = true;

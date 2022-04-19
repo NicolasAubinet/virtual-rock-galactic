@@ -3,18 +3,18 @@
 #include "AfflictionEffect.h"
 #include "BoneParticlesAfflictionEffect.generated.h"
 
-class UParticleSystem;
 class USoundCue;
+class UParticleSystem;
 
 UCLASS(Abstract)
 class UBoneParticlesAfflictionEffect : public UAfflictionEffect {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere, EditFixedSize)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, EditFixedSize, meta=(AllowPrivateAccess=true))
     TArray<UParticleSystem*> Particles;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundCue* Sound;
     
 public:

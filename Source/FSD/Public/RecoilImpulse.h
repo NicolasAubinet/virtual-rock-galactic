@@ -3,14 +3,14 @@
 #include "UObject/NoExportTypes.h"
 #include "RecoilImpulse.generated.h"
 
-USTRUCT()
+USTRUCT(BlueprintType)
 struct FRecoilImpulse {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     float Rotation;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FVector2D Impulse;
     
     FSD_API FRecoilImpulse();

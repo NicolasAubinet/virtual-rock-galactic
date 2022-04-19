@@ -1,7 +1,8 @@
 #include "FSDEvent.h"
 
-class UObject;
+class UTexture2D;
 class UFSDEvent;
+class UObject;
 class APlayerController;
 
 void UFSDEvent::MarkClaimableRewardsSeen(UObject* WorldContext) {
@@ -17,6 +18,10 @@ bool UFSDEvent::HasUnseenClaimableRewards(UObject* WorldContext) {
 
 bool UFSDEvent::GiveRewards(APlayerController* PlayerController) {
     return false;
+}
+
+UTexture2D* UFSDEvent::GetTitleScreenOverride() {
+    return NULL;
 }
 
 bool UFSDEvent::GetIsActive(UObject* WorldContext) const {

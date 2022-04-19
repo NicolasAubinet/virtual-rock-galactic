@@ -6,5 +6,6 @@ UAttachedParticlesAfflictionEffect::UAttachedParticlesAfflictionEffect() {
     this->Socket = EAfflictionSocket::CenterMass;
     this->ScaleToActor = true;
     this->UseVisibilityHack = false;
+    this->UseBoneFilter = false;
 }
 

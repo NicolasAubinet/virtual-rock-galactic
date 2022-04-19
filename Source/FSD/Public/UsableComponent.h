@@ -5,30 +5,30 @@
 
 class UDialogDataAsset;
 
-UCLASS()
-class UUsableComponent : public UUsableComponentBase {
+UCLASS(meta=(BlueprintSpawnableComponent))
+class FSD_API UUsableComponent : public UUsableComponentBase {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDialogDataAsset* ShoutBegin;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText UseText;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ResetOnFail;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool SwitchToUsingState;
     
 public:
+    UUsableComponent();
     UFUNCTION(BlueprintCallable)
     void SetUseText(const FText& NewText);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool HasDuration() const;
     
-    UUsableComponent();
 };
 

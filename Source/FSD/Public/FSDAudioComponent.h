@@ -3,7 +3,7 @@
 #include "Components/AudioComponent.h"
 #include "FSDAudioComponent.generated.h"
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UFSDAudioComponent : public UAudioComponent {
     GENERATED_BODY()
 public:

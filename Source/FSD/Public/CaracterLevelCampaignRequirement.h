@@ -6,14 +6,14 @@
 class UPlayerCharacterID;
 
 UCLASS(EditInlineNew)
-class UCaracterLevelCampaignRequirement : public UCampaignRequirement {
+class FSD_API UCaracterLevelCampaignRequirement : public UCampaignRequirement {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UPlayerCharacterID* characterID;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 LevelRequirement;
     
 public:

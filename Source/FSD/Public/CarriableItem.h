@@ -1,29 +1,33 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "FSDPhysicsActor.h"
+#include "Throwable.h"
+#include "AttachChangeSigDelegate.h"
+#include "OnCarriableDepositedDelegate.h"
 #include "UObject/NoExportTypes.h"
 #include "CarriableItem.generated.h"
 
 class APlayerCharacter;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FCarriableItemOnAttachedChangeDelegate, bool, Attached, FVector, PrevScale);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FCarriableItemOnCarriableDeposited, APlayerCharacter*, fromCharacter);
-
 UCLASS(Abstract)
-class ACarriableItem : public AFSDPhysicsActor {
+class ACarriableItem : public AFSDPhysicsActor, public IThrowable {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FCarriableItemOnAttachedChangeDelegate OnAttachedChangeDelegate;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FAttachChangeSig OnAttachedChangeDelegate;
     
 protected:
-    UPROPERTY(BlueprintAssignable)
-    FCarriableItemOnCarriableDeposited OnCarriableDeposited;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnCarriableDeposited OnCarriableDeposited;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool StrictDeposit;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool IsDopositable;
+    
 public:
+    ACarriableItem();
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void Throw(FVector force);
     
@@ -35,6 +39,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnAttachChanged(bool Attached);
     
-    ACarriableItem();
+    
+    // Fix for true pure virtual functions not being implemented
 };
 

@@ -9,7 +9,7 @@ UCLASS(Abstract)
 class AShowroomItem : public AActor {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<AShowroomStage> ShowroomStage;
     
     AShowroomItem();

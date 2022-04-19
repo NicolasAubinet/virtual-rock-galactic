@@ -13,16 +13,16 @@ class ALoadoutItemProxy : public AItem {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UItemCharacterAnimationSet* AnimationSet;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FItemLoadoutAnimations LoadoutAnimations;
     
 public:
+    ALoadoutItemProxy();
     UFUNCTION(BlueprintCallable)
     static TSubclassOf<AItem> GetLoadoutItemFromClass(TSubclassOf<AActor> ActorClass);
     
-    ALoadoutItemProxy();
 };
 

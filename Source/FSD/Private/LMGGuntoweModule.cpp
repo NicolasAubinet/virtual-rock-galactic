@@ -1,5 +1,9 @@
 #include "LMGGuntoweModule.h"
 #include "Net/UnrealNetwork.h"
+#include "Components/AudioComponent.h"
+#include "Components/SceneComponent.h"
+#include "HitscanComponent.h"
+#include "DamageComponent.h"
 
 void ALMGGuntoweModule::ShowShot(const FVector& Location) {
 }
@@ -14,6 +18,10 @@ void ALMGGuntoweModule::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Ou
 }
 
 ALMGGuntoweModule::ALMGGuntoweModule() {
+    this->HitScanComp = CreateDefaultSubobject<UHitscanComponent>(TEXT("HitComponent"));
+    this->DamageComp = CreateDefaultSubobject<UDamageComponent>(TEXT("DMGComponent"));
+    this->AimAtWhenNoTarget = CreateDefaultSubobject<USceneComponent>(TEXT("AimAtWhenNoTarget"));
+    this->FireAudio = CreateDefaultSubobject<UAudioComponent>(TEXT("FiringAudioComponent"));
     this->TracerEffect = NULL;
     this->MuzzleEffect = NULL;
     this->ShootTailSound = NULL;

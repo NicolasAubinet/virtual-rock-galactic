@@ -1,7 +1,7 @@
 #include "GameDLC.h"
 
-class UObject;
 class UTexture2D;
+class UObject;
 
 bool UGameDLC::ShouldBeAnnounced(UObject* WorldContext) const {
     return false;

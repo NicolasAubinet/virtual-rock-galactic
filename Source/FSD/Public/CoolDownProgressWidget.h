@@ -11,15 +11,18 @@ class UCoolDownProgressWidget : public UUserWidget {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FCoolDownProgressStyle Style;
     
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UObject> CoolDownObject;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool bIsFinished;
     
+public:
+    UCoolDownProgressWidget();
+protected:
     UFUNCTION(BlueprintCallable)
     void UpdateProgress(float Progress);
     
@@ -32,7 +35,5 @@ protected:
     UFUNCTION(BlueprintCallable)
     void Init(UObject* InCoolDownObject, const FCoolDownProgressStyle& InStyle);
     
-public:
-    UCoolDownProgressWidget();
 };
 

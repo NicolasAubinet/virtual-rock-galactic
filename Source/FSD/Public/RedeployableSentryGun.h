@@ -7,71 +7,74 @@
 
 class UActorTrackingComponent;
 class ARedeployableSentryGun;
+class APlayerCharacter;
 class AActor;
 class UOutlineComponent;
 class ASentryElectroBeam;
-class APlayerCharacter;
 class USkeletalMeshComponent;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FRedeployableSentryGunOnStateChanged, ARedeployableSentryGun*, Sender, ERedeployableSentryGunState, NewState);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FRedeployableSentryGunOnDeployFinished);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FRedeployableSentryGunOnDismantleFinished);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FRedeployableSentryGunOnDeployProgressEvent, float, Progress);
 
 UCLASS(Abstract)
 class ARedeployableSentryGun : public ASentryGun {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FRedeployableSentryGunOnStateChanged OnStateChanged;
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnStateChanged, ARedeployableSentryGun*, Sender, ERedeployableSentryGunState, NewState);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDismantleFinished);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnDeployProgress, float, Progress);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDeployFinished);
     
-    UPROPERTY(BlueprintAssignable)
-    FRedeployableSentryGunOnDeployFinished OnDeployFinished;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnStateChanged OnStateChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FRedeployableSentryGunOnDismantleFinished OnDismantleFinished;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnDeployFinished OnDeployFinished;
     
-    UPROPERTY(BlueprintAssignable, BlueprintCallable)
-    FRedeployableSentryGunOnDeployProgressEvent OnDeployProgressEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnDismantleFinished OnDismantleFinished;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnDeployProgress OnDeployProgressEvent;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UActorTrackingComponent* ActorTrackingIcon;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UOutlineComponent* outline;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_SentryGunOwner)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_SentryGunOwner, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<APlayerCharacter> SentryGunOwner;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool bOutlineAndIconVisible;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_State)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_State, meta=(AllowPrivateAccess=true))
     ERedeployableSentryGunState State;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float PlasmaLineMaxRange;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<ASentryElectroBeam*> PlasmaLines;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<ASentryElectroBeam> PlasmaBeamClass;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<AActor> ElectrocutionActorClass;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     AActor* ElectrocutionActor;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<AActor> EMPDischargeActorClass;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float EMPDiscargeCooldown;
     
 public:
+    ARedeployableSentryGun();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintCallable)
     void ToggleOutlineAndIcon(bool Visible);
     
@@ -135,8 +138,5 @@ public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, BlueprintImplementableEvent)
     void ActivateSpecialAttack();
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    ARedeployableSentryGun();
 };
 

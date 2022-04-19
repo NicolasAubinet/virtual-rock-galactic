@@ -5,11 +5,11 @@
 
 class UPickaxePart;
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UPickaxePartRewarder : public UTreasureRewarder {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UPickaxePart* PickaxePart;
     
     UPickaxePartRewarder();

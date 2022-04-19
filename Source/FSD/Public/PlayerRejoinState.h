@@ -1,15 +1,16 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "UObject/NoExportTypes.h"
-#include "Components/ActorComponent.h"
 #include "RejoinInt.h"
+#include "Components/ActorComponent.h"
 #include "RejoinFloat.h"
+#include "UObject/NoExportTypes.h"
 #include "PlayerRejoinState.generated.h"
 
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UPlayerRejoinState : public UActorComponent {
     GENERATED_BODY()
 public:
+    UPlayerRejoinState();
     UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
     void Server_Reset();
     
@@ -23,7 +24,5 @@ protected:
     UFUNCTION(BlueprintCallable, Client, Reliable)
     void Client_SetValues(const TArray<FRejoinFloat>& floatValues, const TArray<FRejoinInt>& intValues);
     
-public:
-    UPlayerRejoinState();
 };
 

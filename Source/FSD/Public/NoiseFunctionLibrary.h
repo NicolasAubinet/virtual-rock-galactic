@@ -1,18 +1,19 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "UObject/NoExportTypes.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "NoiseFunctionLibrary.generated.h"
 
 class UObject;
-class AActor;
 class USceneComponent;
+class AActor;
 
 UCLASS(BlueprintType)
 class UNoiseFunctionLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    UNoiseFunctionLibrary();
     UFUNCTION(BlueprintCallable)
     static void SphericalNoiseMovementComponent(UObject* WorldContextObject, USceneComponent* Component, FVector Center, float Radius, float Speed, float TimeOffset);
     
@@ -34,6 +35,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static float Noise(UObject* WorldContextObject, float X);
     
-    UNoiseFunctionLibrary();
 };
 

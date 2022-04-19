@@ -1,34 +1,34 @@
 #include "ActorFunctionLibrary.h"
 #include "Templates/SubclassOf.h"
 
-class UObject;
-class UWindowWidget;
-class APlayerCharacter;
-class UMaterialInstanceDynamic;
-class USoundCue;
-class APlayerController;
-class UPathfinderCollisionComponent;
-class UUserWidget;
-class AFSDGameMode;
-class AActor;
 class USceneComponent;
+class USoundCue;
+class UPostProcessComponent;
+class UMaterialInstanceDynamic;
+class UItemID;
+class APlayerCharacter;
+class UEnemyComponent;
+class UTexture2D;
+class UObject;
+class APlayerController;
 class UFXSystemAsset;
+class UWindowWidget;
+class UUserWidget;
+class AActor;
+class UPathfinderCollisionComponent;
 class UFSDPhysicalMaterial;
 class UPlayerCharacterID;
-class UEnemyComponent;
-class UItemID;
+class UMeshComponent;
 class UInventoryList;
 class UActorComponent;
-class UTexture2D;
-class UPostProcessComponent;
-class UHealthComponentBase;
 class UBlendableInterface;
 class IBlendableInterface;
-class UMeshComponent;
+class AFSDGameMode;
 class UDamageClass;
+class UHealthComponentBase;
 class AFSDGameState;
 
-void UActorFunctionLibrary::UnlockSpecificCharacters(UObject* WorldContextObject, TArray<APlayerCharacter*> Characters, ECharacterState UnlockIf, ECharacterState UnlockTo) {
+void UActorFunctionLibrary::UnlockSpecificCharacters(TArray<APlayerCharacter*> Characters, ECharacterState UnlockIf, ECharacterState UnlockTo) {
 }
 
 void UActorFunctionLibrary::UnlockCharacters(UObject* WorldContextObject) {
@@ -51,17 +51,17 @@ float UActorFunctionLibrary::PingPong(float Time, float Length, bool normalize) 
     return 0.0f;
 }
 
-float UActorFunctionLibrary::MoveTowards(float current, float End, float step) {
+float UActorFunctionLibrary::MoveTowards(float Current, float End, float step) {
     return 0.0f;
 }
 
-void UActorFunctionLibrary::LockSpecificCharactersIfState(UObject* WorldContextObject, TArray<APlayerCharacter*> Characters, ECharacterState stateToLock) {
+void UActorFunctionLibrary::LockSpecificCharactersIfState(TArray<APlayerCharacter*> Characters, ECharacterState stateToLock) {
 }
 
-void UActorFunctionLibrary::LockSpecificCharacters(UObject* WorldContextObject, TArray<APlayerCharacter*> Characters) {
+void UActorFunctionLibrary::LockSpecificCharacters(TArray<APlayerCharacter*> Characters) {
 }
 
-bool UActorFunctionLibrary::LockSpecificCharacterIfState(UObject* WorldContextObject, APlayerCharacter* Character, ECharacterState LockIf, ECharacterState LockTo) {
+bool UActorFunctionLibrary::LockSpecificCharacterIfState(APlayerCharacter* Character, ECharacterState LockIf, ECharacterState LockTo) {
     return false;
 }
 
@@ -220,14 +220,14 @@ FVector UActorFunctionLibrary::FindCharacterTeleportLocation(UObject* WorldConte
     return FVector{};
 }
 
-void UActorFunctionLibrary::FadeMaterials(UObject* WorldContextObject, UMeshComponent*& Mesh, float Duration) {
+void UActorFunctionLibrary::FadeMaterials(const UObject* WorldContextObject, UMeshComponent*& Mesh, float Duration) {
 }
 
 float UActorFunctionLibrary::EvaluateRuntimeCurve(UObject* WorldContextObject, const FRuntimeFloatCurve& Curve, float Time) {
     return 0.0f;
 }
 
-void UActorFunctionLibrary::DissolveMaterials(UObject* WorldContextObject, UMeshComponent*& Mesh, float Duration) {
+void UActorFunctionLibrary::DissolveMaterials(const UObject* WorldContextObject, UMeshComponent*& Mesh, float Duration) {
 }
 
 void UActorFunctionLibrary::DamagePlayersInArea(const FVector& Origin, AActor* Instigator, const float Damage, const float Radius, UDamageClass* DamageClass) {

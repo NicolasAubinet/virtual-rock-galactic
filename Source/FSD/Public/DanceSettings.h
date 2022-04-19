@@ -8,7 +8,7 @@ UCLASS(BlueprintType)
 class UDanceSettings : public UDataAsset {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FDanceItem> DanceMoves;
     
     UDanceSettings();

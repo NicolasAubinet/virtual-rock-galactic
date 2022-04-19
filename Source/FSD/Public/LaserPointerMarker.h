@@ -5,30 +5,30 @@
 #include "LaserPointerMarker.generated.h"
 
 class UPrimitiveComponent;
-class APlayerCharacter;
 class UTerrainMaterial;
+class APlayerCharacter;
 
 UCLASS(Abstract)
 class ALaserPointerMarker : public AActor {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FLaserPointerData LookAtData;
     
-    UPROPERTY(BlueprintReadOnly, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     AActor* LookAtActor;
     
-    UPROPERTY(BlueprintReadOnly, Export, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Replicated, Transient, meta=(AllowPrivateAccess=true))
     UPrimitiveComponent* LookAtComponent;
     
-    UPROPERTY(BlueprintReadOnly, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     UTerrainMaterial* LookAtTerrainMaterial;
+    
+    ALaserPointerMarker();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     APlayerCharacter* GetCharacter() const;
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    ALaserPointerMarker();
 };
 

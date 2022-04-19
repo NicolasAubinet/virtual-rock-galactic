@@ -1,9 +1,9 @@
 #include "MultiTextCounterAction.h"
 
+class UMultiTextCounterAction;
 class UObject;
 class UTextBlock;
 class USoundCue;
-class UMultiTextCounterAction;
 
 UMultiTextCounterAction* UMultiTextCounterAction::StartMultiTextCounter(UObject* InWorldContext, UTextBlock* InTotalBlock, const FText InTotalFormat, float InCountSpeed, USoundCue* InCountingSound, const TArray<FTextCounterEntry> InEntries) {
     return NULL;

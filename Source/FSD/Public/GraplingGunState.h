@@ -7,10 +7,10 @@ USTRUCT(BlueprintType)
 struct FGraplingGunState {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FVector_NetQuantize TargetLocation;
     
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     uint8 IsGrapling: 1;
     
     FSD_API FGraplingGunState();

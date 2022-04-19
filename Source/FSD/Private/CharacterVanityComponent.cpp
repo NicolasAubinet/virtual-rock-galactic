@@ -15,10 +15,10 @@ void UCharacterVanityComponent::UpdateEquippedVanity(bool applyItems) {
 void UCharacterVanityComponent::SetEquippedVanityInViewer(const TArray<UVanityItem*>& Vanity) {
 }
 
-void UCharacterVanityComponent::Server_SetEquippedVanity_Implementation(const TArray<UVanityItem*>& equippedItems) {
+void UCharacterVanityComponent::Server_SetEquippedVanity_Implementation(const FEquippedVanity& equippedItems) {
 }
-bool UCharacterVanityComponent::Server_SetEquippedVanity_Validate(const TArray<UVanityItem*>& equippedItems) {
-    return true;
+
+void UCharacterVanityComponent::RemoveMedicalGown() {
 }
 
 UVanityItem* UCharacterVanityComponent::Receive_GetEquippedVanityItem(UObject* WorldContextObject, UPlayerCharacterID* Character, EVanitySlot Slot) {
@@ -26,6 +26,10 @@ UVanityItem* UCharacterVanityComponent::Receive_GetEquippedVanityItem(UObject* W
 }
 
 void UCharacterVanityComponent::OnRep_EquippedVanity() {
+}
+
+bool UCharacterVanityComponent::HasSpawnedInMedbay() const {
+    return false;
 }
 
 UVanityItem* UCharacterVanityComponent::GetEquippedVanityItem(EVanitySlot Slot) const {
@@ -36,10 +40,19 @@ UCharacterVanityItems* UCharacterVanityComponent::GetAvailableVanityItems() cons
     return NULL;
 }
 
+void UCharacterVanityComponent::EquipMedicalGown() {
+}
+
 void UCharacterVanityComponent::EnforceValidPaintjob() {
 }
 
 void UCharacterVanityComponent::CreateEquippedGear() {
+}
+
+void UCharacterVanityComponent::Client_RemoveMedicalGown_Implementation() {
+}
+
+void UCharacterVanityComponent::Client_EquipMedicalGown_Implementation() {
 }
 
 void UCharacterVanityComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
@@ -52,8 +65,10 @@ UCharacterVanityComponent::UCharacterVanityComponent() {
     this->AvailableVanityItems = NULL;
     this->ShownBeardColor = NULL;
     this->ArmorMaterial = NULL;
+    this->ArmorClothMaterial = NULL;
     this->DynamicSkinMaterial = NULL;
     this->HeadVanityType = EHeadVanityType::HairOnly;
+    this->SpecialTemporaryArmor = NULL;
     this->SkinMaterial = NULL;
 }
 

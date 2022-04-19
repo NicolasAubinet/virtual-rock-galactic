@@ -5,21 +5,22 @@
 #include "FloatPerkEffect.h"
 #include "FloatPerkAsset.generated.h"
 
-class UFloatPerkAsset;
 class UObject;
+class UFloatPerkAsset;
 
 UCLASS()
 class UFloatPerkAsset : public UPerkAsset {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FFloatPerkRank> Ranks;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FFloatPerkEffect> Effects;
     
 public:
+    UFloatPerkAsset();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetPerkValue(UObject* WorldContext) const;
     
@@ -29,6 +30,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static float GetFloatPerkValue(UObject* WorldContext, UFloatPerkAsset* Perk, float UnclaimedValue);
     
-    UFloatPerkAsset();
 };
 

@@ -9,9 +9,9 @@ UCLASS(BlueprintType)
 class UAfflictionFunctionLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    UAfflictionFunctionLibrary();
     UFUNCTION(BlueprintCallable)
     static void PlayEnemyExplosionEffects(AFSDPawn* enemy);
     
-    UAfflictionFunctionLibrary();
 };
 

@@ -3,41 +3,41 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "PlayerMovementComponent.generated.h"
 
-class USoundBase;
-class UCharacterStateComponent;
-class APlayerCharacter;
 class AActor;
+class USoundBase;
+class APlayerCharacter;
+class UCharacterStateComponent;
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UPlayerMovementComponent : public UCharacterMovementComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool DebugFastMove;
     
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     USoundBase* SlidingOnIceSound;
     
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float LedgeClimbZVelocity;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float MovementPenalty;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     APlayerCharacter* Character;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UCharacterStateComponent> CurrentPhysUpdateState;
     
 public:
+    UPlayerMovementComponent();
     UFUNCTION(BlueprintCallable)
     void RemoveGravityModifier(AActor* SourceActor);
     
     UFUNCTION(BlueprintCallable)
     void AddGravityModifier(AActor* SourceActor, float effect);
     
-    UPlayerMovementComponent();
 };
 

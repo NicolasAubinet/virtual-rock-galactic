@@ -13,5 +13,6 @@ USeason::USeason() {
     this->TreeOfVanity = NULL;
     this->SeasonDLC = NULL;
     this->NumberOfScripChallenges = 0;
+    this->SeasonWarning = NULL;
 }
 

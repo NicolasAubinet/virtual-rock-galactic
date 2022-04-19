@@ -1,10 +1,10 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "CSGSDFInstanceProperties.h"
 #include "CSGBase.h"
-#include "DeepCSGFloatTree.h"
 #include "BinaryTerrainMaterialCombiner.h"
+#include "CSGSDFInstanceProperties.h"
 #include "UObject/NoExportTypes.h"
+#include "DeepCSGFloatTree.h"
 #include "UObject/NoExportTypes.h"
 #include "CSGSDFInstance.generated.h"
 
@@ -15,28 +15,28 @@ UCLASS(BlueprintType)
 class FSDENGINE_API UCSGSDFInstance : public UCSGBase {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FCSGSDFInstanceProperties Properties;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FBinaryTerrainMaterialCombiner Materials;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     USDFBase* CSGSDFInstanceRoot;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UBakeConfig* CurrentBakeConfig;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FBox ChildLocalSpaceBoundingBox;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FBox WorldSpaceBoundingBox;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FDeepCSGFloatTree BoundingTree;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FMatrix TransformMatInv;
     
     UCSGSDFInstance();

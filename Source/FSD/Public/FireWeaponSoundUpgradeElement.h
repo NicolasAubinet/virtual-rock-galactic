@@ -10,7 +10,7 @@ class UFireWeaponSoundUpgradeElement : public UItemUpgradeElement {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundCue* FireSound;
     
 public:

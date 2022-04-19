@@ -1,146 +1,149 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "UObject/NoExportTypes.h"
+#include "EInputKeys.h"
 #include "TrackBuilderSegment.h"
 #include "EPipelineBuildState.h"
-#include "UObject/NoExportTypes.h"
 #include "Engine/EngineTypes.h"
-#include "EInputKeys.h"
 #include "PipelineSegment.generated.h"
 
-class UMaterialInterface;
-class USimpleHealthComponent;
-class APipelineSegment;
-class USingleUsableComponent;
 class UStaticMesh;
-class UDroneUseComponent;
-class USplineComponent;
+class APipelineSegment;
+class UMaterialInterface;
 class UTrackBuilderUsable;
-class UPathfinderSplineSegmentCollisionComponent;
+class USingleUsableComponent;
+class APipelineStart;
+class UDroneUseComponent;
+class USimpleHealthComponent;
+class USplineComponent;
 class USplineMeshComponent;
 class USkeletalMeshComponent;
 class UStaticMeshComponent;
-class APipelineStart;
+class UPathfinderSplineSegmentCollisionComponent;
 class APlayerCharacter;
 class UHealthComponentBase;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPipelineSegmentOnPipelineBroken, APipelineSegment*, InPipelineSegment);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPipelineSegmentOnPipelineRepaired, APipelineSegment*, InPipelineSegment);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPipelineSegmentOnPipelineStateChanged, EPipelineBuildState, InPipelineState);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPipelineSegmentOnPipelineActivated, APipelineSegment*, InPipelineSegment);
 
 UCLASS(Abstract)
 class APipelineSegment : public ATrackBuilderSegment {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FPipelineSegmentOnPipelineBroken OnPipelineBroken;
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPipelineStateDelegate, EPipelineBuildState, InPipelineState);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPipelineSegmentDelegate, APipelineSegment*, InPipelineSegment);
     
-    UPROPERTY(BlueprintAssignable)
-    FPipelineSegmentOnPipelineRepaired OnPipelineRepaired;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FPipelineSegmentDelegate OnPipelineBroken;
     
-    UPROPERTY(BlueprintAssignable)
-    FPipelineSegmentOnPipelineActivated OnPipelineActivated;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FPipelineSegmentDelegate OnPipelineRepaired;
     
-    UPROPERTY(BlueprintAssignable)
-    FPipelineSegmentOnPipelineStateChanged OnPipelineStateChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FPipelineSegmentDelegate OnPipelineActivated;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FPipelineStateDelegate OnPipelineStateChanged;
     
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UStaticMesh* StaticMeshUnassembled;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UStaticMesh* StaticMeshAssembled;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UStaticMesh* StaticMeshFinal;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FVector EditorEndLocation;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TEnumAsByte<ETraceTypeQuery> CarvingTraceType;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UMaterialInterface* NumberMaterial;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USingleUsableComponent* RepairSegmentUsable;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USingleUsableComponent* ActivateSegmentUsable;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UDroneUseComponent* DroneUsable;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USimpleHealthComponent* SegmentHealthComponent;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USplineComponent* MovementSpline;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USplineComponent* MovementSplineRight;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USplineComponent* MovementSplineLeft;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USplineMeshComponent* PipelineMesh;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USplineMeshComponent* PipelineOuterMesh;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* PipelineCapMesh;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* EndPostMesh;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UStaticMeshComponent* EndPostMeshStatic;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UPathfinderSplineSegmentCollisionComponent* PathfinderComponent;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_SegmentBroken)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_SegmentBroken, meta=(AllowPrivateAccess=true))
     bool bSegmentBroken;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_SegmentActivatedProgress)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_SegmentActivatedProgress, meta=(AllowPrivateAccess=true))
     float SegmentActivatedProgress;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     EPipelineBuildState PipelineState;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<APipelineStart> PipelineStart;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MinValidLength;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxValidLength;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float TooSharpExtraLength;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float TooSteepExtraLength;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float BlockedSphereSize;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 BlockedExtraRaytraceRotationOffset;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float BlockedExtraRaytraces;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float BlockedExtraRaytraceDist;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float BlockedRayTraceSuccesses;
     
+public:
+    APipelineSegment();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+protected:
     UFUNCTION(BlueprintCallable)
     void UpdateSplineMesh(USplineMeshComponent* InMesh, float InProgress, bool InMoveEndCap);
     
@@ -211,9 +214,5 @@ protected:
     UFUNCTION(BlueprintCallable)
     void CallbackDroneUsed(int32 TimesUsed);
     
-public:
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    APipelineSegment();
 };
 

@@ -6,37 +6,38 @@
 #include "GameplayTagContainer.h"
 #include "StatusEffectEnemies.generated.h"
 
-class UStatusEffect;
 class UEnemyDescriptor;
 class APawn;
+class UStatusEffect;
 
 UCLASS(Abstract)
 class UStatusEffectEnemies : public URunningMissionBP {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSubclassOf<UStatusEffect>> StatusEffects;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagContainer AllowedFilter;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagQuery AllowedQuery;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ChanceToApply;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool OverrideReplacesDefault;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<UEnemyDescriptor*, TSubclassOf<UStatusEffect>> Overrides;
-    
-    UFUNCTION(BlueprintCallable)
-    void OnEnemySpawned(APawn* enemy, UEnemyDescriptor* descriptor);
     
 public:
     UStatusEffectEnemies();
+protected:
+    UFUNCTION(BlueprintCallable)
+    void OnEnemySpawned(APawn* enemy, UEnemyDescriptor* descriptor);
+    
 };
 

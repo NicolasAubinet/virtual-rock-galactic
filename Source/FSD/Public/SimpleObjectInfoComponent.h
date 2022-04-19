@@ -1,48 +1,49 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "SimpleObjectInfoData.h"
 #include "ObjectInfoComponent.h"
+#include "SimpleObjectInfoData.h"
 #include "SimpleObjectInfoComponent.generated.h"
 
-class UDialogDataAsset;
 class UTexture2D;
+class UDialogDataAsset;
 class UActorContextWidget;
 class USceneComponent;
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class USimpleObjectInfoComponent : public UObjectInfoComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText InGameName;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText InGameDescription;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDialogDataAsset* LookAtShout;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UDialogDataAsset* LookAtShoutOverride;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UTexture2D* Icon;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bIsPingableByLaserpointer;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UActorContextWidget> ContextWidgetClass;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<TWeakObjectPtr<USceneComponent>, FSimpleObjectInfoData> ComponentMap;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UActorContextWidget* ContextWidget;
     
 public:
+    USimpleObjectInfoComponent();
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void SetInGameName(const FString& GameName);
     
@@ -67,6 +68,5 @@ public:
     UFUNCTION(BlueprintCallable)
     void AddComponentObjectInfo(USceneComponent* TargetComponent, const FSimpleObjectInfoData& Data);
     
-    USimpleObjectInfoComponent();
 };
 

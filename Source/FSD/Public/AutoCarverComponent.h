@@ -2,37 +2,36 @@
 #include "CoreMinimal.h"
 #include "Components/StaticMeshComponent.h"
 #include "ECarveFilterType.h"
+#include "CarveDoneDelegateDelegate.h"
 #include "AutoCarverComponent.generated.h"
 
 class UTerrainMaterialBase;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FAutoCarverComponentOnCarveDoneEvent);
-
-UCLASS(EditInlineNew)
+UCLASS(EditInlineNew, meta=(BlueprintSpawnableComponent))
 class UAutoCarverComponent : public UStaticMeshComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UTerrainMaterialBase* TerrainMaterial;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float Frequency;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ExpensiveNoise;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MinDistanceMoved;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     ECarveFilterType Filter;
     
-    UPROPERTY(BlueprintAssignable)
-    FAutoCarverComponentOnCarveDoneEvent OnCarveDoneEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FCarveDoneDelegate OnCarveDoneEvent;
     
+    UAutoCarverComponent();
     UFUNCTION(BlueprintCallable)
     void ForceCarve();
     
-    UAutoCarverComponent();
 };
 

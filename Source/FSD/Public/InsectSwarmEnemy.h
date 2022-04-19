@@ -10,7 +10,7 @@ class AInsectSwarmEnemy : public AEnemyDeepPathfinderCharacter {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UParticleSystemComponent* SwarmParticles;
     
 public:

@@ -16,5 +16,6 @@ int32 UClipBasedItemAggregator::GetClipAmount() const {
 
 UClipBasedItemAggregator::UClipBasedItemAggregator() {
     this->ShowTotalAmount = true;
+    this->ShowClipAndTotalAsOne = false;
 }
 

@@ -9,6 +9,7 @@ UCLASS(Abstract, EditInlineNew)
 class UFSDMainHUDWidget : public UUserWidget {
     GENERATED_BODY()
 public:
+    UFSDMainHUDWidget();
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnRadarPointAdded(URadarPointComponent* Point);
@@ -17,6 +18,5 @@ public:
     UFUNCTION(BlueprintCallable)
     void AddRadarPoint(URadarPointComponent* Point);
     
-    UFSDMainHUDWidget();
 };
 

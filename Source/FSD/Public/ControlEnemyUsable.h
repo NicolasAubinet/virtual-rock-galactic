@@ -3,7 +3,7 @@
 #include "InstantUsable.h"
 #include "ControlEnemyUsable.generated.h"
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UControlEnemyUsable : public UInstantUsable {
     GENERATED_BODY()
 public:

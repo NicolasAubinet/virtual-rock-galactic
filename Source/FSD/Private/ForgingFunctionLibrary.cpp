@@ -3,28 +3,27 @@
 class UObject;
 class USchematic;
 
-USchematic* UForgingFunctionLibrary::GiveForginMasteryReward(UObject* WorldContextObject) {
+USchematic* UForgingFunctionLibrary::PickForgingMasteryDefaultReward(UObject* WorldContextObject, ESchematicType InType) {
     return NULL;
 }
 
-bool UForgingFunctionLibrary::GiveForgingXP(UObject* WorldContextObject) {
-    return false;
-}
-
-TArray<USchematic*> UForgingFunctionLibrary::GetOwnedSchematicsSorted(UObject* WorldContextObject, bool SmallestFirst, const FForgingFunctionLibraryIsLargerThan& IsLargerThan) {
-    return TArray<USchematic*>();
+FForgingResult UForgingFunctionLibrary::GiveForgingXP(UObject* WorldContextObject) {
+    return FForgingResult{};
 }
 
 TArray<USchematic*> UForgingFunctionLibrary::GetOwnedSchematics(UObject* WorldContextObject) {
     return TArray<USchematic*>();
 }
 
-ESchematicType UForgingFunctionLibrary::GetNextForgingMasterRewardType(UObject* WorldContextObject) {
+void UForgingFunctionLibrary::GetForgingPendingMasteryRewardNewest(UObject* WorldContextObject, bool& OutSuccess, FForgingPendingReward& OutReward) {
+}
+
+ESchematicType UForgingFunctionLibrary::GetForgingMasteryRewardType(UObject* WorldContextObject, int32 Level, bool ReturnDefaultIfUnavailable) {
     return ESchematicType::Overclock;
 }
 
-int32 UForgingFunctionLibrary::GetForgingXP(UObject* WorldContextObject) {
-    return 0;
+ESchematicType UForgingFunctionLibrary::GetForgingMasteryRewardDefaultType(ESchematicType InType) {
+    return ESchematicType::Overclock;
 }
 
 float UForgingFunctionLibrary::GetForgingLevelProgress(UObject* WorldContextObject) {
@@ -35,16 +34,15 @@ int32 UForgingFunctionLibrary::GetForgingLevel(UObject* WorldContextObject) {
     return 0;
 }
 
+bool UForgingFunctionLibrary::GetForgingHasPendingMasteryRewards(UObject* WorldContextObject) {
+    return false;
+}
+
 TArray<USchematic*> UForgingFunctionLibrary::GetForgedSchematics(UObject* WorldContextObject) {
     return TArray<USchematic*>();
 }
 
-TArray<USchematic*> UForgingFunctionLibrary::GetAllSchematicsSorted(UObject* WorldContextObject, bool SmallestFirst, const FForgingFunctionLibraryIsLargerThan& IsLargerThan) {
-    return TArray<USchematic*>();
-}
-
-TArray<USchematic*> UForgingFunctionLibrary::GetAllSchematics(UObject* WorldContextObject) {
-    return TArray<USchematic*>();
+void UForgingFunctionLibrary::ClaimForgingPendingMasteryReward(UObject* WorldContextObject, int32 Level, USchematic* Reward) {
 }
 
 UForgingFunctionLibrary::UForgingFunctionLibrary() {

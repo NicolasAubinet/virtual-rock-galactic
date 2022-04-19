@@ -1,128 +1,109 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "AFlyingBug.h"
+#include "GrabSuccessDelegate.h"
 #include "EGrabberState.h"
 #include "Engine/EngineTypes.h"
 #include "FlyingLifter.generated.h"
 
+class UInDangerComponent;
 class UCapsuleComponent;
+class UPointLightComponent;
 class UGrabberComponent;
 class UAudioComponent;
 class USoundBase;
-class UPrimitiveComponent;
-class UInDangerComponent;
 class UAnimSequenceBase;
-class UPointLightComponent;
 class AActor;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFlyingLifterOnGrabSuccess);
+class UPrimitiveComponent;
 
 UCLASS(Abstract)
 class AFlyingLifter : public AAFlyingBug {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere)
-    UGrabberComponent* GrabberComp;
-    
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere)
-    UCapsuleComponent* GrabCapsule;
-    
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere)
-    UAudioComponent* GrabStart;
-    
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere)
-    UAudioComponent* GrabEnd;
-    
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere)
-    UAudioComponent* GrabbedIdleLoop;
-    
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere)
-    UInDangerComponent* InDanger;
-    
-    UPROPERTY(Export, VisibleAnywhere)
-    UAudioComponent* ScreamComponent;
-    
-    UPROPERTY(BlueprintAssignable)
-    FFlyingLifterOnGrabSuccess OnGrabSuccess;
-    
-protected:
-    UPROPERTY(EditAnywhere)
-    float PreventGrabAfterSpawn;
-    
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_ShouldScream)
-    bool ShouldScream;
-    
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_State)
-    EGrabberState GrabberState;
-    
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
-    float WanderingSpeed;
-    
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
-    float WanderingAcceleration;
-    
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
-    float ChaseSpeed;
-    
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
-    float ChaseAcceleration;
-    
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
-    float CarrySpeed;
-    
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
-    float CarryAcceleration;
-    
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
-    float FleeSpeed;
-    
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
-    float FleeAcceleration;
-    
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
-    float CarryCooldown;
-    
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
-    USoundBase* ScreamSound;
-    
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
-    USoundBase* FleeSound;
-    
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
-    UAnimSequenceBase* FleeAnimation;
-    
-    UPROPERTY(BlueprintReadOnly, Export, Transient)
-    UCapsuleComponent* GrabberCollider;
-    
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
-    bool ParalyzeOnGrab;
-    
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
-    float ExtraUpForce;
-    
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
-    float ScreamDistance;
-    
-private:
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UPointLightComponent* GrabLight;
     
-protected:
-    UFUNCTION(BlueprintCallable)
-    void SetLight(UPointLightComponent* ALight);
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UGrabberComponent* GrabberComp;
     
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UCapsuleComponent* GrabCapsule;
+    
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UAudioComponent* GrabbedIdleLoop;
+    
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UInDangerComponent* InDanger;
+    
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UAudioComponent* ScreamComponent;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FGrabSuccess OnGrabSuccess;
+    
+protected:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float PreventGrabAfterSpawn;
+    
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_State, meta=(AllowPrivateAccess=true))
+    EGrabberState GrabberState;
+    
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
+    float WanderingSpeed;
+    
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
+    float WanderingAcceleration;
+    
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
+    float ChaseSpeed;
+    
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
+    float ChaseAcceleration;
+    
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
+    float CarrySpeed;
+    
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
+    float CarryAcceleration;
+    
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
+    float FleeSpeed;
+    
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
+    float FleeAcceleration;
+    
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
+    float CarryCooldown;
+    
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
+    USoundBase* FleeSound;
+    
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
+    UAnimSequenceBase* FleeAnimation;
+    
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
+    bool ParalyzeOnGrab;
+    
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
+    float ExtraUpForce;
+    
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
+    float ScreamDistance;
+    
+public:
+    AFlyingLifter();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+protected:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     bool SelectAnotherTarget();
     
 public:
     UFUNCTION(BlueprintCallable)
-    void OnStateBroke(AActor* aReleasedPlayer);
+    void OnStateBroke(AActor* aReleasedPlayer, bool fullGrabElapsed);
     
     UFUNCTION(BlueprintCallable)
-    void OnRep_State();
-    
-    UFUNCTION(BlueprintCallable)
-    void OnRep_ShouldScream();
+    void OnRep_State(EGrabberState oldState);
     
     UFUNCTION(BlueprintCallable)
     void OnInDanger();
@@ -144,8 +125,5 @@ public:
     UFUNCTION(BlueprintCallable)
     void ChangeState(EGrabberState aGrabberState);
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    AFlyingLifter();
 };
 

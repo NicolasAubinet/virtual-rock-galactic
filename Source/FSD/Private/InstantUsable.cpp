@@ -15,7 +15,6 @@ void UInstantUsable::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLi
 
 UInstantUsable::UInstantUsable() {
     this->bShowUsingUI = true;
-    this->AllowUseWhileCarrying = true;
     this->AudioCompletedUse = NULL;
     this->Usable = false;
     this->TurnOffAfterUse = false;

@@ -7,7 +7,7 @@ UCLASS()
 class UOrDLC : public UDLCBase {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UDLCBase*> DLCs;
     
     UOrDLC();

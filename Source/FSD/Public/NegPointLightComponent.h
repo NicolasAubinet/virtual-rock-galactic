@@ -3,7 +3,7 @@
 #include "Components/PointLightComponent.h"
 #include "NegPointLightComponent.generated.h"
 
-UCLASS(EditInlineNew)
+UCLASS(EditInlineNew, meta=(BlueprintSpawnableComponent))
 class UNegPointLightComponent : public UPointLightComponent {
     GENERATED_BODY()
 public:

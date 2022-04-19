@@ -6,7 +6,7 @@ USTRUCT()
 struct FExampleStruct {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     float Field;
     
     FSD_API FExampleStruct();

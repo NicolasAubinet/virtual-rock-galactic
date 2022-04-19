@@ -1,11 +1,14 @@
 #include "FSDPlayerState.h"
 #include "Net/UnrealNetwork.h"
 #include "Templates/SubclassOf.h"
+#include "PlayerStatsComponent.h"
+#include "PlayerRejoinState.h"
+#include "SaveGameStateComponent.h"
 
 class UPlayerCharacterID;
-class UPlayerResourceComponent;
 class APlayerCharacter;
 class AFSDPlayerController;
+class UPlayerResourceComponent;
 
 void AFSDPlayerState::SetSelectedCharacterID(UPlayerCharacterID* characterID) {
 }
@@ -21,20 +24,11 @@ void AFSDPlayerState::SetCanOnlySpectate(bool canOnlySpectate) {
 
 void AFSDPlayerState::ServerSetSelectedCharacter_Implementation(TSubclassOf<APlayerCharacter> NewCharacter) {
 }
-bool AFSDPlayerState::ServerSetSelectedCharacter_Validate(TSubclassOf<APlayerCharacter> NewCharacter) {
-    return true;
-}
 
 void AFSDPlayerState::Server_SetSupplyStatus_Implementation(uint8 StatusHealth, uint8 StatusAmmo) {
 }
-bool AFSDPlayerState::Server_SetSupplyStatus_Validate(uint8 StatusHealth, uint8 StatusAmmo) {
-    return true;
-}
 
 void AFSDPlayerState::Server_SetGameOwnerStatus_Implementation(int32 NewGameOwnerStatus) {
-}
-bool AFSDPlayerState::Server_SetGameOwnerStatus_Validate(int32 NewGameOwnerStatus) {
-    return true;
 }
 
 void AFSDPlayerState::OnRep_SupplyHealthStatus() {
@@ -160,6 +154,9 @@ AFSDPlayerState::AFSDPlayerState() {
     this->ShouldCopyProperties = false;
     this->gameOwnerStatus = 0;
     this->IsOnSpaceRig = false;
+    this->PlayerStatsComponent = CreateDefaultSubobject<UPlayerStatsComponent>(TEXT("PlayerStatsComponent"));
+    this->RejoinState = CreateDefaultSubobject<UPlayerRejoinState>(TEXT("RejoinState"));
+    this->SaveGameStateComponent = CreateDefaultSubobject<USaveGameStateComponent>(TEXT("SaveGameStateComponent"));
     this->PlayerCharacter = NULL;
     this->IsInMission = false;
     this->IsTalking = false;

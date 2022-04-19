@@ -7,10 +7,10 @@ USTRUCT(BlueprintType)
 struct FActiveCampaignItem {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FGuid CampaignID;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     int32 Progress;
     
     FSD_API FActiveCampaignItem();

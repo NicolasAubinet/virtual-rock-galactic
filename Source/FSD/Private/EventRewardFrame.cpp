@@ -1,5 +1,6 @@
 #include "EventRewardFrame.h"
 #include "Net/UnrealNetwork.h"
+#include "SpecialEventUsableComponent.h"
 
 class AEventRewardDispenser;
 
@@ -27,6 +28,7 @@ void AEventRewardFrame::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Ou
 }
 
 AEventRewardFrame::AEventRewardFrame() {
+    this->EventUsable = CreateDefaultSubobject<USpecialEventUsableComponent>(TEXT("EventUsable"));
     this->keyInserted = false;
 }
 

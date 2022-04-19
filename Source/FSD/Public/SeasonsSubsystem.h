@@ -1,64 +1,65 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "OnTokensChangedSignatureDelegate.h"
 #include "Subsystems/GameInstanceSubsystem.h"
+#include "UObject/NoExportTypes.h"
+#include "ChallengeInfo.h"
+#include "OnXPChangedSignatureDelegate.h"
+#include "OnVanityTreeResetDelegate.h"
 #include "SeasonMissionResult.h"
+#include "OnScripChallengeUpdatedDelegate.h"
+#include "ClaimStatusChangedDelegate.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "SeasonLevel.h"
-#include "ChallengeInfo.h"
 #include "UObject/NoExportTypes.h"
 #include "EPickaxePartLocation.h"
 #include "SeasonsSubsystem.generated.h"
 
-class UMissionStat;
-class UObject;
-class UDataAsset;
 class UItemSkin;
-class AFSDPlayerState;
-class UVanityItem;
-class USeasonChallenge;
-class UTextureRenderTarget2D;
 class UPlayerCharacterID;
+class USeasonChallenge;
+class UObject;
+class AFSDPlayerController;
+class UMissionStat;
+class AFSDPlayerState;
+class UDataAsset;
+class UTextureRenderTarget2D;
+class UVanityItem;
 class UPickaxePart;
 class USeasonEventData;
-class AFSDPlayerController;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FSeasonsSubsystemOnTokensChanged, int32, NumberOfTokens, int32, Change);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FSeasonsSubsystemOnXPChanged);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FSeasonsSubsystemOnVanityTreeReset);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FSeasonsSubsystemOnScripChallengeUpdated);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSeasonsSubsystemOnClaimStatusChanged, bool, AllClaimed);
 
 UCLASS(BlueprintType)
 class USeasonsSubsystem : public UGameInstanceSubsystem {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FSeasonsSubsystemOnXPChanged OnXPChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnXPChangedSignature OnXPChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FSeasonsSubsystemOnTokensChanged OnTokensChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnTokensChangedSignature OnTokensChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FSeasonsSubsystemOnVanityTreeReset OnVanityTreeReset;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnVanityTreeReset OnVanityTreeReset;
     
-    UPROPERTY(BlueprintAssignable)
-    FSeasonsSubsystemOnScripChallengeUpdated OnScripChallengeUpdated;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnScripChallengeUpdated OnScripChallengeUpdated;
     
-    UPROPERTY(BlueprintAssignable)
-    FSeasonsSubsystemOnClaimStatusChanged OnClaimStatusChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FClaimStatusChanged OnClaimStatusChanged;
     
 protected:
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     int32 ForceSeasonEventIndex;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FSeasonMissionResult TempSeasonMissionResult;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FSeasonMissionResult LatestMissionSeasonResult;
     
 public:
+    USeasonsSubsystem();
     UFUNCTION(BlueprintCallable)
     FTimespan TimeToNewChallenge();
     
@@ -67,14 +68,14 @@ public:
     
 protected:
     UFUNCTION(BlueprintCallable)
-    void OnStatChanged(UMissionStat* Stat, float Value);
+    void OnStatChanged(UObject* WorldContext, UMissionStat* Stat, float Value);
     
     UFUNCTION(BlueprintCallable)
-    void OnScripChallengeCompleted(UMissionStat* Stat, float Value);
+    void OnScripChallengeCompleted(UObject* WorldContext, UMissionStat* Stat, float Value);
     
 public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    void IsRewardClaimed(int32 Level, bool& isNormalClaimed, bool& isSpecialClaimed);
+    void IsRewardClaimed(int32 Level, bool& IsNormalClaimed, bool& IsSpecialClaimed);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsNodeUnlocked(int32 TreeOfVanityNodeID);
@@ -107,10 +108,13 @@ public:
     FSeasonMissionResult GetSeasonMissionResult();
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    void GetSeasonLevelFromXP(int32 XP, int32& Level, float& currentLevelPercent, int32& currentLevelXP, int32& levelXPTotal);
+    void GetSeasonLevelFromXP(int32 XP, int32& Level, float& currentLevelPercent, int32& currentLevelXP, int32& LevelXPTotal);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    void GetSeasonLevel(int32& Level, float& currentLevelPercent, int32& currentLevelXP, int32& levelXPTotal);
+    void GetSeasonLevel(int32& Level, float& currentLevelPercent, int32& currentLevelXP, int32& LevelXPTotal);
+    
+    UFUNCTION(BlueprintCallable)
+    bool GetSeasonExpiryDate(FDateTime& ExpiryDate);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     void GetSeasonBought(bool& isBought);
@@ -134,7 +138,7 @@ public:
     FSeasonLevel GetLevelReward(int32 Level);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    void GetLevelProgress(int32 Level, float& levelPercent, int32& levelXP, int32& levelXPTotal);
+    void GetLevelProgress(int32 Level, float& levelPercent);
     
     UFUNCTION(BlueprintCallable)
     TArray<UDataAsset*> GetAssetReferences(int32 challengeIndex, USeasonChallenge*& outChallenge);
@@ -178,6 +182,5 @@ public:
     UFUNCTION(BlueprintCallable)
     bool BuyTreeNode(UObject* WorldContextObject, AFSDPlayerController* Player, int32 TreeOfVanityNodeID);
     
-    USeasonsSubsystem();
 };
 

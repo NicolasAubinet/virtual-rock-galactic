@@ -7,10 +7,10 @@ USTRUCT(BlueprintType)
 struct FPerkEquipEntry {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FGuid characterID;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TArray<FGuid> PerkIDs;
     
     FSD_API FPerkEquipEntry();

@@ -10,7 +10,7 @@ struct FDefaultPickaxeParts {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<EPickaxePartLocation, UPickaxePart*> Parts;
     
 public:

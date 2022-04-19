@@ -1,44 +1,53 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "WeaponFireComponent.h"
-#include "UObject/NoExportTypes.h"
 #include "Engine/NetSerialization.h"
+#include "UObject/NoExportTypes.h"
 #include "ProjectileLauncherBaseComponent.generated.h"
 
 class AProjectileBase;
 class UItemUpgrade;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FProjectileLauncherBaseComponentOnProjectileSpawned, AProjectileBase*, Projectile);
-
-UCLASS(Abstract)
+UCLASS(Abstract, meta=(BlueprintSpawnableComponent))
 class UProjectileLauncherBaseComponent : public UWeaponFireComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FProjectileSpawned, AProjectileBase*, Projectile);
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool IgnoreCollisionWithSelf;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool UseProjectileUpgrades;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool UseSpread;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float VerticalSpread;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float HorizontalSpread;
     
-    UPROPERTY(BlueprintAssignable)
-    FProjectileLauncherBaseComponentOnProjectileSpawned OnProjectileSpawned;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FProjectileSpawned OnProjectileSpawned;
     
 protected:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<UItemUpgrade*> ProjectileUpgrades;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ArcStartAngle;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool TransferCharacterVelocityToProjectile;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool CameraToMuzzleFireCheck;
     
+public:
+    UProjectileLauncherBaseComponent();
+protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_StopFire();
     
@@ -48,7 +57,5 @@ protected:
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
     void All_ShowHit();
     
-public:
-    UProjectileLauncherBaseComponent();
 };
 

@@ -2,9 +2,9 @@
 #include "CoreMinimal.h"
 #include "EItemSkinType.generated.h"
 
-UENUM(BlueprintType)
+UENUM()
 enum class EItemSkinType : uint8 {
-    Color,
-    Mesh,
+    PaintJob,
+    Framework,
 };
 

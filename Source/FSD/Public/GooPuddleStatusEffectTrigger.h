@@ -10,10 +10,10 @@ USTRUCT(BlueprintType)
 struct FGooPuddleStatusEffectTrigger {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     TArray<UDamageClass*> Trigger;
     
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     TSubclassOf<UStatusEffect> NewStatusEffect;
     
     FSD_API FGooPuddleStatusEffectTrigger();

@@ -1,8 +1,8 @@
 #include "BeltDrivenWeaponUpgrade.h"
 #include "Templates/SubclassOf.h"
 
-class AFSDPlayerState;
 class AItem;
+class AFSDPlayerState;
 
 FUpgradeValues UBeltDrivenWeaponUpgrade::GetUpgradedValue(TSubclassOf<AItem> Item, AFSDPlayerState* Player, EBeltDrivenWeaponUpgrade NewUpgradeType) {
     return FUpgradeValues{};

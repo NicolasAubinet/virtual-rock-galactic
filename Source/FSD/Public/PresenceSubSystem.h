@@ -10,10 +10,10 @@ UCLASS(BlueprintType)
 class UPresenceSubSystem : public UGameInstanceSubsystem {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     UDiscordWrapper* DiscordWI;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     UCommunityGoalWrapper* CommunityWI;
     
     UPresenceSubSystem();

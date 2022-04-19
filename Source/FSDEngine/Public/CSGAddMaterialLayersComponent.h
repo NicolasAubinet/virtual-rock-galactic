@@ -4,11 +4,11 @@
 #include "CSGAddMaterialLayersProperties.h"
 #include "CSGAddMaterialLayersComponent.generated.h"
 
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UCSGAddMaterialLayersComponent : public UCSGBaseComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FCSGAddMaterialLayersProperties Properties;
     
     UCSGAddMaterialLayersComponent();

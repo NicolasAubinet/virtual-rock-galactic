@@ -10,6 +10,6 @@ FUpgradeValues UZiplineGunUpgrade::GetUpgradedValue(AFSDPlayerState* Player, TSu
 
 UZiplineGunUpgrade::UZiplineGunUpgrade() {
     this->upgradeType = EZiplineGunUpgrades::MaxAngle;
-    this->projectileClass = NULL;
+    this->ProjectileClass = NULL;
 }
 

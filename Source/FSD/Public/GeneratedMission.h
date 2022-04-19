@@ -3,74 +3,77 @@
 #include "Templates/SubclassOf.h"
 #include "UObject/Object.h"
 #include "GMMutatorItem.h"
-#include "EMissionStructure.h"
 #include "ObjectiveMissionIcon.h"
+#include "EMissionStructure.h"
 #include "GeneratedMission.generated.h"
 
-class UMutator;
-class UGeneratedMission;
+class UMissionMutator;
 class UBiome;
 class UMissionTemplate;
 class UObjective;
 class UMissionWarning;
-class UMissionMutator;
+class ULevelSequence;
+class UMutator;
+class UMissionDNA;
 class UMissionComplexity;
 class UMissionDuration;
-class UMissionDNA;
-class ULevelSequence;
 class AProceduralSetup;
 class AFSDPlayerController;
+class UGeneratedMission;
 
 UCLASS(Blueprintable)
-class UGeneratedMission : public UObject {
+class FSD_API UGeneratedMission : public UObject {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UBiome* Biome;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     int32 Seed;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     int32 GlobalSeed;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UMissionTemplate* Template;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FText MissionName;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TSubclassOf<UObjective> PrimaryObjective;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TSubclassOf<UObjective> SecondaryObjective;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TMap<TSubclassOf<UMutator>, FGMMutatorItem> Mutators;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<UMissionWarning*> MissionWarnings;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UMissionMutator* MissionMutator;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UMissionComplexity* ComplexityLimit;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UMissionDuration* DurationLimit;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TSubclassOf<UMissionDNA> MissionDNA;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     EMissionStructure MissionStructure;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftObjectPtr<ULevelSequence> LoaderLevelSequence;
     
+public:
+    UGeneratedMission();
+protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void Recieve_SetupPLS(AProceduralSetup* pls);
     
@@ -105,6 +108,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool AreMissionsEqual(UGeneratedMission* Other) const;
     
-    UGeneratedMission();
 };
 

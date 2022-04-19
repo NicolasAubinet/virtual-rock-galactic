@@ -1,6 +1,6 @@
 #include "BoscoProjectileAbillity.h"
 
 UBoscoProjectileAbillity::UBoscoProjectileAbillity() {
-    this->projectileClass = NULL;
+    this->ProjectileClass = NULL;
 }
 

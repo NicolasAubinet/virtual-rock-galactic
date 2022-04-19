@@ -10,10 +10,10 @@ USTRUCT(BlueprintType)
 struct FPromotionRewardsRank {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FClaimableRewardEntry> RewardsAllClasses;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<UPlayerCharacterID*, FClaimableRewardArray> RewardsCharacterSpecific;
     
     FSD_API FPromotionRewardsRank();

@@ -6,17 +6,21 @@
 
 class UObject;
 class AActor;
+class USeamlessTravelEventKey;
 
 UCLASS(BlueprintType)
 class UGameModeFunctionLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    UGameModeFunctionLibrary();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static FTransform FindRandomEscapePodLocation(UObject* WorldContextObject);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static FTransform FindEscapePodLocationAtDistance(UObject* WorldContextObject, float Distance, float aboveDistanceBias, AActor* optionalFrom);
     
-    UGameModeFunctionLibrary();
+    UFUNCTION(BlueprintCallable)
+    static void AddSeamlessTravelEventKey(UObject* WorldContextObject, USeamlessTravelEventKey* Key);
+    
 };
 

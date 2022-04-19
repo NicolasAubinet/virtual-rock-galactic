@@ -1,33 +1,36 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "BaseArmorDamageComponent.h"
+#include "AmorPartDestroyedDelegateDelegate.h"
+#include "ArmorPartDamagedDelegateDelegate.h"
 #include "ArmorHealthItem.h"
+#include "ArmorDamageInfo.h"
 #include "ArmorHealthDamageComponent.generated.h"
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FArmorHealthDamageComponentOnArmorPartDestroyedEvent, FName, Name);
-UDELEGATE(BlueprintAuthorityOnly, BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FArmorHealthDamageComponentOnArmorPartDamagedEvent, FName, BoneName, float, Damage);
-
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UArmorHealthDamageComponent : public UBaseArmorDamageComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FArmorHealthDamageComponentOnArmorPartDestroyedEvent OnArmorPartDestroyedEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FAmorPartDestroyedDelegate OnArmorPartDestroyedEvent;
     
-    UPROPERTY(BlueprintAssignable)
-    FArmorHealthDamageComponentOnArmorPartDamagedEvent OnArmorPartDamagedEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FArmorPartDamagedDelegate OnArmorPartDamagedEvent;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<FName, FArmorHealthItem> PhysBoneToArmor;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_ArmorDamageIndex)
-    uint32 ArmorDamageIndex;
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_ArmorDamageInfo, meta=(AllowPrivateAccess=true))
+    FArmorDamageInfo ArmorDamageInfo;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool AffectedByAmorBreak;
     
 public:
+    UArmorHealthDamageComponent();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintCallable)
     bool SetHealthOnBodypartItem(FName BoneName, float newHealth);
     
@@ -38,12 +41,8 @@ public:
     void RegrowAllArmor(float baseHealth);
     
 protected:
-    UFUNCTION()
-    void OnRep_ArmorDamageIndex(uint32 OldValue);
+    UFUNCTION(BlueprintCallable)
+    void OnRep_ArmorDamageInfo(FArmorDamageInfo OldValue);
     
-public:
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    UArmorHealthDamageComponent();
 };
 

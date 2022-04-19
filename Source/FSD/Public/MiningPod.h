@@ -2,101 +2,104 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "GameFramework/Actor.h"
-#include "MiningPodDialogs.h"
-#include "UObject/NoExportTypes.h"
-#include "EMiningPodMission.h"
 #include "GameplayTagAssetInterface.h"
 #include "GameplayTagContainer.h"
 #include "GameplayTagContainer.h"
+#include "UObject/NoExportTypes.h"
+#include "MiningPodDialogs.h"
+#include "EMiningPodMission.h"
 #include "EMiningPodState.h"
 #include "EMiningPodRampState.h"
 #include "UObject/NoExportTypes.h"
 #include "MiningPod.generated.h"
 
-class UAutoCarverComponent;
-class UCurveFloat;
-class UBoxComponent;
 class UOutlineComponent;
+class UCurveFloat;
+class UAutoCarverComponent;
+class UBoxComponent;
 class UObjectivesManager;
+class AMolly;
 class AMiningPod;
 class UObject;
-class AMolly;
 
 UCLASS()
-class AMiningPod : public AActor, public IGameplayTagAssetInterface {
+class FSD_API AMiningPod : public AActor, public IGameplayTagAssetInterface {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DropHeight;
     
-    UPROPERTY(BlueprintReadOnly, EditInstanceOnly, Replicated)
+    UPROPERTY(BlueprintReadWrite, EditInstanceOnly, Replicated, meta=(AllowPrivateAccess=true))
     FVector TargetLocation;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UAutoCarverComponent* AutoCarver;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UCurveFloat* DropCurve;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UCurveFloat* DepartCurve;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UCurveFloat* CarverDropCurve;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float CarverRotationSpeed;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FVector CarverScale;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagContainer GameplayTags;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UBoxComponent* DwarfCheckerBox;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DepartureTime;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText DepartueCountdownName;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FMiningPodDialogs Dialogs;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EMiningPodMission MissionType;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool HasLanded;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UOutlineComponent* PodOutline;
     
-    UPROPERTY(BlueprintReadOnly, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     FVector StartLocation;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_State)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_State, meta=(AllowPrivateAccess=true))
     EMiningPodState State;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_RampState)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_RampState, meta=(AllowPrivateAccess=true))
     EMiningPodRampState rampState;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float TargetDropTime;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float TargetDepartureTime;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float TimeToDrop;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UObjectivesManager* ObjectivesManager;
     
 public:
+    AMiningPod();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintCallable)
     static AMiningPod* SpawnPodAtLocation(UObject* WorldContextObject, TSubclassOf<AMiningPod> podClass, const FTransform& Transform);
     
@@ -199,9 +202,6 @@ public:
     UFUNCTION(BlueprintCallable)
     static FVector AdjustLandingLocationToGround(UObject* WorldContextObjet, const FVector& initialLocation);
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    AMiningPod();
     
     // Fix for true pure virtual functions not being implemented
     UFUNCTION(BlueprintCallable)

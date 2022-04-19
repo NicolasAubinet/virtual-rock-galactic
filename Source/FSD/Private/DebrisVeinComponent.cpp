@@ -2,7 +2,7 @@
 
 UDebrisVeinComponent::UDebrisVeinComponent() {
     this->Material = NULL;
-    this->carverType = EDebrisCarvedType::Large;
+    this->CarverType = EDebrisCarvedType::Large;
     this->VeinCreator = NULL;
 }
 

@@ -6,7 +6,7 @@ USTRUCT()
 struct FLookupSessionRequest {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     FString SessionKey;
     
     FSD_API FLookupSessionRequest();

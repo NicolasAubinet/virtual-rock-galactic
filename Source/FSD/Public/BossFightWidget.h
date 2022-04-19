@@ -10,7 +10,7 @@ UCLASS(Abstract, EditInlineNew)
 class UBossFightWidget : public UUserWidget {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TScriptInterface<IBossFightInterface> BossFight;
     
     UBossFightWidget();

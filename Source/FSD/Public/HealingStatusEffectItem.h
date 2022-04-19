@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "StatusEffectItem.h"
 #include "RandRange.h"
+#include "StatusEffectItem.h"
 #include "HealingStatusEffectItem.generated.h"
 
 class UPawnAffliction;
@@ -11,19 +11,19 @@ class UHealingStatusEffectItem : public UStatusEffectItem {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool HealPercentage;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float NoDamageTimeRequired;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UPawnAffliction* PawnAffliction;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FRandRange Amount;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool IgnoreCanTakeDamage;
     
 public:

@@ -3,90 +3,83 @@
 #include "SavablePrimaryDataAsset.h"
 #include "Craftable.h"
 #include "RefundableInterface.h"
+#include "Aquisitionable.h"
 #include "EVanitySlot.h"
 #include "CraftingCost.h"
+#include "VanityEventSource.h"
 #include "VanityItem.generated.h"
 
-class UDLCBase;
-class UTexture2D;
-class UVanityItem;
 class UIconGenerationCameraKey;
+class UVanityEventSourceDataAsset;
+class UItemAquisitionBase;
+class UDLCBase;
 class UResourceData;
 class UPlayerCharacterID;
 class UObject;
-class AFSDPlayerState;
 class UTexture;
+class AFSDPlayerState;
 class APlayerCharacter;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FVanityItemOnUnlockFlagChanged, UVanityItem*, Item, bool, IsUnlockFlagged);
-
 UCLASS(BlueprintType, EditInlineNew)
-class FSD_API UVanityItem : public USavablePrimaryDataAsset, public ICraftable, public IRefundableInterface {
+class FSD_API UVanityItem : public USavablePrimaryDataAsset, public ICraftable, public IRefundableInterface, public IAquisitionable {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FVanityItemOnUnlockFlagChanged OnUnlockFlagChanged;
-    
 protected:
-    UPROPERTY(EditAnywhere)
-    int32 SortingPriority;
-    
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText ItemName;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText ItemDescription;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FString NotesInternal;
     
-    UPROPERTY(EditAnywhere)
-    UTexture2D* Icon;
-    
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool IsPartOfRandomization;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
+    UItemAquisitionBase* Aquisition;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UVanityEventSourceDataAsset* EventSourceAsset;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UIconGenerationCameraKey* IconGenerationCameraKey;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(AdvancedDisplay, BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UDLCBase* RequiredDLC;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(AdvancedDisplay, BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UDLCBase* CraftingRestrictionDLC;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
-    bool bUnLockedFlag;
-    
-    UPROPERTY(VisibleAnywhere)
+    UPROPERTY(AdvancedDisplay, BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     int32 CraftingPlayerRankRequired;
     
-    UPROPERTY(VisibleAnywhere)
+    UPROPERTY(AdvancedDisplay, BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     TMap<UResourceData*, float> CraftingCost;
     
-    UPROPERTY(VisibleAnywhere)
+    UPROPERTY(AdvancedDisplay, BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     int32 CraftingCreditsCost;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSet<UPlayerCharacterID*> RestrictToCharacters;
     
 public:
+    UVanityItem();
     UFUNCTION(BlueprintCallable)
     bool RemoveFromOwned(UObject* WorldContext);
     
     UFUNCTION(BlueprintCallable, BlueprintPure=false)
     void PreviewItem(AFSDPlayerState* PlayerState, bool Show) const;
     
-protected:
-    UFUNCTION(BlueprintCallable)
-    void MarkAsUnLocked();
-    
-public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsOwned(UObject* WorldContextObject, UPlayerCharacterID* characterID) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsEquipped(UObject* WorldContextObject, UPlayerCharacterID* characterID) const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool HasEventSource() const;
     
     UFUNCTION(BlueprintCallable)
     void GiftItem(UObject* WorldContextObject, UPlayerCharacterID* characterID);
@@ -104,7 +97,13 @@ public:
     bool GetIsUnLockedFromStart() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    UTexture* GetIcon(UObject* WorldContextObject) const;
+    UTexture* GetIcon() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    FCraftingCost GetFashioniteCost() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    FVanityEventSource GetEventSource() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetCraftingCreditsCost() const;
@@ -113,19 +112,17 @@ public:
     FText GetCraftableName() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    UTexture2D* GetCraftableIcon() const;
-    
-    UFUNCTION(BlueprintCallable, BlueprintPure)
     FText GetCraftableDescription() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure=false)
+    void CraftItemWithFashionite(UObject* WorldContextObject, UPlayerCharacterID* characterID) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure=false)
     void CraftItem(UObject* WorldContextObject, UPlayerCharacterID* characterID) const;
     
-protected:
-    UFUNCTION(BlueprintCallable)
-    void ClearUnLockedMark();
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool CanCraftWithFashionite(UObject* WorldContextObject) const;
     
-public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool CanCraft(UObject* WorldContextObject) const;
     
@@ -135,7 +132,6 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure=false)
     void ApplyItem(APlayerCharacter* Player, bool isPermanent) const;
     
-    UVanityItem();
     
     // Fix for true pure virtual functions not being implemented
 };

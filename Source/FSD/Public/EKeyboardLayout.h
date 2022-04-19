@@ -3,7 +3,7 @@
 #include "EKeyboardLayout.generated.h"
 
 UENUM()
-enum class EKeyboardLayout {
+enum class EKeyboardLayout : uint8 {
     QWERTY,
     AZERTY,
     QWERTZ,

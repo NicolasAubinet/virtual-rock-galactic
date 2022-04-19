@@ -5,51 +5,54 @@
 #include "UObject/NoExportTypes.h"
 #include "RockEnemiesEvent.generated.h"
 
-class USkeletalMeshComponent;
-class UParticleSystem;
-class AProjectile;
+class UHealthComponentBase;
 class UEnemyGroupDescriptor;
 class APawn;
-class UHealthComponentBase;
+class AProjectile;
+class USkeletalMeshComponent;
+class UParticleSystem;
 
 UCLASS()
 class ARockEnemiesEvent : public AGameEvent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<AProjectile> PowerUpClass;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float PowerUpGenerationTime;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<int32> KillAmountPerPlayer;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<int32> MaxEnemyCountPerPlayer;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<APawn*> SpawnedRockEnemies;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* Mesh;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UParticleSystem* MuzzleEffect;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 PowerUpsPerGeneration;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 GruntPointsAward;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 TankPointsAward;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UEnemyGroupDescriptor* RockEnemies;
     
+public:
+    ARockEnemiesEvent();
+protected:
     UFUNCTION(BlueprintCallable)
     void StopPowerupGeneration();
     
@@ -76,7 +79,5 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void EnemySpawnedAfterComplete(APawn* spawnedEnemy);
     
-public:
-    ARockEnemiesEvent();
 };
 

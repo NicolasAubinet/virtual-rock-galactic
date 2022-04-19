@@ -2,27 +2,28 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
-#include "DecalData.h"
 #include "ScaledEffect.h"
 #include "UObject/NoExportTypes.h"
+#include "DecalData.h"
 #include "FSDGameplayStatics.generated.h"
 
-class UFXSystemComponent;
 class UObject;
 class UDecalComponent;
-class UMaterialInterface;
+class UFXSystemComponent;
 class AActor;
+class UMaterialInterface;
 class UAudioComponent;
 
 UCLASS(BlueprintType)
 class UFSDGameplayStatics : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    UFSDGameplayStatics();
     UFUNCTION(BlueprintCallable)
     static UFXSystemComponent* SpawnScaledEmitterAtLocation(UObject* WorldContextObject, FScaledEffect ScaledEffect, FVector Location, FRotator Rotation, bool bAutoDestroy);
     
     UFUNCTION(BlueprintCallable)
-    static UDecalComponent* SpawnDecalData(const UObject* WorldContextObject, const FVector& Location, const FVector& upVector, const FDecalData& DecalData);
+    static UDecalComponent* SpawnDecalData(const UObject* WorldContextObject, const FVector& Location, const FVector& upVector, const FDecalData& DecalData, bool randomRollRotation);
     
     UFUNCTION(BlueprintCallable)
     static UDecalComponent* SpawnDecalAtActor(AActor* Actor, UMaterialInterface* DecalMaterial, float Size, float Duration, float FadeDuration);
@@ -36,6 +37,5 @@ public:
     UFUNCTION(BlueprintCallable)
     static void SetControllerSpeakerSubmixSend(const UObject* WorldContextObject, UAudioComponent* AudioComponent, float SendLevel);
     
-    UFSDGameplayStatics();
 };
 

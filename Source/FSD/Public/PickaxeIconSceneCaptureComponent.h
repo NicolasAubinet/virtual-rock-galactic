@@ -4,14 +4,14 @@
 #include "EPickaxePartLocation.h"
 #include "PickaxeIconSceneCaptureComponent.generated.h"
 
-UCLASS(EditInlineNew)
+UCLASS(EditInlineNew, meta=(BlueprintSpawnableComponent))
 class UPickaxeIconSceneCaptureComponent : public USceneCaptureComponent2D {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bIsFullView;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EPickaxePartLocation CameraKey;
     
     UPickaxeIconSceneCaptureComponent();

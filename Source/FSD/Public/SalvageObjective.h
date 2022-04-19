@@ -1,86 +1,91 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
+#include "DelegateDelegate.h"
 #include "Objective.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "SalvageObjective.generated.h"
 
-class UDebrisPositioning;
-class URepairableComponent;
-class UGemResourceData;
-class UDebrisBase;
-class AMiningPod;
 class AMiniMule;
+class UDebrisBase;
+class UGemResourceData;
+class UDebrisPositioning;
+class AMiningPod;
+class URepairableComponent;
 class AProceduralSetup;
-class AActor;
 class UCurveFloat;
+class AActor;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FSalvageObjectiveOnDisableLegSpheres);
-
-UCLASS(Abstract)
-class USalvageObjective : public UObjective {
+UCLASS(Abstract, meta=(BlueprintSpawnableComponent))
+class FSD_API USalvageObjective : public UObjective {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 SalvageActorCount;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UGemResourceData* LegResource;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 LegCountPerActor;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float LegDistanceToActor;
     
-    UPROPERTY(BlueprintAssignable, BlueprintCallable)
-    FSalvageObjectiveOnDisableLegSpheres OnDisableLegSpheres;
+    UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDelegate OnDisableLegSpheres;
     
-    UPROPERTY(EditAnywhere, Instanced)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UDebrisPositioning* Positioning;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSoftObjectPtr<UDebrisBase>> Debris;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<AMiniMule> SalvageActor;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<AMiningPod> DamagedPodClass;
     
-    UPROPERTY(EditAnywhere, Instanced)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UDebrisPositioning* DamagedPodPositioning;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DamagedPodMinDistanceToDropZone;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     AMiningPod* DamagedPod;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_ActorsToSalvage)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_ActorsToSalvage, meta=(AllowPrivateAccess=true))
     int32 ActorsToSalvage;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_ActorsSalvaged)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_ActorsSalvaged, meta=(AllowPrivateAccess=true))
     int32 ActorsSalvaged;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 RepairPoints;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_PointsRepaired)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_PointsRepaired, meta=(AllowPrivateAccess=true))
     int32 PointsRepaired;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MinSalvageActorDistanceToLandingZone;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    bool HasMuleReturnedToPod;
+    
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<AMiniMule*> AllSalvageActors;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<AMiniMule*> SalvagedActors;
     
 public:
+    USalvageObjective();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void PointRepaired();
     
@@ -105,9 +110,5 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void AllActorsSalvaged();
     
-public:
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    USalvageObjective();
 };
 

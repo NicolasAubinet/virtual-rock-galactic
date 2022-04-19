@@ -1,32 +1,16 @@
 #include "CharacterUseComponent.h"
 #include "Net/UnrealNetwork.h"
 
-class AActor;
-class USceneComponent;
 class UUsableComponentBase;
+class AActor;
 
-void UCharacterUseComponent::Server_SetCanUse_Implementation(EUseRestriction NewUseRestriction) {
-}
-bool UCharacterUseComponent::Server_SetCanUse_Validate(EUseRestriction NewUseRestriction) {
-    return true;
+void UCharacterUseComponent::Server_SetState_Implementation(const FCharacterUseState& NewState) {
 }
 
-void UCharacterUseComponent::Server_EndUse_Implementation() {
-}
-bool UCharacterUseComponent::Server_EndUse_Validate() {
-    return true;
+void UCharacterUseComponent::RemoveCustomUsableComponent(UUsableComponentBase* Usable) {
 }
 
-void UCharacterUseComponent::Server_BeginUse_Implementation(uint8 Key, UUsableComponentBase* Usable, USceneComponent* UsableCollider) {
-}
-bool UCharacterUseComponent::Server_BeginUse_Validate(uint8 Key, UUsableComponentBase* Usable, USceneComponent* UsableCollider) {
-    return true;
-}
-
-void UCharacterUseComponent::OnRep_ActiveUsablee(FUsableRepliactional lastUsable) {
-}
-
-void UCharacterUseComponent::OnCharacterStateChanged(ECharacterState NewState) {
+void UCharacterUseComponent::OnRep_State(const FCharacterUseState& oldState) {
 }
 
 bool UCharacterUseComponent::IsLookingAtUsable() const {
@@ -53,7 +37,15 @@ bool UCharacterUseComponent::GetIsDepositing() {
     return false;
 }
 
-void UCharacterUseComponent::All_PlaySingleUse_Implementation(uint8 Key, UUsableComponentBase* Usable) {
+UUsableComponentBase* UCharacterUseComponent::GetHoveringUsable() const {
+    return NULL;
+}
+
+UUsableComponentBase* UCharacterUseComponent::GetActiveUsable() const {
+    return NULL;
+}
+
+void UCharacterUseComponent::All_UseEnded_Implementation(const FCharacterUseState& oldState) {
 }
 
 void UCharacterUseComponent::AddCustomUsableComponent(UUsableComponentBase* Usable, ECustomUsableType eType) {
@@ -62,19 +54,10 @@ void UCharacterUseComponent::AddCustomUsableComponent(UUsableComponentBase* Usab
 void UCharacterUseComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
     Super::GetLifetimeReplicatedProps(OutLifetimeProps);
     
-    DOREPLIFETIME(UCharacterUseComponent, ActiveUsablee);
-    DOREPLIFETIME(UCharacterUseComponent, UseRestriction);
+    DOREPLIFETIME(UCharacterUseComponent, State);
 }
 
 UCharacterUseComponent::UCharacterUseComponent() {
-    this->HoveringUsable = NULL;
-    this->HoveringUsableCollider = NULL;
-    this->ActiveUsableCollider = NULL;
-    this->UseCollider = NULL;
-    this->AudioBeginDepositing = NULL;
-    this->AudioEndDepositing = NULL;
-    this->UseDistance = 250.00f;
-    this->UseRestriction = EUseRestriction::Free;
-    this->Character = NULL;
+    this->UseDistance = 150.00f;
 }
 

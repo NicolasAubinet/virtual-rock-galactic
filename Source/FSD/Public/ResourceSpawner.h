@@ -6,17 +6,17 @@
 class UResourceData;
 
 USTRUCT(BlueprintType)
-struct FResourceSpawner {
+struct FSD_API FResourceSpawner {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UResourceData* Resource;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FRandFloatInterval AmountToSpawn;
     
 public:
-    FSD_API FResourceSpawner();
+    FResourceSpawner();
 };
 

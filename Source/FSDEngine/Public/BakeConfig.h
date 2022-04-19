@@ -9,18 +9,19 @@
 class UBuilderBase;
 
 UCLASS(BlueprintType)
-class UBakeConfig : public UObject {
+class FSDENGINE_API UBakeConfig : public UObject {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FBakeSettings Settings;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TMap<FName, UBuilderBase*> Objects;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FString> Warnings;
     
+    UBakeConfig();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FVector GetVectorSetting(FName Name, FVector defaultVal);
     
@@ -39,6 +40,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetBoolSetting(FName Name, bool defaultVal);
     
-    UBakeConfig();
 };
 

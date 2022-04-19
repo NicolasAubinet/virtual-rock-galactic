@@ -7,10 +7,10 @@ USTRUCT(BlueprintType)
 struct FEventRewardSaveItem {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FGuid CategoryID;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TArray<FGuid> ClassOptions;
     
     FSD_API FEventRewardSaveItem();

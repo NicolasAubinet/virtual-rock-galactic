@@ -1,15 +1,15 @@
 #include "MilestoneAsset.h"
 
-class UObject;
 class UTexture2D;
 class UMissionStat;
+class UObject;
 class UMilestoneAsset;
 
 TArray<UMilestoneAsset*> UMilestoneAsset::SortMilestonesByProgress(UObject* WorldContext, TArray<UMilestoneAsset*>& Milestones) {
     return TArray<UMilestoneAsset*>();
 }
 
-void UMilestoneAsset::OnMissionStatChanged(UMissionStat* Stat, float Value) {
+void UMilestoneAsset::OnMissionStatChanged(UObject* WorldContext, UMissionStat* Stat, float Value) {
 }
 
 bool UMilestoneAsset::IsCompleted(UObject* WorldContext) const {
@@ -60,7 +60,6 @@ UMilestoneAsset::UMilestoneAsset() {
     this->CountValueAsTotal = false;
     this->TrackingStat = NULL;
     this->TrackingCharacterID = NULL;
-    this->GameInstance = NULL;
     this->LastTierReached = 0;
     this->bPendingMilestoneReached = false;
 }

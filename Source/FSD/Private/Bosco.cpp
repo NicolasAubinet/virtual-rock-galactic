@@ -1,11 +1,21 @@
 #include "Bosco.h"
 #include "Net/UnrealNetwork.h"
+#include "Perception/PawnSensingComponent.h"
+#include "UpgradableBoscoComponent.h"
+#include "HealthComponent.h"
+#include "BoscoAbillityComponent.h"
+#include "Components/SpotLightComponent.h"
+#include "DamageComponent.h"
+#include "DroneMiningToolBase.h"
+#include "BobbingComponent.h"
+#include "Components/PointLightComponent.h"
+#include "Components/SkeletalMeshComponent.h"
+#include "HitscanComponent.h"
+#include "Particles/ParticleSystemComponent.h"
+#include "Components/AudioComponent.h"
+#include "DroneSkinnableComponent.h"
 
-class UPrimitiveComponent;
-class UFSDPhysicalMaterial;
 class UTerrainMaterial;
-class UBoscoAbillityComponent;
-class UUpgradableBoscoComponent;
 
 void ABosco::UseABillity() {
 }
@@ -48,7 +58,7 @@ void ABosco::OnReadyToShoot() {
 void ABosco::OnNotReadyToShoot() {
 }
 
-void ABosco::OnHit(float Amount, float BaseAmount, UPrimitiveComponent* Component, UFSDPhysicalMaterial* PhysMat, const FName& BoneName) {
+void ABosco::OnHit(float Amount, float BaseAmount, const FDamageData& DamageData) {
 }
 
 void ABosco::OnGrabbedGem() {
@@ -99,6 +109,19 @@ void ABosco::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimePr
 }
 
 ABosco::ABosco() {
+    this->HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"));
+    this->AbillityComponent = CreateDefaultSubobject<UBoscoAbillityComponent>(TEXT("PlayerAbillity"));
+    this->Damage = CreateDefaultSubobject<UDamageComponent>(TEXT("Damage"));
+    this->Senses = CreateDefaultSubobject<UPawnSensingComponent>(TEXT("Senses"));
+    this->MiningTool = CreateDefaultSubobject<UDroneMiningToolBase>(TEXT("MiningTool"));
+    this->BobbingComponent = CreateDefaultSubobject<UBobbingComponent>(TEXT("BobbingComponent"));
+    this->BoscoMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("BoscoMesh"));
+    this->DroneHitScan = CreateDefaultSubobject<UHitscanComponent>(TEXT("BoscoHitscan"));
+    this->SpotLightComponent = CreateDefaultSubobject<USpotLightComponent>(TEXT("SpotLightComponent"));
+    this->PointLightComponent = CreateDefaultSubobject<UPointLightComponent>(TEXT("PointLightComponent"));
+    this->LTrail = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("LTrail"));
+    this->RTrail = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("RTrail"));
+    this->MomentumSound = CreateDefaultSubobject<UAudioComponent>(TEXT("MomentumAudio"));
     this->DefendDrilldozerShout = NULL;
     this->DefendGenericShout = NULL;
     this->MineOrderShout = NULL;
@@ -125,10 +148,12 @@ ABosco::ABosco() {
     this->RocketAbillity = NULL;
     this->CryoGrenadeAbillity = NULL;
     this->ItemID = NULL;
+    this->Upgradable = CreateDefaultSubobject<UUpgradableBoscoComponent>(TEXT("Upgradable"));
     this->SaluteAnimation = NULL;
     this->PickupGemAnimation = NULL;
     this->DropGemAnimation = NULL;
     this->SaluteDuration = 0.00f;
+    this->Skinnable = CreateDefaultSubobject<UDroneSkinnableComponent>(TEXT("Skinnable"));
     this->TargetLightSetting = 0;
     this->RotateTarget = NULL;
     this->ShootSound = NULL;

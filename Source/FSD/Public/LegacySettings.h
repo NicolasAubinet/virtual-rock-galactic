@@ -9,7 +9,7 @@ UCLASS()
 class FSD_API ULegacySettings : public UDataAsset {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSoftObjectPtr<USkeletalMesh>> ArmorMeshes;
     
     ULegacySettings();

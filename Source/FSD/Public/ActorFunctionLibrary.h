@@ -2,48 +2,49 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
-#include "UObject/NoExportTypes.h"
 #include "ECharacterState.h"
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
 #include "HeroInfo.h"
-#include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
 #include "GameplayTagContainer.h"
 #include "Curves/CurveFloat.h"
 #include "ActorFunctionLibrary.generated.h"
 
+class UEnemyComponent;
+class UTexture2D;
 class UObject;
-class UWindowWidget;
-class APlayerCharacter;
-class UMaterialInstanceDynamic;
-class USoundCue;
-class APlayerController;
-class UPathfinderCollisionComponent;
-class UUserWidget;
-class AFSDGameMode;
-class AActor;
 class USceneComponent;
+class USoundCue;
+class UPostProcessComponent;
+class UMaterialInstanceDynamic;
+class UItemID;
+class APlayerCharacter;
+class APlayerController;
 class UFXSystemAsset;
+class UWindowWidget;
+class UUserWidget;
+class AActor;
+class UPathfinderCollisionComponent;
 class UFSDPhysicalMaterial;
 class UPlayerCharacterID;
-class UEnemyComponent;
-class UItemID;
+class UMeshComponent;
 class UInventoryList;
 class UActorComponent;
-class UTexture2D;
-class UPostProcessComponent;
-class UHealthComponentBase;
 class UBlendableInterface;
 class IBlendableInterface;
-class UMeshComponent;
+class AFSDGameMode;
 class UDamageClass;
+class UHealthComponentBase;
 class AFSDGameState;
 
 UCLASS(BlueprintType)
 class FSD_API UActorFunctionLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    UActorFunctionLibrary();
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
-    static void UnlockSpecificCharacters(UObject* WorldContextObject, TArray<APlayerCharacter*> Characters, ECharacterState UnlockIf, ECharacterState UnlockTo);
+    static void UnlockSpecificCharacters(TArray<APlayerCharacter*> Characters, ECharacterState UnlockIf, ECharacterState UnlockTo);
     
     UFUNCTION(BlueprintCallable)
     static void UnlockCharacters(UObject* WorldContextObject);
@@ -64,16 +65,16 @@ public:
     static float PingPong(float Time, float Length, bool normalize);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    static float MoveTowards(float current, float End, float step);
+    static float MoveTowards(float Current, float End, float step);
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
-    static void LockSpecificCharactersIfState(UObject* WorldContextObject, TArray<APlayerCharacter*> Characters, ECharacterState stateToLock);
+    static void LockSpecificCharactersIfState(TArray<APlayerCharacter*> Characters, ECharacterState stateToLock);
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
-    static void LockSpecificCharacters(UObject* WorldContextObject, TArray<APlayerCharacter*> Characters);
+    static void LockSpecificCharacters(TArray<APlayerCharacter*> Characters);
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
-    static bool LockSpecificCharacterIfState(UObject* WorldContextObject, APlayerCharacter* Character, ECharacterState LockIf, ECharacterState LockTo);
+    static bool LockSpecificCharacterIfState(APlayerCharacter* Character, ECharacterState LockIf, ECharacterState LockTo);
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     static void LockCharacters(UObject* WorldContextObject);
@@ -196,13 +197,13 @@ public:
     static FVector FindCharacterTeleportLocation(UObject* WorldContextObject, const FVector& closeToLocation, float desiredDistance);
     
     UFUNCTION(BlueprintCallable)
-    static void FadeMaterials(UObject* WorldContextObject, UMeshComponent*& Mesh, float Duration);
+    static void FadeMaterials(const UObject* WorldContextObject, UMeshComponent*& Mesh, float Duration);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static float EvaluateRuntimeCurve(UObject* WorldContextObject, const FRuntimeFloatCurve& Curve, float Time);
     
     UFUNCTION(BlueprintCallable)
-    static void DissolveMaterials(UObject* WorldContextObject, UMeshComponent*& Mesh, float Duration);
+    static void DissolveMaterials(const UObject* WorldContextObject, UMeshComponent*& Mesh, float Duration);
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     static void DamagePlayersInArea(const FVector& Origin, AActor* Instigator, const float Damage, const float Radius, UDamageClass* DamageClass);
@@ -228,6 +229,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static bool ActorMatchesTagQuery(const FGameplayTagQuery& Query, const AActor* InActor);
     
-    UActorFunctionLibrary();
 };
 

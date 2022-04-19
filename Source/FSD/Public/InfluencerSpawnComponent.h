@@ -5,15 +5,15 @@
 
 class UCaveInfluencer;
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UInfluencerSpawnComponent : public USceneComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UCaveInfluencer* Influencer;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float range;
     
 public:

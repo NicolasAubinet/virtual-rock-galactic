@@ -7,7 +7,7 @@ UCLASS(CollapseCategories, MinimalAPI)
 class UAnimNotify_MessageOwner : public UAnimNotify {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FName Message;
     
     UAnimNotify_MessageOwner();

@@ -4,21 +4,21 @@
 #include "ItemUpgradeElement.h"
 #include "ReplaceSkeletonMeshUpgradeElement.generated.h"
 
-class USkeletalMesh;
 class UAnimInstance;
+class USkeletalMesh;
 
 UCLASS(EditInlineNew)
 class UReplaceSkeletonMeshUpgradeElement : public UItemUpgradeElement {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USkeletalMesh* TargetMesh;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USkeletalMesh* ReplaceWithMesh;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UAnimInstance> ReplaceWithAnimInstance;
     
 public:

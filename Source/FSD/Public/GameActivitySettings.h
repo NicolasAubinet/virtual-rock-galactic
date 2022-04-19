@@ -10,7 +10,7 @@ class UGameActivitySettings : public UDataAsset {
     GENERATED_BODY()
 public:
 private:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSoftObjectPtr<UGameActivityType>> GameActivites;
     
 public:

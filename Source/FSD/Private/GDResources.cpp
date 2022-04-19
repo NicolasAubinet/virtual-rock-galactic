@@ -2,6 +2,7 @@
 
 FGDResources::FGDResources() {
     this->CreditsResource = NULL;
+    this->Fashionite = NULL;
     this->MOMResource = NULL;
     this->GoldResource = NULL;
     this->NitraResource = NULL;
@@ -25,5 +26,7 @@ FGDResources::FGDResources() {
     this->MotherlodeGemResource = NULL;
     this->RedSugarResource = NULL;
     this->BlankSchematics = NULL;
+    this->FashioniteToCredits = 0.00f;
+    this->FashioniteToMinerals = 0.00f;
 }
 

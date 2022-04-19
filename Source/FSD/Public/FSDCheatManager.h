@@ -2,47 +2,47 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "GameFramework/CheatManager.h"
+#include "CheatEventDelegate.h"
 #include "FSDCheatManager.generated.h"
 
-class UObject;
-class AActor;
-class UResourceData;
-class UBaseCritterDescriptor;
-class UPlayerCharacterID;
-class UEnemyDescriptor;
 class APawn;
 class AFSDAIController;
+class AActor;
+class UPlayerCharacterID;
+class UEnemyDescriptor;
+class UBaseCritterDescriptor;
+class UObject;
 class APlayerCharacter;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFSDCheatManagerToggleHoopGameMovement);
+class UResourceData;
 
 UCLASS()
-class UFSDCheatManager : public UCheatManager {
+class FSD_API UFSDCheatManager : public UCheatManager {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     int32 RoomJumpCount;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float PreviousMaxDistanceBeforeCleanup;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool UnlimitedScoutFlareDuration;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite)
-    FFSDCheatManagerToggleHoopGameMovement ToggleHoopGameMovement;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FCheatEvent ToggleHoopGameMovement;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     AActor* SpawnPosMarker;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool EscortShowSmartRockDebug;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool IsUsingSavedCheats;
     
 public:
+    UFSDCheatManager();
     UFUNCTION(BlueprintCallable)
     void SwitchCharacter(UPlayerCharacterID* characterID);
     
@@ -137,6 +137,12 @@ public:
     
     UFUNCTION(BlueprintCallable)
     bool IsInGodMode();
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsFlyModeActive() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsFastMovementActive() const;
     
 protected:
     UFUNCTION(BlueprintCallable)
@@ -246,6 +252,12 @@ public:
     void C_Windows_CloseAll() const;
     
     UFUNCTION(BlueprintCallable, Exec)
+    void C_VanityMasteryResetXP();
+    
+    UFUNCTION(BlueprintCallable, Exec)
+    void C_VanityMasteryAddXP(int32 Number);
+    
+    UFUNCTION(BlueprintCallable, Exec)
     void C_UnlockOverclocking();
     
     UFUNCTION(BlueprintCallable, Exec)
@@ -294,7 +306,7 @@ public:
     void C_Unlock_Facility();
     
     UFUNCTION(BlueprintCallable, Exec)
-    void C_Treasures_Track(bool Track);
+    void C_Treasures_Track(int32 Mode);
     
     UFUNCTION(BlueprintCallable, Exec)
     void C_Treasures_Reward(int32 count);
@@ -334,6 +346,9 @@ public:
     
     UFUNCTION(BlueprintCallable, Exec)
     void C_SetTestMission(int32 missionIndex);
+    
+    UFUNCTION(BlueprintCallable, Exec)
+    void C_SetTestingCharacter(UPlayerCharacterID* characterID);
     
     UFUNCTION(BlueprintCallable, Exec)
     void C_SetSavedCheats();
@@ -635,6 +650,5 @@ public:
     UFUNCTION(BlueprintCallable)
     void AddResourceToTeamDeposit(UResourceData* Resource, float Amount);
     
-    UFSDCheatManager();
 };
 

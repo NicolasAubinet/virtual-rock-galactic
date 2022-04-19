@@ -1,39 +1,38 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Components/SceneComponent.h"
+#include "MovedIntoSomethingDelegate.h"
 #include "BobbingComponent.generated.h"
 
 class AActor;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FBobbingComponentOnMovedIntoSomethingEvent, bool, Up);
-
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UBobbingComponent : public USceneComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FBobbingComponentOnMovedIntoSomethingEvent OnMovedIntoSomethingEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FMovedIntoSomething OnMovedIntoSomethingEvent;
     
 protected:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     AActor* OwnerActor;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool DoOrientationChecks;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float BobSpeed;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float BobSize;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float OrentationChecksPerSecond;
     
 public:
+    UBobbingComponent();
     UFUNCTION(BlueprintCallable)
     void SetOwner(AActor* AActor);
     
-    UBobbingComponent();
 };
 

@@ -3,30 +3,33 @@
 #include "Blueprint/UserWidget.h"
 #include "ItemsBarIcon.generated.h"
 
+class AItem;
 class APlayerCharacter;
 class UItemsBar;
-class AItem;
 
 UCLASS(Abstract, EditInlineNew)
 class UItemsBarIcon : public UUserWidget {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool Selected;
     
-    UPROPERTY(BlueprintReadOnly, Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UItemsBar* ItemBar;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     APlayerCharacter* Character;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     AItem* Item;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     int32 Index;
     
+public:
+    UItemsBarIcon();
+protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnUnselect();
     
@@ -36,7 +39,5 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnInit();
     
-public:
-    UItemsBarIcon();
 };
 

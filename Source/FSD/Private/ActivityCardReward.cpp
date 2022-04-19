@@ -1,6 +1,6 @@
 #include "ActivityCardReward.h"
 
 UActivityCardReward::UActivityCardReward() {
-    this->activity = NULL;
+    this->Activity = NULL;
 }
 

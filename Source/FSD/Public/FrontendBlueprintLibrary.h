@@ -8,6 +8,7 @@ UCLASS(BlueprintType)
 class UFrontendBlueprintLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    UFrontendBlueprintLibrary();
     UFUNCTION(BlueprintCallable)
     static void OpenURLInExternalBrowser(const FString& URL);
     
@@ -17,6 +18,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static EFSDTargetPlatform FSDTargetPlatform();
     
-    UFrontendBlueprintLibrary();
 };
 

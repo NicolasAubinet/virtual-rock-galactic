@@ -8,7 +8,7 @@ UCLASS(BlueprintType)
 class UCSGGridDuplicator : public UCSGDuplicateSingleChildBase {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FCSGGridDuplicatorProperties Properties;
     
     UCSGGridDuplicator();

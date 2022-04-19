@@ -11,7 +11,7 @@ class UOverclockingUnlockReward : public UUnlockReward {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<AActor> Item;
     
 public:

@@ -9,11 +9,14 @@ UCLASS()
 class AFlareGunProjectile : public AProjectile {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
     float Duration;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_IsFlareOn)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_IsFlareOn, meta=(AllowPrivateAccess=true))
     bool IsFlareOn;
+    
+    AFlareGunProjectile();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnUpdateShadowRadius();
@@ -38,8 +41,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ActivateFlare();
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    AFlareGunProjectile();
 };
 

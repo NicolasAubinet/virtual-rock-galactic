@@ -7,6 +7,7 @@ UCLASS(EditInlineNew)
 class ULockOnTrackingWidget : public UActorTrackingWidget {
     GENERATED_BODY()
 public:
+    ULockOnTrackingWidget();
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnLockOn(int32 numberOfLockOnsOnThisTarget, int32 totalNumberOfLockOns);
     
@@ -16,6 +17,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void CleanUpWidget(bool showFade);
     
-    ULockOnTrackingWidget();
 };
 

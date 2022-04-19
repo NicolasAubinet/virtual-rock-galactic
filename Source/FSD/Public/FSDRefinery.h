@@ -3,88 +3,93 @@
 #include "Templates/SubclassOf.h"
 #include "DropPod.h"
 #include "ERefineryState.h"
-#include "EInputKeys.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "EPipelineBuildState.h"
+#include "EInputKeys.h"
 #include "FSDRefinery.generated.h"
 
-class APipelineExtractorPod;
-class APipelineStart;
 class APipelineSegment;
+class APipelineStart;
+class APipelineExtractorPod;
 class USingleUsableComponent;
 class UDialogDataAsset;
 class ATrackBuilderItem;
 class APlayerCharacter;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDRefineryOnRefineryStateChanged, ERefineryState, InRefineryState);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDRefineryOnRefineryProgressChanged, float, InProgress01);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDRefineryOnPipelineRegistered, APipelineStart*, InPipelineStart);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDRefineryOnPipelineSegmentPlaced, APipelineSegment*, InSegment);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDRefineryOnExtractorPodSpawned, APipelineExtractorPod*, InExtractorPod);
-
 UCLASS()
-class AFSDRefinery : public ADropPod {
+class FSD_API AFSDRefinery : public ADropPod {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FFSDRefineryOnRefineryStateChanged OnRefineryStateChanged;
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FRefineryStateDelegate, ERefineryState, InRefineryState);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FRefineryProgressDelegate, float, InProgress01);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FRefineryPipelineSegmentDelegate, APipelineSegment*, InSegment);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FRefineryPipelineDelegate, APipelineStart*, InPipelineStart);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FRefineryExtractPodDelegate, APipelineExtractorPod*, InExtractorPod);
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDRefineryOnRefineryProgressChanged OnRefineryProgressChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FRefineryStateDelegate OnRefineryStateChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDRefineryOnPipelineRegistered OnPipelineRegistered;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FRefineryProgressDelegate OnRefineryProgressChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDRefineryOnPipelineSegmentPlaced OnPipelineSegmentPlaced;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FRefineryPipelineDelegate OnPipelineRegistered;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDRefineryOnExtractorPodSpawned OnExtractorPodSpawned;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FRefineryPipelineSegmentDelegate OnPipelineSegmentPlaced;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FRefineryExtractPodDelegate OnExtractorPodSpawned;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USingleUsableComponent* UsableStartRefining;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USingleUsableComponent* UsableLaunchRocket;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<float, UDialogDataAsset*> ProgressMissionShouts;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDialogDataAsset* LaunchRocketButtonPressedShout;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<ATrackBuilderItem> BuilderItem;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float RefiningTotalDuration;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FFloatRange PipelineBreakCoolDown;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float PipelineBreakTimePenaltyPerAdditionalPlayers;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FInt32Range MaxSegmentBreakDowns;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 SegmentBreakDownPenaltyPerAdditionalPlayers;
     
-    UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_RefineryState)
+    UPROPERTY(BlueprintReadWrite, ReplicatedUsing=OnRep_RefineryState, meta=(AllowPrivateAccess=true))
     ERefineryState RefineryState;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     ERefineryState PreviousRefineryState;
     
-    UPROPERTY(Replicated)
+    UPROPERTY(BlueprintReadWrite, Replicated, meta=(AllowPrivateAccess=true))
     uint8 RefiningProgressReplicated;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TArray<APipelineStart*> PipelineStarts;
     
+public:
+    AFSDRefinery();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+protected:
     UFUNCTION(BlueprintCallable)
     void SetRefineryState(ERefineryState InState);
     
@@ -119,8 +124,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetRefiningProgress() const;
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    AFSDRefinery();
 };
 

@@ -1,0 +1,16 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.DLSS.cpp.obj": [
+			"DLSSModule.cpp.obj",
+			"DLSSOverrideSettings.cpp.obj",
+			"DLSSSettings.cpp.obj"
+		],
+		"Module.DLSS.gen.cpp.obj": [
+			"DLSS.init.gen.cpp.obj",
+			"DLSSOverrideSettings.gen.cpp.obj",
+			"DLSSSettings.gen.cpp.obj",
+			"EDLSSSettingOverride.gen.cpp.obj"
+		]
+	}
+}

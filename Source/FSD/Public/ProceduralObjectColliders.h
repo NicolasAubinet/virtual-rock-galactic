@@ -3,7 +3,7 @@
 #include "Components/ActorComponent.h"
 #include "ProceduralObjectColliders.generated.h"
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UProceduralObjectColliders : public UActorComponent {
     GENERATED_BODY()
 public:

@@ -12,12 +12,15 @@ class UPlayerAfflictionOverlayWidget : public UUserWidget {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool bOverlayActive;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     UPlayerAfflictionOverlay* Overlay;
     
+public:
+    UPlayerAfflictionOverlayWidget();
+protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ReceiveEndOverlay();
     
@@ -31,6 +34,5 @@ public:
     UFUNCTION(BlueprintCallable)
     void BeginOverlay(UPlayerAfflictionOverlay* InOverlay);
     
-    UPlayerAfflictionOverlayWidget();
 };
 

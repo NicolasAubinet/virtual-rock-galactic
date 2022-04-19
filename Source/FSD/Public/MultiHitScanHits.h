@@ -10,13 +10,13 @@ USTRUCT(BlueprintType)
 struct FMultiHitScanHits {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FMultiHitscanHit> Hits;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     TArray<UPrimitiveComponent*> Components;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<UFSDPhysicalMaterial*> PhysicalMaterials;
     
     FSD_API FMultiHitScanHits();

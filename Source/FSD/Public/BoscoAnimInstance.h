@@ -1,42 +1,40 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EDroneAIState.h"
 #include "Animation/AnimInstance.h"
+#include "BoscoAnimNotifyDelegateDelegate.h"
+#include "EDroneAIState.h"
 #include "BoscoAnimInstance.generated.h"
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FBoscoAnimInstanceOnWeaponsReady);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FBoscoAnimInstanceOnWeaponsNotReady);
 
 UCLASS(NonTransient)
 class UBoscoAnimInstance : public UAnimInstance {
     GENERATED_BODY()
 public:
-    UPROPERTY()
-    FBoscoAnimInstanceOnWeaponsReady OnWeaponsReady;
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FBoscoAnimNotifyDelegate OnWeaponsReady;
     
-    UPROPERTY()
-    FBoscoAnimInstanceOnWeaponsNotReady OnWeaponsNotReady;
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FBoscoAnimNotifyDelegate OnWeaponsNotReady;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere, Transient)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float DigAnimPlayRate;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere, Transient)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     EDroneAIState CurrentState;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere, Transient)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool IsReadyToMine;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere, Transient)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool IsMining;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere, Transient)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool IsFiring;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere, Transient)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool IsReviving;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere, Transient)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool IsCarryingGem;
     
 public:

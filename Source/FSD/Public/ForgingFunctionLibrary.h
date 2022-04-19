@@ -1,35 +1,36 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "ForgingPendingReward.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "ESchematicType.h"
+#include "ForgingResult.h"
 #include "ForgingFunctionLibrary.generated.h"
 
-class USchematic;
 class UObject;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_DELEGATE_ThreeParams(FForgingFunctionLibraryIsLargerThan, const USchematic*, Schematic1, const USchematic*, Schematic2, bool&, FirstIsLarger);
+class USchematic;
 
 UCLASS(BlueprintType)
 class UForgingFunctionLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
-    UFUNCTION(BlueprintCallable)
-    static USchematic* GiveForginMasteryReward(UObject* WorldContextObject);
-    
-    UFUNCTION(BlueprintCallable)
-    static bool GiveForgingXP(UObject* WorldContextObject);
-    
+    UForgingFunctionLibrary();
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    static TArray<USchematic*> GetOwnedSchematicsSorted(UObject* WorldContextObject, bool SmallestFirst, const FForgingFunctionLibraryIsLargerThan& IsLargerThan);
+    static USchematic* PickForgingMasteryDefaultReward(UObject* WorldContextObject, ESchematicType InType);
+    
+    UFUNCTION(BlueprintCallable)
+    static FForgingResult GiveForgingXP(UObject* WorldContextObject);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static TArray<USchematic*> GetOwnedSchematics(UObject* WorldContextObject);
     
-    UFUNCTION(BlueprintCallable, BlueprintPure)
-    static ESchematicType GetNextForgingMasterRewardType(UObject* WorldContextObject);
+    UFUNCTION(BlueprintCallable)
+    static void GetForgingPendingMasteryRewardNewest(UObject* WorldContextObject, bool& OutSuccess, FForgingPendingReward& OutReward);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    static int32 GetForgingXP(UObject* WorldContextObject);
+    static ESchematicType GetForgingMasteryRewardType(UObject* WorldContextObject, int32 Level, bool ReturnDefaultIfUnavailable);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    static ESchematicType GetForgingMasteryRewardDefaultType(ESchematicType InType);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static float GetForgingLevelProgress(UObject* WorldContextObject);
@@ -38,14 +39,13 @@ public:
     static int32 GetForgingLevel(UObject* WorldContextObject);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    static bool GetForgingHasPendingMasteryRewards(UObject* WorldContextObject);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     static TArray<USchematic*> GetForgedSchematics(UObject* WorldContextObject);
     
-    UFUNCTION(BlueprintCallable, BlueprintPure)
-    static TArray<USchematic*> GetAllSchematicsSorted(UObject* WorldContextObject, bool SmallestFirst, const FForgingFunctionLibraryIsLargerThan& IsLargerThan);
+    UFUNCTION(BlueprintCallable)
+    static void ClaimForgingPendingMasteryReward(UObject* WorldContextObject, int32 Level, USchematic* Reward);
     
-    UFUNCTION(BlueprintCallable, BlueprintPure)
-    static TArray<USchematic*> GetAllSchematics(UObject* WorldContextObject);
-    
-    UForgingFunctionLibrary();
 };
 

@@ -6,21 +6,21 @@
 #include "EElectricalSMGUpgrades.h"
 #include "ElectricalSMGUpgrade.generated.h"
 
-class AActor;
 class AFSDPlayerState;
+class AActor;
 
 UCLASS(EditInlineNew, MinimalAPI)
 class UElectricalSMGUpgrade : public UStandardItemUpgrade {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EElectricalSMGUpgrades upgradeType;
     
 public:
+    UElectricalSMGUpgrade();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static FUpgradeValues GetUpgradedValue(AFSDPlayerState* Player, TSubclassOf<AActor> Item, EElectricalSMGUpgrades NewUpgradeType);
     
-    UElectricalSMGUpgrade();
 };
 

@@ -1,89 +1,89 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "FollowTargetChangedDelegate.h"
 #include "FSDAIController.h"
-#include "EInputKeys.h"
+#include "LaserPointerTarget.h"
 #include "GameplayTagContainer.h"
 #include "UObject/NoExportTypes.h"
-#include "LaserPointerTarget.h"
+#include "EInputKeys.h"
 #include "BoscoController.generated.h"
 
-class APlayerCharacter;
-class UTerrainMaterial;
-class UBehaviorTree;
 class UDroneUseComponent;
-class AActor;
-class ACarriableItem;
 class AFSDPlayerState;
+class UBehaviorTree;
+class ACarriableItem;
+class UTerrainMaterial;
+class APlayerCharacter;
+class AActor;
 class UHealthComponentBase;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FBoscoControllerOnFollowTargetChangedDelegate, AActor*, FollowTarget);
 
 UCLASS()
 class ABoscoController : public AFSDAIController {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     UBehaviorTree* BehaviourTree;
     
-    UPROPERTY(EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     float CheckOutOfTheWayInterval;
     
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     float DistCountAsSameHit;
     
-    UPROPERTY(BlueprintAssignable)
-    FBoscoControllerOnFollowTargetChangedDelegate OnFollowTargetChangedDelegate;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FFollowTargetChanged OnFollowTargetChangedDelegate;
     
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UTerrainMaterial* HearthstoneCrystalMaterial;
     
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     float SearchForEnemiesInterval;
     
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     float SaluteDelay;
     
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     float SaluteCooldown;
     
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
     float CheckGraberInterval;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxThrowStrength;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxThrowRange;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float RepairRange;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DistanceCountedAsClose;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagQuery TargetQuery;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagQuery AttackOnOrderQuery;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagQuery AttackOnSightQuery;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagQuery DefendTageQuery;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ReviveHealthPercentage;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UDroneUseComponent* CurrentUse;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     ACarriableItem* TryingToPickGem;
     
 public:
+    ABoscoController();
     UFUNCTION(BlueprintCallable)
     void ReviveTarget();
     
@@ -145,7 +145,5 @@ protected:
     UFUNCTION(BlueprintCallable)
     void CarriableDrop();
     
-public:
-    ABoscoController();
 };
 

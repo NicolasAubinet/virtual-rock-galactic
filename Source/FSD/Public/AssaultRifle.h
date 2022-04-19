@@ -13,25 +13,26 @@ class AAssaultRifle : public AAmmoDrivenWeapon {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float KillsResetAccuracyDuration;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool KillsTriggersStatusEffect;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UStatusEffect> KillTriggeredStatusEffect;
     
+public:
+    AAssaultRifle();
+protected:
     UFUNCTION(BlueprintCallable)
     void OnTimerElapsed();
     
     UFUNCTION(BlueprintCallable)
-    void OnEnemyKilled(AActor* Target, UFSDPhysicalMaterial* PhysMat);
+    void OnEnemyKilled(AActor* Target, UFSDPhysicalMaterial* PhysMat, bool wasDirectHit);
     
     UFUNCTION(BlueprintCallable, Client, Reliable)
     void Client_ResetAccuracy();
     
-public:
-    AAssaultRifle();
 };
 

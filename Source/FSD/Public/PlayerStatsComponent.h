@@ -3,59 +3,62 @@
 #include "Templates/SubclassOf.h"
 #include "Components/ActorComponent.h"
 #include "EndMissionResult.h"
+#include "DelegateDelegate.h"
 #include "PlayerStatsComponent.generated.h"
 
-class APlayerCharacter;
 class UCappedResource;
+class APlayerCharacter;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPlayerStatsComponentOnKillAdded);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerStatsComponentOnEndMissionResultReady, const FEndMissionResult&, Result);
-
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UPlayerStatsComponent : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FPlayerStatsComponentOnKillAdded OnKillAdded;
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FEndMissionResultDelegate, const FEndMissionResult&, Result);
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDelegate OnKillAdded;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     int32 TotalKills;
     
-    UPROPERTY(BlueprintReadWrite, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     int32 TotalRevived;
     
-    UPROPERTY(BlueprintReadWrite, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     int32 TotalDeaths;
     
-    UPROPERTY(BlueprintReadWrite, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     int32 TotalSupplypodsRequested;
     
-    UPROPERTY(BlueprintReadWrite, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     float TotalGoldMined;
     
-    UPROPERTY(BlueprintReadWrite, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     float TotalMOMsMined;
     
-    UPROPERTY(BlueprintReadWrite, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     float TotalMineralsMined;
     
-    UPROPERTY(BlueprintReadWrite, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     float TotalXPGained;
     
-    UPROPERTY(BlueprintReadWrite, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     bool EscapedInPod;
     
-    UPROPERTY(BlueprintReadWrite, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     TSubclassOf<APlayerCharacter> LastPlayedClass;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_EndMissionResult)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_EndMissionResult, meta=(AllowPrivateAccess=true))
     FEndMissionResult EndMissionResult;
     
-    UPROPERTY(BlueprintAssignable)
-    FPlayerStatsComponentOnEndMissionResultReady OnEndMissionResultReady;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FEndMissionResultDelegate OnEndMissionResultReady;
     
 public:
+    UPlayerStatsComponent();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintCallable)
     void SendMissionAnalytics(bool trackMorkite);
     
@@ -76,8 +79,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetSurvivedInPod() const;
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    UPlayerStatsComponent();
 };
 

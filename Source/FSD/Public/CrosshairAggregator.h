@@ -1,36 +1,47 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "ItemAggregator.h"
 #include "Upgradable.h"
+#include "ItemAggregator.h"
+#include "CrosshairCreatedDelegate.h"
 #include "CrosshairAggregator.generated.h"
 
+class APlayerController;
 class UUserWidget;
+class UObject;
+class UCustomAmmoCountWidget;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FCrosshairAggregatorOnCrosshairCreated, UUserWidget*, Crosshair);
-
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UCrosshairAggregator : public UItemAggregator, public IUpgradable {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FCrosshairAggregatorOnCrosshairCreated OnCrosshairCreated;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FCrosshairCreated OnCrosshairCreated;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, Export)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UUserWidget* CrosshairWidget;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UUserWidget> CrossHairType;
     
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
+    UCustomAmmoCountWidget* CustomAmmoCounterWidget;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<UCustomAmmoCountWidget> CustomAmmoCounterType;
+    
 public:
+    UCrosshairAggregator();
     UFUNCTION(BlueprintCallable)
     void SetCrosshair(UUserWidget* Widget);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UUserWidget* GetOrCreateCrosshair();
     
-    UCrosshairAggregator();
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UCustomAmmoCountWidget* GetCustomAmmoCounterWidget(UObject* WorldContext, APlayerController* InOwner);
+    
     
     // Fix for true pure virtual functions not being implemented
 };

@@ -4,43 +4,46 @@
 #include "GuntowerWeakPoint.generated.h"
 
 class USceneComponent;
-class UWeakpointGlowComponent;
+class USoundCue;
+class UParticleSystem;
+class UDamageClass;
 class UEnemyHealthComponent;
 class UStaticMeshComponent;
-class UDamageClass;
-class UParticleSystem;
-class USoundCue;
+class UWeakpointGlowComponent;
 class UHealthComponentBase;
 
 UCLASS()
 class AGuntowerWeakPoint : public AFSDPawn {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USceneComponent* Root;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UEnemyHealthComponent* Health;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UStaticMeshComponent* Mesh;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UWeakpointGlowComponent* HitGlow;
     
 protected:
-    UPROPERTY(Export)
+    UPROPERTY(BlueprintReadWrite, Export, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UEnemyHealthComponent> ParentHealth;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDamageClass* DamageToParent;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UParticleSystem* deathParticles;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundCue* deathSound;
     
+public:
+    AGuntowerWeakPoint();
+protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnExposedChanged(bool isExposed);
     
@@ -50,7 +53,5 @@ protected:
     UFUNCTION(BlueprintCallable)
     void DamageParent(float ammount);
     
-public:
-    AGuntowerWeakPoint();
 };
 

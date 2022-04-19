@@ -11,9 +11,9 @@ UCLASS(BlueprintType)
 class UPromotionRewardsLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    UPromotionRewardsLibrary();
     UFUNCTION(BlueprintCallable)
     static bool ClaimPromotionRewards(UObject* WorldContext, APlayerController* PlayerController, TArray<FClaimableRewardEntry>& OutRewards, bool& OutFirstPromotion);
     
-    UPromotionRewardsLibrary();
 };
 

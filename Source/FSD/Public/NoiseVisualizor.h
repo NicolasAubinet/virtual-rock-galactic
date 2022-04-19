@@ -11,34 +11,34 @@ class ANoiseVisualizor : public AActor {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UFloodFillSettings* FloodFillSettings;
     
-    UPROPERTY(EditInstanceOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, EditInstanceOnly, Transient, meta=(AllowPrivateAccess=true))
     float FreqMultiplier;
     
-    UPROPERTY(EditInstanceOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, EditInstanceOnly, Transient, meta=(AllowPrivateAccess=true))
     float AmplitudeMultiplier;
     
-    UPROPERTY(EditInstanceOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, EditInstanceOnly, Transient, meta=(AllowPrivateAccess=true))
     FVector NoiseSize;
     
-    UPROPERTY(EditInstanceOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, EditInstanceOnly, Transient, meta=(AllowPrivateAccess=true))
     float PointSize;
     
-    UPROPERTY(EditInstanceOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, EditInstanceOnly, Transient, meta=(AllowPrivateAccess=true))
     float PostNoiseAmplitude;
     
-    UPROPERTY(EditInstanceOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, EditInstanceOnly, Transient, meta=(AllowPrivateAccess=true))
     int32 Octaves;
     
-    UPROPERTY(EditInstanceOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, EditInstanceOnly, Transient, meta=(AllowPrivateAccess=true))
     FVector Origin;
     
-    UPROPERTY(EditAnywhere, Transient)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool ShowNoise;
     
-    UPROPERTY(EditAnywhere, Transient)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool ShowTerrainNoise;
     
 public:

@@ -8,7 +8,7 @@ USTRUCT(BlueprintType)
 struct FCSGSTLProperties {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UStaticMeshCarver* Mesh;
     
     FSDENGINE_API FCSGSTLProperties();

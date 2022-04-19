@@ -4,11 +4,11 @@
 #include "SDFBoxProperties.h"
 #include "SDFBoxComponent.generated.h"
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class FSDENGINE_API USDFBoxComponent : public USDFBaseWithTransformComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSDFBoxProperties Properties;
     
     USDFBoxComponent();

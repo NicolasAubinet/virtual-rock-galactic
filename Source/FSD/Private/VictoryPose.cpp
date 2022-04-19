@@ -21,6 +21,7 @@ void UVictoryPose::Equip(UObject* WorldContextObject, UPlayerCharacterID* charac
 }
 
 UVictoryPose::UVictoryPose() {
+    this->Aquisition = NULL;
     this->UnlockedFromStart = false;
 }
 

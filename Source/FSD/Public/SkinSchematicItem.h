@@ -3,18 +3,18 @@
 #include "SchematicItem.h"
 #include "SkinSchematicItem.generated.h"
 
-class UItemSkin;
 class UItemID;
+class UItemSkin;
 
 UCLASS(EditInlineNew)
 class FSD_API USkinSchematicItem : public USchematicItem {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     UItemID* ItemID;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UItemSkin* Skin;
     
 public:

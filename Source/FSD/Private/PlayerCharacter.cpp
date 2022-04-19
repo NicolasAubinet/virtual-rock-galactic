@@ -1,36 +1,59 @@
 #include "PlayerCharacter.h"
 #include "Net/UnrealNetwork.h"
+#include "StatusEffectsComponent.h"
+#include "CharacterSightComponent.h"
+#include "InventoryComponent.h"
+#include "Components/SceneComponent.h"
+#include "PlayerAfflictionComponent.h"
+#include "CharacterVanityComponent.h"
+#include "CommunicationComponent.h"
+#include "PawnStatsComponent.h"
+#include "OutlineComponent.h"
+#include "PlayerTemperatureComponent.h"
+#include "PlayerHealthComponent.h"
+#include "CharacterUseComponent.h"
+#include "CharacterRecoilComponent.h"
+#include "PlayerReactiveTerrainTrackerComponent.h"
+#include "Components/WidgetInteractionComponent.h"
+#include "FirstPersonSkeletalMeshComponent.h"
+#include "Camera/CameraComponent.h"
+#include "ActorTrackingComponent.h"
+#include "MissionStatsCollector.h"
+#include "CharacterCameraController.h"
+#include "GameFramework/SpringArmComponent.h"
+#include "Components/PointLightComponent.h"
+#include "SingleUsableComponent.h"
+#include "PlayerInfoComponent.h"
+#include "PlayerAttackPositionComponent.h"
+#include "InstantUsable.h"
 
-class USceneComponent;
-class AZipLineProjectile;
-class USoundAttenuation;
-class UPerkHUDActivationWidget;
-class UAudioComponent;
-class USoundBase;
-class UPlayerFPAnimInstance;
-class USoundConcurrency;
-class APlayerController;
-class UMaterialInstanceDynamic;
-class UFSDPhysicalMaterial;
-class AShieldGeneratorActor;
-class AFSDPlayerState;
-class UAnimMontage;
-class UParticleSystem;
-class UTrailComponent;
-class AEventRewardDispenser;
-class USchematic;
-class UCharacterStateComponent;
-class APlayerCharacter;
-class UInventoryList;
-class AFSDPhysicsActor;
-class AActor;
-class UObject;
-class UCappedResource;
-class AItem;
 class UPlayerTPAnimInstance;
 class AFSDPlayerController;
+class AZipLineProjectile;
+class UPerkHUDActivationWidget;
+class USoundBase;
+class UAudioComponent;
+class USoundAttenuation;
+class USoundConcurrency;
+class AFSDPlayerState;
+class APlayerController;
+class UMaterialInstanceDynamic;
+class AShieldGeneratorActor;
+class UFSDPhysicalMaterial;
+class UCharacterStateComponent;
+class USchematic;
+class UAnimMontage;
+class UParticleSystem;
+class AEventRewardDispenser;
+class APlayerCharacter;
+class AFSDPhysicsActor;
+class UCappedResource;
+class AActor;
+class AItem;
+class UInventoryList;
+class UObject;
 class UTexture2D;
-class UCharacterVanityComponent;
+class UPlayerFPAnimInstance;
 class UPlayerAnimInstance;
 
 void APlayerCharacter::UseZipLine(AZipLineProjectile* ZipLine, const FVector& Start, const FVector& End) {
@@ -117,9 +140,6 @@ void APlayerCharacter::SetAttached(USceneComponent* AttachTo, bool DelayUntilLan
 void APlayerCharacter::Server_TriggerDash_Implementation() {
 }
 
-void APlayerCharacter::Server_ThrowCarriedItem_Implementation(FVector_NetQuantize force) {
-}
-
 void APlayerCharacter::Server_StartSalute_Implementation(UAnimMontage* startSalute) {
 }
 
@@ -154,6 +174,18 @@ void APlayerCharacter::Server_InstantRevive_Implementation(APlayerCharacter* Rev
 }
 
 void APlayerCharacter::Server_EscapeFromGrabber_Implementation() {
+}
+
+void APlayerCharacter::Server_CheatRevive_Implementation() {
+}
+
+void APlayerCharacter::Server_CheatKillAll_Implementation() {
+}
+
+void APlayerCharacter::Server_CheatGodMode_Implementation() {
+}
+
+void APlayerCharacter::Server_CheatFlyMode_Implementation(bool Active) {
 }
 
 void APlayerCharacter::Server_CancelThrowingCarriable_Implementation() {
@@ -285,12 +317,19 @@ bool APlayerCharacter::IsFirstPerson() const {
     return false;
 }
 
+bool APlayerCharacter::IsEquipepdActor(AActor* Actor) const {
+    return false;
+}
+
 bool APlayerCharacter::IsDown() const {
     return false;
 }
 
 bool APlayerCharacter::IsAlive() const {
     return false;
+}
+
+void APlayerCharacter::InstantRevive(APlayerCharacter* ReviveTarget, EInputKeys Key) {
 }
 
 void APlayerCharacter::IgnoreInvite() {
@@ -300,7 +339,7 @@ bool APlayerCharacter::HasBeenRevived() const {
     return false;
 }
 
-UTrailComponent* APlayerCharacter::GetTrailComponent() const {
+UCharacterUseComponent* APlayerCharacter::GetUseComponent() const {
     return NULL;
 }
 
@@ -340,6 +379,10 @@ FText APlayerCharacter::GetHeroName() const {
     return FText::GetEmpty();
 }
 
+FHeroInfo APlayerCharacter::GetHeroInfo() const {
+    return FHeroInfo{};
+}
+
 UTexture2D* APlayerCharacter::GetHeroIcon() const {
     return NULL;
 }
@@ -366,8 +409,13 @@ APlayerCharacter* APlayerCharacter::GetDownCameraTarget() const {
 
 
 
+
 ECharacterState APlayerCharacter::GetCurrentState() const {
     return ECharacterState::Walking;
+}
+
+UCommunicationComponent* APlayerCharacter::GetCommunicationComponent() const {
+    return NULL;
 }
 
 float APlayerCharacter::GetClassXP() {
@@ -385,6 +433,7 @@ UCharacterStateComponent* APlayerCharacter::GetCharacterStateComponent(ECharacte
 float APlayerCharacter::GetBeginRevivedProgress() const {
     return 0.0f;
 }
+
 
 FString APlayerCharacter::GetAnalyticsClass() const {
     return TEXT("");
@@ -436,12 +485,6 @@ void APlayerCharacter::Client_AddImpulse_Implementation(const FVector_NetQuantiz
 void APlayerCharacter::CheckWithoutAPaddleAchievement_Implementation() {
 }
 
-void APlayerCharacter::CheatRevive_Implementation() {
-}
-
-void APlayerCharacter::CheatGodMode_Implementation() {
-}
-
 void APlayerCharacter::ChangeState(ECharacterState NewState) {
 }
 
@@ -481,10 +524,6 @@ void APlayerCharacter::AddImpulseFromVector(const FVector& Vector) {
 void APlayerCharacter::AddImpulseFromDirectionAndForce(const FVector& Direction, float force) {
 }
 
-float APlayerCharacter::AddClassXP(float Amount) {
-    return 0.0f;
-}
-
 void APlayerCharacter::AcknowledgeCharacterState_Implementation(ECharacterState eState) {
 }
 
@@ -506,16 +545,45 @@ void APlayerCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 }
 
 APlayerCharacter::APlayerCharacter() {
+    this->HeightenedSenseComponent = NULL;
     this->ZipLineStateComponent = NULL;
     this->BoundPerkActivationW = NULL;
     this->PerkActivationTimer = -1.00f;
     this->GrabbedByClass = NULL;
-    this->PowerAttackRefreshedSound = NULL;
     this->bIsBeingBittenByCaveLeech = false;
+    this->WidgetInteraction = CreateDefaultSubobject<UWidgetInteractionComponent>(TEXT("WidgetInteraction"));
     this->EquipLaserpointerHoldDuration = 0.33f;
     this->IsPressingMovementInputKey = false;
     this->characterID = NULL;
+    this->FPMesh = CreateDefaultSubobject<UFirstPersonSkeletalMeshComponent>(TEXT("FPMesh"));
+    this->FirstPersonCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FirstPersonCamera"));
+    this->FirstPersonRoot = CreateDefaultSubobject<USceneComponent>(TEXT("FPRoot"));
+    this->ActorTracking = CreateDefaultSubobject<UActorTrackingComponent>(TEXT("ActorTracking"));
     this->IntoxicationComponent = NULL;
+    this->MissionStatsCollector = CreateDefaultSubobject<UMissionStatsCollector>(TEXT("MissionStatsCollector"));
+    this->ThirdPersonSpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("ThirdPersonSpringArm"));
+    this->ThirdPersonCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("ThirdPersonCamera"));
+    this->ThirdPersonLight = CreateDefaultSubobject<UPointLightComponent>(TEXT("ThirdPersonLight"));
+    this->FollowSpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("FollowSpringArm"));
+    this->FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
+    this->DownCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("DownCamera"));
+    this->CameraController = CreateDefaultSubobject<UCharacterCameraController>(TEXT("CameraController"));
+    this->HealthComponent = CreateDefaultSubobject<UPlayerHealthComponent>(TEXT("Health"));
+    this->SightComponent = CreateDefaultSubobject<UCharacterSightComponent>(TEXT("SightComponent"));
+    this->InventoryComponent = CreateDefaultSubobject<UInventoryComponent>(TEXT("Inventory"));
+    this->UseComponentNew = CreateDefaultSubobject<UCharacterUseComponent>(TEXT("UseComponentNew"));
+    this->UsableComponent = CreateDefaultSubobject<USingleUsableComponent>(TEXT("UsableComponent"));
+    this->OutlineComponent = CreateDefaultSubobject<UOutlineComponent>(TEXT("OutlineComponent"));
+    this->RecoilComponent = CreateDefaultSubobject<UCharacterRecoilComponent>(TEXT("RecoilComponent"));
+    this->StatusEffectsComponent = CreateDefaultSubobject<UStatusEffectsComponent>(TEXT("StatusEffects"));
+    this->PawnStatsComponent = CreateDefaultSubobject<UPawnStatsComponent>(TEXT("PawnStats"));
+    this->PawnAfflictionComponent = CreateDefaultSubobject<UPlayerAfflictionComponent>(TEXT("PawnAfflictions"));
+    this->PlayerInfoComponent = CreateDefaultSubobject<UPlayerInfoComponent>(TEXT("PlayerInfoComponent"));
+    this->AttackerPositioningComponent = CreateDefaultSubobject<UPlayerAttackPositionComponent>(TEXT("AttackerPositioning"));
+    this->CommunicationComponent = CreateDefaultSubobject<UCommunicationComponent>(TEXT("Communication"));
+    this->TemperatureComponent = CreateDefaultSubobject<UPlayerTemperatureComponent>(TEXT("TemperatureComponent"));
+    this->ReactiveTerrainTracker = CreateDefaultSubobject<UPlayerReactiveTerrainTrackerComponent>(TEXT("TerrainTracker"));
+    this->TrackGrindUsableComponent = CreateDefaultSubobject<UInstantUsable>(TEXT("TrackGrindUsable"));
     this->RunningSpeed = 0.00f;
     this->RunBoost = 0.00f;
     this->RunBoostChargeTime = 0.00f;
@@ -530,6 +598,7 @@ APlayerCharacter::APlayerCharacter() {
     this->DownedCameraMinPitch = -75.00f;
     this->DownedCameraMaxPitch = 0.00f;
     this->TurnToFaceScannerAngularSpeed = 180.00f;
+    this->Turn180Time = 0.50f;
     this->CarryingMovementSpeedPenalty = 0.50f;
     this->CarryingMaxFallVelocity = 1200.00f;
     this->MaxThrowProgress = 1.00f;
@@ -552,6 +621,8 @@ APlayerCharacter::APlayerCharacter() {
     this->DashStatusEffect = NULL;
     this->ForwardInput = 0.00f;
     this->RightInput = 0.00f;
+    this->ControllerForwardInput = 0.00f;
+    this->ControllerRightInput = 0.00f;
     this->StoppedRunningTime = -1.00f;
     this->ShoutPressedTime = -1.00f;
     this->bIsUsingItemPressed = false;
@@ -588,5 +659,6 @@ APlayerCharacter::APlayerCharacter() {
     this->PlayerIsLeavingInDroppod = false;
     this->CanInstantRevive = false;
     this->HasInitializedPerks = false;
+    this->CharacterVanity = CreateDefaultSubobject<UCharacterVanityComponent>(TEXT("CharacterVanity"));
 }
 

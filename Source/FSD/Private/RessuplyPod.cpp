@@ -1,9 +1,10 @@
 #include "RessuplyPod.h"
 #include "Net/UnrealNetwork.h"
 #include "Templates/SubclassOf.h"
+#include "DamageComponent.h"
 
-class UObject;
 class ARessuplyPod;
+class UObject;
 class AActor;
 
 void ARessuplyPod::SetIdling() {
@@ -29,6 +30,7 @@ void ARessuplyPod::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLife
 }
 
 ARessuplyPod::ARessuplyPod() {
+    this->Damage = CreateDefaultSubobject<UDamageComponent>(TEXT("Damage"));
     this->KillRadius = 150.00f;
     this->DropHeight = 3500.00f;
     this->DropDelay = 0.00f;

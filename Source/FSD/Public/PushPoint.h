@@ -2,17 +2,17 @@
 #include "CoreMinimal.h"
 #include "PushPoint.generated.h"
 
-class USphereComponent;
 class APlayerCharacter;
+class USphereComponent;
 
 USTRUCT()
 struct FPushPoint {
     GENERATED_BODY()
 public:
-    UPROPERTY(Export)
+    UPROPERTY(Export, meta=(AllowPrivateAccess=true))
     USphereComponent* collider;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     APlayerCharacter* Character;
     
     FSD_API FPushPoint();

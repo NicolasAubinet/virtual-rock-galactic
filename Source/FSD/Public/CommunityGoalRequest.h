@@ -6,19 +6,19 @@ USTRUCT()
 struct FCommunityGoalRequest {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     FString GoalID;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     int32 FactionID;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     float Value;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     FString SteamTicket;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     FString Branch;
     
     FSD_API FCommunityGoalRequest();

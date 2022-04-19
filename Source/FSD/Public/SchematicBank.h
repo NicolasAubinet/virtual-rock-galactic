@@ -10,13 +10,13 @@ class FSD_API USchematicBank : public USchematicBankBase {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSet<USchematic*> Schematics;
     
 public:
+    USchematicBank();
     UFUNCTION(BlueprintCallable)
     void AddSchematic(USchematic* Schematic);
     
-    USchematicBank();
 };
 

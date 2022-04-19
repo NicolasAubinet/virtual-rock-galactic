@@ -8,11 +8,11 @@ USTRUCT(BlueprintType)
 struct FDeepCSGFloatTree {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FDeepCSGNode Root;
     
-    UPROPERTY()
-    TArray<FDeepCSGFloatPlane> Planes;
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    TArray<FDeepCSGFloatPlane> planes;
     
     FSDENGINE_API FDeepCSGFloatTree();
 };

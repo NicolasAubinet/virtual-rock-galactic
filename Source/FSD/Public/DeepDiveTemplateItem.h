@@ -9,10 +9,10 @@ USTRUCT(BlueprintType)
 struct FDeepDiveTemplateItem {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UMissionTemplate* mission;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UMissionDuration*> AllowedDurations;
     
     FSD_API FDeepDiveTemplateItem();

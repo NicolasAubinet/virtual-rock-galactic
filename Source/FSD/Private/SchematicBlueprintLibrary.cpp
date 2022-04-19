@@ -1,37 +1,23 @@
 #include "SchematicBlueprintLibrary.h"
 
-class UObject;
 class UItemSkinSchematicCollection;
 class USchematic;
+class UItemUpgrade;
+class UObject;
 class UPlayerCharacterID;
 class USchematicCategory;
-class UItemUpgrade;
+
+void USchematicBlueprintLibrary::PriceSchematics(const TSet<USchematic*>& Schematics) {
+}
 
 void USchematicBlueprintLibrary::PriceAllSchematics(bool lockPrices) {
 }
 
-bool USchematicBlueprintLibrary::IsSchematicOwnedOrForged(UObject* WorldContextObject, USchematic* Schematic) {
-    return false;
-}
-
-bool USchematicBlueprintLibrary::IsSchematicOwned(UObject* WorldContextObject, USchematic* Schematic) {
-    return false;
-}
-
-bool USchematicBlueprintLibrary::IsSchematicForged(UObject* WorldContextObject, USchematic* Schematic) {
-    return false;
+void USchematicBlueprintLibrary::LockSchematics(const TSet<USchematic*>& Schematics) {
 }
 
 bool USchematicBlueprintLibrary::HasAnyUnlockableSchematics(UObject* WorldContextObject, UPlayerCharacterID* characterID, TSet<USchematicCategory*>& Categories) {
     return false;
-}
-
-TArray<USchematic*> USchematicBlueprintLibrary::GetRewardableSchematics(UObject* WorldContextObject, UPlayerCharacterID* characterID, USchematicCategory* Category) {
-    return TArray<USchematic*>();
-}
-
-TArray<USchematic*> USchematicBlueprintLibrary::GetForgedSchematic(UObject* WorldContextObject) {
-    return TArray<USchematic*>();
 }
 
 USchematicCategory* USchematicBlueprintLibrary::FindItemUpgradeSchematicCategory(UItemUpgrade* Upgrade) {

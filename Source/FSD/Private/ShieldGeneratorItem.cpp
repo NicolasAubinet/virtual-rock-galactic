@@ -1,5 +1,6 @@
 #include "ShieldGeneratorItem.h"
 #include "Net/UnrealNetwork.h"
+#include "CapacityHoldingItemAggregator.h"
 
 
 
@@ -21,6 +22,8 @@ void AShieldGeneratorItem::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>&
 }
 
 AShieldGeneratorItem::AShieldGeneratorItem() {
+    this->ChargeCapacity = CreateDefaultSubobject<UCapacityHoldingItemAggregator>(TEXT("ChargeCapacity"));
+    this->CarryCapacity = CreateDefaultSubobject<UCapacityHoldingItemAggregator>(TEXT("Capacity"));
     this->RechargeDuration = 2.00f;
     this->UnchargedCount = 0;
     this->RechargeProgress = 0.00f;

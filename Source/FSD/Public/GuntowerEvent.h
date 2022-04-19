@@ -4,44 +4,50 @@
 #include "GuntowerModuleLevel.h"
 #include "GuntowerEvent.generated.h"
 
-class AGuntowerModule;
-class USkeletalMeshComponent;
 class USceneComponent;
+class USkeletalMeshComponent;
 class UDamageComponent;
+class AGuntowerModule;
 
 UCLASS()
 class AGuntowerEvent : public AGameEvent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USceneComponent* Root;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* BaseMesh;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UDamageComponent* EndExplosionDamage;
     
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FGuntowerModuleLevel> GuntowerLevels;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FName ModuleAttachBone;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float TowerExplodeDelay;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DelayBetweenExplosions;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<AGuntowerModule*> TowerModules;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_ModuleActive)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_ModuleActive, meta=(AllowPrivateAccess=true))
     int32 ActiveHostileModules;
     
 public:
+    AGuntowerEvent();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
+    void SpawnModules();
+    
     UFUNCTION(BlueprintCallable)
     void OnRep_ModuleActive();
     
@@ -51,8 +57,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnModuleExploded(AGuntowerModule* explodedModule);
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    AGuntowerEvent();
 };
 

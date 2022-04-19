@@ -3,21 +3,20 @@
 
 class UPrimitiveComponent;
 
-void UCompositeArmorComponent::OnRep_ArmorDamageIndex(uint32 OldValue) {
+void UCompositeArmorComponent::OnRep_ArmorDamageInfo(FArmorDamageInfo OldValue) {
 }
 
-void UCompositeArmorComponent::AddArmorPart(UPrimitiveComponent* Primitive, float Health) {
+void UCompositeArmorComponent::AddArmorPart(UPrimitiveComponent* Primitive, float Health, bool overrideAffectedByArmomrBreak, bool NewAffectedByArmorBreak) {
 }
 
 void UCompositeArmorComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
     Super::GetLifetimeReplicatedProps(OutLifetimeProps);
     
-    DOREPLIFETIME(UCompositeArmorComponent, ArmorDamageIndex);
+    DOREPLIFETIME(UCompositeArmorComponent, ArmorDamageInfo);
 }
 
 UCompositeArmorComponent::UCompositeArmorComponent() {
     this->BreakParticle = NULL;
     this->AffectedByAmorBreak = true;
-    this->ArmorDamageIndex = 0;
 }
 

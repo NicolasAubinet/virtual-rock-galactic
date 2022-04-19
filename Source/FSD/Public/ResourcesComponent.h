@@ -1,39 +1,43 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "ResourceFullSignatureDelegate.h"
 #include "Components/ActorComponent.h"
+#include "ResourceChangedSignatureDelegate.h"
+#include "ResourceAddedSignatureDelegate.h"
+#include "ResourceAddedDelegate.h"
 #include "ResourcesComponent.generated.h"
 
 class UCappedResource;
 class UResourceData;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FResourcesComponentOnResourceChanged, UCappedResource*, Resource, float, Amount);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FResourcesComponentOnResourceAdded, UCappedResource*, Resource);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FResourcesComponentOnResourceIncreased, UCappedResource*, Resource, float, Amount);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FResourcesComponentOnResourceFull, UCappedResource*, Resource);
-
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UResourcesComponent : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FResourcesComponentOnResourceChanged OnResourceChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FResourceChangedSignature OnResourceChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FResourcesComponentOnResourceIncreased OnResourceIncreased;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FResourceAddedSignature OnResourceIncreased;
     
-    UPROPERTY(BlueprintAssignable)
-    FResourcesComponentOnResourceFull OnResourceFull;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FResourceFullSignature OnResourceFull;
     
-    UPROPERTY(BlueprintAssignable)
-    FResourcesComponentOnResourceAdded OnResourceAdded;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FResourceAdded OnResourceAdded;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_Resources)
+    UPROPERTY(BlueprintReadWrite, ReplicatedUsing=OnRep_Resources, meta=(AllowPrivateAccess=true))
     TArray<UCappedResource*> Resources;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ResourceCap;
     
+public:
+    UResourcesComponent();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+protected:
     UFUNCTION(BlueprintCallable)
     void ResourceIncreased(UCappedResource* Resource, float Delta);
     
@@ -65,8 +69,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<UCappedResource*> GetAllResources();
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    UResourcesComponent();
 };
 

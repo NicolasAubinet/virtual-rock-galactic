@@ -1,60 +1,63 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Objective.h"
-#include "EliminationTarget.h"
 #include "EliminationDescriptors.h"
+#include "EliminationTarget.h"
 #include "EliminationObjective.generated.h"
 
-class UDebrisPositioning;
-class AActor;
+class UEnemyDescriptor;
 class AFSDPawn;
 class UCaveInfluencer;
+class UDebrisPositioning;
+class AActor;
 class UDebrisBase;
 class UHealthComponentBase;
-class UEnemyDescriptor;
 
-UCLASS(Abstract)
-class UEliminationObjective : public UObjective {
+UCLASS(Abstract, meta=(BlueprintSpawnableComponent))
+class FSD_API UEliminationObjective : public UObjective {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 ObjectCount;
     
-    UPROPERTY(EditAnywhere, Instanced)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UDebrisPositioning* Positioning;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<int32> ExcludeRoomIDs;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<AActor> ObjectToSpawn;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UCaveInfluencer* CaveInfluencer;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DebrisRadius;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSoftObjectPtr<UDebrisBase>> ObjectDebris;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_EnemiesKilled)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_EnemiesKilled, meta=(AllowPrivateAccess=true))
     int32 EnemiesKilled;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_EnemiesToKill)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_EnemiesToKill, meta=(AllowPrivateAccess=true))
     int32 EnemiesToKill;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FEliminationDescriptors> TargetDescriptors;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FEliminationDescriptors> TargetQueue;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FEliminationTarget> ActiveEliminationTargets;
     
 public:
+    UEliminationObjective();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void RegisterEliminationTargets(const TArray<AFSDPawn*>& Targets);
     
@@ -78,8 +81,5 @@ public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     TArray<UEnemyDescriptor*> GetNextTargetInQueue();
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    UEliminationObjective();
 };
 

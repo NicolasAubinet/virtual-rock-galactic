@@ -1,66 +1,65 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "PlayersInsideChangedDelegate.h"
+#include "ProgressUpdatedDelegate.h"
+#include "OnFinishedDelegate.h"
 #include "Engine/EngineTypes.h"
 #include "GuntowerActivationPlatform.generated.h"
 
-class USceneComponent;
-class AGuntowerModule;
 class USkeletalMeshComponent;
-class APlayerCharacter;
+class USceneComponent;
 class UCapsuleComponent;
-class UPrimitiveComponent;
+class AGuntowerModule;
 class UHealthComponentBase;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FGuntowerActivationPlatformOnProgressUpdatedDelegate, float, Progress);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FGuntowerActivationPlatformOnPlayersInsideChangedDelegate, int32, playerCount);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FGuntowerActivationPlatformOnProgressFilled);
+class AFSDPlayerState;
+class UPrimitiveComponent;
 
 UCLASS()
 class FSD_API AGuntowerActivationPlatform : public AActor {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USceneComponent* Root;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* SKMesh;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UCapsuleComponent* Trigger;
     
-    UPROPERTY(BlueprintAssignable)
-    FGuntowerActivationPlatformOnProgressUpdatedDelegate OnProgressUpdatedDelegate;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FProgressUpdated OnProgressUpdatedDelegate;
     
-    UPROPERTY(BlueprintAssignable)
-    FGuntowerActivationPlatformOnPlayersInsideChangedDelegate OnPlayersInsideChangedDelegate;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FPlayersInsideChanged OnPlayersInsideChangedDelegate;
     
-    UPROPERTY(BlueprintAssignable)
-    FGuntowerActivationPlatformOnProgressFilled OnProgressFilled;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnFinished OnProgressFilled;
     
 protected:
-    UPROPERTY(Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     AGuntowerModule* AssignedModule;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DoneAt;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DisabledTime;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_PlayersInside)
-    int32 PlayersInside;
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_PlayersInside, meta=(AllowPrivateAccess=true))
+    int32 playersInside;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_Disabled)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_Disabled, meta=(AllowPrivateAccess=true))
     bool Disabled;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_IsShutDown)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_IsShutDown, meta=(AllowPrivateAccess=true))
     bool IsShutDown;
     
-    UFUNCTION(BlueprintCallable)
-    void UpdatePlayersInside(APlayerCharacter* Character);
-    
 public:
+    AGuntowerActivationPlatform();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void ShutDown();
     
@@ -71,11 +70,25 @@ protected:
     UFUNCTION(BlueprintCallable)
     void ReEnable();
     
+public:
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void PlayerSteppedOn(int32 CurrentCount);
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void PlayerSteppedOff(int32 CurrentCount);
+    
+protected:
+    UFUNCTION(BlueprintCallable)
+    void PlayerInsideRevived();
+    
+    UFUNCTION(BlueprintCallable)
+    void PlayerInsideDied(UHealthComponentBase* Health);
+    
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnShutDown();
     
     UFUNCTION(BlueprintCallable)
-    void OnRep_PlayersInside();
+    void OnRep_PlayersInside(int32 OldCount);
     
     UFUNCTION(BlueprintCallable)
     void OnRep_IsShutDown();
@@ -85,6 +98,9 @@ protected:
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnPlayersInsideChanged(int32 NewPlayersInside);
+    
+    UFUNCTION(BlueprintCallable)
+    void OnPlayerLeave(AFSDPlayerState* PlayerState);
     
     UFUNCTION(BlueprintCallable)
     void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
@@ -113,8 +129,5 @@ public:
     UFUNCTION(BlueprintCallable)
     void AssignModule(AGuntowerModule* towerModule);
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    AGuntowerActivationPlatform();
 };
 

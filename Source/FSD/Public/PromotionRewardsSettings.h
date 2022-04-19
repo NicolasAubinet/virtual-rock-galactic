@@ -9,10 +9,10 @@ UCLASS()
 class UPromotionRewardsSettings : public UDataAsset {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FClaimableRewardEntry> FirstPromotionRewards;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<int32, FPromotionRewardsRank> PromotionRanks;
     
     UPromotionRewardsSettings();

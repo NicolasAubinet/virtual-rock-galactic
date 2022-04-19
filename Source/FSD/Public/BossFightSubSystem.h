@@ -3,34 +3,33 @@
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "BossFightSubSystem.generated.h"
 
+class AActor;
 class UBossFightInterface;
 class IBossFightInterface;
-class AActor;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FBossFightSubSystemOnNewBossFight, const TScriptInterface<IBossFightInterface>&, BossFight);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FBossFightSubSystemOnBossFightRemoved, const TScriptInterface<IBossFightInterface>&, BossFight);
 
 UCLASS(BlueprintType)
 class UBossFightSubSystem : public UGameInstanceSubsystem {
     GENERATED_BODY()
 public:
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FBossFightDelegate, const TScriptInterface<IBossFightInterface>&, BossFight);
+    
 protected:
-    UPROPERTY(BlueprintAssignable)
-    FBossFightSubSystemOnNewBossFight OnNewBossFight;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FBossFightDelegate OnNewBossFight;
     
-    UPROPERTY(BlueprintAssignable)
-    FBossFightSubSystemOnBossFightRemoved OnBossFightRemoved;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FBossFightDelegate OnBossFightRemoved;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TArray<TScriptInterface<IBossFightInterface>> ActiveBossFights;
     
 public:
+    UBossFightSubSystem();
     UFUNCTION(BlueprintCallable)
     void RegisterBossFight(TScriptInterface<IBossFightInterface> BossFight);
     
     UFUNCTION(BlueprintCallable)
     void DeregisterBossFight(AActor* boss);
     
-    UBossFightSubSystem();
 };
 

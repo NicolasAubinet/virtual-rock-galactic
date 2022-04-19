@@ -7,10 +7,10 @@ USTRUCT(BlueprintType)
 struct FDeepDiveSaveRewardItem {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FGuid RewardID;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     int32 Stage;
     
     FSD_API FDeepDiveSaveRewardItem();

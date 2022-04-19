@@ -2,55 +2,58 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "GameFramework/Actor.h"
+#include "ItemDispenserDelegateDelegate.h"
 #include "EInputKeys.h"
 #include "ItemDispenser.generated.h"
 
-class USceneComponent;
-class UInstantUsable;
-class ACarriableItem;
 class APlayerCharacter;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FItemDispenserOnItemSpawned, AActor*, spawnedItem);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FItemDispenserOnItemTaken, AActor*, spawnedItem);
+class USceneComponent;
+class ACarriableItem;
+class UInstantUsable;
 
 UCLASS()
 class AItemDispenser : public AActor {
     GENERATED_BODY()
 public:
-    UPROPERTY(Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USceneComponent* Root;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UInstantUsable* Usable;
     
-    UPROPERTY(BlueprintAssignable)
-    FItemDispenserOnItemSpawned OnItemSpawned;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FItemDispenserDelegate OnItemSpawned;
     
-    UPROPERTY(BlueprintAssignable)
-    FItemDispenserOnItemTaken OnItemTaken;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FItemDispenserDelegate OnItemTaken;
     
 protected:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<AActor*> ItemHistory;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<ACarriableItem> itemClass;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_SpawnedItem)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_SpawnedItem, meta=(AllowPrivateAccess=true))
     AActor* spawnedItem;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ItemSpawnTime;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float InitialItemSpawnTime;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_IsOpen)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_IsOpen, meta=(AllowPrivateAccess=true))
     bool IsOpen;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool KillItemsOnDestuction;
     
+public:
+    AItemDispenser();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+protected:
     UFUNCTION(BlueprintCallable)
     void SpawnItem();
     
@@ -87,8 +90,5 @@ public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void Close();
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    AItemDispenser();
 };
 

@@ -10,10 +10,10 @@ USTRUCT(BlueprintType)
 struct FPawnStatEntriesArray : public FFastArraySerializer {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TArray<FPawnStatEntry> Items;
     
-    UPROPERTY(Export, NotReplicated)
+    UPROPERTY(BlueprintReadWrite, Export, NotReplicated, meta=(AllowPrivateAccess=true))
     UPawnStatsComponent* Owner;
     
     FSD_API FPawnStatEntriesArray();

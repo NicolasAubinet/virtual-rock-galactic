@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EnemyAnimInstance.h"
 #include "UObject/NoExportTypes.h"
+#include "EnemyAnimInstance.h"
 #include "FacilityTurretAnimInstance.generated.h"
 
 UCLASS(NonTransient)
@@ -9,10 +9,10 @@ class UFacilityTurretAnimInstance : public UEnemyAnimInstance {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere, Transient)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FRotator AimRotation;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere, Transient)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool IsEngaged;
     
 public:

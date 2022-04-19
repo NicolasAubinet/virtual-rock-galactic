@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "UObject/NoExportTypes.h"
 #include "Engine/DataAsset.h"
 #include "SaveGameIDInterface.h"
-#include "UObject/NoExportTypes.h"
 #include "SavableDataAsset.generated.h"
 
 class UBuildRestriction;
@@ -12,20 +12,20 @@ class USavableDataAsset : public UDataAsset, public ISaveGameIDInterface {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(AdvancedDisplay, EditAnywhere)
+    UPROPERTY(AdvancedDisplay, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool EnableDangerousSaveGameIDEditing;
     
-    UPROPERTY(EditAnywhere)
-    FGuid SaveGameID;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FGuid SavegameID;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UBuildRestriction* BuildRestriction;
     
 public:
+    USavableDataAsset();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FGuid GetSavegameID() const;
     
-    USavableDataAsset();
     
     // Fix for true pure virtual functions not being implemented
 };

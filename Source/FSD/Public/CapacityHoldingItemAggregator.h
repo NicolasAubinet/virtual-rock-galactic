@@ -1,25 +1,28 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "CapacityBasedItemAggregator.h"
 #include "RejoinListener.h"
+#include "CapacityBasedItemAggregator.h"
 #include "Upgradable.h"
 #include "CapacityHoldingItemAggregator.generated.h"
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UCapacityHoldingItemAggregator : public UCapacityBasedItemAggregator, public IUpgradable, public IRejoinListener {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_MaxAmmo)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_MaxAmmo, meta=(AllowPrivateAccess=true))
     int32 MaxAmmo;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_AmmoCount)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_AmmoCount, meta=(AllowPrivateAccess=true))
     int32 AmmoCount;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool UseRejoin;
     
 public:
+    UCapacityHoldingItemAggregator();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintCallable)
     void UseAmmo(int32 count);
     
@@ -40,9 +43,6 @@ public:
     UFUNCTION(BlueprintCallable)
     void AddAmmo(int32 Amount);
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    UCapacityHoldingItemAggregator();
     
     // Fix for true pure virtual functions not being implemented
 };

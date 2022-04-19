@@ -10,7 +10,7 @@ UCLASS(EditInlineNew)
 class UCaveItemsMutator : public UMutator {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UDebrisItemComponent> Item;
     
     UCaveItemsMutator();

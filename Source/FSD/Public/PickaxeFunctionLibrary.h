@@ -5,19 +5,23 @@
 #include "PickaxeSet.h"
 #include "PickaxeFunctionLibrary.generated.h"
 
-class UPickaxePart;
 class UObject;
+class UPickaxePart;
 class UItemID;
 
 UCLASS(BlueprintType)
 class UPickaxeFunctionLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    UPickaxeFunctionLibrary();
     UFUNCTION(BlueprintCallable)
     static bool RemovePickaxePartFromOwned(UObject* WorldContextObject, const UPickaxePart* part);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static bool IsPickaxePartEquipped(UObject* WorldContextObject, EPickaxePartLocation Location, UPickaxePart* part, UItemID* pickaxeID);
+    
+    UFUNCTION(BlueprintCallable)
+    static void GivePickaxePart(UObject* WorldContextObject, UPickaxePart* part);
     
     UFUNCTION(BlueprintCallable)
     static TArray<UPickaxePart*> GetUnlockedPickaxeParts(UObject* WorldContextObject, EPickaxePartLocation Category);
@@ -37,6 +41,5 @@ public:
     UFUNCTION(BlueprintCallable)
     static void EquipPickaxePart(UObject* WorldContextObject, UPickaxePart* part, EPickaxePartLocation partLocation, UItemID* pickaxeID);
     
-    UPickaxeFunctionLibrary();
 };
 

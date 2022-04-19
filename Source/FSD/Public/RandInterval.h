@@ -7,7 +7,7 @@ USTRUCT(BlueprintType)
 struct FRandInterval {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FRandIntervalItem> Intervals;
     
     FSD_API FRandInterval();

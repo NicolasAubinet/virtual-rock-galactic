@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "TrackBuilderSegment.h"
 #include "UObject/NoExportTypes.h"
+#include "TrackBuilderSegment.h"
 #include "UObject/NoExportTypes.h"
 #include "FuelLineSegment.generated.h"
 
@@ -17,33 +17,36 @@ class FSD_API AFuelLineSegment : public ATrackBuilderSegment {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USplineMeshComponent* FuelLineSplineMesh;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USplineComponent* FuelLineSplineComponent;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UStaticMeshComponent* FuelLineEndPostMesh;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USimpleHealthComponent* DeconstructHealthComponent;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USceneComponent* PreviewEndPostLocation;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float EndPostHeightOffset;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxLength;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool bHasMaxTurnAngle;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxTurnAngle;
     
+public:
+    AFuelLineSegment();
+protected:
     UFUNCTION(BlueprintCallable, Client, Unreliable, WithValidation)
     void ClientUpdateStartTransform(const FVector& NewStartLocation);
     
@@ -56,7 +59,5 @@ protected:
     UFUNCTION(BlueprintCallable)
     void CallbackCanStartNextSegmentChanged(bool InCanStart);
     
-public:
-    AFuelLineSegment();
 };
 

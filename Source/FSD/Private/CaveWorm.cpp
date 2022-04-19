@@ -1,9 +1,10 @@
 #include "CaveWorm.h"
+#include "SimpleHealthComponent.h"
 
-class UObject;
 class UResourceData;
-class UHealthComponentBase;
+class UObject;
 class AResourceChunk;
+class UHealthComponentBase;
 
 AResourceChunk* ACaveWorm::SpawnResource(UObject* WorldContext, UResourceData* Data, float Size, FTransform Transform, FVector Impulse, FVector DropOffset) {
     return NULL;
@@ -19,6 +20,7 @@ void ACaveWorm::DropResource(UResourceData* Data, float Size, FVector Impulse, F
 }
 
 ACaveWorm::ACaveWorm() {
+    this->Health = CreateDefaultSubobject<USimpleHealthComponent>(TEXT("Health"));
     this->SearchChunksRadius = -1.00f;
     this->SearchChunksInterval = -1.00f;
 }

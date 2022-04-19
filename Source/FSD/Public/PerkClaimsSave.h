@@ -4,17 +4,17 @@
 #include "PerkClaimsSave.generated.h"
 
 USTRUCT(BlueprintType)
-struct FPerkClaimsSave {
+struct FSD_API FPerkClaimsSave {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TArray<FPerkClaimEntry> PerkEntries;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool HasResetPerks2;
     
 public:
-    FSD_API FPerkClaimsSave();
+    FPerkClaimsSave();
 };
 

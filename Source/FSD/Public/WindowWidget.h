@@ -1,26 +1,30 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "InputCoreTypes.h"
 #include "WindowWidget.generated.h"
 
 class UWindowWidget;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FWindowWidgetOnWindowClosed, UWindowWidget*, Window);
-
 UCLASS(EditInlineNew)
-class UWindowWidget : public UUserWidget {
+class FSD_API UWindowWidget : public UUserWidget {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FWindowWidgetOnWindowClosed OnWindowClosed;
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FWindowDelegate, UWindowWidget*, Window);
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FWindowDelegate OnWindowClosed;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bHandleCloseCommand;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bResolutionDownscaleWhenOpen;
     
+public:
+    UWindowWidget();
+protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ReceiveSelectPreviousCommand();
     
@@ -35,6 +39,9 @@ protected:
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ReceiveCloseCommand();
+    
+    UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+    bool ReceiveCanCloseWindow(FName InActionName, FKey InKey, bool InIsMouseEvent);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnShown();
@@ -52,6 +59,5 @@ public:
     UFUNCTION(BlueprintCallable)
     void CloseThisWindow();
     
-    UWindowWidget();
 };
 

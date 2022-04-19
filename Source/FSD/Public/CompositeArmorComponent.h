@@ -1,47 +1,49 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "CompositeArmorItem.h"
 #include "BaseArmorDamageComponent.h"
+#include "ArmorPrimitiveDestroyedDelegate.h"
+#include "ArmorPrimitiveDamagedDelegateDelegate.h"
+#include "CompositeArmorItem.h"
+#include "ArmorDamageInfo.h"
 #include "CompositeArmorComponent.generated.h"
 
-class UPrimitiveComponent;
 class UFXSystemAsset;
+class UPrimitiveComponent;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FCompositeArmorComponentOnArmorPartDestroyedEvent, UPrimitiveComponent*, collider);
-UDELEGATE(BlueprintAuthorityOnly, BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FCompositeArmorComponentOnArmorPartDamagedEvent, UPrimitiveComponent*, collider, float, Damage);
-
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UCompositeArmorComponent : public UBaseArmorDamageComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintAssignable)
-    FCompositeArmorComponentOnArmorPartDestroyedEvent OnArmorPartDestroyedEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FArmorPrimitiveDestroyed OnArmorPartDestroyedEvent;
     
-    UPROPERTY(BlueprintAssignable)
-    FCompositeArmorComponentOnArmorPartDamagedEvent OnArmorPartDamagedEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FArmorPrimitiveDamagedDelegate OnArmorPartDamagedEvent;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UFXSystemAsset* BreakParticle;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool AffectedByAmorBreak;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FCompositeArmorItem> ArmorItems;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_ArmorDamageIndex)
-    uint32 ArmorDamageIndex;
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_ArmorDamageInfo, meta=(AllowPrivateAccess=true))
+    FArmorDamageInfo ArmorDamageInfo;
     
-    UFUNCTION()
-    void OnRep_ArmorDamageIndex(uint32 OldValue);
+public:
+    UCompositeArmorComponent();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+protected:
+    UFUNCTION(BlueprintCallable)
+    void OnRep_ArmorDamageInfo(FArmorDamageInfo OldValue);
     
 public:
     UFUNCTION(BlueprintCallable)
-    void AddArmorPart(UPrimitiveComponent* Primitive, float Health);
+    void AddArmorPart(UPrimitiveComponent* Primitive, float Health, bool overrideAffectedByArmomrBreak, bool NewAffectedByArmorBreak);
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    UCompositeArmorComponent();
 };
 

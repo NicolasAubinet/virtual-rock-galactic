@@ -1,97 +1,96 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "SpawnRarityModifierItem.h"
-#include "Components/ActorComponent.h"
 #include "GameplayTagContainer.h"
+#include "Components/ActorComponent.h"
+#include "EnemyDestroyedSignatureDelegate.h"
+#include "EnemySpawnedSignatureDelegate.h"
 #include "SpawnQueueItem.h"
+#include "SpawnRarityModifierItem.h"
 #include "UObject/NoExportTypes.h"
+#include "EnemySpawnedDelegateDelegate.h"
 #include "EnemySpawnManager.generated.h"
 
+class UHealthComponentBase;
 class USpawnEffectsComponent;
-class AProceduralSetup;
+class UStatusEffect;
 class APawn;
 class UEnemyDescriptor;
-class UStatusEffect;
+class AProceduralSetup;
 class AActor;
-class UHealthComponentBase;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FEnemySpawnManagerOnEnemyDestroyed, APawn*, enemy);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FEnemySpawnManagerOnEnemyDied, APawn*, enemy);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_DELEGATE_OneParam(FEnemySpawnManagerCallback, APawn*, enemy);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FEnemySpawnManagerOnEnemySpawned, APawn*, enemy, UEnemyDescriptor*, descriptor);
-
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class FSD_API UEnemySpawnManager : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FEnemySpawnManagerOnEnemyDestroyed OnEnemyDestroyed;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FEnemyDestroyedSignature OnEnemyDestroyed;
     
-    UPROPERTY(BlueprintAssignable)
-    FEnemySpawnManagerOnEnemyDied OnEnemyDied;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FEnemyDestroyedSignature OnEnemyDied;
     
-    UPROPERTY(BlueprintAssignable)
-    FEnemySpawnManagerOnEnemySpawned OnEnemySpawned;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FEnemySpawnedSignature OnEnemySpawned;
     
 protected:
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     USpawnEffectsComponent* SpawnEffects;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<APawn*> ActiveEnemies;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<APawn*> ActiveSwarmerEnemies;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<TSubclassOf<UStatusEffect>> ActiveGlobalStatusEffects;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TMap<UEnemyDescriptor*, FSpawnRarityModifierItem> SpawnRarityModifiers;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<APawn*> ActiveCritters;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<APawn*> CritcalEnemies;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 MaxActiveEnemies;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 MaxActiveSwarmers;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 MaxActiveCritters;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxDistanceBeforeCleanup;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTag SwarmerTag;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTag RegularTag;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTag CritterTag;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     AProceduralSetup* ProceduralSetup;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FSpawnQueueItem> SpawnQueue;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool bDestroyingAllEnemies;
     
 public:
+    UEnemySpawnManager();
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SpawnerDestroyed(APawn* Actor);
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
-    bool SpawnEnemy(UEnemyDescriptor* descriptor, const FTransform& Transform, const FEnemySpawnManagerCallback& Callback, bool useSpawnFX, bool Alert);
+    bool SpawnEnemy(UEnemyDescriptor* descriptor, const FTransform& Transform, const FEnemySpawnedDelegate& Callback, bool useSpawnFX, bool Alert);
     
     UFUNCTION(BlueprintCallable)
     void SetSpawningEnabled(bool newSpawningEnabled);
@@ -136,6 +135,5 @@ public:
     UFUNCTION(BlueprintCallable)
     void AddGlobalStatusEffect(TSubclassOf<UStatusEffect> StatusEffect);
     
-    UEnemySpawnManager();
 };
 

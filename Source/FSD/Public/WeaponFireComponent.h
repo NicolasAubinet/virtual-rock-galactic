@@ -1,36 +1,36 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Engine/NetSerialization.h"
-#include "Components/ActorComponent.h"
-#include "Upgradable.h"
 #include "UObject/NoExportTypes.h"
+#include "Components/ActorComponent.h"
+#include "WeaponFireEndedDelegateDelegate.h"
+#include "Upgradable.h"
+#include "WeaponFiredDelegateDelegate.h"
+#include "WeaponRicochetDelegateDelegate.h"
 #include "WeaponFireComponent.generated.h"
 
 class UWeaponFireOwner;
 class IWeaponFireOwner;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FWeaponFireComponentOnWeaponFired, const FVector&, Location);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FWeaponFireComponentOnWeaponFireEnded);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FWeaponFireComponentOnRicochetEvent, const FVector&, Origin, const FVector&, Location, const FVector&, Normal);
-
-UCLASS(Abstract, BlueprintType)
+UCLASS(Abstract, BlueprintType, meta=(BlueprintSpawnableComponent))
 class UWeaponFireComponent : public UActorComponent, public IUpgradable {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FWeaponFireComponentOnWeaponFired OnWeaponFired;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FWeaponFiredDelegate OnWeaponFired;
     
-    UPROPERTY(BlueprintAssignable)
-    FWeaponFireComponentOnWeaponFireEnded OnWeaponFireEnded;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FWeaponFireEndedDelegate OnWeaponFireEnded;
     
-    UPROPERTY(BlueprintAssignable)
-    FWeaponFireComponentOnRicochetEvent OnRicochetEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FWeaponRicochetDelegate OnRicochetEvent;
     
 protected:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TScriptInterface<IWeaponFireOwner> Weapon;
     
 public:
+    UWeaponFireComponent();
     UFUNCTION(BlueprintCallable)
     void StopFire();
     
@@ -42,7 +42,6 @@ public:
     UFUNCTION(BlueprintCallable)
     void Fire(const FVector& Origin, const FVector_NetQuantizeNormal& Direction, bool playFireFX);
     
-    UWeaponFireComponent();
     
     // Fix for true pure virtual functions not being implemented
 };

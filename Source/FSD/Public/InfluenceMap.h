@@ -9,7 +9,7 @@ USTRUCT(BlueprintType)
 struct FInfluenceMap {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TMap<UObject*, FCaveInfluenceSet> CaveInfluences;
     
     FSD_API FInfluenceMap();

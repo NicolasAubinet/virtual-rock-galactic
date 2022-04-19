@@ -2,109 +2,113 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "Objective.h"
-#include "SubObjective.h"
-#include "IRandRange.h"
 #include "RandInterval.h"
+#include "SubObjective.h"
+#include "EnemySpawnedDelegateDelegate.h"
+#include "IRandRange.h"
 #include "UObject/NoExportTypes.h"
 #include "RoomNode.h"
 #include "UObject/NoExportTypes.h"
 #include "FacilityObjective.generated.h"
 
-class ARessuplyPod;
-class AActor;
-class APawn;
 class UEnemyDescriptor;
+class APawn;
+class ARessuplyPod;
+class UCappedResource;
+class AActor;
 class ATetherStation;
 class UResourceData;
 class AProceduralSetup;
 class UEncounterManager;
 class UDebrisPositioning;
-class UCappedResource;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_DELEGATE_OneParam(FFacilityObjectiveOnFirstEncounterDroneSpawned_Delegate, APawn*, enemy);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_DELEGATE_OneParam(FFacilityObjectiveOnSecondEncounterDroneSpawned_Delegate, APawn*, enemy);
-
-UCLASS(Abstract)
-class UFacilityObjective : public UObjective {
+UCLASS(Abstract, meta=(BlueprintSpawnableComponent))
+class FSD_API UFacilityObjective : public UObjective {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<ARessuplyPod> generatorClass;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<AActor> GeneratorBeaconClass;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 GeneratorCount;
     
 protected:
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_ObjectivesStage)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_ObjectivesStage, meta=(AllowPrivateAccess=true))
     int32 ObjectivesStage;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FSubObjective> SubObjectives;
     
-    UPROPERTY()
-    FFacilityObjectiveOnFirstEncounterDroneSpawned_Delegate OnFirstEncounterDroneSpawned_Delegate;
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FEnemySpawnedDelegate OnFirstEncounterDroneSpawned_Delegate;
     
-    UPROPERTY()
-    FFacilityObjectiveOnSecondEncounterDroneSpawned_Delegate OnSecondEncounterDroneSpawned_Delegate;
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FEnemySpawnedDelegate OnSecondEncounterDroneSpawned_Delegate;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<APawn*> spawnedEnemies;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UEnemyDescriptor*> TurretDescriptors;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UEnemyDescriptor*> GeneratorRoomTurretDescriptors;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UEnemyDescriptor*> EncounterEnemies;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float EncounterDifficulty;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FRandInterval Diversity;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FIRandRange TurretEncountersRange;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 MinimumTurretEncounters;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FIRandRange TunnelTurretsRange;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<AActor*> SmallGenerators;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     ATetherStation* mainFacility;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<int32> ShieldGeneratorRooms;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     int32 MainFacilityRoom;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    bool HasRemovedMainShield;
+    
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<AActor*> ShieldGenerators;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UResourceData* GoalResource;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float AmountRequired;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_AmountCollected)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_AmountCollected, meta=(AllowPrivateAccess=true))
     float AmountCollected;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_GeneratorsActivated)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_GeneratorsActivated, meta=(AllowPrivateAccess=true))
     int32 GeneratorsActivated;
     
 public:
+    UFacilityObjective();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintCallable)
     void SpawnFacilityEncounters(AProceduralSetup* setup, UEncounterManager* Encounters, UDebrisPositioning* Positioning);
     
@@ -191,8 +195,5 @@ public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void AddShieldGenerator(AActor* charger, int32 roomIndex);
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    UFacilityObjective();
 };
 

@@ -1,29 +1,29 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "CSGBakedChildInstanceProperties.h"
 #include "CSGBase.h"
-#include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
 #include "DeepCSGFloatTree.h"
+#include "CSGBakedChildInstanceProperties.h"
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
 #include "CSGBakedChildInstance.generated.h"
 
 UCLASS(BlueprintType)
 class UCSGBakedChildInstance : public UCSGBase {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FCSGBakedChildInstanceProperties Properties;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FBox ChildLocalSpaceBoundingBox;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FBox WorldSpaceBoundingBox;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FMatrix TransformMatInv;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FDeepCSGFloatTree TempTree;
     
     UCSGBakedChildInstance();

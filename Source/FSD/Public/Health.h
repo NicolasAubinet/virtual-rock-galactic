@@ -23,11 +23,11 @@ public:
     UFUNCTION(BlueprintCallable)
     virtual AActor* GetOwner() const PURE_VIRTUAL(GetOwner, return NULL;);
     
-    /*UFUNCTION(BlueprintCallable)
-    virtual float GetMaxHealth() const PURE_VIRTUAL(GetMaxHealth, return 0.0f;);*/
+    UFUNCTION(BlueprintCallable)
+    virtual float GetMaxHealth() const PURE_VIRTUAL(GetMaxHealth, return 0.0f;);
     
-    /*UFUNCTION(BlueprintCallable)
-    virtual EHealthbarType GetHealthbarType() const PURE_VIRTUAL(GetHealthbarType, return EHealthbarType::None;);*/
+    UFUNCTION(BlueprintCallable)
+    virtual EHealthbarType GetHealthbarType() const PURE_VIRTUAL(GetHealthbarType, return EHealthbarType::None;);
     
     UFUNCTION(BlueprintCallable)
     virtual float GetHealth() const PURE_VIRTUAL(GetHealth, return 0.0f;);

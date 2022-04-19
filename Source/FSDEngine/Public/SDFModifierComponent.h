@@ -4,11 +4,11 @@
 #include "SDFModifierProperties.h"
 #include "SDFModifierComponent.generated.h"
 
-UCLASS()
-class USDFModifierComponent : public USDFBaseComponent {
+UCLASS(meta=(BlueprintSpawnableComponent))
+class FSDENGINE_API USDFModifierComponent : public USDFBaseComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSDFModifierProperties Properties;
     
     USDFModifierComponent();

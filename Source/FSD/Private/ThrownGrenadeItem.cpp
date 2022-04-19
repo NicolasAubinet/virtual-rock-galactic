@@ -1,8 +1,6 @@
 #include "ThrownGrenadeItem.h"
 #include "Net/UnrealNetwork.h"
 
-class UHealthComponentBase;
-
 void AThrownGrenadeItem::Server_ThrowGrenade_Implementation() {
 }
 bool AThrownGrenadeItem::Server_ThrowGrenade_Validate() {
@@ -30,7 +28,7 @@ void AThrownGrenadeItem::OnRep_State() {
 void AThrownGrenadeItem::OnRep_GrenadeCount() {
 }
 
-void AThrownGrenadeItem::OnDeath(UHealthComponentBase* Health) {
+void AThrownGrenadeItem::OnRep_GrenadeClass() {
 }
 
 void AThrownGrenadeItem::GrenadeThrowFinished() {

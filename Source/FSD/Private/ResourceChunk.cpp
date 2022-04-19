@@ -1,5 +1,6 @@
 #include "ResourceChunk.h"
 #include "Net/UnrealNetwork.h"
+#include "SimpleObjectInfoComponent.h"
 
 class UResourceData;
 
@@ -28,6 +29,7 @@ AResourceChunk::AResourceChunk() {
     this->CollectDuration = 0.30f;
     this->CanBeCollectedNormally = true;
     this->CanBeCollected = false;
+    this->InfoComponent = CreateDefaultSubobject<USimpleObjectInfoComponent>(TEXT("Info"));
     this->ResourceAmount = 0.00f;
     this->PickupSound = NULL;
     this->ResourceData = NULL;

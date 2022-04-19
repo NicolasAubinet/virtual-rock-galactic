@@ -5,30 +5,31 @@
 #include "ActiveStatusEffectBank.h"
 #include "StatusEffectsComponent.generated.h"
 
+class AActor;
 class UHealthComponentBase;
 class UStatusEffectExclusiveKey;
-class UObject;
 class UStatusEffect;
-class AActor;
+class UObject;
 
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UStatusEffectsComponent : public UActorComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FActiveStatusEffectBank> ActiveStatusEffects;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UHealthComponentBase* OwnerHealth;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TSet<UStatusEffectExclusiveKey*> ActiveExclusiveKeys;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool IgnoreAll;
     
 public:
+    UStatusEffectsComponent();
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     static bool TryPushActiveStatusEffect(TSubclassOf<UStatusEffect> StatusEffect, AActor* Target, AActor* Owner);
     
@@ -61,6 +62,5 @@ public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     static UStatusEffect* CreateStatusEffectInstance(TSubclassOf<UStatusEffect> StatusEffect, UObject* Owner);
     
-    UStatusEffectsComponent();
 };
 

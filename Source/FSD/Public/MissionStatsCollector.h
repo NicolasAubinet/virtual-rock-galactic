@@ -6,18 +6,19 @@
 class APlayerCharacter;
 class UCappedResource;
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UMissionStatsCollector : public UActorComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     APlayerCharacter* Character;
-    
-    UFUNCTION(BlueprintCallable)
-    void OnResourceIncremented(UCappedResource* Resource, float Amount);
     
 public:
     UMissionStatsCollector();
+protected:
+    UFUNCTION(BlueprintCallable)
+    void OnResourceIncremented(UCappedResource* Resource, float Amount);
+    
 };
 

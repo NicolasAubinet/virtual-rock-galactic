@@ -8,10 +8,10 @@ struct FAchievementSave {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TArray<FString> OfflineAchievedAchievements;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TArray<FAchievementSaveEntry> AchievementEntries;
     
 public:

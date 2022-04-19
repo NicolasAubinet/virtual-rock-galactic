@@ -1,10 +1,10 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "VictoryPoseSave.h"
 #include "UObject/NoExportTypes.h"
-#include "ItemLoadout.h"
 #include "CharacterVanitySave.h"
+#include "ItemLoadout.h"
+#include "VictoryPoseSave.h"
 #include "CharacterSave.generated.h"
 
 class APlayerCharacter;
@@ -13,41 +13,41 @@ USTRUCT(BlueprintType)
 struct FCharacterSave {
     GENERATED_BODY()
 public:
-    UPROPERTY()
-    FGuid SaveGameID;
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FGuid SavegameID;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     int32 XP;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool HasCompletedRetirementCampaign;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     int32 TimesRetired;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     int32 RetiredCharacterLevels;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool HasSeenRetirementRewardScreen;
     
 private:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TSubclassOf<APlayerCharacter> CharacterClass;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FCharacterVanitySave Vanity;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     int32 SelectedLoadout;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FItemLoadout Loadout;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TArray<FItemLoadout> Loadouts;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FVictoryPoseSave VictoryPose;
     
 public:

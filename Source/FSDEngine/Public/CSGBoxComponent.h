@@ -1,14 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "ConvexMeshWithCachedTreeComponent.h"
 #include "MeshBoxProperties.h"
+#include "ConvexMeshWithCachedTreeComponent.h"
 #include "CSGBoxComponent.generated.h"
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UCSGBoxComponent : public UConvexMeshWithCachedTreeComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FMeshBoxProperties Properties;
     
     UCSGBoxComponent();

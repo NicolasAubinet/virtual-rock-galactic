@@ -1,26 +1,28 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "VisibilityChangedDelegateDelegate.h"
 #include "Blueprint/UserWidget.h"
 #include "Components/SlateWrapperTypes.h"
 #include "FSDUserWidget.generated.h"
 
-class APlayerCharacter;
 class AItem;
+class APlayerCharacter;
 class AFSDPlayerState;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FFSDUserWidgetOnVisibilityChanged, UUserWidget*, Widget, bool, IsVisible);
-
 UCLASS(EditInlineNew)
-class UFSDUserWidget : public UUserWidget {
+class FSD_API UFSDUserWidget : public UUserWidget {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FFSDUserWidgetOnVisibilityChanged OnVisibilityChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FVisibilityChangedDelegate OnVisibilityChangedFSD;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     APlayerCharacter* Character;
     
+public:
+    UFSDUserWidget();
+protected:
     UFUNCTION(BlueprintCallable)
     void SetOpacity(float alpha);
     
@@ -61,7 +63,5 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void BP_OnRefresh();
     
-public:
-    UFSDUserWidget();
 };
 

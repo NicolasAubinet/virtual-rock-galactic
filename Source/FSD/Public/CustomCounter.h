@@ -1,19 +1,18 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "CustomCounterDelegateDelegate.h"
 #include "CustomCounter.generated.h"
 
 class UObject;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_DELEGATE_TwoParams(FCustomCounterOnCount, float, Value, float, NormalizedTime);
 
 USTRUCT(BlueprintType)
 struct FCustomCounter {
     GENERATED_BODY()
 public:
-    UPROPERTY()
-    FCustomCounterOnCount OnCount;
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FCustomCounterDelegate OnCount;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UObject> Owner;
     
     FSD_API FCustomCounter();

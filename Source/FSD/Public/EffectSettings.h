@@ -9,9 +9,10 @@ UCLASS(BlueprintType)
 class UEffectSettings : public UDataAsset {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSoftObjectPtr<UNiagaraSystem>> ParticlesForShaderGeneration;
     
+    UEffectSettings();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool NeedsShadeGeneration() const;
     
@@ -21,6 +22,5 @@ public:
     UFUNCTION(BlueprintCallable)
     void CompileShaders();
     
-    UEffectSettings();
 };
 

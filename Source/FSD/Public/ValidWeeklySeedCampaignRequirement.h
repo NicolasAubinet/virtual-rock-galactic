@@ -4,7 +4,7 @@
 #include "ValidWeeklySeedCampaignRequirement.generated.h"
 
 UCLASS(EditInlineNew)
-class UValidWeeklySeedCampaignRequirement : public UCampaignRequirement {
+class FSD_API UValidWeeklySeedCampaignRequirement : public UCampaignRequirement {
     GENERATED_BODY()
 public:
     UValidWeeklySeedCampaignRequirement();

@@ -1,7 +1,8 @@
 #include "SplinePlant.h"
 #include "Net/UnrealNetwork.h"
-
-class USplineComponent;
+#include "Components/SplineComponent.h"
+#include "Components/AudioComponent.h"
+#include "Components/SceneComponent.h"
 
 void ASplinePlant::SetTargetPlantLengthPercent(float InTargetPercent, float InPercentPerSecond, float InEaseExp) {
 }
@@ -47,6 +48,9 @@ void ASplinePlant::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLife
 }
 
 ASplinePlant::ASplinePlant() {
+    this->PlantSpline = CreateDefaultSubobject<USplineComponent>(TEXT("PlantSpline"));
+    this->PlantEndPoint = CreateDefaultSubobject<USceneComponent>(TEXT("PlantEndPoint"));
+    this->AudioComponent = CreateDefaultSubobject<UAudioComponent>(TEXT("AudioComponent"));
     this->AudioExtending = NULL;
     this->AudioRetracting = NULL;
     this->bEnabledSegmentCollision = false;

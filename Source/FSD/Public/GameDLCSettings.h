@@ -11,10 +11,11 @@ class FSD_API UGameDLCSettings : public UDataAsset {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSet<UGameDLC*> StoreDLCs;
     
 public:
+    UGameDLCSettings();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<UGameDLC*> GetStoreDLCs(UObject* WorldContext);
     
@@ -22,7 +23,5 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<UGameDLC*> GetAnnouncableDLCs(UObject* WorldContext);
     
-public:
-    UGameDLCSettings();
 };
 

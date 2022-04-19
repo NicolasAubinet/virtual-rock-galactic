@@ -1,44 +1,44 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "ECarveFilterType.h"
 #include "MatrixWithExactSync.h"
 #include "CarveOptionsCellSize.h"
+#include "ECarveFilterType.h"
 #include "LevelGenerationCarver.generated.h"
 
-class UTerrainMaterial;
 class USTLMeshCarver;
-class UStaticMeshCarver;
 class UStaticMesh;
+class UStaticMeshCarver;
+class UTerrainMaterial;
 
 USTRUCT()
 struct FLevelGenerationCarver {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     FMatrixWithExactSync Transform;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     USTLMeshCarver* MeshCarver;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     UStaticMesh* ConvexCarver;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     UStaticMeshCarver* StaticMeshCarver;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     float ConvexExpensiveNoise;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
     CarveOptionsCellSize CarveCellSize;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     UTerrainMaterial* TerrainMaterial;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     ECarveFilterType Filter;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     bool ToBeDiscarded;
     
     FSD_API FLevelGenerationCarver();

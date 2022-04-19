@@ -1,46 +1,48 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/Object.h"
+#include "ResourceChangedSignatureDelegate.h"
+#include "ResourceAddedSignatureDelegate.h"
+#include "ResourceFullSignatureDelegate.h"
 #include "UObject/NoExportTypes.h"
 #include "CappedResource.generated.h"
 
-class UCappedResource;
 class UResourceData;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FCappedResourceOnChanged, UCappedResource*, Resource, float, Amount);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FCappedResourceOnIncreased, UCappedResource*, Resource, float, Amount);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FCappedResourceOnFull, UCappedResource*, Resource);
+class UCappedResource;
 
 UCLASS(BlueprintType)
 class UCappedResource : public UObject {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FCappedResourceOnChanged OnChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FResourceChangedSignature OnChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FCappedResourceOnIncreased OnIncreased;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FResourceAddedSignature OnIncreased;
     
-    UPROPERTY(BlueprintAssignable)
-    FCappedResourceOnFull OnFull;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FResourceFullSignature OnFull;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere, Replicated)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
     UResourceData* Data;
     
-    UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_CurrentAmount)
+    UPROPERTY(BlueprintReadWrite, ReplicatedUsing=OnRep_CurrentAmount, meta=(AllowPrivateAccess=true))
     float currentAmount;
     
-    UPROPERTY(BlueprintReadOnly, Replicated)
+    UPROPERTY(BlueprintReadWrite, Replicated, meta=(AllowPrivateAccess=true))
     float MaxAmount;
     
-    UPROPERTY(BlueprintReadOnly, Replicated)
+    UPROPERTY(BlueprintReadWrite, Replicated, meta=(AllowPrivateAccess=true))
     float TotalCollected;
     
-    UPROPERTY(ReplicatedUsing=OnRep_FullFlag)
+    UPROPERTY(BlueprintReadWrite, ReplicatedUsing=OnRep_FullFlag, meta=(AllowPrivateAccess=true))
     int32 FullFlag;
     
 public:
+    UCappedResource();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintCallable)
     float TransferAll(UCappedResource* Receiver);
     
@@ -82,8 +84,5 @@ public:
     UFUNCTION(BlueprintCallable)
     float Add(float Amount);
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    UCappedResource();
 };
 

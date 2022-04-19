@@ -1,4 +1,5 @@
 #include "RockEnemiesEvent.h"
+#include "Components/SkeletalMeshComponent.h"
 
 class APawn;
 class UHealthComponentBase;
@@ -26,6 +27,7 @@ void ARockEnemiesEvent::RockEnemyDied(UHealthComponentBase* Health) {
 ARockEnemiesEvent::ARockEnemiesEvent() {
     this->PowerUpClass = NULL;
     this->PowerUpGenerationTime = 10.00f;
+    this->Mesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Mesh"));
     this->MuzzleEffect = NULL;
     this->PowerUpsPerGeneration = 1;
     this->GruntPointsAward = 1;

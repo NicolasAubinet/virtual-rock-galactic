@@ -7,14 +7,17 @@
 class AShowroomStage;
 class AActor;
 
-UCLASS(Abstract, BlueprintType)
+UCLASS(Abstract, BlueprintType, meta=(BlueprintSpawnableComponent))
 class UShowroomController : public UActorComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     AShowroomStage* Stage;
     
+public:
+    UShowroomController();
+protected:
     UFUNCTION(BlueprintCallable)
     void SetLightChannels(AActor* Actor);
     
@@ -28,6 +31,5 @@ public:
     UFUNCTION(BlueprintCallable)
     FRotator GetShowroomRotation();
     
-    UShowroomController();
 };
 

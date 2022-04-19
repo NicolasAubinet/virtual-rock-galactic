@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "EGatlingGunUpgrade.h"
 #include "StandardItemUpgrade.h"
+#include "EGatlingGunUpgrade.h"
 #include "UpgradeValues.h"
 #include "GatlingGunUpgrade.generated.h"
 
@@ -14,13 +14,13 @@ class UGatlingGunUpgrade : public UStandardItemUpgrade {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EGatlingGunUpgrade upgradeType;
     
 public:
+    UGatlingGunUpgrade();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static FUpgradeValues GetUpgradedValue(TSubclassOf<AItem> Item, AFSDPlayerState* Player, EGatlingGunUpgrade NewUpgradeType);
     
-    UGatlingGunUpgrade();
 };
 

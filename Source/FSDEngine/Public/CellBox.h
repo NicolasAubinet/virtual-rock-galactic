@@ -7,10 +7,10 @@ USTRUCT()
 struct FCellBox {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     FCellId Min;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     FCellId Max;
     
     FSDENGINE_API FCellBox();

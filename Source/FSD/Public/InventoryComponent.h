@@ -1,163 +1,138 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "Components/ActorComponent.h"
-#include "CarriedItemState.h"
+#include "FlareProductionDelegateDelegate.h"
+#include "InventoryBase.h"
+#include "CarriableChangedDelegateDelegate.h"
+#include "ResupplyDelegateDelegate.h"
+#include "InventoryItemsLoadedDelegate.h"
+#include "ItemDelegateDelegate.h"
 #include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
+#include "GrenadesDelegateDelegate.h"
+#include "FlaresDelegateDelegate.h"
 #include "EItemCategory.h"
-#include "ECharacterState.h"
+#include "UObject/NoExportTypes.h"
 #include "InventoryComponent.generated.h"
 
 class APickaxeItem;
-class AItem;
-class UInventoryComponent;
-class ARecallableSentryGunItem;
-class ALaserPointerItem;
-class UInventoryList;
-class AActor;
 class ARessuplyPodItem;
+class UInventoryList;
 class AThrownGrenadeItem;
-class ATerrainScannerItem;
-class UItemUpgrade;
+class AFlare;
 class USoundCue;
 class UDialogDataAsset;
-class AFlare;
+class UItemUpgrade;
+class ALaserPointerItem;
+class ATerrainScannerItem;
+class ARecallableSentryGunItem;
+class AActor;
+class AItem;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FInventoryComponentOnMaxFlareCountChanged, int32, CurrentCount, UInventoryComponent*, inventory);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FInventoryComponentOnItemsLoaded);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FInventoryComponentOnItemClicked, AItem*, Item);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FInventoryComponentOnItemEquipped, AItem*, Item);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FInventoryComponentOnGrenadeCountChanged, int32, CurrentCount);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FInventoryComponentOnFlareProduction, int32, NextIndex, float, Progress);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FInventoryComponentOnItemUnequipped, AItem*, Item);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FInventoryComponentOnFlareCountChanged, int32, CurrentCount, UInventoryComponent*, inventory);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FInventoryComponentOnResuppliedEvent, float, percentage);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FInventoryComponentOnCarriableChangedEvent, AActor*, carriedActor);
-
-UCLASS(BlueprintType)
-class UInventoryComponent : public UActorComponent {
+UCLASS(meta=(BlueprintSpawnableComponent))
+class UInventoryComponent : public UInventoryBase {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FInventoryComponentOnItemsLoaded OnItemsLoaded;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FInventoryItemsLoaded OnItemsLoaded;
     
-    UPROPERTY(BlueprintAssignable)
-    FInventoryComponentOnItemClicked OnItemClicked;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FItemDelegate OnItemClicked;
     
-    UPROPERTY(BlueprintAssignable)
-    FInventoryComponentOnItemEquipped OnItemEquipped;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FItemDelegate OnItemEquipped;
     
-    UPROPERTY(BlueprintAssignable)
-    FInventoryComponentOnItemUnequipped OnItemUnequipped;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FItemDelegate OnItemUnequipped;
     
-    UPROPERTY(BlueprintAssignable)
-    FInventoryComponentOnGrenadeCountChanged OnGrenadeCountChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FGrenadesDelegate OnGrenadeCountChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FInventoryComponentOnFlareCountChanged OnFlareCountChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FFlaresDelegate OnFlareCountChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FInventoryComponentOnMaxFlareCountChanged OnMaxFlareCountChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FFlaresDelegate OnMaxFlareCountChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FInventoryComponentOnFlareProduction OnFlareProduction;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FFlareProductionDelegate OnFlareProduction;
     
-    UPROPERTY(BlueprintAssignable)
-    FInventoryComponentOnResuppliedEvent OnResuppliedEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FResupplyDelegate OnResuppliedEvent;
     
-    UPROPERTY(BlueprintAssignable)
-    FInventoryComponentOnCarriableChangedEvent OnCarriableChangedEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FCarriableChangedDelegate OnCarriableChangedEvent;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, Transient)
-    bool bItemsLoaded;
-    
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UInventoryList* InventoryList;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<AThrownGrenadeItem> ThrownGrenadeClass;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_Items)
-    TArray<AItem*> Items;
-    
-    UPROPERTY(Replicated, Transient)
-    TArray<AItem*> UnlistedItems;
-    
-    UPROPERTY(BlueprintReadOnly, Replicated, Transient)
-    APickaxeItem* MiningItem;
-    
-    UPROPERTY(BlueprintReadOnly, Replicated, Transient)
-    AThrownGrenadeItem* GrenadeItem;
-    
-    UPROPERTY(BlueprintReadOnly, Replicated, Transient)
-    ALaserPointerItem* LaserPointerItem;
-    
-    UPROPERTY(BlueprintReadOnly, Replicated, Transient)
-    ATerrainScannerItem* TerrainScannerItem;
-    
-    UPROPERTY(Transient)
-    ARecallableSentryGunItem* RecallableSentryGunItem;
-    
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_PickedUpItem)
-    AItem* PickedUpItem;
-    
-    UPROPERTY(BlueprintReadWrite, Replicated, Transient)
-    ARessuplyPodItem* ResupplyItem;
-    
-    UPROPERTY(BlueprintReadOnly, Transient)
-    AItem* PreviousItem;
-    
-    UPROPERTY(Transient)
-    TArray<AItem*> EquipHistory;
-    
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_CarriedItem)
-    FCarriedItemState CarriedItem;
-    
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
-    FVector FlareOffset;
-    
-    UPROPERTY(EditAnywhere)
-    USoundCue* OutOfFlaresSound;
-    
-    UPROPERTY(EditAnywhere)
-    UDialogDataAsset* OutOfFlaresShout;
-    
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
-    float FlareAngle;
-    
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
-    float FlareCooldown;
-    
-    UPROPERTY(BlueprintReadOnly, Transient)
-    float FlareProductionTime;
-    
-    UPROPERTY(BlueprintReadOnly, Transient)
-    FLinearColor FlareChromaColor;
-    
-    UPROPERTY(BlueprintReadOnly, Transient)
-    float FlareProductionTimeLeft;
-    
-    UPROPERTY(BlueprintReadWrite, Transient)
-    int32 MaxFlares;
-    
-    UPROPERTY(BlueprintReadWrite, Transient)
-    int32 Flares;
-    
-    UPROPERTY(BlueprintReadOnly, Transient)
-    float FlareCooldownRemaining;
-    
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_FlareClass, meta=(AllowPrivateAccess=true))
     TSubclassOf<AFlare> flareClass;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FVector FlareOffset;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    USoundCue* OutOfFlaresSound;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UDialogDataAsset* OutOfFlaresShout;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float FlareAngle;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float FlareCooldown;
+    
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    float FlareProductionTime;
+    
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    FLinearColor FlareChromaColor;
+    
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    float FlareProductionTimeLeft;
+    
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    int32 MaxFlares;
+    
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    int32 Flares;
+    
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    float FlareCooldownRemaining;
+    
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<UItemUpgrade*> FlareUpgrades;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_EquippedItem)
-    AItem* EquippedItem;
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    bool bItemsLoaded;
+    
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    APickaxeItem* MiningItem;
+    
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    AThrownGrenadeItem* GrenadeItem;
+    
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    ALaserPointerItem* LaserPointerItem;
+    
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    ATerrainScannerItem* TerrainScannerItem;
+    
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    ARessuplyPodItem* ResupplyItem;
+    
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    ARecallableSentryGunItem* RecallableSentryGunItem;
     
 public:
+    UInventoryComponent();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void UpdateFromSaveGameInSlot(EItemCategory Category);
     
@@ -165,15 +140,12 @@ public:
     void StartGrenadeThrow();
     
 protected:
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
-    void Server_ThrowFlare();
-    
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
-    void Server_Equip(AItem* Item);
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_ThrowItem(AActor* Item, FVector force, bool PlayMontage);
     
 public:
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
-    void Server_DropCarriedItem();
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_ThrowFlare();
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void Resupply(float percentage);
@@ -186,19 +158,7 @@ public:
     
 protected:
     UFUNCTION(BlueprintCallable)
-    void OnRep_PickedUpItem();
-    
-    UFUNCTION(BlueprintCallable)
-    void OnRep_Items();
-    
-    UFUNCTION(BlueprintCallable)
-    void OnRep_EquippedItem(AItem* oldItem);
-    
-    UFUNCTION(BlueprintCallable)
-    void OnRep_CarriedItem(FCarriedItemState& LastCarriedItem);
-    
-    UFUNCTION(BlueprintCallable)
-    void OnCharacterStateChanged(ECharacterState NewState);
+    void OnRep_FlareClass();
     
 public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -220,22 +180,16 @@ public:
     AItem* GetItem(EItemCategory Category) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    AActor* GetCarriedItem() const;
+    AItem* GetEquippedItem() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    TArray<AItem*> GetAllItems() const;
-    
-    UFUNCTION(BlueprintCallable)
-    void EquipLastItem(bool ignoreUsing);
+    AActor* GetCarriedItem() const;
     
     UFUNCTION(BlueprintCallable)
     bool EquipCategory(EItemCategory Category);
     
     UFUNCTION(BlueprintCallable)
-    void EquipAtIndex(int32 Index, bool ignoreUsing);
-    
-    UFUNCTION(BlueprintCallable)
-    void Equip(AItem* Item, bool ignoreIsUsing);
+    void Equip(AItem* Item);
     
     UFUNCTION(BlueprintCallable)
     void EndGrenadeThrow();
@@ -243,16 +197,8 @@ public:
     UFUNCTION(BlueprintCallable)
     void DropPickedupItem();
     
-protected:
-    UFUNCTION(BlueprintCallable)
-    void CreateStartingEquipmentWhenItemsLoaded();
-    
     UFUNCTION(BlueprintCallable, Client, Reliable)
     void Client_Resupply(float percentage);
-    
-public:
-    UFUNCTION(BlueprintCallable, Client, Reliable)
-    void Client_DropPickedUpItem();
     
     UFUNCTION(BlueprintCallable)
     void AnimationNotify2();
@@ -260,8 +206,9 @@ public:
     UFUNCTION(BlueprintCallable)
     void AnimationNotify1();
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+protected:
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void All_PlayThrowMontage(AActor* Item);
     
-    UInventoryComponent();
 };
 

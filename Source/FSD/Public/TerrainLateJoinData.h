@@ -1,50 +1,54 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "RemoveFloatingIslandOperationData.h"
 #include "GrenadeExplodeOperationData.h"
 #include "CarveWithColliderOperationData.h"
-#include "CarveWithSTLMeshOperationData.h"
-#include "PickaxeDigOperationData.h"
-#include "RemoveFloatingIslandOperationData.h"
-#include "MeltOperationData.h"
 #include "DrillOperationData.h"
+#include "CarveWithSTLMeshOperationData.h"
+#include "MeltOperationData.h"
+#include "PickaxeDigOperationData.h"
 #include "SplineSegmentCarveOperationData.h"
+#include "CSGBuildOperationData.h"
 #include "TerrainLateJoinData.generated.h"
 
 USTRUCT(BlueprintType)
 struct FTerrainLateJoinData {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
-    TArray<FGrenadeExplodeOperationData> explosions;
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    TArray<FGrenadeExplodeOperationData> Explosions;
     
-    UPROPERTY(Transient)
-    TArray<FCarveWithColliderOperationData> colliderCarves;
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    TArray<FCarveWithColliderOperationData> ColliderCarves;
     
-    UPROPERTY(Transient)
-    TArray<FCarveWithSTLMeshOperationData> meshCarves;
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    TArray<FCarveWithSTLMeshOperationData> MeshCarves;
     
-    UPROPERTY(Transient)
-    TArray<FPickaxeDigOperationData> pickAxe;
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    TArray<FPickaxeDigOperationData> PickAxe;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FRemoveFloatingIslandOperationData> RemoveFloating;
     
-    UPROPERTY(Transient)
-    TArray<FDrillOperationData> drills;
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    TArray<FDrillOperationData> Drills;
     
-    UPROPERTY(Transient)
-    TArray<FMeltOperationData> melts;
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    TArray<FMeltOperationData> Melts;
     
-    UPROPERTY(Transient)
-    TArray<FSplineSegmentCarveOperationData> splines;
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    TArray<FSplineSegmentCarveOperationData> Splines;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    TArray<FCSGBuildOperationData> CSGBuilds;
+    
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<int32> DebrisInstanceComponentPairs;
     
-    UPROPERTY(Transient)
-    TArray<uint32> visibleChunks;
+    UPROPERTY(Transient, meta=(AllowPrivateAccess=true))
+    TArray<uint32> VisibleChunks;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     int32 OperationCount;
     
     FSD_API FTerrainLateJoinData();

@@ -1,23 +1,24 @@
 #include "Projectile.h"
 #include "Net/UnrealNetwork.h"
 #include "Templates/SubclassOf.h"
+#include "FSDProjectileMovementComponent.h"
 
-class AProjectileBase;
 class UObject;
+class AProjectileBase;
 class AProjectile;
 class APawn;
 class USceneComponent;
 class UFSDPhysicalMaterial;
 
-AProjectileBase* AProjectile::SpawnProjectileFromSelf(UObject* WorldContextObject, TSubclassOf<AProjectileBase> projectileClass, FVector Origin, FRotator velocityDirection) {
+AProjectileBase* AProjectile::SpawnProjectileFromSelf(UObject* WorldContextObject, TSubclassOf<AProjectileBase> ProjectileClass, FVector Origin, FRotator velocityDirection) {
     return NULL;
 }
 
-AProjectileBase* AProjectile::SpawnProjectile(UObject* WorldContextObject, TSubclassOf<AProjectileBase> projectileClass, APawn* projectileOwner, FVector Origin, FRotator velocityDirection) {
+AProjectileBase* AProjectile::SpawnProjectile(UObject* WorldContextObject, TSubclassOf<AProjectileBase> ProjectileClass, APawn* projectileOwner, FVector Origin, FRotator velocityDirection) {
     return NULL;
 }
 
-AProjectileBase* AProjectile::SpawnBallisticProjectile(UObject* WorldContextObject, TSubclassOf<AProjectile> projectileClass, APawn* projectileOwner, FVector Origin, FVector Velocity) {
+AProjectileBase* AProjectile::SpawnBallisticProjectile(UObject* WorldContextObject, TSubclassOf<AProjectile> ProjectileClass, APawn* projectileOwner, FVector Origin, FVector Velocity) {
     return NULL;
 }
 
@@ -51,5 +52,6 @@ void AProjectile::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifet
 
 AProjectile::AProjectile() {
     this->UseArmorDamageBoneCheck = false;
+    this->MovementComponent = CreateDefaultSubobject<UFSDProjectileMovementComponent>(TEXT("ProjectileComponent"));
 }
 

@@ -1,16 +1,19 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "UObject/NoExportTypes.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "UObject/NoExportTypes.h"
+#include "ESchematicType.h"
 #include "SpecialEventBlueprintLibrary.generated.h"
 
-class USchematic;
 class UObject;
+class USchematic;
+class UPlayerCharacterID;
 
 UCLASS(BlueprintType)
 class USpecialEventBlueprintLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    USpecialEventBlueprintLibrary();
     UFUNCTION(BlueprintCallable)
     static USchematic* TryGivePendingReward(UObject* WorldContextObject);
     
@@ -27,8 +30,10 @@ public:
     static TArray<USchematic*> GetSpecialEventsRewardSchematics(UObject* WorldContextObject);
     
     UFUNCTION(BlueprintCallable)
+    static USchematic* FindRandomSchematicForCharacter(UObject* WorldContextObject, UPlayerCharacterID* characterID, ESchematicType SchematicType);
+    
+    UFUNCTION(BlueprintCallable)
     static void ClearPendingReward(UObject* WorldContextObject);
     
-    USpecialEventBlueprintLibrary();
 };
 

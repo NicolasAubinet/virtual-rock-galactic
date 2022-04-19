@@ -1,38 +1,41 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "MULE.h"
+#include "DelegateDelegate.h"
 #include "UObject/NoExportTypes.h"
 #include "Molly.generated.h"
 
-class UOutlineComponent;
 class UDialogDataAsset;
-class APlayerCharacter;
 class UResourceBank;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FMollyOnCalledByChanged, APlayerCharacter*, InPlayer);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FMollyOnReachedDropShip);
+class APlayerCharacter;
+class UOutlineComponent;
 
 UCLASS(Abstract)
-class AMolly : public AMULE {
+class FSD_API AMolly : public AMULE {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FMollyOnCalledByChanged OnCalledByChanged;
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FCalledByDelegate, APlayerCharacter*, InPlayer);
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FCalledByDelegate OnCalledByChanged;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UResourceBank* ResourceBank;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UOutlineComponent* OutlineComponent;
     
-    UPROPERTY(BlueprintAssignable, BlueprintCallable)
-    FMollyOnReachedDropShip OnReachedDropShip;
+    UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDelegate OnReachedDropShip;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_CalledBy)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_CalledBy, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<APlayerCharacter> CalledBy;
     
 public:
+    AMolly();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintCallable)
     void SetOpenForDeposit(bool Open);
     
@@ -53,8 +56,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void EnableButton();
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    AMolly();
 };
 

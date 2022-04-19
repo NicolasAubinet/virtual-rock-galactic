@@ -1,14 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "SDFCylinderProperties.h"
 #include "SDFBaseWithTransformComponent.h"
+#include "SDFCylinderProperties.h"
 #include "SDFCylinderComponent.generated.h"
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class FSDENGINE_API USDFCylinderComponent : public USDFBaseWithTransformComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSDFCylinderProperties Properties;
     
     USDFCylinderComponent();

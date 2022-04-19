@@ -2,8 +2,8 @@
 #include "Net/UnrealNetwork.h"
 
 class AActor;
-class UHealthComponentBase;
 class UFSDPhysicalMaterial;
+class UHealthComponentBase;
 class UPrimitiveComponent;
 
 void ABoltActionWeapon::SetOverheated(bool isOverheated) {
@@ -30,7 +30,7 @@ bool ABoltActionWeapon::Server_SetIsChargingShot_Validate(bool bisCharging) {
 void ABoltActionWeapon::OnTimerElapsed() {
 }
 
-void ABoltActionWeapon::OnTargetKilled(AActor* Target, UFSDPhysicalMaterial* PhysicalMaterial) {
+void ABoltActionWeapon::OnTargetKilled(AActor* Target, UFSDPhysicalMaterial* PhysicalMaterial, bool wasDirectHit) {
 }
 
 void ABoltActionWeapon::OnTargetDamaged(UHealthComponentBase* Health, float Amount, UPrimitiveComponent* HitComponent, UFSDPhysicalMaterial* PhysicalMaterial) {

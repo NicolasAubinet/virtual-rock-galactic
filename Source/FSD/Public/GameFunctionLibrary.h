@@ -3,28 +3,29 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "GameFunctionLibrary.generated.h"
 
-class UDeepDiveManager;
-class UGoogleAnalyticsWrapper;
-class UFSDSaveGame;
+class UFSDGameInstance;
 class UObject;
+class APlayerCharacter;
 class UAudioComponent;
+class UWindowWidget;
 class USoundBase;
 class UWindowManager;
-class APlayerCharacter;
-class UWindowWidget;
+class UGoogleAnalyticsWrapper;
 class AFSDGameModeSpaceRig;
-class ADeepCSGWorld;
+class UFSDSaveGame;
 class AFSDGameState;
 class AFSDGameMode;
-class UFSDGameInstance;
 class UGameData;
+class UDeepDiveManager;
+class ADeepCSGWorld;
 class UCampaignManager;
 class UAsyncManager;
 
 UCLASS(BlueprintType)
-class UGameFunctionLibrary : public UBlueprintFunctionLibrary {
+class FSD_API UGameFunctionLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    UGameFunctionLibrary();
     UFUNCTION(BlueprintCallable)
     static void SpawnOrUpdateAudio2D(UObject* WorldContext, UPARAM(Ref) UAudioComponent*& AudioComponent, USoundBase* Sound, float VolumeMultiplier, float PitchMultiplier, FName FloatParamName, float FloatParam);
     
@@ -112,6 +113,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static UAsyncManager* GetAsyncManager(UObject* WorldContextObject);
     
-    UGameFunctionLibrary();
 };
 

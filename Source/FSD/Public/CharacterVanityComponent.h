@@ -2,54 +2,66 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "EHeadVanityType.h"
+#include "EquippedVanity.h"
 #include "TattooArmorItem.h"
 #include "EVanitySlot.h"
 #include "CharacterVanityComponent.generated.h"
 
-class USkeletalMeshComponent;
 class UBeardColorVanityItem;
-class UMaterialInterface;
 class UCharacterVanityItems;
 class UMaterialInstanceDynamic;
+class UMaterialInterface;
 class UVanityItem;
+class USkeletalMeshComponent;
 class UObject;
 class UPlayerCharacterID;
 
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UCharacterVanityComponent : public UActorComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UCharacterVanityItems* AvailableVanityItems;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UBeardColorVanityItem* ShownBeardColor;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UMaterialInterface* ArmorMaterial;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UMaterialInterface* ArmorClothMaterial;
+    
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UMaterialInstanceDynamic* DynamicSkinMaterial;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     EHeadVanityType HeadVanityType;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_EquippedVanity)
-    TArray<UVanityItem*> EquippedVanity;
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_EquippedVanity, meta=(AllowPrivateAccess=true))
+    FEquippedVanity EquippedVanity;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UVanityItem* SpecialTemporaryArmor;
+    
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UMaterialInterface* SkinMaterial;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FTattooArmorItem> Tattoos;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<UMaterialInterface*> CachedMaterials;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     TMap<EVanitySlot, USkeletalMeshComponent*> VanityMeshes;
     
+public:
+    UCharacterVanityComponent();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+protected:
     UFUNCTION(BlueprintCallable)
     void UpdateMeshes();
     
@@ -61,10 +73,13 @@ public:
     void SetEquippedVanityInViewer(const TArray<UVanityItem*>& Vanity);
     
 protected:
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
-    void Server_SetEquippedVanity(const TArray<UVanityItem*>& equippedItems);
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_SetEquippedVanity(const FEquippedVanity& equippedItems);
     
 public:
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
+    void RemoveMedicalGown();
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static UVanityItem* Receive_GetEquippedVanityItem(UObject* WorldContextObject, UPlayerCharacterID* Character, EVanitySlot Slot);
     
@@ -73,11 +88,17 @@ protected:
     void OnRep_EquippedVanity();
     
 public:
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, BlueprintPure)
+    bool HasSpawnedInMedbay() const;
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UVanityItem* GetEquippedVanityItem(EVanitySlot Slot) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UCharacterVanityItems* GetAvailableVanityItems() const;
+    
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
+    void EquipMedicalGown();
     
     UFUNCTION(BlueprintCallable)
     void EnforceValidPaintjob();
@@ -85,8 +106,11 @@ public:
     UFUNCTION(BlueprintCallable)
     void CreateEquippedGear();
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    UFUNCTION(BlueprintCallable, Client, Reliable)
+    void Client_RemoveMedicalGown();
     
-    UCharacterVanityComponent();
+    UFUNCTION(BlueprintCallable, Client, Reliable)
+    void Client_EquipMedicalGown();
+    
 };
 

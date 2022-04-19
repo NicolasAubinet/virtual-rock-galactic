@@ -11,7 +11,7 @@ class UItemSettings : public UDataAsset {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TMap<UItemID*, UItemData*> ItemData;
     
 public:

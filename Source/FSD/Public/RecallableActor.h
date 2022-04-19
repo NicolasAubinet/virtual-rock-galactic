@@ -1,66 +1,68 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "UObject/NoExportTypes.h"
-#include "DeepPathfinderCharacter.h"
 #include "Upgradable.h"
+#include "DeepPathfinderCharacter.h"
+#include "UObject/NoExportTypes.h"
+#include "ReturnedSignatureDelegate.h"
 #include "ERecallableActorState.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "RecallableActor.generated.h"
 
-class ARecallableActor;
 class AActor;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FRecallableActorOnRelocateFinished, AActor*, Sender, bool, Succes);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FRecallableActorOnStateChanged, ARecallableActor*, Sender, ERecallableActorState, State);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FRecallableActorOnReturnFinish, AActor*, Sender, bool, Succes);
+class ARecallableActor;
 
 UCLASS(Abstract)
 class ARecallableActor : public ADeepPathfinderCharacter, public IUpgradable {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FRecallableActorOnStateChanged OnStateChanged;
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FRecallableActorStateChanged, ARecallableActor*, Sender, ERecallableActorState, State);
     
-    UPROPERTY(BlueprintAssignable)
-    FRecallableActorOnReturnFinish OnReturnFinish;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FRecallableActorStateChanged OnStateChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FRecallableActorOnRelocateFinished OnRelocateFinished;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FReturnedSignature OnReturnFinish;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FReturnedSignature OnRelocateFinished;
     
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float AcceptanceRadius;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float AutoRecallDistance;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float RelocateLandingHeight;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<AActor> RelocationMarkerType;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_RecallTarget)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_RecallTarget, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<AActor> RecallTarget;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_State)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_State, meta=(AllowPrivateAccess=true))
     ERecallableActorState State;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FTransform RelocateTransform;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool RelocateLanded;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<AActor> RelocationMarker;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool bInitialized;
     
 public:
+    ARecallableActor();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
     void SetRecallTarget(AActor* NewTarget);
     
@@ -123,10 +125,6 @@ protected:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void BeginMove();
     
-public:
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    ARecallableActor();
     
     // Fix for true pure virtual functions not being implemented
 };

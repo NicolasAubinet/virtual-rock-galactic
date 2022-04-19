@@ -8,10 +8,10 @@ USTRUCT(BlueprintType)
 struct FCSGBakedChildInstanceProperties {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UCSGBake* BakedCSG;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 VariantIndex;
     
     FSDENGINE_API FCSGBakedChildInstanceProperties();

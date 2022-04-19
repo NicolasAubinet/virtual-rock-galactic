@@ -1,65 +1,66 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "UObject/Object.h"
 #include "UObject/NoExportTypes.h"
+#include "UObject/Object.h"
 #include "ECampaignType.h"
 #include "CampaignManager.generated.h"
 
-class UGeneratedMission;
+class AFSDPlayerController;
 class UFSDSaveGame;
 class UCampaign;
-class AFSDPlayerController;
+class UGeneratedMission;
 class UDifficultySetting;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FCampaignManagerOnCampaignCompleted);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FCampaignManagerOnCampaignChanged);
-
 UCLASS(Abstract, BlueprintType)
-class UCampaignManager : public UObject {
+class FSD_API UCampaignManager : public UObject {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FCampaignManagerOnCampaignCompleted OnCampaignCompleted;
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FCampaignCompletedDelegate);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FCampaignChangedDelegate);
     
-    UPROPERTY(BlueprintAssignable)
-    FCampaignManagerOnCampaignChanged OnCampaignChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FCampaignCompletedDelegate OnCampaignCompleted;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FCampaignChangedDelegate OnCampaignChanged;
     
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UCampaign> MainCampaign;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSubclassOf<UCampaign>> WeeklyCampaigns;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSubclassOf<UCampaign>> MatrixCoreHuntCampaigns;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSubclassOf<UCampaign>> SideCampaigns;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<TSubclassOf<UCampaign>> EventCampaigns;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UCampaign* ActiveCampaign;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     int32 NumFailedRequests;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool WeeklyBackendDataValid;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     int32 WeeklyBackendSeed;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FDateTime WeeklyBackendExpirationTime;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FDateTime LastRequestTime;
     
 public:
+    UCampaignManager();
     UFUNCTION(BlueprintCallable)
     void StartNewCampaign(TSubclassOf<UCampaign> campaignClass, UFSDSaveGame* SaveGame);
     
@@ -98,6 +99,5 @@ public:
     UFUNCTION(BlueprintCallable)
     void AbortActiveCampaign(UFSDSaveGame* SaveGame);
     
-    UCampaignManager();
 };
 

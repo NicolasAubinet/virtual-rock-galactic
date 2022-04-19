@@ -1,39 +1,38 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "EEnemyHealthScaling.h"
 #include "EHealthbarType.h"
 #include "Components/ActorComponent.h"
+#include "SubHealthComponentDelegateDelegate.h"
+#include "DamageSigDelegate.h"
 #include "Health.h"
-#include "EEnemyHealthScaling.h"
+#include "HealthChangedSigDelegate.h"
 #include "SubHealthComponent.generated.h"
 
-class USubHealthComponent;
 class AActor;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSubHealthComponentOnCanTakeDamageChanged, USubHealthComponent*, subHealth);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSubHealthComponentOnHealthChanged, float, Health);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSubHealthComponentOnDamageTaken, float, Amount);
-
-UCLASS(Abstract, BlueprintType)
+UCLASS(Abstract, BlueprintType, meta=(BlueprintSpawnableComponent))
 class USubHealthComponent : public UActorComponent, public IHealth {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FSubHealthComponentOnDamageTaken OnDamageTaken;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDamageSig OnDamageTaken;
     
-    UPROPERTY(BlueprintAssignable)
-    FSubHealthComponentOnHealthChanged OnHealthChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FHealthChangedSig OnHealthChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FSubHealthComponentOnCanTakeDamageChanged OnCanTakeDamageChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FSubHealthComponentDelegate OnCanTakeDamageChanged;
     
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EHealthbarType HealthbarType;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EEnemyHealthScaling EnemyHealthScaling;
     
 public:
+    USubHealthComponent();
     UFUNCTION(BlueprintCallable)
     void SetCanTakeDamage(bool canTakeDamage);
     
@@ -52,17 +51,16 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetCanTakeDamage() const;
     
-    USubHealthComponent();
     
     // Fix for true pure virtual functions not being implemented
-    /*UFUNCTION(BlueprintCallable)
+    /*UFUNCTION(BlueprintCallable)*/
     AActor* GetOwner() const override PURE_VIRTUAL(GetOwner, return NULL;);
     
     UFUNCTION(BlueprintCallable)
     float GetMaxHealth() const override PURE_VIRTUAL(GetMaxHealth, return 0.0f;);
     
     UFUNCTION(BlueprintCallable)
-    EHealthbarType GetHealthbarType() const override PURE_VIRTUAL(GetHealthbarType, return EHealthbarType::None;);*/
+    EHealthbarType GetHealthbarType() const override PURE_VIRTUAL(GetHealthbarType, return EHealthbarType::None;);
     
 };
 

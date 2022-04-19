@@ -7,7 +7,7 @@ UCLASS()
 class UCSGSingleChildBase : public UCSGBase {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     UCSGBase* Child;
     
     UCSGSingleChildBase();

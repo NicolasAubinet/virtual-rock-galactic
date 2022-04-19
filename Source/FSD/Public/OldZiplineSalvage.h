@@ -11,17 +11,18 @@ UCLASS()
 class FSD_API AOldZiplineSalvage : public AActor {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<AZipLineProjectile> ZiplineProjectileClass;
     
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FVector RelativeDestinationLocation;
-    
-    UFUNCTION(BlueprintCallable)
-    void OnMatchStarted();
     
 public:
     AOldZiplineSalvage();
+protected:
+    UFUNCTION(BlueprintCallable)
+    void OnMatchStarted();
+    
 };
 

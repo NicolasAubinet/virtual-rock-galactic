@@ -1,7 +1,12 @@
 #include "ItemData.h"
 #include "Templates/SubclassOf.h"
 
+class UTexture2D;
 class AActor;
+
+UTexture2D* UItemData::GetPreviewImage() const {
+    return NULL;
+}
 
 TSubclassOf<AActor> UItemData::GetPreviewActorClass() const {
     return NULL;

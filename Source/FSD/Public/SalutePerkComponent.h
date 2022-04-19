@@ -3,21 +3,22 @@
 #include "FloatPerkComponent.h"
 #include "SalutePerkComponent.generated.h"
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class USalutePerkComponent : public UFloatPerkComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float CoolDown;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float FleeRadius;
-    
-    UFUNCTION(BlueprintCallable)
-    void OnSalute();
     
 public:
     USalutePerkComponent();
+protected:
+    UFUNCTION(BlueprintCallable)
+    void OnSalute();
+    
 };
 

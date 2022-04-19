@@ -3,6 +3,9 @@
 void UActorTrackingComponent::ToggleIcon(bool Visible) {
 }
 
+void UActorTrackingComponent::ShowAlwaysOn() {
+}
+
 void UActorTrackingComponent::OnHoldTAB(bool IsDown) {
 }
 

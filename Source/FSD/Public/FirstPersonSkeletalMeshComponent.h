@@ -6,13 +6,13 @@
 
 class APlayerController;
 
-UCLASS(EditInlineNew)
+UCLASS(EditInlineNew, meta=(BlueprintSpawnableComponent))
 class UFirstPersonSkeletalMeshComponent : public USkeletalMeshComponent {
     GENERATED_BODY()
 public:
+    UFirstPersonSkeletalMeshComponent();
     UFUNCTION(BlueprintCallable)
     static FVector CalcFirstPersonFOVPositionCorrection(APlayerController* PlayerController, const FVector& origPos);
     
-    UFirstPersonSkeletalMeshComponent();
 };
 

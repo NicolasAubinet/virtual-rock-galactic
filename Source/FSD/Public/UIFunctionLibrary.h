@@ -12,6 +12,7 @@ UCLASS(BlueprintType)
 class UUIFunctionLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    UUIFunctionLibrary();
     UFUNCTION(BlueprintCallable)
     static void SetLoadoutIcon(UObject* WorldContextObject, UPlayerCharacterID* characterID, int32 loadoutIndex, int32 IconIndex);
     
@@ -39,6 +40,5 @@ public:
     UFUNCTION(BlueprintCallable)
     static void AddItemUINotification(UObject* WorldContextObject, TArray<UObject*> Item);
     
-    UUIFunctionLibrary();
 };
 

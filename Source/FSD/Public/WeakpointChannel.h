@@ -9,13 +9,13 @@ USTRUCT(BlueprintType)
 struct FWeakpointChannel {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UFSDPhysicalMaterial* WeakPointMaterial;
     
-    UPROPERTY(Transient)
-    FName Bone;
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    int32 BoneIndex;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UMaterialInstanceDynamic* Mid;
     
     FSD_API FWeakpointChannel();

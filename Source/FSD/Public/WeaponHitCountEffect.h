@@ -8,7 +8,7 @@ class UWeaponHitCountEffect : public UObject {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool UsesDamageEffects;
     
 public:

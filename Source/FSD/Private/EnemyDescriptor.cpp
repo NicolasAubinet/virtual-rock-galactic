@@ -1,11 +1,20 @@
 #include "EnemyDescriptor.h"
 #include "Templates/SubclassOf.h"
 
-class UBiome;
 class APawn;
+class UBiome;
+class UEnemyDescriptor;
 
 TSubclassOf<APawn> UEnemyDescriptor::GetEnemyClass(UBiome* Biome, bool isElite) const {
     return NULL;
+}
+
+TArray<UEnemyDescriptor*> UEnemyDescriptor::FindDescriptorsForCheatMenu(EEnemyDescriptorCheatClass NewCheatClass) {
+    return TArray<UEnemyDescriptor*>();
+}
+
+TArray<UEnemyDescriptor*> UEnemyDescriptor::FindAllDescriptorsForCheatMenu() {
+    return TArray<UEnemyDescriptor*>();
 }
 
 UEnemyDescriptor::UEnemyDescriptor() {
@@ -32,5 +41,6 @@ UEnemyDescriptor::UEnemyDescriptor() {
     this->RequiredMainCampaignProgress = 0;
     this->UsesSpawnRarityModifiers = false;
     this->SpawnRarityModifiers.AddDefaulted(4);
+    this->CheatClass = EEnemyDescriptorCheatClass::Basic;
 }
 

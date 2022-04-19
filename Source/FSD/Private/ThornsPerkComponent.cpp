@@ -1,9 +1,6 @@
 #include "ThornsPerkComponent.h"
 
-class UDamageClass;
-class AActor;
-
-void UThornsPerkComponent::OnHit(float Damage, UDamageClass* inDamageClass, AActor* DamageCauser, bool anyHealthLost) {
+void UThornsPerkComponent::OnHit(float Damage, const FDamageData& DamageData, bool anyHealthLost) {
 }
 
 UThornsPerkComponent::UThornsPerkComponent() {

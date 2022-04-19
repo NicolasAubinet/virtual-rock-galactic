@@ -6,50 +6,50 @@
 #include "GemResourceData.generated.h"
 
 class UDebrisPositioning;
-class UDebrisBase;
-class UGemResourceCreator;
 class AGem;
+class UGemResourceCreator;
 class AFSDGameState;
+class UDebrisBase;
 
 UCLASS()
 class UGemResourceData : public UResourceData {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere, Instanced)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UDebrisPositioning* DebrisPositioning;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool CheckIfCompletelyCoveredByTerrain;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FIRandRange GemValue;
     
-    UPROPERTY(EditAnywhere, Instanced)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UGemResourceCreator* ResourceCreator;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float InfluencerRange;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSoftObjectPtr<UDebrisBase>> Debris;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSoftClassPtr<AGem>> GemClasses;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<TSubclassOf<AGem>> GemClassesLoaded;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<UDebrisBase*> DebrisLoaded;
     
 public:
+    UGemResourceData();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static int32 GetCollectedGemsCreditValue(AFSDGameState* GameState);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static int32 GetCollectedGemsAmount(AFSDGameState* GameState);
     
-    UGemResourceData();
 };
 

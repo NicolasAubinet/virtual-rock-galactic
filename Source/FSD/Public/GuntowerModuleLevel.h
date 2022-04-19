@@ -9,10 +9,10 @@ USTRUCT(BlueprintType)
 struct FGuntowerModuleLevel {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSubclassOf<AGuntowerModule>> PossibleModules;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool PreventDuplication;
     
     FSD_API FGuntowerModuleLevel();

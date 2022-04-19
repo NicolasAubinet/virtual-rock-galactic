@@ -1,9 +1,10 @@
 #include "PipelineFinish.h"
 #include "Net/UnrealNetwork.h"
+#include "TrackBuilderConnectPoint.h"
+#include "SingleUsableComponent.h"
 
 class ARessuplyPod;
 class APlayerCharacter;
-class UTrackBuilderConnectPoint;
 class ATrackBuilderSegment;
 class APipelineSegment;
 
@@ -36,6 +37,8 @@ void APipelineFinish::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutL
 }
 
 APipelineFinish::APipelineFinish() {
+    this->PipelineEndConnection = CreateDefaultSubobject<UTrackBuilderConnectPoint>(TEXT("TrackEndConnection"));
+    this->UsableOrderExtractor = CreateDefaultSubobject<USingleUsableComponent>(TEXT("UsableOrderExtractor"));
     this->ExtractPodClass = NULL;
     this->ExtractorPod = NULL;
     this->bPipelineCompleted = false;

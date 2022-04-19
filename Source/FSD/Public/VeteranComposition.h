@@ -7,10 +7,10 @@ USTRUCT(BlueprintType)
 struct FVeteranComposition {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FRandFloatInterval Normal;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FRandFloatInterval Large;
     
     FSD_API FVeteranComposition();

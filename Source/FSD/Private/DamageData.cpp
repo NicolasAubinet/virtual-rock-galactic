@@ -1,7 +1,7 @@
 #include "DamageData.h"
 
 FDamageData::FDamageData() {
-    this->Bodypart = NULL;
     this->DamageClass = NULL;
+    this->DamageModifier = 0.00f;
 }
 

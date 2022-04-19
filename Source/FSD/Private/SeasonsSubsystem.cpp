@@ -1,17 +1,17 @@
 #include "SeasonsSubsystem.h"
 
-class UMissionStat;
-class AFSDPlayerState;
-class UObject;
-class UDataAsset;
-class UItemSkin;
-class UVanityItem;
 class USeasonChallenge;
+class AFSDPlayerController;
+class UMissionStat;
+class UObject;
+class AFSDPlayerState;
+class UDataAsset;
+class UVanityItem;
 class UPlayerCharacterID;
 class UTextureRenderTarget2D;
+class UItemSkin;
 class UPickaxePart;
 class USeasonEventData;
-class AFSDPlayerController;
 
 FTimespan USeasonsSubsystem::TimeToNewChallenge() {
     return FTimespan{};
@@ -20,13 +20,13 @@ FTimespan USeasonsSubsystem::TimeToNewChallenge() {
 void USeasonsSubsystem::RerollChallenge(int32 Index) {
 }
 
-void USeasonsSubsystem::OnStatChanged(UMissionStat* Stat, float Value) {
+void USeasonsSubsystem::OnStatChanged(UObject* WorldContext, UMissionStat* Stat, float Value) {
 }
 
-void USeasonsSubsystem::OnScripChallengeCompleted(UMissionStat* Stat, float Value) {
+void USeasonsSubsystem::OnScripChallengeCompleted(UObject* WorldContext, UMissionStat* Stat, float Value) {
 }
 
-void USeasonsSubsystem::IsRewardClaimed(int32 Level, bool& isNormalClaimed, bool& isSpecialClaimed) {
+void USeasonsSubsystem::IsRewardClaimed(int32 Level, bool& IsNormalClaimed, bool& IsSpecialClaimed) {
 }
 
 bool USeasonsSubsystem::IsNodeUnlocked(int32 TreeOfVanityNodeID) {
@@ -68,10 +68,14 @@ FSeasonMissionResult USeasonsSubsystem::GetSeasonMissionResult() {
     return FSeasonMissionResult{};
 }
 
-void USeasonsSubsystem::GetSeasonLevelFromXP(int32 XP, int32& Level, float& currentLevelPercent, int32& currentLevelXP, int32& levelXPTotal) {
+void USeasonsSubsystem::GetSeasonLevelFromXP(int32 XP, int32& Level, float& currentLevelPercent, int32& currentLevelXP, int32& LevelXPTotal) {
 }
 
-void USeasonsSubsystem::GetSeasonLevel(int32& Level, float& currentLevelPercent, int32& currentLevelXP, int32& levelXPTotal) {
+void USeasonsSubsystem::GetSeasonLevel(int32& Level, float& currentLevelPercent, int32& currentLevelXP, int32& LevelXPTotal) {
+}
+
+bool USeasonsSubsystem::GetSeasonExpiryDate(FDateTime& ExpiryDate) {
+    return false;
 }
 
 void USeasonsSubsystem::GetSeasonBought(bool& isBought) {
@@ -100,7 +104,7 @@ FSeasonLevel USeasonsSubsystem::GetLevelReward(int32 Level) {
     return FSeasonLevel{};
 }
 
-void USeasonsSubsystem::GetLevelProgress(int32 Level, float& levelPercent, int32& levelXP, int32& levelXPTotal) {
+void USeasonsSubsystem::GetLevelProgress(int32 Level, float& levelPercent) {
 }
 
 TArray<UDataAsset*> USeasonsSubsystem::GetAssetReferences(int32 challengeIndex, USeasonChallenge*& outChallenge) {

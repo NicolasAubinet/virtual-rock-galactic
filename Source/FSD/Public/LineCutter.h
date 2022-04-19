@@ -3,8 +3,8 @@
 #include "AmmoDrivenWeapon.h"
 #include "LineCutter.generated.h"
 
-class AProjectileBase;
 class UItemUpgrade;
+class AProjectileBase;
 class ALineCutterProjectile;
 
 UCLASS()
@@ -12,24 +12,29 @@ class ALineCutter : public AAmmoDrivenWeapon {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool StopUsingReversesProjectile;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool RotateProjectileUntillStop;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool ExplodeLastProjectileOnNextFireAttempt;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<UItemUpgrade*> upgrades;
     
-    UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_LastProjectile)
+    UPROPERTY(BlueprintReadWrite, ReplicatedUsing=OnRep_LastProjectile, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<ALineCutterProjectile> LastProjectile;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MinExplosiveGoodbyeActivationTimme;
     
+public:
+    ALineCutter();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+protected:
     UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
     void Server_StopRotatingProjectile();
     
@@ -50,9 +55,5 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnFireWhileLastProjectileAlive(ALineCutterProjectile* Projectile);
     
-public:
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    ALineCutter();
 };
 

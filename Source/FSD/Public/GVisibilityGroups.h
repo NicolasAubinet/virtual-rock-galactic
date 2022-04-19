@@ -8,10 +8,10 @@ USTRUCT(BlueprintType)
 struct FGVisibilityGroups {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSet<UHUDVisibilityGroup*> AllGroups;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UHUDVisibilityGroup* EnemyHealth;
     
     FSD_API FGVisibilityGroups();

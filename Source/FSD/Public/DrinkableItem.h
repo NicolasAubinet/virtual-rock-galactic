@@ -10,9 +10,14 @@ class ADrinkableItem : public AAnimatedItem {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere, ReplicatedUsing=OnRep_DrinkableData)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_DrinkableData, meta=(AllowPrivateAccess=true))
     UDrinkableDataAsset* DrinkableData;
     
+public:
+    ADrinkableItem();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_DrinkableData();
     
@@ -25,9 +30,5 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     bool CheckCanSalute() const;
     
-public:
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    ADrinkableItem();
 };
 

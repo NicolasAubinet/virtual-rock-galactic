@@ -3,7 +3,7 @@
 #include "ExplosionBaseComponent.h"
 #include "ExplosionComponent.generated.h"
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UExplosionComponent : public UExplosionBaseComponent {
     GENERATED_BODY()
 public:

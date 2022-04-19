@@ -5,12 +5,12 @@
 
 class ADeepPathfinderCharacter;
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UDeepPatherFinderCharacterAfflictionComponent : public UPawnAfflictionComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     ADeepPathfinderCharacter* Character;
     
 public:

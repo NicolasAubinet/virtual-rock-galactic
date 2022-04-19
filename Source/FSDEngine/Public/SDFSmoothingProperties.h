@@ -6,10 +6,10 @@ USTRUCT(BlueprintType)
 struct FSDFSmoothingProperties {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float SmoothingDist;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool SmoothingEnabled;
     
     FSDENGINE_API FSDFSmoothingProperties();

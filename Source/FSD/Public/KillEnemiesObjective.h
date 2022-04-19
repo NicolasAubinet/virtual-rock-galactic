@@ -3,35 +3,38 @@
 #include "Objective.h"
 #include "KillEnemiesObjective.generated.h"
 
-class UDebrisPositioning;
-class UHealthComponentBase;
 class UEnemyDescriptor;
+class UDebrisPositioning;
 class APawn;
+class UHealthComponentBase;
 
-UCLASS(Abstract)
+UCLASS(Abstract, meta=(BlueprintSpawnableComponent))
 class UKillEnemiesObjective : public UObjective {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 EnemyCount;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 ExtraEnemies;
     
-    UPROPERTY(EditAnywhere, Instanced)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UDebrisPositioning* Positioning;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UEnemyDescriptor* EnemyTarget;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_EnemiesKilled)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_EnemiesKilled, meta=(AllowPrivateAccess=true))
     int32 EnemiesKilled;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_EnemiesToKill)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_EnemiesToKill, meta=(AllowPrivateAccess=true))
     int32 EnemiesToKill;
     
 public:
+    UKillEnemiesObjective();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, BlueprintPure=false)
     void RegisterTargetSpawned(APawn* Target) const;
     
@@ -48,9 +51,5 @@ protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_EnemiesKilled(int32 prevAmount);
     
-public:
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    UKillEnemiesObjective();
 };
 

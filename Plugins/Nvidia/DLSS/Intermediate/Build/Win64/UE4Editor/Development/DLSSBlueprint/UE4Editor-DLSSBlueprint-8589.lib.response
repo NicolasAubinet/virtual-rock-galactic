@@ -1,0 +1,13 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UE4Editor-DLSSBlueprint-8589.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Intermediate\Build\Win64\FSDEditor\Development\Engine\SharedPCH.Engine.h.obj"
+"C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Intermediate\Build\Win64\UE4Editor\Development\DLSSBlueprint\Module.DLSSBlueprint.cpp.obj"
+"C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Intermediate\Build\Win64\UE4Editor\Development\DLSSBlueprint\Module.DLSSBlueprint.gen.cpp.obj"
+"C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Intermediate\Build\Win64\UE4Editor\Development\DLSSBlueprint\Default.rc2.res"
+/OUT:"C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Intermediate\Build\Win64\UE4Editor\Development\DLSSBlueprint\UE4Editor-DLSSBlueprint-8589.lib"

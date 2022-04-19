@@ -7,17 +7,17 @@
 class UTerrainMaterial;
 class UVeinResourceCreator;
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UDebrisVeinComponent : public UDebrisActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UTerrainMaterial* Material;
     
-    UPROPERTY(EditAnywhere)
-    EDebrisCarvedType carverType;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    EDebrisCarvedType CarverType;
     
-    UPROPERTY(EditAnywhere, Instanced)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UVeinResourceCreator* VeinCreator;
     
     UDebrisVeinComponent();

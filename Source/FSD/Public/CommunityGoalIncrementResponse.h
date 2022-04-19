@@ -6,7 +6,7 @@ USTRUCT()
 struct FCommunityGoalIncrementResponse {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     bool success;
     
     FSD_API FCommunityGoalIncrementResponse();

@@ -4,13 +4,15 @@
 void AChargedWeapon::SetOverheated(bool isOverheated) {
 }
 
-void AChargedWeapon::Server_SetIsCharging_Implementation(bool isChargingValue) {
-}
-bool AChargedWeapon::Server_SetIsCharging_Validate(bool isChargingValue) {
-    return true;
+void AChargedWeapon::Server_SetIsCharging_Implementation(bool isCharging) {
 }
 
 
+
+
+
+void AChargedWeapon::OnRep_Charging() {
+}
 
 bool AChargedWeapon::GetIsCharging() const {
     return false;
@@ -24,7 +26,9 @@ void AChargedWeapon::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLi
 
 AChargedWeapon::AChargedWeapon() {
     this->FP_OverheatAnim = NULL;
+    this->WeaponOverheatAnim = NULL;
     this->FP_ChargeupMontage = NULL;
+    this->TP_ChargeupMontage = NULL;
     this->ChargeupParticles = NULL;
     this->ChargeupParticleInstance = NULL;
     this->ChargeupFireMuzzleFlash = NULL;

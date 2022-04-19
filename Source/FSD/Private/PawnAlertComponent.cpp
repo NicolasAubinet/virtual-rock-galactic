@@ -1,8 +1,6 @@
 #include "PawnAlertComponent.h"
 
-class UDamageClass;
 class APawn;
-class AActor;
 
 void UPawnAlertComponent::StopAutoAlerting() {
 }
@@ -10,7 +8,7 @@ void UPawnAlertComponent::StopAutoAlerting() {
 void UPawnAlertComponent::OnPawnSeen(APawn* Pawn) {
 }
 
-void UPawnAlertComponent::OnHit(float Damage, UDamageClass* DamageClass, AActor* DamageCauser, bool anyHealthLost) {
+void UPawnAlertComponent::OnHit(float Damage, const FDamageData& DamageData, bool anyHealthLost) {
 }
 
 void UPawnAlertComponent::OnAlerted() {

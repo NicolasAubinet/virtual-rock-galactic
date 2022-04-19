@@ -8,10 +8,10 @@ USTRUCT(BlueprintType)
 struct FSeasonEvent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     USeasonEventData* Event;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     int32 count;
     
     FSD_API FSeasonEvent();

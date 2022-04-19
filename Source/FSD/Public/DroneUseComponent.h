@@ -1,53 +1,56 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Components/ActorComponent.h"
 #include "EInputKeys.h"
+#include "Components/ActorComponent.h"
+#include "DroneFinishedUsingDelegate.h"
+#include "DelegateEventDelegate.h"
+#include "DroneUseProgressDelegate.h"
 #include "DroneUseComponent.generated.h"
 
 class APlayerCharacter;
 class UDialogDataAsset;
 class USingleUsableComponent;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FDroneUseComponentOnUsed, int32, TimesUsed);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDroneUseComponentOnBeginUse);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDroneUseComponentOnStopUse);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FDroneUseComponentOnProgress, float, Progress);
-
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class FSD_API UDroneUseComponent : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FDroneUseComponentOnUsed OnUsed;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDroneFinishedUsing OnUsed;
     
-    UPROPERTY(BlueprintAssignable)
-    FDroneUseComponentOnBeginUse OnBeginUse;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDelegateEvent OnBeginUse;
     
-    UPROPERTY(BlueprintAssignable)
-    FDroneUseComponentOnStopUse OnStopUse;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDelegateEvent OnStopUse;
     
-    UPROPERTY(BlueprintAssignable)
-    FDroneUseComponentOnProgress OnProgress;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDroneUseProgress OnProgress;
     
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDialogDataAsset* BoscoLaserpointerShout;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<USingleUsableComponent> SyncToUsable;
     
-    UPROPERTY(BlueprintReadOnly, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     float Progress;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float useDuration;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ResetOnFail;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool CanUse;
     
+public:
+    UDroneUseComponent();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+protected:
     UFUNCTION(BlueprintCallable)
     void SyncedUsableUserCountChangedResponse(int32 userCount);
     
@@ -73,8 +76,5 @@ public:
     UFUNCTION(BlueprintCallable)
     void BeginUse();
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    UDroneUseComponent();
 };
 

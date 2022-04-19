@@ -3,24 +3,24 @@
 #include "Blueprint/UserWidget.h"
 #include "OptionalObjectiveWidget.generated.h"
 
-class UObjective;
 class UOptionalObjectiveWidget;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOptionalObjectiveWidgetOnWidgetUpdated, UOptionalObjectiveWidget*, InOptionalObjectiveWidget);
+class UObjective;
 
 UCLASS(Abstract, EditInlineNew)
 class UOptionalObjectiveWidget : public UUserWidget {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FOptionalObjectiveWidgetOnWidgetUpdated OnWidgetUpdated;
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOptionalObjectiveWidgetDelegate, UOptionalObjectiveWidget*, InOptionalObjectiveWidget);
     
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOptionalObjectiveWidgetDelegate OnWidgetUpdated;
+    
+    UOptionalObjectiveWidget();
     UFUNCTION(BlueprintCallable)
     void SignalWidgetUpdated();
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void SetObjective(UObjective* obj);
     
-    UOptionalObjectiveWidget();
 };
 

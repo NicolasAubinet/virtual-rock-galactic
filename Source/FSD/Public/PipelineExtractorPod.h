@@ -11,13 +11,16 @@ class FSD_API APipelineExtractorPod : public ARessuplyPod {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_ConnectedSegment)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_ConnectedSegment, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<APipelineSegment> ConnectedSegment;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
     float TargetRotation;
     
 public:
+    APipelineExtractorPod();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
     void SetTargetRotation(APipelineSegment* InPipelineSegment);
     
@@ -32,8 +35,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ExtractorPodOrderedEvent(APlayerCharacter* InUser);
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    APipelineExtractorPod();
 };
 

@@ -3,7 +3,7 @@
 #include "CSGBaseComponent.h"
 #include "CSGGroupComponent.generated.h"
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UCSGGroupComponent : public UCSGBaseComponent {
     GENERATED_BODY()
 public:

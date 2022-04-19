@@ -10,7 +10,7 @@ class UPickaxeMeshPart : public UPickaxePartItem {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftObjectPtr<UStaticMesh> Mesh;
     
 public:

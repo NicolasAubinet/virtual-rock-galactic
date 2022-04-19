@@ -4,41 +4,42 @@
 #include "DeepDiveRewardItem.h"
 #include "DeepDive.generated.h"
 
-class UBiome;
 class UGeneratedMission;
+class UBiome;
 class UDeepDiveTemplate;
 
 UCLASS(BlueprintType)
 class UDeepDive : public UObject {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TArray<UGeneratedMission*> missions;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     UBiome* Biome;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TArray<FDeepDiveRewardItem> GivenRewards;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     int32 MissionsCompleted;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TArray<int32> StagesCompleted;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     int32 CurrentMissionIndex;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UDeepDiveTemplate* Template;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FText DeepDiveName;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     int32 BestTime;
     
+    UDeepDive();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsCompleted() const;
     
@@ -48,6 +49,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FDeepDiveRewardItem GetGivenRewardAtStage(int32 stageIndex);
     
-    UDeepDive();
 };
 

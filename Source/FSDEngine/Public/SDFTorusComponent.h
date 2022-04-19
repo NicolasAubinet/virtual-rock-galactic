@@ -4,11 +4,11 @@
 #include "SDFTorusProperties.h"
 #include "SDFTorusComponent.generated.h"
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class FSDENGINE_API USDFTorusComponent : public USDFBaseWithTransformComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSDFTorusProperties Properties;
     
     USDFTorusComponent();

@@ -1,22 +1,24 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Kismet/BlueprintFunctionLibrary.h"
 #include "GameFramework/PlayerInput.h"
-#include "Input/Events.h"
 #include "EKeyBindingAxis.h"
-#include "GameFramework/PlayerInput.h"
 #include "Input/Events.h"
+#include "Kismet/BlueprintFunctionLibrary.h"
+#include "Input/Events.h"
+#include "GameFramework/PlayerInput.h"
 #include "InputCoreTypes.h"
 #include "EFSDInputSource.h"
 #include "InputDisplay.h"
 #include "InputFunctionLibrary.generated.h"
 
 class APlayerController;
+class UTexture2D;
 
 UCLASS(BlueprintType)
 class UInputFunctionLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    UInputFunctionLibrary();
     UFUNCTION(BlueprintCallable)
     static void SetMouseSmoothingOn(bool smoothingOn);
     
@@ -50,6 +52,8 @@ public:
     UFUNCTION(BlueprintCallable)
     static bool FindInputDisplay(const APlayerController* PlayerController, FName InputName, EFSDInputSource InputSource, int32 LayoutIndex, FInputDisplay& OutInputDisplay);
     
-    UInputFunctionLibrary();
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    static UTexture2D* FindActionIcon(FName InActionName, bool InGamepadKeys);
+    
 };
 

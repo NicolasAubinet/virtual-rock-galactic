@@ -3,21 +3,21 @@
 #include "SpecialEventSpawner.h"
 #include "SimpleSpecialEventSpawner.generated.h"
 
-class AActor;
 class UDebrisPositioning;
+class AActor;
 
 UCLASS(EditInlineNew)
 class USimpleSpecialEventSpawner : public USpecialEventSpawner {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere, Instanced)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UDebrisPositioning* Positioning;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<AActor> EventActor;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float EventAvoidanceRadius;
     
 public:

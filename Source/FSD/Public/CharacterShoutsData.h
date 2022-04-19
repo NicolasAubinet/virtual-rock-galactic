@@ -8,7 +8,7 @@ UCLASS(BlueprintType)
 class UCharacterShoutsData : public UDataAsset {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FCharacterShouts Shouts;
     
     UCharacterShoutsData();

@@ -9,10 +9,10 @@ USTRUCT(BlueprintType)
 struct FSeasonalEventEntry {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USpecialEvent* SpecialEvent;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UMissionTemplate*> BannedMissions;
     
     FSD_API FSeasonalEventEntry();

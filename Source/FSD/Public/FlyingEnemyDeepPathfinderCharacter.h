@@ -1,34 +1,37 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "EnemyDeepPathfinderCharacter.h"
-#include "Engine/EngineTypes.h"
 #include "UObject/NoExportTypes.h"
+#include "Engine/EngineTypes.h"
 #include "FlyingEnemyDeepPathfinderCharacter.generated.h"
 
-class AActor;
+class UPrimitiveComponent;
 class UPhysicalMaterial;
 class UPhysicsAsset;
-class UPrimitiveComponent;
-class USoundCue;
 class UParticleSystem;
+class USoundCue;
+class AActor;
 
 UCLASS()
 class AFlyingEnemyDeepPathfinderCharacter : public AEnemyDeepPathfinderCharacter {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UPhysicalMaterial* FrozenMaterial;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UPhysicsAsset* FrozenAsset;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundCue* FrozenDeathSound;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UParticleSystem* FrozenDeathparticles;
     
+public:
+    AFlyingEnemyDeepPathfinderCharacter();
+protected:
     UFUNCTION(BlueprintCallable)
     void TriggerFrozenRagdoll();
     
@@ -39,6 +42,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void BP_FreezeImpact();
     
-    AFlyingEnemyDeepPathfinderCharacter();
 };
 

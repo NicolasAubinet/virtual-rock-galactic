@@ -5,6 +5,10 @@
 
 
 
+bool UWindowWidget::ReceiveCanCloseWindow_Implementation(FName InActionName, FKey InKey, bool InIsMouseEvent) {
+    return false;
+}
+
 
 
 

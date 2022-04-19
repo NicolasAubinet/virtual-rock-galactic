@@ -6,5 +6,6 @@ UENUM()
 enum class ECustomUsableType : uint8 {
     ClearOnFrameEnd,
     ClearOnUseReleased,
+    ClearManually,
 };
 

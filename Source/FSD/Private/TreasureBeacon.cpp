@@ -1,5 +1,7 @@
 #include "TreasureBeacon.h"
 #include "Net/UnrealNetwork.h"
+#include "Components/SceneComponent.h"
+#include "TerrainPlacementComponent.h"
 
 void ATreasureBeacon::SpawnDebreeParts() const {
 }
@@ -14,6 +16,8 @@ void ATreasureBeacon::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutL
 }
 
 ATreasureBeacon::ATreasureBeacon() {
+    this->RootComp = CreateDefaultSubobject<USceneComponent>(TEXT("RootComp"));
+    this->terrainPlacement = CreateDefaultSubobject<UTerrainPlacementComponent>(TEXT("terrainPlacement"));
     this->TreasurePositioning = NULL;
     this->DebrisPartsPositioning = NULL;
     this->AvoidCostCurve = NULL;

@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "FloatPerkActivation.h"
 #include "EPawnStatType.h"
+#include "FloatPerkActivation.h"
 #include "StatPerkActivation.generated.h"
 
 class UPawnStat;
@@ -11,10 +11,10 @@ class UStatPerkActivation : public UFloatPerkActivation {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UPawnStat* PawnStat;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EPawnStatType StatType;
     
 public:

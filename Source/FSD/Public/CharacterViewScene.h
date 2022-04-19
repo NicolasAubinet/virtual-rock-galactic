@@ -7,10 +7,10 @@ USTRUCT(BlueprintType)
 struct FCharacterViewScene {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FCharacterViewInfo> Characters;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool MissionSuccess;
     
     FSD_API FCharacterViewScene();

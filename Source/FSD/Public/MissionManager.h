@@ -5,18 +5,19 @@
 
 class URunningMissionBP;
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UMissionManager : public UActorComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<URunningMissionBP*> RunningBlueprints;
-    
-    UFUNCTION(BlueprintCallable)
-    void OnMatchStarted();
     
 public:
     UMissionManager();
+protected:
+    UFUNCTION(BlueprintCallable)
+    void OnMatchStarted();
+    
 };
 

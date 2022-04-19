@@ -2,30 +2,31 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "FloatPerkComponent.h"
+#include "DamageData.h"
 #include "ThornsPerkComponent.generated.h"
 
 class UDamageClass;
 class UStatusEffect;
-class AActor;
 
-UCLASS(Abstract)
+UCLASS(Abstract, meta=(BlueprintSpawnableComponent))
 class UThornsPerkComponent : public UFloatPerkComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDamageClass* DamageClass;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float CoolDown;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UStatusEffect> ThornsSTE;
-    
-    UFUNCTION(BlueprintCallable)
-    void OnHit(float Damage, UDamageClass* inDamageClass, AActor* DamageCauser, bool anyHealthLost);
     
 public:
     UThornsPerkComponent();
+protected:
+    UFUNCTION(BlueprintCallable)
+    void OnHit(float Damage, const FDamageData& DamageData, bool anyHealthLost);
+    
 };
 

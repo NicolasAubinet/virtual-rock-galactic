@@ -1,38 +1,38 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "FindSessionsCallbackProxy.h"
 #include "Net/OnlineBlueprintCallProxyBase.h"
 #include "FindSessionsCallbackProxy.h"
 #include "FSDFindSessionsCallbackProxy.generated.h"
 
+class UObject;
 class UFSDFindSteamSessions;
 class UFSDFindSessionsCallbackProxy;
-class UObject;
 class APlayerController;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDFindSessionsCallbackProxyOnSuccess, const TArray<FBlueprintSessionResult>&, Results);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDFindSessionsCallbackProxyOnFailure, const TArray<FBlueprintSessionResult>&, Results);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDFindSessionsCallbackProxyOnRefresh, const TArray<FBlueprintSessionResult>&, Results);
 
 UCLASS(MinimalAPI)
 class UFSDFindSessionsCallbackProxy : public UOnlineBlueprintCallProxyBase {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FFSDFindSessionsCallbackProxyOnSuccess OnSuccess;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FBlueprintFindSessionsResultDelegate OnSuccess;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDFindSessionsCallbackProxyOnFailure OnFailure;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FBlueprintFindSessionsResultDelegate OnFailure;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDFindSessionsCallbackProxyOnRefresh OnRefresh;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FBlueprintFindSessionsResultDelegate OnRefresh;
     
 private:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     UObject* WorldContextObject;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     UFSDFindSteamSessions* FSDFindSteamSessions;
     
+public:
+    UFSDFindSessionsCallbackProxy();
+private:
     UFUNCTION(BlueprintCallable)
     void OnFSDCompleted(bool bSuccess, const TArray<FBlueprintSessionResult>& Results);
     
@@ -46,6 +46,5 @@ public:
     UFUNCTION(BlueprintCallable)
     static UFSDFindSessionsCallbackProxy* FSDFindFullSessions(UObject* NewWorldContextObject, APlayerController* PlayerController, int32 MaxResults);
     
-    UFSDFindSessionsCallbackProxy();
 };
 

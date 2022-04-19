@@ -1,32 +1,32 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Engine/EngineTypes.h"
 #include "AIController.h"
+#include "MessageBehaviorTreeDelegate.h"
+#include "Engine/EngineTypes.h"
+#include "DelegateDelegate.h"
 #include "FSDAIController.generated.h"
 
 class APlayerCharacter;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDAIControllerOnMessageBehaviorTreeEvent, FName, Message);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFSDAIControllerOnAlertedEvent);
 
 UCLASS()
 class AFSDAIController : public AAIController {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable, BlueprintCallable)
-    FFSDAIControllerOnMessageBehaviorTreeEvent OnMessageBehaviorTreeEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FMessageBehaviorTree OnMessageBehaviorTreeEvent;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDAIControllerOnAlertedEvent OnAlertedEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDelegate OnAlertedEvent;
     
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TEnumAsByte<ECollisionChannel> LOSTraceChannel;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<APlayerCharacter> TargetedPlayer;
     
 public:
+    AFSDAIController();
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetAlerted(bool isAlerted);
     
@@ -52,6 +52,5 @@ public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, BlueprintPure)
     bool GetIsAlerted() const;
     
-    AFSDAIController();
 };
 

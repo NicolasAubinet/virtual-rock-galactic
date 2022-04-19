@@ -1,7 +1,12 @@
 #include "PlayerCharacterID.h"
 #include "Templates/SubclassOf.h"
 
+class UPlayerCharacterData;
 class APlayerCharacter;
+
+UPlayerCharacterData* UPlayerCharacterID::GetCharacterData() const {
+    return NULL;
+}
 
 TSubclassOf<APlayerCharacter> UPlayerCharacterID::GetCharacterClass() const {
     return NULL;

@@ -6,19 +6,19 @@ USTRUCT()
 struct FCommunityGoalTierResponse {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     bool Found;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     FString GoalID;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     float FirstTierGoal;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     float SecondTierGoal;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     float ThirdTierGoal;
     
     FSD_API FCommunityGoalTierResponse();

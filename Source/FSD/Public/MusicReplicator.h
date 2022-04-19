@@ -9,15 +9,16 @@ class AMusicReplicator : public AActor {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_ActiveMusic)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_ActiveMusic, meta=(AllowPrivateAccess=true))
     TArray<FActiveMusicItem> ActiveMusic;
     
+public:
+    AMusicReplicator();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_ActiveMusic();
     
-public:
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    AMusicReplicator();
 };
 

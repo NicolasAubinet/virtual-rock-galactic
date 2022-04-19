@@ -5,12 +5,12 @@
 
 class UFSDPhysicalMaterial;
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UPlayerReactiveTerrainTrackerComponent : public UReactiveTerrainTrackerComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UFSDPhysicalMaterial* CurrentPhysicalMaterial;
     
 public:

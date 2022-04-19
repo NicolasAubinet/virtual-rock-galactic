@@ -8,13 +8,13 @@ USTRUCT(BlueprintType)
 struct FReplicatedCharacterData {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<AActor> Target;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     float TemperatureEffect;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool bCanTakeDamage;
     
     FSD_API FReplicatedCharacterData();

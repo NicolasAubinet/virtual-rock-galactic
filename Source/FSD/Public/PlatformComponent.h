@@ -10,10 +10,10 @@ USTRUCT(BlueprintType)
 struct FPlatformComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UActorComponent> ComponentClass;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EPlatformComponentCriteria Criteria;
     
     FSD_API FPlatformComponent();

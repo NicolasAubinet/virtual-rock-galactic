@@ -1,7 +1,7 @@
 #include "DebrisCarved.h"
 
 UDebrisCarved::UDebrisCarved() {
-    this->carverType = EDebrisCarvedType::Large;
+    this->CarverType = EDebrisCarvedType::Large;
     this->TerrainMaterial = NULL;
     this->Filter = ECarveFilterType::ReplaceAll;
     this->ExpensiveNoise = 0.00f;

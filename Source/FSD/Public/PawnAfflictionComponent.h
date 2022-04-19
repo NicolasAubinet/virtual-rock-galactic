@@ -1,53 +1,54 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "EFrozenBitsSize.h"
 #include "Components/ActorComponent.h"
-#include "PawnAfflictionItem.h"
 #include "AfflictionEntriesArray.h"
+#include "AfflictionChangeDelegateDelegate.h"
+#include "PawnAfflictionItem.h"
+#include "EFrozenBitsSize.h"
 #include "PawnAfflictionComponent.generated.h"
 
-class UFrozenAfflictionEffect;
-class UBurningAfflictionEffect;
 class UPawnAffliction;
+class UBurningAfflictionEffect;
+class UFrozenAfflictionEffect;
 class UHealthComponentBase;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPawnAfflictionComponentOnAfflictionActivatedEvent, UPawnAffliction*, Affliction);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPawnAfflictionComponentOnAfflictionDeactivatedEvent, UPawnAffliction*, Affliction);
-
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UPawnAfflictionComponent : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FPawnAfflictionComponentOnAfflictionActivatedEvent OnAfflictionActivatedEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FAfflictionChangeDelegate OnAfflictionActivatedEvent;
     
-    UPROPERTY(BlueprintAssignable)
-    FPawnAfflictionComponentOnAfflictionDeactivatedEvent OnAfflictionDeactivatedEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FAfflictionChangeDelegate OnAfflictionDeactivatedEvent;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TMap<UPawnAffliction*, FPawnAfflictionItem> ActiveAfflictions;
     
-    UPROPERTY(Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     FAfflictionEntriesArray NetworkedAfflictions;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UFrozenAfflictionEffect> FrozenEffect;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UBurningAfflictionEffect> BurningEffect;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EFrozenBitsSize EffectSize;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float BaseEffectScale;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool UseDormancy;
     
 public:
+    UPawnAfflictionComponent();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void PushAffliction(UPawnAffliction* Affliction, bool onlyIfNotActive);
     
@@ -65,8 +66,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<UPawnAffliction*> GetActiveAfflictions() const;
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    UPawnAfflictionComponent();
 };
 

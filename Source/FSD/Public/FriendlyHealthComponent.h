@@ -5,33 +5,33 @@
 
 class UParticleSystem;
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UFriendlyHealthComponent : public UHealthComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxHealth;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float friendlyFireModifier;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float NeutralDamageModifier;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float BigHitDamageModifier;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float BigHitDamageReductionThreshold;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UParticleSystem* GenericImpactParticles;
     
 public:
-    /*UFUNCTION(BlueprintCallable, BlueprintPure)
-    float GetMaxHealth() const;*/
-    
     UFriendlyHealthComponent();
+    /*UFUNCTION(BlueprintCallable, BlueprintPure)*/
+    float GetMaxHealth() const;
+    
 };
 

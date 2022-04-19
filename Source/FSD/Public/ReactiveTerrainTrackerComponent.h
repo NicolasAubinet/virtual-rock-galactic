@@ -3,7 +3,7 @@
 #include "Components/ActorComponent.h"
 #include "ReactiveTerrainTrackerComponent.generated.h"
 
-UCLASS(Abstract)
+UCLASS(Abstract, meta=(BlueprintSpawnableComponent))
 class UReactiveTerrainTrackerComponent : public UActorComponent {
     GENERATED_BODY()
 public:

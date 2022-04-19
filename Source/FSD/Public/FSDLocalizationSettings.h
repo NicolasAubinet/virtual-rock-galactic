@@ -9,7 +9,7 @@ class UFSDLocalizationSettings : public UDeveloperSettings {
     GENERATED_BODY()
 public:
 private:
-    UPROPERTY(Config, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FFSDTranslationProgress> CommunityTranslationProgress;
     
 public:

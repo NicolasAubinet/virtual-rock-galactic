@@ -43,16 +43,12 @@ void UUsableComponentBase::BeginUse(APlayerCharacter* User, EInputKeys Key) {
 UUsableComponentBase::UUsableComponentBase() {
     this->CallbackKeys = 1;
     this->UseCooldown = 0.00f;
-    this->MustBeGroundedToUse = true;
-    this->CanUseStrict = false;
-    this->StrictOnlyAfterPickup = false;
     this->AnimationSettings = NULL;
     this->Priority = 0;
-    this->UseableByOwnerOnly = false;
     this->RestrictToCollider = NULL;
-    this->UseRestrictionAllowance = EUseRestriction::Free;
     this->IsRayTraceTriggered = true;
     this->ResetUsingOnCompletion = true;
-    this->EquipOnEndUse = false;
+    this->IsClientPredictive = false;
+    this->ThirdPersonWhileUsing = false;
 }
 

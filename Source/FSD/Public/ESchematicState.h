@@ -5,8 +5,7 @@
 UENUM()
 enum class ESchematicState : uint8 {
     NotOwned,
-    OwnedCannotBuild,
-    OwnedCanBuild,
+    Owned,
     OwnedBuilt,
 };
 

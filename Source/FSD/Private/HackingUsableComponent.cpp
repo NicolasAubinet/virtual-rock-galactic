@@ -4,7 +4,7 @@
 class UHackingToolWidget;
 class APlayerCharacter;
 
-void UHackingUsableComponent::OnRep_HackingState(const FHackingUsableState& oldState) const {
+void UHackingUsableComponent::OnRep_HackingState(const FHackingUsableState& oldState) {
 }
 
 bool UHackingUsableComponent::GetIsHacked() const {

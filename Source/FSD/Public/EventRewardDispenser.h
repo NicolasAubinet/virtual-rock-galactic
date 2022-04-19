@@ -1,35 +1,38 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
 #include "GameFramework/OnlineReplStructs.h"
+#include "GameFramework/Actor.h"
 #include "EventRewardDispenser.generated.h"
 
 class AFSDPlayerState;
 class AEventRewardFrame;
-class APlayerCharacter;
 class USchematic;
+class APlayerCharacter;
 
 UCLASS()
 class AEventRewardDispenser : public AActor {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_PlayerId)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_PlayerId, meta=(AllowPrivateAccess=true))
     FUniqueNetIdRepl PlayerId;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     AEventRewardFrame* DispenserFrame;
     
-    UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_PoweredUp)
+    UPROPERTY(BlueprintReadWrite, ReplicatedUsing=OnRep_PoweredUp, meta=(AllowPrivateAccess=true))
     bool PoweredUp;
     
-    UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_IsActivated)
+    UPROPERTY(BlueprintReadWrite, ReplicatedUsing=OnRep_IsActivated, meta=(AllowPrivateAccess=true))
     bool IsActivated;
     
-    UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_SelectedReward)
+    UPROPERTY(BlueprintReadWrite, ReplicatedUsing=OnRep_SelectedReward, meta=(AllowPrivateAccess=true))
     USchematic* SelectedReward;
     
 public:
+    AEventRewardDispenser();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintCallable)
     void SetSelectedReward(USchematic* InReward);
     
@@ -71,8 +74,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     AFSDPlayerState* GetPlayer() const;
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    AEventRewardDispenser();
 };
 

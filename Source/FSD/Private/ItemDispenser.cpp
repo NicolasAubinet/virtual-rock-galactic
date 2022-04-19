@@ -1,5 +1,7 @@
 #include "ItemDispenser.h"
 #include "Net/UnrealNetwork.h"
+#include "Components/SceneComponent.h"
+#include "InstantUsable.h"
 
 class APlayerCharacter;
 class AActor;
@@ -41,6 +43,8 @@ void AItemDispenser::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLi
 }
 
 AItemDispenser::AItemDispenser() {
+    this->Root = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
+    this->Usable = CreateDefaultSubobject<UInstantUsable>(TEXT("Usable"));
     this->itemClass = NULL;
     this->spawnedItem = NULL;
     this->ItemSpawnTime = 0.00f;

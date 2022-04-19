@@ -10,7 +10,7 @@ class UUnlockMissionTypeReward : public UUnlockReward {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UMissionTemplate* MissionToUnlock;
     
 public:

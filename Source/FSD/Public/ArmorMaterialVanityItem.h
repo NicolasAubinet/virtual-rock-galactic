@@ -3,27 +3,45 @@
 #include "VanityItem.h"
 #include "ArmorMaterialVanityItem.generated.h"
 
+class UMaterialInstanceDynamic;
 class UMaterialInterface;
+class UDynamicIcon;
 class UArmorVanityItem;
+class UMaterialInstance;
+class UMaterialInstanceConstant;
+class UObject;
+class UArmorMaterialVanityItem;
 
 UCLASS(EditInlineNew)
-class UArmorMaterialVanityItem : public UVanityItem {
+class FSD_API UArmorMaterialVanityItem : public UVanityItem {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftObjectPtr<UMaterialInterface> Material;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
-    TSoftObjectPtr<UMaterialInterface> IconMaterial;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
+    UDynamicIcon* DynamicIcon;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UArmorVanityItem* LockedToArmor;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UArmorVanityItem*> BannedArmors;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSoftObjectPtr<UMaterialInstance> ClothMaterial;
     
 public:
     UArmorMaterialVanityItem();
+    UFUNCTION(BlueprintCallable)
+    static UMaterialInstanceConstant* SetArmorMaterialToTwoSided(UMaterialInstance* Parent);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UMaterialInstanceDynamic* CreateIcon(UObject* Owner) const;
+    
+    UFUNCTION(BlueprintCallable)
+    static void CreateClothMaterialForAmorVanity(UArmorMaterialVanityItem* armorVanity);
+    
 };
 

@@ -12,21 +12,24 @@ class UItemsBar : public UFSDUserWidget {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UItemsBarIcon> DefaultItemWidget;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bShowSupplyItem;
     
-    UPROPERTY(BlueprintReadOnly, Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     TArray<UItemsBarIcon*> ItemIcons;
     
-    UPROPERTY(BlueprintReadOnly, Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UItemsBarIcon* SupplyIcon;
     
-    UPROPERTY(BlueprintReadOnly, Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UItemsBarIcon* SelectedIcon;
     
+public:
+    UItemsBar();
+protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnSupplyItemUnequipped(UItemsBarIcon* ItemIcon);
     
@@ -60,7 +63,5 @@ protected:
     UFUNCTION(BlueprintCallable)
     void ItemClicked(AItem* NewItem);
     
-public:
-    UItemsBar();
 };
 

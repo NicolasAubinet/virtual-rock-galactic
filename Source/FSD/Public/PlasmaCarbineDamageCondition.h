@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "DamageCondition.h"
 #include "EPlasmaCarbineConditions.h"
+#include "DamageCondition.h"
 #include "PlasmaCarbineDamageCondition.generated.h"
 
 UCLASS(EditInlineNew)
@@ -9,10 +9,10 @@ class UPlasmaCarbineDamageCondition : public UDamageCondition {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EPlasmaCarbineConditions WeaponCondition;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 Condition;
     
 public:

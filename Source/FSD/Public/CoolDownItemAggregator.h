@@ -6,27 +6,28 @@
 class USoundBase;
 class AItem;
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UCoolDownItemAggregator : public UItemAggregator {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float CooldownDuration;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundBase* AudioCoolDownFinished;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float CooldownRemaining;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool CoolDownIsPaused;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     AItem* Item;
     
 public:
+    UCoolDownItemAggregator();
     UFUNCTION(BlueprintCallable)
     void SetPaused(bool IsPaused);
     
@@ -39,6 +40,5 @@ public:
     UFUNCTION(BlueprintCallable)
     void ActivateCoolDown(bool startPaused);
     
-    UCoolDownItemAggregator();
 };
 

@@ -6,10 +6,10 @@ USTRUCT(BlueprintType)
 struct FDiscordEoMData {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FString nick;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FString UserId;
     
     FSD_API FDiscordEoMData();

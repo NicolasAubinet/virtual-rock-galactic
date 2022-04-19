@@ -9,10 +9,10 @@ USTRUCT(BlueprintType)
 struct FBinaryMatProperties {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EBinaryComb Result;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UTerrainMaterialCore* Material;
     
     FSDENGINE_API FBinaryMatProperties();

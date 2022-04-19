@@ -4,7 +4,7 @@
 #include "RandRange.h"
 #include "SpawnSettings.generated.h"
 
-class UParticleSystem;
+class UNiagaraSystem;
 class USoundCue;
 
 UCLASS()
@@ -12,13 +12,13 @@ class USpawnSettings : public UDataAsset {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere, EditFixedSize)
-    TArray<UParticleSystem*> SpawnEffects;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, EditFixedSize, meta=(AllowPrivateAccess=true))
+    TArray<UNiagaraSystem*> SpawnEffects;
     
-    UPROPERTY(EditAnywhere, EditFixedSize)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, EditFixedSize, meta=(AllowPrivateAccess=true))
     TArray<USoundCue*> SpawnSounds;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FRandRange SpawnDuration;
     
 public:

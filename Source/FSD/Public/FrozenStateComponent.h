@@ -1,39 +1,40 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "RandRange.h"
 #include "CharacterStateComponent.h"
+#include "RandRange.h"
 #include "FrozenStateComponent.generated.h"
 
 class USoundBase;
 class UFSDPhysicalMaterial;
 
-UCLASS(MinimalAPI)
+UCLASS(MinimalAPI, meta=(BlueprintSpawnableComponent))
 class UFrozenStateComponent : public UCharacterStateComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FRandRange DeFrostAmount;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundBase* AudioFreeFromIce;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UFSDPhysicalMaterial* IcePhysicalMaterial;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UFSDPhysicalMaterial* DwarfFleshMaterial;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float SlowAnimationSpeed;
     
+public:
+    UFrozenStateComponent();
+protected:
     UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
     void Server_ThawPlayer();
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ReceiveOnDefrosting();
     
-public:
-    UFrozenStateComponent();
 };
 

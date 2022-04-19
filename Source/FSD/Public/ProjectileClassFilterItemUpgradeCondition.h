@@ -11,7 +11,7 @@ class UProjectileClassFilterItemUpgradeCondition : public UItemUpgradeCondition 
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSubclassOf<AProjectileBase>> ProjectileClasses;
     
 public:

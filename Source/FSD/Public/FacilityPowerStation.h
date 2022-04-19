@@ -1,38 +1,39 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "Hackprogress_DelegateDelegate.h"
 #include "GameFramework/Actor.h"
 #include "FacilityPowerStation.generated.h"
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFacilityPowerStationOnHackingProgressDelegate, float, hackProgress);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFacilityPowerStationOnProgresspointDelegate, float, hackProgress);
 
 UCLASS()
 class FSD_API AFacilityPowerStation : public AActor {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FFacilityPowerStationOnHackingProgressDelegate OnHackingProgressDelegate;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FHackprogress_Delegate OnHackingProgressDelegate;
     
-    UPROPERTY(BlueprintAssignable)
-    FFacilityPowerStationOnProgresspointDelegate OnProgresspointDelegate;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FHackprogress_Delegate OnProgresspointDelegate;
     
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ProgressPoint;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 ProgresPointCount;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float TimeToDefend;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_Progress)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_Progress, meta=(AllowPrivateAccess=true))
     float Progress;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_IsHacking)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_IsHacking, meta=(AllowPrivateAccess=true))
     bool IsHacking;
     
 public:
+    AFacilityPowerStation();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void StopHacking();
     
@@ -56,8 +57,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsHacked() const;
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    AFacilityPowerStation();
 };
 

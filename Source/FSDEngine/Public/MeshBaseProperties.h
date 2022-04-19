@@ -6,7 +6,7 @@ USTRUCT(BlueprintType)
 struct FMeshBaseProperties {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool Enabled;
     
     FSDENGINE_API FMeshBaseProperties();

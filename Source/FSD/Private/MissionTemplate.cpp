@@ -1,18 +1,18 @@
 #include "MissionTemplate.h"
 #include "Templates/SubclassOf.h"
 
-class UFSDSaveGame;
+class UTexture2D;
 class UObject;
+class UMissionMutator;
+class UFSDSaveGame;
+class AProceduralSetup;
 class UMissionDuration;
 class UMissionComplexity;
-class AProceduralSetup;
-class UObjective;
 class UMissionTemplate;
-class UTexture2D;
-class UGeneratedMission;
 class UBiome;
 class UMissionWarning;
-class UMissionMutator;
+class UObjective;
+class UGeneratedMission;
 
 
 bool UMissionTemplate::IsLocked(UFSDSaveGame* SaveGame) const {

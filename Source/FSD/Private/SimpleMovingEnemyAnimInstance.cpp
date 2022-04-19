@@ -3,6 +3,10 @@
 void USimpleMovingEnemyAnimInstance::SetMeshScale(float newScale) {
 }
 
+bool USimpleMovingEnemyAnimInstance::IsNotMoving() const {
+    return false;
+}
+
 USimpleMovingEnemyAnimInstance::USimpleMovingEnemyAnimInstance() {
     this->Speed = 0.00f;
     this->WalkCycleSpeed = 200.00f;

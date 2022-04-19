@@ -2,112 +2,106 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "FSDPlayerControllerBase.h"
-#include "ESpacerigStartType.h"
-#include "PendingRewards.h"
-#include "EChatSenderType.h"
+#include "OnPlayerCharacterPossesedDelegate.h"
 #include "PendingRewardsStats.h"
-#include "GrenadeExplodeOperationData.h"
-#include "CarveWithColliderOperationData.h"
-#include "CarveWithSTLMeshOperationData.h"
-#include "PickaxeDigOperationData.h"
-#include "RemoveFloatingIslandOperationData.h"
-#include "MeltOperationData.h"
-#include "DrillOperationData.h"
-#include "SplineSegmentCarveOperationData.h"
+#include "ChatOpenedDelegateDelegate.h"
+#include "ESpacerigStartType.h"
+#include "EChatSenderType.h"
+#include "PendingRewards.h"
 #include "FSDPlayerController.generated.h"
 
-class UDrinkableDataAsset;
-class UTreasureRewarder;
 class UTexture2D;
+class APlayerCharacter;
 class UTutorialContentWidget;
-class UFSDWidgetEffectsComponent;
-class UPerkUsageComponent;
+class AFSDPlayerState;
 class UVanityItem;
+class UPerkUsageComponent;
+class UTerrainLatejoinComponent;
 class USoundMix;
+class UFSDWidgetEffectsComponent;
 class AActor;
 class UFSDAchievement;
-class UPlayerCharacterID;
 class UTemporaryBuff;
-class APlayerCharacter;
-class AFSDPlayerState;
+class UPlayerCharacterID;
 class USoundCue;
-class UResourceData;
+class UTreasureRewarder;
 class UVictoryPose;
 class UItemSkin;
 class UItemID;
 class UPickaxePart;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDPlayerControllerOnTransmitVoiceChanged, bool, isRecieving);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDPlayerControllerOnHideCurrentTutorialHint, bool, wasWatched);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFSDPlayerControllerOnEndLevelReceived);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDPlayerControllerOnChangeTutorialHintDuration, float, NewDuration);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDPlayerControllerOnReceiveVoiceChanged, bool, isRecieving);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_FiveParams(FFSDPlayerControllerOnShowTutorialHint, const FText&, Text, const FText&, Title, const FText&, TaskText, UTexture2D*, Image, float, Duration);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFSDPlayerControllerOnLevelFinished);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FFSDPlayerControllerOnShowTutorialWidget, TSubclassOf<UTutorialContentWidget>, TutorialWidget, bool, bIgnoreQueue);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFSDPlayerControllerOnPlayerCharacterPossesed);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFSDPlayerControllerOnChatOpened);
-
 UCLASS()
-class AFSDPlayerController : public AFSDPlayerControllerBase {
+class FSD_API AFSDPlayerController : public AFSDPlayerControllerBase {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FFSDPlayerControllerOnEndLevelReceived OnEndLevelReceived;
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FReceivingVoiceSignature, bool, isRecieving);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FReceivedEndLevelDelegate);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_FiveParams(FOnShowTutorialHint, const FText&, Text, const FText&, Title, const FText&, TaskText, UTexture2D*, Image, float, Duration);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnHideTutorialHint, bool, wasWatched);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnChangeTutorialWidget, TSubclassOf<UTutorialContentWidget>, TutorialWidget, bool, bIgnoreQueue);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChangeTutorialHintDuration, float, NewDuration);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FLevelFinishedSignature);
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDPlayerControllerOnReceiveVoiceChanged OnReceiveVoiceChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FReceivedEndLevelDelegate OnEndLevelReceived;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDPlayerControllerOnTransmitVoiceChanged OnTransmitVoiceChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FReceivingVoiceSignature OnReceiveVoiceChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDPlayerControllerOnLevelFinished OnLevelFinished;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FReceivingVoiceSignature OnTransmitVoiceChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDPlayerControllerOnShowTutorialHint OnShowTutorialHint;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FLevelFinishedSignature OnLevelFinished;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDPlayerControllerOnShowTutorialWidget OnShowTutorialWidget;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnShowTutorialHint OnShowTutorialHint;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDPlayerControllerOnChangeTutorialHintDuration OnChangeTutorialHintDuration;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnChangeTutorialWidget OnShowTutorialWidget;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDPlayerControllerOnHideCurrentTutorialHint OnHideCurrentTutorialHint;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnChangeTutorialHintDuration OnChangeTutorialHintDuration;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDPlayerControllerOnPlayerCharacterPossesed OnPlayerCharacterPossesed;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnHideTutorialHint OnHideCurrentTutorialHint;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnPlayerCharacterPossesed OnPlayerCharacterPossesed;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UPerkUsageComponent* PerkUsageComponent;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UTerrainLatejoinComponent* LateJoinComponent;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool IsOnSpaceRig;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bReceivedEndLevel;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<USoundMix*> InitialSoundMixes;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool ServerTravelDone;
     
-    UPROPERTY(BlueprintAssignable, BlueprintCallable)
-    FFSDPlayerControllerOnChatOpened OnChatOpened;
+    UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FChatOpenedDelegate OnChatOpened;
     
-    UPROPERTY(EditAnywhere, Export)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UFSDWidgetEffectsComponent* WidgetEffects;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     ESpacerigStartType SpacerigSpawnType;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bDetectGravityChanges;
     
 public:
+    AFSDPlayerController();
     UFUNCTION(BlueprintCallable)
     void ToggleVoiceOn(bool Enabled);
     
@@ -126,11 +120,8 @@ public:
     UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
     void ServerSetUserHoldToRun(bool Value);
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_TravelDone();
-    
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
-    void Server_TerrainLateJoinPartReceived();
     
     UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
     void Server_SetLateJoinDone();
@@ -174,11 +165,6 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void RecieveOnControllerReady();
     
-public:
-    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-    void RecieveClientTravelDone();
-    
-protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ReceiveEndLevel();
     
@@ -246,26 +232,11 @@ protected:
     void EndLevel();
     
 public:
-    UFUNCTION(Client, Reliable)
-    void Client_TerrainLateJoinVisibleChunks(const TArray<uint32>& visibleChunks);
-    
-    UFUNCTION(BlueprintCallable, Client, Reliable)
-    void Client_TerrainLateJoinPart(const TArray<FGrenadeExplodeOperationData>& explosions, const TArray<FCarveWithColliderOperationData>& colliderCarves, const TArray<FCarveWithSTLMeshOperationData>& meshCarves, const TArray<FPickaxeDigOperationData>& pickAxe, const TArray<FRemoveFloatingIslandOperationData>& floating, const TArray<FDrillOperationData>& drills, const TArray<FMeltOperationData>& melts, const TArray<FSplineSegmentCarveOperationData>& splines);
-    
-    UFUNCTION(BlueprintCallable, Client, Reliable)
-    void Client_TerrainLateJoinDone();
-    
-    UFUNCTION(BlueprintCallable, Client, Reliable)
-    void Client_TerrainLateJoinDebris(const TArray<int32>& instanceComponentPairs);
-    
     UFUNCTION(BlueprintCallable, Client, Reliable)
     void Client_PlayCue(USoundCue* SoundCue);
     
     UFUNCTION(BlueprintCallable, Client, Reliable)
     void Client_EndLevel_WaitForData(bool areObjectivesCompleted, int32 numberOfPlayersInPod);
-    
-    UFUNCTION(BlueprintCallable, Client, Reliable)
-    void Client_DeductResource(UResourceData* Resource, int32 Amount);
     
     UFUNCTION(BlueprintCallable, Client, Reliable)
     void Client_CollectVanityItem(UTreasureRewarder* rewarder, UVanityItem* targetItem, UPlayerCharacterID* targetCharacter);
@@ -277,14 +248,10 @@ public:
     void Client_CollectTreasureSkin(UTreasureRewarder* rewarder, UItemSkin* targetSkin, UItemID* targetItem);
     
     UFUNCTION(BlueprintCallable, Client, Reliable)
-    void Client_CollectTreasureDrink(UTreasureRewarder* rewarder, UDrinkableDataAsset* Drinkable);
-    
-    UFUNCTION(BlueprintCallable, Client, Reliable)
     void Client_CollectPickaxePart(const UTreasureRewarder* rewarder, UPickaxePart* targetPart);
     
     UFUNCTION(BlueprintCallable)
     void ApplyPendingRewards();
     
-    AFSDPlayerController();
 };
 

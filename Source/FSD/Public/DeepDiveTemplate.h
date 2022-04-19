@@ -1,9 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "SavableDataAsset.h"
-#include "DeepDiveTemplateItem.h"
-#include "ESchematicType.h"
 #include "RandInterval.h"
+#include "SavableDataAsset.h"
+#include "ESchematicType.h"
+#include "DeepDiveTemplateItem.h"
 #include "DeepDiveTemplate.generated.h"
 
 class UDifficultySetting;
@@ -12,39 +12,39 @@ UCLASS()
 class UDeepDiveTemplate : public USavableDataAsset {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere, EditFixedSize)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, EditFixedSize, meta=(AllowPrivateAccess=true))
     TArray<UDifficultySetting*> Difficulties;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FDeepDiveTemplateItem> missions;
     
-    UPROPERTY(EditAnywhere, EditFixedSize)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, EditFixedSize, meta=(AllowPrivateAccess=true))
     TArray<ESchematicType> Rewards;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 CreditsPerPrimaryObjective;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 CreditsPerSecondaryObjective;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 XPPerPrimaryObjective;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 XPPerSecondaryObjective;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float HazardBonus;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FRandInterval MutatorCount;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FRandInterval WarningCount;
     
+    UDeepDiveTemplate();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     ESchematicType GetStageRewardType(int32 stageIndex) const;
     
-    UDeepDiveTemplate();
 };
 

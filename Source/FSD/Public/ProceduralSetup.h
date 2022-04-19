@@ -3,179 +3,185 @@
 #include "Templates/SubclassOf.h"
 #include "GameFramework/Actor.h"
 #include "UObject/NoExportTypes.h"
-#include "EncounterSpecialItem.h"
-#include "RoomNode.h"
-#include "GemResourceAmount.h"
 #include "VeinResource.h"
+#include "EncountersSpawnedDelegateDelegate.h"
+#include "EncounterSpecialItem.h"
+#include "Engine/LatentActionManager.h"
+#include "DebrisCapsule.h"
 #include "CarvedResource.h"
+#include "GemResourceAmount.h"
 #include "CollectableSpawnableItem.h"
 #include "ESpawnSettings.h"
+#include "RoomNode.h"
+#include "UObject/NoExportTypes.h"
 #include "TunnelNode.h"
 #include "GeneratedInfluenceSets.h"
+#include "RandRange.h"
 #include "GeneratedInstantCarvers.h"
 #include "GeneratedDebris.h"
 #include "PathObstacle.h"
 #include "InfluenceMap.h"
-#include "Engine/LatentActionManager.h"
 #include "EDebrisItemPass.h"
 #include "EDebrisCarvedType.h"
-#include "UObject/NoExportTypes.h"
-#include "RandRange.h"
-#include "DebrisCapsule.h"
 #include "ProceduralSetup.generated.h"
 
-class UProceduralObjectColliders;
-class AProceduralSetup;
-class USpecialEvent;
-class UNoisyPathfinderComponent;
-class UProceduralTunnelComponent;
-class ADeepCSGWorld;
-class UFloodFillSettings;
-class UMissionDNA;
-class UResourceData;
-class UBiome;
-class AFSDPlayerController;
 class UTunnelParameters;
+class UPLSEncounterComponent;
+class UProceduralTunnelComponent;
+class USpecialEvent;
+class UBiome;
+class UFloodFillSettings;
+class UResourceData;
+class UNoisyPathfinderComponent;
+class UProceduralObjectColliders;
+class ADeepCSGWorld;
+class UMissionDNA;
+class AProceduralSetup;
+class AFSDPlayerController;
 class URoomGeneratorBase;
 class UCaveInfluencer;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FProceduralSetupOnEncounterSpawnedEvent, AProceduralSetup*, setup);
-
 UCLASS()
-class AProceduralSetup : public AActor {
+class FSD_API AProceduralSetup : public AActor {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ShowItemNoisePattern;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 Seed;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool UseRandomSeed;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FRandomStream RandomStream;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FRandomStream RandomStreamServer;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FRandomStream RandomStreamAsync;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FRandomStream RandomStreamAsyncServer;
     
-    UPROPERTY(Transient)
-    FProceduralSetupOnEncounterSpawnedEvent OnEncounterSpawnedEvent;
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    FEncountersSpawnedDelegate OnEncounterSpawnedEvent;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FEncounterSpecialItem> SpecialEncountersToSpawn;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     USpecialEvent* ForcedSpecialEvent;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     USpecialEvent* ForcedTreasure;
     
 protected:
-    UPROPERTY(Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UNoisyPathfinderComponent* NoisyPathfinder;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UProceduralTunnelComponent* ProceduralTunnel;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPLSEncounterComponent* Encounters;
+    
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UProceduralObjectColliders* ObjectColliders;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     ADeepCSGWorld* CSGWorld;
     
-    UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UFloodFillSettings* PathfinderNoise;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FVeinResource> VeinResources;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FCarvedResource> CarvedResources;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TSubclassOf<UMissionDNA> MissionDNA;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FGemResourceAmount> GemResourcesToGenerate;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FCollectableSpawnableItem> CollectablesToGenerate;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     ESpawnSettings SpawnSettings;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool CanSpawnSpecialEvents;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ShouldCarveTunnels;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FRoomNode> Rooms;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FRoomNode> RoomsInitialState;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
-    TArray<FTunnelNode> Tunnels;
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    TArray<FTunnelNode> tunnels;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FGeneratedInfluenceSets GeneratedInfluenceSets;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FGeneratedInstantCarvers GeneratedInstantCarvers;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FGeneratedDebris GeneratedDebris;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UBiome* Biome;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float missionLength;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FPathObstacle> PathObstacles;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FInfluenceMap InfluenceMap;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<UResourceData*> SpawnedResources;
     
-    UPROPERTY(BlueprintReadOnly, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     float CaveDepth;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     AActor* PostProcessActor;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     USpecialEvent* SpecialEvent;
     
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool IsInitialized;
     
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     int32 CurrentRoomPass;
     
-    UPROPERTY(BlueprintReadWrite)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool Pass1Completed;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool UsePerLevelCritterSpawning;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     FString LastCompletedPLSPass;
     
 public:
+    AProceduralSetup();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void StartGenerationOnClient(AFSDPlayerController* client);
     
@@ -206,11 +212,6 @@ public:
     UFUNCTION(BlueprintCallable)
     void SetSeed(int32 NewSeed);
     
-private:
-    UFUNCTION(BlueprintCallable)
-    void SetObjectivesCompleted();
-    
-public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ResetData();
     
@@ -241,16 +242,16 @@ public:
     UMissionDNA* GetMissionDNA() const;
     
 protected:
-    UFUNCTION(BlueprintCallable)
-    TMap<FString, float> GetGemsResourceAmounts();
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    TMap<FString, float> GetGemsResourceAmounts() const;
     
 public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     ADeepCSGWorld* GetCSGWorld() const;
     
 protected:
-    UFUNCTION(BlueprintCallable)
-    TMap<FString, float> GetCollectablesResourceAmounts();
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    TMap<FString, float> GetCollectablesResourceAmounts() const;
     
 public:
     UFUNCTION(BlueprintCallable)
@@ -272,16 +273,16 @@ public:
     void GeneratePostCarveRooms();
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-    void GenerateLandscapeFromData(int32 NewSeed, const TArray<FRoomNode>& NewRooms, const TArray<FPathObstacle>& obstacles);
+    void GenerateLandscapeFromData(int32 NewSeed, const TArray<FRoomNode>& NewRooms, const TArray<FPathObstacle>& Obstacles);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void GenerateLandscape();
     
     UFUNCTION(BlueprintCallable)
-    static void GenerateDebrisVeins_Async(AProceduralSetup*& setup, EDebrisCarvedType carverType, FLatentActionInfo LatentInfo);
+    static void GenerateDebrisVeins_Async(AProceduralSetup*& setup, EDebrisCarvedType CarverType, FLatentActionInfo LatentInfo);
     
     UFUNCTION(BlueprintCallable)
-    void GenerateDebrisVeins(EDebrisCarvedType carverType);
+    void GenerateDebrisVeins(EDebrisCarvedType CarverType);
     
     UFUNCTION(BlueprintCallable)
     FVector FindLocationInDirection(FVector Origin, FVector Direction, float horizontalDeviation, float verticalDeviation, FRandRange Distance, float additionalDistance);
@@ -309,9 +310,6 @@ public:
     
     UFUNCTION(BlueprintCallable)
     void CreateGeneratedInfluenceSet();
-    
-    UFUNCTION(BlueprintCallable)
-    void CreateAdditionalRooms();
     
     UFUNCTION(BlueprintCallable)
     int32 ConnectRooms(UPARAM(Ref) FRoomNode& From, UPARAM(Ref) FRoomNode& to, bool hasDirt, UTunnelParameters* tunnelParameterOverride);
@@ -358,8 +356,5 @@ public:
     UFUNCTION(BlueprintCallable)
     int32 AddAirParticlesCollider(const FDebrisCapsule& Capsule);
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    AProceduralSetup();
 };
 

@@ -9,10 +9,10 @@ USTRUCT(BlueprintType)
 struct FGeneralMatProperties {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EGeneralComb Result;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UTerrainMaterialCore* Material;
     
     FSDENGINE_API FGeneralMatProperties();

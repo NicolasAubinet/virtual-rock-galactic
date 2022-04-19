@@ -1,11 +1,12 @@
 #include "GooGunPuddle.h"
 #include "Net/UnrealNetwork.h"
 #include "Templates/SubclassOf.h"
+#include "Components/SphereComponent.h"
+#include "SimpleHealthComponent.h"
 
-class UStatusEffect;
 class UPrimitiveComponent;
+class UStatusEffect;
 class AActor;
-class UDamageClass;
 
 void AGooGunPuddle::SetStatusEffect(TSubclassOf<UStatusEffect> NewStatusEffect) {
 }
@@ -20,7 +21,7 @@ void AGooGunPuddle::OnPuddleEndOverLap(UPrimitiveComponent* OverlappedComponent,
 void AGooGunPuddle::OnPuddleBeginOverLap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
 }
 
-void AGooGunPuddle::OnHit(float Damage, UDamageClass* DamageClass, AActor* DamageCauser, bool anyHealthLost) {
+void AGooGunPuddle::OnHit(float Damage, const FDamageData& DamageData, bool anyHealthLost) {
 }
 
 void AGooGunPuddle::AddStatusEffect(TSubclassOf<UStatusEffect> NewStatusEffect) {
@@ -34,6 +35,8 @@ void AGooGunPuddle::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLif
 }
 
 AGooGunPuddle::AGooGunPuddle() {
+    this->SphereTrigger = CreateDefaultSubobject<USphereComponent>(TEXT("SphereTrigger"));
+    this->SimpleHealth = CreateDefaultSubobject<USimpleHealthComponent>(TEXT("SimpleHealth"));
     this->SpawnSound = NULL;
     this->ActiveStatusEffectTriggersMask = 0;
     this->LifeTime = 0.00f;

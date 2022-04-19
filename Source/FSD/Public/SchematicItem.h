@@ -10,6 +10,7 @@ UCLASS(Abstract, BlueprintType, EditInlineNew)
 class USchematicItem : public UObject {
     GENERATED_BODY()
 public:
+    USchematicItem();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FText GetTitle() const;
     
@@ -22,6 +23,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FText GetDescription() const;
     
-    USchematicItem();
 };
 

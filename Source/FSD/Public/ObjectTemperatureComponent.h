@@ -1,45 +1,45 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "TemperatureComponent.h"
+#include "OnStartBurningDelegate.h"
 #include "ObjectTemperatureComponent.generated.h"
 
 class UHealthComponentBase;
 
-UDELEGATE(BlueprintAuthorityOnly, BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FObjectTemperatureComponentOnStartBurning);
-
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UObjectTemperatureComponent : public UTemperatureComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FObjectTemperatureComponentOnStartBurning OnStartBurning;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnStartBurning OnStartBurning;
     
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float TemperatureChangeScale;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float BurnTemperature;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DouseFireTemperature;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 CoolingRate;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool IsHeatsourceWhenOnFire;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float OnFireHeatRange;
     
+public:
+    UObjectTemperatureComponent();
+protected:
     UFUNCTION(BlueprintCallable)
     void TimerCallback();
     
     UFUNCTION(BlueprintCallable)
     void OnDeath(UHealthComponentBase* HealthComponent);
     
-public:
-    UObjectTemperatureComponent();
 };
 

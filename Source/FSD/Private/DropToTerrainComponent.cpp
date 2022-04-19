@@ -1,5 +1,7 @@
 #include "DropToTerrainComponent.h"
 
+class USceneComponent;
+
 void UDropToTerrainComponent::StopDropDetection(bool stopFalling) {
 }
 
@@ -9,7 +11,7 @@ bool UDropToTerrainComponent::SetParentPositionOnAll_Validate(FVector CurrentPar
     return true;
 }
 
-void UDropToTerrainComponent::OnTerrainRemoved() {
+void UDropToTerrainComponent::OnTerrainRemoved(USceneComponent* Point) {
 }
 
 void UDropToTerrainComponent::BeginDropDetection() {

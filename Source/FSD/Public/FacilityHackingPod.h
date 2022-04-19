@@ -1,22 +1,26 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "RessuplyPod.h"
+#include "HackingPod_DelegateDelegate.h"
 #include "EHackingPodState.h"
 #include "FacilityHackingPod.generated.h"
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFacilityHackingPodOnHackingPodStateChanged, EHackingPodState, State);
 
 UCLASS()
 class FSD_API AFacilityHackingPod : public ARessuplyPod {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FFacilityHackingPodOnHackingPodStateChanged OnHackingPodStateChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FHackingPod_Delegate OnHackingPodStateChanged;
     
 protected:
-    UPROPERTY(EditAnywhere, ReplicatedUsing=OnRep_PodState)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_PodState, meta=(AllowPrivateAccess=true))
     EHackingPodState PodState;
     
+public:
+    AFacilityHackingPod();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+protected:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetState(EHackingPodState aState);
     
@@ -33,8 +37,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     EHackingPodState GetState() const;
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    AFacilityHackingPod();
 };
 

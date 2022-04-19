@@ -4,11 +4,11 @@
 #include "CSGBakedChildInstanceProperties.h"
 #include "CSGBakedChildInstanceComponent.generated.h"
 
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UCSGBakedChildInstanceComponent : public UCSGBaseComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FCSGBakedChildInstanceProperties Properties;
     
     UCSGBakedChildInstanceComponent();

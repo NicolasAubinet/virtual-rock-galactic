@@ -1,129 +1,128 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
+#include "SupplyStatusChangedDelegateDelegate.h"
 #include "GameFramework/PlayerState.h"
-#include "GameplayTagContainer.h"
+#include "PlayerSpawnedSignatureDelegate.h"
+#include "PlayerVoiceSignatureDelegate.h"
+#include "SelectedCharacterChangedDelegateDelegate.h"
+#include "EnemyKilledSignatureDelegate.h"
+#include "PlayerNameChangedSignatureDelegate.h"
+#include "FractionLevelGeneratedDelegateDelegate.h"
+#include "LevelGenerationStateSignatureDelegate.h"
 #include "RewardTexts.h"
-#include "EChatSenderType.h"
 #include "XPReward.h"
 #include "CharacterProgress.h"
 #include "EGameOwnerStatus.h"
 #include "CreditsReward.h"
+#include "EChatSenderType.h"
 #include "FSDPlayerState.generated.h"
 
-class UPlayerStatsComponent;
-class UDamageClass;
 class UPlayerResourceComponent;
-class APlayerCharacter;
-class AActor;
 class UVanityItem;
+class APlayerCharacter;
+class AFSDPlayerController;
+class UPlayerStatsComponent;
 class UPlayerRejoinState;
 class USaveGameStateComponent;
 class UPlayerCharacterID;
-class AFSDPlayerController;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDPlayerStateOnPlayerCharacterSpawned, APlayerCharacter*, PlayerCharacter);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDPlayerStateOnFractionLevelGenerated, float, Fraction);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDPlayerStateOnPlayerTalkingChanged, bool, IsTalking);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDPlayerStateOnSelectedCharacterChanged, TSubclassOf<APlayerCharacter>, NewCharacter);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FFSDPlayerStateOnSupplyStatusChangedEvent, float, ammoStatus01, float, healthStatus01);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDPlayerStateOnLevelGenerationStateChanged, const FString&, NewState);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FFSDPlayerStateOnEnemyKilledEvent, const FGameplayTagContainer&, enemyTags, AActor*, enemy, UDamageClass*, DamageClass);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDPlayerStateOnPlayerNameChanged, const FString&, NewName);
 
 UCLASS()
-class AFSDPlayerState : public APlayerState {
+class FSD_API AFSDPlayerState : public APlayerState {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FFSDPlayerStateOnPlayerCharacterSpawned OnPlayerCharacterSpawned;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FPlayerSpawnedSignature OnPlayerCharacterSpawned;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDPlayerStateOnPlayerTalkingChanged OnPlayerTalkingChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FPlayerVoiceSignature OnPlayerTalkingChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDPlayerStateOnSelectedCharacterChanged OnSelectedCharacterChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FSelectedCharacterChangedDelegate OnSelectedCharacterChanged;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_FractionLevelGenerated)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_FractionLevelGenerated, meta=(AllowPrivateAccess=true))
     float FractionLevelGenerated;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_LevelGenerationState)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_LevelGenerationState, meta=(AllowPrivateAccess=true))
     FString LevelGenerationState;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDPlayerStateOnSupplyStatusChangedEvent OnSupplyStatusChangedEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FSupplyStatusChangedDelegate OnSupplyStatusChangedEvent;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDPlayerStateOnEnemyKilledEvent OnEnemyKilledEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FEnemyKilledSignature OnEnemyKilledEvent;
     
-    UPROPERTY(BlueprintReadOnly, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     TArray<UVanityItem*> LatestEquipedVanity;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere, ReplicatedUsing=OnRep_SelectedCharacter)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_SelectedCharacter, meta=(AllowPrivateAccess=true))
     TSubclassOf<APlayerCharacter> SelectedCharacter;
     
-    UPROPERTY(BlueprintReadOnly, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     bool bIsServer;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ShouldCopyProperties;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_GameOwnerStatus)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_GameOwnerStatus, meta=(AllowPrivateAccess=true))
     uint8 gameOwnerStatus;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool IsOnSpaceRig;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UPlayerStatsComponent* PlayerStatsComponent;
     
-    UPROPERTY(Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UPlayerRejoinState* RejoinState;
     
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     USaveGameStateComponent* SaveGameStateComponent;
     
-    UPROPERTY(BlueprintReadOnly, Transient, ReplicatedUsing=OnRep_PlayerCharacter)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_PlayerCharacter, meta=(AllowPrivateAccess=true))
     APlayerCharacter* PlayerCharacter;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool IsInMission;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool IsTalking;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool HasGeneratedLevel;
     
-    UPROPERTY(BlueprintReadWrite, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     bool HasSelectedCharacter;
     
-    UPROPERTY(Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     int32 PlayerSortId;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDPlayerStateOnPlayerNameChanged OnPlayerNameChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FPlayerNameChangedSignature OnPlayerNameChanged;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDPlayerStateOnFractionLevelGenerated OnFractionLevelGenerated;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FFractionLevelGeneratedDelegate OnFractionLevelGenerated;
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDPlayerStateOnLevelGenerationStateChanged OnLevelGenerationStateChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FLevelGenerationStateSignature OnLevelGenerationStateChanged;
     
-    UPROPERTY(BlueprintReadOnly, Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UPlayerResourceComponent* PlayerResources;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_SupplyAmmoStatus)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_SupplyAmmoStatus, meta=(AllowPrivateAccess=true))
     uint8 SupplyAmmoStatus;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_SupplyHealthStatus)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_SupplyHealthStatus, meta=(AllowPrivateAccess=true))
     uint8 SupplyHealthStatus;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FRewardTexts RewardTexts;
     
 public:
+    AFSDPlayerState();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
     UFUNCTION(BlueprintCallable)
     void SetSelectedCharacterID(UPlayerCharacterID* characterID);
     
@@ -137,14 +136,14 @@ public:
     void SetCanOnlySpectate(bool canOnlySpectate);
     
 protected:
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void ServerSetSelectedCharacter(TSubclassOf<APlayerCharacter> NewCharacter);
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetSupplyStatus(uint8 StatusHealth, uint8 StatusAmmo);
     
 public:
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetGameOwnerStatus(int32 NewGameOwnerStatus);
     
 protected:
@@ -236,8 +235,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void CharacterSelected();
     
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    AFSDPlayerState();
 };
 

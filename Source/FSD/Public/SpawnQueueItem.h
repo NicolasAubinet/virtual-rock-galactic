@@ -1,24 +1,23 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "EnemySpawnedDelegateDelegate.h"
 #include "SpawnQueueItem.generated.h"
 
 class APawn;
 class UEnemyDescriptor;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_DELEGATE_OneParam(FSpawnQueueItemCallback, APawn*, enemy);
-
 USTRUCT(BlueprintType)
 struct FSpawnQueueItem {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<APawn> EnemyClass;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UEnemyDescriptor* enemy;
     
-    UPROPERTY()
-    FSpawnQueueItemCallback Callback;
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FEnemySpawnedDelegate Callback;
     
     FSD_API FSpawnQueueItem();
 };

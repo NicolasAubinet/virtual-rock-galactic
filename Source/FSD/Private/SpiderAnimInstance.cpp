@@ -3,8 +3,31 @@
 void USpiderAnimInstance::SetMeshScale(float newScale) {
 }
 
+void USpiderAnimInstance::SetDeathAnimationCategory(ESpiderDeathAnimationCategory Category) {
+}
+
 
 void USpiderAnimInstance::PlayForcedCycle(float Duration) {
+}
+
+bool USpiderAnimInstance::IsNotStrafing() const {
+    return false;
+}
+
+bool USpiderAnimInstance::IsNotStaggered() const {
+    return false;
+}
+
+bool USpiderAnimInstance::IsNotMoving() const {
+    return false;
+}
+
+bool USpiderAnimInstance::IsNotFrozen() const {
+    return false;
+}
+
+bool USpiderAnimInstance::IsNotAirborne() const {
+    return false;
 }
 
 USpiderAnimInstance::USpiderAnimInstance() {
@@ -41,5 +64,6 @@ USpiderAnimInstance::USpiderAnimInstance() {
     this->WalkToTurnRight = false;
     this->WalkToTurnLeft = false;
     this->IsInFakePhysics = false;
+    this->DeathAnimationCategory = ESpiderDeathAnimationCategory::NoAnimation;
 }
 

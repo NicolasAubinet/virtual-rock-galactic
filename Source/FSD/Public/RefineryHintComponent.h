@@ -3,18 +3,21 @@
 #include "TutorialHintComponent.h"
 #include "RefineryHintComponent.generated.h"
 
+class APipelineExtractorPod;
 class AFSDRefinery;
 class APipelineSegment;
-class APipelineExtractorPod;
 
-UCLASS(Abstract)
+UCLASS(Abstract, meta=(BlueprintSpawnableComponent))
 class URefineryHintComponent : public UTutorialHintComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<AFSDRefinery> Refinery;
     
+public:
+    URefineryHintComponent();
+protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ReceiveRefinerySpawned(AFSDRefinery* InRefinery);
     
@@ -27,7 +30,5 @@ protected:
     UFUNCTION(BlueprintCallable)
     void OnRefinerySpawned(AFSDRefinery* InRefinery);
     
-public:
-    URefineryHintComponent();
 };
 

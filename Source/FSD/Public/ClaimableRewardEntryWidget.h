@@ -6,19 +6,22 @@
 
 class UClaimableRewardEntryWidget;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FClaimableRewardEntryWidgetOnRewardClaimed, UClaimableRewardEntryWidget*, EntryWidget);
-
 UCLASS(EditInlineNew)
 class UClaimableRewardEntryWidget : public UUserWidget {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FClaimableRewardEntryWidgetOnRewardClaimed OnRewardClaimed;
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FWidgetDelegate, UClaimableRewardEntryWidget*, EntryWidget);
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FWidgetDelegate OnRewardClaimed;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FClaimableRewardEntry Data;
     
+public:
+    UClaimableRewardEntryWidget();
+protected:
     UFUNCTION(BlueprintCallable)
     void SignalRewardClaimed();
     
@@ -30,7 +33,5 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ReceiveDataChanged();
     
-public:
-    UClaimableRewardEntryWidget();
 };
 

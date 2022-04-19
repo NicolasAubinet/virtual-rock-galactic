@@ -1,27 +1,27 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "DamageSigDelegate.h"
 #include "HealthDamageTracker.generated.h"
 
 class UHealthComponentBase;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FHealthDamageTrackerOnTrackedPercentageReachedEvent, float, Amount);
-
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UHealthDamageTracker : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FHealthDamageTrackerOnTrackedPercentageReachedEvent OnTrackedPercentageReachedEvent;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FDamageSig OnTrackedPercentageReachedEvent;
     
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float TiggerOnPercentage;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UHealthComponentBase* Health;
     
 public:
+    UHealthDamageTracker();
     UFUNCTION(BlueprintCallable)
     void ResetTrackedDamage();
     
@@ -29,7 +29,5 @@ protected:
     UFUNCTION(BlueprintCallable)
     void OnDamageTaken(float Amount);
     
-public:
-    UHealthDamageTracker();
 };
 

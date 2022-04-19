@@ -3,18 +3,17 @@
 #include "InstantUsable.h"
 #include "BPInstantUsable.generated.h"
 
-class APlayerCharacter;
 class USceneComponent;
+class APlayerCharacter;
 
-UCLASS()
-class UBPInstantUsable : public UInstantUsable {
+UCLASS(meta=(BlueprintSpawnableComponent))
+class FSD_API UBPInstantUsable : public UInstantUsable {
     GENERATED_BODY()
 public:
+    UBPInstantUsable();
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-    bool BPCanUse(APlayerCharacter* User, USceneComponent* UseCollider) const;
+    bool BPCanUse(APlayerCharacter* User, USceneComponent* useCollider) const;
     
-public:
-    UBPInstantUsable();
 };
 

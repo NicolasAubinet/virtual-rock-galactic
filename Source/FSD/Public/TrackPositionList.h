@@ -10,16 +10,16 @@ USTRUCT(BlueprintType)
 struct FTrackPositionList {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FName TrackName;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TArray<FVector> Positions;
     
-    UPROPERTY(Export)
+    UPROPERTY(Export, meta=(AllowPrivateAccess=true))
     TArray<TWeakObjectPtr<UGemTracker>> Trackers;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     TArray<TWeakObjectPtr<UMaterialInstanceDynamic>> DynamicMaterials;
     
     FSD_API FTrackPositionList();

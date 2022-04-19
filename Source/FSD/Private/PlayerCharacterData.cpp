@@ -35,5 +35,6 @@ FLinearColor UPlayerCharacterData::GetColor() const {
 }
 
 UPlayerCharacterData::UPlayerCharacterData() {
+    this->characterID = NULL;
 }
 

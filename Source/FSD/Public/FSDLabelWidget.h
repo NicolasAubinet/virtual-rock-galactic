@@ -9,6 +9,7 @@ UCLASS()
 class UFSDLabelWidget : public UTextBlock {
     GENERATED_BODY()
 public:
+    UFSDLabelWidget();
     UFUNCTION(BlueprintCallable)
     void SetWrapTextAt(float WrapAt);
     
@@ -27,6 +28,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetFontSize() const;
     
-    UFSDLabelWidget();
 };
 

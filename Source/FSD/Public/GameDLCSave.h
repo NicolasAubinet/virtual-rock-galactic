@@ -8,7 +8,7 @@ struct FGameDLCSave {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TSet<FGuid> AnnouncedIDs;
     
 public:

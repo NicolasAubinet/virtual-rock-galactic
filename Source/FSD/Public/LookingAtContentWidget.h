@@ -3,41 +3,42 @@
 #include "Blueprint/UserWidget.h"
 #include "LookingAtContentWidget.generated.h"
 
-class UPetComponent;
 class UPawnAfflictionComponent;
 class AActor;
+class UHackingUsableComponent;
 class USimpleObjectInfoComponent;
 class UHealth;
 class IHealth;
-class UHackingUsableComponent;
+class UPetComponent;
 
 UCLASS(Abstract, EditInlineNew)
 class ULookingAtContentWidget : public UUserWidget {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<AActor> CurrentTarget;
     
-    UPROPERTY(BlueprintReadOnly, Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UPawnAfflictionComponent> CurrentTargetAfflictions;
     
-    UPROPERTY(BlueprintReadOnly, Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<USimpleObjectInfoComponent> CurrentTargetInfo;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TScriptInterface<IHealth> CurrentTargetHealth;
     
-    UPROPERTY(BlueprintReadOnly, Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UHackingUsableComponent> CurrentHackingComponent;
     
-    UPROPERTY(BlueprintReadOnly, Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UPetComponent> CurrentPetComponent;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool bWeakPointHit;
     
 public:
+    ULookingAtContentWidget();
     UFUNCTION(BlueprintCallable)
     void UpdateCurrentTarget(float DeltaSeconds, AActor* InTargetActor, const TScriptInterface<IHealth>& InTargetHealthComponent);
     
@@ -61,6 +62,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetTargetHealthPct() const;
     
-    ULookingAtContentWidget();
 };
 

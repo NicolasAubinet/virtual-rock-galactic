@@ -14,26 +14,18 @@ UCLASS(BlueprintType)
 class USchematicBlueprintLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
+    USchematicBlueprintLibrary();
+    UFUNCTION(BlueprintCallable)
+    static void PriceSchematics(const TSet<USchematic*>& Schematics);
+    
     UFUNCTION(BlueprintCallable)
     static void PriceAllSchematics(bool lockPrices);
     
-    UFUNCTION(BlueprintCallable, BlueprintPure)
-    static bool IsSchematicOwnedOrForged(UObject* WorldContextObject, USchematic* Schematic);
-    
-    UFUNCTION(BlueprintCallable, BlueprintPure)
-    static bool IsSchematicOwned(UObject* WorldContextObject, USchematic* Schematic);
-    
-    UFUNCTION(BlueprintCallable, BlueprintPure)
-    static bool IsSchematicForged(UObject* WorldContextObject, USchematic* Schematic);
+    UFUNCTION(BlueprintCallable)
+    static void LockSchematics(const TSet<USchematic*>& Schematics);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static bool HasAnyUnlockableSchematics(UObject* WorldContextObject, UPlayerCharacterID* characterID, TSet<USchematicCategory*>& Categories);
-    
-    UFUNCTION(BlueprintCallable)
-    static TArray<USchematic*> GetRewardableSchematics(UObject* WorldContextObject, UPlayerCharacterID* characterID, USchematicCategory* Category);
-    
-    UFUNCTION(BlueprintCallable)
-    static TArray<USchematic*> GetForgedSchematic(UObject* WorldContextObject);
     
     UFUNCTION(BlueprintCallable)
     static USchematicCategory* FindItemUpgradeSchematicCategory(UItemUpgrade* Upgrade);
@@ -41,6 +33,5 @@ public:
     UFUNCTION(BlueprintCallable)
     static void AddSkinSchematicCollectionToSettings(UItemSkinSchematicCollection* Collection);
     
-    USchematicBlueprintLibrary();
 };
 

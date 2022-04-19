@@ -1,73 +1,77 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
+#include "EThrownGrenadeItemState.h"
 #include "Item.h"
 #include "RejoinListener.h"
 #include "UObject/NoExportTypes.h"
-#include "EThrownGrenadeItemState.h"
 #include "UObject/NoExportTypes.h"
 #include "ThrownGrenadeItem.generated.h"
 
-class UHealthComponentBase;
 class UPlayerAnimInstance;
 class UGrenadeAnimationSet;
 class UItemCharacterAnimationSet;
 class AGrenade;
 class UStaticMeshComponent;
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE(FThrownGrenadeItemOnGrenadeThrown);
-
 UCLASS()
 class AThrownGrenadeItem : public AItem, public IRejoinListener {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable)
-    FThrownGrenadeItemOnGrenadeThrown OnGrenadeThrown;
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnGrenadeThrown);
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnGrenadeThrown OnGrenadeThrown;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UPlayerAnimInstance* FPAnimInstance;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     UPlayerAnimInstance* TPAnimInstance;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UItemCharacterAnimationSet* CharacterAnimationSet;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FVector ThrowOffset;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ThrowAngle;
     
-    UPROPERTY(BlueprintReadWrite, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     int32 MaxGrenades;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_GrenadeCount)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_GrenadeCount, meta=(AllowPrivateAccess=true))
     int32 Grenades;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     float GrenadeCooldownRemaining;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_State)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_State, meta=(AllowPrivateAccess=true))
     EThrownGrenadeItemState State;
     
-    UPROPERTY(BlueprintReadWrite, Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_GrenadeClass, meta=(AllowPrivateAccess=true))
     TSubclassOf<AGrenade> GrenadeClass;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UGrenadeAnimationSet* DefaultGrenadeAnimationSet;
     
-    UPROPERTY(BlueprintReadWrite, Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UStaticMeshComponent* GrenadeMeshInstance;
     
-    UPROPERTY(Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     bool HasRejoinedInitialized;
     
+public:
+    AThrownGrenadeItem();
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+protected:
     UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
     void Server_ThrowGrenade();
     
-    UFUNCTION(Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
     void Server_SetState(EThrownGrenadeItemState itemState);
     
 public:
@@ -78,14 +82,14 @@ public:
     void ResupplyGrenades(float percentage);
     
 protected:
-    UFUNCTION()
+    UFUNCTION(BlueprintCallable)
     void OnRep_State();
     
-    UFUNCTION()
+    UFUNCTION(BlueprintCallable)
     void OnRep_GrenadeCount();
     
     UFUNCTION(BlueprintCallable)
-    void OnDeath(UHealthComponentBase* Health);
+    void OnRep_GrenadeClass();
     
     UFUNCTION(BlueprintCallable)
     void GrenadeThrowFinished();
@@ -102,10 +106,6 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetGrenadeDuration() const;
     
-public:
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-    AThrownGrenadeItem();
     
     // Fix for true pure virtual functions not being implemented
 };

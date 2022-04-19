@@ -8,7 +8,7 @@ struct FInputTranslationTable {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<FName, FInputTranslation> Entries;
     
 public:

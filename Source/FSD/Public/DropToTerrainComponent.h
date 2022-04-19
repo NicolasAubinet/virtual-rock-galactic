@@ -1,34 +1,42 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Components/ActorComponent.h"
 #include "UObject/NoExportTypes.h"
+#include "Components/ActorComponent.h"
+#include "OnIsFallingToTerrainChangedDelegate.h"
 #include "DropToTerrainComponent.generated.h"
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FDropToTerrainComponentOnFallToTerrainStateChanged, bool, IsFalling);
+class UTerrainDetectComponent;
+class USceneComponent;
 
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class UDropToTerrainComponent : public UActorComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
+    TArray<UTerrainDetectComponent*> TerrainPoints;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float FallVelocity;
     
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float TerrainTraceMaxDistance;
     
-    UPROPERTY(BlueprintAssignable)
-    FDropToTerrainComponentOnFallToTerrainStateChanged OnFallToTerrainStateChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FOnIsFallingToTerrainChanged OnFallToTerrainStateChanged;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FVector CurrentLocation;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     FVector DropTarget;
     
-    UPROPERTY(BlueprintReadOnly)
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     bool IsDetecting;
     
+public:
+    UDropToTerrainComponent();
+protected:
     UFUNCTION(BlueprintCallable)
     void StopDropDetection(bool stopFalling);
     
@@ -36,12 +44,10 @@ protected:
     void SetParentPositionOnAll(FVector CurrentParentLocation);
     
     UFUNCTION(BlueprintCallable)
-    void OnTerrainRemoved();
+    void OnTerrainRemoved(USceneComponent* Point);
     
     UFUNCTION(BlueprintCallable)
     void BeginDropDetection();
     
-public:
-    UDropToTerrainComponent();
 };
 

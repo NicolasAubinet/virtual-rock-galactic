@@ -3,7 +3,7 @@
 #include "CapacityBasedItemAggregator.h"
 #include "DoubleDrillAggregator.generated.h"
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UDoubleDrillAggregator : public UCapacityBasedItemAggregator {
     GENERATED_BODY()
 public:

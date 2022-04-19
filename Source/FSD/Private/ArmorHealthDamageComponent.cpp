@@ -11,17 +11,16 @@ void UArmorHealthDamageComponent::SetHealthOnAllItems(float newHealth) {
 void UArmorHealthDamageComponent::RegrowAllArmor(float baseHealth) {
 }
 
-void UArmorHealthDamageComponent::OnRep_ArmorDamageIndex(uint32 OldValue) {
+void UArmorHealthDamageComponent::OnRep_ArmorDamageInfo(FArmorDamageInfo OldValue) {
 }
 
 void UArmorHealthDamageComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
     Super::GetLifetimeReplicatedProps(OutLifetimeProps);
     
-    DOREPLIFETIME(UArmorHealthDamageComponent, ArmorDamageIndex);
+    DOREPLIFETIME(UArmorHealthDamageComponent, ArmorDamageInfo);
 }
 
 UArmorHealthDamageComponent::UArmorHealthDamageComponent() {
-    this->ArmorDamageIndex = 0;
     this->AffectedByAmorBreak = true;
 }
 

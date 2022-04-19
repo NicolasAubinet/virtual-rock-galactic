@@ -10,6 +10,6 @@ FUpgradeValues UFlaregunProjectileUpgrade::GetUpgradedValue(TSubclassOf<AActor> 
 
 UFlaregunProjectileUpgrade::UFlaregunProjectileUpgrade() {
     this->upgradeType = EFlaregunProjectileUpgrades::Duration;
-    this->projectileClass = NULL;
+    this->ProjectileClass = NULL;
 }
 

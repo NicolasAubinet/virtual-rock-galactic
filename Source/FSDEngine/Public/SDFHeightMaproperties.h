@@ -7,7 +7,7 @@ USTRUCT(BlueprintType)
 struct FSDFHeightMaproperties {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FVector Scale;
     
     FSDENGINE_API FSDFHeightMaproperties();

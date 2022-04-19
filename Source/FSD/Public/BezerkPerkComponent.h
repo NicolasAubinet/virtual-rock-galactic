@@ -5,21 +5,22 @@
 
 class UPawnStat;
 
-UCLASS(Abstract)
+UCLASS(Abstract, meta=(BlueprintSpawnableComponent))
 class UBezerkPerkComponent : public UFloatPerkComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UPawnStat* BoostedStat;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float AmountPerValue;
-    
-    UFUNCTION(BlueprintCallable)
-    void OnHealthChanged(float Health);
     
 public:
     UBezerkPerkComponent();
+protected:
+    UFUNCTION(BlueprintCallable)
+    void OnHealthChanged(float Health);
+    
 };
 

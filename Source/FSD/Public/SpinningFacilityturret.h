@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "RandRange.h"
 #include "FacilityTurret.h"
 #include "UObject/NoExportTypes.h"
+#include "RandRange.h"
 #include "SpinningFacilityturret.generated.h"
 
 UCLASS()
@@ -10,27 +10,27 @@ class ASpinningFacilityturret : public AFacilityTurret {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(Replicated, Transient)
+    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
     FRotator TargetRotation;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FRandRange AimAtTargetEveryTurn;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float TurnCooldown;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float TurnTimer;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float Acceptance;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float TurnSpeed;
     
 public:
+    ASpinningFacilityturret();
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
     
-    ASpinningFacilityturret();
 };
 

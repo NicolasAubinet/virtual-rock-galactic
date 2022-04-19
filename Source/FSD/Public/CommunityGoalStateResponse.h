@@ -6,22 +6,22 @@ USTRUCT()
 struct FCommunityGoalStateResponse {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     bool isGoal;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     bool isRecruitment;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     bool FreeBeers;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     float TimeLeftSeconds;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     int32 LastUpdateGoalsID;
     
-    UPROPERTY()
+    UPROPERTY(meta=(AllowPrivateAccess=true))
     int32 CurrentGoalPeriodID;
     
     FSD_API FCommunityGoalStateResponse();

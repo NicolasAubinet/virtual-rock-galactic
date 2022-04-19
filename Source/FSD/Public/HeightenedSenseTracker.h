@@ -2,22 +2,22 @@
 #include "CoreMinimal.h"
 #include "HeightenedSenseTracker.generated.h"
 
-class AActor;
-class UHealthComponentBase;
 class UAttackingPointInterface;
 class IAttackingPointInterface;
+class AActor;
+class UHealthComponentBase;
 
 USTRUCT(BlueprintType)
 struct FHeightenedSenseTracker {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<AActor> Actor;
     
-    UPROPERTY(Export)
+    UPROPERTY(BlueprintReadWrite, Export, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UHealthComponentBase> HealthComponent;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     TScriptInterface<IAttackingPointInterface> AttackingPoint;
     
     FSD_API FHeightenedSenseTracker();

@@ -2,21 +2,21 @@
 #include "CoreMinimal.h"
 #include "PlanetZoneItem.generated.h"
 
-class UGeneratedMission;
 class UBiome;
 class UPlanetZone;
+class UGeneratedMission;
 
 USTRUCT()
 struct FPlanetZoneItem {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
+    UPROPERTY(Transient, meta=(AllowPrivateAccess=true))
     TArray<UBiome*> Biomes;
     
-    UPROPERTY(Transient)
+    UPROPERTY(Transient, meta=(AllowPrivateAccess=true))
     TArray<UGeneratedMission*> missions;
     
-    UPROPERTY(Transient)
+    UPROPERTY(Transient, meta=(AllowPrivateAccess=true))
     UPlanetZone* Zone;
     
     FSD_API FPlanetZoneItem();

@@ -1,9 +1,9 @@
 #include "PipelineStart.h"
 #include "Net/UnrealNetwork.h"
+#include "TrackBuilderUsable.h"
 
-class ATrackBuilderSegment;
 class APipelineFinish;
-class UTrackBuilderUsable;
+class ATrackBuilderSegment;
 class APipelineSegment;
 
 
@@ -29,6 +29,7 @@ void APipelineStart::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLi
 
 APipelineStart::APipelineStart() {
     this->PipelineID = 0;
+    this->PipelineStartUsable = CreateDefaultSubobject<UTrackBuilderUsable>(TEXT("PipelineStartUsable"));
     this->BuildState = EPipelineBuildState::NotStarted;
     this->PipelineFinish = NULL;
     this->Refinery = NULL;

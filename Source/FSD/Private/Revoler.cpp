@@ -3,7 +3,7 @@
 class AActor;
 class UFSDPhysicalMaterial;
 
-void ARevoler::OnTargetKilled(AActor* Target, UFSDPhysicalMaterial* PhysMat) {
+void ARevoler::OnTargetKilled(AActor* Target, UFSDPhysicalMaterial* PhysMat, bool wasDirectHit) {
 }
 
 ARevoler::ARevoler() {

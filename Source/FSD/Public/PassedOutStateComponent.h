@@ -5,21 +5,22 @@
 
 class UDialogDataAsset;
 
-UCLASS(MinimalAPI)
+UCLASS(MinimalAPI, meta=(BlueprintSpawnableComponent))
 class UPassedOutStateComponent : public UCharacterStateComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDialogDataAsset* ReviveShout;
     
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool bAllPlayersPassedOut;
-    
-    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-    void ReceiveTeamPassedOut();
     
 public:
     UPassedOutStateComponent();
+protected:
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void ReceiveTeamPassedOut();
+    
 };
 

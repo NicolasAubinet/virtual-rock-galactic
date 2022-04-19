@@ -1,12 +1,13 @@
 #include "GameEvent.h"
 #include "Net/UnrealNetwork.h"
 #include "Templates/SubclassOf.h"
+#include "Components/ChildActorComponent.h"
 
 class ARessuplyPod;
-class UDebrisPositioning;
-class AActor;
-class AEventStarterButton;
 class AProceduralSetup;
+class AActor;
+class UDebrisPositioning;
+class AEventStarterButton;
 
 void AGameEvent::TrySetupGameEvent() {
 }
@@ -29,6 +30,9 @@ AActor* AGameEvent::SpawnEventActor(TSubclassOf<AActor> eventActorClass, const F
 }
 
 void AGameEvent::SetStageProgress(float Progress) {
+}
+
+void AGameEvent::SetProgressBarPct(float InPct) {
 }
 
 void AGameEvent::SetObjectivesPerStage(int32 NewObjectivesPerStage) {
@@ -63,6 +67,10 @@ void AGameEvent::OnRep_EventParticipants() {
 
 
 
+bool AGameEvent::IsEventCompleted() const {
+    return false;
+}
+
 bool AGameEvent::IsEventActive() const {
     return false;
 }
@@ -76,6 +84,10 @@ bool AGameEvent::GetShowTimeOnHUD() const {
 }
 
 bool AGameEvent::GetShowScoreOnHUD() const {
+    return false;
+}
+
+bool AGameEvent::GetShowProgressBar() const {
     return false;
 }
 
@@ -125,6 +137,7 @@ void AGameEvent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifeti
 
 AGameEvent::AGameEvent() {
     this->bGameEventSetup = false;
+    this->StartEventObject = CreateDefaultSubobject<UChildActorComponent>(TEXT("StartEventObject"));
     this->EventTriggeredShout = NULL;
     this->EventFinishedShout = NULL;
     this->EventFailedShout = NULL;
@@ -141,6 +154,8 @@ AGameEvent::AGameEvent() {
     this->FailedEvent = false;
     this->ShowRemainingTimeOnHUD = false;
     this->ShowScoreStatusOnHUD = false;
+    this->ShowProgressBar = false;
+    this->ProgressBarPct = 0.00f;
     this->SkipEventStarters = false;
 }
 

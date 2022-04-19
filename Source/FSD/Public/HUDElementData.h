@@ -7,10 +7,10 @@ USTRUCT(BlueprintType)
 struct FHUDElementData {
     GENERATED_BODY()
 public:
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     EHUDVisibilityMode Mode;
     
-    UPROPERTY()
+    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
     int32 Version;
     
     FSD_API FHUDElementData();

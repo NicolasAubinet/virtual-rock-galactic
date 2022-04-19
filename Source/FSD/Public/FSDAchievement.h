@@ -4,8 +4,8 @@
 #include "EFSDAchievementType.h"
 #include "FSDAchievement.generated.h"
 
-class UObject;
 class AFSDPlayerController;
+class UObject;
 class UFSDAchievement;
 
 UCLASS()
@@ -13,22 +13,23 @@ class UFSDAchievement : public USavableDataAsset {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FString SteamAPIAchievementName;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FString SteamAPIStatName;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FString XboxAchievementID;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float AchievementTargetValue;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EFSDAchievementType AchievementType;
     
 public:
+    UFSDAchievement();
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetAchievementProgressForEntireServer(float Progress, UObject* WorldContext);
     
@@ -41,6 +42,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetAchievementTargetValue();
     
-    UFSDAchievement();
 };
 

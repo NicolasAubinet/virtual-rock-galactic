@@ -1,33 +1,34 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EHUDVisibilityReason.h"
 #include "GameFramework/HUD.h"
+#include "EHUDVisibilityReason.h"
 #include "FSDHUD.generated.h"
 
-class APlayerController;
-class URadarPointComponent;
 class APlayerCharacter;
 class AFSDHUD;
+class APlayerController;
+class URadarPointComponent;
 class APlayerCameraDrone;
-
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FFSDHUDSetObjectivesVisible, bool, InVisible, bool, animate);
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFSDHUDOnHUDVisibilityChanged, bool, InHudVisible);
 
 UCLASS(NonTransient)
 class AFSDHUD : public AHUD {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable, BlueprintCallable)
-    FFSDHUDSetObjectivesVisible SetObjectivesVisible;
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FSetObjectivesVisible, bool, InVisible, bool, animate);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FHudVisibilityChanged, bool, InHudVisible);
     
-    UPROPERTY(BlueprintAssignable)
-    FFSDHUDOnHUDVisibilityChanged OnHUDVisibilityChanged;
+    UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FSetObjectivesVisible SetObjectivesVisible;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    FHudVisibilityChanged OnHUDVisibilityChanged;
     
 protected:
-    UPROPERTY(BlueprintReadOnly, Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     uint8 IsVisibleFlags;
     
 public:
+    AFSDHUD();
     UFUNCTION(BlueprintCallable)
     bool ToggleHUDVisibility(EHUDVisibilityReason reason);
     
@@ -63,6 +64,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void CameraDroneSpawned(APlayerCameraDrone* Drone);
     
-    AFSDHUD();
 };
 

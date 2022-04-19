@@ -2,13 +2,13 @@
 #include "Net/UnrealNetwork.h"
 #include "Templates/SubclassOf.h"
 
-class APawn;
-class AProceduralSetup;
-class ATetherStation;
-class UEncounterManager;
-class UDebrisPositioning;
-class AActor;
 class UCappedResource;
+class AActor;
+class AProceduralSetup;
+class UDebrisPositioning;
+class UEncounterManager;
+class ATetherStation;
+class APawn;
 class ARessuplyPod;
 
 void UFacilityObjective::SpawnFacilityEncounters(AProceduralSetup* setup, UEncounterManager* Encounters, UDebrisPositioning* Positioning) {
@@ -109,6 +109,7 @@ UFacilityObjective::UFacilityObjective() {
     this->MinimumTurretEncounters = 0;
     this->mainFacility = NULL;
     this->MainFacilityRoom = -1;
+    this->HasRemovedMainShield = false;
     this->GoalResource = NULL;
     this->AmountRequired = 1.00f;
     this->AmountCollected = 0.00f;

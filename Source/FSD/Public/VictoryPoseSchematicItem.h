@@ -10,7 +10,7 @@ class UVictoryPoseSchematicItem : public USchematicItem {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UVictoryPose* VictoryPose;
     
 public:

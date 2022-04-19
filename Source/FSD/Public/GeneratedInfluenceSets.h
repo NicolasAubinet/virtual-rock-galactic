@@ -7,10 +7,10 @@ USTRUCT(BlueprintType)
 struct FGeneratedInfluenceSets {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FGeneratedInfluenceSet> InfluenceSets;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     bool IsValid;
     
     FSD_API FGeneratedInfluenceSets();

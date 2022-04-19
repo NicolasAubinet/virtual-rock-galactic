@@ -11,13 +11,14 @@ class ADualMachinePistols : public ADualWieldWeapon {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UStatusEffect> EmptyClipStatusEffect;
-    
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
-    void Server_TriggerStatusEffect();
     
 public:
     ADualMachinePistols();
+protected:
+    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    void Server_TriggerStatusEffect();
+    
 };
 

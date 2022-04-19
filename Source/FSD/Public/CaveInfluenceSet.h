@@ -7,7 +7,7 @@ USTRUCT(BlueprintType)
 struct FCaveInfluenceSet {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient)
+    UPROPERTY(Transient, meta=(AllowPrivateAccess=true))
     TArray<FCaveInfluence> CaveInfluences;
     
     FSD_API FCaveInfluenceSet();

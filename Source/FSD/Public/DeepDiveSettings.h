@@ -1,42 +1,42 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "DeepDiveLoaderSequence.h"
 #include "Engine/DataAsset.h"
+#include "DeepDiveLoaderSequence.h"
 #include "DeepDiveSettings.generated.h"
 
-class UMutator;
 class UMissionWarning;
-class UMissionMutator;
+class UMutator;
 class UDeepDiveTemplate;
-class UMissionNameBank;
 class UDialogDataAsset;
+class UMissionMutator;
+class UMissionNameBank;
 
 UCLASS()
 class UDeepDiveSettings : public UDataAsset {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDeepDiveTemplate* NormalTemplate;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDeepDiveTemplate* HardTemplate;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UMutator*> BaseMutators;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UMissionMutator*> Mutators;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UMissionWarning*> Warnings;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UDialogDataAsset*> DeepDiveMissionCompleteShouts;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FDeepDiveLoaderSequence> LoaderSequnces;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UMissionNameBank* DeepDiveNameBank;
     
     UDeepDiveSettings();

@@ -1,16 +1,16 @@
 #include "EnemySpawnManager.h"
 #include "Templates/SubclassOf.h"
 
-class APawn;
-class UHealthComponentBase;
-class UEnemyDescriptor;
 class UStatusEffect;
+class APawn;
+class UEnemyDescriptor;
 class AActor;
+class UHealthComponentBase;
 
 void UEnemySpawnManager::SpawnerDestroyed(APawn* Actor) {
 }
 
-bool UEnemySpawnManager::SpawnEnemy(UEnemyDescriptor* descriptor, const FTransform& Transform, const FEnemySpawnManagerCallback& Callback, bool useSpawnFX, bool Alert) {
+bool UEnemySpawnManager::SpawnEnemy(UEnemyDescriptor* descriptor, const FTransform& Transform, const FEnemySpawnedDelegate& Callback, bool useSpawnFX, bool Alert) {
     return false;
 }
 

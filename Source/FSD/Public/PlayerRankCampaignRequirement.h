@@ -4,11 +4,11 @@
 #include "PlayerRankCampaignRequirement.generated.h"
 
 UCLASS(EditInlineNew)
-class UPlayerRankCampaignRequirement : public UCampaignRequirement {
+class FSD_API UPlayerRankCampaignRequirement : public UCampaignRequirement {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 RankRequirement;
     
 public:

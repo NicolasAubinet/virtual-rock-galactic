@@ -5,28 +5,28 @@
 #include "MissionHazardSetting.h"
 #include "FSDMissionSettings.generated.h"
 
-class UDifficultySetting;
-class UGeneratedMission;
 class UObject;
+class UGeneratedMission;
+class UDifficultySetting;
 
 UCLASS(BlueprintType, DefaultConfig, Config=Game)
 class UFSDMissionSettings : public UDeveloperSettings {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(Config, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSoftObjectPath DefaultRoomGenerator;
     
-    UPROPERTY(Config, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<int32, FMissionHazardSetting> MissionComplexitySettings;
     
-    UPROPERTY(Config, EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<int32, FMissionHazardSetting> MissionDurationSettings;
     
 public:
+    UFSDMissionSettings();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static float GetTotalHazardBonus(UObject* WorldContextObject, UGeneratedMission* mission, UDifficultySetting* DifficultySetting);
     
-    UFSDMissionSettings();
 };
 

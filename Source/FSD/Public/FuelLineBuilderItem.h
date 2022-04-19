@@ -10,13 +10,14 @@ class FSD_API AFuelLineBuilderItem : public ATrackBuilderItem {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadOnly, Export, VisibleAnywhere)
+    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
     UItemPlacerAggregator* SegmentPlacer;
-    
-    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-    void ReceivePlacementUpdated(bool InCanPlace, bool InConnecting, float InDistanceProgress);
     
 public:
     AFuelLineBuilderItem();
+protected:
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void ReceivePlacementUpdated(bool InCanPlace, bool InConnecting, float InDistanceProgress);
+    
 };
 

@@ -5,12 +5,12 @@
 
 class URoomGenerator;
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class URoomCarverComponent : public USceneComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     URoomGenerator* RoomGenerator;
     
 public:

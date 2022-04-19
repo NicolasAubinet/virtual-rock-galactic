@@ -5,12 +5,12 @@
 
 class UHealthComponentBase;
 
-UCLASS()
+UCLASS(meta=(BlueprintSpawnableComponent))
 class UObjectAttackerPositioning : public UAttackerPositioningComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UHealthComponentBase* Health;
     
 public:

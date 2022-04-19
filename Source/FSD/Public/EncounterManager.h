@@ -9,33 +9,34 @@ class AProceduralSetup;
 class UEnemySpawnManager;
 class UEnemyDescriptor;
 
-UCLASS(BlueprintType)
+UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
 class FSD_API UEncounterManager : public UActorComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float SpawnDistanceFromRoomBounds;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<FEncounterManagerItem> Encounters;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     AProceduralSetup* ProceduralSetup;
     
-    UPROPERTY(Export, Transient)
+    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
     UEnemySpawnManager* SpawnManager;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UEnemyDescriptor*> EnemyPool;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<UEnemyDescriptor*> EncounterPool;
     
-    UPROPERTY(Transient)
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
     TArray<UCritterDescriptor*> CritterPool;
     
 public:
+    UEncounterManager();
     UFUNCTION(BlueprintCallable, Exec)
     void ShowSpawnLocations();
     
@@ -48,6 +49,5 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<UCritterDescriptor*> GetCritterPool() const;
     
-    UEncounterManager();
 };
 
