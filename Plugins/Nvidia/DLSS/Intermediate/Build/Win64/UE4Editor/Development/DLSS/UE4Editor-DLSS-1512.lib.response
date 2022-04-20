@@ -1,0 +1,13 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UE4Editor-DLSS-1512.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Intermediate\Build\Win64\FSDEditor\Development\Engine\SharedPCH.Engine.h.obj"
+"C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Intermediate\Build\Win64\UE4Editor\Development\DLSS\Module.DLSS.cpp.obj"
+"C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Intermediate\Build\Win64\UE4Editor\Development\DLSS\Module.DLSS.gen.cpp.obj"
+"C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Intermediate\Build\Win64\UE4Editor\Development\DLSS\Default.rc2.res"
+/OUT:"C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Intermediate\Build\Win64\UE4Editor\Development\DLSS\UE4Editor-DLSS-1512.lib"
