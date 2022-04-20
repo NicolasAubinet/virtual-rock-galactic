@@ -1122,7 +1122,7 @@ public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void ExitVehicle();
     
-protected:
+public:
     UFUNCTION(BlueprintCallable)
     void CycleItemUp();
     
