@@ -59,8 +59,8 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<AItem> LoadoutItem;
     
-    UPROPERTY(Transient, meta=(AllowPrivateAccess=true))
-    TArray<TWeakObjectPtr<AThrowableActor>> ThrownActors;
+    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    TArray<AThrowableActor*> ThrownActors;
     
 public:
     AThrowableItem();
