@@ -28,10 +28,10 @@
 /wd4244
 /wd4838
 /I .
-/I "C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Source\DLSSBlueprint\Private"
-/I "C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Intermediate\Build\Win64\UE4\Inc\DLSSBlueprint"
-/I "C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Source"
-/I "C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Source\DLSSBlueprint\Public"
+/I "D:\Unreal Projects\virtual-rock-galactic\Plugins\Nvidia\DLSS\Source\DLSSBlueprint\Private"
+/I "D:\Unreal Projects\virtual-rock-galactic\Plugins\Nvidia\DLSS\Intermediate\Build\Win64\UE4\Inc\DLSSBlueprint"
+/I "D:\Unreal Projects\virtual-rock-galactic\Plugins\Nvidia\DLSS\Source"
+/I "D:\Unreal Projects\virtual-rock-galactic\Plugins\Nvidia\DLSS\Source\DLSSBlueprint\Public"
 /I Runtime
 /I Runtime\TraceLog\Public
 /I Runtime\Core\Public
@@ -141,18 +141,18 @@
 /I ThirdParty\PhysX3\APEX_1.4\shared\general\RenderDebug\public
 /I ThirdParty\PhysX3\APEX_1.4\shared\general\PairFilter\include
 /I ThirdParty\PhysX3\APEX_1.4\shared\internal\include
-/I "C:\Apps\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\INCLUDE"
-/I "C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um"
-/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"
-/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared"
-/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um"
-/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt"
-/FI"C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Intermediate\Build\Win64\FSD\Shipping\Engine\SharedPCH.Engine.h"
-/Yu"C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Intermediate\Build\Win64\FSD\Shipping\Engine\SharedPCH.Engine.h"
-/Fp"C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Intermediate\Build\Win64\FSD\Shipping\Engine\SharedPCH.Engine.h.pch"
-"C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Intermediate\Build\Win64\UE4\Shipping\DLSSBlueprint\Module.DLSSBlueprint.cpp"
-/FI"C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Intermediate\Build\Win64\UE4\Shipping\DLSSBlueprint\Definitions.DLSSBlueprint.h"
-/Fo"C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Intermediate\Build\Win64\UE4\Shipping\DLSSBlueprint\Module.DLSSBlueprint.cpp.obj"
+/I "D:\Visual studio 2017\VC\Tools\MSVC\14.16.27023\INCLUDE"
+/I "C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.2\include\um"
+/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.16299.0\ucrt"
+/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.16299.0\shared"
+/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.16299.0\um"
+/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.16299.0\winrt"
+/FI"D:\Unreal Projects\virtual-rock-galactic\Intermediate\Build\Win64\FSD\Shipping\Engine\SharedPCH.Engine.h"
+/Yu"D:\Unreal Projects\virtual-rock-galactic\Intermediate\Build\Win64\FSD\Shipping\Engine\SharedPCH.Engine.h"
+/Fp"D:\Unreal Projects\virtual-rock-galactic\Intermediate\Build\Win64\FSD\Shipping\Engine\SharedPCH.Engine.h.pch"
+"D:\Unreal Projects\virtual-rock-galactic\Plugins\Nvidia\DLSS\Intermediate\Build\Win64\UE4\Shipping\DLSSBlueprint\Module.DLSSBlueprint.cpp"
+/FI"D:\Unreal Projects\virtual-rock-galactic\Plugins\Nvidia\DLSS\Intermediate\Build\Win64\UE4\Shipping\DLSSBlueprint\Definitions.DLSSBlueprint.h"
+/Fo"D:\Unreal Projects\virtual-rock-galactic\Plugins\Nvidia\DLSS\Intermediate\Build\Win64\UE4\Shipping\DLSSBlueprint\Module.DLSSBlueprint.cpp.obj"
 /TP
 /GR-
 /W4

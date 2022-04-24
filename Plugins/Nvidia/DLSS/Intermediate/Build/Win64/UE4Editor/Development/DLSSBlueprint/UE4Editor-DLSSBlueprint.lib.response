@@ -6,8 +6,8 @@
 /NAME:"UE4Editor-DLSSBlueprint.dll"
 /IGNORE:4221
 /NODEFAULTLIB
-"C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Intermediate\Build\Win64\FSDEditor\Development\Engine\SharedPCH.Engine.h.obj"
-"C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Intermediate\Build\Win64\UE4Editor\Development\DLSSBlueprint\Module.DLSSBlueprint.cpp.obj"
-"C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Intermediate\Build\Win64\UE4Editor\Development\DLSSBlueprint\Module.DLSSBlueprint.gen.cpp.obj"
-"C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Intermediate\Build\Win64\UE4Editor\Development\DLSSBlueprint\Default.rc2.res"
-/OUT:"C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Intermediate\Build\Win64\UE4Editor\Development\DLSSBlueprint\UE4Editor-DLSSBlueprint.lib"
+"D:\Unreal Projects\virtual-rock-galactic\Intermediate\Build\Win64\FSDEditor\Development\Engine\SharedPCH.Engine.h.obj"
+"D:\Unreal Projects\virtual-rock-galactic\Plugins\Nvidia\DLSS\Intermediate\Build\Win64\UE4Editor\Development\DLSSBlueprint\Module.DLSSBlueprint.cpp.obj"
+"D:\Unreal Projects\virtual-rock-galactic\Plugins\Nvidia\DLSS\Intermediate\Build\Win64\UE4Editor\Development\DLSSBlueprint\Module.DLSSBlueprint.gen.cpp.obj"
+"D:\Unreal Projects\virtual-rock-galactic\Plugins\Nvidia\DLSS\Intermediate\Build\Win64\UE4Editor\Development\DLSSBlueprint\Default.rc2.res"
+/OUT:"D:\Unreal Projects\virtual-rock-galactic\Plugins\Nvidia\DLSS\Intermediate\Build\Win64\UE4Editor\Development\DLSSBlueprint\UE4Editor-DLSSBlueprint.lib"

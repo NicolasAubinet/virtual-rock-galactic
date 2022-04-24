@@ -1,19 +1,19 @@
-C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Intermediate\Build\Win64\UE4Editor\Development\DLSSBlueprint\Definitions.DLSSBlueprint.h
-C:/Users/Nico/Documents/Unreal Projects/DRG Modding/FSD/Plugins/Nvidia/DLSS/Intermediate/Build/Win64/UE4Editor/Inc/DLSSBlueprint/DLSSBlueprint.init.gen.cpp
-E:\EpicGames\UE_4.27\Engine\Source\Runtime\CoreUObject\Public\UObject/GeneratedCppIncludes.h
-E:\EpicGames\UE_4.27\Engine\Source\Runtime\CoreUObject\Public\UObject/MetaData.h
-C:/Users/Nico/Documents/Unreal Projects/DRG Modding/FSD/Plugins/Nvidia/DLSS/Intermediate/Build/Win64/UE4Editor/Inc/DLSSBlueprint/DLSSLibrary.gen.cpp
-C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Source\DLSSBlueprint/Public/DLSSLibrary.h
-C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Source\DLSSBlueprint\Public\UDLSSMode.h
-C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Intermediate\Build\Win64\UE4Editor\Inc\DLSSBlueprint\UDLSSMode.generated.h
-C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Source\DLSSBlueprint\Public\UDLSSSupport.h
-C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Intermediate\Build\Win64\UE4Editor\Inc\DLSSBlueprint\UDLSSSupport.generated.h
-E:\EpicGames\UE_4.27\Engine\Source\Runtime\CoreUObject\Public\UObject/NoExportTypes.h
-E:\EpicGames\UE_4.27\Engine\Source\Runtime\CoreUObject\Public\UObject/PropertyAccessUtil.h
-E:\EpicGames\UE_4.27\Engine\Source\Runtime\Core\Public\Math/UnitConversion.h
-E:\EpicGames\UE_4.27\Engine\Source\Runtime\Core\Public\Math/UnitConversion.inl
-E:\EpicGames\UE_4.27\Engine\Source\Runtime\Core\Public\Internationalization/PolyglotTextData.h
-E:\EpicGames\UE_4.27\Engine\Source\Runtime\CoreUObject\Public\AssetRegistry/ARFilter.h
-C:\Users\Nico\Documents\Unreal Projects\DRG Modding\FSD\Plugins\Nvidia\DLSS\Intermediate\Build\Win64\UE4Editor\Inc\DLSSBlueprint\DLSSLibrary.generated.h
-C:/Users/Nico/Documents/Unreal Projects/DRG Modding/FSD/Plugins/Nvidia/DLSS/Intermediate/Build/Win64/UE4Editor/Inc/DLSSBlueprint/UDLSSMode.gen.cpp
-C:/Users/Nico/Documents/Unreal Projects/DRG Modding/FSD/Plugins/Nvidia/DLSS/Intermediate/Build/Win64/UE4Editor/Inc/DLSSBlueprint/UDLSSSupport.gen.cpp
+D:\Unreal Projects\virtual-rock-galactic\Plugins\Nvidia\DLSS\Intermediate\Build\Win64\UE4Editor\Development\DLSSBlueprint\Definitions.DLSSBlueprint.h
+D:/Unreal Projects/virtual-rock-galactic/Plugins/Nvidia/DLSS/Intermediate/Build/Win64/UE4Editor/Inc/DLSSBlueprint/DLSSBlueprint.init.gen.cpp
+D:\Unreal Engine 4\Epic Games\UE_4.27\Engine\Source\Runtime\CoreUObject\Public\UObject/GeneratedCppIncludes.h
+D:\Unreal Engine 4\Epic Games\UE_4.27\Engine\Source\Runtime\CoreUObject\Public\UObject/MetaData.h
+D:/Unreal Projects/virtual-rock-galactic/Plugins/Nvidia/DLSS/Intermediate/Build/Win64/UE4Editor/Inc/DLSSBlueprint/DLSSLibrary.gen.cpp
+D:\Unreal Projects\virtual-rock-galactic\Plugins\Nvidia\DLSS\Source\DLSSBlueprint/Public/DLSSLibrary.h
+d:\unreal projects\virtual-rock-galactic\plugins\nvidia\dlss\source\dlssblueprint\public\UDLSSMode.h
+d:\unreal projects\virtual-rock-galactic\plugins\nvidia\dlss\intermediate\build\win64\ue4editor\inc\dlssblueprint\UDLSSMode.generated.h
+d:\unreal projects\virtual-rock-galactic\plugins\nvidia\dlss\source\dlssblueprint\public\UDLSSSupport.h
+d:\unreal projects\virtual-rock-galactic\plugins\nvidia\dlss\intermediate\build\win64\ue4editor\inc\dlssblueprint\UDLSSSupport.generated.h
+D:\Unreal Engine 4\Epic Games\UE_4.27\Engine\Source\Runtime\CoreUObject\Public\UObject/NoExportTypes.h
+D:\Unreal Engine 4\Epic Games\UE_4.27\Engine\Source\Runtime\CoreUObject\Public\UObject/PropertyAccessUtil.h
+D:\Unreal Engine 4\Epic Games\UE_4.27\Engine\Source\Runtime\Core\Public\Math/UnitConversion.h
+D:\Unreal Engine 4\Epic Games\UE_4.27\Engine\Source\Runtime\Core\Public\Math/UnitConversion.inl
+D:\Unreal Engine 4\Epic Games\UE_4.27\Engine\Source\Runtime\Core\Public\Internationalization/PolyglotTextData.h
+D:\Unreal Engine 4\Epic Games\UE_4.27\Engine\Source\Runtime\CoreUObject\Public\AssetRegistry/ARFilter.h
+d:\unreal projects\virtual-rock-galactic\plugins\nvidia\dlss\intermediate\build\win64\ue4editor\inc\dlssblueprint\DLSSLibrary.generated.h
+D:/Unreal Projects/virtual-rock-galactic/Plugins/Nvidia/DLSS/Intermediate/Build/Win64/UE4Editor/Inc/DLSSBlueprint/UDLSSMode.gen.cpp
+D:/Unreal Projects/virtual-rock-galactic/Plugins/Nvidia/DLSS/Intermediate/Build/Win64/UE4Editor/Inc/DLSSBlueprint/UDLSSSupport.gen.cpp

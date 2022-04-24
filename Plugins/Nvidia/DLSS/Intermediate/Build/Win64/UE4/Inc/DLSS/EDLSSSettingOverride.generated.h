@@ -14,7 +14,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #define DLSS_EDLSSSettingOverride_generated_h
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID FSD_Plugins_Nvidia_DLSS_Source_DLSS_Public_EDLSSSettingOverride_h
+#define CURRENT_FILE_ID virtual_rock_galactic_Plugins_Nvidia_DLSS_Source_DLSS_Public_EDLSSSettingOverride_h
 
 
 #define FOREACH_ENUM_EDLSSSETTINGOVERRIDE(op) \

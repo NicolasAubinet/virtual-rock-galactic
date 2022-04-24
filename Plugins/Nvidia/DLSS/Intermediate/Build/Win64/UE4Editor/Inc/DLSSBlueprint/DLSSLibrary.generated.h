@@ -16,8 +16,8 @@ enum class UDLSSSupport : uint8;
 #endif
 #define DLSSBLUEPRINT_DLSSLibrary_generated_h
 
-#define FSD_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_SPARSE_DATA
-#define FSD_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_RPC_WRAPPERS \
+#define virtual_rock_galactic_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_SPARSE_DATA
+#define virtual_rock_galactic_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_RPC_WRAPPERS \
  \
 	DECLARE_FUNCTION(execEnableDLAA); \
 	DECLARE_FUNCTION(execGetDefaultDLSSMode); \
@@ -35,7 +35,7 @@ enum class UDLSSSupport : uint8;
 	DECLARE_FUNCTION(execSetDLSSSharpness);
 
 
-#define FSD_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_RPC_WRAPPERS_NO_PURE_DECLS \
+#define virtual_rock_galactic_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_RPC_WRAPPERS_NO_PURE_DECLS \
  \
 	DECLARE_FUNCTION(execEnableDLAA); \
 	DECLARE_FUNCTION(execGetDefaultDLSSMode); \
@@ -53,7 +53,7 @@ enum class UDLSSSupport : uint8;
 	DECLARE_FUNCTION(execSetDLSSSharpness);
 
 
-#define FSD_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_INCLASS_NO_PURE_DECLS \
+#define virtual_rock_galactic_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUDLSSLibrary(); \
 	friend struct Z_Construct_UClass_UDLSSLibrary_Statics; \
@@ -62,7 +62,7 @@ public: \
 	DECLARE_SERIALIZER(UDLSSLibrary)
 
 
-#define FSD_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_INCLASS \
+#define virtual_rock_galactic_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_INCLASS \
 private: \
 	static void StaticRegisterNativesUDLSSLibrary(); \
 	friend struct Z_Construct_UClass_UDLSSLibrary_Statics; \
@@ -71,7 +71,7 @@ public: \
 	DECLARE_SERIALIZER(UDLSSLibrary)
 
 
-#define FSD_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_STANDARD_CONSTRUCTORS \
+#define virtual_rock_galactic_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	DLSSBLUEPRINT_API UDLSSLibrary(const FObjectInitializer& ObjectInitializer); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UDLSSLibrary) \
@@ -84,7 +84,7 @@ private: \
 public:
 
 
-#define FSD_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_ENHANCED_CONSTRUCTORS \
+#define virtual_rock_galactic_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	DLSSBLUEPRINT_API UDLSSLibrary(UDLSSLibrary&&); \
@@ -95,28 +95,28 @@ public: \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(UDLSSLibrary)
 
 
-#define FSD_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_PRIVATE_PROPERTY_OFFSET
-#define FSD_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_9_PROLOG
-#define FSD_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_GENERATED_BODY_LEGACY \
+#define virtual_rock_galactic_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_PRIVATE_PROPERTY_OFFSET
+#define virtual_rock_galactic_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_9_PROLOG
+#define virtual_rock_galactic_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FSD_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_PRIVATE_PROPERTY_OFFSET \
-	FSD_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_SPARSE_DATA \
-	FSD_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_RPC_WRAPPERS \
-	FSD_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_INCLASS \
-	FSD_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_STANDARD_CONSTRUCTORS \
+	virtual_rock_galactic_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_PRIVATE_PROPERTY_OFFSET \
+	virtual_rock_galactic_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_SPARSE_DATA \
+	virtual_rock_galactic_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_RPC_WRAPPERS \
+	virtual_rock_galactic_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_INCLASS \
+	virtual_rock_galactic_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define FSD_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_GENERATED_BODY \
+#define virtual_rock_galactic_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FSD_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_PRIVATE_PROPERTY_OFFSET \
-	FSD_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_SPARSE_DATA \
-	FSD_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_RPC_WRAPPERS_NO_PURE_DECLS \
-	FSD_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_INCLASS_NO_PURE_DECLS \
-	FSD_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_ENHANCED_CONSTRUCTORS \
+	virtual_rock_galactic_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_PRIVATE_PROPERTY_OFFSET \
+	virtual_rock_galactic_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_SPARSE_DATA \
+	virtual_rock_galactic_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_RPC_WRAPPERS_NO_PURE_DECLS \
+	virtual_rock_galactic_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_INCLASS_NO_PURE_DECLS \
+	virtual_rock_galactic_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h_11_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
@@ -124,7 +124,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 template<> DLSSBLUEPRINT_API UClass* StaticClass<class UDLSSLibrary>();
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID FSD_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h
+#define CURRENT_FILE_ID virtual_rock_galactic_Plugins_Nvidia_DLSS_Source_DLSSBlueprint_Public_DLSSLibrary_h
 
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
