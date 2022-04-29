@@ -6,7 +6,425 @@
 	{
 		"/actions/main":
 		{
-			"sources": [],
+			"sources": [
+				{
+					"mode": "trigger",
+					"path": "/user/hand/left/input/grip",
+					"inputs":
+					{
+						"click":
+						{
+							"output": "/actions/main/in/LeftGrip"
+						}
+					}
+				},
+				{
+					"mode": "trigger",
+					"path": "/user/hand/right/input/grip",
+					"inputs":
+					{
+						"click":
+						{
+							"output": "/actions/main/in/RightGrip"
+						}
+					}
+				},
+				{
+					"mode": "trigger",
+					"path": "/user/hand/left/input/trigger",
+					"inputs":
+					{
+						"click":
+						{
+							"output": "/actions/main/in/LeftTriggerClick"
+						}
+					}
+				},
+				{
+					"mode": "trigger",
+					"path": "/user/hand/right/input/trigger",
+					"inputs":
+					{
+						"click":
+						{
+							"output": "/actions/main/in/RightTriggerClick"
+						}
+					}
+				},
+				{
+					"mode": "button",
+					"path": "/user/hand/left/input/a",
+					"inputs":
+					{
+						"click":
+						{
+							"output": "/actions/main/in/LeftButtonA"
+						}
+					}
+				},
+				{
+					"mode": "button",
+					"path": "/user/hand/right/input/a",
+					"inputs":
+					{
+						"click":
+						{
+							"output": "/actions/main/in/RightButtonA"
+						}
+					}
+				},
+				{
+					"mode": "button",
+					"path": "/user/hand/left/input/b",
+					"inputs":
+					{
+						"click":
+						{
+							"output": "/actions/main/in/LeftButtonB"
+						}
+					}
+				},
+				{
+					"mode": "button",
+					"path": "/user/hand/right/input/b",
+					"inputs":
+					{
+						"click":
+						{
+							"output": "/actions/main/in/RightButtonB"
+						}
+					}
+				},
+				{
+					"mode": "joystick",
+					"path": "/user/hand/left/input/thumbstick",
+					"inputs":
+					{
+						"click":
+						{
+							"output": "/actions/main/in/Sprint"
+						}
+					}
+				},
+				{
+					"mode": "joystick",
+					"path": "/user/hand/right/input/thumbstick",
+					"inputs":
+					{
+						"click":
+						{
+							"output": "/actions/main/in/RightThumbStick"
+						}
+					}
+				},
+				{
+					"mode": "joystick",
+					"path": "/user/hand/left/input/thumbstick",
+					"inputs":
+					{
+						"click":
+						{
+							"output": "/actions/main/in/LeftThumbStick"
+						}
+					}
+				},
+				{
+					"mode": "button",
+					"path": "/user/hand/left/input/a",
+					"inputs":
+					{
+						"click":
+						{
+							"output": "/actions/main/in/VREditor_Left_Modifier"
+						}
+					}
+				},
+				{
+					"mode": "dpad",
+					"path": "/user/hand/left/input/thumbstick",
+					"parameters":
+					{
+						"sub_mode": "touch"
+					},
+					"inputs":
+					{
+						"south":
+						{
+							"output": "/actions/main/in/VREditor_Left_TrackpadDown"
+						}
+					}
+				},
+				{
+					"mode": "dpad",
+					"path": "/user/hand/left/input/thumbstick",
+					"parameters":
+					{
+						"sub_mode": "touch"
+					},
+					"inputs":
+					{
+						"west":
+						{
+							"output": "/actions/main/in/VREditor_Left_TrackpadLeft"
+						}
+					}
+				},
+				{
+					"mode": "dpad",
+					"path": "/user/hand/left/input/thumbstick",
+					"parameters":
+					{
+						"sub_mode": "touch"
+					},
+					"inputs":
+					{
+						"east":
+						{
+							"output": "/actions/main/in/VREditor_Left_TrackpadRight"
+						}
+					}
+				},
+				{
+					"mode": "dpad",
+					"path": "/user/hand/left/input/thumbstick",
+					"parameters":
+					{
+						"sub_mode": "touch"
+					},
+					"inputs":
+					{
+						"north":
+						{
+							"output": "/actions/main/in/VREditor_Left_TrackpadUp"
+						}
+					}
+				},
+				{
+					"mode": "joystick",
+					"path": "/user/hand/left/input/thumbstick",
+					"inputs":
+					{
+						"click":
+						{
+							"output": "/actions/main/in/VREditor_Left_ConfirmRadialSelection"
+						}
+					}
+				},
+				{
+					"mode": "joystick",
+					"path": "/user/hand/left/input/thumbstick",
+					"inputs":
+					{
+						"touch":
+						{
+							"output": "/actions/main/in/VREditor_Left_Touch"
+						}
+					}
+				},
+				{
+					"mode": "button",
+					"path": "/user/hand/left/input/b",
+					"inputs":
+					{
+						"click":
+						{
+							"output": "/actions/main/in/VREditor_Left_Modifier2"
+						}
+					}
+				},
+				{
+					"mode": "trackpad",
+					"path": "/user/hand/right/input/trackpad",
+					"inputs":
+					{
+						"touch":
+						{
+							"output": "/actions/main/in/VREditor_Right_WorldMovement"
+						}
+					}
+				},
+				{
+					"mode": "button",
+					"path": "/user/hand/right/input/a",
+					"inputs":
+					{
+						"click":
+						{
+							"output": "/actions/main/in/VREditor_Right_Modifier"
+						}
+					}
+				},
+				{
+					"mode": "dpad",
+					"path": "/user/hand/right/input/thumbstick",
+					"parameters":
+					{
+						"sub_mode": "touch"
+					},
+					"inputs":
+					{
+						"south":
+						{
+							"output": "/actions/main/in/VREditor_Right_TrackpadDown"
+						}
+					}
+				},
+				{
+					"mode": "dpad",
+					"path": "/user/hand/right/input/thumbstick",
+					"parameters":
+					{
+						"sub_mode": "touch"
+					},
+					"inputs":
+					{
+						"west":
+						{
+							"output": "/actions/main/in/VREditor_Right_TrackpadLeft"
+						}
+					}
+				},
+				{
+					"mode": "dpad",
+					"path": "/user/hand/right/input/thumbstick",
+					"parameters":
+					{
+						"sub_mode": "touch"
+					},
+					"inputs":
+					{
+						"east":
+						{
+							"output": "/actions/main/in/VREditor_Right_TrackpadRight"
+						}
+					}
+				},
+				{
+					"mode": "dpad",
+					"path": "/user/hand/right/input/thumbstick",
+					"parameters":
+					{
+						"sub_mode": "touch"
+					},
+					"inputs":
+					{
+						"north":
+						{
+							"output": "/actions/main/in/VREditor_Right_TrackpadUp"
+						}
+					}
+				},
+				{
+					"mode": "joystick",
+					"path": "/user/hand/right/input/thumbstick",
+					"inputs":
+					{
+						"click":
+						{
+							"output": "/actions/main/in/VREditor_Right_ConfirmRadialSelection"
+						}
+					}
+				},
+				{
+					"mode": "joystick",
+					"path": "/user/hand/right/input/thumbstick",
+					"inputs":
+					{
+						"touch":
+						{
+							"output": "/actions/main/in/VREditor_Right_Touch"
+						}
+					}
+				},
+				{
+					"mode": "button",
+					"path": "/user/hand/right/input/b",
+					"inputs":
+					{
+						"click":
+						{
+							"output": "/actions/main/in/VREditor_Right_Modifier2"
+						}
+					}
+				},
+				{
+					"mode": "trigger",
+					"path": "/user/hand/left/input/trigger",
+					"inputs":
+					{
+						"pull":
+						{
+							"output": "/actions/main/in/LeftTriggerPull axis"
+						}
+					}
+				},
+				{
+					"mode": "trigger",
+					"path": "/user/hand/right/input/trigger",
+					"inputs":
+					{
+						"pull":
+						{
+							"output": "/actions/main/in/RightTriggerPull axis"
+						}
+					}
+				},
+				{
+					"mode": "joystick",
+					"path": "/user/hand/left/input/thumbstick",
+					"inputs":
+					{
+						"position":
+						{
+							"output": "/actions/main/in/MotionControllerThumbLeft_X,MotionControllerThumbLeft_Y X Y_axis2d"
+						}
+					}
+				},
+				{
+					"mode": "joystick",
+					"path": "/user/hand/right/input/thumbstick",
+					"inputs":
+					{
+						"position":
+						{
+							"output": "/actions/main/in/MotionControllerThumbRight_X,MotionControllerThumbRight_Y X Y_axis2d"
+						}
+					}
+				},
+				{
+					"mode": "trigger",
+					"path": "/user/hand/left/input/trigger",
+					"inputs":
+					{
+						"pull":
+						{
+							"output": "/actions/main/in/VREditor_Left_TriggerAxis axis"
+						}
+					}
+				},
+				{
+					"mode": "trackpad",
+					"path": "/user/hand/left/input/trackpad",
+					"inputs":
+					{
+						"touch":
+						{
+							"output": "/actions/main/in/VREditor_Left_WorldMovement axis"
+						}
+					}
+				},
+				{
+					"mode": "trigger",
+					"path": "/user/hand/right/input/trigger",
+					"inputs":
+					{
+						"pull":
+						{
+							"output": "/actions/main/in/VREditor_Right_TriggerAxis axis"
+						}
+					}
+				}
+			],
 			"poses": [
 				{
 					"output": "/actions/main/in/controllerleft",
@@ -40,5 +458,5 @@
 			]
 		}
 	},
-	"description": "FSD-0"
+	"description": "FSD-18319896"
 }

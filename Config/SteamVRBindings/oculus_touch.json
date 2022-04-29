@@ -118,6 +118,17 @@
 					}
 				},
 				{
+					"mode": "joystick",
+					"path": "/user/hand/left/input/joystick",
+					"inputs":
+					{
+						"click":
+						{
+							"output": "/actions/main/in/LeftThumbStick"
+						}
+					}
+				},
+				{
 					"mode": "trigger",
 					"path": "/user/hand/left/input/trigger",
 					"inputs":
@@ -195,5 +206,5 @@
 			]
 		}
 	},
-	"description": "FSD-0"
+	"description": "FSD-18319896"
 }
