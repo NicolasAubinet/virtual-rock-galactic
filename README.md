@@ -4,8 +4,23 @@ A VR mod for [Deep Rock Galactic](https://store.steampowered.com/app/548430/Deep
 
 ---
 
-Did you ever hear the tragedy of Darth Plagueis The Wise? I thought not. It’s not a story the Jedi would tell you. It’s a Sith legend. Darth Plagueis was a Dark Lord of the Sith, so powerful and so wise he could use the Force to influence the midichlorians to create life… He had such a knowledge of the dark side that he could even keep the ones he cared about from dying. The dark side of the Force is a pathway to many abilities some consider to be unnatural. He became so powerful… the only thing he was afraid of was losing his power, which eventually, of course, he did. Unfortunately, he taught his apprentice everything he knew, then his apprentice killed him in his sleep. Ironic. He could save others from death, but not himself.
-git stuff test
+# Videos
+
+| <a href="https://youtu.be/jrcGVagjNpc">Beardo Benjo</a>  | <a href="https://youtu.be/MAfXr7pz5i0">Matteo311</a> |
+| ------------- | ------------- |
+| <a href="https://youtu.be/jrcGVagjNpc"><img src="https://kosro.de/share/beardo_thumb.jpg" width="100%"></img></a>  | <a href="https://youtu.be/MAfXr7pz5i0"><img src="https://kosro.de/share/matteo_thumb.jpg" width="100%"></img></a>  |
+
+---
+
+# Project Setup
+
+- Use Unreal Engine 4.27
+- Remember to pull LFS files as well
+- Probably wanna use [Node Graph Assisant](https://www.unrealengine.com/marketplace/en-US/product/node-graph-assistant) (Mod is 99% Blueprint)
+- If you wanna package with UE:
+  - Project Settings:
+![Project Settings](https://kosro.de/share/UE4Editor_o0RjB3iGx1.png)
+  -  Use packaging/deploy script (Alchemist, Fristi & Kosro made their own)
 
 ---
 
