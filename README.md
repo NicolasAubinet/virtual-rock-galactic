@@ -6,9 +6,9 @@ A VR mod for [Deep Rock Galactic](https://store.steampowered.com/app/548430/Deep
 
 # Videos
 
-| <a href="https://youtu.be/jrcGVagjNpc">Beardo Benjo</a>  | <a href="https://youtu.be/MAfXr7pz5i0">Matteo311</a> |
+| <a href="https://youtu.be/jrcGVagjNpc" target="_blank">Beardo Benjo</a>  | <a href="https://youtu.be/MAfXr7pz5i0" target="_blank">Matteo311</a> |
 | ------------- | ------------- |
-| <a href="https://youtu.be/jrcGVagjNpc"><img src="https://kosro.de/share/beardo_thumb.jpg" width="100%"></img></a>  | <a href="https://youtu.be/MAfXr7pz5i0"><img src="https://kosro.de/share/matteo_thumb.jpg" width="100%"></img></a>  |
+| <a href="https://youtu.be/jrcGVagjNpc" target="_blank"><img src="https://kosro.de/share/beardo_thumb.jpg" width="100%"></img></a>  | <a href="https://youtu.be/MAfXr7pz5i0" target="_blank"><img src="https://kosro.de/share/matteo_thumb.jpg" width="100%"></img></a>  |
 
 ---
 
