@@ -5,6 +5,7 @@ A VR mod for [Deep Rock Galactic](https://store.steampowered.com/app/548430/Deep
 ---
 
 # Videos
+These bearded beauties covered VRG on YouTube ❤
 
 | <a href="https://youtu.be/jrcGVagjNpc" target="_blank">Beardo Benjo</a>  | <a href="https://youtu.be/MAfXr7pz5i0" target="_blank">Matteo311</a> |
 | ------------- | ------------- |
@@ -24,6 +25,6 @@ A VR mod for [Deep Rock Galactic](https://store.steampowered.com/app/548430/Deep
 
 ---
 
-Made with ❤ by [KI2T](https://github.com/ki2t), [NicolasAubinet](https://github.com/NicolasAubinet), [PinkMilkProductions](https://github.com/PinkMilkProductions) & [Robert-K](https://github.com/Robert-K)
+Made with ❤ & 🍺 by [KI2T](https://github.com/ki2t), [NicolasAubinet](https://github.com/NicolasAubinet), [PinkMilkProductions](https://github.com/PinkMilkProductions) & [Robert-K](https://github.com/Robert-K)
 
 ⛏ ROCK & STONE!!! 🍻
