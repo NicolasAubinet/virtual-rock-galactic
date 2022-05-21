@@ -17,6 +17,7 @@ These bearded beauties covered VRG on YouTube ❤
 
 - Use Unreal Engine 4.27
 - Remember to pull LFS files as well
+- Right click FSD.uproject > Generate Visual Studio project files > Open project > Compile
 - Probably wanna use [Node Graph Assisant](https://www.unrealengine.com/marketplace/en-US/product/node-graph-assistant) (Mod is 99% Blueprint)
 - If you wanna package with UE:
   - Project Settings:
