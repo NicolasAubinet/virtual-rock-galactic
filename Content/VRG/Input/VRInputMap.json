@@ -1,0 +1,173 @@
+[
+	{
+		"Action / Axis Name": "LeftButtonA",
+		"Is Axis": true,
+		"Keys / Axes": [
+			{
+				"KeyName": "Vive_Left_Trigger_Axis"
+			}
+		]
+	},
+	{
+		"Action / Axis Name": "LeftButtonB",
+		"Is Axis": true,
+		"Keys / Axes": [
+			{
+				"KeyName": "Vive_Left_Trigger_Axis"
+			}
+		]
+	},
+	{
+		"Action / Axis Name": "LeftGrip",
+		"Is Axis": true,
+		"Keys / Axes": [
+			{
+				"KeyName": "Vive_Left_Trigger_Axis"
+			}
+		]
+	},
+	{
+		"Action / Axis Name": "LeftTriggerClick",
+		"Is Axis": true,
+		"Keys / Axes": [
+			{
+				"KeyName": "Vive_Left_Trigger_Axis"
+			}
+		]
+	},
+	{
+		"Action / Axis Name": "RightButtonA",
+		"Is Axis": true,
+		"Keys / Axes": [
+			{
+				"KeyName": "Vive_Left_Trigger_Axis"
+			}
+		]
+	},
+	{
+		"Action / Axis Name": "RightButtonB",
+		"Is Axis": true,
+		"Keys / Axes": [
+			{
+				"KeyName": "Vive_Left_Trigger_Axis"
+			}
+		]
+	},
+	{
+		"Action / Axis Name": "RightGrip",
+		"Is Axis": true,
+		"Keys / Axes": [
+			{
+				"KeyName": "Vive_Left_Trigger_Axis"
+			}
+		]
+	},
+	{
+		"Action / Axis Name": "RightThumbStick",
+		"Is Axis": true,
+		"Keys / Axes": [
+			{
+				"KeyName": "Vive_Left_Trigger_Axis"
+			}
+		]
+	},
+	{
+		"Action / Axis Name": "RightTriggerClick",
+		"Is Axis": true,
+		"Keys / Axes": [
+			{
+				"KeyName": "Vive_Left_Trigger_Axis"
+			}
+		]
+	},
+	{
+		"Action / Axis Name": "Run",
+		"Is Axis": true,
+		"Keys / Axes": [
+			{
+				"KeyName": "Vive_Left_Trigger_Axis"
+			}
+		]
+	},
+	{
+		"Action / Axis Name": "Mine",
+		"Is Axis": true,
+		"Keys / Axes": [
+			{
+				"KeyName": "Vive_Left_Trigger_Axis"
+			}
+		]
+	},
+	{
+		"Action / Axis Name": "Use",
+		"Is Axis": true,
+		"Keys / Axes": [
+			{
+				"KeyName": "Vive_Left_Trigger_Axis"
+			}
+		]
+	},
+	{
+		"Action / Axis Name": "Sprint",
+		"Is Axis": true,
+		"Keys / Axes": [
+			{
+				"KeyName": "Vive_Left_Trigger_Axis"
+			}
+		]
+	},
+	{
+		"Action / Axis Name": "LeftTriggerPull",
+		"Is Axis": true,
+		"Keys / Axes": [
+			{
+				"KeyName": "Vive_Left_Trigger_Axis"
+			}
+		]
+	},
+	{
+		"Action / Axis Name": "MotionControllerThumbLeft_X",
+		"Is Axis": true,
+		"Keys / Axes": [
+			{
+				"KeyName": "Vive_Left_Trigger_Axis"
+			}
+		]
+	},
+	{
+		"Action / Axis Name": "MotionControllerThumbLeft_Y",
+		"Is Axis": true,
+		"Keys / Axes": [
+			{
+				"KeyName": "Vive_Left_Trigger_Axis"
+			}
+		]
+	},
+	{
+		"Action / Axis Name": "MotionControllerThumbRight_X",
+		"Is Axis": true,
+		"Keys / Axes": [
+			{
+				"KeyName": "Vive_Left_Trigger_Axis"
+			}
+		]
+	},
+	{
+		"Action / Axis Name": "MotionControllerThumbRight_Y",
+		"Is Axis": true,
+		"Keys / Axes": [
+			{
+				"KeyName": "Vive_Left_Trigger_Axis"
+			}
+		]
+	},
+	{
+		"Action / Axis Name": "RightTriggerPull",
+		"Is Axis": true,
+		"Keys / Axes": [
+			{
+				"KeyName": "Vive_Left_Trigger_Axis"
+			}
+		]
+	}
+]
