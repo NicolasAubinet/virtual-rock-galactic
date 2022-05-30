@@ -4,10 +4,10 @@
 #include "EProspectorRobotState.h"
 #include "ProspectorRobot.generated.h"
 
-class AActor;
 class UMaterialInstanceDynamic;
+class AActor;
 
-UCLASS()
+UCLASS(Blueprintable)
 class AProspectorRobot : public AEnemyDeepPathfinderCharacter {
     GENERATED_BODY()
 public:
@@ -18,7 +18,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float EnginePowerMultiplier;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     AActor* Target;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -30,10 +30,10 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float HeadSearchMaxAngle;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     UMaterialInstanceDynamic* EngineMaterial;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_ProspectorState, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_ProspectorState, meta=(AllowPrivateAccess=true))
     EProspectorRobotState ProspectorState;
     
 public:

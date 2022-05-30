@@ -5,40 +5,40 @@
 #include "CheatEventDelegate.h"
 #include "FSDCheatManager.generated.h"
 
-class APawn;
 class AFSDAIController;
+class UEnemyDescriptor;
 class AActor;
 class UPlayerCharacterID;
-class UEnemyDescriptor;
+class APawn;
+class APlayerCharacter;
 class UBaseCritterDescriptor;
 class UObject;
-class APlayerCharacter;
 class UResourceData;
 
-UCLASS()
+UCLASS(Blueprintable)
 class FSD_API UFSDCheatManager : public UCheatManager {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     int32 RoomJumpCount;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float PreviousMaxDistanceBeforeCleanup;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool UnlimitedScoutFlareDuration;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FCheatEvent ToggleHoopGameMovement;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     AActor* SpawnPosMarker;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool EscortShowSmartRockDebug;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool IsUsingSavedCheats;
     
 public:
@@ -128,6 +128,9 @@ public:
     
     UFUNCTION(BlueprintCallable, Exec)
     void R_AddCraftingResource(int32 Amount, int32 Type);
+    
+    UFUNCTION(BlueprintCallable, Exec)
+    void R_Add_Phazyonite(int32 Amount);
     
     UFUNCTION(BlueprintCallable, Exec)
     void R_Add_BitterGem(int32 Amount);
@@ -357,6 +360,9 @@ public:
     void C_SetPlayers(int32 Number);
     
     UFUNCTION(BlueprintCallable, Exec)
+    void C_SetInstantUsables(bool Value);
+    
+    UFUNCTION(BlueprintCallable, Exec)
     void C_SetHealth(float Health);
     
     UFUNCTION(BlueprintCallable, Exec)
@@ -459,6 +465,9 @@ public:
     void C_Reset_WeaponSkins();
     
     UFUNCTION(BlueprintCallable, Exec)
+    void C_Reset_Poses();
+    
+    UFUNCTION(BlueprintCallable, Exec)
     void C_Reset_PickaxeParts();
     
     UFUNCTION(BlueprintCallable, Exec)
@@ -543,6 +552,12 @@ public:
     void C_JumpToNextRoom();
     
     UFUNCTION(BlueprintCallable, Exec)
+    void C_Intoxication_SetAll(int32 Percent);
+    
+    UFUNCTION(BlueprintCallable, Exec)
+    void C_Intoxication_Set(int32 Percent);
+    
+    UFUNCTION(BlueprintCallable, Exec)
     void C_IncrementAllMissionStats(int32 Amount);
     
     UFUNCTION(BlueprintCallable, Exec)
@@ -616,9 +631,6 @@ public:
     
     UFUNCTION(BlueprintCallable, Exec)
     void C_ClearAllMilestones();
-    
-    UFUNCTION(BlueprintCallable, Exec)
-    void C_ChangeIntoxication(int32 Percent);
     
     UFUNCTION(BlueprintCallable, Exec)
     void C_Campaign_ResetProgress();

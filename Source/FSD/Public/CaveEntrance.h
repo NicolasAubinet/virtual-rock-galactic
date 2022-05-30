@@ -6,18 +6,18 @@
 
 class UCaveEntranceComponent;
 
-UCLASS(CollapseCategories)
+UCLASS(Blueprintable, CollapseCategories)
 class ACaveEntrance : public AGenerationItem {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UCaveEntranceComponent* CaveEntranceComponent;
     
-    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     ECaveEntranceType EntranceType;
     
-    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool HasBeenConverted;
     
 public:

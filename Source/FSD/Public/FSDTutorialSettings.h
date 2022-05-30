@@ -1,10 +1,10 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Engine/DataAsset.h"
 #include "NewPlayerMutator.h"
+#include "Engine/DataAsset.h"
 #include "FSDTutorialSettings.generated.h"
 
-UCLASS()
+UCLASS(Blueprintable)
 class UFSDTutorialSettings : public UDataAsset {
     GENERATED_BODY()
 public:

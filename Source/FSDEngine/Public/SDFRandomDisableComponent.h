@@ -4,7 +4,7 @@
 #include "SDFRandomDisableProperties.h"
 #include "SDFRandomDisableComponent.generated.h"
 
-UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class USDFRandomDisableComponent : public USDFBaseComponent {
     GENERATED_BODY()
 public:

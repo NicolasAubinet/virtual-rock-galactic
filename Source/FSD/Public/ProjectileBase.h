@@ -1,56 +1,56 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "EOnProjectileImpactBehaviourEnum.h"
+#include "UObject/NoExportTypes.h"
 #include "GameFramework/Actor.h"
 #include "ProjectileImpact.h"
 #include "Engine/EngineTypes.h"
 #include "Engine/NetSerialization.h"
-#include "UObject/NoExportTypes.h"
 #include "Engine/NetSerialization.h"
 #include "ProjectileBase.generated.h"
 
-class UProjectileUpgradeElement;
 class USoundCue;
 class USphereComponent;
 class UTerrainMaterial;
+class UProjectileUpgradeElement;
 class UPrimitiveComponent;
 class AProjectileBase;
 class UDamageComponent;
 class UItemUpgrade;
 
-UCLASS(Abstract)
+UCLASS(Abstract, Blueprintable)
 class AProjectileBase : public AActor {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_ProjectileImpact, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_ProjectileImpact, meta=(AllowPrivateAccess=true))
     FProjectileImpact ProjectileImpact;
     
-    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     bool IsSpawnedFromWeapon;
     
-    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool Exploded;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool DoOnImpact;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool DoOnImpact2;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool DoOnImpact3;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool DoOnSpawnVar;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float GravityMultiplier;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_IsDorment, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_IsDorment, meta=(AllowPrivateAccess=true))
     bool IsDorment;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleDefaultsOnly, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     USphereComponent* CollisionComponent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -77,7 +77,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float WhizByStartDistance;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere)
     EOnProjectileImpactBehaviourEnum EOnImpactBehaviour;
     
 public:

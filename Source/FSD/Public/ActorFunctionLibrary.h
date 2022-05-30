@@ -2,43 +2,43 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "HeroInfo.h"
 #include "ECharacterState.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
-#include "HeroInfo.h"
 #include "GameplayTagContainer.h"
 #include "Curves/CurveFloat.h"
 #include "ActorFunctionLibrary.generated.h"
 
-class UEnemyComponent;
-class UTexture2D;
-class UObject;
-class USceneComponent;
-class USoundCue;
-class UPostProcessComponent;
-class UMaterialInstanceDynamic;
 class UItemID;
 class APlayerCharacter;
-class APlayerController;
-class UFXSystemAsset;
 class UWindowWidget;
+class APlayerController;
+class UObject;
+class USoundCue;
+class UHealthComponentBase;
+class UMaterialInstanceDynamic;
 class UUserWidget;
 class AActor;
+class USceneComponent;
+class UFXSystemAsset;
 class UPathfinderCollisionComponent;
 class UFSDPhysicalMaterial;
 class UPlayerCharacterID;
-class UMeshComponent;
 class UInventoryList;
+class UTexture2D;
 class UActorComponent;
+class UPostProcessComponent;
 class UBlendableInterface;
 class IBlendableInterface;
 class AFSDGameMode;
+class UMeshComponent;
 class UDamageClass;
-class UHealthComponentBase;
+class UEnemyComponent;
 class AFSDGameState;
 
-UCLASS(BlueprintType)
+UCLASS(Blueprintable)
 class FSD_API UActorFunctionLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:

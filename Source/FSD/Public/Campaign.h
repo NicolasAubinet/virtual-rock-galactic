@@ -7,18 +7,18 @@
 #include "ECampaignMutators.h"
 #include "Campaign.generated.h"
 
-class UTexture2D;
 class UCampaignMission;
 class UCampaignRequirement;
 class UPlayerCharacterID;
 class UDifficultySetting;
-class AFSDPlayerController;
+class UTexture2D;
 class UMissionStat;
 class UGameActivityAssignmentType;
 class UCampaign;
+class AFSDPlayerController;
 class APlayerController;
 
-UCLASS(Abstract, BlueprintType)
+UCLASS(Abstract, Blueprintable)
 class FSD_API UCampaign : public UObject {
     GENERATED_BODY()
 public:
@@ -37,7 +37,7 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UDifficultySetting*> RestrictedToDifficulties;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     int32 Progress;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -83,7 +83,7 @@ public:
     UGameActivityAssignmentType* CampaignActivity;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere)
     ECampaignMutators Mutators;
     
 public:

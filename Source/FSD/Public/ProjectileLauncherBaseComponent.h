@@ -8,7 +8,7 @@
 class AProjectileBase;
 class UItemUpgrade;
 
-UCLASS(Abstract, meta=(BlueprintSpawnableComponent))
+UCLASS(Abstract, Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UProjectileLauncherBaseComponent : public UWeaponFireComponent {
     GENERATED_BODY()
 public:
@@ -29,11 +29,11 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float HorizontalSpread;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FProjectileSpawned OnProjectileSpawned;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<UItemUpgrade*> ProjectileUpgrades;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

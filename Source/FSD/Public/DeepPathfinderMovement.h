@@ -1,34 +1,34 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "PauseMovementElapsedDelegate.h"
-#include "PathBeginDelegate.h"
+#include "UObject/NoExportTypes.h"
 #include "GameFramework/PawnMovementComponent.h"
-#include "Engine/EngineTypes.h"
+#include "PauseMovementElapsedDelegate.h"
 #include "AsyncPathRequestsInterface.h"
 #include "DeepPathFinderType.h"
 #include "DeepPathFinderPreference.h"
+#include "Engine/LatentActionManager.h"
 #include "DeepPathFinderSize.h"
+#include "Engine/EngineTypes.h"
+#include "PathBeginDelegate.h"
+#include "EDeepMovementState.h"
 #include "PathFinishedDelegate.h"
 #include "RefreshDestinationDelegate.h"
 #include "PathStateChangedDelegateDelegate.h"
-#include "Engine/LatentActionManager.h"
 #include "DeepRepPath.h"
-#include "UObject/NoExportTypes.h"
-#include "EOffsetFrom.h"
 #include "EDeepMovementMode.h"
 #include "HandleRotationOptions.h"
 #include "FakeMoverState.h"
 #include "UObject/NoExportTypes.h"
-#include "EDeepMovementState.h"
+#include "EOffsetFrom.h"
 #include "UObject/NoExportTypes.h"
 #include "DeepPathfinderMovement.generated.h"
 
-class UFakeMoverSettings;
-class ADeepCSGWorld;
 class AActor;
+class ADeepCSGWorld;
+class UFakeMoverSettings;
 class UPawnStatsComponent;
 
-UCLASS(meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UDeepPathfinderMovement : public UPawnMovementComponent, public IAsyncPathRequestsInterface {
     GENERATED_BODY()
 public:
@@ -65,7 +65,7 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float AngleSpeedFilterFactor;
     
-    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere)
     uint32 AIAvoidanceWeight;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -92,92 +92,92 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ForceAPathIfNoneFound;
     
-    UPROPERTY(BlueprintReadWrite, EditInstanceOnly, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool DrawServerPath;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FPathBegin OnPathBegin;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FPauseMovementElapsed OnPauseMovementElapsed;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FPathFinished OnPathFinished;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FRefreshDestination OnRefreshDestination;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FPathStateChangedDelegate OnStateChanged;
     
 private:
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     ADeepCSGWorld* CSGWorld;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_PathMovedDist, meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere, Transient, ReplicatedUsing=OnRep_PathMovedDist)
     uint32 PathMovedDist;
     
-    UPROPERTY(Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere, Transient)
     uint32 LocalPathMovedDist;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_Path, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_Path, meta=(AllowPrivateAccess=true))
     FDeepRepPath Path;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_MoveSettings, meta=(AllowPrivateAccess=true))
     UFakeMoverSettings* MoveSettings;
     
-    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     AActor* TargetActor;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     int32 CurrentPathIndex;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float CurrentPathFraction;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FVector Destination;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     AActor* DestinationActor;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float AcceptanceRadius;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool OnlyPartPath;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float PauseMovementTime;
     
-    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     EDeepMovementMode MoveMode;
     
-    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
     UPawnStatsComponent* PawnStats;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FVector LastForwardDir;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float VerticalAngleSpeed;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float HorizontalAngleSpeed;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool IsStrafing;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool HasOustandingPathRequest;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool LastPathReachedPreciseDestination;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float PostponedTickTime;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool LastMoveSuccessful;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -189,10 +189,10 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FHandleRotationOptions HandleRotationOptions;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FVector UnfilteredPosition;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FVector LastDestPosUsed;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -209,7 +209,7 @@ public:
     FFakeMoverState FakePhysicsMove;
     
 private:
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float FakeSyncTime;
     
 public:

@@ -8,10 +8,10 @@ USTRUCT(BlueprintType)
 struct FReflectionTraceResult {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<FScanPath> Path;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FReflectiveHitscanHit FinalHit;
     
     FSD_API FReflectionTraceResult();

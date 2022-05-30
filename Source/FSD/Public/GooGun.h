@@ -4,28 +4,28 @@
 #include "EGooGunFireMode.h"
 #include "GooGun.generated.h"
 
-class UFXSystemComponent;
 class USoundCue;
-class UFXSystemAsset;
 class UAnimMontage;
+class UFXSystemAsset;
+class UFXSystemComponent;
 
-UCLASS(Abstract)
+UCLASS(Abstract, Blueprintable)
 class AGooGun : public AAmmoDrivenWeapon {
     GENERATED_BODY()
 public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FChargingDelegate);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FChargeChangedDelegate, float, charge);
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FChargingDelegate OnStartCharging;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FChargingDelegate OnEndCharging;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FChargingDelegate OnChargingFailed;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FChargeChangedDelegate OnChargeChanged;
     
 protected:
@@ -68,7 +68,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UFXSystemAsset* ChargeupFireMuzzleFlash;
     
-    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
     UFXSystemComponent* ChargeupParticleInstance;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

@@ -6,7 +6,7 @@ USTRUCT(BlueprintType)
 struct FHealthRegenerationParams {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool bIsRegenerating;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

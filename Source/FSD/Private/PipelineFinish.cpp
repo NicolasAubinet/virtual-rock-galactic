@@ -3,9 +3,9 @@
 #include "TrackBuilderConnectPoint.h"
 #include "SingleUsableComponent.h"
 
-class ARessuplyPod;
-class APlayerCharacter;
 class ATrackBuilderSegment;
+class APlayerCharacter;
+class ARessuplyPod;
 class APipelineSegment;
 
 

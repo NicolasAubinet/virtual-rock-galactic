@@ -3,7 +3,7 @@
 #include "DamageBonusBase.h"
 #include "PercentDamageBonus.generated.h"
 
-UCLASS(EditInlineNew)
+UCLASS(Blueprintable, EditInlineNew)
 class UPercentDamageBonus : public UDamageBonusBase {
     GENERATED_BODY()
 public:

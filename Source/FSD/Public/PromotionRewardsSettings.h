@@ -5,7 +5,7 @@
 #include "PromotionRewardsRank.h"
 #include "PromotionRewardsSettings.generated.h"
 
-UCLASS()
+UCLASS(Blueprintable)
 class UPromotionRewardsSettings : public UDataAsset {
     GENERATED_BODY()
 public:

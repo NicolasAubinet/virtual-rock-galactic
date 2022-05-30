@@ -3,7 +3,7 @@
 #include "Engine/DeveloperSettings.h"
 #include "GamepadCursorSettings.generated.h"
 
-UCLASS(DefaultConfig, Config=Game)
+UCLASS(Blueprintable, DefaultConfig, Config=Game)
 class UGamepadCursorSettings : public UDeveloperSettings {
     GENERATED_BODY()
 public:

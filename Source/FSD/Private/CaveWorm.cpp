@@ -1,8 +1,8 @@
 #include "CaveWorm.h"
 #include "SimpleHealthComponent.h"
 
-class UResourceData;
 class UObject;
+class UResourceData;
 class AResourceChunk;
 class UHealthComponentBase;
 

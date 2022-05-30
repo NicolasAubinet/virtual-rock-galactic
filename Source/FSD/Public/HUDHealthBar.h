@@ -1,20 +1,20 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "HUDHealthBarSignatureDelegate.h"
 #include "FSDUserWidget.h"
-#include "HealthBarLooks.h"
+#include "HUDHealthBarSignatureDelegate.h"
 #include "UObject/NoExportTypes.h"
 #include "EHealthbarType.h"
+#include "HealthBarLooks.h"
 #include "HUDHealthBar.generated.h"
 
 class UHealth;
 class IHealth;
 
-UCLASS(Abstract, EditInlineNew)
+UCLASS(Abstract, Blueprintable, EditInlineNew)
 class UHUDHealthBar : public UFSDUserWidget {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FHUDHealthBarSignature OnOwnerDead;
     
 protected:
@@ -48,13 +48,13 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 MaxHealthCells;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TScriptInterface<IHealth> TargetHealth;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float AnimatedHealth;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float MaxHealth;
     
 public:

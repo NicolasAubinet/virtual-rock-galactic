@@ -7,7 +7,7 @@
 
 class UStatusEffect;
 
-UCLASS(Abstract, meta=(BlueprintSpawnableComponent))
+UCLASS(Abstract, Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UEyeForEyePerkComponent : public UFloatPerkComponent {
     GENERATED_BODY()
 public:
@@ -18,7 +18,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<UStatusEffect> EyeForEyeSTE;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TSubclassOf<UStatusEffect> LoadedSTE;
     
 public:

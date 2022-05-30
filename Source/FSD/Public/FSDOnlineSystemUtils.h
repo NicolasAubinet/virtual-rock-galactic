@@ -1,18 +1,18 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
-#include "OnGetUserPrivilegeCompleteBPDelegateDelegate.h"
+#include "OnShowWebUrlClosedBPDelegate.h"
 #include "EBlueprintableUserPrivileges.h"
 #include "EBlueprintablePrivilegeResults.h"
-#include "OnShowWebUrlClosedBPDelegate.h"
+#include "OnGetUserPrivilegeCompleteBPDelegateDelegate.h"
 #include "EInviteBlockReason.h"
 #include "FSDOnlineSystemUtils.generated.h"
 
+class APlayerState;
 class UFSDGameInstance;
 class UObject;
-class APlayerState;
 
-UCLASS(BlueprintType)
+UCLASS(Blueprintable)
 class UFSDOnlineSystemUtils : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:

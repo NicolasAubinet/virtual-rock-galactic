@@ -6,10 +6,10 @@
 #include "UpgradeValues.h"
 #include "AssaultRifleUpgrade.generated.h"
 
-class AFSDPlayerState;
 class AItem;
+class AFSDPlayerState;
 
-UCLASS(EditInlineNew, MinimalAPI)
+UCLASS(Blueprintable, EditInlineNew, MinimalAPI)
 class UAssaultRifleUpgrade : public UStandardItemUpgrade {
     GENERATED_BODY()
 public:

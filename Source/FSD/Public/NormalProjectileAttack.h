@@ -6,7 +6,7 @@
 
 class AProjectile;
 
-UCLASS(BlueprintType, EditInlineNew)
+UCLASS(Blueprintable, EditInlineNew)
 class UNormalProjectileAttack : public UProjectileAttack {
     GENERATED_BODY()
 public:

@@ -5,7 +5,7 @@
 #include "UObject/NoExportTypes.h"
 #include "EscapeMenuWindow.generated.h"
 
-UCLASS(EditInlineNew)
+UCLASS(Blueprintable, EditInlineNew)
 class UEscapeMenuWindow : public UWindowWidget {
     GENERATED_BODY()
 public:

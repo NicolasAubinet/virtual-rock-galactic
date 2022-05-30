@@ -4,10 +4,10 @@
 #include "BeardVanityItem.generated.h"
 
 class USkeletalMesh;
-class UMaterialInterface;
 class UVanityAnimInstance;
+class UMaterialInterface;
 
-UCLASS(EditInlineNew)
+UCLASS(Blueprintable, EditInlineNew)
 class UBeardVanityItem : public UVanityItem {
     GENERATED_BODY()
 public:

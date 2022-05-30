@@ -7,7 +7,7 @@
 
 class USoundCue;
 
-UCLASS(CollapseCategories, EditInlineNew, MinimalAPI)
+UCLASS(Blueprintable, CollapseCategories, EditInlineNew, MinimalAPI)
 class UAnimNotifyState_PlaySound : public UAnimNotifyState {
     GENERATED_BODY()
 public:

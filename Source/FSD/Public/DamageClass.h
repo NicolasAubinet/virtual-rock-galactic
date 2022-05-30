@@ -3,12 +3,12 @@
 #include "Engine/DataAsset.h"
 #include "DamageClass.generated.h"
 
-class UDamageImpulse;
 class UPawnStat;
 class UDialogDataAsset;
 class UTexture2D;
+class UDamageImpulse;
 
-UCLASS(BlueprintType)
+UCLASS(Blueprintable)
 class UDamageClass : public UDataAsset {
     GENERATED_BODY()
 public:

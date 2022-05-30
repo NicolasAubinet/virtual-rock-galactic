@@ -6,7 +6,7 @@
 
 class UTexture2D;
 
-UCLASS()
+UCLASS(Blueprintable)
 class UVanityTattoo : public UDataAsset {
     GENERATED_BODY()
 public:

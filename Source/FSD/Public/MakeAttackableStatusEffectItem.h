@@ -6,7 +6,7 @@
 
 class UAttackerPositioningComponent;
 
-UCLASS(EditInlineNew)
+UCLASS(Blueprintable, EditInlineNew)
 class UMakeAttackableStatusEffectItem : public UStatusEffectItem {
     GENERATED_BODY()
 public:

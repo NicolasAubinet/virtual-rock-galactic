@@ -7,18 +7,18 @@
 class AFSDPostProcessingActor;
 class UMaterialInstanceDynamic;
 
-UCLASS()
+UCLASS(Blueprintable)
 class APostProcessingManager : public AActor {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere, Transient)
     TArray<TWeakObjectPtr<AFSDPostProcessingActor>> RegisteredActors;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<FPostProcessingBlendable> CurrentBlendables;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<UMaterialInstanceDynamic*> Materials;
     
 public:

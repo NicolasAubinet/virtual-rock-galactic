@@ -5,14 +5,14 @@
 #include "EDroneAIState.h"
 #include "BoscoAnimInstance.generated.h"
 
-UCLASS(NonTransient)
+UCLASS(Blueprintable, NonTransient)
 class UBoscoAnimInstance : public UAnimInstance {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FBoscoAnimNotifyDelegate OnWeaponsReady;
     
-    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FBoscoAnimNotifyDelegate OnWeaponsNotReady;
     
 protected:

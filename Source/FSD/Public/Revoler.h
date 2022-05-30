@@ -6,7 +6,7 @@
 class AActor;
 class UFSDPhysicalMaterial;
 
-UCLASS()
+UCLASS(Blueprintable)
 class ARevoler : public AAmmoDrivenWeapon {
     GENERATED_BODY()
 public:

@@ -3,7 +3,7 @@
 #include "DamageBonusBase.h"
 #include "FearAoEBonus.generated.h"
 
-UCLASS(EditInlineNew)
+UCLASS(Blueprintable, EditInlineNew)
 class UFearAoEBonus : public UDamageBonusBase {
     GENERATED_BODY()
 public:

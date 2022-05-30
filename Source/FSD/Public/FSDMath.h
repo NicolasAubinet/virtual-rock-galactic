@@ -5,7 +5,7 @@
 #include "UObject/NoExportTypes.h"
 #include "FSDMath.generated.h"
 
-UCLASS(BlueprintType)
+UCLASS(Blueprintable)
 class UFSDMath : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:

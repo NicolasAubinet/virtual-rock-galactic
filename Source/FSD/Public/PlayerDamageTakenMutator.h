@@ -5,7 +5,7 @@
 
 class UDamageClass;
 
-UCLASS(EditInlineNew)
+UCLASS(Blueprintable, EditInlineNew)
 class UPlayerDamageTakenMutator : public UMutator {
     GENERATED_BODY()
 public:

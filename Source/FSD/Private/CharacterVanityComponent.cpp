@@ -68,7 +68,7 @@ UCharacterVanityComponent::UCharacterVanityComponent() {
     this->ArmorClothMaterial = NULL;
     this->DynamicSkinMaterial = NULL;
     this->HeadVanityType = EHeadVanityType::HairOnly;
-    this->SpecialTemporaryArmor = NULL;
+    this->PreviewedItem = NULL;
     this->SkinMaterial = NULL;
 }
 

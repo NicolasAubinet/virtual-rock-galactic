@@ -1,14 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "Item.h"
 #include "ItemLoadoutAnimations.h"
+#include "Item.h"
 #include "LoadoutItemProxy.generated.h"
 
 class UItemCharacterAnimationSet;
 class AActor;
 
-UCLASS()
+UCLASS(Blueprintable)
 class ALoadoutItemProxy : public AItem {
     GENERATED_BODY()
 public:

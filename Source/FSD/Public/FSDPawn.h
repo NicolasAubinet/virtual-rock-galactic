@@ -1,46 +1,46 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "BoolDelegateDelegate.h"
 #include "GameFramework/Pawn.h"
+#include "GameplayTagContainer.h"
+#include "ProjectileSpawner.h"
 #include "GameplayTagAssetInterface.h"
 #include "Targetable.h"
-#include "ProjectileSpawner.h"
-#include "GameplayTagContainer.h"
+#include "BoolDelegateDelegate.h"
+#include "UObject/NoExportTypes.h"
 #include "GameplayTagContainer.h"
 #include "EPawnAttitude.h"
-#include "UObject/NoExportTypes.h"
 #include "FSDPawn.generated.h"
 
-class AFSDAIController;
-class UEnemyTemperatureComponent;
 class UStatusEffectsComponent;
-class UHealthComponentBase;
+class UEnemyTemperatureComponent;
 class UEnemyDescriptor;
 class UPawnStatsComponent;
 class AActor;
 class USkeletalMeshComponent;
+class UHealthComponentBase;
+class AFSDAIController;
 
-UCLASS(Abstract)
+UCLASS(Abstract, Blueprintable)
 class AFSDPawn : public APawn, public IGameplayTagAssetInterface, public ITargetable, public IProjectileSpawner {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FBoolDelegate OnFrozenEvent;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UStatusEffectsComponent* StatusEffects;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UEnemyTemperatureComponent* Temperature;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagContainer GameplayTags;
     
-    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UEnemyDescriptor* SpawnedFromDescriptor;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_IsFrozen, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_IsFrozen, meta=(AllowPrivateAccess=true))
     bool IsFrozen;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -49,10 +49,10 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool FleeInsteadOfBackingOff;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool IsFleeing;
     
-    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
     UPawnStatsComponent* PawnStatsInstance;
     
 public:
@@ -108,6 +108,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void MakeElite();
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsElite() const;
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, BlueprintPure)
     bool GetIsAlerted() const;

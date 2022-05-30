@@ -8,23 +8,23 @@
 #include "EPerkHUDActivationLocation.h"
 #include "PerkAsset.generated.h"
 
-class UPerkHUDActivationWidget;
-class UPerkLogic;
-class UDialogDataAsset;
-class UObject;
-class UTexture2D;
 class UPerkHUDIconWidget;
+class UDialogDataAsset;
+class UTexture2D;
 class APlayerController;
+class UPerkLogic;
+class UPerkHUDActivationWidget;
+class UObject;
 class UPlayerCharacterID;
 class UPerkAsset;
 class UPerkDelegateItem;
 
-UCLASS(Abstract, BlueprintType)
+UCLASS(Abstract, Blueprintable)
 class FSD_API UPerkAsset : public UDataAsset {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGuid SavegameID;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -54,7 +54,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float CoolDownBetweenUse;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool bIsHighlighted;
     
 public:

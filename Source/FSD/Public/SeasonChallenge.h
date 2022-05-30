@@ -1,17 +1,17 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "ChallengeVariation.h"
+#include "TrackedStatInfo.h"
 #include "SavableDataAsset.h"
 #include "UObject/NoExportTypes.h"
-#include "TrackedStatInfo.h"
+#include "ChallengeVariation.h"
 #include "SeasonChallenge.generated.h"
 
 class UTexture2D;
-class USeasonChallenge;
 class UCampaign;
+class USeasonChallenge;
 
-UCLASS()
+UCLASS(Blueprintable)
 class USeasonChallenge : public USavableDataAsset {
     GENERATED_BODY()
 public:

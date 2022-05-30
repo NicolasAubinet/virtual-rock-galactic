@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "Engine/EngineTypes.h"
 #include "Components/ActorComponent.h"
+#include "Engine/EngineTypes.h"
 #include "ExplosionBaseComponent.generated.h"
 
 class UDamageComponent;
-class UPhysicalMaterial;
 class UPrimitiveComponent;
+class UPhysicalMaterial;
 
-UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UExplosionBaseComponent : public UActorComponent {
     GENERATED_BODY()
 public:

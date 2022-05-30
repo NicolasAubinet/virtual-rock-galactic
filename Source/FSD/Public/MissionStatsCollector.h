@@ -3,15 +3,15 @@
 #include "Components/ActorComponent.h"
 #include "MissionStatsCollector.generated.h"
 
-class APlayerCharacter;
 class UCappedResource;
+class APlayerCharacter;
 
-UCLASS(meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UMissionStatsCollector : public UActorComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     APlayerCharacter* Character;
     
 public:

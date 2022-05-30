@@ -1,23 +1,23 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Blueprint/UserWidget.h"
 #include "CoolDownProgressStyle.h"
+#include "Blueprint/UserWidget.h"
 #include "CoolDownProgressWidget.generated.h"
 
 class UObject;
 
-UCLASS(Abstract, EditInlineNew)
+UCLASS(Abstract, Blueprintable, EditInlineNew)
 class UCoolDownProgressWidget : public UUserWidget {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FCoolDownProgressStyle Style;
     
-    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere)
     TWeakObjectPtr<UObject> CoolDownObject;
     
-    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bIsFinished;
     
 public:

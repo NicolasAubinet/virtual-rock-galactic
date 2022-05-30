@@ -3,12 +3,12 @@
 #include "PerkHUDWidget.h"
 #include "PerkHUDIconWidget.generated.h"
 
-UCLASS(Abstract, EditInlineNew)
+UCLASS(Abstract, Blueprintable, EditInlineNew)
 class UPerkHUDIconWidget : public UPerkHUDWidget {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float CoolDownProgress;
     
 public:

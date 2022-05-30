@@ -1,31 +1,31 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "GameFramework/Actor.h"
 #include "SaveGameIDInterface.h"
+#include "UObject/NoExportTypes.h"
+#include "GameFramework/Actor.h"
 #include "ItemIDInterface.h"
 #include "LoadoutItem.h"
-#include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "Engine/EngineTypes.h"
 #include "Grenade.generated.h"
 
-class UGrenadeAnimationSet;
 class UProjectileMovementComponent;
-class USoundCue;
-class ALoadoutItemProxy;
 class UItemID;
+class UGrenadeAnimationSet;
+class ALoadoutItemProxy;
 class UStaticMesh;
+class USoundCue;
 class UParticleSystem;
 class AGrenade;
 class AItem;
 
-UCLASS()
+UCLASS(Blueprintable)
 class AGrenade : public AActor, public ISaveGameIDInterface, public IItemIDInterface, public ILoadoutItem {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UProjectileMovementComponent* Movement;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -40,7 +40,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 MaxGrenades;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_HasExploded, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_HasExploded, meta=(AllowPrivateAccess=true))
     bool HasExploded;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

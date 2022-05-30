@@ -1,60 +1,60 @@
 #include "PlayerCharacter.h"
 #include "Net/UnrealNetwork.h"
-#include "StatusEffectsComponent.h"
-#include "CharacterSightComponent.h"
-#include "InventoryComponent.h"
+#include "PlayerAttackPositionComponent.h"
 #include "Components/SceneComponent.h"
+#include "CharacterCameraController.h"
+#include "MissionStatsCollector.h"
 #include "PlayerAfflictionComponent.h"
-#include "CharacterVanityComponent.h"
-#include "CommunicationComponent.h"
-#include "PawnStatsComponent.h"
-#include "OutlineComponent.h"
-#include "PlayerTemperatureComponent.h"
-#include "PlayerHealthComponent.h"
+#include "CharacterSightComponent.h"
 #include "CharacterUseComponent.h"
-#include "CharacterRecoilComponent.h"
-#include "PlayerReactiveTerrainTrackerComponent.h"
+#include "PlayerTemperatureComponent.h"
+#include "CommunicationComponent.h"
+#include "InventoryComponent.h"
+#include "Camera/CameraComponent.h"
+#include "CharacterVanityComponent.h"
 #include "Components/WidgetInteractionComponent.h"
 #include "FirstPersonSkeletalMeshComponent.h"
-#include "Camera/CameraComponent.h"
 #include "ActorTrackingComponent.h"
-#include "MissionStatsCollector.h"
-#include "CharacterCameraController.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Components/PointLightComponent.h"
+#include "PawnStatsComponent.h"
+#include "PlayerHealthComponent.h"
 #include "SingleUsableComponent.h"
+#include "OutlineComponent.h"
+#include "CharacterRecoilComponent.h"
+#include "StatusEffectsComponent.h"
 #include "PlayerInfoComponent.h"
-#include "PlayerAttackPositionComponent.h"
+#include "PlayerReactiveTerrainTrackerComponent.h"
 #include "InstantUsable.h"
 
-class UPlayerTPAnimInstance;
-class AFSDPlayerController;
+class AFSDPhysicsActor;
+class AEventRewardDispenser;
 class AZipLineProjectile;
+class AActor;
+class UPlayerAnimInstance;
 class UPerkHUDActivationWidget;
 class USoundBase;
-class UAudioComponent;
 class USoundAttenuation;
 class USoundConcurrency;
-class AFSDPlayerState;
+class UAudioComponent;
 class APlayerController;
 class UMaterialInstanceDynamic;
+class UPlayerFPAnimInstance;
 class AShieldGeneratorActor;
 class UFSDPhysicalMaterial;
-class UCharacterStateComponent;
-class USchematic;
 class UAnimMontage;
-class UParticleSystem;
-class AEventRewardDispenser;
+class USchematic;
 class APlayerCharacter;
-class AFSDPhysicsActor;
 class UCappedResource;
-class AActor;
-class AItem;
-class UInventoryList;
 class UObject;
+class UCharacterStateComponent;
+class AItem;
+class UPlayerTPAnimInstance;
+class AFSDPlayerState;
+class AFSDPlayerController;
+class UInventoryList;
 class UTexture2D;
-class UPlayerFPAnimInstance;
-class UPlayerAnimInstance;
+class UParticleSystem;
 
 void APlayerCharacter::UseZipLine(AZipLineProjectile* ZipLine, const FVector& Start, const FVector& End) {
 }
@@ -117,6 +117,9 @@ void APlayerCharacter::SetOutsideShieldGenerator(AShieldGeneratorActor* Shield) 
 }
 
 void APlayerCharacter::SetIsCharacterSelectionModel() {
+}
+
+void APlayerCharacter::SetInstantUsables_Implementation(bool Value) {
 }
 
 void APlayerCharacter::SetInsideShieldGenerator(AShieldGeneratorActor* Shield) {
@@ -186,6 +189,9 @@ void APlayerCharacter::Server_CheatGodMode_Implementation() {
 }
 
 void APlayerCharacter::Server_CheatFlyMode_Implementation(bool Active) {
+}
+
+void APlayerCharacter::Server_CheatDebugFastMode_Implementation(bool fast) {
 }
 
 void APlayerCharacter::Server_CancelThrowingCarriable_Implementation() {
@@ -647,8 +653,6 @@ APlayerCharacter::APlayerCharacter() {
     this->IdleTime = 0.00f;
     this->FPDrinkSalute = NULL;
     this->TPDrinkSalute = NULL;
-    this->SaluteShout = NULL;
-    this->DrinkShout = NULL;
     this->CurrentSaluteMontage = NULL;
     this->BlockTrackGrindOnLanded = false;
     this->RadarMaterialInstance = NULL;

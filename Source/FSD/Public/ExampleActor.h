@@ -4,11 +4,11 @@
 #include "ExampleUpdatedDelegateDelegate.h"
 #include "ExampleActor.generated.h"
 
-UCLASS()
+UCLASS(Blueprintable)
 class AExampleActor : public AActor {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FExampleUpdatedDelegate OnExampleUpdatedEvent;
     
 protected:

@@ -1,26 +1,26 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
-#include "Targetable.h"
 #include "Steerable.h"
+#include "Targetable.h"
 #include "PathfinderVehicle.generated.h"
 
 class USkeletalMeshComponent;
 class UDeepPathfinderMovement;
 class UHealthComponent;
 
-UCLASS()
+UCLASS(Blueprintable)
 class APathfinderVehicle : public APawn, public ITargetable, public ISteerable {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UDeepPathfinderMovement* PathfinderMovement;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* Mesh;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UHealthComponent* HealthComponent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

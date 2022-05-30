@@ -1,29 +1,29 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Engine/NetSerialization.h"
 #include "EnemyPawn.h"
 #include "AttackingPointInterface.h"
+#include "Engine/NetSerialization.h"
 #include "ECaveLeechState.h"
 #include "UObject/NoExportTypes.h"
 #include "CaveLeech.generated.h"
 
-class AActor;
 class UPawnAffliction;
 class USkeletalMeshComponent;
 class UGrabberComponent;
+class AActor;
 class UHealthComponent;
 class USceneComponent;
 class UHealthComponentBase;
 
-UCLASS(Abstract)
+UCLASS(Abstract, Blueprintable)
 class ACaveLeech : public AEnemyPawn, public IAttackingPointInterface {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* SkeletalMesh;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UGrabberComponent* GrabberComponent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -77,25 +77,25 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UPawnAffliction* CaveLeechSenseAffliction;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float StateTime;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_State, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_State, meta=(AllowPrivateAccess=true))
     ECaveLeechState State;
     
-    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     FVector_NetQuantize TentacleLocation;
     
-    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     FVector_NetQuantize TentacleVelocity;
     
-    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere, Replicated, Transient)
     TWeakObjectPtr<AActor> Target;
     
-    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
     UHealthComponent* HealthTarget;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     USceneComponent* TentacleHead;
     
 public:

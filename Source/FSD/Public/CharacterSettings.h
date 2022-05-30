@@ -5,42 +5,53 @@
 #include "UObject/NoExportTypes.h"
 #include "CharacterSettings.generated.h"
 
-class ACarriableItem;
-class UUseAnimationSetting;
 class APlayerCharacter;
-class USkeletalMesh;
+class UInventoryList;
+class UTerrainPlacementComponent;
 class UPlayerCharacterID;
+class UDebrisPositioning;
+class USkeletalMesh;
+class UUseAnimationSetting;
+class ACarriableItem;
+class UCampaignManager;
+class UPlayerCharacterData;
 class UCharacterVanityItems;
 class UDialogDataAsset;
-class UDebrisPositioning;
-class UTerrainPlacementComponent;
-class UPlayerCharacterData;
 class UAsyncManager;
 
-UCLASS(BlueprintType)
+UCLASS(Blueprintable)
 class UCharacterSettings : public UDataAsset {
     GENERATED_BODY()
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSoftClassPtr<APlayerCharacter>> RankedHeroClasses;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<TSubclassOf<APlayerCharacter>> LoadedClasses;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FText> PlayerRankNames;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TMap<UPlayerCharacterID*, UInventoryList*> InventoryLists;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<int32> CharacterXPLevels;
     
-    UPROPERTY(BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<FGuid, UPlayerCharacterID*> PlayerCharacterIDMap;
     
-    UPROPERTY(BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UPlayerCharacterID*> PlayerCharacterIDs;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UPlayerCharacterID* BoscoID;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPlayerCharacterID* DefaultCharacterID;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPlayerCharacterID* DefaultEditorCharacterID;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USkeletalMesh* NoHead;
@@ -61,6 +72,9 @@ public:
     UUseAnimationSetting* ThrowItemAnimSettings;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSoftClassPtr<UCampaignManager> CampaignManagerClass;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<UPlayerCharacterID*, UCharacterVanityItems*> CharacterVanityItems;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -73,7 +87,7 @@ public:
     TSubclassOf<UTerrainPlacementComponent> TeleportPlacement;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TMap<UPlayerCharacterID*, UPlayerCharacterData*> CharacterData;
     
 public:
@@ -83,6 +97,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UPlayerCharacterID* GetPlayerCharacterID(const FGuid& ID) const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UInventoryList* GetInventoryList(UPlayerCharacterID* characterID) const;
     
 };
 

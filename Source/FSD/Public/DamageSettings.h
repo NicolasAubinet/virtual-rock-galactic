@@ -1,19 +1,19 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "Curves/CurveFloat.h"
-#include "DecalData.h"
 #include "Engine/DataAsset.h"
+#include "DecalData.h"
+#include "Curves/CurveFloat.h"
 #include "DamageSettings.generated.h"
 
+class UDamageTag;
 class UStatusEffect;
 class UDamageComponent;
-class UNiagaraSystem;
 class USoundCue;
-class UDamageTag;
+class UNiagaraSystem;
 class UDamageImpulse;
 
-UCLASS(BlueprintType)
+UCLASS(Blueprintable)
 class UDamageSettings : public UDataAsset {
     GENERATED_BODY()
 public:

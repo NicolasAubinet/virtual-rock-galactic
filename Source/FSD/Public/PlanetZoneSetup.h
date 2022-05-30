@@ -3,10 +3,10 @@
 #include "Engine/DataAsset.h"
 #include "PlanetZoneSetup.generated.h"
 
-class UPlanetZone;
 class UBiome;
+class UPlanetZone;
 
-UCLASS(BlueprintType)
+UCLASS(Blueprintable)
 class UPlanetZoneSetup : public UDataAsset {
     GENERATED_BODY()
 public:

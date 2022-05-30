@@ -6,7 +6,7 @@
 
 class UParticleSystem;
 
-UCLASS(Abstract, BlueprintType)
+UCLASS(Abstract, Blueprintable)
 class UTracerManager : public UWorldSubsystem {
     GENERATED_BODY()
 public:

@@ -4,17 +4,17 @@
 #include "HackingUsableState.h"
 #include "HackingUsableComponent.generated.h"
 
-class AHackingToolItem;
 class APlayerCharacter;
+class AHackingToolItem;
 class UHackingToolWidget;
 
-UCLASS(meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class FSD_API UHackingUsableComponent : public UInstantUsable {
     GENERATED_BODY()
 public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FHackedDelegate, APlayerCharacter*, InHackedBy);
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FHackedDelegate OnHacked;
     
 protected:
@@ -24,7 +24,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<UHackingToolWidget> HackingWidgetType;
     
-    UPROPERTY(BlueprintReadWrite, ReplicatedUsing=OnRep_HackingState, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_HackingState, meta=(AllowPrivateAccess=true))
     FHackingUsableState HackingState;
     
 public:

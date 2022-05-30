@@ -3,11 +3,11 @@
 #include "WeaponHitCountEffect.h"
 #include "ChargedHitCountEffect.generated.h"
 
-class USoundCue;
 class UParticleSystem;
 class UDamageClass;
+class USoundCue;
 
-UCLASS(EditInlineNew, MinimalAPI)
+UCLASS(Blueprintable, EditInlineNew, MinimalAPI)
 class UChargedHitCountEffect : public UWeaponHitCountEffect {
     GENERATED_BODY()
 public:

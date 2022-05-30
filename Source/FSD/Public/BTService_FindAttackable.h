@@ -5,7 +5,7 @@
 #include "GameplayTagContainer.h"
 #include "BTService_FindAttackable.generated.h"
 
-UCLASS()
+UCLASS(Blueprintable)
 class UBTService_FindAttackable : public UBTService {
     GENERATED_BODY()
 public:

@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "ForgingPendingReward.h"
+#include "ForgingResult.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "ESchematicType.h"
-#include "ForgingResult.h"
+#include "ForgingPendingReward.h"
 #include "ForgingFunctionLibrary.generated.h"
 
-class UObject;
 class USchematic;
+class UObject;
 
-UCLASS(BlueprintType)
+UCLASS(Blueprintable)
 class UForgingFunctionLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:

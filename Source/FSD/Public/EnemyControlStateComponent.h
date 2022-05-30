@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "CharacterStateComponent.h"
-#include "ControlEnemyState.h"
 #include "EEnemyControlState.h"
+#include "ControlEnemyState.h"
 #include "UObject/NoExportTypes.h"
 #include "EnemyControlStateComponent.generated.h"
 
 class UAnimMontage;
 class UAIPlayerControlComponent;
 
-UCLASS(meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class FSD_API UEnemyControlStateComponent : public UCharacterStateComponent {
     GENERATED_BODY()
 public:
@@ -17,16 +17,16 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool UseThirdPersonCam;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_StateData, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_StateData, meta=(AllowPrivateAccess=true))
     FControlEnemyState StateData;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_ControlState, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_ControlState, meta=(AllowPrivateAccess=true))
     EEnemyControlState ControlState;
     
-    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     FQuat AngularVelocity;
     
-    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     FQuat ControlRotation;
     
 public:

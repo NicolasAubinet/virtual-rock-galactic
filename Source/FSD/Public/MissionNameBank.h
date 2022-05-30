@@ -1,10 +1,10 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Engine/DataAsset.h"
 #include "UObject/NoExportTypes.h"
+#include "Engine/DataAsset.h"
 #include "MissionNameBank.generated.h"
 
-UCLASS(BlueprintType)
+UCLASS(Blueprintable)
 class UMissionNameBank : public UDataAsset {
     GENERATED_BODY()
 public:

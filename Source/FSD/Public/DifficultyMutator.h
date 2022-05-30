@@ -3,7 +3,7 @@
 #include "Mutator.h"
 #include "DifficultyMutator.generated.h"
 
-UCLASS(EditInlineNew)
+UCLASS(Blueprintable, EditInlineNew)
 class UDifficultyMutator : public UMutator {
     GENERATED_BODY()
 public:

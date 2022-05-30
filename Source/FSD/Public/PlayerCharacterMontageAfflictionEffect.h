@@ -5,7 +5,7 @@
 
 class UAnimMontage;
 
-UCLASS()
+UCLASS(Blueprintable)
 class UPlayerCharacterMontageAfflictionEffect : public UAfflictionEffect {
     GENERATED_BODY()
 public:

@@ -6,7 +6,7 @@
 class UTerrainMaterial;
 class UVeinResourceCreator;
 
-UCLASS()
+UCLASS(Blueprintable)
 class UVeinResourceData : public UResourceData {
     GENERATED_BODY()
 public:

@@ -7,7 +7,7 @@
 
 class UStaticMesh;
 
-UCLASS(EditInlineNew)
+UCLASS(Blueprintable, EditInlineNew)
 class UMeshCarveAttackEffect : public UAttackEffect {
     GENERATED_BODY()
 public:

@@ -1,14 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "IRandRange.h"
-#include "DebrisActorComponent.h"
 #include "DebrisItemActorItem.h"
+#include "DebrisActorComponent.h"
 #include "EDebrisItemPass.h"
+#include "IRandRange.h"
 #include "DebrisItemComponent.generated.h"
 
 class UDebrisPositioning;
 
-UCLASS(meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UDebrisItemComponent : public UDebrisActorComponent {
     GENERATED_BODY()
 public:

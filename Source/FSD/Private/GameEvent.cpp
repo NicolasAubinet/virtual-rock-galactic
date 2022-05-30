@@ -4,10 +4,10 @@
 #include "Components/ChildActorComponent.h"
 
 class ARessuplyPod;
-class AProceduralSetup;
 class AActor;
-class UDebrisPositioning;
 class AEventStarterButton;
+class AProceduralSetup;
+class UDebrisPositioning;
 
 void AGameEvent::TrySetupGameEvent() {
 }

@@ -1,9 +1,9 @@
 #include "EnemySpawnManager.h"
 #include "Templates/SubclassOf.h"
 
-class UStatusEffect;
 class APawn;
 class UEnemyDescriptor;
+class UStatusEffect;
 class AActor;
 class UHealthComponentBase;
 

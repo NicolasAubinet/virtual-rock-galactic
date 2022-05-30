@@ -6,7 +6,7 @@
 
 class UWidget;
 
-UCLASS()
+UCLASS(Blueprintable)
 class ADefenseEvent : public AGameEvent {
     GENERATED_BODY()
 public:
@@ -17,7 +17,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UWidget> DefendWidget;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_Progress, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_Progress, meta=(AllowPrivateAccess=true))
     float Progress;
     
 public:

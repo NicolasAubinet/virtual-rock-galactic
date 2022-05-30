@@ -1,45 +1,45 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "OnNoTargetHitDelegate.h"
-#include "GameplayTagContainer.h"
 #include "Components/ActorComponent.h"
-#include "OnEnemyDamagedDelegateDelegate.h"
 #include "OnEnemyKilledDelegateDelegate.h"
+#include "OnEnemyDamagedDelegateDelegate.h"
+#include "OnNoTargetHitDelegate.h"
 #include "OnAsyncAoE_CompleteDelegate.h"
 #include "EDamageComponentType.h"
 #include "EArmorDamageType.h"
-#include "UObject/NoExportTypes.h"
+#include "GameplayTagContainer.h"
 #include "Engine/EngineTypes.h"
+#include "UObject/NoExportTypes.h"
 #include "DamageComponent.generated.h"
 
 class UDamageImpulse;
 class UDamageClass;
 class UDamageBonusBase;
-class AActor;
 class UDamageModifier;
 class UDamageTag;
 class UDamageComponent;
+class AActor;
 class UPrimitiveComponent;
 class UFSDPhysicalMaterial;
 
-UCLASS(BlueprintType, EditInlineNew, meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, EditInlineNew, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UDamageComponent : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable, BlueprintAuthorityOnly, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintAuthorityOnly, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnEnemyKilledDelegate OnTargetKilledEvent;
     
-    UPROPERTY(BlueprintAssignable, BlueprintAuthorityOnly, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintAuthorityOnly, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnEnemyDamagedDelegate OnTargetDamagedEvent;
     
-    UPROPERTY(BlueprintAssignable, BlueprintAuthorityOnly, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintAuthorityOnly, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnNoTargetHit OnNoTargetHitEvent;
     
-    UPROPERTY(BlueprintAssignable, BlueprintAuthorityOnly, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintAuthorityOnly, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnNoTargetHit OnHitDeadTarget;
     
-    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnAsyncAoE_Complete OnAsyncAoE_Complete;
     
 protected:

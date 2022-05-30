@@ -5,7 +5,7 @@
 
 class UCaveInfluencer;
 
-UCLASS(meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UInfluencerSpawnComponent : public USceneComponent {
     GENERATED_BODY()
 public:

@@ -6,7 +6,7 @@
 
 class UCameraShakeBase;
 
-UCLASS(CollapseCategories, MinimalAPI)
+UCLASS(Blueprintable, CollapseCategories, MinimalAPI)
 class UAnimNotify_CameraShake : public UAnimNotify {
     GENERATED_BODY()
 public:

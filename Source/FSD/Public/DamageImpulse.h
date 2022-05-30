@@ -4,7 +4,7 @@
 #include "EImpulseDirectionSource.h"
 #include "DamageImpulse.generated.h"
 
-UCLASS(BlueprintType)
+UCLASS(Blueprintable)
 class UDamageImpulse : public UDataAsset {
     GENERATED_BODY()
 public:

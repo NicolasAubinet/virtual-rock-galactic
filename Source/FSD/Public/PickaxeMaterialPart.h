@@ -8,7 +8,7 @@ class UMaterialInterface;
 class UDynamicIcon;
 class UObject;
 
-UCLASS(BlueprintType, EditInlineNew)
+UCLASS(Blueprintable, EditInlineNew)
 class FSD_API UPickaxeMaterialPart : public UPickaxePartItem {
     GENERATED_BODY()
 public:

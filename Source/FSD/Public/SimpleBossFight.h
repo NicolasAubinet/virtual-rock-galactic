@@ -5,11 +5,11 @@
 #include "BossFight.h"
 #include "SimpleBossFight.generated.h"
 
-UCLASS(BlueprintType)
+UCLASS(Blueprintable)
 class USimpleBossFight : public UObject, public IBossFightInterface {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FBossFight BossFight;
     
     USimpleBossFight();

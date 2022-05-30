@@ -3,10 +3,10 @@
 #include "Components/SphereComponent.h"
 
 class UTerrainMaterial;
-class UDamageComponent;
+class AActor;
 class UPrimitiveComponent;
 class AProjectileBase;
-class AActor;
+class UDamageComponent;
 
 UTerrainMaterial* AProjectileBase::TryGetTerrainMaterial() const {
     return NULL;

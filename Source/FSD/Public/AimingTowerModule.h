@@ -6,15 +6,15 @@
 
 class AActor;
 
-UCLASS()
+UCLASS(Blueprintable)
 class AAimingTowerModule : public ATowerModuleBase {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, Replicated, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
     AActor* Target;
     
-    UPROPERTY(BlueprintReadWrite, Replicated, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
     FRotator AimRotation;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

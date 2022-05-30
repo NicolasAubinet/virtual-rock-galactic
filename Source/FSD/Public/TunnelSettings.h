@@ -4,10 +4,10 @@
 #include "UObject/NoExportTypes.h"
 #include "TunnelSettings.generated.h"
 
-class UTerrainMaterial;
 class UFloodFillSettings;
+class UTerrainMaterial;
 
-UCLASS(BlueprintType)
+UCLASS(Blueprintable)
 class UTunnelSettings : public UDataAsset {
     GENERATED_BODY()
 public:

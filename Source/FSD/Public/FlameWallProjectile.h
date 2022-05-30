@@ -7,7 +7,7 @@
 class AFlameWallSegment;
 class AActor;
 
-UCLASS(Abstract)
+UCLASS(Abstract, Blueprintable)
 class AFlameWallProjectile : public AProjectile {
     GENERATED_BODY()
 public:

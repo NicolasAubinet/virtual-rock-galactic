@@ -1,8 +1,8 @@
 #include "ItemPreviewActor.h"
 #include "Templates/SubclassOf.h"
 
-class USkinEffect;
 class UItemSkin;
+class USkinEffect;
 class AActor;
 
 void AItemPreviewActor::SkinItem(USkinEffect* Skin) {

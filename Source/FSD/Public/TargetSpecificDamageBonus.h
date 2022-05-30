@@ -1,10 +1,10 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "DamageBonusBase.h"
 #include "GameplayTagContainer.h"
+#include "DamageBonusBase.h"
 #include "TargetSpecificDamageBonus.generated.h"
 
-UCLASS(EditInlineNew)
+UCLASS(Blueprintable, EditInlineNew)
 class UTargetSpecificDamageBonus : public UDamageBonusBase {
     GENERATED_BODY()
 public:

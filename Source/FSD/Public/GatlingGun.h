@@ -3,12 +3,12 @@
 #include "BeltDrivenWeapon.h"
 #include "GatlingGun.generated.h"
 
-class UDamageComponent;
-class AActor;
-class UFXSystemAsset;
 class UFSDPhysicalMaterial;
+class UDamageComponent;
+class UFXSystemAsset;
+class AActor;
 
-UCLASS()
+UCLASS(Blueprintable)
 class AGatlingGun : public ABeltDrivenWeapon {
     GENERATED_BODY()
 public:
@@ -37,19 +37,19 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float HeatRemovedOnKill;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool CriticalOverheatEnabled;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_HotShellsTracerOn, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_HotShellsTracerOn, meta=(AllowPrivateAccess=true))
     bool HotShellsOn;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float HotShellsTemperatureRequired;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UDamageComponent* DamageComponent;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UDamageComponent* BarrelProximityDamageComponent;
     
 public:

@@ -5,7 +5,7 @@
 
 class UResourceData;
 
-UCLASS(EditInlineNew)
+UCLASS(Blueprintable, EditInlineNew)
 class UResourceVeinMutator : public UMutator {
     GENERATED_BODY()
 public:

@@ -2,14 +2,14 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "StandardItemUpgrade.h"
-#include "ECapsuleHitscanUpgradeType.h"
 #include "UpgradeValues.h"
+#include "ECapsuleHitscanUpgradeType.h"
 #include "CapsuleHitscanUpgrade.generated.h"
 
 class AItem;
 class AFSDPlayerState;
 
-UCLASS(EditInlineNew, MinimalAPI)
+UCLASS(Blueprintable, EditInlineNew, MinimalAPI)
 class UCapsuleHitscanUpgrade : public UStandardItemUpgrade {
     GENERATED_BODY()
 public:

@@ -1,9 +1,9 @@
 #include "FSDAdvancedLabel.h"
 
-class UTextBlock;
-class UHorizontalBox;
 class UImage;
 class UTexture2D;
+class UTextBlock;
+class UHorizontalBox;
 
 void UFSDAdvancedLabel::SetText(FText NewText, FText OverrideControllerText) {
 }

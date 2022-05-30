@@ -9,20 +9,20 @@
 #include "CraftingCost.h"
 #include "UpgradableGearComponent.generated.h"
 
-class UItemData;
-class UOverclockBank;
 class UResourceData;
-class UObject;
-class UTexture2D;
-class UItemUpgrade;
 class AActor;
+class UOverclockBank;
+class UItemUpgrade;
+class UItemData;
+class UTexture2D;
+class UObject;
+class APlayerCharacter;
 class UItemID;
 class AFSDPlayerController;
-class APlayerCharacter;
 class AFSDPlayerState;
 class UPlayerCharacterID;
 
-UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class FSD_API UUpgradableGearComponent : public UActorComponent {
     GENERATED_BODY()
 public:
@@ -36,7 +36,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UOverclockBank* OverclockBank;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<UItemUpgrade*> AllOverclocks;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -146,7 +146,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static EItemUpgradeStatus GetItemUpgradeStatus(UObject* WorldContextObject, TSubclassOf<AActor> itemClass, UItemUpgrade* ItemUpgrade, UPlayerCharacterID* characterID);
     
-    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UFUNCTION(BlueprintPure)
     static TArray<UItemUpgrade*> GetItemUpgrades(TSubclassOf<AActor> itemClass, TSubclassOf<UItemUpgrade> upgradeClass, AFSDPlayerState* Player, uint8 upgradeIndex);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)

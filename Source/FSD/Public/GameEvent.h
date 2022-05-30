@@ -1,54 +1,54 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "ProgressChangedSigDelegate.h"
+#include "UObject/NoExportTypes.h"
 #include "GameFramework/Actor.h"
-#include "GameplayTagAssetInterface.h"
-#include "DelegateEventDelegate.h"
 #include "StageCompleteSigDelegate.h"
 #include "GameplayTagContainer.h"
+#include "GameplayTagAssetInterface.h"
+#include "DelegateEventDelegate.h"
+#include "ProgressChangedSigDelegate.h"
+#include "UObject/NoExportTypes.h"
 #include "GameplayTagContainer.h"
-#include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
 #include "GameEvent.generated.h"
 
-class UDebrisPositioning;
 class AEventStarterButton;
 class UChildActorComponent;
 class UDialogDataAsset;
 class ARessuplyPod;
 class AProceduralSetup;
+class UDebrisPositioning;
 
-UCLASS()
+UCLASS(Blueprintable)
 class AGameEvent : public AActor, public IGameplayTagAssetInterface {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FDelegateEvent EventTriggeredDelegate;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FDelegateEvent EventFinishedDelegate;
     
-    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FStageCompleteSig StageCompleteDelegate;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FProgressChangedSig ProgressChangedDelegate;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FProgressChangedSig OnProgressBarChanged;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FProgressChangedSig TimeProgressChanged;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FStageCompleteSig ObjectivesPerStageChanged;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<AEventStarterButton*> StarterObjects;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool bGameEventSetup;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -63,7 +63,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagContainer GameplayTags;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UChildActorComponent* StartEventObject;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -81,7 +81,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float EventFinishedShoutDelay;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_StageProgress, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_StageProgress, meta=(AllowPrivateAccess=true))
     float StageProgress;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -93,7 +93,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_ObjectivesPerStage, meta=(AllowPrivateAccess=true))
     int32 objectivesPerStage;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_IsEventStartersActive, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_IsEventStartersActive, meta=(AllowPrivateAccess=true))
     bool EventStartersActive;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -102,10 +102,10 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool StopNormalWavesWhileActive;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_EventStarted, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_EventStarted, meta=(AllowPrivateAccess=true))
     bool EventStarted;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_FailedEvent, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_FailedEvent, meta=(AllowPrivateAccess=true))
     bool FailedEvent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -124,7 +124,7 @@ protected:
     bool SkipEventStarters;
     
 private:
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_EventParticipants, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_EventParticipants, meta=(AllowPrivateAccess=true))
     TArray<AActor*> EventParticipants;
     
 public:

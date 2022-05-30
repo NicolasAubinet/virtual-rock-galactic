@@ -4,7 +4,7 @@
 #include "EPawnStatType.h"
 #include "PawnStat.generated.h"
 
-UCLASS()
+UCLASS(Blueprintable)
 class UPawnStat : public UDataAsset {
     GENERATED_BODY()
 public:

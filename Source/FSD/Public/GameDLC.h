@@ -5,17 +5,23 @@
 #include "UObject/NoExportTypes.h"
 #include "GameDLC.generated.h"
 
-class UObject;
 class UResourceData;
-class UTexture2D;
-class UWindowWidget;
 class UFileMediaSource;
+class UTexture2D;
+class UObject;
+class UWindowWidget;
 
-UCLASS()
+UCLASS(Blueprintable)
 class UGameDLC : public UDLCBase, public ISaveGameIDInterface {
     GENERATED_BODY()
 public:
 protected:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bFakeUnlockedStateInEditor;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bEditorUnlockedState;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 SteamID;
     
@@ -46,7 +52,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<UWindowWidget> AnnouncementWidget;
     
-    UPROPERTY(BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGuid SavegameID;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

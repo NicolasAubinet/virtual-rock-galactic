@@ -4,7 +4,7 @@
 #include "BehaviorTree/BehaviorTreeTypes.h"
 #include "BTService_UpdateFlyingMoveToTarget.generated.h"
 
-UCLASS()
+UCLASS(Blueprintable)
 class UBTService_UpdateFlyingMoveToTarget : public UBTService {
     GENERATED_BODY()
 public:

@@ -7,7 +7,7 @@
 
 class USplineComponent;
 
-UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UPathfinderSplineSegmentCollisionComponent : public UActorComponent {
     GENERATED_BODY()
 public:

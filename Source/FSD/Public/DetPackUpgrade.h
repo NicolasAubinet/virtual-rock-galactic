@@ -6,10 +6,10 @@
 #include "UpgradeValues.h"
 #include "DetPackUpgrade.generated.h"
 
-class AActor;
 class AFSDPlayerState;
+class AActor;
 
-UCLASS(EditInlineNew, MinimalAPI)
+UCLASS(Blueprintable, EditInlineNew, MinimalAPI)
 class UDetPackUpgrade : public UStandardItemUpgrade {
     GENERATED_BODY()
 public:

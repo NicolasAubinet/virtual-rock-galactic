@@ -3,7 +3,7 @@
 #include "Animation/AnimInstance.h"
 #include "TreasureBoxAnimInstance.generated.h"
 
-UCLASS(NonTransient)
+UCLASS(Blueprintable, NonTransient)
 class UTreasureBoxAnimInstance : public UAnimInstance {
     GENERATED_BODY()
 public:

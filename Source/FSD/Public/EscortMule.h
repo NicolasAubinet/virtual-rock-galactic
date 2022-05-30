@@ -1,78 +1,85 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "TriggerAI.h"
 #include "FSDPawn.h"
+#include "DelegateDelegate.h"
+#include "TriggerAI.h"
 #include "MuleActivatedSignatureDelegate.h"
 #include "SpeedChangedSignatureDelegate.h"
-#include "IntDelegateDelegate.h"
-#include "DelegateDelegate.h"
-#include "GaragePathSignatureDelegate.h"
 #include "FloatDelegateDelegate.h"
+#include "GaragePathSignatureDelegate.h"
+#include "IntDelegateDelegate.h"
+#include "EEscortMissionState.h"
 #include "UObject/NoExportTypes.h"
 #include "EscortMuleMovementState.h"
 #include "UObject/NoExportTypes.h"
 #include "EscortMuleExtractorSlot.h"
-#include "EEscortMissionState.h"
 #include "EEscortExtractorState.h"
 #include "EscortMule.generated.h"
 
-class AExtractorItem;
+class USkeletalMeshComponent;
+class USimpleObjectInfoComponent;
+class APlayerCharacter;
 class UFriendlyHealthComponent;
 class URestrictedResourceBank;
-class USimpleObjectInfoComponent;
-class USkeletalMeshComponent;
+class UEscortObjective;
 class UOutlineComponent;
-class APlayerCharacter;
 class UInstantUsable;
+class AExtractorItem;
 
-UCLASS()
+UCLASS(Blueprintable)
 class FSD_API AEscortMule : public AFSDPawn, public ITriggerAI {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FMuleActivatedSignature OnMuleActivated;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSpeedChangedSignature OnSpeedChanged;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FIntDelegate OnFullCanistersChanged;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGaragePathSignature OnExitGaragePathSet;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FFloatDelegate Cheat_SetMuleSpeed;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FDelegate Cheat_JumpToNextPhase;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UFriendlyHealthComponent* HealthComponent;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     USimpleObjectInfoComponent* ObjectInfo;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     URestrictedResourceBank* ResourceBank;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FTransform TargetTransform;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FTransform PreviousTransform;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_MovementState, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnObjectiveStateChanged, meta=(AllowPrivateAccess=true))
+    EEscortMissionState State;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UEscortObjective* EscortObjective;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_MovementState, meta=(AllowPrivateAccess=true))
     FEscortMuleMovementState MovementState;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_SpeedModifier, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_SpeedModifier, meta=(AllowPrivateAccess=true))
     float SpeedModifier;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* Mesh;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UOutlineComponent* OutlineComponent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -81,22 +88,22 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float HealPerTickUnderAttack;
     
-    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     bool CannisterVisible_Left;
     
-    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     bool CannisterVisible_Right;
     
-    UPROPERTY(BlueprintReadWrite, Replicated, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
     FVector NextStop;
     
-    UPROPERTY(BlueprintReadWrite, ReplicatedUsing=OnRep_IsCarvingTunnel, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_IsCarvingTunnel, meta=(AllowPrivateAccess=true))
     bool IsCarvingTunnel;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     int32 FullCanisters;
     
-    UPROPERTY(BlueprintReadWrite, ReplicatedUsing=OnRep_ExtractorSlots, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_ExtractorSlots, meta=(AllowPrivateAccess=true))
     TArray<FEscortMuleExtractorSlot> ExtractorSlots;
     
 public:
@@ -144,7 +151,7 @@ protected:
     
 public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-    void OnObjectiveStateChanged(EEscortMissionState NewState);
+    void OnObjectiveStateChanged(EEscortMissionState oldState);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnExtractorSlotChanged(const FEscortMuleExtractorSlot& Slot, int32 Index);
@@ -154,7 +161,7 @@ protected:
     void OnExtractorDetached(AExtractorItem* Item);
     
 public:
-    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    UFUNCTION(BlueprintCallable)
     void ObjectiveStateChange(EEscortMissionState NewState);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)

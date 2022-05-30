@@ -1,10 +1,10 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "SDFBaseComponent.h"
 #include "SDFRandomizeTransformProperties.h"
+#include "SDFBaseComponent.h"
 #include "SDFRandomizeTransformComponent.generated.h"
 
-UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class USDFRandomizeTransformComponent : public USDFBaseComponent {
     GENERATED_BODY()
 public:

@@ -3,12 +3,12 @@
 #include "GameFramework/Actor.h"
 #include "CoilGunTrailSegment.generated.h"
 
-UCLASS()
+UCLASS(Blueprintable)
 class ACoilGunTrailSegment : public AActor {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_EffectsLife, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_EffectsLife, meta=(AllowPrivateAccess=true))
     float EffectsLife;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

@@ -3,7 +3,7 @@
 #include "Mutator.h"
 #include "EliteEnemiesMutator.generated.h"
 
-UCLASS(EditInlineNew)
+UCLASS(Blueprintable, EditInlineNew)
 class UEliteEnemiesMutator : public UMutator {
     GENERATED_BODY()
 public:

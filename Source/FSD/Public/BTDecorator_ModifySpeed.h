@@ -3,7 +3,7 @@
 #include "BehaviorTree/BTDecorator.h"
 #include "BTDecorator_ModifySpeed.generated.h"
 
-UCLASS()
+UCLASS(Blueprintable)
 class UBTDecorator_ModifySpeed : public UBTDecorator {
     GENERATED_BODY()
 public:

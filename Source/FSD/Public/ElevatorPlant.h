@@ -1,30 +1,30 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "UObject/NoExportTypes.h"
 #include "StartTimelineEventDelegate.h"
 #include "COnStateChangedDelegate.h"
 #include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
 #include "ElevatorPlant.generated.h"
 
-class USplineMeshComponent;
-class USceneComponent;
 class UAudioComponent;
 class USoundCue;
+class USplineMeshComponent;
 class UCurveFloat;
+class USceneComponent;
 
-UCLASS()
+UCLASS(Blueprintable)
 class AElevatorPlant : public AActor {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FStartTimelineEvent OnStartTimelineEvent;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FCOnStateChanged COnStateChangedEvent;
     
-    UPROPERTY(BlueprintReadWrite, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UAudioComponent* MovingSoundComponent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -54,13 +54,13 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float BaseTangentLength;
     
-    UPROPERTY(BlueprintReadWrite, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     USplineMeshComponent* CSplineMesh;
     
-    UPROPERTY(BlueprintReadWrite, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     USceneComponent* CVineBase;
     
-    UPROPERTY(BlueprintReadWrite, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     USceneComponent* CVineLeaf;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))

@@ -5,7 +5,7 @@
 
 class USoundMix;
 
-UCLASS(CollapseCategories)
+UCLASS(Blueprintable, CollapseCategories)
 class UAnimNotify_PushSoundMix : public UAnimNotify {
     GENERATED_BODY()
 public:

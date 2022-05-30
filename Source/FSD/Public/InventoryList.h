@@ -6,13 +6,13 @@
 #include "EItemCategory.h"
 #include "InventoryList.generated.h"
 
-class UObject;
-class UTexture2D;
 class UItemID;
+class UTexture2D;
 class UMaterialInterface;
+class UObject;
 class AActor;
 
-UCLASS(BlueprintType)
+UCLASS(Blueprintable)
 class FSD_API UInventoryList : public UDataAsset {
     GENERATED_BODY()
 public:

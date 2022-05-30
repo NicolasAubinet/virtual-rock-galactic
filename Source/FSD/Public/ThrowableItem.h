@@ -6,13 +6,13 @@
 #include "UObject/NoExportTypes.h"
 #include "ThrowableItem.generated.h"
 
-class AActor;
 class AThrowableActor;
-class UAnimMontage;
 class UItemUpgrade;
+class UAnimMontage;
 class AItem;
+class AActor;
 
-UCLASS()
+UCLASS(Blueprintable)
 class AThrowableItem : public AAnimatedItem, public IUpgradable {
     GENERATED_BODY()
 public:
@@ -50,17 +50,17 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ThrowZOffset;
     
-    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     float CooldownLeft;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<UItemUpgrade*> upgrades;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<AItem> LoadoutItem;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
-    TArray<AThrowableActor*> ThrownActors;
+    UPROPERTY(EditAnywhere, Transient)
+    TArray<TWeakObjectPtr<AThrowableActor>> ThrownActors;
     
 public:
     AThrowableItem();

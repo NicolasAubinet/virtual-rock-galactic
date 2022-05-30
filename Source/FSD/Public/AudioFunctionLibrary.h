@@ -7,7 +7,7 @@ class UObject;
 class USoundClass;
 class USoundMix;
 
-UCLASS(BlueprintType)
+UCLASS(Blueprintable)
 class UAudioFunctionLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:

@@ -3,10 +3,10 @@
 
 class UObject;
 class UFSDGameInstance;
-class UPlayerCharacterID;
 class APlayerCharacter;
-class UDifficultySetting;
+class UPlayerCharacterID;
 class UBiome;
+class UDifficultySetting;
 class UMissionTemplate;
 
 void USessionHandling::StopVoice(UObject* WorldContextObject) {

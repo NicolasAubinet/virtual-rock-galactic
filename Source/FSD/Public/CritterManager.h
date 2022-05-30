@@ -3,7 +3,7 @@
 #include "Components/ActorComponent.h"
 #include "CritterManager.generated.h"
 
-UCLASS(meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UCritterManager : public UActorComponent {
     GENERATED_BODY()
 public:

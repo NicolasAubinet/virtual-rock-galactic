@@ -6,7 +6,7 @@
 class UDrinkableDataAsset;
 class APlayerCharacter;
 
-UCLASS(Abstract)
+UCLASS(Abstract, Blueprintable)
 class ADrinkableActor : public AActor {
     GENERATED_BODY()
 public:

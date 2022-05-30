@@ -4,11 +4,11 @@
 #include "UpgradableItemComponent.h"
 
 class USoundBase;
+class USoundAttenuation;
 class USceneComponent;
 class UAudioComponent;
-class USoundAttenuation;
-class USoundConcurrency;
 class AActor;
+class USoundConcurrency;
 class UTexture2D;
 class AItem;
 class UItemCharacterAnimationSet;

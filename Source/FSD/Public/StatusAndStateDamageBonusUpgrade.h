@@ -5,10 +5,10 @@
 #include "ETargetStateDamageBonusType.h"
 #include "StatusAndStateDamageBonusUpgrade.generated.h"
 
-class UStatusEffect;
 class UDamageClass;
+class UStatusEffect;
 
-UCLASS(EditInlineNew, MinimalAPI)
+UCLASS(Blueprintable, EditInlineNew, MinimalAPI)
 class UStatusAndStateDamageBonusUpgrade : public UItemUpgrade {
     GENERATED_BODY()
 public:

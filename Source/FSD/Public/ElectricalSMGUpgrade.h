@@ -2,14 +2,14 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "StandardItemUpgrade.h"
-#include "UpgradeValues.h"
 #include "EElectricalSMGUpgrades.h"
+#include "UpgradeValues.h"
 #include "ElectricalSMGUpgrade.generated.h"
 
 class AFSDPlayerState;
 class AActor;
 
-UCLASS(EditInlineNew, MinimalAPI)
+UCLASS(Blueprintable, EditInlineNew, MinimalAPI)
 class UElectricalSMGUpgrade : public UStandardItemUpgrade {
     GENERATED_BODY()
 public:

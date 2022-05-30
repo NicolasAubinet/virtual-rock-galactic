@@ -37,7 +37,7 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool DissolvePlatforms;
     
-    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere)
     uint32 OverrideBurntMaterialHandle;
     
     FSD_API FGrenadeExplodeOperationData();

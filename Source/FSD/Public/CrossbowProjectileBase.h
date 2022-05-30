@@ -4,88 +4,108 @@
 #include "Projectile.h"
 #include "OnCrossbowDamageDealtDelegate.h"
 #include "ECrossbowEffectApplication.h"
-#include "EInputKeys.h"
 #include "Engine/EngineTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "EInputKeys.h"
 #include "CrossbowProjectileBase.generated.h"
 
 class ACrossbowProjectileStuck;
 class UCrossbowProjectileRecallable;
 class UCrossbowProjectileMagnetic;
 class UCrossbowProjectileRicochet;
-class USceneComponent;
-class USoundCue;
 class UCrossbowStuckProjectileEffectBanshee;
 class UTexture2D;
 class UStatusEffect;
+class USoundCue;
+class USphereComponent;
+class UDamageComponent;
+class UTerrainDetectComponent;
 class UStaticMesh;
 class APlayerCharacter;
+class USceneComponent;
 
-UCLASS()
+UCLASS(Blueprintable)
 class ACrossbowProjectileBase : public AProjectile {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float StatusEffectTime;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, Export, Replicated, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Replicated, meta=(AllowPrivateAccess=true))
     UCrossbowProjectileRecallable* RecallComponent;
     
-    UPROPERTY(BlueprintReadWrite, Export, Replicated, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Replicated, meta=(AllowPrivateAccess=true))
     UCrossbowProjectileMagnetic* MagneticComponent;
     
-    UPROPERTY(BlueprintReadWrite, Export, Replicated, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Replicated, meta=(AllowPrivateAccess=true))
     UCrossbowProjectileRicochet* RicochetComponent;
     
-    UPROPERTY(BlueprintReadWrite, Export, Replicated, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Replicated, meta=(AllowPrivateAccess=true))
     UCrossbowStuckProjectileEffectBanshee* BansheeComponent;
     
-    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UCrossbowStuckProjectileEffectBanshee> BansheeComponentClass;
     
-    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UCrossbowProjectileRecallable> RecallComponentClass;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftObjectPtr<UTexture2D> Icon;
     
-    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftObjectPtr<UTexture2D> TriforkIcon;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnCrossbowDamageDealt OnDamageDealt;
     
-    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<ACrossbowProjectileStuck> SpawnableStuckProjectile;
     
-    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UStatusEffect> OnDamageEffect;
     
-    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     ECrossbowEffectApplication EffectApplication;
     
-    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere)
     uint8 SelectionPriority;
     
-    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool CanEverBePickedUp;
     
-    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool Penetrates;
     
-    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundCue* ImpactSound;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool IsASpecialProjectile;
+    
 private:
-    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    USphereComponent* LaserCollider;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UDamageComponent* DamageComponent;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UTerrainDetectComponent* TerrainDetectComponent;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UStaticMesh* ProjectileMesh;
     
-    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float KillTrailAfterTime;
     
 public:
     ACrossbowProjectileBase();
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+private:
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_HandleImpact(const FHitResult& HitResult, const FVector& RelativeLocation);
     
 protected:
     UFUNCTION(BlueprintCallable)
@@ -106,7 +126,7 @@ public:
     
 protected:
     UFUNCTION(BlueprintCallable)
-    void ApplyDamageEffects(const FHitResult& HitResult);
+    void ApplyDamageEffects(const FHitResult& HitResult, const FVector& RelativeLocation);
     
 public:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)

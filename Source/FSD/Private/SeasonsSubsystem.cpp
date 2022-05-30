@@ -1,17 +1,17 @@
 #include "SeasonsSubsystem.h"
 
-class USeasonChallenge;
-class AFSDPlayerController;
+class UItemSkin;
+class UDataAsset;
+class AFSDPlayerState;
 class UMissionStat;
 class UObject;
-class AFSDPlayerState;
-class UDataAsset;
+class USeasonChallenge;
 class UVanityItem;
 class UPlayerCharacterID;
 class UTextureRenderTarget2D;
-class UItemSkin;
 class UPickaxePart;
 class USeasonEventData;
+class AFSDPlayerController;
 
 FTimespan USeasonsSubsystem::TimeToNewChallenge() {
     return FTimespan{};
@@ -37,7 +37,7 @@ bool USeasonsSubsystem::IsNodeBought(int32 TreeOfVanityNodeID) {
     return false;
 }
 
-void USeasonsSubsystem::InitliazeStats() {
+void USeasonsSubsystem::InitializeStatsAndChallenges() {
 }
 
 bool USeasonsSubsystem::HasClaimedLevelRewards(int32 startLevel, int32 numberOfLevels) {

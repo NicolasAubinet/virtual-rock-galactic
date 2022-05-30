@@ -6,7 +6,7 @@
 
 class UStatusEffect;
 
-UCLASS(DefaultToInstanced, EditInlineNew)
+UCLASS(Blueprintable, DefaultToInstanced, EditInlineNew)
 class UPushDynamicStatusEffectDamageBonus : public UDamageBonusBase {
     GENERATED_BODY()
 public:
@@ -14,7 +14,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UStatusEffect> BaseSTE;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     UStatusEffect* StatusEffect;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

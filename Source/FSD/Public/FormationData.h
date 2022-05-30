@@ -5,12 +5,12 @@
 #include "FormationDataItem.h"
 #include "FormationData.generated.h"
 
-UCLASS(Abstract)
+UCLASS(Abstract, Blueprintable)
 class UFormationData : public UDataAsset {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FFormationDataItem> FormationItems;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

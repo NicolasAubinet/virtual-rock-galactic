@@ -5,7 +5,7 @@
 #include "FSDTagsRoot.h"
 #include "FSDTagSettings.generated.h"
 
-UCLASS()
+UCLASS(Blueprintable)
 class UFSDTagSettings : public UDataAsset {
     GENERATED_BODY()
 public:

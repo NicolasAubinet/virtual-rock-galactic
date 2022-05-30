@@ -3,7 +3,7 @@
 #include "BehaviorTree/BTDecorator.h"
 #include "BTDecorator_RandomLoop.generated.h"
 
-UCLASS()
+UCLASS(Blueprintable)
 class UBTDecorator_RandomLoop : public UBTDecorator {
     GENERATED_BODY()
 public:

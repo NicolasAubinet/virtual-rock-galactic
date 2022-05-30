@@ -1,19 +1,19 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Projectile.h"
-#include "GameplayTagAssetInterface.h"
 #include "GameplayTagContainer.h"
+#include "GameplayTagAssetInterface.h"
 #include "GameplayTagContainer.h"
 #include "HomingDroneBomb.generated.h"
 
 class UEnemyHealthComponent;
 class USoundCue;
 
-UCLASS()
+UCLASS(Blueprintable)
 class AHomingDroneBomb : public AProjectile, public IGameplayTagAssetInterface {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UEnemyHealthComponent* Health;
     
 protected:
@@ -32,7 +32,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagContainer GameplayTags;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_HomingAccelerationMagnitude, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_HomingAccelerationMagnitude, meta=(AllowPrivateAccess=true))
     float HomingAccelerationMagnitude;
     
 public:

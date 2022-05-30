@@ -3,7 +3,7 @@
 #include "ThrowableActor.h"
 #include "ShieldGeneratorActor.generated.h"
 
-UCLASS()
+UCLASS(Blueprintable)
 class AShieldGeneratorActor : public AThrowableActor {
     GENERATED_BODY()
 public:

@@ -4,10 +4,10 @@
 #include "CommnuityRewardSetup.generated.h"
 
 class UCommnuityRewardBundle;
-class UObject;
 class UResourceData;
+class UObject;
 
-UCLASS(BlueprintType)
+UCLASS(Blueprintable)
 class UCommnuityRewardSetup : public UDataAsset {
     GENERATED_BODY()
 public:

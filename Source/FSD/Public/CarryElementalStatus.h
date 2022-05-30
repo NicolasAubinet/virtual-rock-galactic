@@ -5,7 +5,7 @@
 
 class UDamageClass;
 
-UCLASS(EditInlineNew)
+UCLASS(Blueprintable, EditInlineNew)
 class UCarryElementalStatus : public UDamageBonusBase {
     GENERATED_BODY()
 public:
@@ -13,7 +13,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float CarryBonusAmount;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     UDamageClass* CarriedClass;
     
 public:

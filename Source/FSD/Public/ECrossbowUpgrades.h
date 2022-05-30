@@ -2,7 +2,7 @@
 #include "CoreMinimal.h"
 #include "ECrossbowUpgrades.generated.h"
 
-UENUM()
+UENUM(BlueprintType)
 enum class ECrossbowUpgrades : uint8 {
     SpecialArrowPheramone,
     SpecialArrowTaser,
@@ -12,6 +12,8 @@ enum class ECrossbowUpgrades : uint8 {
     RadioModule,
     Ricochet,
     VelocityChange,
+    DamageDefault,
+    RadialDamageDefault,
     Trifork,
     Pentafork,
     BattleFrenzy,

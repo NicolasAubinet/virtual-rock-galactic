@@ -5,20 +5,20 @@
 #include "UObject/NoExportTypes.h"
 #include "TrackBuilderUsable.generated.h"
 
+class USceneComponent;
 class UTrackBuilderUsable;
+class APlayerCharacter;
 class ATrackBuilderSegment;
 class ATrackBuilderItem;
-class APlayerCharacter;
-class USceneComponent;
 class AActor;
 
-UCLASS(meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class FSD_API UTrackBuilderUsable : public UInstantUsable {
     GENERATED_BODY()
 public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FSegmentDelegate, UTrackBuilderUsable*, InUsable, ATrackBuilderSegment*, InSegment);
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSegmentDelegate OnNextSegmentChanged;
     
 protected:
@@ -28,13 +28,13 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FString ColliderName;
     
-    UPROPERTY(BlueprintReadWrite, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     USceneComponent* TrackStartComponent;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_NextSegment, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_NextSegment, meta=(AllowPrivateAccess=true))
     ATrackBuilderSegment* NextSegment;
     
-    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere, Replicated, Transient)
     TWeakObjectPtr<APlayerCharacter> InUseBy;
     
 public:

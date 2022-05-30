@@ -6,7 +6,7 @@
 
 class AActor;
 
-UCLASS(Abstract, BlueprintType, meta=(BlueprintSpawnableComponent))
+UCLASS(Abstract, Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UTemperatureComponent : public UActorComponent {
     GENERATED_BODY()
 public:

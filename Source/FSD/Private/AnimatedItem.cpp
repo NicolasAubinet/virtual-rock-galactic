@@ -1,6 +1,6 @@
 #include "AnimatedItem.h"
-#include "SkinnableComponent.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "SkinnableComponent.h"
 #include "FirstPersonSkeletalMeshComponent.h"
 
 

@@ -3,9 +3,9 @@
 #include "NiagaraComponent.h"
 #include "CoilgunTrailSpawner.h"
 
-class UPrimitiveComponent;
 class UFSDPhysicalMaterial;
 class AActor;
+class UPrimitiveComponent;
 class UHealthComponentBase;
 class ACoilgunWeaponTrail;
 
@@ -13,6 +13,9 @@ void ACoilGun::UpdateAfflictions() {
 }
 
 void ACoilGun::SetDynamicMaterials() {
+}
+
+void ACoilGun::Server_ToggleCharingBonuses_Implementation(bool Enabled) {
 }
 
 void ACoilGun::Server_SpawnTrail_Implementation(const FVector_NetQuantize& Location, const FRotator& Rotation, float HalfHeight, bool fireTrailEnabled) {
@@ -25,6 +28,9 @@ void ACoilGun::Server_RegisterPrimaryHit_Implementation(UPrimitiveComponent* Tar
 }
 
 void ACoilGun::Server_RegisterBonusHit_Implementation(AActor* Target) {
+}
+
+void ACoilGun::Server_RegisterBlastHit_Implementation(AActor* Target, const FVector_NetQuantize& Location, UPrimitiveComponent* comp) {
 }
 
 void ACoilGun::Server_HitTerrain_Implementation(const FVector_NetQuantize& Location, const FVector_NetQuantize& End, float maxCarveDepth) {

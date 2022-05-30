@@ -5,23 +5,23 @@
 #include "EExitTrackMode.h"
 #include "TrackMovementStateComponent.generated.h"
 
-class AZipLineConnector;
 class UAudioComponent;
 class USoundBase;
 class UDialogDataAsset;
+class AZipLineConnector;
 
-UCLASS(meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class FSD_API UTrackMovementStateComponent : public UCharacterStateComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UAudioComponent* AudioStartComponent;
     
-    UPROPERTY(BlueprintReadWrite, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UAudioComponent* AudioDuringComponent;
     
-    UPROPERTY(BlueprintReadWrite, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UAudioComponent* AudioStopComponent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -45,7 +45,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float StateUpdateShoutFrequencySecsMax;
     
-    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float AudioDuringSlidingSpeedParam;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -81,13 +81,13 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<AZipLineConnector> ConnectorClass;
     
-    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     AZipLineConnector* Connector;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EExitTrackMode ExitMode;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_TrackMovementdata, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_TrackMovementdata, meta=(AllowPrivateAccess=true))
     FPipelineMovementData TrackMovementData;
     
 public:

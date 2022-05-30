@@ -6,7 +6,7 @@
 class UStatusEffect;
 class UOxygenComponent;
 
-UCLASS(EditInlineNew)
+UCLASS(Blueprintable, EditInlineNew)
 class UNoOxygenMutator : public UMutator {
     GENERATED_BODY()
 public:

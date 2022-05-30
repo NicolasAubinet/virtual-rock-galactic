@@ -4,10 +4,10 @@
 #include "SchematicBankItem.h"
 #include "VanitySchematicBank.generated.h"
 
-class UVanityItem;
 class USchematicCategory;
+class UVanityItem;
 
-UCLASS()
+UCLASS(Blueprintable)
 class FSD_API UVanitySchematicBank : public USchematicBankBase {
     GENERATED_BODY()
 public:

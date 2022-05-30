@@ -4,10 +4,10 @@
 #include "ECarveFilterType.h"
 #include "STLMeshCarverComponent.generated.h"
 
-class USTLMeshCarver;
 class UTerrainMaterialBase;
+class USTLMeshCarver;
 
-UCLASS(meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class USTLMeshCarverComponent : public UPrimitiveComponent {
     GENERATED_BODY()
 public:

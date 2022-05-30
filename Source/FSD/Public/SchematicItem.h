@@ -6,7 +6,7 @@
 
 class UTexture;
 
-UCLASS(Abstract, BlueprintType, EditInlineNew)
+UCLASS(Abstract, Blueprintable, EditInlineNew)
 class USchematicItem : public UObject {
     GENERATED_BODY()
 public:

@@ -6,7 +6,7 @@
 
 class AProjectile;
 
-UCLASS()
+UCLASS(Blueprintable)
 class AHomingFireModule : public AHostileTargetingGuntowerModule {
     GENERATED_BODY()
 public:

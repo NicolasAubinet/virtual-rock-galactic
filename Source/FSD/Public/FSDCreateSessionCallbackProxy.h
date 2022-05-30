@@ -5,17 +5,17 @@
 #include "FSDCreateSessionCallbackProxy.generated.h"
 
 class UFSDCreateSessionCallbackProxy;
-class UObject;
 class APlayerController;
+class UObject;
 
-UCLASS(MinimalAPI)
+UCLASS(Blueprintable, MinimalAPI)
 class UFSDCreateSessionCallbackProxy : public UOnlineBlueprintCallProxyBase {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FEmptyOnlineDelegate OnSuccess;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FEmptyOnlineDelegate OnFailure;
     
     UFSDCreateSessionCallbackProxy();

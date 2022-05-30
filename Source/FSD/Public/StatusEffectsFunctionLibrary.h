@@ -4,11 +4,11 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "StatusEffectsFunctionLibrary.generated.h"
 
-class UStatusEffect;
 class UDamageClass;
+class UStatusEffect;
 class AActor;
 
-UCLASS(BlueprintType)
+UCLASS(Blueprintable)
 class UStatusEffectsFunctionLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:

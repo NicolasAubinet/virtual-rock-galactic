@@ -4,10 +4,10 @@
 #include "EBoscoAbillityTargetPreference.h"
 #include "BoscoAbillity.generated.h"
 
-class UAnimSequenceBase;
 class USoundBase;
+class UAnimSequenceBase;
 
-UCLASS()
+UCLASS(Blueprintable)
 class UBoscoAbillity : public UDataAsset {
     GENERATED_BODY()
 public:

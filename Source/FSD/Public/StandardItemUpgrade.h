@@ -3,7 +3,7 @@
 #include "ItemUpgrade.h"
 #include "StandardItemUpgrade.generated.h"
 
-UCLASS(Abstract, EditInlineNew)
+UCLASS(Abstract, Blueprintable, EditInlineNew)
 class UStandardItemUpgrade : public UItemUpgrade {
     GENERATED_BODY()
 public:

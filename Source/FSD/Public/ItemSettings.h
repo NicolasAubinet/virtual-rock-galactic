@@ -4,14 +4,18 @@
 #include "ItemSettings.generated.h"
 
 class UItemID;
+class UItemRefundList;
 class UItemData;
 
-UCLASS()
+UCLASS(Blueprintable)
 class UItemSettings : public UDataAsset {
     GENERATED_BODY()
 public:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<UItemRefundList*> ItemRefunds;
+    
 protected:
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TMap<UItemID*, UItemData*> ItemData;
     
 public:

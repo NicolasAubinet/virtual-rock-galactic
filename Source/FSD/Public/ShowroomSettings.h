@@ -3,11 +3,11 @@
 #include "Engine/DataAsset.h"
 #include "ShowroomSettings.generated.h"
 
-class AShowroomStage;
-class UEnemyShowroomController;
 class UCharacterShowroomController;
+class UEnemyShowroomController;
+class AShowroomStage;
 
-UCLASS()
+UCLASS(Blueprintable)
 class UShowroomSettings : public UDataAsset {
     GENERATED_BODY()
 public:

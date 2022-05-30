@@ -3,20 +3,20 @@
 #include "PlanetZoneItem.generated.h"
 
 class UBiome;
-class UPlanetZone;
 class UGeneratedMission;
+class UPlanetZone;
 
-USTRUCT()
+USTRUCT(BlueprintType)
 struct FPlanetZoneItem {
     GENERATED_BODY()
 public:
-    UPROPERTY(Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<UBiome*> Biomes;
     
-    UPROPERTY(Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<UGeneratedMission*> missions;
     
-    UPROPERTY(Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     UPlanetZone* Zone;
     
     FSD_API FPlanetZoneItem();

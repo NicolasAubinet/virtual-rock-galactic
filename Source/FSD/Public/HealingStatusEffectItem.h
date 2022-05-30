@@ -1,12 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "RandRange.h"
 #include "StatusEffectItem.h"
+#include "RandRange.h"
 #include "HealingStatusEffectItem.generated.h"
 
 class UPawnAffliction;
 
-UCLASS(EditInlineNew)
+UCLASS(Blueprintable, EditInlineNew)
 class UHealingStatusEffectItem : public UStatusEffectItem {
     GENERATED_BODY()
 public:

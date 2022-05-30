@@ -4,12 +4,12 @@
 #include "UObject/NoExportTypes.h"
 #include "PlayerCharacterFunctionLibrary.generated.h"
 
-class UObject;
 class AFSDPlayerState;
+class UObject;
 class APlayerCharacter;
 class AActor;
 
-UCLASS(BlueprintType)
+UCLASS(Blueprintable)
 class UPlayerCharacterFunctionLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:

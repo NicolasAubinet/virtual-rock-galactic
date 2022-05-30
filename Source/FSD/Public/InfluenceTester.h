@@ -6,14 +6,14 @@
 class UCaveInfluencer;
 class USphereComponent;
 
-UCLASS()
+UCLASS(Blueprintable)
 class AInfluenceTester : public AActor {
     GENERATED_BODY()
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UCaveInfluencer* Influencer;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     USphereComponent* Sphere;
     
     AInfluenceTester();

@@ -5,7 +5,7 @@
 
 class UPawnStat;
 
-UCLASS()
+UCLASS(Blueprintable)
 class UStatTemporaryBuff : public UTemporaryBuff {
     GENERATED_BODY()
 public:

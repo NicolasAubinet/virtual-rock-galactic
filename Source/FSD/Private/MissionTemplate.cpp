@@ -1,16 +1,16 @@
 #include "MissionTemplate.h"
 #include "Templates/SubclassOf.h"
 
-class UTexture2D;
-class UObject;
-class UMissionMutator;
 class UFSDSaveGame;
-class AProceduralSetup;
-class UMissionDuration;
-class UMissionComplexity;
 class UMissionTemplate;
-class UBiome;
+class UTexture2D;
 class UMissionWarning;
+class UMissionComplexity;
+class UMissionDuration;
+class AProceduralSetup;
+class UMissionMutator;
+class UObject;
+class UBiome;
 class UObjective;
 class UGeneratedMission;
 

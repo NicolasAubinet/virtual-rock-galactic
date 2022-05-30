@@ -1,16 +1,16 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Components/PrimitiveComponent.h"
-#include "CarveOptionsCellSize.h"
 #include "ECarveFilterType.h"
+#include "CarveOptionsCellSize.h"
 #include "LevelGenerationCarverComponent.generated.h"
 
 class UTerrainMaterialBase;
-class USTLMeshCarver;
-class UStaticMesh;
 class UStaticMeshCarver;
+class UStaticMesh;
+class USTLMeshCarver;
 
-UCLASS(meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class ULevelGenerationCarverComponent : public UPrimitiveComponent {
     GENERATED_BODY()
 public:

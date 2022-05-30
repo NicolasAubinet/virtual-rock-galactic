@@ -3,7 +3,7 @@
 #include "DamageCondition.h"
 #include "DistanceToTargetDamageCondition.generated.h"
 
-UCLASS(EditInlineNew)
+UCLASS(Blueprintable, EditInlineNew)
 class UDistanceToTargetDamageCondition : public UDamageCondition {
     GENERATED_BODY()
 public:

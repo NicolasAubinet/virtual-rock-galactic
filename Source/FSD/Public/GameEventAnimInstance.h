@@ -3,7 +3,7 @@
 #include "Animation/AnimInstance.h"
 #include "GameEventAnimInstance.generated.h"
 
-UCLASS(NonTransient)
+UCLASS(Blueprintable, NonTransient)
 class UGameEventAnimInstance : public UAnimInstance {
     GENERATED_BODY()
 public:

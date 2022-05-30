@@ -1,13 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "CharacterStateComponent.h"
 #include "UObject/NoExportTypes.h"
+#include "CharacterStateComponent.h"
 #include "FallingStateComponent.generated.h"
 
 class UDialogDataAsset;
 class UUseAnimationSetting;
 
-UCLASS(MinimalAPI, meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, MinimalAPI, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UFallingStateComponent : public UCharacterStateComponent {
     GENERATED_BODY()
 public:
@@ -66,10 +66,10 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float HoverBootActivateDuration;
     
-    UPROPERTY(BlueprintReadWrite, ReplicatedUsing=OnRep_HoverBootsActive, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_HoverBootsActive, meta=(AllowPrivateAccess=true))
     bool bHoverBootsActive;
     
-    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float HoverBootMaxDuration;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -78,7 +78,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float JumpBootsZVelocity;
     
-    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool JumpBootsActive;
     
 public:

@@ -6,7 +6,7 @@
 
 class UMaterialInterface;
 
-UCLASS(EditInlineNew)
+UCLASS(Blueprintable, EditInlineNew)
 class UDebrisMesh : public UDebrisBase {
     GENERATED_BODY()
 public:

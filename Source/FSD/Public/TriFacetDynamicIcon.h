@@ -6,7 +6,7 @@
 
 class UTexture2D;
 
-UCLASS(EditInlineNew)
+UCLASS(Blueprintable, EditInlineNew)
 class FSD_API UTriFacetDynamicIcon : public UTwoFacetDynamicIcon {
     GENERATED_BODY()
 public:

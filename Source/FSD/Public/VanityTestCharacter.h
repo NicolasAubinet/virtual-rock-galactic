@@ -7,7 +7,7 @@
 
 class USkeletalMesh;
 
-UCLASS()
+UCLASS(Blueprintable)
 class AVanityTestCharacter : public ACharacter {
     GENERATED_BODY()
 public:

@@ -9,7 +9,7 @@ class UEnemyDescriptor;
 class APawn;
 class UStatusEffect;
 
-UCLASS()
+UCLASS(Blueprintable)
 class UStatusEffectMissionBP : public URunningMissionBP {
     GENERATED_BODY()
 public:

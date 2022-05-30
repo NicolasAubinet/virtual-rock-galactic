@@ -24,5 +24,9 @@ FCharacterShouts::FCharacterShouts() {
     this->UpgradeBought = NULL;
     this->WaitingInDropPod = NULL;
     this->Carrying = NULL;
+    this->WaitingInEscapePod = NULL;
+    this->Salute = NULL;
+    this->Salute_Spacerig = NULL;
+    this->Drink = NULL;
 }
 

@@ -4,13 +4,13 @@
 #include "BeamCollision.h"
 #include "LockOnBeam.generated.h"
 
-class ALockOnWeapon;
 class USplineComponent;
+class USplineMeshComponent;
+class ALockOnWeapon;
 class UMaterialInterface;
 class USceneComponent;
-class USplineMeshComponent;
 
-UCLASS(Abstract)
+UCLASS(Abstract, Blueprintable)
 class ALockOnBeam : public AActor {
     GENERATED_BODY()
 public:
@@ -45,10 +45,10 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float BeamThicknessScale;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere, Transient)
     TWeakObjectPtr<ALockOnWeapon> Item;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere, Transient)
     TWeakObjectPtr<AActor> TargetActor;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

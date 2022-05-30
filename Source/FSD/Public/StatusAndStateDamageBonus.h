@@ -5,10 +5,10 @@
 #include "ETargetStateDamageBonusType.h"
 #include "StatusAndStateDamageBonus.generated.h"
 
-class UStatusEffect;
 class UDamageClass;
+class UStatusEffect;
 
-UCLASS(EditInlineNew)
+UCLASS(Blueprintable, EditInlineNew)
 class UStatusAndStateDamageBonus : public UDamageBonusBase {
     GENERATED_BODY()
 public:

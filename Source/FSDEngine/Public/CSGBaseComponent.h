@@ -1,10 +1,10 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "CSGBuilderBaseSceneComponent.h"
 #include "MeshBaseProperties.h"
+#include "CSGBuilderBaseSceneComponent.h"
 #include "CSGBaseComponent.generated.h"
 
-UCLASS(meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UCSGBaseComponent : public UCSGBuilderBaseSceneComponent {
     GENERATED_BODY()
 public:

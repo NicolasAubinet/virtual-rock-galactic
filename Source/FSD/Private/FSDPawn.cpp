@@ -3,8 +3,8 @@
 #include "EnemyTemperatureComponent.h"
 #include "StatusEffectsComponent.h"
 
-class USkeletalMeshComponent;
 class AActor;
+class USkeletalMeshComponent;
 class UHealthComponentBase;
 class AFSDAIController;
 
@@ -43,6 +43,10 @@ void AFSDPawn::OnAlerted() {
 void AFSDPawn::MakeRagdollMesh(USkeletalMeshComponent* Mesh) {
 }
 
+
+bool AFSDPawn::IsElite() const {
+    return false;
+}
 
 bool AFSDPawn::GetIsAlerted() const {
     return false;

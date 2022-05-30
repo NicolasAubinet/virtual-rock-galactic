@@ -2,35 +2,35 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "TemperatureComponent.h"
-#include "PlayerTemperatureChangeRateSignatureDelegate.h"
 #include "PlayerTemperatureChangedSignatureDelegate.h"
-#include "PlayerTemperatureStateChangedSignatureDelegate.h"
 #include "PlayerDefrostingSignatureDelegate.h"
+#include "PlayerTemperatureStateChangedSignatureDelegate.h"
 #include "PlayerTemperatureShowBarDelegate.h"
+#include "PlayerTemperatureChangeRateSignatureDelegate.h"
 #include "EPlayerTemperatureState.h"
 #include "PlayerTemperatureComponent.generated.h"
 
-class UStatusEffect;
 class APlayerCharacter;
+class UStatusEffect;
 class UHealthComponentBase;
 
-UCLASS(meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UPlayerTemperatureComponent : public UTemperatureComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FPlayerTemperatureChangedSignature OnTemperatureChanged;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FPlayerTemperatureStateChangedSignature OnTemperatureStateChanged;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FPlayerTemperatureChangeRateSignature OnTemperatureChangeRate;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FPlayerDefrostingSignature OnDefrosting;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FPlayerTemperatureShowBar OnBarVisibilityChanged;
     
 protected:
@@ -58,28 +58,28 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UStatusEffect> OnDefrostedStatusEffect;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float NormalTemperature;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_CurrentTemperature, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_CurrentTemperature, meta=(AllowPrivateAccess=true))
     float CurrentTemperature;
     
-    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     float TargetTemperature;
     
-    UPROPERTY(Transient, ReplicatedUsing=OnRep_TemperatureChangeSpeed, meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere, Transient, ReplicatedUsing=OnRep_TemperatureChangeSpeed)
     int8 TemperatureChangeSpeed;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_DefrostProgress, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_DefrostProgress, meta=(AllowPrivateAccess=true))
     float DefrostProgress;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool barVisible;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     APlayerCharacter* Character;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_TemperatureState, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_TemperatureState, meta=(AllowPrivateAccess=true))
     EPlayerTemperatureState TemperatureState;
     
 public:

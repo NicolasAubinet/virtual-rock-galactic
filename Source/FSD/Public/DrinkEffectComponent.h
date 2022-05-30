@@ -5,7 +5,7 @@
 
 class APlayerCharacter;
 
-UCLASS(Blueprintable, meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UDrinkEffectComponent : public UActorComponent {
     GENERATED_BODY()
 public:
@@ -16,7 +16,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool AutoDestroy;
     
-    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool EffectIsActive;
     
 public:

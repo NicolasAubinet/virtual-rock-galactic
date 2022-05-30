@@ -1,18 +1,18 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "GameEvent.h"
 #include "UObject/NoExportTypes.h"
+#include "GameEvent.h"
 #include "RockEnemiesEvent.generated.h"
 
-class UHealthComponentBase;
 class UEnemyGroupDescriptor;
-class APawn;
 class AProjectile;
 class USkeletalMeshComponent;
+class APawn;
 class UParticleSystem;
+class UHealthComponentBase;
 
-UCLASS()
+UCLASS(Blueprintable)
 class ARockEnemiesEvent : public AGameEvent {
     GENERATED_BODY()
 public:
@@ -29,10 +29,10 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<int32> MaxEnemyCountPerPlayer;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<APawn*> SpawnedRockEnemies;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* Mesh;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

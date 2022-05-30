@@ -6,25 +6,25 @@
 #include "EMissionStatType.h"
 #include "MissionStat.generated.h"
 
+class UFSDAchievement;
 class UMissionStat;
-class UTexture2D;
 class UObject;
 class UMissionStatCategory;
-class UFSDAchievement;
 class APlayerCharacter;
 class UPlayerCharacterID;
+class UTexture2D;
 
-UCLASS(BlueprintType)
+UCLASS(Blueprintable)
 class UMissionStat : public UDataAsset {
     GENERATED_BODY()
 public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FStatCountChanged, UObject*, WorldContext, UMissionStat*, MissionStat, float, Value);
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FStatCountChanged OnCountChanged;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGuid SavegameID;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

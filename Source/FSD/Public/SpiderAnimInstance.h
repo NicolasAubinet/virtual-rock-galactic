@@ -1,20 +1,20 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EnemyAnimInstance.h"
 #include "UObject/NoExportTypes.h"
+#include "EnemyAnimInstance.h"
 #include "FootStepNotifyTarget.h"
 #include "EMoveDirection.h"
 #include "RandomWalkCycleEntry.h"
 #include "ESpiderDeathAnimationCategory.h"
 #include "SpiderAnimInstance.generated.h"
 
+class UEnemyPlaySoundKey;
 class USoundCue;
 class UParticleSystem;
-class UEnemyPlaySoundKey;
 class UEnemySpawnEffectsKey;
 class UAnimSequenceBase;
 
-UCLASS(NonTransient)
+UCLASS(Blueprintable, NonTransient)
 class USpiderAnimInstance : public UEnemyAnimInstance, public IFootStepNotifyTarget {
     GENERATED_BODY()
 public:
@@ -22,7 +22,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float Speed;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FVector Velocity;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -37,7 +37,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float WalkCycleMinRate;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float WalkCyclePlayRate;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -58,7 +58,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float HorizontalAngularSpeed;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float HorizontalAngularSpeed_Abs;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -73,7 +73,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool IsStrafing;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool IsMovingAndStrafing;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -109,7 +109,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<UEnemySpawnEffectsKey*, UParticleSystem*> SpawnEffectsByKeyMap;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     int32 RandomWalkCycleIndex;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

@@ -1,13 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "RandRange.h"
 #include "Components/ActorComponent.h"
+#include "RandRange.h"
 #include "PheromoneSpawnerComponent.generated.h"
 
-class UEnemyDescriptor;
 class AActor;
+class UEnemyDescriptor;
 
-UCLASS(meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UPheromoneSpawnerComponent : public UActorComponent {
     GENERATED_BODY()
 public:
@@ -21,7 +21,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UEnemyDescriptor* enemy;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TMap<AActor*, float> InfectedActors;
     
 public:

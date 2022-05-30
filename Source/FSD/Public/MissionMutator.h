@@ -5,11 +5,11 @@
 #include "MissionMutator.generated.h"
 
 class UMutator;
-class UObjective;
 class URunningMissionBP;
+class UObjective;
 class UTexture2D;
 
-UCLASS(BlueprintType)
+UCLASS(Blueprintable)
 class UMissionMutator : public UDataAsset {
     GENERATED_BODY()
 public:

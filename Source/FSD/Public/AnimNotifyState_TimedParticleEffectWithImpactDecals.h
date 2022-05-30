@@ -7,7 +7,7 @@
 class UMaterialInterface;
 class UPhysicalMaterial;
 
-UCLASS(CollapseCategories, EditInlineNew)
+UCLASS(Blueprintable, CollapseCategories, EditInlineNew)
 class UAnimNotifyState_TimedParticleEffectWithImpactDecals : public UAnimNotifyState_TimedParticleEffect {
     GENERATED_BODY()
 public:

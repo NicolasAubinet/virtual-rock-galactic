@@ -3,11 +3,11 @@
 #include "Components/ActorComponent.h"
 #include "DifficultyManager.generated.h"
 
-class AFSDGameState;
-class AFSDGameMode;
 class UDifficultySetting;
+class AFSDGameMode;
+class AFSDGameState;
 
-UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UDifficultyManager : public UActorComponent {
     GENERATED_BODY()
 public:
@@ -21,19 +21,22 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MinModifierSpeed;
     
-    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 ForcedPlayerCount;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     AFSDGameMode* GameMode;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     AFSDGameState* GameState;
     
 public:
     UDifficultyManager();
     UFUNCTION(BlueprintCallable)
     UDifficultySetting* SelectDifficulty(int32 Index);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    float GetSpeedModifier() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetSmallEnemyDamageResistance() const;

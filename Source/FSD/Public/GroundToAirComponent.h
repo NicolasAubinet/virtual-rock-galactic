@@ -1,22 +1,22 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Components/ActorComponent.h"
 #include "ChangedStateSigDelegate.h"
+#include "Components/ActorComponent.h"
 #include "StateStats.h"
 #include "GroundToAirComponent.generated.h"
 
 class UDeepPathfinderMovement;
 class ADeepPathfinderCharacter;
 
-UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UGroundToAirComponent : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FChangedStateSig OnChangedPathfinderState;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UDeepPathfinderMovement* CurrentMove;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -49,10 +49,10 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FStateStats FlyStats;
     
-    UPROPERTY(BlueprintReadWrite, ReplicatedUsing=OnRep_StateChange, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_StateChange, meta=(AllowPrivateAccess=true))
     bool IsFlying;
     
-    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere)
     TWeakObjectPtr<ADeepPathfinderCharacter> OwningPathfinder;
     
 public:

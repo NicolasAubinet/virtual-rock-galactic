@@ -4,7 +4,7 @@
 #include "ETemperatureIntensity.h"
 #include "HeatSourceStatusEffectItem.generated.h"
 
-UCLASS(EditInlineNew)
+UCLASS(Blueprintable, EditInlineNew)
 class UHeatSourceStatusEffectItem : public UStatusEffectItem {
     GENERATED_BODY()
 public:

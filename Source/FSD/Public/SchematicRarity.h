@@ -3,7 +3,7 @@
 #include "Engine/DataAsset.h"
 #include "SchematicRarity.generated.h"
 
-UCLASS()
+UCLASS(Blueprintable)
 class FSD_API USchematicRarity : public UDataAsset {
     GENERATED_BODY()
 public:

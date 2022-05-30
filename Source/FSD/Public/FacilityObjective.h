@@ -2,27 +2,27 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "Objective.h"
-#include "RandInterval.h"
-#include "SubObjective.h"
-#include "EnemySpawnedDelegateDelegate.h"
 #include "IRandRange.h"
+#include "EnemySpawnedDelegateDelegate.h"
+#include "SubObjective.h"
+#include "UObject/NoExportTypes.h"
+#include "RandInterval.h"
 #include "UObject/NoExportTypes.h"
 #include "RoomNode.h"
-#include "UObject/NoExportTypes.h"
 #include "FacilityObjective.generated.h"
 
-class UEnemyDescriptor;
 class APawn;
 class ARessuplyPod;
-class UCappedResource;
+class UEncounterManager;
 class AActor;
+class UEnemyDescriptor;
 class ATetherStation;
 class UResourceData;
 class AProceduralSetup;
-class UEncounterManager;
 class UDebrisPositioning;
+class UCappedResource;
 
-UCLASS(Abstract, meta=(BlueprintSpawnableComponent))
+UCLASS(Abstract, Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class FSD_API UFacilityObjective : public UObjective {
     GENERATED_BODY()
 public:
@@ -36,19 +36,19 @@ public:
     int32 GeneratorCount;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_ObjectivesStage, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_ObjectivesStage, meta=(AllowPrivateAccess=true))
     int32 ObjectivesStage;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FSubObjective> SubObjectives;
     
-    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FEnemySpawnedDelegate OnFirstEncounterDroneSpawned_Delegate;
     
-    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FEnemySpawnedDelegate OnSecondEncounterDroneSpawned_Delegate;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<APawn*> spawnedEnemies;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -75,22 +75,22 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FIRandRange TunnelTurretsRange;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<AActor*> SmallGenerators;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     ATetherStation* mainFacility;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<int32> ShieldGeneratorRooms;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     int32 MainFacilityRoom;
     
-    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool HasRemovedMainShield;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<AActor*> ShieldGenerators;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -99,10 +99,10 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float AmountRequired;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_AmountCollected, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_AmountCollected, meta=(AllowPrivateAccess=true))
     float AmountCollected;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_GeneratorsActivated, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_GeneratorsActivated, meta=(AllowPrivateAccess=true))
     int32 GeneratorsActivated;
     
 public:

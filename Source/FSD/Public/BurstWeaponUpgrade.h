@@ -9,7 +9,7 @@
 class AItem;
 class AFSDPlayerState;
 
-UCLASS(EditInlineNew, MinimalAPI)
+UCLASS(Blueprintable, EditInlineNew, MinimalAPI)
 class UBurstWeaponUpgrade : public UStandardItemUpgrade {
     GENERATED_BODY()
 public:

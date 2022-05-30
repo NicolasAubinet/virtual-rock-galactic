@@ -9,24 +9,24 @@
 class UCapacityHoldingItemAggregator;
 class UDialogDataAsset;
 
-UCLASS()
+UCLASS(Blueprintable)
 class AShieldGeneratorItem : public AThrowableItem, public IUpgradableGear, public IRejoinListener {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UCapacityHoldingItemAggregator* ChargeCapacity;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UCapacityHoldingItemAggregator* CarryCapacity;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float RechargeDuration;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_UnchargedCount, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_UnchargedCount, meta=(AllowPrivateAccess=true))
     int32 UnchargedCount;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float RechargeProgress;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

@@ -1,8 +1,8 @@
 #include "GoogleAnalyticsWrapper.h"
 
+class AFSDGameState;
 class AFSDPlayerState;
 class APlayerController;
-class AFSDGameState;
 class AActor;
 class USeasonChallenge;
 

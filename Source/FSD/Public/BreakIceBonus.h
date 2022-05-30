@@ -3,7 +3,7 @@
 #include "DamageBonusBase.h"
 #include "BreakIceBonus.generated.h"
 
-UCLASS(EditInlineNew)
+UCLASS(Blueprintable, EditInlineNew)
 class UBreakIceBonus : public UDamageBonusBase {
     GENERATED_BODY()
 public:

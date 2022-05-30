@@ -1,18 +1,18 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Blueprint/UserWidget.h"
 #include "InputCoreTypes.h"
+#include "Blueprint/UserWidget.h"
 #include "WindowWidget.generated.h"
 
 class UWindowWidget;
 
-UCLASS(EditInlineNew)
+UCLASS(Blueprintable, EditInlineNew)
 class FSD_API UWindowWidget : public UUserWidget {
     GENERATED_BODY()
 public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FWindowDelegate, UWindowWidget*, Window);
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FWindowDelegate OnWindowClosed;
     
 protected:

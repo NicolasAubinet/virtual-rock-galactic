@@ -2,14 +2,14 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "StandardItemUpgrade.h"
-#include "UpgradeValues.h"
 #include "ECoilgunUpgrades.h"
+#include "UpgradeValues.h"
 #include "CoilgunUpgrade.generated.h"
 
 class AItem;
 class AFSDPlayerState;
 
-UCLASS(EditInlineNew, MinimalAPI)
+UCLASS(Blueprintable, EditInlineNew, MinimalAPI)
 class UCoilgunUpgrade : public UStandardItemUpgrade {
     GENERATED_BODY()
 public:

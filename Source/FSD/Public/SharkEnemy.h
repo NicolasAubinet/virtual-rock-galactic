@@ -6,53 +6,53 @@
 #include "ESharkEnemyState.h"
 #include "SharkEnemy.generated.h"
 
-class UEnemyComponent;
-class UInDangerComponent;
-class UPawnSensingComponent;
-class USphereComponent;
-class UFakeMoverSettings;
-class UParticleSystemComponent;
-class UDamageComponent;
 class UFakePhysGrabberComponent;
+class UPawnSensingComponent;
+class UDamageComponent;
+class USphereComponent;
+class UInDangerComponent;
+class UParticleSystemComponent;
+class UEnemyComponent;
 class USoundCue;
+class UFakeMoverSettings;
 class UParticleSystem;
 class AActor;
-class UPrimitiveComponent;
 class APawn;
+class UPrimitiveComponent;
 class UHealthComponentBase;
 
-UCLASS(Abstract)
+UCLASS(Abstract, Blueprintable)
 class ASharkEnemy : public AEnemyDeepPathfinderCharacter {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UPawnSensingComponent* PawnSensing;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     USphereComponent* CollisionSphere;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     USphereComponent* NearTargetSphere;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UParticleSystemComponent* TearingGroundParticles;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UParticleSystemComponent* AirTrailParticles;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UInDangerComponent* Danger;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UEnemyComponent* EnemyComponent;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UDamageComponent* Damage;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UDamageComponent* BumpDamage;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UFakePhysGrabberComponent* RestrictedGrabberComponent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -65,10 +65,10 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundCue* JumpSound;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_DiveTime, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_DiveTime, meta=(AllowPrivateAccess=true))
     float DiveForSeconds;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_RagdollImpact, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_RagdollImpact, meta=(AllowPrivateAccess=true))
     FVector_NetQuantize RagdollImpact;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -161,7 +161,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UParticleSystem* DiveParticles;
     
-    UPROPERTY(BlueprintReadWrite, ReplicatedUsing=OnRep_State, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_State, meta=(AllowPrivateAccess=true))
     ESharkEnemyState State;
     
 public:

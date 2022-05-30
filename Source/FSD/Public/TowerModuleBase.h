@@ -2,36 +2,36 @@
 #include "CoreMinimal.h"
 #include "FSDPawn.h"
 #include "EventParticipant.h"
-#include "UObject/NoExportTypes.h"
 #include "EGuntowerModuleState.h"
+#include "UObject/NoExportTypes.h"
 #include "TowerModuleBase.generated.h"
 
-class USoundCue;
 class USceneComponent;
 class USkeletalMeshComponent;
 class UStaticMeshComponent;
 class UEnemyHealthComponent;
 class USkeletalMesh;
+class USoundCue;
 class UParticleSystem;
 
-UCLASS()
+UCLASS(Blueprintable)
 class ATowerModuleBase : public AFSDPawn, public IEventParticipant {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     USceneComponent* Root;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* ModuleMesh;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     TArray<UStaticMeshComponent*> ArmorPlates;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UEnemyHealthComponent* Health;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     FRotator ModuleRotation;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -55,7 +55,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ConstantRotation;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_State, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_State, meta=(AllowPrivateAccess=true))
     EGuntowerModuleState State;
     
 public:

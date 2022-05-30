@@ -8,7 +8,7 @@
 
 class UObject;
 
-UCLASS(BlueprintType)
+UCLASS(Blueprintable)
 class UPathfinderFunctionLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:

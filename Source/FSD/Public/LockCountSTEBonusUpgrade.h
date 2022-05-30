@@ -5,11 +5,11 @@
 #include "UpgradeValues.h"
 #include "LockCountSTEBonusUpgrade.generated.h"
 
+class AFSDPlayerState;
 class UStatusEffect;
 class AActor;
-class AFSDPlayerState;
 
-UCLASS(EditInlineNew, MinimalAPI)
+UCLASS(Blueprintable, EditInlineNew, MinimalAPI)
 class ULockCountSTEBonusUpgrade : public UItemUpgrade {
     GENERATED_BODY()
 public:

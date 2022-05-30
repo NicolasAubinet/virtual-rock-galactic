@@ -1,10 +1,10 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "CSGSingleChildBase.h"
 #include "WarpedProperties.h"
+#include "CSGSingleChildBase.h"
 #include "CSGWarped.generated.h"
 
-UCLASS(BlueprintType)
+UCLASS(Blueprintable)
 class UCSGWarped : public UCSGSingleChildBase {
     GENERATED_BODY()
 public:

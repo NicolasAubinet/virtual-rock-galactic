@@ -5,7 +5,7 @@
 #include "BehaviorTree/BehaviorTreeTypes.h"
 #include "BTDecorator_CanSeeTarget.generated.h"
 
-UCLASS()
+UCLASS(Blueprintable)
 class UBTDecorator_CanSeeTarget : public UBTDecorator {
     GENERATED_BODY()
 public:

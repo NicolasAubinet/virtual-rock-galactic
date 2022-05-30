@@ -8,17 +8,17 @@
 
 class UBuilderBase;
 
-UCLASS(BlueprintType)
+UCLASS(Blueprintable)
 class FSDENGINE_API UBakeConfig : public UObject {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FBakeSettings Settings;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TMap<FName, UBuilderBase*> Objects;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<FString> Warnings;
     
     UBakeConfig();

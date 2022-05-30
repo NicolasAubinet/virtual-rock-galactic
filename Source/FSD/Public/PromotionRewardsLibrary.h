@@ -4,10 +4,10 @@
 #include "ClaimableRewardEntry.h"
 #include "PromotionRewardsLibrary.generated.h"
 
-class UObject;
 class APlayerController;
+class UObject;
 
-UCLASS(BlueprintType)
+UCLASS(Blueprintable)
 class UPromotionRewardsLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:

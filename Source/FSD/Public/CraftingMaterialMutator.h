@@ -3,7 +3,7 @@
 #include "Mutator.h"
 #include "CraftingMaterialMutator.generated.h"
 
-UCLASS(EditInlineNew)
+UCLASS(Blueprintable, EditInlineNew)
 class UCraftingMaterialMutator : public UMutator {
     GENERATED_BODY()
 public:

@@ -6,7 +6,7 @@
 class UResourceData;
 class UCappedResource;
 
-UCLASS(Abstract, meta=(BlueprintSpawnableComponent))
+UCLASS(Abstract, Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class FSD_API UResourceObjective : public UResourceBasedObjective {
     GENERATED_BODY()
 public:
@@ -17,7 +17,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ResourcesRequired;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_ResourcesCollected, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_ResourcesCollected, meta=(AllowPrivateAccess=true))
     float ResourcesCollected;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

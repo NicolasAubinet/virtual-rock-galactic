@@ -7,7 +7,7 @@
 
 class UEnemyPlaySoundKey;
 
-UCLASS(CollapseCategories, EditInlineNew, MinimalAPI)
+UCLASS(Blueprintable, CollapseCategories, EditInlineNew, MinimalAPI)
 class UAnimNotifyState_EnemyPlaySoundByKey : public UAnimNotifyState {
     GENERATED_BODY()
 public:

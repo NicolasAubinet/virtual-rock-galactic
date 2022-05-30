@@ -8,8 +8,8 @@
 #include "Components/SkeletalMeshComponent.h"
 
 class AProceduralSetup;
-class UDebrisPositioning;
 class UCurveFloat;
+class UDebrisPositioning;
 class APlayerCharacter;
 
 void ATreasureBox::PlaceResources(AProceduralSetup* setup, float Radius, UDebrisPositioning* DebrisPositioning, const TArray<FVector>& locationsToAvoid, UCurveFloat* AvoidCostCurve) {

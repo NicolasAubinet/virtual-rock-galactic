@@ -3,7 +3,7 @@
 #include "AttackEffect.h"
 #include "NoiseCarveAttackEffect.generated.h"
 
-UCLASS(BlueprintType, EditInlineNew)
+UCLASS(Blueprintable, EditInlineNew)
 class UNoiseCarveAttackEffect : public UAttackEffect {
     GENERATED_BODY()
 public:

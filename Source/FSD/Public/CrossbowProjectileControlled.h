@@ -4,7 +4,7 @@
 #include "Components/ActorComponent.h"
 #include "CrossbowProjectileControlled.generated.h"
 
-UCLASS(meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class FSD_API UCrossbowProjectileControlled : public UActorComponent {
     GENERATED_BODY()
 public:

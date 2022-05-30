@@ -6,10 +6,10 @@
 #include "UpgradeValues.h"
 #include "GatlingGunUpgrade.generated.h"
 
-class AFSDPlayerState;
 class AItem;
+class AFSDPlayerState;
 
-UCLASS(EditInlineNew, MinimalAPI)
+UCLASS(Blueprintable, EditInlineNew, MinimalAPI)
 class UGatlingGunUpgrade : public UStandardItemUpgrade {
     GENERATED_BODY()
 public:

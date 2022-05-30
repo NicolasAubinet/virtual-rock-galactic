@@ -1,24 +1,24 @@
 #include "FSDGameMode.h"
 #include "Templates/SubclassOf.h"
+#include "ObjectivesManager.h"
+#include "EnemySpawnManager.h"
+#include "PheromoneSpawnerComponent.h"
+#include "KeepInsideWorld.h"
 #include "MissionManager.h"
 #include "CritterManager.h"
-#include "PheromoneSpawnerComponent.h"
-#include "EnemySpawnManager.h"
-#include "ObjectivesManager.h"
-#include "KeepInsideWorld.h"
 #include "FormationsManagerComponent.h"
 
+class UEncounterManager;
 class AActor;
-class AMolly;
+class APlayerCharacter;
 class AMiningPod;
 class AFSDGameMode;
 class UEnemyWaveManager;
 class AFSDPlayerController;
-class UEncounterManager;
+class AMolly;
 class ABosco;
 class UDifficultyManager;
 class APlayerController;
-class APlayerCharacter;
 
 void AFSDGameMode::StartGame() {
 }

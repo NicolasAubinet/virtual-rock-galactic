@@ -5,22 +5,22 @@
 #include "QueuedMontage.h"
 #include "EnemyDeepPathfinderCharacter.generated.h"
 
-class USkeletalMeshComponent;
-class UMeshComponent;
-class UEnemyHealthComponent;
-class UMaterialInterface;
 class UAnimMontage;
+class UEnemyHealthComponent;
+class UMeshComponent;
+class UMaterialInterface;
+class USkeletalMeshComponent;
 class UAnimInstance;
 
-UCLASS()
+UCLASS(Blueprintable)
 class AEnemyDeepPathfinderCharacter : public ADeepPathfinderCharacter, public INetMontageAble {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UEnemyHealthComponent* HealthComponent;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_QueuedMontage, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_QueuedMontage, meta=(AllowPrivateAccess=true))
     FQueuedMontage QueuedMontage;
     
 public:

@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "ECarveFilterType.h"
 #include "CarveSplineSegment.h"
 #include "EPreciousMaterialOptions.h"
-#include "ECarveFilterType.h"
 #include "SplineSegmentCarveOperationData.generated.h"
 
 class UTerrainMaterial;

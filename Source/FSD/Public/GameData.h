@@ -2,99 +2,82 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "UObject/Object.h"
-#include "GVisibilityGroups.h"
-#include "GDTerrainTypes.h"
-#include "GDDamageClasses.h"
 #include "GDPlayerAndCharacterProgression.h"
-#include "GDDifficulty.h"
-#include "GameplayTagContainer.h"
-#include "GDItemCategoryIDs.h"
-#include "GDPerks.h"
+#include "GVisibilityGroups.h"
+#include "GDDamageClasses.h"
 #include "GDGameStatsTracking.h"
-#include "GDMilestones.h"
-#include "GDMissionStats.h"
-#include "GDStats.h"
-#include "GDCharacterRetirement.h"
-#include "GDResources.h"
-#include "GDAudio.h"
+#include "GDTerrainTypes.h"
 #include "UObject/NoExportTypes.h"
+#include "GDMissionStats.h"
+#include "GDMilestones.h"
+#include "GDResources.h"
+#include "GDPerks.h"
+#include "GDItemCategoryIDs.h"
+#include "GDStats.h"
+#include "GDAudio.h"
+#include "GDDifficulty.h"
+#include "GDCharacterRetirement.h"
+#include "GameplayTagContainer.h"
 #include "RetirementCostItem.h"
 #include "GameData.generated.h"
 
-class UTexture2D;
-class AActor;
-class UPromotionRewardsSettings;
-class UEffectSettings;
-class UNiagaraParameterCollection;
-class UFSDEventCollection;
-class UDLCBase;
-class UMissionTemplate;
-class UItemSettings;
-class UGameAnimationSettings;
 class UGameActivitySettings;
-class ULegacySettings;
+class UVanitySettings;
+class UFSDEventCollection;
+class UShowroomSettings;
+class USchematicSettings;
+class UDeepDiveSettings;
+class UPromotionRewardsSettings;
+class UGameAnimationSettings;
 class UDanceSettings;
+class UAchievementList;
 class UEnemySettings;
+class UDynamicIconSettings;
 class UDamageSettings;
 class UPlanetZoneSetup;
 class UTreasureSettings;
-class UFSDTutorialSettings;
-class UVanitySettings;
 class UDrinkSettings;
-class UPlayerCharacterID;
+class UProceduralSettings;
 class UUpgradeSettings;
 class USpawnSettings;
 class UKeyBindingSettings;
-class UInventoryList;
-class UDeepDiveSettings;
-class UAchievementList;
 class UEncounterSettings;
-class USeasonSettings;
+class UVictoryPoseSettings;
 class UForginSettings;
-class USchematicSettings;
 class UItemSkinSettings;
 class USpecialEventSettings;
-class UProceduralSettings;
+class UFSDTutorialSettings;
 class UPickaxeSettings;
-class UCampaignManager;
 class UFSDTagSettings;
-class UDataTable;
-class UDynamicIconSettings;
-class UShowroomSettings;
-class UVictoryPoseSettings;
-class UAfflictionSettings;
+class UInventoryList;
+class USeasonSettings;
 class UCommunityGoalSettings;
-class UDailyDealSettings;
-class UCharacterSettings;
-class UMinersManual;
-class APlayerCharacter;
-class UBiome;
+class UItemSettings;
+class ULegacySettings;
 class UStatusEffectSettings;
-class UGlobalMissionSetup;
-class AProceduralSetup;
-class UItemRefundList;
+class USaveGameSettings;
+class UEffectSettings;
+class UAfflictionSettings;
+class UDailyDealSettings;
+class APlayerCharacter;
 class USubsystem;
-class UAsyncManager;
+class UTexture2D;
+class UMinersManual;
 class UDifficultySetting;
+class UCharacterSettings;
+class UGlobalMissionSetup;
+class UPlayerCharacterID;
+class UAsyncManager;
 class UPerkAsset;
 class UHUDVisibilityGroup;
 class UMissionStat;
 
-UCLASS(BlueprintType)
+UCLASS(Blueprintable)
 class FSD_API UGameData : public UObject {
     GENERATED_BODY()
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TSoftClassPtr<AActor> BarrelClass;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGVisibilityGroups VisibilityGroups;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    UNiagaraParameterCollection* NiagaraParameterCollection;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    UDLCBase* AlwaysLockedDLC;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UPromotionRewardsSettings* PromotionRewardsSettings;
@@ -197,6 +180,9 @@ protected:
     UDailyDealSettings* DailyDealSettings;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    USaveGameSettings* SaveGameSettings;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGDMissionStats MissionStats;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -241,7 +227,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGDCharacterRetirement Retirement;
     
-    UPROPERTY(BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGDPlayerAndCharacterProgression PlayerAndCharacterProgression;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -251,43 +237,10 @@ protected:
     UAchievementList* Achievements;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    UDataTable* SchematicGATable;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TArray<UMissionTemplate*> TestMissions;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TSoftObjectPtr<UBiome> TestBiome;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UGlobalMissionSetup* MissionSetup;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TSoftClassPtr<UCampaignManager> CampaignManagerClass;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    UPlayerCharacterID* BoscoID;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TMap<UPlayerCharacterID*, UInventoryList*> InventoryLists;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    UBiome* DefaultBiome;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TArray<FText> GenericBiomeQuotes;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    UMissionTemplate* DefaultMission;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USeasonSettings* SeasonSettings;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TSubclassOf<AProceduralSetup> CaveGeneratorPLSClass;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TArray<UItemRefundList*> ItemRefunds;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSubclassOf<USubsystem>> BlueprintSubSystems;

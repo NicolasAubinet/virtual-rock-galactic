@@ -1,8 +1,8 @@
 #include "ProceduralSetup.h"
 #include "Net/UnrealNetwork.h"
-#include "PLSEncounterComponent.h"
 #include "NoisyPathfinderComponent.h"
 #include "ProceduralTunnelComponent.h"
+#include "PLSEncounterComponent.h"
 #include "ProceduralObjectColliders.h"
 
 class AProceduralSetup;

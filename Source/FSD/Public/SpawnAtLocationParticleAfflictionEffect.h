@@ -1,10 +1,10 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "AfflictionEffect.h"
 #include "ScaledEffect.h"
+#include "AfflictionEffect.h"
 #include "SpawnAtLocationParticleAfflictionEffect.generated.h"
 
-UCLASS()
+UCLASS(Blueprintable)
 class USpawnAtLocationParticleAfflictionEffect : public UAfflictionEffect {
     GENERATED_BODY()
 public:

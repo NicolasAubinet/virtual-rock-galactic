@@ -3,7 +3,7 @@
 #include "FloodFillSettings.h"
 #include "DetailNoise.generated.h"
 
-UCLASS()
+UCLASS(Blueprintable)
 class UDetailNoise : public UFloodFillSettings {
     GENERATED_BODY()
 public:

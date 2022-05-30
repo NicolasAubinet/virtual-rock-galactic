@@ -5,7 +5,7 @@
 
 class UParticleSystem;
 
-UCLASS(meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UFriendlyHealthComponent : public UHealthComponent {
     GENERATED_BODY()
 public:

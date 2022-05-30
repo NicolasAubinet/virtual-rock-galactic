@@ -5,12 +5,12 @@
 
 class AActor;
 
-UCLASS(MinimalAPI, meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, MinimalAPI, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UPilotingStateComponent : public UCharacterStateComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_Vehicle, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_Vehicle, meta=(AllowPrivateAccess=true))
     AActor* Vehicle;
     
 public:

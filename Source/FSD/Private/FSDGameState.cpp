@@ -1,24 +1,24 @@
 #include "FSDGameState.h"
 #include "Net/UnrealNetwork.h"
-#include "FlareController.h"
+#include "SoundMixManagerComponent.h"
 #include "DifficultyManager.h"
-#include "DynamicMeshScaler.h"
+#include "SeasonReplicatorComponent.h"
+#include "PlayerProximityTracker.h"
 #include "SpawnEffectsComponent.h"
+#include "DynamicMeshScaler.h"
+#include "FlareController.h"
 #include "GemProximityTracker.h"
 #include "AttackerManagerComponent.h"
-#include "ShowroomManager.h"
-#include "SoundMixManagerComponent.h"
-#include "SeasonReplicatorComponent.h"
 #include "TeamResourcesComponent.h"
-#include "PlayerProximityTracker.h"
+#include "ShowroomManager.h"
 
-class AProceduralSetup;
-class AGameStats;
 class UGeneratedMission;
-class UDifficultySetting;
-class UObjective;
-class AFSDPlayerState;
 class UResourceData;
+class UDifficultySetting;
+class AFSDPlayerState;
+class AProceduralSetup;
+class UObjective;
+class AGameStats;
 class UFSDEvent;
 class USoundCue;
 

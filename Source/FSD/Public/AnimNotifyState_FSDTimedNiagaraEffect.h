@@ -7,7 +7,7 @@
 
 class UNiagaraSystem;
 
-UCLASS(CollapseCategories, EditInlineNew)
+UCLASS(Blueprintable, CollapseCategories, EditInlineNew)
 class UAnimNotifyState_FSDTimedNiagaraEffect : public UAnimNotifyState {
     GENERATED_BODY()
 public:

@@ -4,10 +4,10 @@
 #include "UObject/NoExportTypes.h"
 #include "TwoFacetDynamicIcon.generated.h"
 
-class UMaterialInstanceDynamic;
 class UTexture2D;
+class UMaterialInstanceDynamic;
 
-UCLASS(EditInlineNew)
+UCLASS(Blueprintable, EditInlineNew)
 class FSD_API UTwoFacetDynamicIcon : public UDynamicIcon {
     GENERATED_BODY()
 public:

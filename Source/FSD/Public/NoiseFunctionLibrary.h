@@ -9,7 +9,7 @@ class UObject;
 class USceneComponent;
 class AActor;
 
-UCLASS(BlueprintType)
+UCLASS(Blueprintable)
 class UNoiseFunctionLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:

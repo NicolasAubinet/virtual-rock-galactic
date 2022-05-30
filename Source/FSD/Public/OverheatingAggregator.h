@@ -3,17 +3,17 @@
 #include "ItemAggregator.h"
 #include "OverheatingAggregator.generated.h"
 
-UCLASS(meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UOverheatingAggregator : public UItemAggregator {
     GENERATED_BODY()
 public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOverheatingProgressChanged, float, Progress);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOverheatedChanged, bool, Overheated);
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOverheatingProgressChanged OnOverheatingProgressChanged;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOverheatedChanged OnOverheatedChanged;
     
 protected:
@@ -23,10 +23,10 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
     float OverheatedDuration;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_IsOverheated, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_IsOverheated, meta=(AllowPrivateAccess=true))
     bool bIsOverheated;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_Temperature, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_Temperature, meta=(AllowPrivateAccess=true))
     float Temperature;
     
 public:

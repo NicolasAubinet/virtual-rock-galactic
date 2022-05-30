@@ -7,7 +7,7 @@ class UHealthComponentBase;
 class UPrimitiveComponent;
 class UFSDPhysicalMaterial;
 
-UCLASS()
+UCLASS(Blueprintable)
 class ABasicPistol : public AAmmoDrivenWeapon {
     GENERATED_BODY()
 public:

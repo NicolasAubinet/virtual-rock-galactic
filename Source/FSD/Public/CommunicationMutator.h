@@ -3,7 +3,7 @@
 #include "Mutator.h"
 #include "CommunicationMutator.generated.h"
 
-UCLASS(BlueprintType, EditInlineNew)
+UCLASS(Blueprintable, EditInlineNew)
 class UCommunicationMutator : public UMutator {
     GENERATED_BODY()
 public:

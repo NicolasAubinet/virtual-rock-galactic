@@ -3,7 +3,7 @@
 #include "Components/SceneComponent.h"
 #include "FragileDebrisCleaner.generated.h"
 
-UCLASS(meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UFragileDebrisCleaner : public USceneComponent {
     GENERATED_BODY()
 public:

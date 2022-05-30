@@ -6,15 +6,15 @@
 class UHealthComponent;
 class USimpleObjectInfoComponent;
 
-UCLASS(Abstract)
+UCLASS(Abstract, Blueprintable)
 class FSD_API AMULE : public ADeepPathfinderCharacter {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UHealthComponent* HealthComponent;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     USimpleObjectInfoComponent* ObjectInfo;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_IsDown, meta=(AllowPrivateAccess=true))

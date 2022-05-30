@@ -3,15 +3,15 @@
 #include "GameFramework/Actor.h"
 #include "GlowPlant.generated.h"
 
-class UPointLightComponent;
 class UStaticMeshComponent;
+class UPointLightComponent;
 class UPrimitiveComponent;
 
-UCLASS(Abstract)
+UCLASS(Abstract, Blueprintable)
 class AGlowPlant : public AActor {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UStaticMeshComponent* TrunkMesh;
     
 protected:

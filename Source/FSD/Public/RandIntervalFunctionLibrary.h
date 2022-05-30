@@ -1,10 +1,10 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Kismet/BlueprintFunctionLibrary.h"
 #include "RandInterval.h"
+#include "Kismet/BlueprintFunctionLibrary.h"
 #include "RandIntervalFunctionLibrary.generated.h"
 
-UCLASS(BlueprintType)
+UCLASS(Blueprintable)
 class URandIntervalFunctionLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:

@@ -3,10 +3,10 @@
 #include "Engine/DataAsset.h"
 #include "TerrainType.generated.h"
 
-class UParticleSystem;
 class USoundCue;
+class UParticleSystem;
 
-UCLASS(BlueprintType, MinimalAPI)
+UCLASS(Blueprintable, MinimalAPI)
 class UTerrainType : public UDataAsset {
     GENERATED_BODY()
 public:

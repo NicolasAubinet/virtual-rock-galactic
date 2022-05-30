@@ -1,13 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "CarveOptionsCellSize.h"
 #include "Components/StaticMeshComponent.h"
 #include "ECarveFilterType.h"
-#include "CarveOptionsCellSize.h"
 #include "MeshCarverComponent.generated.h"
 
 class UTerrainMaterialBase;
 
-UCLASS(EditInlineNew, meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, EditInlineNew, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UMeshCarverComponent : public UStaticMeshComponent {
     GENERATED_BODY()
 public:

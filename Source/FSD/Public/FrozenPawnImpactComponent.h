@@ -1,26 +1,26 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "UObject/NoExportTypes.h"
 #include "Components/ActorComponent.h"
 #include "DelegateDelegate.h"
-#include "UObject/NoExportTypes.h"
 #include "Engine/EngineTypes.h"
 #include "FrozenPawnImpactComponent.generated.h"
 
-class UPhysicsAsset;
-class UParticleSystem;
-class USoundCue;
-class UPrimitiveComponent;
-class UPhysicalMaterial;
 class AActor;
+class UPhysicsAsset;
+class UPhysicalMaterial;
+class USoundCue;
+class UParticleSystem;
+class UPrimitiveComponent;
 
-UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UFrozenPawnImpactComponent : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FDelegate OnStartFallingEvent;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FDelegate OnFreezeImpactEvent;
     
 protected:

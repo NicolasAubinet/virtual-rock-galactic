@@ -1,11 +1,11 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "PlayerProgress.h"
 #include "Blueprint/UserWidget.h"
+#include "PlayerProgress.h"
 #include "CharacterProgress.h"
 #include "MissionPlayerAndCharacterWidget.generated.h"
 
-UCLASS(EditInlineNew)
+UCLASS(Blueprintable, EditInlineNew)
 class UMissionPlayerAndCharacterWidget : public UUserWidget {
     GENERATED_BODY()
 public:

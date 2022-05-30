@@ -6,7 +6,7 @@
 
 class UTerrainType;
 
-UCLASS(meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UReflectionHitscanComponent : public UHitscanBaseComponent {
     GENERATED_BODY()
 public:

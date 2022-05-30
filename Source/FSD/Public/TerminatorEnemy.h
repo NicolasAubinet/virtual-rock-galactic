@@ -8,7 +8,7 @@ class UAnimMontage;
 class UHitReactionComponent;
 class AActor;
 
-UCLASS()
+UCLASS(Blueprintable)
 class ATerminatorEnemy : public AEnemyDeepPathfinderCharacter, public IMultiTargeter {
     GENERATED_BODY()
 public:
@@ -22,10 +22,10 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxFlairAnimationCooldown;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UHitReactionComponent* HitReactions;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TSet<AActor*> CurrentTargets;
     
 public:

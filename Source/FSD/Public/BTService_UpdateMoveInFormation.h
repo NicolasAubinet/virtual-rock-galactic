@@ -4,7 +4,7 @@
 #include "BehaviorTree/BehaviorTreeTypes.h"
 #include "BTService_UpdateMoveInFormation.generated.h"
 
-UCLASS()
+UCLASS(Blueprintable)
 class UBTService_UpdateMoveInFormation : public UBTService {
     GENERATED_BODY()
 public:

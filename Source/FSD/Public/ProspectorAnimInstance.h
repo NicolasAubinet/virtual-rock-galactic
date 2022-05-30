@@ -5,7 +5,7 @@
 #include "EProspectorRobotState.h"
 #include "ProspectorAnimInstance.generated.h"
 
-UCLASS(NonTransient)
+UCLASS(Blueprintable, NonTransient)
 class UProspectorAnimInstance : public UEnemyAnimInstance {
     GENERATED_BODY()
 public:

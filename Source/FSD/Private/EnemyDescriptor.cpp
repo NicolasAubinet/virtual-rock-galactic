@@ -5,7 +5,7 @@ class APawn;
 class UBiome;
 class UEnemyDescriptor;
 
-TSubclassOf<APawn> UEnemyDescriptor::GetEnemyClass(UBiome* Biome, bool isElite) const {
+TSubclassOf<APawn> UEnemyDescriptor::GetEnemyClass(UBiome* Biome, bool IsElite) const {
     return NULL;
 }
 

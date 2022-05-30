@@ -3,16 +3,16 @@
 #include "AmmoDrivenWeapon.h"
 #include "BeltDrivenWeapon.generated.h"
 
+class UCurveFloat;
 class USoundCue;
 class UAudioComponent;
-class UCurveFloat;
 
-UCLASS(Abstract)
+UCLASS(Abstract, Blueprintable)
 class ABeltDrivenWeapon : public AAmmoDrivenWeapon {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
     UAudioComponent* BarrelAudio;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -33,10 +33,10 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float BarrelSpinDownTime;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float CurrentSpinRate;
     
-    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     bool Simulate_SpinBarrel;
     
 public:

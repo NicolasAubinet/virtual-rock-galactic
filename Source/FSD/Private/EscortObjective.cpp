@@ -1,9 +1,9 @@
 #include "EscortObjective.h"
 #include "Net/UnrealNetwork.h"
 
-class AEscortMule;
-class AExtractorItem;
 class UCappedResource;
+class AExtractorItem;
+class AEscortMule;
 
 void UEscortObjective::SyncProgressTimer() {
 }

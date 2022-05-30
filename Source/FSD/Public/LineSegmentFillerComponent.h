@@ -1,13 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "GenerationComponent.h"
 #include "LineSegmentFillerPoint.h"
+#include "GenerationComponent.h"
 #include "RandRange.h"
 #include "LineSegmentFillerComponent.generated.h"
 
 class UFloodFillSettings;
 
-UCLASS(meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class FSD_API ULineSegmentFillerComponent : public UGenerationComponent {
     GENERATED_BODY()
 public:

@@ -2,8 +2,8 @@
 
 class UObject;
 class UTextBlock;
-class UUserWidget;
 class UWidget;
+class UUserWidget;
 
 void UFSDWidgetEffectsComponent::StartTextCounter(UObject* WorldContext, UTextBlock*& Widget, float Start, float End, float Duration, int32 MaxDigits, float StartDelay) {
 }

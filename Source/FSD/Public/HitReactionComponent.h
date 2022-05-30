@@ -6,7 +6,7 @@
 class UAnimSequenceBase;
 class USkeletalMeshComponent;
 
-UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UHitReactionComponent : public UActorComponent {
     GENERATED_BODY()
 public:
@@ -20,7 +20,7 @@ public:
     float OverrideHitReactBlendIn;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* SkeletalMesh;
     
 public:

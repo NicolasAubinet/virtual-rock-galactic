@@ -1,49 +1,49 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "LerpingPercent.h"
 #include "Components/ActorComponent.h"
+#include "LerpingPercent.h"
 #include "CountDownFloat.h"
 #include "EIntoxicationState.h"
 #include "EDrinkableAlcoholStrength.h"
 #include "CharacterIntoxicationComponent.generated.h"
 
-class UCurveFloat;
 class APlayerCharacter;
+class UCurveFloat;
 class UDrinkableDataAsset;
 
-UCLASS(Blueprintable, MinimalAPI, meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, MinimalAPI, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UCharacterIntoxicationComponent : public UActorComponent {
     GENERATED_BODY()
 public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPassOutDrunkSignature, APlayerCharacter*, Player);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FIntoxicationProgressSignature, APlayerCharacter*, Player, float, Progress);
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FIntoxicationProgressSignature OnIntoxicationChanged;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FPassOutDrunkSignature OnPassOutDrunk;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     APlayerCharacter* Character;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     EIntoxicationState CurrentState;
     
-    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     FLerpingPercent IntoxicationPercent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float IntoxicationLerpSpeed;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float TimeDrunk;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FCountDownFloat SoberingUpCoolDown;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere)
     uint8 SoberingPercent;
     
 public:
@@ -100,7 +100,7 @@ protected:
     int32 GetAlcoholPct(EDrinkableAlcoholStrength Strength) const;
     
 public:
-    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
+    UFUNCTION(BlueprintCallable, BlueprintAuthorityOnly, BlueprintCallable)
     void Consume(UDrinkableDataAsset* Drinkable);
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)

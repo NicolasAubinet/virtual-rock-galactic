@@ -6,7 +6,7 @@
 
 class UFakeMoverSettings;
 
-UCLASS()
+UCLASS(Blueprintable)
 class UBTTask_FakePhysicsMove : public UBTTask_BlackboardBase {
     GENERATED_BODY()
 public:

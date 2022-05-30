@@ -3,7 +3,7 @@
 #include "AfflictionEffect.h"
 #include "EnemyScaleAfflictionEffect.generated.h"
 
-UCLASS(Abstract)
+UCLASS(Abstract, Blueprintable)
 class UEnemyScaleAfflictionEffect : public UAfflictionEffect {
     GENERATED_BODY()
 public:

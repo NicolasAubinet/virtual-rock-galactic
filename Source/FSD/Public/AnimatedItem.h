@@ -1,33 +1,33 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Item.h"
 #include "UObject/NoExportTypes.h"
+#include "Item.h"
 #include "AnimatedItem.generated.h"
 
-class USkeletalMeshComponent;
-class USkinnableComponent;
 class UPlayerAnimInstance;
+class USkinnableComponent;
+class USkeletalMeshComponent;
 class UAnimMontage;
 class UItemCharacterAnimationSet;
 
-UCLASS(Abstract)
+UCLASS(Abstract, Blueprintable)
 class AAnimatedItem : public AItem {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(AssetRegistrySearchable, BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(AssetRegistrySearchable, BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     USkinnableComponent* Skinnable;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     UPlayerAnimInstance* FPAnimInstance;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     UPlayerAnimInstance* TPAnimInstance;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* FPMesh;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* TPMesh;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

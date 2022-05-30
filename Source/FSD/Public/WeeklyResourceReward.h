@@ -4,10 +4,10 @@
 #include "IRandRange.h"
 #include "WeeklyResourceReward.generated.h"
 
-class AFSDPlayerController;
 class UResourceData;
+class AFSDPlayerController;
 
-UCLASS(BlueprintType, EditInlineNew)
+UCLASS(Blueprintable, EditInlineNew)
 class UWeeklyResourceReward : public UReward {
     GENERATED_BODY()
 public:

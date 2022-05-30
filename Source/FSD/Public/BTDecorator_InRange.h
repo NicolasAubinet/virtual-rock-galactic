@@ -4,7 +4,7 @@
 #include "AITypes.h"
 #include "BTDecorator_InRange.generated.h"
 
-UCLASS()
+UCLASS(Blueprintable)
 class UBTDecorator_InRange : public UBTDecorator_BlackboardBase {
     GENERATED_BODY()
 public:

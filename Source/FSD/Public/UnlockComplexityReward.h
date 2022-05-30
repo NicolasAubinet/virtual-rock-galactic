@@ -3,10 +3,10 @@
 #include "UnlockReward.h"
 #include "UnlockComplexityReward.generated.h"
 
-class UMissionTemplate;
 class UMissionComplexity;
+class UMissionTemplate;
 
-UCLASS(BlueprintType, EditInlineNew)
+UCLASS(Blueprintable, EditInlineNew)
 class UUnlockComplexityReward : public UUnlockReward {
     GENERATED_BODY()
 public:

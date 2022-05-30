@@ -3,7 +3,7 @@
 #include "HitscanComponent.h"
 #include "AllPiercingHitscanComponent.generated.h"
 
-UCLASS(meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class FSD_API UAllPiercingHitscanComponent : public UHitscanComponent {
     GENERATED_BODY()
 public:

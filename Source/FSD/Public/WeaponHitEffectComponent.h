@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
+#include "Components/ActorComponent.h"
 #include "Engine/EngineTypes.h"
 #include "Engine/NetSerialization.h"
-#include "Components/ActorComponent.h"
 #include "UObject/NoExportTypes.h"
 #include "WeaponHitEffectComponent.generated.h"
 
 class AActor;
 
-UCLASS(meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UWeaponHitEffectComponent : public UActorComponent {
     GENERATED_BODY()
 public:

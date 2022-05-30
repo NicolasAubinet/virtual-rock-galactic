@@ -3,7 +3,7 @@
 #include "EnemyAnimInstance.h"
 #include "CaretagerBodyAnimInstance.generated.h"
 
-UCLASS(NonTransient)
+UCLASS(Blueprintable, NonTransient)
 class UCaretagerBodyAnimInstance : public UEnemyAnimInstance {
     GENERATED_BODY()
 public:

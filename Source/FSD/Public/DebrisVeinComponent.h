@@ -4,10 +4,10 @@
 #include "EDebrisCarvedType.h"
 #include "DebrisVeinComponent.generated.h"
 
-class UTerrainMaterial;
 class UVeinResourceCreator;
+class UTerrainMaterial;
 
-UCLASS(meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UDebrisVeinComponent : public UDebrisActorComponent {
     GENERATED_BODY()
 public:

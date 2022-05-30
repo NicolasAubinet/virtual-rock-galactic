@@ -1,12 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "GameplayTagAssetInterface.h"
 #include "GameplayTagContainer.h"
+#include "GameplayTagAssetInterface.h"
 #include "GameplayTagContainer.h"
 #include "EscortMuleTrack.generated.h"
 
-UCLASS(Abstract)
+UCLASS(Abstract, Blueprintable)
 class AEscortMuleTrack : public AActor, public IGameplayTagAssetInterface {
     GENERATED_BODY()
 public:

@@ -6,11 +6,11 @@
 #include "EProjectileUpgrade.h"
 #include "ProjectileUpgrade.generated.h"
 
-class UItemUpgradeCondition;
 class AActor;
+class UItemUpgradeCondition;
 class AFSDPlayerState;
 
-UCLASS(EditInlineNew, MinimalAPI)
+UCLASS(Blueprintable, EditInlineNew, MinimalAPI)
 class UProjectileUpgrade : public UStandardItemUpgrade {
     GENERATED_BODY()
 public:

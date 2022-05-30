@@ -7,7 +7,7 @@
 
 class AGooGunPuddle;
 
-UCLASS()
+UCLASS(Blueprintable)
 class AGooGunProjectile : public AProjectile {
     GENERATED_BODY()
 public:

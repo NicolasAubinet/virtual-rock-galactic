@@ -4,18 +4,18 @@
 #include "UObject/NoExportTypes.h"
 #include "SentryGunAnimInstance.generated.h"
 
-class ASentryGun;
 class ARedeployableSentryGun;
+class ASentryGun;
 
-UCLASS(Abstract, NonTransient)
+UCLASS(Abstract, Blueprintable, NonTransient)
 class USentryGunAnimInstance : public UAnimInstance {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     ASentryGun* SentryGun;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     ARedeployableSentryGun* RedeployableSentryGun;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

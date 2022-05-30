@@ -4,7 +4,7 @@
 #include "BehaviorTree/BehaviorTreeTypes.h"
 #include "BTService_FindPlayer.generated.h"
 
-UCLASS()
+UCLASS(Blueprintable)
 class UBTService_FindPlayer : public UBTService {
     GENERATED_BODY()
 public:

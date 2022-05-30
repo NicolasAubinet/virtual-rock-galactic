@@ -1,61 +1,61 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "OnTokensChangedSignatureDelegate.h"
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "UObject/NoExportTypes.h"
-#include "ChallengeInfo.h"
 #include "OnXPChangedSignatureDelegate.h"
-#include "OnVanityTreeResetDelegate.h"
+#include "OnTokensChangedSignatureDelegate.h"
 #include "SeasonMissionResult.h"
+#include "UObject/NoExportTypes.h"
+#include "OnVanityTreeResetDelegate.h"
 #include "OnScripChallengeUpdatedDelegate.h"
+#include "UObject/NoExportTypes.h"
 #include "ClaimStatusChangedDelegate.h"
-#include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
+#include "ChallengeInfo.h"
 #include "SeasonLevel.h"
 #include "UObject/NoExportTypes.h"
 #include "EPickaxePartLocation.h"
 #include "SeasonsSubsystem.generated.h"
 
 class UItemSkin;
-class UPlayerCharacterID;
-class USeasonChallenge;
+class UDataAsset;
 class UObject;
-class AFSDPlayerController;
 class UMissionStat;
 class AFSDPlayerState;
-class UDataAsset;
+class USeasonChallenge;
 class UTextureRenderTarget2D;
 class UVanityItem;
+class UPlayerCharacterID;
 class UPickaxePart;
 class USeasonEventData;
+class AFSDPlayerController;
 
-UCLASS(BlueprintType)
+UCLASS(Blueprintable)
 class USeasonsSubsystem : public UGameInstanceSubsystem {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnXPChangedSignature OnXPChanged;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnTokensChangedSignature OnTokensChanged;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnVanityTreeReset OnVanityTreeReset;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnScripChallengeUpdated OnScripChallengeUpdated;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FClaimStatusChanged OnClaimStatusChanged;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 ForceSeasonEventIndex;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FSeasonMissionResult TempSeasonMissionResult;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FSeasonMissionResult LatestMissionSeasonResult;
     
 public:
@@ -84,7 +84,7 @@ public:
     bool IsNodeBought(int32 TreeOfVanityNodeID);
     
     UFUNCTION(BlueprintCallable)
-    void InitliazeStats();
+    void InitializeStatsAndChallenges();
     
     UFUNCTION(BlueprintCallable)
     bool HasClaimedLevelRewards(int32 startLevel, int32 numberOfLevels);

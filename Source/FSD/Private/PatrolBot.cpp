@@ -7,8 +7,8 @@
 #include "EnemyComponent.h"
 #include "DamageComponent.h"
 #include "PawnAlertComponent.h"
-#include "PlayerImpactCooldownComponent.h"
 #include "AvoidCeilingComponent.h"
+#include "PlayerImpactCooldownComponent.h"
 #include "Components/AudioComponent.h"
 #include "ProjectileAttackComponent.h"
 
@@ -78,6 +78,9 @@ void APatrolBot::EndFireRockets() {
 }
 
 void APatrolBot::DisableDrone() {
+}
+
+void APatrolBot::All_SetLaserBeamActive_Implementation(bool Active) {
 }
 
 void APatrolBot::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {

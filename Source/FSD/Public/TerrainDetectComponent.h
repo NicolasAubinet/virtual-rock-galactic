@@ -1,16 +1,16 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Components/SceneComponent.h"
+#include "UObject/NoExportTypes.h"
 #include "TerrainDetectInterface.h"
 #include "PointRemovedEventDelegate.h"
-#include "UObject/NoExportTypes.h"
 #include "TerrainDetectComponent.generated.h"
 
-UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UTerrainDetectComponent : public USceneComponent, public ITerrainDetectInterface {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FPointRemovedEvent OnPointRemoved;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -22,10 +22,10 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool KillActorOnPointRemoved;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FVector ActiveDetectPos;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     int32 DetectorId;
     
     UTerrainDetectComponent();

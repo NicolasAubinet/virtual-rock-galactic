@@ -5,11 +5,11 @@
 #include "ProjectileSpawnData.h"
 #include "MultiprojectileSpawner.generated.h"
 
-class UDataAsset;
-class UMultiprojectileSpawner;
 class AActor;
+class UMultiprojectileSpawner;
+class UDataAsset;
 
-UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class FSD_API UMultiprojectileSpawner : public UActorComponent {
     GENERATED_BODY()
 public:

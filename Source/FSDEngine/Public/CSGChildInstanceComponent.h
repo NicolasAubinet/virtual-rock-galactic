@@ -1,11 +1,11 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "GeneralTerrainMaterialCombiner.h"
 #include "CSGBaseComponent.h"
 #include "CSGChildInstanceProperties.h"
-#include "GeneralTerrainMaterialCombiner.h"
 #include "CSGChildInstanceComponent.generated.h"
 
-UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UCSGChildInstanceComponent : public UCSGBaseComponent {
     GENERATED_BODY()
 public:

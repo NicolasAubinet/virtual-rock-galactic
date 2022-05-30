@@ -4,10 +4,10 @@
 #include "Components/ActorComponent.h"
 #include "MolotovComponent.generated.h"
 
-class UDebrisPositioning;
 class AActor;
+class UDebrisPositioning;
 
-UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UMolotovComponent : public UActorComponent {
     GENERATED_BODY()
 public:

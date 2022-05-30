@@ -5,13 +5,13 @@
 #include "RequiredMissionItem.h"
 #include "CampaignMission.generated.h"
 
-class UMissionWarning;
 class UPlanetZone;
 class UReward;
-class UDialogDataAsset;
 class UMissionTemplate;
+class UMissionWarning;
+class UDialogDataAsset;
 
-UCLASS(BlueprintType, EditInlineNew)
+UCLASS(Blueprintable, EditInlineNew)
 class FSD_API UCampaignMission : public UDataAsset {
     GENERATED_BODY()
 public:
@@ -31,7 +31,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool OverrideMutators;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere)
     ECampaignMutators MutatorOverride;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

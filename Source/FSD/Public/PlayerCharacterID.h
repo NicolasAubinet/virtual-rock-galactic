@@ -4,10 +4,10 @@
 #include "SavableDataAsset.h"
 #include "PlayerCharacterID.generated.h"
 
-class APlayerCharacter;
 class UPlayerCharacterData;
+class APlayerCharacter;
 
-UCLASS()
+UCLASS(Blueprintable)
 class FSD_API UPlayerCharacterID : public USavableDataAsset {
     GENERATED_BODY()
 public:

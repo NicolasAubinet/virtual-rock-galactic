@@ -5,10 +5,10 @@
 #include "GameModeFunctionLibrary.generated.h"
 
 class UObject;
-class AActor;
 class USeamlessTravelEventKey;
+class AActor;
 
-UCLASS(BlueprintType)
+UCLASS(Blueprintable)
 class UGameModeFunctionLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:

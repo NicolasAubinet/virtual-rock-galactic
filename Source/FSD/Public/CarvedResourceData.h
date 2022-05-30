@@ -5,7 +5,7 @@
 
 class UCarvedResourceCreator;
 
-UCLASS()
+UCLASS(Blueprintable)
 class FSD_API UCarvedResourceData : public UResourceData {
     GENERATED_BODY()
 public:

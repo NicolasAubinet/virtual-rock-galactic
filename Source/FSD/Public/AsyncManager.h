@@ -1,20 +1,20 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EAsyncLoadPriority.h"
-#include "Subsystems/GameInstanceSubsystem.h"
 #include "UObject/NoExportTypes.h"
+#include "Subsystems/GameInstanceSubsystem.h"
+#include "EAsyncLoadPriority.h"
 #include "EAsyncPersistence.h"
 #include "AsyncLoadCompleteDelegateDelegate.h"
 #include "AsyncManager.generated.h"
 
 class UObject;
 
-UCLASS(BlueprintType)
+UCLASS(Blueprintable)
 class UAsyncManager : public UGameInstanceSubsystem {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<UObject*> PermanentReferences;
     
 public:

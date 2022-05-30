@@ -2,39 +2,42 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "FSDPhysicsActor.h"
-#include "EInputKeys.h"
 #include "ECrossbowStuckType.h"
+#include "EInputKeys.h"
 #include "CrossbowProjectileStuck.generated.h"
 
-class UHealthComponentBase;
-class ACrossbowProjectileBase;
 class UStatusEffect;
-class APlayerCharacter;
 class USphereComponent;
+class ACrossbowProjectileBase;
+class APlayerCharacter;
+class UHealthComponentBase;
 class USceneComponent;
 
-UCLASS()
+UCLASS(Blueprintable)
 class ACrossbowProjectileStuck : public AFSDPhysicsActor {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     ECrossbowStuckType StuckProjectileEffect;
     
-    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool IsPlayingElectricRangeEffect;
     
-    UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UStatusEffect> AppliedEffect;
     
-    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
     float StatusEffectTime;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     USphereComponent* AttachmentRoot;
     
 private:
-    UPROPERTY(BlueprintReadWrite, Replicated, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    USphereComponent* LaserCollider;
+    
+    UPROPERTY(EditAnywhere, Replicated)
     TWeakObjectPtr<ACrossbowProjectileBase> BaseProjectile;
     
 public:

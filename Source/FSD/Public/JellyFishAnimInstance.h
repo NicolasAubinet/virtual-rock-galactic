@@ -3,7 +3,7 @@
 #include "EnemyAnimInstance.h"
 #include "JellyFishAnimInstance.generated.h"
 
-UCLASS(NonTransient)
+UCLASS(Blueprintable, NonTransient)
 class UJellyFishAnimInstance : public UEnemyAnimInstance {
     GENERATED_BODY()
 public:

@@ -6,7 +6,7 @@
 
 class UTextRenderComponent;
 
-UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UDroneDisplayActionComponent : public USceneComponent {
     GENERATED_BODY()
 public:

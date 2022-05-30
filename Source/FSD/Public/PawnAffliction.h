@@ -7,10 +7,10 @@
 
 class UDialogDataAsset;
 class UTexture2D;
-class UAfflictionEffect;
 class UPlayerAfflictionOverlay;
+class UAfflictionEffect;
 
-UCLASS(BlueprintType)
+UCLASS(Blueprintable)
 class UPawnAffliction : public UDataAsset, public ISoftReferenceProvider {
     GENERATED_BODY()
 public:

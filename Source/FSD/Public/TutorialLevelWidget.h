@@ -6,7 +6,7 @@
 
 class UTutorialContentWidget;
 
-UCLASS(EditInlineNew)
+UCLASS(Blueprintable, EditInlineNew)
 class UTutorialLevelWidget : public UFSDUserWidget {
     GENERATED_BODY()
 public:

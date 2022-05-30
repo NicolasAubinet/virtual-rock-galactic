@@ -6,27 +6,27 @@
 #include "DrinkableBarSlot.h"
 #include "SpaceRigBar.generated.h"
 
-class UDrinkableDataAsset;
-class UInstantUsable;
 class UBarMenuWidget;
+class UDrinkableDataAsset;
 class UBoxComponent;
+class UInstantUsable;
 class APlayerCharacter;
 class ADrinkableActor;
 
-UCLASS(Abstract)
+UCLASS(Abstract, Blueprintable)
 class ASpaceRigBar : public AActor {
     GENERATED_BODY()
 public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FDrinkableSignature, UDrinkableDataAsset*, Drinkable);
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FDrinkableSignature OnNewDrinkableSpecial;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UInstantUsable* BarUsable;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UBoxComponent* BarUsableCollider;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -35,10 +35,10 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FVector> DrinkServingLocations;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<FDrinkableBarSlot> DrinkableBarSlots;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_DrinkableSpecial, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_DrinkableSpecial, meta=(AllowPrivateAccess=true))
     UDrinkableDataAsset* DrinkableSpecial;
     
 public:

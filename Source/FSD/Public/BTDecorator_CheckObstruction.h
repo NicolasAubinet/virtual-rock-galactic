@@ -5,7 +5,7 @@
 #include "BehaviorTree/BehaviorTreeTypes.h"
 #include "BTDecorator_CheckObstruction.generated.h"
 
-UCLASS()
+UCLASS(Blueprintable)
 class UBTDecorator_CheckObstruction : public UBTDecorator {
     GENERATED_BODY()
 public:

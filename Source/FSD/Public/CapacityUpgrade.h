@@ -8,7 +8,7 @@
 class AActor;
 class AFSDPlayerState;
 
-UCLASS(EditInlineNew, MinimalAPI)
+UCLASS(Blueprintable, EditInlineNew, MinimalAPI)
 class UCapacityUpgrade : public UStandardItemUpgrade {
     GENERATED_BODY()
 public:

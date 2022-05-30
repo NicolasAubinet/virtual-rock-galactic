@@ -1,56 +1,56 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "UpgradableGear.h"
 #include "Item.h"
-#include "PickaxePartEquip.h"
-#include "CoolDownProgressStyle.h"
+#include "UpgradableGear.h"
 #include "GameplayTagContainer.h"
-#include "EPickaxeState.h"
-#include "EPickaxePartLocation.h"
+#include "PickaxePartEquip.h"
 #include "PickaxeMeshInstance.h"
+#include "CoolDownProgressStyle.h"
+#include "Engine/NetSerialization.h"
+#include "EPickaxeState.h"
+#include "Engine/NetSerialization.h"
+#include "EPickaxePartLocation.h"
 #include "UObject/NoExportTypes.h"
-#include "Engine/NetSerialization.h"
-#include "Engine/NetSerialization.h"
 #include "PickaxeItem.generated.h"
 
-class UFSDPhysicalMaterial;
-class USoundCue;
-class USceneComponent;
 class UPlayerAnimInstance;
+class UDamageComponent;
+class USceneComponent;
 class UAnimMontage;
 class UItemCharacterAnimationSet;
-class UDamageComponent;
 class UStatusEffect;
-class UParticleSystem;
+class USoundCue;
 class UForceFeedbackEffect;
 class UMaterialInterface;
 class UPrimitiveComponent;
+class UFSDPhysicalMaterial;
+class UParticleSystem;
 
-UCLASS(Abstract)
+UCLASS(Abstract, Blueprintable)
 class APickaxeItem : public AItem, public IUpgradableGear, public IPickaxePartEquip {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool QuadDamageCarving;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     USceneComponent* FP_Root;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     USceneComponent* TP_Root;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     USceneComponent* FP_Scale;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     USceneComponent* TP_Scale;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     UPlayerAnimInstance* FPAnimInstance;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     UPlayerAnimInstance* TPAnimInstance;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -65,16 +65,16 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UItemCharacterAnimationSet* CharacterAnimationSet;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UDamageComponent* DamageComponent;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UDamageComponent* SpecialDamageComponent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float SpecialCooldown;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float SpecialCooldownRemaining;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -128,7 +128,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float BlockParticlesScaleTP;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_State, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_State, meta=(AllowPrivateAccess=true))
     EPickaxeState State;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -146,10 +146,10 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float QMiningReducedPlayRatePct;
     
-    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere)
     double QMiningLastHitTime;
     
-    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool CanBezerk;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -158,10 +158,10 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool PowerAttackEnabled;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TMap<EPickaxePartLocation, FPickaxeMeshInstance> EquippedParts;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     UMaterialInterface* EquippedMaterial;
     
 public:
@@ -195,7 +195,7 @@ protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_DigBlock2(FVector carvePos, FVector carveDirection, int32 TerrainMaterial, bool isSpecial);
     
-    UFUNCTION(BlueprintCallable, Reliable, Server)
+    UFUNCTION(Reliable, Server)
     void Server_DamageTarget(UPrimitiveComponent* TargetComponent, bool isSpecial, const FVector_NetQuantize& ImpactPoint, const FVector_NetQuantizeNormal& ImpactNormal, UFSDPhysicalMaterial* PhysMaterial, uint8 BoneIndex);
     
 public:
@@ -223,7 +223,7 @@ protected:
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
     void All_SimulateDigBlock(FVector_NetQuantize Position, bool spawnParticles, int32 Material, float Density, bool isSpecial);
     
-    UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
+    UFUNCTION(NetMulticast, Unreliable)
     void All_SimulateDamageTarget(UPrimitiveComponent* TargetComponent, bool isSpecial, const FVector_NetQuantize& ImpactPoint, const FVector_NetQuantizeNormal& ImpactNormal, UFSDPhysicalMaterial* PhysMaterial, uint8 BoneIndex);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)

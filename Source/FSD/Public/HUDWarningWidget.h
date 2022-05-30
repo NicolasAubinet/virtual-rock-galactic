@@ -3,10 +3,10 @@
 #include "FSDUserWidget.h"
 #include "HUDWarningWidget.generated.h"
 
-class UTexture2D;
 class USoundBase;
+class UTexture2D;
 
-UCLASS(EditInlineNew)
+UCLASS(Blueprintable, EditInlineNew)
 class FSD_API UHUDWarningWidget : public UFSDUserWidget {
     GENERATED_BODY()
 public:

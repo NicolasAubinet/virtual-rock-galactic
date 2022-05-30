@@ -3,7 +3,7 @@
 #include "BehaviorTree/Tasks/BTTask_BlackboardBase.h"
 #include "BTTask_MoveToTarget.generated.h"
 
-UCLASS()
+UCLASS(Blueprintable)
 class UBTTask_MoveToTarget : public UBTTask_BlackboardBase {
     GENERATED_BODY()
 public:

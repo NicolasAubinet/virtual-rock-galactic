@@ -8,15 +8,15 @@ class UStaticMeshComponent;
 class UTrackBuilderConnectPoint;
 class ATrackBuilderSegment;
 
-UCLASS(Abstract)
+UCLASS(Abstract, Blueprintable)
 class FSD_API AFuelLineEndPoint : public AActor {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UFuelLineConnectPoint* ConnectPoint;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UStaticMeshComponent* StaticMesh;
     
 public:

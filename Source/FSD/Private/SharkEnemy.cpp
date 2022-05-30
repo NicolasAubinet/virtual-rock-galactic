@@ -1,7 +1,7 @@
 #include "SharkEnemy.h"
 #include "Net/UnrealNetwork.h"
-#include "Perception/PawnSensingComponent.h"
 #include "Components/SphereComponent.h"
+#include "Perception/PawnSensingComponent.h"
 #include "Particles/ParticleSystemComponent.h"
 #include "InDangerComponent.h"
 #include "EnemyComponent.h"

@@ -1,21 +1,21 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Blueprint/UserWidget.h"
 #include "UObject/NoExportTypes.h"
+#include "Blueprint/UserWidget.h"
 #include "PlayerAfflictionOverlayWidget.generated.h"
 
-class UPlayerAfflictionOverlay;
 class UTexture2D;
+class UPlayerAfflictionOverlay;
 
-UCLASS(EditInlineNew)
+UCLASS(Blueprintable, EditInlineNew)
 class UPlayerAfflictionOverlayWidget : public UUserWidget {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bOverlayActive;
     
-    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UPlayerAfflictionOverlay* Overlay;
     
 public:

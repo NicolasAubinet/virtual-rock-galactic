@@ -2,27 +2,27 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "EDropPodState.h"
-#include "GameFramework/Actor.h"
 #include "UObject/NoExportTypes.h"
+#include "GameFramework/Actor.h"
 #include "DropPod.generated.h"
 
-class UCurveFloat;
 class UAutoCarverComponent;
-class UObject;
+class UCurveFloat;
 class ADropPod;
+class UObject;
 
-UCLASS()
+UCLASS(Blueprintable)
 class FSD_API ADropPod : public AActor {
     GENERATED_BODY()
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DropHeight;
     
-    UPROPERTY(BlueprintReadWrite, EditInstanceOnly, Replicated, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
     FVector TargetLocation;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UAutoCarverComponent* AutoCarver;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -37,10 +37,10 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DepartureTime;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FVector StartLocation;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_State, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_State, meta=(AllowPrivateAccess=true))
     EDropPodState State;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

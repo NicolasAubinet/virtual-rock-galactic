@@ -6,7 +6,7 @@
 
 class UParticleSystem;
 
-UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UHugeExplosionComponent : public UActorComponent {
     GENERATED_BODY()
 public:

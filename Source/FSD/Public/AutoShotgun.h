@@ -4,13 +4,13 @@
 #include "AmmoDrivenWeapon.h"
 #include "AutoShotgun.generated.h"
 
-class UPrimitiveComponent;
+class UHealthComponentBase;
 class UStatusEffect;
 class AActor;
 class UFSDPhysicalMaterial;
-class UHealthComponentBase;
+class UPrimitiveComponent;
 
-UCLASS()
+UCLASS(Blueprintable)
 class AAutoShotgun : public AAmmoDrivenWeapon {
     GENERATED_BODY()
 public:

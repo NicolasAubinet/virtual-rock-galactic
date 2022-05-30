@@ -2,15 +2,15 @@
 #include "CoreMinimal.h"
 #include "ExplosionBaseComponent.h"
 #include "ScaledEffect.h"
-#include "UObject/NoExportTypes.h"
 #include "Engine/EngineTypes.h"
+#include "UObject/NoExportTypes.h"
 #include "ProjectileExplosion.generated.h"
 
-class UForceFeedbackEffect;
 class USoundCue;
+class UForceFeedbackEffect;
 class UForceFeedbackAttenuation;
 
-UCLASS(meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UProjectileExplosion : public UExplosionBaseComponent {
     GENERATED_BODY()
 public:

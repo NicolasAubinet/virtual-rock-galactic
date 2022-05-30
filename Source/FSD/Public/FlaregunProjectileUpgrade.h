@@ -2,14 +2,14 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "StandardItemUpgrade.h"
-#include "UpgradeValues.h"
 #include "EFlaregunProjectileUpgrades.h"
+#include "UpgradeValues.h"
 #include "FlaregunProjectileUpgrade.generated.h"
 
 class AActor;
 class AFSDPlayerState;
 
-UCLASS(EditInlineNew, MinimalAPI)
+UCLASS(Blueprintable, EditInlineNew, MinimalAPI)
 class UFlaregunProjectileUpgrade : public UStandardItemUpgrade {
     GENERATED_BODY()
 public:

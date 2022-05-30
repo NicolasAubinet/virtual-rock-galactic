@@ -7,7 +7,7 @@
 
 class UStaticMesh;
 
-UCLASS(CollapseCategories, EditInlineNew, MinimalAPI)
+UCLASS(Blueprintable, CollapseCategories, EditInlineNew, MinimalAPI)
 class UAnimNotifyState_SpawnMesh : public UAnimNotifyState {
     GENERATED_BODY()
 public:

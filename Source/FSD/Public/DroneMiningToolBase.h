@@ -1,17 +1,17 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Engine/NetSerialization.h"
 #include "Components/ActorComponent.h"
+#include "Engine/NetSerialization.h"
 #include "MineHitEventDelegate.h"
 #include "DroneMiningToolBase.generated.h"
 
 class UTerrainMaterial;
 
-UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UDroneMiningToolBase : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FMineHitEvent HitSomething;
     
 protected:

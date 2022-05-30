@@ -1,7 +1,7 @@
 #include "GameDLC.h"
 
-class UTexture2D;
 class UObject;
+class UTexture2D;
 
 bool UGameDLC::ShouldBeAnnounced(UObject* WorldContext) const {
     return false;
@@ -27,6 +27,8 @@ UTexture2D* UGameDLC::GetBanner() const {
 }
 
 UGameDLC::UGameDLC() {
+    this->bFakeUnlockedStateInEditor = false;
+    this->bEditorUnlockedState = true;
     this->SteamID = 0;
     this->ShowOnDLCScreen = true;
     this->PerformancePoints = 0;

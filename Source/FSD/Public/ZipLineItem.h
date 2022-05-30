@@ -6,7 +6,7 @@
 
 class UDialogDataAsset;
 
-UCLASS(Abstract)
+UCLASS(Abstract, Blueprintable)
 class AZipLineItem : public AAmmoDrivenWeapon {
     GENERATED_BODY()
 public:

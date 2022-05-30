@@ -1,21 +1,21 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "RandRange.h"
 #include "ECarveFilterType.h"
+#include "RandRange.h"
 #include "RandomizedInstantMeshCarver.generated.h"
 
+class UStaticMeshCarver;
+class USTLMeshCarver;
 class UStaticMesh;
 class UTerrainMaterialBase;
-class USTLMeshCarver;
-class UStaticMeshCarver;
 
-UCLASS()
+UCLASS(Blueprintable)
 class ARandomizedInstantMeshCarver : public AActor {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UStaticMesh*> CarvingMeshes;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

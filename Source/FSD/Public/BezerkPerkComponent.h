@@ -5,7 +5,7 @@
 
 class UPawnStat;
 
-UCLASS(Abstract, meta=(BlueprintSpawnableComponent))
+UCLASS(Abstract, Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UBezerkPerkComponent : public UFloatPerkComponent {
     GENERATED_BODY()
 public:

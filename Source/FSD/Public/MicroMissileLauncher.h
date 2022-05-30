@@ -4,19 +4,19 @@
 #include "EMicroMissileLauncherFireMode.h"
 #include "MicroMissileLauncher.generated.h"
 
-class UAnimMontage;
 class USoundCue;
+class UAnimMontage;
 
-UCLASS(Abstract)
+UCLASS(Abstract, Blueprintable)
 class AMicroMissileLauncher : public AAmmoDrivenWeapon {
     GENERATED_BODY()
 public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FChargingDelegate);
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FChargingDelegate OnStartCharging;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FChargingDelegate OnEndCharging;
     
 protected:

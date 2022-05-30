@@ -1,11 +1,11 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "GameActivitySubTask.h"
 #include "Engine/DataAsset.h"
 #include "EActivityType.h"
-#include "GameActivitySubTask.h"
 #include "GameActivityType.generated.h"
 
-UCLASS()
+UCLASS(Blueprintable)
 class UGameActivityType : public UDataAsset {
     GENERATED_BODY()
 public:

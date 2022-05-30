@@ -3,7 +3,7 @@
 #include "Mutator.h"
 #include "SupplyPodMutator.generated.h"
 
-UCLASS(EditInlineNew)
+UCLASS(Blueprintable, EditInlineNew)
 class USupplyPodMutator : public UMutator {
     GENERATED_BODY()
 public:

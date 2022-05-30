@@ -6,11 +6,11 @@
 #include "ItemData.generated.h"
 
 class UItemID;
-class UResourceData;
 class UTexture2D;
+class UResourceData;
 class AActor;
 
-UCLASS(BlueprintType)
+UCLASS(Blueprintable)
 class FSD_API UItemData : public UPrimaryDataAsset {
     GENERATED_BODY()
 public:

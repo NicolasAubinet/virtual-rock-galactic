@@ -1,15 +1,16 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "UObject/NoExportTypes.h"
 #include "ObjectInfoComponent.generated.h"
 
-class APlayerController;
 class UTexture2D;
 class UDialogDataAsset;
+class APlayerController;
 class UPrimitiveComponent;
 class UActorContextWidget;
 
-UCLASS(Abstract, BlueprintType, meta=(BlueprintSpawnableComponent))
+UCLASS(Abstract, Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UObjectInfoComponent : public UActorComponent {
     GENERATED_BODY()
 public:
@@ -22,6 +23,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FText GetInGameName(const UPrimitiveComponent* TargetComponent) const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    FLinearColor GetInGameIconTint(const UPrimitiveComponent* TargetComponent) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UTexture2D* GetInGameIcon(const UPrimitiveComponent* TargetComponent) const;

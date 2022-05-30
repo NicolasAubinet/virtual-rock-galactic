@@ -3,11 +3,11 @@
 #include "Engine/DataAsset.h"
 #include "TemporaryBuff.generated.h"
 
-class AFSDPlayerController;
-class UTexture2D;
 class APlayerCharacter;
+class UTexture2D;
+class AFSDPlayerController;
 
-UCLASS(Abstract, BlueprintType)
+UCLASS(Abstract, Blueprintable)
 class UTemporaryBuff : public UDataAsset {
     GENERATED_BODY()
 public:

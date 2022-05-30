@@ -7,10 +7,10 @@
 #include "StatusEffectEnemies.generated.h"
 
 class UEnemyDescriptor;
-class APawn;
 class UStatusEffect;
+class APawn;
 
-UCLASS(Abstract)
+UCLASS(Abstract, Blueprintable)
 class UStatusEffectEnemies : public URunningMissionBP {
     GENERATED_BODY()
 public:

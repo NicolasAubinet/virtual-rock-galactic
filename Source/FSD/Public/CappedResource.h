@@ -1,42 +1,42 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "UObject/Object.h"
 #include "ResourceChangedSignatureDelegate.h"
+#include "UObject/Object.h"
+#include "UObject/NoExportTypes.h"
 #include "ResourceAddedSignatureDelegate.h"
 #include "ResourceFullSignatureDelegate.h"
-#include "UObject/NoExportTypes.h"
 #include "CappedResource.generated.h"
 
 class UResourceData;
 class UCappedResource;
 
-UCLASS(BlueprintType)
+UCLASS(Blueprintable)
 class UCappedResource : public UObject {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FResourceChangedSignature OnChanged;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FResourceAddedSignature OnIncreased;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FResourceFullSignature OnFull;
     
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
     UResourceData* Data;
     
-    UPROPERTY(BlueprintReadWrite, ReplicatedUsing=OnRep_CurrentAmount, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_CurrentAmount, meta=(AllowPrivateAccess=true))
     float currentAmount;
     
-    UPROPERTY(BlueprintReadWrite, Replicated, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
     float MaxAmount;
     
-    UPROPERTY(BlueprintReadWrite, Replicated, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
     float TotalCollected;
     
-    UPROPERTY(BlueprintReadWrite, ReplicatedUsing=OnRep_FullFlag, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_FullFlag, meta=(AllowPrivateAccess=true))
     int32 FullFlag;
     
 public:

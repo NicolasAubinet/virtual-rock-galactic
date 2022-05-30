@@ -1,17 +1,17 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "ResourceData.h"
 #include "IRandRange.h"
+#include "ResourceData.h"
 #include "GemResourceData.generated.h"
 
-class UDebrisPositioning;
-class AGem;
 class UGemResourceCreator;
+class UDebrisPositioning;
 class AFSDGameState;
 class UDebrisBase;
+class AGem;
 
-UCLASS()
+UCLASS(Blueprintable)
 class UGemResourceData : public UResourceData {
     GENERATED_BODY()
 public:
@@ -37,10 +37,10 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSoftClassPtr<AGem>> GemClasses;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<TSubclassOf<AGem>> GemClassesLoaded;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<UDebrisBase*> DebrisLoaded;
     
 public:

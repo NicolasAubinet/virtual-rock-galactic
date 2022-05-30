@@ -3,7 +3,7 @@
 #include "Mutator.h"
 #include "EncounterOverrideMutator.generated.h"
 
-UCLASS(EditInlineNew)
+UCLASS(Blueprintable, EditInlineNew)
 class UEncounterOverrideMutator : public UMutator {
     GENERATED_BODY()
 public:

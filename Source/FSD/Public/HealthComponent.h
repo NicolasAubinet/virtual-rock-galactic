@@ -1,12 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "HealthComponentBase.h"
-#include "HealthChangedSigDelegate.h"
+#include "DeathSigDetailedDelegate.h"
 #include "DamageSigDelegate.h"
+#include "HealthComponentBase.h"
 #include "HealthSegmentChangeDelegate.h"
 #include "ArmorHealedSigDelegate.h"
-#include "DeathSigDetailedDelegate.h"
 #include "EHealthbarType.h"
+#include "HealthChangedSigDelegate.h"
 #include "DamageData.h"
 #include "HealthComponent.generated.h"
 
@@ -14,27 +14,27 @@ class USubHealthComponent;
 class UPawnStat;
 class UPawnStatsComponent;
 
-UCLASS(meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UHealthComponent : public UHealthComponentBase {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FHealthChangedSig OnArmorChanged;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FDamageSig OnArmorDamaged;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FArmorHealedSig OnArmorHealed;
     
-    UPROPERTY(BlueprintAssignable, BlueprintAuthorityOnly, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintAuthorityOnly, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FDeathSigDetailed OnDeathDetailed;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FHealthSegmentChange OnNewHealthSegment;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_Damage, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_Damage, meta=(AllowPrivateAccess=true))
     float Damage;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -43,7 +43,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool CanDamageThroughSegments;
     
-    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
     TArray<USubHealthComponent*> SubHealthComponents;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -61,7 +61,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool UseDormancy;
     
-    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
     UPawnStatsComponent* PawnStats;
     
 public:

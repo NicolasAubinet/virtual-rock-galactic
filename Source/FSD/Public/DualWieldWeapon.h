@@ -4,19 +4,19 @@
 #include "DualWieldWeapon.generated.h"
 
 class UFirstPersonSkeletalMeshComponent;
-class UFXSystemAsset;
 class USkeletalMeshComponent;
 class UAnimMontage;
+class UFXSystemAsset;
 
-UCLASS(Abstract)
+UCLASS(Abstract, Blueprintable)
 class ADualWieldWeapon : public AAmmoDrivenWeapon {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     UFirstPersonSkeletalMeshComponent* FPMeshLeft;
     
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* TPMeshLeft;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

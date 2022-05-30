@@ -1,48 +1,48 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "Upgradable.h"
+#include "UObject/NoExportTypes.h"
 #include "GameFramework/Actor.h"
+#include "AmmoCountChangedEventDelegate.h"
+#include "Upgradable.h"
 #include "WeaponFireOwner.h"
 #include "SentryGunMuzzleSetup.h"
-#include "AmmoCountChangedEventDelegate.h"
 #include "TracerData.h"
 #include "Engine/EngineTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "GameplayTagContainer.h"
-#include "UObject/NoExportTypes.h"
 #include "LaserPointerTarget.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "SentryGun.generated.h"
 
 class USkeletalMeshComponent;
-class USoundBase;
-class APlayerCharacter;
 class AProjectile;
-class UAudioComponent;
 class USoundCue;
 class UParticleSystem;
-class UWeaponFireComponent;
+class USoundBase;
 class UHealthComponentBase;
+class UWeaponFireComponent;
+class UAudioComponent;
+class APlayerCharacter;
 
-UCLASS(Abstract)
+UCLASS(Abstract, Blueprintable)
 class FSD_API ASentryGun : public AActor, public IWeaponFireOwner, public IUpgradable {
     GENERATED_BODY()
 public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FEnabledChanged, bool, IsEnabled);
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FEnabledChanged OnEnabledChanged;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FAmmoCountChangedEvent OnAmmoCountChanged;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FAmmoCountChangedEvent OnMaxAmmoCountChanged;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, Export, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* SentryGunMesh;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -60,7 +60,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FTracerData TracerData;
     
-    UPROPERTY(BlueprintReadWrite, VisibleAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UParticleSystem* Tracer;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -72,13 +72,13 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
     bool Enabled;
     
-    UPROPERTY(meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere)
     TArray<FOverlapResult> OverlapCache;
     
-    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FRotator MinRotation;
     
-    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FRotator MaxRotation;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -114,32 +114,32 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagContainer DissallowedTargetTags;
     
-    UPROPERTY(BlueprintReadWrite, Transient, ReplicatedUsing=OnRep_AmmoCount, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_AmmoCount, meta=(AllowPrivateAccess=true))
     int32 AmmoCount;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_MaxAmmoCount, meta=(AllowPrivateAccess=true))
     int32 MaxAmmoCount;
     
-    UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float Damage;
     
-    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     float TargetYaw;
     
-    UPROPERTY(BlueprintReadWrite, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     float TargetPitch;
     
-    UPROPERTY(BlueprintReadWrite, Export, Transient, ReplicatedUsing=OnRep_LastTarget, meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere, Export, Transient, ReplicatedUsing=OnRep_LastTarget)
     TWeakObjectPtr<UHealthComponentBase> LastTarget;
     
-    UPROPERTY(BlueprintReadWrite, Export, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere, Export, Replicated, Transient)
     TWeakObjectPtr<UHealthComponentBase> PrioritizedTarget;
     
-    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
     UWeaponFireComponent* WeaponFire;
     
 private:
-    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
     UAudioComponent* ShootingAudioComponent;
     
 public:

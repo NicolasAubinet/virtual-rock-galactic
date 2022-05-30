@@ -6,68 +6,68 @@
 #include "ReplicatedCharacterData.h"
 #include "CharacterSightComponent.generated.h"
 
-class UTemperatureComponent;
 class AActor;
+class UTemperatureComponent;
 class UPrimitiveComponent;
+class USimpleObjectInfoComponent;
 class APlayerCharacter;
+class UPawnAfflictionComponent;
 class UHealth;
 class IHealth;
-class USimpleObjectInfoComponent;
-class UPawnAfflictionComponent;
 class UTargetable;
 class ITargetable;
 class UCharacterSightSensorBase;
 
-UCLASS(BlueprintType, meta=(BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UCharacterSightComponent : public UActorComponent {
     GENERATED_BODY()
 public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FTargetChangedSignature, AActor*, NewTarget, UPrimitiveComponent*, NewPrimitive);
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FTargetChangedSignature OnTargetChanged;
     
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float TargetMaxDistance;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere)
     TEnumAsByte<ECollisionChannel> TraceChannel;
     
-    UPROPERTY(Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere, Transient)
     TArray<TWeakObjectPtr<AActor>> IgnoredActors;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     APlayerCharacter* Character;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere, Transient)
     TWeakObjectPtr<AActor> TargetActor;
     
-    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere, Export, Transient)
     TWeakObjectPtr<UPrimitiveComponent> TargetPrimitive;
     
-    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere, Export, Transient)
     TWeakObjectPtr<USimpleObjectInfoComponent> TargetInfo;
     
-    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere, Export, Transient)
     TWeakObjectPtr<UTemperatureComponent> TargetTemperature;
     
-    UPROPERTY(BlueprintReadWrite, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere, Export, Transient)
     TWeakObjectPtr<UPawnAfflictionComponent> TargetAfflictions;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TScriptInterface<IHealth> TargetHealth;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TScriptInterface<ITargetable> TargetTargetable;
     
-    UPROPERTY(BlueprintReadWrite, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float TargetTime;
     
-    UPROPERTY(meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere, Export)
     TArray<TWeakObjectPtr<UCharacterSightSensorBase>> TargetSensors;
     
-    UPROPERTY(Replicated, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     FReplicatedCharacterData ReplicatedData;
     
 public:

@@ -1,12 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Engine/DataAsset.h"
-#include "FakeMoverTarget.h"
-#include "FakeMoverPropulsion.h"
 #include "DeepPathFinderSize.h"
+#include "Engine/DataAsset.h"
+#include "FakeMoverPropulsion.h"
+#include "FakeMoverTarget.h"
 #include "FakeMoverSettings.generated.h"
 
-UCLASS(BlueprintType)
+UCLASS(Blueprintable)
 class UFakeMoverSettings : public UDataAsset {
     GENERATED_BODY()
 public:

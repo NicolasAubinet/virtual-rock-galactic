@@ -8,7 +8,7 @@
 class UPlayerCharacterID;
 class UTexture2D;
 
-UCLASS(BlueprintType)
+UCLASS(Blueprintable)
 class FSD_API UPlayerCharacterData : public UPrimaryDataAsset {
     GENERATED_BODY()
 public:

@@ -4,9 +4,9 @@
 #include "Particles/ParticleSystemComponent.h"
 #include "Components/CapsuleComponent.h"
 
+class UHealthComponentBase;
 class USceneComponent;
 class AActor;
-class UHealthComponentBase;
 
 void AElectroBeam::SetTarget(USceneComponent* TargetPoint) {
 }

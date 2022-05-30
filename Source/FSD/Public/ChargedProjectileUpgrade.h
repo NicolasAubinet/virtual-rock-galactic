@@ -10,7 +10,7 @@ class AActor;
 class AItem;
 class AFSDPlayerState;
 
-UCLASS(EditInlineNew, MinimalAPI)
+UCLASS(Blueprintable, EditInlineNew, MinimalAPI)
 class UChargedProjectileUpgrade : public UStandardItemUpgrade {
     GENERATED_BODY()
 public:
