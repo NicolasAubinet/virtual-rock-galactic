@@ -192,6 +192,22 @@
 			"type": "boolean"
 		},
 		{
+			"name": "/actions/main/in/MapTool",
+			"type": "boolean"
+		},
+		{
+			"name": "/actions/main/in/Run",
+			"type": "boolean"
+		},
+		{
+			"name": "/actions/main/in/Mine",
+			"type": "boolean"
+		},
+		{
+			"name": "/actions/main/in/Use",
+			"type": "boolean"
+		},
+		{
 			"name": "/actions/main/in/VREditor_Left_WorldMovement",
 			"type": "boolean"
 		},
@@ -543,6 +559,10 @@
 			"/actions/main/in/Sprint": "Sprint",
 			"/actions/main/in/RightThumbStick": "RightThumbStick",
 			"/actions/main/in/LeftThumbStick": "LeftThumbStick",
+			"/actions/main/in/MapTool": "MapTool",
+			"/actions/main/in/Run": "Run",
+			"/actions/main/in/Mine": "Mine",
+			"/actions/main/in/Use": "Use",
 			"/actions/main/in/VREditor_Left_WorldMovement": "VREditor_Left_WorldMovement",
 			"/actions/main/in/VREditor_Left_Modifier": "VREditor_Left_Modifier",
 			"/actions/main/in/VREditor_Left_TrackpadDown": "VREditor_Left_TrackpadDown",
