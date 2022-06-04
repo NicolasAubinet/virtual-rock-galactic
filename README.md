@@ -1,6 +1,6 @@
 <img src="https://github.com/NicolasAubinet/virtual-rock-galactic/raw/main/FSD.png" width="128" align="left"></img>
 # Virtual Rock Galactic
-A VR mod for [Deep Rock Galactic](https://store.steampowered.com/app/548430/Deep_Rock_Galactic/)
+Immersive VR mod for [Deep Rock Galactic](https://store.steampowered.com/app/548430/Deep_Rock_Galactic/) with 6DOF and motion controller support. Available on [mod.io](https://drg.mod.io/vrg)!
 
 ---
 
