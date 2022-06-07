@@ -314,7 +314,7 @@ protected:
     UPROPERTY(EditAnywhere, Transient)
     TWeakObjectPtr<APostProcessingManager> PostProcessingManager;
     
-    UPROPERTY(EditAnywhere, Transient)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient)
     TWeakObjectPtr<ABosco> Drone;
     
     UPROPERTY(EditAnywhere, Transient)
