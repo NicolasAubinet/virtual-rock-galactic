@@ -175,7 +175,7 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<FClaimableRewardEntry> PendingPromotionRewards;
     
-    UPROPERTY(EditAnywhere, Export, Transient)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient)
     TWeakObjectPtr<UMouseCursorWidget> MouseCursorWidget;
     
     UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
