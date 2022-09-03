@@ -256,8 +256,8 @@ public:
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FDonkeyCharacterDelegate OnDonkeyChanged;
     
-    UPROPERTY(EditAnywhere, Transient)
-    TWeakObjectPtr<AMolly> Donkey;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Transient)
+    AMolly* Donkey;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FBoscoChanged OnBoscoChanged;
