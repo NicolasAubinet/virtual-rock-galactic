@@ -3,17 +3,17 @@
 #include "CSGBuilderBase.h"
 #include "CSGBuilder.generated.h"
 
-class UCSGPreviewScene;
 class UTerrainMaterialCore;
 class UCSGGroupComponent;
-class UCSGBase;
 class UBakeConfig;
+class UCSGBase;
+class UCSGPreviewScene;
 
 UCLASS(Blueprintable)
 class FSDENGINE_API ACSGBuilder : public ACSGBuilderBase {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UCSGGroupComponent* CSGRoot;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))

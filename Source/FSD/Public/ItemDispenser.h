@@ -1,24 +1,24 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "ItemDispenserDelegateDelegate.h"
 #include "GameFramework/Actor.h"
+#include "ItemDispenserDelegateDelegate.h"
 #include "EInputKeys.h"
 #include "ItemDispenser.generated.h"
 
-class USceneComponent;
-class UInstantUsable;
 class ACarriableItem;
+class UInstantUsable;
+class USceneComponent;
 class APlayerCharacter;
 
 UCLASS(Blueprintable)
 class AItemDispenser : public AActor {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USceneComponent* Root;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UInstantUsable* Usable;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

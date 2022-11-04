@@ -1,13 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "StandardItemUpgrade.h"
 #include "EGrapplingHookUpgrade.h"
+#include "StandardItemUpgrade.h"
 #include "UpgradeValues.h"
 #include "GrapplingHookUpgrade.generated.h"
 
-class AFSDPlayerState;
 class AActor;
+class AFSDPlayerState;
 
 UCLASS(Blueprintable, EditInlineNew, MinimalAPI)
 class UGrapplingHookUpgrade : public UStandardItemUpgrade {

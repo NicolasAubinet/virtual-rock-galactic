@@ -1,11 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Engine/DataAsset.h"
+#include "UObject/NoExportTypes.h"
 #include "SeasonSettings.generated.h"
 
+class UMissionStat;
 class USeason;
-class UCurveFloat;
 class USeasonChallenge;
+class UCurveFloat;
 
 UCLASS(Blueprintable)
 class USeasonSettings : public UDataAsset {
@@ -31,6 +33,18 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float SpecialChallengeChange;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UMissionStat* HeartsColledtedStat;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FIntPoint SporeTowerPlagueGainRange;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 HeartsPerScrip;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 NumberOfScriptsFromPlague;
     
     USeasonSettings();
 };

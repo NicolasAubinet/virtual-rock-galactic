@@ -5,8 +5,8 @@
 #include "DamageHitCountEffect.generated.h"
 
 class UStatusEffect;
-class UParticleSystem;
 class UDamageClass;
+class UParticleSystem;
 class USoundCue;
 
 UCLASS(Blueprintable, EditInlineNew, MinimalAPI)
@@ -28,6 +28,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool DeadBugWalkingTargetMarking;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float ExtraDamageForCalculatingDBW;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UStatusEffect> DeadBugWalkingSTE;

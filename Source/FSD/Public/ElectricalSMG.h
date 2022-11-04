@@ -6,11 +6,11 @@
 #include "Engine/NetSerialization.h"
 #include "ElectricalSMG.generated.h"
 
-class UHealthComponentBase;
-class USoundCue;
-class UParticleSystem;
 class UStatusEffect;
+class UParticleSystem;
+class USoundCue;
 class UPrimitiveComponent;
+class UHealthComponentBase;
 class UFSDPhysicalMaterial;
 
 UCLASS(Blueprintable)

@@ -22,6 +22,9 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FVector ManualOffset;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool FromCenterOfMass;
+    
 public:
     UBTTask_FindPointNearTarget();
 };

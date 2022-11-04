@@ -26,7 +26,7 @@ public:
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
     
 protected:
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void ServerSpawnItem(const FVector& Location, const FRotator& Rotation);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)

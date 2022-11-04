@@ -4,11 +4,11 @@
 #include "GameplayTagContainer.h"
 #include "MissionDNA.generated.h"
 
-class UMissionDuration;
 class UMissionComplexity;
+class UMissionDuration;
 
 UCLASS(Abstract, Blueprintable)
-class UMissionDNA : public UObject {
+class FSD_API UMissionDNA : public UObject {
     GENERATED_BODY()
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

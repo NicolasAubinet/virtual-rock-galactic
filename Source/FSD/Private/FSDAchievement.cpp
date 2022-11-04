@@ -13,6 +13,9 @@ void UFSDAchievement::SetAchievementProgress(float Progress, const AFSDPlayerCon
 void UFSDAchievement::ResetStatForAchievement(UFSDAchievement* AchievementToReset, const AFSDPlayerController* Player) {
 }
 
+void UFSDAchievement::QueryAchievements(const AFSDPlayerController* Player) {
+}
+
 float UFSDAchievement::GetAchievementTargetValue() {
     return 0.0f;
 }

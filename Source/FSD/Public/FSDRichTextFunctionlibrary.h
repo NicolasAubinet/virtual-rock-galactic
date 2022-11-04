@@ -16,7 +16,7 @@ public:
     static FRichTextParseResult ParseRichText(const FText& InText);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    static FText MidRichText(const FRichTextParseResult& Parser, int32 StartIndex, int32 count, bool bKeepFormatting);
+    static FText MidRichText(const FRichTextParseResult& Parser, int32 StartIndex, int32 Count, bool bKeepFormatting);
     
 };
 

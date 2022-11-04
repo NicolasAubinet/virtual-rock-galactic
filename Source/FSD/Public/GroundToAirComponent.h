@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "ChangedStateSigDelegate.h"
-#include "Components/ActorComponent.h"
 #include "StateStats.h"
+#include "Components/ActorComponent.h"
+#include "ChangedStateSigDelegate.h"
 #include "GroundToAirComponent.generated.h"
 
 class UDeepPathfinderMovement;
@@ -16,7 +16,7 @@ public:
     FChangedStateSig OnChangedPathfinderState;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UDeepPathfinderMovement* CurrentMove;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

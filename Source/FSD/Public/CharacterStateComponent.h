@@ -4,9 +4,9 @@
 #include "PlaySoundInterface.h"
 #include "CharacterStateComponent.generated.h"
 
+class UPlayerMovementComponent;
 class APlayerCharacter;
 class UDialogDataAsset;
-class UPlayerMovementComponent;
 
 UCLASS(Abstract, Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UCharacterStateComponent : public UActorComponent, public IPlaySoundInterface {
@@ -29,7 +29,7 @@ protected:
     UDialogDataAsset* AttentionShout;
     
 private:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     UPlayerMovementComponent* PlayerMovement;
     
 public:

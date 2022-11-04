@@ -2,44 +2,44 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "TreasureContainer.h"
-#include "UObject/NoExportTypes.h"
 #include "EInputKeys.h"
+#include "UObject/NoExportTypes.h"
 #include "TreasureBox.generated.h"
 
-class USkeletalMeshComponent;
-class URepairableComponent;
-class URepairableUsable;
 class UTerrainPlacementComponent;
+class URepairableComponent;
+class AActor;
+class URepairableUsable;
 class USingleUsableComponent;
 class UStaticMeshComponent;
-class AActor;
+class USkeletalMeshComponent;
 class UAnimSequenceBase;
 class UTreasureRewarder;
-class UCurveFloat;
 class AProceduralSetup;
 class UDebrisPositioning;
+class UCurveFloat;
 class APlayerCharacter;
 
 UCLASS(Blueprintable)
 class FSD_API ATreasureBox : public ATreasureContainer {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     URepairableComponent* repairable;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     URepairableUsable* RepairUsable;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USingleUsableComponent* HammeringUsable;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UTerrainPlacementComponent* terrainPlacement;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UStaticMeshComponent* MiddlePlane;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* BoxMesh;
     
 protected:
@@ -58,7 +58,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<AActor> ResourceClass;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     UTreasureRewarder* boxRewarder;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

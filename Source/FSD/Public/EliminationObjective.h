@@ -6,9 +6,9 @@
 #include "EliminationObjective.generated.h"
 
 class UDebrisPositioning;
-class UCaveInfluencer;
 class AActor;
 class UDebrisBase;
+class UCaveInfluencer;
 class AFSDPawn;
 class UHealthComponentBase;
 class UEnemyDescriptor;

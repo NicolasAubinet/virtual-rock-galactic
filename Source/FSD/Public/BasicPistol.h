@@ -3,8 +3,8 @@
 #include "AmmoDrivenWeapon.h"
 #include "BasicPistol.generated.h"
 
-class UHealthComponentBase;
 class UPrimitiveComponent;
+class UHealthComponentBase;
 class UFSDPhysicalMaterial;
 
 UCLASS(Blueprintable)

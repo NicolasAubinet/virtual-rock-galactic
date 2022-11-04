@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Projectile.h"
-#include "GameplayTagContainer.h"
 #include "GameplayTagAssetInterface.h"
+#include "GameplayTagContainer.h"
 #include "GameplayTagContainer.h"
 #include "HomingDroneBomb.generated.h"
 
@@ -13,7 +13,7 @@ UCLASS(Blueprintable)
 class AHomingDroneBomb : public AProjectile, public IGameplayTagAssetInterface {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UEnemyHealthComponent* Health;
     
 protected:

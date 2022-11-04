@@ -1,34 +1,25 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Engine/DataAsset.h"
-#include "Curves/CurveFloat.h"
-#include "RandRange.h"
+#include "ScaledMeshAfflictionTypeItem.h"
 #include "AfflictionSettings.generated.h"
 
-class UStaticMesh;
-class UPawnAffliction;
 class USoundCue;
-class UParticleSystem;
+class UPawnAffliction;
+class UFXSystemAsset;
 
 UCLASS(Blueprintable)
 class UAfflictionSettings : public UDataAsset {
     GENERATED_BODY()
 public:
+private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TArray<FRuntimeFloatCurve> IceScalers;
+    FScaledMeshAfflictionTypeItem FrozenScaledMeshAffliction;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TArray<UStaticMesh*> IceMeshes;
+    FScaledMeshAfflictionTypeItem InfectedScaledMeshAffliction;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FRandRange ScaleDelay;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    USoundCue* FreezeSound;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    USoundCue* IceBreakSound;
-    
+public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundCue* BurningSound;
     
@@ -55,19 +46,13 @@ public:
     
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, EditFixedSize, meta=(AllowPrivateAccess=true))
-    TArray<UParticleSystem*> FreezeParticles;
+    TArray<UFXSystemAsset*> BurningParticles;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, EditFixedSize, meta=(AllowPrivateAccess=true))
-    TArray<UParticleSystem*> IceBreakParticles;
+    TArray<UFXSystemAsset*> EletrocutedParticles;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, EditFixedSize, meta=(AllowPrivateAccess=true))
-    TArray<UParticleSystem*> BurningParticles;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, EditFixedSize, meta=(AllowPrivateAccess=true))
-    TArray<UParticleSystem*> EletrocutedParticles;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, EditFixedSize, meta=(AllowPrivateAccess=true))
-    TArray<UParticleSystem*> ExplodingParticles;
+    TArray<UFXSystemAsset*> ExplodingParticles;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, EditFixedSize, meta=(AllowPrivateAccess=true))
     TArray<USoundCue*> ExplodingSounds;

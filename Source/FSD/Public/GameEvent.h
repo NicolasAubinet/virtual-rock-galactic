@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "UObject/NoExportTypes.h"
 #include "GameFramework/Actor.h"
-#include "StageCompleteSigDelegate.h"
-#include "GameplayTagContainer.h"
 #include "GameplayTagAssetInterface.h"
 #include "DelegateEventDelegate.h"
+#include "GameplayTagContainer.h"
+#include "GameplayTagContainer.h"
+#include "StageCompleteSigDelegate.h"
 #include "ProgressChangedSigDelegate.h"
 #include "UObject/NoExportTypes.h"
-#include "GameplayTagContainer.h"
+#include "UObject/NoExportTypes.h"
 #include "GameEvent.generated.h"
 
 class AEventStarterButton;
@@ -20,7 +20,7 @@ class AProceduralSetup;
 class UDebrisPositioning;
 
 UCLASS(Blueprintable)
-class AGameEvent : public AActor, public IGameplayTagAssetInterface {
+class FSD_API AGameEvent : public AActor, public IGameplayTagAssetInterface {
     GENERATED_BODY()
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -63,7 +63,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagContainer GameplayTags;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UChildActorComponent* StartEventObject;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

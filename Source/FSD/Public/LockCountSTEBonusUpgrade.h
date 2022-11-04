@@ -5,8 +5,8 @@
 #include "UpgradeValues.h"
 #include "LockCountSTEBonusUpgrade.generated.h"
 
-class AFSDPlayerState;
 class UStatusEffect;
+class AFSDPlayerState;
 class AActor;
 
 UCLASS(Blueprintable, EditInlineNew, MinimalAPI)

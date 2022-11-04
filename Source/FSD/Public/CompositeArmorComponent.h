@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "CompositeArmorItem.h"
-#include "ArmorPrimitiveDestroyedDelegate.h"
 #include "BaseArmorDamageComponent.h"
+#include "ArmorPrimitiveDestroyedDelegate.h"
+#include "CompositeArmorItem.h"
 #include "ArmorPrimitiveDamagedDelegateDelegate.h"
 #include "ArmorDamageInfo.h"
 #include "CompositeArmorComponent.generated.h"

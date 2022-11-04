@@ -2,20 +2,20 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "Components/ActorComponent.h"
-#include "PlayerProgressChangedSignatureDelegate.h"
-#include "ItemUpgradesChangedDelegateDelegate.h"
 #include "LoadoutChangedDelegateDelegate.h"
+#include "ItemUpgradesChangedDelegateDelegate.h"
+#include "PlayerProgressChangedSignatureDelegate.h"
 #include "CharacterProgressChangedSignatureDelegate.h"
+#include "CharacterProgress.h"
 #include "SaveGameStatePerkItem.h"
 #include "ItemLoadout.h"
 #include "PlayerProgress.h"
 #include "ActiveCampaingMission.h"
 #include "ItemUpgradeSelection.h"
-#include "CharacterProgress.h"
 #include "SaveGameStateComponent.generated.h"
 
-class AActor;
 class UItemUpgrade;
+class AActor;
 class UVictoryPose;
 class UPlayerCharacterID;
 class UGeneratedMission;
@@ -85,25 +85,25 @@ public:
     void SetCampaign();
     
 protected:
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetVictoryPose(UVictoryPose* pose);
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetPlayerProgress(const FPlayerProgress& Progress);
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetLoadout(const FItemLoadout& Loadout, const TArray<FItemUpgradeSelection>& weaponLoadouts);
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetEquippedPerks(const TArray<FSaveGameStatePerkItem>& perks);
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetCredits(const int32 Amount);
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetCharacterStats(const TArray<FCharacterProgress>& Stats);
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetActiveCampaignMission(FActiveCampaingMission Data);
     
 public:

@@ -6,8 +6,8 @@
 #include "UpgradeValues.h"
 #include "TargetStateDamageBonusUpgrade.generated.h"
 
-class AFSDPlayerState;
 class UDamageClass;
+class AFSDPlayerState;
 class AActor;
 
 UCLASS(Blueprintable, EditInlineNew, MinimalAPI)

@@ -4,8 +4,8 @@
 #include "EGooGunFireMode.h"
 #include "GooGun.generated.h"
 
-class USoundCue;
 class UAnimMontage;
+class USoundCue;
 class UFXSystemAsset;
 class UFXSystemComponent;
 
@@ -68,7 +68,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UFXSystemAsset* ChargeupFireMuzzleFlash;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     UFXSystemComponent* ChargeupParticleInstance;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -79,6 +79,9 @@ protected:
     
 public:
     AGooGun();
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void OnPuddleSuckedIn();
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetOverChargeProgress() const;
     

@@ -3,9 +3,9 @@
 #include "Blueprint/UserWidget.h"
 #include "ItemsBarIcon.generated.h"
 
+class AItem;
 class UItemsBar;
 class APlayerCharacter;
-class AItem;
 
 UCLASS(Abstract, Blueprintable, EditInlineNew)
 class UItemsBarIcon : public UUserWidget {
@@ -15,7 +15,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool Selected;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     UItemsBar* ItemBar;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))

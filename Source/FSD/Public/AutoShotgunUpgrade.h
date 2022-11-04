@@ -6,8 +6,8 @@
 #include "UpgradeValues.h"
 #include "AutoShotgunUpgrade.generated.h"
 
-class AItem;
 class AFSDPlayerState;
+class AItem;
 
 UCLASS(Blueprintable, EditInlineNew, MinimalAPI)
 class UAutoShotgunUpgrade : public UStandardItemUpgrade {

@@ -1,14 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EOutline.h"
 #include "Components/ActorComponent.h"
+#include "EOutline.h"
 #include "OutlineComponent.generated.h"
 
+class AItem;
 class AActor;
+class UHealthComponentBase;
 class APlayerCharacter;
 class UPrimitiveComponent;
-class UHealthComponentBase;
-class AItem;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UOutlineComponent : public UActorComponent {
@@ -35,10 +35,10 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     EOutline CurrentOutline;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     TArray<UPrimitiveComponent*> OutlinedComponents;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     TArray<UPrimitiveComponent*> ExcludedComponents;
     
     UPROPERTY(EditAnywhere, Transient)

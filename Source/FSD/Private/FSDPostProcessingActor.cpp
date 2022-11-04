@@ -2,10 +2,10 @@
 
 class APostProcessingManager;
 class UObject;
-class UMaterialInstanceDynamic;
-class UMaterialInterface;
 class UBlendableInterface;
 class IBlendableInterface;
+class UMaterialInterface;
+class UMaterialInstanceDynamic;
 
 void AFSDPostProcessingActor::UnapplyPostProcessingBlendablesByType(UObject* WorldContext, EPostProcessingType Type) {
 }

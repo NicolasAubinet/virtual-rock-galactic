@@ -1,28 +1,28 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "TriggerAI.h"
 #include "FSDPawn.h"
 #include "DelegateDelegate.h"
-#include "TriggerAI.h"
 #include "MuleActivatedSignatureDelegate.h"
-#include "SpeedChangedSignatureDelegate.h"
-#include "FloatDelegateDelegate.h"
-#include "GaragePathSignatureDelegate.h"
 #include "IntDelegateDelegate.h"
+#include "EscortMuleMovementState.h"
+#include "SpeedChangedSignatureDelegate.h"
+#include "GaragePathSignatureDelegate.h"
+#include "FloatDelegateDelegate.h"
+#include "EscortMuleExtractorSlot.h"
+#include "UObject/NoExportTypes.h"
 #include "EEscortMissionState.h"
 #include "UObject/NoExportTypes.h"
-#include "EscortMuleMovementState.h"
-#include "UObject/NoExportTypes.h"
-#include "EscortMuleExtractorSlot.h"
 #include "EEscortExtractorState.h"
 #include "EscortMule.generated.h"
 
-class USkeletalMeshComponent;
-class USimpleObjectInfoComponent;
-class APlayerCharacter;
+class UOutlineComponent;
 class UFriendlyHealthComponent;
+class USimpleObjectInfoComponent;
 class URestrictedResourceBank;
 class UEscortObjective;
-class UOutlineComponent;
+class USkeletalMeshComponent;
+class APlayerCharacter;
 class UInstantUsable;
 class AExtractorItem;
 
@@ -49,13 +49,13 @@ public:
     FDelegate Cheat_JumpToNextPhase;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UFriendlyHealthComponent* HealthComponent;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USimpleObjectInfoComponent* ObjectInfo;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     URestrictedResourceBank* ResourceBank;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -67,7 +67,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnObjectiveStateChanged, meta=(AllowPrivateAccess=true))
     EEscortMissionState State;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UEscortObjective* EscortObjective;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_MovementState, meta=(AllowPrivateAccess=true))
@@ -76,10 +76,10 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_SpeedModifier, meta=(AllowPrivateAccess=true))
     float SpeedModifier;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* Mesh;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UOutlineComponent* OutlineComponent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

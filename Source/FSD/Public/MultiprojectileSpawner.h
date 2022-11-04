@@ -1,12 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "UObject/NoExportTypes.h"
 #include "Components/ActorComponent.h"
 #include "ProjectileSpawnData.h"
+#include "UObject/NoExportTypes.h"
 #include "MultiprojectileSpawner.generated.h"
 
-class AActor;
 class UMultiprojectileSpawner;
+class AActor;
 class UDataAsset;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))

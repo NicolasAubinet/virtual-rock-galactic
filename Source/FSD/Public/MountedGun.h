@@ -1,34 +1,34 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
 #include "GameFramework/Actor.h"
-#include "Steerable.h"
+#include "UObject/NoExportTypes.h"
 #include "WeaponFireOwner.h"
+#include "Steerable.h"
+#include "UObject/NoExportTypes.h"
 #include "MountedGun.generated.h"
 
-class APlayerCharacter;
-class USkeletalMeshComponent;
 class UGunLogicComponent;
+class USkeletalMeshComponent;
 class UWeaponFireComponent;
+class APlayerCharacter;
 
 UCLASS(Blueprintable)
 class AMountedGun : public AActor, public ISteerable, public IWeaponFireOwner {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* Mesh;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     UWeaponFireComponent* WeaponFire;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     UGunLogicComponent* GunLogic;
     
 public:
     AMountedGun();
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_Test();
     
     

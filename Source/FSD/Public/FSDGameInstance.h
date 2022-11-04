@@ -1,88 +1,87 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "OnXBoxChangeUserDelegate.h"
-#include "GenericSignatureDelegate.h"
 #include "Engine/GameInstance.h"
-#include "CravityChangedSignatureDelegate.h"
+#include "GenericSignatureDelegate.h"
 #include "ESteamSearchRegion.h"
-#include "ShowCharacterSelectorSignatureDelegate.h"
 #include "ESteamServerJoinStatus.h"
-#include "ShowCharacterWorldSignatureDelegate.h"
+#include "OnXBoxChangeUserDelegate.h"
+#include "FSDServerSearchOptions.h"
 #include "TemporaryBuffChangedDelegate.h"
 #include "JoinSignatureDelegate.h"
+#include "EDisconnectReason.h"
 #include "OnLoaderStartSigDelegate.h"
 #include "OnPlayLevelSequenceInCharacterWorldSigDelegate.h"
-#include "FSDServerSearchOptions.h"
+#include "ShowCharacterWorldSignatureDelegate.h"
 #include "StartForgingDelegate.h"
 #include "ForgingDoneDelegate.h"
+#include "OnHDRGammaChangedDelegate.h"
 #include "TutorialManagerSignatureDelegate.h"
-#include "OnXBoxAccountPickerClosedDelegate.h"
 #include "PlayerCharacterSignatureDelegate.h"
 #include "ShowReconnectControllerDelegate.h"
-#include "OnHDRGammaChangedDelegate.h"
+#include "OnXBoxAccountPickerClosedDelegate.h"
+#include "NetworkConnectionInfo.h"
+#include "ShowCharacterSelectorEquipSignatureDelegate.h"
+#include "CravityChangedSignatureDelegate.h"
 #include "NewPostProcessingManagerDelegate.h"
 #include "SkinSignatureDelegate.h"
-#include "PendingRewards.h"
-#include "ClaimableRewardEntry.h"
+#include "ShowCharacterSelectorSignatureDelegate.h"
 #include "ShowViewer3DSignatureDelegate.h"
 #include "ShowCharacterSelectorEqiupSlotSignatureDelegate.h"
-#include "ShowCharacterSelectorEquipSignatureDelegate.h"
 #include "ShowCharacterSelectorRotateSignatureDelegate.h"
 #include "ShowCharacterSelectorEndScreenSignatureDelegate.h"
 #include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
 #include "GeneratedMissionSignatureDelegate.h"
-#include "EDisconnectReason.h"
 #include "BoscoChangedDelegate.h"
 #include "MinersManualNotificationDelegate.h"
 #include "OnPrivilegeCheckCompleteDelegate.h"
 #include "EAlwaysLoadedWorlds.h"
 #include "ECharselectionCameraLocation.h"
 #include "FindSessionsCallbackProxy.h"
-#include "UObject/NoExportTypes.h"
 #include "EMinersManualSection.h"
 #include "ECharacterSelectorItemStatus.h"
 #include "Engine/EngineBaseTypes.h"
-#include "PendingRewardsStats.h"
-#include "NetworkConnectionInfo.h"
 #include "FSDGameInstance.generated.h"
 
-class UFSDSessionUpdater;
-class UCampaignManager;
+class UDeepDiveManager;
+class USoundSubmix;
+class UWindowWidget;
 class USchematic;
 class AMolly;
-class USpecialEvent;
-class AProceduralSetup;
 class UHUDWarningWidget;
-class USoundBase;
-class UFSDSaveGame;
-class ULevelSequence;
-class UGoogleAnalyticsWrapper;
+class ACharacterSelectionSwitcher;
+class UDSTelemetryWrapper;
+class AProceduralSetup;
+class UMissionResultInfo;
+class UNetDriver;
+class UFSDSessionUpdater;
+class UDifficultySetting;
 class APostProcessingManager;
 class UMouseCursorWidget;
-class ACharacterSelectionSwitcher;
-class UTemporaryBuff;
-class ABosco;
-class UWorld;
-class AActor;
-class UMissionResultInfo;
-class UFSDCloudLoadSave;
-class UDifficultySetting;
-class UIconGenerationManager;
-class UWindowWidget;
-class APlayerCharacter;
-class ATutorialManager;
-class UGeneratedMission;
-class UDeepDiveManager;
 class UFSDSendToURL;
+class ULevelSequence;
+class UFSDCloudLoadSave;
+class AActor;
+class UGeneratedMission;
+class UWorld;
+class APlayerCharacter;
+class UGoogleAnalyticsWrapper;
+class UIconGenerationManager;
+class USpecialEvent;
+class ABosco;
+class ATutorialManager;
+class UCampaignManager;
+class UFSDSaveGame;
 class UFSDFriendsAndInvites;
-class USoundSubmix;
+class UTemporaryBuff;
 class UObject;
-class UNetDriver;
 class UMutator;
 class AFSDPlayerController;
 class UItemSkin;
+class UFSDGameUserSettings;
 class UTexture2D;
+class USoundBase;
 
 UCLASS(Blueprintable, NonTransient)
 class FSD_API UFSDGameInstance : public UGameInstance {
@@ -169,13 +168,7 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool ShowingReconnectScreen;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    FPendingRewards PendingMissionRewards;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    TArray<FClaimableRewardEntry> PendingPromotionRewards;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient)
+    UPROPERTY(EditAnywhere, Export, Transient)
     TWeakObjectPtr<UMouseCursorWidget> MouseCursorWidget;
     
     UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -256,8 +249,8 @@ public:
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FDonkeyCharacterDelegate OnDonkeyChanged;
     
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Transient)
-    AMolly* Donkey;
+    UPROPERTY(EditAnywhere, Transient)
+    TWeakObjectPtr<AMolly> Donkey;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FBoscoChanged OnBoscoChanged;
@@ -293,7 +286,13 @@ public:
     UGoogleAnalyticsWrapper* GoogleAnalyticsWI;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    USpecialEvent* ForcedSpecialEvent;
+    UDSTelemetryWrapper* DSTelemetryWrapper;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    USpecialEvent* ForcedMachineEvent;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    USpecialEvent* ForcedOtherEvent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ShowMinerManualWorkInProgress;
@@ -314,7 +313,7 @@ protected:
     UPROPERTY(EditAnywhere, Transient)
     TWeakObjectPtr<APostProcessingManager> PostProcessingManager;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient)
+    UPROPERTY(EditAnywhere, Transient)
     TWeakObjectPtr<ABosco> Drone;
     
     UPROPERTY(EditAnywhere, Transient)
@@ -481,12 +480,6 @@ public:
     UFUNCTION(BlueprintCallable)
     AProceduralSetup* SpawnProcedural();
     
-    UFUNCTION(BlueprintCallable, BlueprintPure)
-    bool ShouldPendingRewardsBeShown() const;
-    
-    UFUNCTION(BlueprintCallable, BlueprintPure)
-    bool ShouldPendingRewardsBeGiven() const;
-    
     UFUNCTION(BlueprintCallable)
     void SetViewer3DClass(TSubclassOf<AActor> NewClass, ECharselectionCameraLocation Location);
     
@@ -522,6 +515,9 @@ public:
     
     UFUNCTION(BlueprintCallable)
     void SetHasSeenInfoScreen();
+    
+    UFUNCTION(BlueprintCallable)
+    void SetGlobalMissionSeed(int32 Seed);
     
     UFUNCTION(BlueprintCallable)
     void SetFSDPassword(const FString& pw);
@@ -640,9 +636,6 @@ public:
     TArray<FBlueprintSessionResult> GetServersFriendsArePlaying(TArray<FBlueprintSessionResult> servers);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    bool GetPendingRewards(FPendingRewardsStats& OutStats, FPendingRewards& OutRewards) const;
-    
-    UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<UMutator*> GetMutators(TSubclassOf<UMutator> mutatorClass) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -687,9 +680,6 @@ public:
     void CloseSessionLobby();
     
     UFUNCTION(BlueprintCallable)
-    void ClearPendingRewards();
-    
-    UFUNCTION(BlueprintCallable)
     void ClearDisconnectError();
     
     UFUNCTION(BlueprintCallable)
@@ -697,6 +687,9 @@ public:
     
     UFUNCTION(BlueprintCallable)
     void CancelJoin();
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void ApplyGameUserSettings(UFSDGameUserSettings* Settings);
     
     UFUNCTION(BlueprintCallable)
     UHUDWarningWidget* AddWarningToHUD(TSubclassOf<UHUDWarningWidget> WidgetClass, UTexture2D* Texture, USoundBase* PingSound);
@@ -708,7 +701,7 @@ public:
     void AddStatValue(const FString& Key, float Value);
     
     UFUNCTION(BlueprintCallable)
-    void AddStatCount(const FString& Key, int32 count);
+    void AddStatCount(const FString& Key, int32 Count);
     
 };
 

@@ -1,14 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "ResourceChangedSignatureDelegate.h"
-#include "UObject/Object.h"
-#include "UObject/NoExportTypes.h"
 #include "ResourceAddedSignatureDelegate.h"
+#include "UObject/Object.h"
+#include "ResourceChangedSignatureDelegate.h"
 #include "ResourceFullSignatureDelegate.h"
+#include "UObject/NoExportTypes.h"
 #include "CappedResource.generated.h"
 
-class UResourceData;
 class UCappedResource;
+class UResourceData;
 
 UCLASS(Blueprintable)
 class UCappedResource : public UObject {
@@ -56,7 +56,7 @@ protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_CurrentAmount(float OldAmount);
     
-    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContext"))
     bool IsObjectiveResource(UObject* WorldContext, bool& IsCompleted) const;
     
 public:

@@ -5,10 +5,10 @@
 #include "CraftingCost.h"
 #include "ItemData.generated.h"
 
-class UItemID;
 class UTexture2D;
-class UResourceData;
+class UItemID;
 class AActor;
+class UResourceData;
 
 UCLASS(Blueprintable)
 class FSD_API UItemData : public UPrimaryDataAsset {

@@ -2,10 +2,10 @@
 #include "Templates/SubclassOf.h"
 
 class UDialogDataAsset;
-class APlayerCharacter;
 class UObject;
-class UAudioComponent;
+class APlayerCharacter;
 class USoundBase;
+class UAudioComponent;
 
 void UCommunicationComponent::ShoutCustomOrDefault(UDialogDataAsset* CustomShout, EShoutType DefaultShout) {
 }
@@ -35,7 +35,7 @@ UAudioComponent* UCommunicationComponent::PlayPitchedByClass(UObject* WorldConte
     return NULL;
 }
 
-void UCommunicationComponent::PlayPitchedAsync(UDialogDataAsset* NewShout, EShoutType ShoutType, bool IgnoreCoolDown, UAudioComponent* AudioComponent, UObject* WorldContextObject, float shoutVolumeMultiplier) {
+void UCommunicationComponent::PlayPitchedAsync(UDialogDataAsset* NewShout, EShoutType ShoutType, bool IgnoreCoolDown, UAudioComponent* AudioComponent, UObject* WorldContextObject, float shoutVolumeMultiplier, EAsyncLoadPriority Priority) {
 }
 
 UAudioComponent* UCommunicationComponent::PlayPitched(USoundBase* Sound, UDialogDataAsset* NewShout, EShoutType ShoutType, bool IgnoreCoolDown, UAudioComponent* AudioComponent, UObject* WorldContextObject) {

@@ -1,20 +1,20 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "ProgressSignatureDelegate.h"
+#include "UsableChangedSignatureDelegate.h"
 #include "UsableComponent.h"
 #include "UsedBySignatureDelegate.h"
-#include "UserCountChangedDelegateDelegate.h"
 #include "GenericUsableDelegateDelegate.h"
-#include "UsableChangedSignatureDelegate.h"
+#include "ProgressSignatureDelegate.h"
+#include "UserCountChangedDelegateDelegate.h"
 #include "OnFailedDelegate.h"
 #include "EInputKeys.h"
 #include "SingleUsableComponent.generated.h"
 
 class USoundCue;
 class UDialogDataAsset;
-class UAudioComponent;
 class UPawnStat;
 class UTexture2D;
+class UAudioComponent;
 class APlayerCharacter;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -91,7 +91,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_UserCount, meta=(AllowPrivateAccess=true))
     int32 userCount;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     UAudioComponent* AudioBeginUseInstance;
     
 public:

@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "RandRange.h"
 #include "BehaviorTree/BTDecorator.h"
+#include "RandRange.h"
 #include "GameplayTagContainer.h"
 #include "BTDecorator_TagRandomCooldown.generated.h"
 

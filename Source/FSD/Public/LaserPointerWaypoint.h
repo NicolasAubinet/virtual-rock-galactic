@@ -1,11 +1,11 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "UObject/NoExportTypes.h"
 #include "GameFramework/Actor.h"
+#include "UObject/NoExportTypes.h"
 #include "LaserPointerWaypoint.generated.h"
 
-class ALaserPointerItem;
 class APlayerCharacter;
+class ALaserPointerItem;
 
 UCLASS(Abstract, Blueprintable)
 class ALaserPointerWaypoint : public AActor {

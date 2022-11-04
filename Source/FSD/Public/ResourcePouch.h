@@ -1,20 +1,20 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Engine/EngineTypes.h"
 #include "CarriableItem.h"
 #include "UObject/NoExportTypes.h"
+#include "Engine/EngineTypes.h"
 #include "ResourcePouch.generated.h"
 
-class UCarriableInstantUsable;
-class USoundCue;
 class AActor;
+class USoundCue;
+class UCarriableInstantUsable;
 
 UCLASS(Blueprintable)
 class AResourcePouch : public ACarriableItem {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UCarriableInstantUsable* Usable;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

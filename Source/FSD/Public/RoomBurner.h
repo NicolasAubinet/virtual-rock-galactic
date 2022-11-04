@@ -7,9 +7,9 @@
 #include "RoomBurner.generated.h"
 
 class UDifficultySetting;
+class UEnemyDescriptor;
 class URoomGenerator;
 class UBiome;
-class UEnemyDescriptor;
 class UMissionMutator;
 class UMissionWarning;
 class USpecialEvent;

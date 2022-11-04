@@ -7,9 +7,9 @@
 #include "UObject/NoExportTypes.h"
 #include "ZipLineStateComponent.generated.h"
 
+class USoundBase;
 class AZipLineProjectile;
 class UDialogDataAsset;
-class USoundBase;
 class UAudioComponent;
 
 UCLASS(Abstract, Blueprintable, MinimalAPI, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -102,12 +102,12 @@ protected:
     float DamageBeforeFalling;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    float friendlyFireModifier;
+    float FriendlyFireModifier;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DamageResetTime;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UAudioComponent* AudioComponent;
     
 public:
@@ -115,16 +115,16 @@ public:
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
     
 protected:
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void ServerSetSpeedBoostActivated(bool InBoostActivated);
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void ServerJumpPressed(bool JumpForward);
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void ServerForwardInputChanged(float Input);
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void ServerChangeDirection();
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
@@ -145,7 +145,7 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     FVector GetJumpVector(FVector LookVector, FVector CurrentVelocity);
     
-    UFUNCTION(BlueprintCallable, NetMulticast, Unreliable, WithValidation)
+    UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
     void All_SpeedBoostChanged(bool bActive);
     
 };

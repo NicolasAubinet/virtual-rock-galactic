@@ -7,10 +7,10 @@
 #include "UObject/NoExportTypes.h"
 #include "WidgetToRenderTargetComponent.generated.h"
 
-class UTextureRenderTarget2D;
-class UUserWidget;
 class ULocalPlayer;
+class UUserWidget;
 class UMaterialInterface;
+class UTextureRenderTarget2D;
 class UMaterialInstanceDynamic;
 
 UCLASS(Blueprintable, EditInlineNew, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -69,7 +69,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool TickWhenOffscreen;
     
-    UPROPERTY(BlueprintReadWrite, DuplicateTransient, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, DuplicateTransient, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     UUserWidget* Widget;
     
     UPROPERTY(BlueprintReadWrite, DuplicateTransient, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))

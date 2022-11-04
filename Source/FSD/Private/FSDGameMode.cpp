@@ -1,24 +1,24 @@
 #include "FSDGameMode.h"
 #include "Templates/SubclassOf.h"
-#include "ObjectivesManager.h"
 #include "EnemySpawnManager.h"
-#include "PheromoneSpawnerComponent.h"
-#include "KeepInsideWorld.h"
 #include "MissionManager.h"
+#include "PheromoneSpawnerComponent.h"
+#include "ObjectivesManager.h"
+#include "KeepInsideWorld.h"
 #include "CritterManager.h"
 #include "FormationsManagerComponent.h"
 
-class UEncounterManager;
 class AActor;
-class APlayerCharacter;
 class AMiningPod;
-class AFSDGameMode;
-class UEnemyWaveManager;
-class AFSDPlayerController;
 class AMolly;
+class AFSDGameMode;
+class AFSDPlayerController;
+class UEnemyWaveManager;
+class UEncounterManager;
 class ABosco;
 class UDifficultyManager;
 class APlayerController;
+class APlayerCharacter;
 
 void AFSDGameMode::StartGame() {
 }
@@ -44,6 +44,9 @@ void AFSDGameMode::LoadMission(const FString& MapName, TSoftClassPtr<AFSDGameMod
 }
 
 void AFSDGameMode::HostAbortMission() {
+}
+
+void AFSDGameMode::HandlePlayerBanning(AFSDPlayerController* FSDPlayerController) {
 }
 
 UEnemyWaveManager* AFSDGameMode::GetWaveManager() const {

@@ -1,11 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "EInviteBlockReason.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "OnShowWebUrlClosedBPDelegate.h"
+#include "OnGetUserPrivilegeCompleteBPDelegateDelegate.h"
 #include "EBlueprintableUserPrivileges.h"
 #include "EBlueprintablePrivilegeResults.h"
-#include "OnGetUserPrivilegeCompleteBPDelegateDelegate.h"
-#include "EInviteBlockReason.h"
+#include "OnProfileUIClosedBPDelegate.h"
 #include "FSDOnlineSystemUtils.generated.h"
 
 class APlayerState;
@@ -30,6 +31,9 @@ public:
     static void OpenURLInOverlay(const FString& URL, FOnShowWebUrlClosedBP OnOverlayClosed);
     
     UFUNCTION(BlueprintCallable)
+    static void OpenProfileWithEvent(APlayerState* Requestor, APlayerState* Requestee, FOnProfileUIClosedBP OnProfileWindowClosed);
+    
+    UFUNCTION(BlueprintCallable)
     static void OpenProfileByUserId(APlayerState* Requestor, const FString& RequesteeUserID);
     
     UFUNCTION(BlueprintCallable)
@@ -44,10 +48,10 @@ public:
     UFUNCTION(BlueprintCallable)
     static void GetIsPrivilegeAllowed(const APlayerState* PlayerState, EBlueprintableUserPrivileges Privilege, const FOnGetUserPrivilegeCompleteBPDelegate& Delegate);
     
-    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static FText GetInviteFeatureBlockReason(UObject* WorldContextObject, EInviteBlockReason reason);
     
-    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static EInviteBlockReason CanPlayerInvite(UObject* WorldContextObject);
     
 };

@@ -3,11 +3,11 @@
 
 class UItemID;
 class APlayerCharacter;
-class AFSDPlayerState;
-class UObject;
-class UItemUpgrade;
 class AFSDPlayerController;
+class UItemUpgrade;
+class AFSDPlayerState;
 class AActor;
+class UObject;
 class UPlayerCharacterID;
 class UResourceData;
 class UTexture2D;
@@ -27,7 +27,7 @@ bool UUpgradableGearComponent::PlayerOwnesUpgradeInAllTiers(TSubclassOf<AActor> 
     return false;
 }
 
-void UUpgradableGearComponent::MirrorUpgradePreviewStatus(FGearStatEntry& From, FGearStatEntry& to) {
+void UUpgradableGearComponent::MirrorUpgradePreviewStatus(FGearStatEntry& From, FGearStatEntry& To) {
 }
 
 bool UUpgradableGearComponent::IsUpgradeEquipped(TSubclassOf<AActor> itemClass, UItemUpgrade* Upgrade, AFSDPlayerState* Player) {

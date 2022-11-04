@@ -2,11 +2,11 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "Health.h"
-#include "DamageSigDelegate.h"
-#include "EEnemyHealthScaling.h"
 #include "EHealthbarType.h"
 #include "HealthChangedSigDelegate.h"
+#include "DamageSigDelegate.h"
 #include "SubHealthComponentDelegateDelegate.h"
+#include "EEnemyHealthScaling.h"
 #include "SubHealthComponent.generated.h"
 
 class AActor;

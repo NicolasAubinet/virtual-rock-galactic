@@ -2,8 +2,8 @@
 #include "CoreMinimal.h"
 #include "PlanetZoneItem.generated.h"
 
-class UBiome;
 class UGeneratedMission;
+class UBiome;
 class UPlanetZone;
 
 USTRUCT(BlueprintType)
@@ -18,6 +18,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     UPlanetZone* Zone;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    bool HasSpecialEvent;
     
     FSD_API FPlanetZoneItem();
 };

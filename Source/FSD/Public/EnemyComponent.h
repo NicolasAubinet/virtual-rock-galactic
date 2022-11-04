@@ -4,8 +4,8 @@
 #include "MixerEnemyNameChangeDelegate.h"
 #include "EnemyComponent.generated.h"
 
-class UEnemyFamily;
 class UTexture2D;
+class UEnemyFamily;
 class UDialogDataAsset;
 class UEnemyID;
 

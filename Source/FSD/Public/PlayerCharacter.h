@@ -1,136 +1,139 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "PlayerCharacterEventDelegate.h"
+#include "EInputKeys.h"
+#include "SaluteEventDelegate.h"
 #include "GameFramework/Character.h"
-#include "ToggleMapToolSignatureDelegate.h"
 #include "GameplayTagAssetInterface.h"
+#include "ECharacterState.h"
+#include "OnLaserPointerPressedSignatureDelegate.h"
+#include "UObject/NoExportTypes.h"
+#include "CameraModeChangedDelegate.h"
 #include "Targetable.h"
+#include "DownCameraSettings.h"
 #include "RejoinListener.h"
 #include "PlaySoundInterface.h"
-#include "SaluteEventDelegate.h"
-#include "CollectedDrinkDelegateDelegate.h"
+#include "PlayerCharacterEventDelegate.h"
+#include "OnJumpReleasedSignatureDelegate.h"
 #include "UObject/NoExportTypes.h"
-#include "CollectedVanityItemDeledateDelegate.h"
-#include "DamagedEnemyEventDelegate.h"
 #include "BoolDelegateDelegate.h"
+#include "CharacterDelegateDelegate.h"
+#include "OnCharacterDeathChangeSignatureDelegate.h"
+#include "OnCharacterStateChangedSignatureDelegate.h"
 #include "DelegateDelegate.h"
-#include "ThrowCarriableDelegateDelegate.h"
-#include "UpdateMeshesSignatureDelegate.h"
-#include "OnPerkActivationTimerFinishedDelegate.h"
+#include "CollectedVanityItemDeledateDelegate.h"
 #include "CollectedEverythingEventDelegate.h"
 #include "SchematicEventDelegate.h"
 #include "SkinEventDelegate.h"
+#include "CollectedDrinkDelegateDelegate.h"
+#include "Engine/NetSerialization.h"
 #include "CollectedVictoryPoseEventDelegate.h"
 #include "CollectedPickaxePartDelegateDelegate.h"
-#include "CameraModeChangedDelegate.h"
-#include "OnLaserPointerPressedSignatureDelegate.h"
 #include "DownCameraTargetChangedDelegate.h"
 #include "ActionHoldEventDelegate.h"
+#include "ThrowCarriableDelegateDelegate.h"
 #include "OnJumpPressedSignatureDelegate.h"
-#include "OnJumpReleasedSignatureDelegate.h"
-#include "LaserPointerSecondaryDelegate.h"
 #include "OnMinePressedSignatureDelegate.h"
+#include "GameplayTagContainer.h"
 #include "OnFlareThrownDelegate.h"
+#include "OnPerkActivationTimerFinishedDelegate.h"
+#include "UpdateMeshesSignatureDelegate.h"
+#include "HoldButton.h"
 #include "CoolDownProgressDelegateDelegate.h"
 #include "OpenChatSignatureDelegate.h"
 #include "AcceptInviteSignatureDelegate.h"
+#include "PlatformComponent.h"
 #include "RejectInviteSignatureDelegate.h"
 #include "IgnoreInviteSignatureDelegate.h"
+#include "ToggleMapToolSignatureDelegate.h"
 #include "DepthSignatureDelegate.h"
-#include "OnCharacterStateChangedSignatureDelegate.h"
-#include "CharacterDelegateDelegate.h"
-#include "OnCharacterDeathChangeSignatureDelegate.h"
+#include "DamagedEnemyEventDelegate.h"
 #include "LaserPointerEventDelegate.h"
 #include "OnPlayerShoutEventDelegate.h"
 #include "ReviveCallEventDelegate.h"
 #include "HeadlightOnChangedEventDelegate.h"
-#include "HoldButton.h"
 #include "OnCallDonkeySignatureDelegate.h"
-#include "GameplayTagContainer.h"
-#include "GameplayTagContainer.h"
-#include "DownCameraSettings.h"
-#include "PlatformComponent.h"
-#include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "AnalogAimSettings.h"
 #include "ECharacterCameraMode.h"
 #include "CameraSpringSettings.h"
 #include "Engine/EngineTypes.h"
-#include "EInputKeys.h"
+#include "EnhancedTrace.h"
 #include "Engine/NetSerialization.h"
-#include "Engine/NetSerialization.h"
-#include "ECharacterState.h"
 #include "HeroInfo.h"
 #include "UObject/NoExportTypes.h"
+#include "GameplayTagContainer.h"
 #include "PlayerCharacter.generated.h"
 
 class AItem;
-class ATutorialManager;
-class UPerkHUDActivationWidget;
+class UMaterialInstanceDynamic;
+class APlayerCharacter;
+class ADamageEnhancer;
 class AActor;
-class USchematic;
-class UWidgetInteractionComponent;
+class ATutorialManager;
 class UHeightenedSenseComponent;
-class USkeletalMeshComponent;
-class USoundBase;
-class UInventoryComponent;
-class UCameraComponent;
-class UInventoryList;
-class USpringArmComponent;
 class UZipLineStateComponent;
 class AShieldGeneratorActor;
-class UPhysicsAsset;
+class UPlayerAfflictionComponent;
+class UCharacterVanityComponent;
+class UPlayerTPAnimInstance;
+class UPlayerHealthComponent;
+class UWidgetInteractionComponent;
+class UCharacterIntoxicationComponent;
 class UPlayerCharacterID;
+class UPerkHUDActivationWidget;
+class USkeletalMeshComponent;
+class UCameraComponent;
 class USceneComponent;
 class UActorTrackingComponent;
-class UCharacterIntoxicationComponent;
 class UMissionStatsCollector;
+class USpringArmComponent;
 class UPointLightComponent;
+class UUsableComponent;
 class UCharacterCameraController;
-class UPlayerHealthComponent;
 class UCharacterSightComponent;
+class UInventoryComponent;
 class UCharacterUseComponent;
 class USingleUsableComponent;
-class UStatusEffect;
 class UOutlineComponent;
 class UCharacterRecoilComponent;
 class UStatusEffectsComponent;
 class UPawnStatsComponent;
-class UPlayerAfflictionComponent;
 class UPlayerInfoComponent;
+class UCappedResource;
 class UPlayerAttackPositionComponent;
 class UCommunicationComponent;
-class UParticleSystem;
 class UPlayerTemperatureComponent;
+class UPlayerInfectionComponent;
 class UPlayerReactiveTerrainTrackerComponent;
 class UInstantUsable;
 class USoundCue;
+class UParticleSystem;
 class UPawnAffliction;
+class UPhysicsAsset;
 class UAudioComponent;
+class UStatusEffect;
 class UCharacterStateComponent;
 class UFSDAchievement;
 class UAnimMontage;
 class UMaterialInterface;
-class UMaterialInstanceDynamic;
 class UFSDPhysicalMaterial;
-class UCharacterVanityComponent;
+class AEventRewardDispenser;
 class AZipLineProjectile;
+class USoundBase;
 class USoundAttenuation;
 class USoundConcurrency;
 class APlayerController;
-class AEventRewardDispenser;
-class APlayerCharacter;
+class UEnemyDescriptor;
+class USchematic;
+class UPlayerAnimInstance;
 class AFSDPhysicsActor;
-class UCappedResource;
-class UPlayerTPAnimInstance;
+class UPlayerFPAnimInstance;
 class AFSDPlayerState;
 class AFSDPlayerController;
+class UInventoryList;
 class UTexture2D;
-class UPlayerFPAnimInstance;
 class ULightComponent;
-class UUsableComponent;
-class UPlayerAnimInstance;
 class UObject;
 
 UCLASS(Abstract, Blueprintable)
@@ -139,6 +142,7 @@ class FSD_API APlayerCharacter : public ACharacter, public IGameplayTagAssetInte
 public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FKilledGrabber, AActor*, Grabber);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FItemUseDelegate, AItem*, Item);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FGenericAnimNotifyDelegate, APlayerCharacter*, Player);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFirePressedDelegate);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FCanEscapeGrabberDelegate, bool, bCanEscape);
     
@@ -163,7 +167,10 @@ public:
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FBoolDelegate OnInstantRevivePossibleEvent;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FGenericAnimNotifyDelegate OnGenericAnimNotify;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     UHeightenedSenseComponent* HeightenedSenseComponent;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -269,7 +276,7 @@ public:
     FLaserPointerEvent OnLaserPointerEvent;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FLaserPointerSecondary OnSecondaryLaserPointerEvent;
+    FLaserPointerEvent OnSecondaryLaserPointerEvent;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSaluteEvent OnSaluteEvent;
@@ -298,7 +305,7 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagContainer GameplayTags;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     UZipLineStateComponent* ZipLineStateComponent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -310,7 +317,7 @@ public:
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnPerkActivationTimerFinished OnPerkActivationTimerFinished;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UPerkHUDActivationWidget* BoundPerkActivationW;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -329,7 +336,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool bIsBeingBittenByCaveLeech;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UWidgetInteractionComponent* WidgetInteraction;
     
     UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -371,91 +378,94 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<ATutorialManager> TutorialManagerSpacerig;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* FPMesh;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UCameraComponent* FirstPersonCamera;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USceneComponent* FirstPersonRoot;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UActorTrackingComponent* ActorTracking;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     UCharacterIntoxicationComponent* IntoxicationComponent;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UMissionStatsCollector* MissionStatsCollector;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USpringArmComponent* ThirdPersonSpringArm;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UCameraComponent* ThirdPersonCamera;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UPointLightComponent* ThirdPersonLight;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USpringArmComponent* FollowSpringArm;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UCameraComponent* FollowCamera;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UCameraComponent* DownCamera;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UCharacterCameraController* CameraController;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UPlayerHealthComponent* HealthComponent;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UCharacterSightComponent* SightComponent;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UInventoryComponent* InventoryComponent;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UCharacterUseComponent* UseComponentNew;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USingleUsableComponent* UsableComponent;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UOutlineComponent* OutlineComponent;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UCharacterRecoilComponent* RecoilComponent;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UStatusEffectsComponent* StatusEffectsComponent;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UPawnStatsComponent* PawnStatsComponent;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UPlayerAfflictionComponent* PawnAfflictionComponent;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UPlayerInfoComponent* PlayerInfoComponent;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UPlayerAttackPositionComponent* AttackerPositioningComponent;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UCommunicationComponent* CommunicationComponent;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UPlayerTemperatureComponent* TemperatureComponent;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
+    UPlayerInfectionComponent* InfectionComponent;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UPlayerReactiveTerrainTrackerComponent* ReactiveTerrainTracker;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UInstantUsable* TrackGrindUsableComponent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -485,7 +495,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool IsPlayableCharacter;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     UAudioComponent* SprintSoundComponent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -536,7 +546,7 @@ protected:
     UPROPERTY(EditAnywhere, Transient)
     TWeakObjectPtr<ATutorialManager> TutorialManager;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, ReplicatedUsing=OnRep_CharacterState, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, ReplicatedUsing=OnRep_CharacterState, meta=(AllowPrivateAccess=true))
     UCharacterStateComponent* ActiveCharacterState;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -648,6 +658,9 @@ protected:
     bool IsInCharacterSelectionWorld;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    bool bShouldSpawnAnimEffects;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float IdleTime;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -686,7 +699,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool ClientReady;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     UCharacterStateComponent* NextCharacterState;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
@@ -698,7 +711,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool HasInitializedPerks;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UCharacterVanityComponent* CharacterVanity;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -806,6 +819,9 @@ protected:
     
 public:
     UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_SpawnEnemies(UEnemyDescriptor* descriptor, int32 Count);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_Shouted();
     
 protected:
@@ -850,6 +866,9 @@ public:
     void Server_CheatRevive();
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_CheatKillAllFriendly();
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_CheatKillAll();
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
@@ -869,6 +888,9 @@ protected:
     void Server_CallDonkey();
     
 public:
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_AddToTraceQueue(ADamageEnhancer* Target, FEnhancedTrace Item);
+    
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_AddImpulseToActor(AFSDPhysicsActor* Target, FVector_NetQuantize Impulse, FVector_NetQuantize Location, FVector_NetQuantize AngularImpulse);
     
@@ -1121,7 +1143,7 @@ public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void ExitVehicle();
     
-public:
+protected:
     UFUNCTION(BlueprintCallable)
     void CycleItemUp();
     
@@ -1143,6 +1165,9 @@ protected:
     void Client_TargetDamaged(UObject* Health, float Damage, float DamageModifier, bool IsWeakPoint, bool IsRadial);
     
 public:
+    UFUNCTION(BlueprintCallable, Client, Reliable)
+    void Client_OpenMinersManual();
+    
     UFUNCTION(BlueprintCallable, Client, Reliable)
     void Client_AddImpulse(const FVector_NetQuantizeNormal& Direction, float force);
     

@@ -3,8 +3,8 @@
 #include "DamageDataBase.h"
 #include "DamageData.generated.h"
 
-class UDamageClass;
 class AController;
+class UDamageClass;
 class AActor;
 
 USTRUCT(BlueprintType)
@@ -22,6 +22,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float DamageModifier;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    float ArmorPenetration;
     
     FSD_API FDamageData();
 };

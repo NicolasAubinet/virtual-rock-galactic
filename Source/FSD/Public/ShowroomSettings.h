@@ -3,8 +3,8 @@
 #include "Engine/DataAsset.h"
 #include "ShowroomSettings.generated.h"
 
-class UCharacterShowroomController;
 class UEnemyShowroomController;
+class UCharacterShowroomController;
 class AShowroomStage;
 
 UCLASS(Blueprintable)

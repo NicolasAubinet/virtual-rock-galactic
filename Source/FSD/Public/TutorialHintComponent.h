@@ -20,7 +20,7 @@ protected:
     UFUNCTION(BlueprintCallable)
     void SetRemainingVisibleTime(float remainingTime);
     
-    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContext"))
     bool IsSingleplayer(UObject* WorldContext) const;
     
     UFUNCTION(BlueprintCallable)

@@ -1,7 +1,11 @@
 #include "UsableComponentBase.h"
 
-class APlayerCharacter;
+class UUseConditionSet;
 class UTexture2D;
+class APlayerCharacter;
+
+void UUsableComponentBase::SetUseRestrictions(UUseConditionSet* set) {
+}
 
 void UUsableComponentBase::SetRayTraceTriggered(bool rayTraceTriggered) {
 }
@@ -46,6 +50,7 @@ UUsableComponentBase::UUsableComponentBase() {
     this->AnimationSettings = NULL;
     this->Priority = 0;
     this->RestrictToCollider = NULL;
+    this->UsableHidesPlaceables = true;
     this->IsRayTraceTriggered = true;
     this->ResetUsingOnCompletion = true;
     this->IsClientPredictive = false;

@@ -3,10 +3,10 @@
 #include "Templates/SubclassOf.h"
 
 class UResourceData;
-class UObjective;
 class UObjectiveWidget;
-class UOptionalObjectiveWidget;
 class UTexture2D;
+class UOptionalObjectiveWidget;
+class UObjective;
 
 void UObjective::SignalObjectiveUpdated() {
 }
@@ -24,6 +24,10 @@ bool UObjective::IsPrimary() const {
 }
 
 bool UObjective::IsObjectiveResource_Implementation(UResourceData* InResource) const {
+    return false;
+}
+
+bool UObjective::IsNeededForMissionCompletion() const {
     return false;
 }
 
@@ -94,6 +98,7 @@ void UObjective::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifeti
     Super::GetLifetimeReplicatedProps(OutLifetimeProps);
     
     DOREPLIFETIME(UObjective, IsPrimaryObjective);
+    DOREPLIFETIME(UObjective, bIsNeededForMissionCompletion);
 }
 
 UObjective::UObjective() {
@@ -101,9 +106,11 @@ UObjective::UObjective() {
     this->CompletionRewardInCredits = 0;
     this->CompletionRewardInXP = 0;
     this->ScaleObjectiveToMission = true;
+    this->bHasReturnObjective = false;
     this->RequiredReturnObjectiveCompleted = false;
     this->ObjectiveCompletedStat = NULL;
     this->IsPrimaryObjective = -1;
+    this->bIsNeededForMissionCompletion = false;
     this->MissionScale = 1.00f;
 }
 

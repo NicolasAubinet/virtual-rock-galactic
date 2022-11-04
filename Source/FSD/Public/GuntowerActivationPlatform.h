@@ -1,17 +1,17 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "ProgressUpdatedDelegate.h"
-#include "GameFramework/Actor.h"
-#include "PlayersInsideChangedDelegate.h"
 #include "OnFinishedDelegate.h"
+#include "GameFramework/Actor.h"
+#include "ProgressUpdatedDelegate.h"
+#include "PlayersInsideChangedDelegate.h"
 #include "Engine/EngineTypes.h"
 #include "GuntowerActivationPlatform.generated.h"
 
 class USceneComponent;
 class USkeletalMeshComponent;
 class UCapsuleComponent;
-class AGuntowerModule;
 class UHealthComponentBase;
+class AGuntowerModule;
 class AFSDPlayerState;
 class UPrimitiveComponent;
 
@@ -19,13 +19,13 @@ UCLASS(Blueprintable)
 class FSD_API AGuntowerActivationPlatform : public AActor {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USceneComponent* Root;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* SKMesh;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UCapsuleComponent* Trigger;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

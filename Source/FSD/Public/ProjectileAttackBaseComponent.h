@@ -1,21 +1,22 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "AttackBaseComponent.h"
-#include "ProjectileAttackDelegateDelegate.h"
 #include "EProjectileAttackRotationType.h"
+#include "ProjectileAttackDelegateDelegate.h"
 #include "ProjetileSpawnedDelegateDelegate.h"
 #include "ProjectileAttackBaseComponent.generated.h"
 
 class UProjectileAttack;
 class UAnimMontage;
 class AActor;
+class UTargetValidator;
 
 UCLASS(Abstract, Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UProjectileAttackBaseComponent : public UAttackBaseComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     TArray<UProjectileAttack*> Projectiles;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -26,6 +27,9 @@ protected:
     
     UPROPERTY(EditAnywhere)
     EProjectileAttackRotationType RotationHandling;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
+    UTargetValidator* FinalValidationCheck;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ProjectilesIgnoreEachOther;

@@ -6,8 +6,8 @@
 #include "UpgradeValues.h"
 #include "SentryGunUpgrade.generated.h"
 
-class AItem;
 class AFSDPlayerState;
+class AItem;
 
 UCLASS(Blueprintable, EditInlineNew, MinimalAPI)
 class USentryGunUpgrade : public UStandardItemUpgrade {

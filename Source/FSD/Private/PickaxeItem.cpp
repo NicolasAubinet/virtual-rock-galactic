@@ -3,10 +3,10 @@
 #include "Components/SceneComponent.h"
 #include "DamageComponent.h"
 
-class UParticleSystem;
+class USoundCue;
 class UPrimitiveComponent;
 class UFSDPhysicalMaterial;
-class USoundCue;
+class UFXSystemAsset;
 
 
 void APickaxeItem::SetSpecialCoolDownDuration(float newCooldownDuration) {
@@ -49,7 +49,7 @@ float APickaxeItem::GetSpecialCooldownProgress() const {
 void APickaxeItem::All_SimulateHitBlock_Implementation(FVector_NetQuantize Position, int32 materia, bool removeDebris, bool isSpecial) {
 }
 
-void APickaxeItem::All_SimulateDigDebris_Implementation(FVector_NetQuantize Position, UParticleSystem* Particles, USoundCue* cue) {
+void APickaxeItem::All_SimulateDigDebris_Implementation(FVector_NetQuantize Position, UFXSystemAsset* Particles, USoundCue* cue) {
 }
 
 void APickaxeItem::All_SimulateDigBlock_Implementation(FVector_NetQuantize Position, bool spawnParticles, int32 Material, float Density, bool isSpecial) {

@@ -6,17 +6,17 @@
 #include "CharacterSettings.generated.h"
 
 class APlayerCharacter;
-class UInventoryList;
-class UTerrainPlacementComponent;
 class UPlayerCharacterID;
-class UDebrisPositioning;
+class UInventoryList;
 class USkeletalMesh;
-class UUseAnimationSetting;
 class ACarriableItem;
+class UUseAnimationSetting;
 class UCampaignManager;
-class UPlayerCharacterData;
 class UCharacterVanityItems;
 class UDialogDataAsset;
+class UDebrisPositioning;
+class UTerrainPlacementComponent;
+class UPlayerCharacterData;
 class UAsyncManager;
 
 UCLASS(Blueprintable)
@@ -25,9 +25,6 @@ class UCharacterSettings : public UDataAsset {
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSoftClassPtr<APlayerCharacter>> RankedHeroClasses;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    TArray<TSubclassOf<APlayerCharacter>> LoadedClasses;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FText> PlayerRankNames;
@@ -60,10 +57,22 @@ public:
     USkeletalMesh* DefaultHead;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    USkeletalMesh* HeadForMasks;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USkeletalMesh* ThickNeck;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USkeletalMesh* ThinNeck;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    USkeletalMesh* FlatEars;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    USkeletalMesh* FaceOnly;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    USkeletalMesh* EyesOnly;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<ACarriableItem> CarriableBagClass;

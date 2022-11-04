@@ -3,11 +3,12 @@
 #include "GameFramework/Actor.h"
 #include "FuelLineStart.generated.h"
 
-class UFuelLineStartUsable;
+class AFuelLineEndPoint;
+class AFuelLineSegment;
 class UStaticMeshComponent;
-class AFuelLineStart;
 class UOutlineComponent;
 class USimpleObjectInfoComponent;
+class UFuelLineStartUsable;
 class UTrackBuilderUsable;
 class ATrackBuilderSegment;
 
@@ -15,22 +16,30 @@ UCLASS(Abstract, Blueprintable)
 class FSD_API AFuelLineStart : public AActor {
     GENERATED_BODY()
 public:
-    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFuelLineStartDelegate, AFuelLineStart*, InFuelLineStart);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFuelLineStartedDelegate, bool, InFuelLineStarted);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFuelLineConnectedDelegate, AFuelLineEndPoint*, InFuelLineStart);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFirstFuelLineDelegate, AFuelLineSegment*, InFirstSegment);
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FFuelLineStartDelegate OnFuelLineConnected;
+    FFuelLineConnectedDelegate OnFuelLineConnected;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FFuelLineStartedDelegate OnFuelLineStarted;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FFirstFuelLineDelegate OnFirstFuelLineSegment;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UStaticMeshComponent* StaticMesh;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UOutlineComponent* OutlineComponent;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USimpleObjectInfoComponent* ObjectInfoComponent;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UFuelLineStartUsable* UsableStartFuelLine;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_FuelLineConnected, meta=(AllowPrivateAccess=true))

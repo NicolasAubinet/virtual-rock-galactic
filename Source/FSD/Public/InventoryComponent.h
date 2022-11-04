@@ -1,14 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "ResupplyDelegateDelegate.h"
-#include "FlareProductionDelegateDelegate.h"
-#include "InventoryBase.h"
-#include "CarriableChangedDelegateDelegate.h"
-#include "InventoryItemsLoadedDelegate.h"
-#include "GrenadesDelegateDelegate.h"
-#include "ItemDelegateDelegate.h"
 #include "FlaresDelegateDelegate.h"
+#include "GrenadesDelegateDelegate.h"
+#include "InventoryBase.h"
+#include "InventoryItemsLoadedDelegate.h"
+#include "ItemDelegateDelegate.h"
+#include "FlareProductionDelegateDelegate.h"
+#include "ResupplyDelegateDelegate.h"
+#include "CarriableChangedDelegateDelegate.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "EItemCategory.h"
@@ -18,15 +18,15 @@ class ATerrainScannerItem;
 class UInventoryList;
 class AThrownGrenadeItem;
 class AFlare;
-class AActor;
 class USoundCue;
 class UDialogDataAsset;
+class AItem;
 class UItemUpgrade;
 class APickaxeItem;
-class ARecallableSentryGunItem;
 class ALaserPointerItem;
 class ARessuplyPodItem;
-class AItem;
+class ARecallableSentryGunItem;
+class AActor;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UInventoryComponent : public UInventoryBase {
@@ -148,6 +148,9 @@ public:
     void Server_ThrowFlare();
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
+    void ResupplyGrenades(float percentage);
+    
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void Resupply(float percentage);
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
@@ -209,6 +212,10 @@ public:
 protected:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void All_PlayThrowMontage(AActor* Item);
+    
+public:
+    UFUNCTION(BlueprintCallable)
+    void AddItemClass(TSubclassOf<AItem> itemClass);
     
 };
 

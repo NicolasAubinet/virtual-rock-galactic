@@ -3,43 +3,43 @@
 #include "DualAnimatedItem.h"
 #include "RejoinListener.h"
 #include "Upgradable.h"
-#include "EDoubleDrillState.h"
 #include "UpgradableGear.h"
-#include "Engine/NetSerialization.h"
-#include "Engine/EngineTypes.h"
+#include "EDoubleDrillState.h"
 #include "UObject/NoExportTypes.h"
+#include "Engine/EngineTypes.h"
 #include "DoubleDrillDamageItem.h"
+#include "Engine/NetSerialization.h"
 #include "DoubleDrillItem.generated.h"
 
-class UFirstPersonParticleSystemComponent;
 class UFSDAudioComponent;
-class UDoubleDrillAggregator;
 class UDamageComponent;
+class UFirstPersonParticleSystemComponent;
+class UDoubleDrillAggregator;
+class UFSDPhysicalMaterial;
 class UAnimMontage;
 class UParticleSystem;
 class UForceFeedbackEffect;
-class AActor;
 class UDamageClass;
 class UDialogDataAsset;
-class UFSDPhysicalMaterial;
+class AActor;
 
 UCLASS(Blueprintable)
 class ADoubleDrillItem : public ADualAnimatedItem, public IUpgradable, public IUpgradableGear, public IRejoinListener {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UFirstPersonParticleSystemComponent* FP_Left_DrillParticles;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UFirstPersonParticleSystemComponent* FP_Right_DrillParticles;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UDamageComponent* DamageComponent;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UFSDAudioComponent* AudioComponent;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UDoubleDrillAggregator* Aggregator;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -127,7 +127,7 @@ public:
     UDamageClass* DamageClass;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    float friendlyFireModifier;
+    float FriendlyFireModifier;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxFuel;
@@ -165,16 +165,16 @@ public:
     ADoubleDrillItem();
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_StopMining();
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_StartMining();
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_DoDamage(const TArray<FDoubleDrillDamageItem>& Targets);
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_DigBlock(FVector_NetQuantize Start, FVector_NetQuantize End);
     
     UFUNCTION(BlueprintCallable)

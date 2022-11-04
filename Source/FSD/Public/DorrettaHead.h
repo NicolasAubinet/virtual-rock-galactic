@@ -3,18 +3,18 @@
 #include "CarriableItem.h"
 #include "DorrettaHead.generated.h"
 
-class UCarriableInstantUsable;
 class UCarriableComponent;
+class UCarriableInstantUsable;
 
 UCLASS(Blueprintable)
 class ADorrettaHead : public ACarriableItem {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UCarriableInstantUsable* Usable;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UCarriableComponent* CarriableComponent;
     
 public:

@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "UObject/NoExportTypes.h"
 #include "Engine/DataAsset.h"
+#include "UObject/NoExportTypes.h"
 #include "MissionNameBank.generated.h"
 
 UCLASS(Blueprintable)
@@ -18,7 +18,7 @@ protected:
 public:
     UMissionNameBank();
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    TArray<FText> GetRandomGeneratedNames(UPARAM(Ref) FRandomStream& Random, int32 count) const;
+    TArray<FText> GetRandomGeneratedNames(UPARAM(Ref) FRandomStream& Random, int32 Count) const;
     
 };
 

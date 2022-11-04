@@ -1,26 +1,26 @@
 #include "FSDGameInstance.h"
 #include "Templates/SubclassOf.h"
-#include "FSDCloudLoadSave.h"
-#include "FSDSendToURL.h"
 #include "FSDSessionUpdater.h"
+#include "FSDSendToURL.h"
+#include "FSDCloudLoadSave.h"
 
 class AProceduralSetup;
 class AActor;
+class AFSDPlayerController;
 class UGeneratedMission;
-class APlayerCharacter;
+class UIconGenerationManager;
 class UObject;
-class UTemporaryBuff;
 class ACharacterSelectionSwitcher;
 class UWorld;
 class UNetDriver;
-class USoundBase;
 class UFSDSaveGame;
 class UMutator;
-class AFSDPlayerController;
-class UIconGenerationManager;
+class UTemporaryBuff;
+class APlayerCharacter;
 class UItemSkin;
 class UHUDWarningWidget;
 class UTexture2D;
+class USoundBase;
 
 void UFSDGameInstance::UpdateGlobelMissionSeed() {
 }
@@ -39,14 +39,6 @@ void UFSDGameInstance::StartPersonalAnalytics() {
 
 AProceduralSetup* UFSDGameInstance::SpawnProcedural() {
     return NULL;
-}
-
-bool UFSDGameInstance::ShouldPendingRewardsBeShown() const {
-    return false;
-}
-
-bool UFSDGameInstance::ShouldPendingRewardsBeGiven() const {
-    return false;
 }
 
 void UFSDGameInstance::SetViewer3DClass(TSubclassOf<AActor> NewClass, ECharselectionCameraLocation Location) {
@@ -83,6 +75,9 @@ void UFSDGameInstance::SetIsUsingOnlineFeatures(bool bIsOnlineFeatureUsed) {
 }
 
 void UFSDGameInstance::SetHasSeenInfoScreen() {
+}
+
+void UFSDGameInstance::SetGlobalMissionSeed(int32 Seed) {
 }
 
 void UFSDGameInstance::SetFSDPassword(const FString& pw) {
@@ -207,10 +202,6 @@ TArray<FBlueprintSessionResult> UFSDGameInstance::GetServersFriendsArePlaying(TA
     return TArray<FBlueprintSessionResult>();
 }
 
-bool UFSDGameInstance::GetPendingRewards(FPendingRewardsStats& OutStats, FPendingRewards& OutRewards) const {
-    return false;
-}
-
 TArray<UMutator*> UFSDGameInstance::GetMutators(TSubclassOf<UMutator> mutatorClass) const {
     return TArray<UMutator*>();
 }
@@ -265,9 +256,6 @@ void UFSDGameInstance::GameUserSettingsChanged() {
 void UFSDGameInstance::CloseSessionLobby() {
 }
 
-void UFSDGameInstance::ClearPendingRewards() {
-}
-
 void UFSDGameInstance::ClearDisconnectError() {
 }
 
@@ -276,6 +264,7 @@ void UFSDGameInstance::ChangeSkinPreview(UItemSkin* PreviewSkin) {
 
 void UFSDGameInstance::CancelJoin() {
 }
+
 
 UHUDWarningWidget* UFSDGameInstance::AddWarningToHUD(TSubclassOf<UHUDWarningWidget> WidgetClass, UTexture2D* Texture, USoundBase* PingSound) {
     return NULL;
@@ -287,7 +276,7 @@ void UFSDGameInstance::AddToFriendSessions(const FString& friendSessionId, const
 void UFSDGameInstance::AddStatValue(const FString& Key, float Value) {
 }
 
-void UFSDGameInstance::AddStatCount(const FString& Key, int32 count) {
+void UFSDGameInstance::AddStatCount(const FString& Key, int32 Count) {
 }
 
 UFSDGameInstance::UFSDGameInstance() {
@@ -312,7 +301,9 @@ UFSDGameInstance::UFSDGameInstance() {
     this->CanPlayOnline = true;
     this->CanCommunicateOnline = true;
     this->GoogleAnalyticsWI = NULL;
-    this->ForcedSpecialEvent = NULL;
+    this->DSTelemetryWrapper = NULL;
+    this->ForcedMachineEvent = NULL;
+    this->ForcedOtherEvent = NULL;
     this->ShowMinerManualWorkInProgress = false;
     this->LastDreadnaughtKillTime = -1.00f;
     this->CharacterSelectionSwitcher = NULL;

@@ -4,8 +4,8 @@
 #include "GameFramework/OnlineReplStructs.h"
 #include "EventRewardDispenser.generated.h"
 
-class USchematic;
 class AFSDPlayerState;
+class USchematic;
 class AEventRewardFrame;
 class APlayerCharacter;
 

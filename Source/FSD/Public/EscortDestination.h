@@ -1,13 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "UObject/NoExportTypes.h"
 #include "GameFramework/Actor.h"
 #include "ShellCrackedSignatureDelegate.h"
+#include "UObject/NoExportTypes.h"
 #include "EscortDestination.generated.h"
 
+class UTerrainMaterial;
 class UDamageComponent;
 class ADeepCSGWorld;
-class UTerrainMaterial;
 
 UCLASS(Blueprintable)
 class FSD_API AEscortDestination : public AActor {
@@ -16,7 +16,7 @@ public:
     UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FShellCrackedSignature OnShellCracked;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UDamageComponent* EndExplosionDamage;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

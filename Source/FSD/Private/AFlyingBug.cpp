@@ -1,18 +1,18 @@
 #include "AFlyingBug.h"
 #include "Net/UnrealNetwork.h"
+#include "PawnAlertComponent.h"
 #include "EnemyComponent.h"
 #include "PawnStatsComponent.h"
 #include "OutlineComponent.h"
 #include "Perception/PawnSensingComponent.h"
-#include "PawnAlertComponent.h"
 #include "Components/SphereComponent.h"
 #include "Components/AudioComponent.h"
 #include "FrozenPawnImpactComponent.h"
 #include "HitReactionComponent.h"
 
-class UHealthComponent;
 class AActor;
 class UHealthComponentBase;
+class UHealthComponent;
 class UDamageTag;
 
 

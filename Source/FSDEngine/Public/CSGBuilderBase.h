@@ -5,9 +5,9 @@
 #include "BakeSettings.h"
 #include "CSGBuilderBase.generated.h"
 
-class UCSGPreviewComponent;
 class UTerrainMaterialCore;
 class UBakeConfig;
+class UCSGPreviewComponent;
 
 UCLASS(Blueprintable)
 class FSDENGINE_API ACSGBuilderBase : public AActor {
@@ -34,7 +34,7 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UTerrainMaterialCore* BurnedMat;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     UCSGPreviewComponent* PreviewComponent;
     
     ACSGBuilderBase();

@@ -3,8 +3,8 @@
 #include "Blueprint/UserWidget.h"
 #include "TreeOfVanityItemWidget.generated.h"
 
-class UTreeOfVanityItemWidget;
 class UReward;
+class UTreeOfVanityItemWidget;
 
 UCLASS(Blueprintable, EditInlineNew)
 class FSD_API UTreeOfVanityItemWidget : public UUserWidget {
@@ -19,7 +19,7 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bIsStartingNode;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     TArray<UTreeOfVanityItemWidget*> ConnectedNodes;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -32,7 +32,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UReward* DefaultReward;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     TArray<UUserWidget*> NodeConnections;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))

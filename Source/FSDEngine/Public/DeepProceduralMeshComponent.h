@@ -4,8 +4,8 @@
 #include "DeepProceduralMeshComponent.generated.h"
 
 class UBodySetup;
-class UTerrainMaterialCore;
 class UPhysicalMaterial;
+class UTerrainMaterialCore;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class FSDENGINE_API UDeepProceduralMeshComponent : public UMeshComponent {

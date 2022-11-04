@@ -6,8 +6,8 @@
 #include "LevelGenerationCarver.generated.h"
 
 class UStaticMeshCarver;
-class UStaticMesh;
 class USTLMeshCarver;
+class UStaticMesh;
 class UTerrainMaterial;
 
 USTRUCT(BlueprintType)

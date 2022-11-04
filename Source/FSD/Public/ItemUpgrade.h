@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "EUpgradeClass.h"
 #include "SavableDataAsset.h"
+#include "EUpgradeClass.h"
 #include "RefundableInterface.h"
 #include "EUpgradeTiers.h"
 #include "ItemUpgradeStatText.h"
@@ -11,8 +11,8 @@
 #include "ItemUpgrade.generated.h"
 
 class UResourceData;
-class UItemUpgrade;
 class UItemUpgradeCategory;
+class UItemUpgrade;
 class UItemUpgradeElement;
 class AActor;
 class AFSDPlayerState;
@@ -60,7 +60,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UResourceData*> ResourceCost;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     TArray<UItemUpgradeElement*> Elements;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

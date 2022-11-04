@@ -3,13 +3,14 @@
 #include "GameFramework/Actor.h"
 #include "PLSTester.generated.h"
 
-class UDifficultySetting;
 class UMissionTemplate;
-class UMissionWarning;
-class UMissionDuration;
 class UMissionComplexity;
+class UMissionDuration;
 class UMissionMutator;
 class UBiome;
+class UMissionWarning;
+class USpecialEvent;
+class UDifficultySetting;
 
 UCLASS(Blueprintable)
 class APLSTester : public AActor {
@@ -39,6 +40,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UMissionWarning*> Warnings;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    USpecialEvent* SpecialEvent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UBiome* Biome;

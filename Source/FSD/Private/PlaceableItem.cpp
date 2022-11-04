@@ -1,11 +1,8 @@
 #include "PlaceableItem.h"
-#include "ItemPlacerAggregator.h"
 #include "CapacityHoldingItemAggregator.h"
+#include "ItemPlacerAggregator.h"
 
 void APlaceableItem::Server_SpawnItem_Implementation(FVector Location) {
-}
-bool APlaceableItem::Server_SpawnItem_Validate(FVector Location) {
-    return true;
 }
 
 

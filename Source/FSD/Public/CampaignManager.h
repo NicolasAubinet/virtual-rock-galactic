@@ -6,11 +6,11 @@
 #include "ECampaignType.h"
 #include "CampaignManager.generated.h"
 
+class UDifficultySetting;
 class UCampaign;
 class UFSDSaveGame;
 class AFSDPlayerController;
 class UGeneratedMission;
-class UDifficultySetting;
 
 UCLASS(Abstract, Blueprintable)
 class FSD_API UCampaignManager : public UObject {
@@ -64,7 +64,7 @@ public:
     UFUNCTION(BlueprintCallable)
     void StartNewCampaign(TSubclassOf<UCampaign> campaignClass, UFSDSaveGame* SaveGame);
     
-    UFUNCTION(BlueprintCallable)
+    UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     void SkipMainCampaign(UObject* WorldContextObject);
     
 protected:
@@ -72,16 +72,16 @@ protected:
     void OnEventsRefreshed();
     
 public:
-    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContext"))
     bool IsWeeklyCampaignCompleted(UObject* WorldContext, ECampaignType campaigntype) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsInCampaignMission(AFSDPlayerController* Player) const;
     
-    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     bool IsCampaignRestrictionsMet(UObject* WorldContextObject, UGeneratedMission* mission, UDifficultySetting* optionalDifficulty) const;
     
-    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     bool IsCampaignMission(UObject* WorldContextObject, UGeneratedMission* mission) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -90,11 +90,14 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<TSubclassOf<UCampaign>> GetUncompletedCampaigns(AFSDPlayerController* Player) const;
     
-    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     UGeneratedMission* GetCampaingMissionFromSeeds(UObject* WorldContextObject, int32 GlobalSeed, int32 MissionSeed) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UGeneratedMission* GetCampaingMission(const TArray<UGeneratedMission*>& missions, int32 MissionSeed) const;
+    
+    UFUNCTION(BlueprintCallable)
+    void CompleteCampaignWithNoMissions(TSubclassOf<UCampaign> campaignClass, UFSDSaveGame* SaveGame);
     
     UFUNCTION(BlueprintCallable)
     void AbortActiveCampaign(UFSDSaveGame* SaveGame);

@@ -2,9 +2,9 @@
 #include "Net/UnrealNetwork.h"
 #include "Templates/SubclassOf.h"
 
-class AProjectileBase;
-class UProjectileLauncherBaseComponent;
 class UStatusEffect;
+class UProjectileLauncherBaseComponent;
+class AProjectileBase;
 class AActor;
 class UAnimMontage;
 
@@ -25,7 +25,7 @@ int32 ACrossbow::GetTotalArrowCount(bool InDefaultArrowCount) const {
     return 0;
 }
 
-float ACrossbow::GetSpecialArrowEffectDuration(const TSubclassOf<UStatusEffect>& effect) const {
+float ACrossbow::GetSpecialArrowEffectDuration(const TSubclassOf<UStatusEffect>& Effect) const {
     return 0.0f;
 }
 

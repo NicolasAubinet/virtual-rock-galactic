@@ -1,13 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Net/OnlineBlueprintCallProxyBase.h"
-#include "FindSessionsCallbackProxy.h"
 #include "Net/OnlineBlueprintCallProxyBase.h"
+#include "FindSessionsCallbackProxy.h"
 #include "FSDJoinSessionCallbackProxy.generated.h"
 
-class APlayerController;
 class UObject;
 class UFSDJoinSessionCallbackProxy;
+class APlayerController;
 
 UCLASS(Blueprintable, MinimalAPI)
 class UFSDJoinSessionCallbackProxy : public UOnlineBlueprintCallProxyBase {
@@ -25,7 +25,7 @@ private:
     
 public:
     UFSDJoinSessionCallbackProxy();
-    UFUNCTION(BlueprintCallable)
+    UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static UFSDJoinSessionCallbackProxy* FSDJoinSession(UObject* NewWorldContextObject, APlayerController* PlayerController, const FBlueprintSessionResult& SearchResult, const FString& FSDPassword, bool fromInvite);
     
 };

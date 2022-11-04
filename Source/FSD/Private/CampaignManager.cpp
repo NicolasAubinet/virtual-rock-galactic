@@ -3,8 +3,8 @@
 
 class UCampaign;
 class UFSDSaveGame;
-class UObject;
 class UDifficultySetting;
+class UObject;
 class AFSDPlayerController;
 class UGeneratedMission;
 
@@ -47,6 +47,9 @@ UGeneratedMission* UCampaignManager::GetCampaingMissionFromSeeds(UObject* WorldC
 
 UGeneratedMission* UCampaignManager::GetCampaingMission(const TArray<UGeneratedMission*>& missions, int32 MissionSeed) const {
     return NULL;
+}
+
+void UCampaignManager::CompleteCampaignWithNoMissions(TSubclassOf<UCampaign> campaignClass, UFSDSaveGame* SaveGame) {
 }
 
 void UCampaignManager::AbortActiveCampaign(UFSDSaveGame* SaveGame) {

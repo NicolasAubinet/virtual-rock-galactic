@@ -6,8 +6,8 @@
 #include "UpgradeValues.h"
 #include "ElectricalSMGUpgrade.generated.h"
 
-class AFSDPlayerState;
 class AActor;
+class AFSDPlayerState;
 
 UCLASS(Blueprintable, EditInlineNew, MinimalAPI)
 class UElectricalSMGUpgrade : public UStandardItemUpgrade {
