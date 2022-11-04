@@ -289,19 +289,19 @@ public:
     UFUNCTION(BlueprintCallable)
     float FindTotalVolumeOfMaterialInWorld(UTerrainMaterial* Material);
     
-    UFUNCTION(BlueprintCallable, meta=(Latent, LatentInfo="LatentInfo"))
+    UFUNCTION(BlueprintCallable)
     static void CarveWithSTLMeshUsingTransform_Wait(ADeepCSGWorld* CSGWorld, USTLMeshCarver* MeshCarver, UTerrainMaterial* Material, ECarveFilterType CarveFilter, const FTransform& Transform, EPreciousMaterialOptions Precious, FLatentActionInfo LatentInfo);
     
     UFUNCTION(BlueprintCallable)
     void CarveWithSTLMeshUsingTransform(USTLMeshCarver* MeshCarver, UTerrainMaterial* Material, ECarveFilterType CarveFilter, const FTransform& Transform, EPreciousMaterialOptions Precious);
     
-    UFUNCTION(BlueprintCallable, meta=(Latent, LatentInfo="LatentInfo"))
+    UFUNCTION(BlueprintCallable)
     static void CarveWithSTLMesh_Wait(ADeepCSGWorld* CSGWorld, USTLMeshCarver* MeshCarver, UTerrainMaterial* Material, ECarveFilterType CarveFilter, FVector Pos, FQuat Orientation, FVector Scale, EPreciousMaterialOptions Precious, FLatentActionInfo LatentInfo);
     
     UFUNCTION(BlueprintCallable)
     void CarveWithSTLMesh(USTLMeshCarver* MeshCarver, UTerrainMaterial* Material, ECarveFilterType CarveFilter, FVector Pos, FQuat Orientation, FVector Scale, EPreciousMaterialOptions Precious);
     
-    UFUNCTION(BlueprintCallable, meta=(Latent, LatentInfo="LatentInfo"))
+    UFUNCTION(BlueprintCallable)
     static void CarveWithStaticMeshUsingTransform_Wait(ADeepCSGWorld* CSGWorld, UStaticMeshCarver* MeshCarver, UTerrainMaterial* Material, ECarveFilterType CarveFilter, const FTransform& Transform, EPreciousMaterialOptions Precious, FLatentActionInfo LatentInfo);
     
     UFUNCTION(BlueprintCallable)
@@ -316,13 +316,13 @@ public:
     UFUNCTION(BlueprintCallable)
     void CarveWithSplineSegment(const FVector& SplineStart, const FVector& SplineStartTangent, const FVector& SplineEnd, const FVector& SplineEndTangent, float Radius, UTerrainMaterial* Material, ECarveFilterType CarveFilter, EPreciousMaterialOptions Precious);
     
-    UFUNCTION(BlueprintCallable, meta=(Latent, LatentInfo="LatentInfo"))
+    UFUNCTION(BlueprintCallable)
     static void CarveWithMeshUsingTransform_Wait(ADeepCSGWorld* CSGWorld, UStaticMesh* StaticMesh, UTerrainMaterial* Material, ECarveFilterType CarveFilter, const FTransform& Transform, float ExpensiveNoise, EPreciousMaterialOptions Precious, FLatentActionInfo LatentInfo);
     
     UFUNCTION(BlueprintCallable)
     void CarveWithMeshUsingTransform(UStaticMesh* StaticMesh, UTerrainMaterial* Material, ECarveFilterType CarveFilter, const FTransform& Transform, float ExpensiveNoise, EPreciousMaterialOptions Precious, CarveOptionsCellSize CarverSize);
     
-    UFUNCTION(BlueprintCallable, meta=(Latent, LatentInfo="LatentInfo"))
+    UFUNCTION(BlueprintCallable)
     static void CarveWithMesh_Wait(ADeepCSGWorld* CSGWorld, UStaticMesh* StaticMesh, UTerrainMaterial* Material, ECarveFilterType CarveFilter, FVector Pos, FQuat Orientation, FVector Scale, FLatentActionInfo LatentInfo);
     
     UFUNCTION(BlueprintCallable)

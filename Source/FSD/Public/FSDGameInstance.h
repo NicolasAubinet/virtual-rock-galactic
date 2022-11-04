@@ -51,7 +51,6 @@ class USchematic;
 class AMolly;
 class UHUDWarningWidget;
 class ACharacterSelectionSwitcher;
-class UDSTelemetryWrapper;
 class AProceduralSetup;
 class UMissionResultInfo;
 class UNetDriver;
@@ -168,7 +167,7 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool ShowingReconnectScreen;
     
-    UPROPERTY(EditAnywhere, Export, Transient)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient)
     TWeakObjectPtr<UMouseCursorWidget> MouseCursorWidget;
     
     UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -249,8 +248,8 @@ public:
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FDonkeyCharacterDelegate OnDonkeyChanged;
     
-    UPROPERTY(EditAnywhere, Transient)
-    TWeakObjectPtr<AMolly> Donkey;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient)
+    AMolly* Donkey;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FBoscoChanged OnBoscoChanged;
@@ -286,9 +285,6 @@ public:
     UGoogleAnalyticsWrapper* GoogleAnalyticsWI;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    UDSTelemetryWrapper* DSTelemetryWrapper;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     USpecialEvent* ForcedMachineEvent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -313,7 +309,7 @@ protected:
     UPROPERTY(EditAnywhere, Transient)
     TWeakObjectPtr<APostProcessingManager> PostProcessingManager;
     
-    UPROPERTY(EditAnywhere, Transient)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient)
     TWeakObjectPtr<ABosco> Drone;
     
     UPROPERTY(EditAnywhere, Transient)
