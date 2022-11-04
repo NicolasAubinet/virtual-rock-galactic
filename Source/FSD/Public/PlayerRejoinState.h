@@ -15,10 +15,10 @@ public:
     void Server_Reset();
     
 protected:
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_AddIntValue_Internal(const FGuid& ItemKey, const FName& ValueKey, int32 Value);
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_AddFloatValue_Internal(const FGuid& ItemKey, const FName& ValueKey, float Value);
     
     UFUNCTION(BlueprintCallable, Client, Reliable)

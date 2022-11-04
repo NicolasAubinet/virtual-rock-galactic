@@ -1,16 +1,20 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "OnHitDelegateDelegate.h"
 #include "HitscanBaseComponent.h"
 #include "MultiHitScanHits.h"
+#include "OnHitDelegateDelegate.h"
 #include "CapsuleHitscanComponent.generated.h"
 
 class AActor;
+class ADamageEnhancer;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UCapsuleHitscanComponent : public UHitscanBaseComponent {
     GENERATED_BODY()
 public:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    ADamageEnhancer* DamageEnhancer;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnHitDelegate OnHitEffect;
     
@@ -48,7 +52,7 @@ protected:
 public:
     UCapsuleHitscanComponent();
 protected:
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_RegisterHit(const FMultiHitScanHits& hitResults);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)

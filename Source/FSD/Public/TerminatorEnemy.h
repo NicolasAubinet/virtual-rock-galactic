@@ -4,8 +4,8 @@
 #include "MultiTargeter.h"
 #include "TerminatorEnemy.generated.h"
 
-class UAnimMontage;
 class UHitReactionComponent;
+class UAnimMontage;
 class AActor;
 
 UCLASS(Blueprintable)
@@ -22,7 +22,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxFlairAnimationCooldown;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UHitReactionComponent* HitReactions;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))

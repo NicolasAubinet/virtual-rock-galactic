@@ -37,7 +37,7 @@ public:
     void RemoveGravityModifier(AActor* SourceActor);
     
     UFUNCTION(BlueprintCallable)
-    void AddGravityModifier(AActor* SourceActor, float effect);
+    void AddGravityModifier(AActor* SourceActor, float Effect);
     
 };
 

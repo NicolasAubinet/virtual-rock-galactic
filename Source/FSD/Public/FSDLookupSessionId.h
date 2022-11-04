@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "FoundSessionResultDelegate.h"
 #include "Net/OnlineBlueprintCallProxyBase.h"
+#include "FoundSessionResultDelegate.h"
 #include "Net/OnlineBlueprintCallProxyBase.h"
 #include "FSDLookupSessionId.generated.h"
 
@@ -22,7 +22,7 @@ private:
 public:
     UFSDLookupSessionId();
 private:
-    UFUNCTION(BlueprintCallable)
+    UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static UFSDLookupSessionId* FSDLookupSessionId(UObject* WorldContextObject, const FString& SessionKey);
     
 };

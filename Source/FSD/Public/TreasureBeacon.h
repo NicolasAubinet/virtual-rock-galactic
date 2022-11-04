@@ -6,18 +6,18 @@
 
 class UCurveFloat;
 class USceneComponent;
-class UTerrainPlacementComponent;
-class UDebrisPositioning;
 class ATreasureContainer;
+class UDebrisPositioning;
+class UTerrainPlacementComponent;
 
 UCLASS(Blueprintable)
 class FSD_API ATreasureBeacon : public AActor {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USceneComponent* RootComp;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UTerrainPlacementComponent* terrainPlacement;
     
 protected:

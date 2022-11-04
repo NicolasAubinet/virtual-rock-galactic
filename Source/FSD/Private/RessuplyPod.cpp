@@ -3,13 +3,16 @@
 #include "Templates/SubclassOf.h"
 #include "DamageComponent.h"
 
+class AActor;
 class UObject;
 class ARessuplyPod;
-class AActor;
 
 void ARessuplyPod::SetIdling() {
 }
 
+
+void ARessuplyPod::OnRep_TargetLocation() {
+}
 
 void ARessuplyPod::OnRep_State(ERessuplyPodState oldState) {
 }
@@ -35,6 +38,7 @@ ARessuplyPod::ARessuplyPod() {
     this->DropHeight = 3500.00f;
     this->DropDelay = 0.00f;
     this->MissionShoutDelay = 2.00f;
+    this->ShoutDialogOrderAccepted = NULL;
     this->DialogOrderAccepted = NULL;
     this->DialogPodArrived = NULL;
     this->CurrentMissionShout = NULL;

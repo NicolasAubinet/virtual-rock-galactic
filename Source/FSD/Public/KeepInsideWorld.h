@@ -3,8 +3,8 @@
 #include "Components/ActorComponent.h"
 #include "KeepInsideWorld.generated.h"
 
-class AActor;
 class UObject;
+class AActor;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UKeepInsideWorld : public UActorComponent {
@@ -19,10 +19,10 @@ protected:
     
 public:
     UKeepInsideWorld();
-    UFUNCTION(BlueprintCallable)
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static void UnregisterForKeepInsideWorld(UObject* WorldContextObject, AActor* Actor);
     
-    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static void RegisterForKeepInsideWorld(UObject* WorldContextObject, AActor* Actor);
     
 };

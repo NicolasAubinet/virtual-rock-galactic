@@ -2,20 +2,21 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "Health.h"
-#include "DeathSigDelegate.h"
-#include "EHealthbarType.h"
-#include "HealthChangedSigDelegate.h"
-#include "DamageSigDelegate.h"
 #include "HitSigDelegate.h"
-#include "BodypartHitSigDelegate.h"
-#include "OnRadialDamageDelegate.h"
-#include "UObject/NoExportTypes.h"
 #include "DamageData.h"
+#include "DamageSigDelegate.h"
+#include "HealthChangedSigDelegate.h"
+#include "BodypartHitSigDelegate.h"
+#include "DeathSigDelegate.h"
+#include "OnRadialDamageDelegate.h"
+#include "OnHitByHitScanDelegate.h"
+#include "UObject/NoExportTypes.h"
+#include "EHealthbarType.h"
 #include "HealthComponentBase.generated.h"
 
+class UPrimitiveComponent;
 class AActor;
 class UDamageClass;
-class UPrimitiveComponent;
 class UParticleSystem;
 
 UCLASS(Abstract, Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -44,6 +45,9 @@ public:
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnRadialDamage OnRadialDamage;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FOnHitByHitScan OnHitByHitScan;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FCanTakeDamageDelegate OnCanTakeDamageChanged;

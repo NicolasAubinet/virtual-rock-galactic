@@ -1,12 +1,12 @@
 #include "SessionHandling.h"
 #include "Templates/SubclassOf.h"
 
+class UDifficultySetting;
 class UObject;
 class UFSDGameInstance;
-class APlayerCharacter;
 class UPlayerCharacterID;
+class APlayerCharacter;
 class UBiome;
-class UDifficultySetting;
 class UMissionTemplate;
 
 void USessionHandling::StopVoice(UObject* WorldContextObject) {
@@ -16,6 +16,10 @@ void USessionHandling::StartVoice(UObject* WorldContextObject) {
 }
 
 bool USessionHandling::StartSearchForFriends(int32 localUserNum, UFSDGameInstance* GameInstance) {
+    return false;
+}
+
+bool USessionHandling::StartSearchForBlockedUsers(int32 localUserNum) {
     return false;
 }
 

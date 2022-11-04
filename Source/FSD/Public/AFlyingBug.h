@@ -7,48 +7,48 @@
 
 class UEnemyComponent;
 class UPawnStatsComponent;
-class UPawnAlertComponent;
-class UPawnSensingComponent;
-class UOutlineComponent;
-class USphereComponent;
 class UAudioComponent;
-class UFrozenPawnImpactComponent;
-class USoundBase;
-class UHitReactionComponent;
+class UOutlineComponent;
+class UPawnSensingComponent;
 class AActor;
+class UPawnAlertComponent;
+class USphereComponent;
+class UFrozenPawnImpactComponent;
+class UHitReactionComponent;
+class USoundBase;
 class UHealthComponentBase;
-class UHealthComponent;
 class UDamageTag;
+class UHealthComponent;
 
 UCLASS(Blueprintable)
 class AAFlyingBug : public AEnemyDeepPathfinderCharacter {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UEnemyComponent* EnemyComponent;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UPawnStatsComponent* PawnStats;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UOutlineComponent* outline;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UPawnSensingComponent* Senses;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UPawnAlertComponent* Alert;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USphereComponent* ExplosionSphere;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UAudioComponent* WingSoundComponent;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UFrozenPawnImpactComponent* FrozenImpact;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UHitReactionComponent* HitReactions;
     
 protected:

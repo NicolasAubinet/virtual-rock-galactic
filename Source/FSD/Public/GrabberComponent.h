@@ -1,19 +1,19 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "ReleasedActorSigDelegate.h"
-#include "Components/ActorComponent.h"
 #include "GrabbedActorSigDelegate.h"
-#include "GameplayTagContainer.h"
+#include "Components/ActorComponent.h"
 #include "EOutline.h"
+#include "ReleasedActorSigDelegate.h"
+#include "GameplayTagContainer.h"
 #include "EGrabbedStateCameraMode.h"
 #include "GrabberComponent.generated.h"
 
+class USoundCue;
+class AActor;
+class ADeepPathfinderCharacter;
 class UAudioComponent;
 class USkeletalMeshComponent;
-class ADeepPathfinderCharacter;
-class USoundCue;
 class UDialogDataAsset;
-class AActor;
 class UPrimitiveComponent;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -30,7 +30,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagQuery TagFilter;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     UAudioComponent* GrabLoopSoundInstance;
     
     UPROPERTY(EditAnywhere, Transient)

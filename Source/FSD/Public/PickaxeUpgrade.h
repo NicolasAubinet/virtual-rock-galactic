@@ -6,8 +6,8 @@
 #include "UpgradeValues.h"
 #include "PickaxeUpgrade.generated.h"
 
-class AItem;
 class AFSDPlayerState;
+class AItem;
 
 UCLASS(Blueprintable, EditInlineNew, MinimalAPI)
 class UPickaxeUpgrade : public UStandardItemUpgrade {

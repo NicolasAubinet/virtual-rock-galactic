@@ -2,16 +2,16 @@
 #include "CoreMinimal.h"
 #include "Objective.h"
 #include "ShellBreakTimerSignatureDelegate.h"
+#include "UObject/NoExportTypes.h"
 #include "ShellBreakPauseChangeSignatureDelegate.h"
 #include "MuleRefueledDelegate.h"
-#include "UObject/NoExportTypes.h"
 #include "EEscortMissionState.h"
 #include "CannisterRegisteredDelegate.h"
 #include "EscortObjective.generated.h"
 
+class UDebrisPositioning;
 class UCurveFloat;
 class UDebrisBase;
-class UDebrisPositioning;
 class AActor;
 class AEscortDestination;
 class UCarvedResourceData;
@@ -59,7 +59,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DebrisRadius;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     TArray<UDebrisBase*> ObjectDebris;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

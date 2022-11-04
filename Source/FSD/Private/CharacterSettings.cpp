@@ -21,8 +21,12 @@ UCharacterSettings::UCharacterSettings() {
     this->DefaultEditorCharacterID = NULL;
     this->NoHead = NULL;
     this->DefaultHead = NULL;
+    this->HeadForMasks = NULL;
     this->ThickNeck = NULL;
     this->ThinNeck = NULL;
+    this->FlatEars = NULL;
+    this->FaceOnly = NULL;
+    this->EyesOnly = NULL;
     this->ThrowItemAnimSettings = NULL;
     this->AutoReloadShout = NULL;
     this->TeleportPositioning = NULL;

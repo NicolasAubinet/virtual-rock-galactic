@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "TentacleBase.h"
-#include "TriggerAI.h"
 #include "EFacilityTentacleState.h"
+#include "TriggerAI.h"
 #include "TentacleTarget.h"
 #include "UObject/NoExportTypes.h"
 #include "FacilityTentacle.generated.h"
 
 class UAnimMontage;
-class UDebrisPositioning;
 class USkeletalMeshComponent;
+class UDebrisPositioning;
 
 UCLASS(Blueprintable)
 class FSD_API AFacilityTentacle : public ATentacleBase, public ITriggerAI {
@@ -28,7 +28,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_TentacleState, meta=(AllowPrivateAccess=true))
     EFacilityTentacleState TentacleState;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* HeadMesh;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_DesiredTarget, meta=(AllowPrivateAccess=true))

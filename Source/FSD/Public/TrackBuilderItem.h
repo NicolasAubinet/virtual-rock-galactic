@@ -1,16 +1,16 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "EPlaceableObstructionType.h"
+#include "UObject/NoExportTypes.h"
 #include "AnimatedItem.h"
 #include "PlaceableInterface.h"
-#include "UObject/NoExportTypes.h"
+#include "EPlaceableObstructionType.h"
 #include "UObject/NoExportTypes.h"
 #include "TrackBuilderItem.generated.h"
 
+class UCrosshairAggregator;
 class ATrackBuilderSegment;
 class UTrackBuilderConnectPoint;
-class UCrosshairAggregator;
 class UTrackBuilderUsable;
 
 UCLASS(Abstract, Blueprintable)
@@ -18,7 +18,7 @@ class FSD_API ATrackBuilderItem : public AAnimatedItem, public IPlaceableInterfa
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UCrosshairAggregator* CrosshairAggregator;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -47,16 +47,16 @@ public:
     void UpdatePlacement(const FTransform& InTransform, UTrackBuilderConnectPoint* InConnectPoint, bool bPlacementValid, bool InUpdateServer);
     
 protected:
-    UFUNCTION(BlueprintCallable, Server, Unreliable, WithValidation)
+    UFUNCTION(BlueprintCallable, Server, Unreliable)
     void ServerUpdatePlacement(const FTransform& InTransform, const bool bPlacementValid, UTrackBuilderConnectPoint* InConnectPoint);
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void ServerFinishPlacement(const FTransform& FinalLocation, UTrackBuilderConnectPoint* ConnectPoint);
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void ServerCancelPlacement();
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void ServerBeginPlaceSegment(UTrackBuilderUsable* InUsable);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)

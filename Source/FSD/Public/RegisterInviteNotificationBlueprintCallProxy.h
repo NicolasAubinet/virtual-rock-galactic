@@ -4,8 +4,8 @@
 #include "BlueprintRegisterInvitiNotificationDelegateDelegate.h"
 #include "RegisterInviteNotificationBlueprintCallProxy.generated.h"
 
-class URegisterInviteNotificationBlueprintCallProxy;
 class UObject;
+class URegisterInviteNotificationBlueprintCallProxy;
 
 UCLASS(Blueprintable)
 class URegisterInviteNotificationBlueprintCallProxy : public UOnlineBlueprintCallProxyBase {
@@ -24,7 +24,7 @@ public:
     UObject* WorldContextObject;
     
     URegisterInviteNotificationBlueprintCallProxy();
-    UFUNCTION(BlueprintCallable)
+    UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static URegisterInviteNotificationBlueprintCallProxy* RegisterInvitiNotification(UObject* NewWorldContextObject);
     
 };

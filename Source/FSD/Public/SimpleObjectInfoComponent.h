@@ -5,10 +5,10 @@
 #include "SimpleObjectInfoData.h"
 #include "SimpleObjectInfoComponent.generated.h"
 
-class UTexture2D;
 class UDialogDataAsset;
-class UActorContextWidget;
+class UTexture2D;
 class USceneComponent;
+class UActorContextWidget;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class USimpleObjectInfoComponent : public UObjectInfoComponent {
@@ -23,6 +23,12 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDialogDataAsset* LookAtShout;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bHasMissionControlLookAtShout;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UDialogDataAsset* MissionControlLookAtShout;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     UDialogDataAsset* LookAtShoutOverride;
@@ -42,7 +48,7 @@ protected:
     UPROPERTY(EditAnywhere)
     TMap<TWeakObjectPtr<USceneComponent>, FSimpleObjectInfoData> ComponentMap;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     UActorContextWidget* ContextWidget;
     
 public:

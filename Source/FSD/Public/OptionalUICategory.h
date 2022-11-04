@@ -25,10 +25,10 @@ protected:
     
 public:
     UOptionalUICategory();
-    UFUNCTION(BlueprintCallable)
+    UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
     void SetVisible(UObject* WorldContext, bool IsCategoryVisible);
     
-    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContext"))
     bool IsVisible(UObject* WorldContext) const;
     
 };

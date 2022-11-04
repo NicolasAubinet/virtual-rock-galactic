@@ -1,10 +1,10 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "ControllerSettings.h"
-#include "UDLSSMode.h"
 #include "HUDElements.h"
-#include "CharacterOptions.h"
 #include "EConsoleGraphicsMode.h"
+#include "UDLSSMode.h"
+#include "CharacterOptions.h"
 #include "CustomKeyBinding.h"
 #include "ConsoleOptionsInSaveGame.generated.h"
 
@@ -145,10 +145,16 @@ public:
     int32 AmdFsrMode;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 AmdFsr2Mode;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDLSSMode NvidiaDlssMode;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float AmdFsrSharpness;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float AmdFsr2Sharpness;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float NvidiaDlssSharpness;

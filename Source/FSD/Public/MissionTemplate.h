@@ -1,31 +1,31 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "ResourceSpawner.h"
 #include "SavableDataAsset.h"
+#include "ResourceSpawner.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "ObjectiveMissionIcon.h"
 #include "MissionTemplate.generated.h"
 
-class AProceduralSetup;
-class UObjective;
-class AFSDGameMode;
-class UMutator;
-class UMissionWarning;
-class UMissionComplexity;
 class UWorld;
+class UDebrisActorComponent;
+class UObjective;
+class UMutator;
+class AProceduralSetup;
+class AFSDGameMode;
+class UMissionComplexity;
 class UMissionDuration;
-class UMissionTemplate;
 class UTexture2D;
 class UMissionDNA;
-class UDebrisActorComponent;
 class UTutorialComponent;
 class UGeneratedMission;
 class UFSDSaveGame;
-class UMissionMutator;
+class UMissionTemplate;
 class UObject;
 class UBiome;
+class UMissionMutator;
+class UMissionWarning;
 
 UCLASS(Blueprintable, EditInlineNew)
 class FSD_API UMissionTemplate : public USavableDataAsset {
@@ -141,7 +141,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UTexture2D* GetMissionButtonImage() const;
     
-    UFUNCTION(BlueprintCallable)
+    UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     UGeneratedMission* GenerateMission(const UObject* WorldContextObject, UBiome* Biome, int32 Seed, int32 GlobalSeed, int32 missionIndex, UMissionComplexity* limitComplexity, UMissionDuration* limitDuration, UMissionMutator* Mutator, TArray<UMissionWarning*> Warnings, TSubclassOf<UObjective> forceSecondary);
     
 };

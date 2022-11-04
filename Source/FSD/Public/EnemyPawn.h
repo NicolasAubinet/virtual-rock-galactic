@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "FSDPawn.h"
-#include "NetMontageAble.h"
 #include "QueuedMontage.h"
+#include "NetMontageAble.h"
 #include "EnemyPawn.generated.h"
 
-class UEnemyComponent;
 class UEnemyPawnAfflictionComponent;
-class UPawnStatsComponent;
 class UEnemyHealthComponent;
+class UPawnStatsComponent;
 class UMaterialInterface;
+class UEnemyComponent;
 class UMeshComponent;
 class USkeletalMeshComponent;
 class UAnimMontage;
@@ -20,16 +20,16 @@ class AEnemyPawn : public AFSDPawn, public INetMontageAble {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UEnemyHealthComponent* Health;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UPawnStatsComponent* Stats;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UEnemyPawnAfflictionComponent* Affliction;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UEnemyComponent* enemy;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

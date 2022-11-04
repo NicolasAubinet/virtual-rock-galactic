@@ -5,8 +5,8 @@
 #include "Kismet/KismetMathLibrary.h"
 #include "MoveComponentToAction.generated.h"
 
-class USceneComponent;
 class UMoveComponentToAction;
+class USceneComponent;
 class UObject;
 
 UCLASS(Blueprintable)
@@ -25,7 +25,7 @@ protected:
 public:
     UMoveComponentToAction();
 protected:
-    UFUNCTION(BlueprintCallable)
+    UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
     static UMoveComponentToAction* EaseComponentTo(UObject* WorldContext, USceneComponent* InComponent, FTransform InEndTransform, TEnumAsByte<EEasingFunc::Type> InEasingMode, bool InWorldSpace, float InDuration);
     
 };

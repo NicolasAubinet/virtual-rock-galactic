@@ -1,54 +1,53 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "ScaledEffect.h"
+#include "GameEventCompletedDelegateDelegate.h"
 #include "GameFramework/GameState.h"
 #include "Int32DelegateEventDelegate.h"
+#include "CountDownStartedDelegate.h"
 #include "DelegateEventDelegate.h"
-#include "GameEventCompletedDelegateDelegate.h"
-#include "PlayerDelegateDelegate.h"
-#include "FSDChatMessage.h"
-#include "ReplicatedObjectives.h"
-#include "EnemyKilledDelegateDelegate.h"
+#include "GeneratedMissionSeed.h"
 #include "PlayerCharacterDelegateDelegate.h"
+#include "PlayerDelegateDelegate.h"
+#include "EnemyKilledDelegateDelegate.h"
+#include "FSDChatMessage.h"
 #include "BoscoReviveCounterChangedDelegate.h"
 #include "BoolDelegateDelegate.h"
+#include "FSDLocalizedChatMessage.h"
 #include "ObjectivesDelegateDelegate.h"
 #include "DifficultyDelegateDelegate.h"
-#include "CreditsReward.h"
-#include "CountDownStartedDelegate.h"
 #include "CountdownDelegate.h"
-#include "Engine/NetSerialization.h"
-#include "FSDLocalizedChatMessage.h"
-#include "GeneratedMissionSeed.h"
+#include "ReplicatedObjectives.h"
 #include "CurrentLeaderChangedDelegate.h"
-#include "ScaledEffect.h"
+#include "CreditsReward.h"
+#include "Engine/NetSerialization.h"
 #include "FSDGameState.generated.h"
 
-class UFlareController;
-class APlayerState;
-class APlayerCharacter;
+class UGeneratedMission;
 class AMiningPod;
-class AProceduralSetup;
 class UResourceData;
+class AFSDPlayerState;
 class ADeepCSGWorld;
+class UFSDEvent;
+class UPlayerCharacterID;
+class AProceduralSetup;
 class UPrimitiveComponent;
 class USpawnEffectsComponent;
 class UDynamicMeshScaler;
 class UGemProximityTracker;
+class APlayerState;
 class UAttackerManagerComponent;
 class UDifficultyManager;
 class AGameStats;
 class USoundMixManagerComponent;
 class USeasonReplicatorComponent;
 class UTeamResourcesComponent;
+class APlayerCharacter;
 class UDifficultySetting;
-class USoundCue;
 class UPlayerProximityTracker;
 class UShowroomManager;
-class UGeneratedMission;
-class AFSDPlayerState;
 class UObjective;
-class UPlayerCharacterID;
-class UFSDEvent;
+class USoundCue;
 
 UCLASS(Blueprintable)
 class FSD_API AFSDGameState : public AGameState {
@@ -138,13 +137,16 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     int32 LastSupplyPodTimeStamp;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    int32 LastCleaningPodTimeStamp;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     AProceduralSetup* ProceduralSetup;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool DelayLateJoin;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     UPrimitiveComponent* FakeMovementBase;
     
 protected:
@@ -184,31 +186,28 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_BoscoReviveCounter, meta=(AllowPrivateAccess=true))
     int32 BoscoReviveCounter;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USpawnEffectsComponent* SpawnEffects;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDynamicMeshScaler* MeshScaler;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
-    UFlareController* FlareController;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UGemProximityTracker* GemProximityTracker;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UAttackerManagerComponent* AttackerManager;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UDifficultyManager* DifficultyManagerComponent;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USoundMixManagerComponent* SoundMixManager;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USeasonReplicatorComponent* SeasonReplicatorComponent;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UTeamResourcesComponent* TeamResources;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -238,10 +237,10 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool RememberDifficulty;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UPlayerProximityTracker* ProximityTracker;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UShowroomManager* ShowroomManager;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -390,6 +389,9 @@ public:
     AFSDPlayerState* GetServerPlayerState();
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    TArray<UObjective*> GetSecondaryObjectives() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     UObjective* GetSecondaryObjective() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -462,10 +464,13 @@ public:
     bool AllMissionEndResultsReceived() const;
     
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
-    void All_SpawnScaledEffectAt(FScaledEffect effect, FVector_NetQuantize Location);
+    void All_SpawnScaledEffectAt(FScaledEffect Effect, FVector_NetQuantize Location);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
-    void All_SpawnScaledEffectAndCueAt(FScaledEffect effect, USoundCue* Audio, FVector_NetQuantize Location);
+    void All_SpawnScaledEffectAndCueAt(FScaledEffect Effect, USoundCue* Audio, FVector_NetQuantize Location);
+    
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void All_ServerQuit();
     
 };
 

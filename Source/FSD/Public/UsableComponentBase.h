@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Components/ActorComponent.h"
 #include "EInputKeys.h"
 #include "UsedBySignatureDelegate.h"
+#include "Components/ActorComponent.h"
 #include "UsableComponentBase.generated.h"
 
 class UUseAnimationSetting;
 class USceneComponent;
 class UUseConditionSet;
-class APlayerCharacter;
 class UTexture2D;
+class APlayerCharacter;
 
 UCLASS(Abstract, Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class FSD_API UUsableComponentBase : public UActorComponent {
@@ -31,8 +31,11 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 Priority;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     USceneComponent* RestrictToCollider;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool UsableHidesPlaceables;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool IsRayTraceTriggered;
@@ -51,6 +54,9 @@ protected:
     
 public:
     UUsableComponentBase();
+    UFUNCTION(BlueprintCallable)
+    void SetUseRestrictions(UUseConditionSet* set);
+    
     UFUNCTION(BlueprintCallable)
     void SetRayTraceTriggered(bool rayTraceTriggered);
     

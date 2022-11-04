@@ -3,14 +3,14 @@
 #include "Templates/SubclassOf.h"
 #include "UObject/Object.h"
 #include "GameplayTagContainer.h"
-#include "RandRange.h"
 #include "GameplayTagContainer.h"
+#include "RandRange.h"
 #include "StatusEffect.generated.h"
 
+class UStatusEffectExclusiveKey;
 class UPawnAffliction;
 class UStatusEffectItem;
 class UDamageClass;
-class UStatusEffectExclusiveKey;
 class UStatusEffect;
 class AActor;
 
@@ -22,7 +22,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UPawnAffliction* PawnAffliction;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     TArray<UStatusEffectItem*> StatusEffects;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -35,10 +35,16 @@ protected:
     UStatusEffectExclusiveKey* ExclusiveKey;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool TriggerTwiceOnPush;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FRandRange ApplyEffectsInterval;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool CanStack;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 MaxStack;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float Duration;
@@ -51,6 +57,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool RemoveOnTemperatureStateChange;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool AllowExternalSread;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagQuery GameplayTagQuery;

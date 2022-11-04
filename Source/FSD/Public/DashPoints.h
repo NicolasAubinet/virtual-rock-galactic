@@ -1,11 +1,11 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "UObject/NoExportTypes.h"
 #include "Components/ActorComponent.h"
-#include "Engine/NetSerialization.h"
 #include "DashSigDelegate.h"
-#include "Curves/CurveFloat.h"
 #include "EDashPointsGenerationMode.h"
+#include "Engine/NetSerialization.h"
+#include "UObject/NoExportTypes.h"
+#include "Curves/CurveFloat.h"
 #include "DashPoints.generated.h"
 
 class AActor;

@@ -1,12 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "TattooArmorItem.h"
 #include "VanityItem.h"
+#include "TattooArmorItem.h"
 #include "ArmorVanityItem.generated.h"
 
 class USkeletalMesh;
-class UAnimInstance;
 class UMaterialInterface;
+class UAnimInstance;
 class UArmorMaterialVanityItem;
 class AFSDPlayerState;
 

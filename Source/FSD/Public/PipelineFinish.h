@@ -1,17 +1,17 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "UObject/NoExportTypes.h"
-#include "GameFramework/Actor.h"
 #include "ERessuplyPodState.h"
+#include "GameFramework/Actor.h"
 #include "EInputKeys.h"
+#include "UObject/NoExportTypes.h"
 #include "PipelineFinish.generated.h"
 
-class UTrackBuilderConnectPoint;
-class USingleUsableComponent;
-class APipelineExtractorPod;
-class APlayerCharacter;
 class ARessuplyPod;
+class UTrackBuilderConnectPoint;
+class APlayerCharacter;
+class APipelineExtractorPod;
+class USingleUsableComponent;
 class ATrackBuilderSegment;
 class APipelineSegment;
 
@@ -20,10 +20,10 @@ class FSD_API APipelineFinish : public AActor {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UTrackBuilderConnectPoint* PipelineEndConnection;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USingleUsableComponent* UsableOrderExtractor;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

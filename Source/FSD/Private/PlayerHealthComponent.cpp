@@ -12,9 +12,6 @@ UStatusEffect* UPlayerHealthComponent::SetIronWillStatusEffect(TSubclassOf<UStat
 
 void UPlayerHealthComponent::Server_TryActivateIronWill_Implementation() {
 }
-bool UPlayerHealthComponent::Server_TryActivateIronWill_Validate() {
-    return true;
-}
 
 void UPlayerHealthComponent::OnRep_MaxHealth() {
 }
@@ -47,20 +44,11 @@ float UPlayerHealthComponent::GetHealthRegeneratingTargetRatio() const {
 
 void UPlayerHealthComponent::Client_SetHealthRegenerating_Implementation(bool isRegenerating) {
 }
-bool UPlayerHealthComponent::Client_SetHealthRegenerating_Validate(bool isRegenerating) {
-    return true;
-}
 
 void UPlayerHealthComponent::Client_OnFriendlyFire_Implementation(AController* EventInstigator, AActor* DamageCauser) {
 }
-bool UPlayerHealthComponent::Client_OnFriendlyFire_Validate(AController* EventInstigator, AActor* DamageCauser) {
-    return true;
-}
 
 void UPlayerHealthComponent::Client_HealthFullCannotHeal_Implementation() {
-}
-bool UPlayerHealthComponent::Client_HealthFullCannotHeal_Validate() {
-    return true;
 }
 
 bool UPlayerHealthComponent::CanActivateIronWill() const {

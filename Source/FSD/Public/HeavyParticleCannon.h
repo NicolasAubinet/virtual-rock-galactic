@@ -1,22 +1,22 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "BoosterModuleActiveDelegate.h"
 #include "AmmoDrivenWeapon.h"
 #include "DecalData.h"
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
 #include "ReflectionTraceResult.h"
-#include "BoosterModuleActiveDelegate.h"
-#include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
 #include "HeavyParticleCannon.generated.h"
 
-class UStickyFlameSpawner;
-class UNiagaraSystem;
+class USoundBase;
+class UFirstPersonNiagaraComponent;
 class UDamageComponent;
 class UReflectionHitscanComponent;
-class UFirstPersonNiagaraComponent;
-class UNiagaraComponent;
-class USoundBase;
-class AActor;
+class UStickyFlameSpawner;
 class UTerrainType;
+class UNiagaraComponent;
+class UNiagaraSystem;
+class AActor;
 class UFSDPhysicalMaterial;
 
 UCLASS(Blueprintable)
@@ -24,22 +24,22 @@ class AHeavyParticleCannon : public AAmmoDrivenWeapon {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UDamageComponent* Damage;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UReflectionHitscanComponent* HitscanComponent;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UStickyFlameSpawner* StickyFlamesSpawner;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UFirstPersonNiagaraComponent* FirstPersonBeam;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UFirstPersonNiagaraComponent* FirstPersonLaserSight;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UNiagaraComponent* ThirdPersonBeam;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -81,7 +81,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UNiagaraSystem* ProjectionModuleParticle;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UNiagaraComponent* ImpactParticleComp;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

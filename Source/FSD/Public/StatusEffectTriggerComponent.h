@@ -6,9 +6,9 @@
 #include "Engine/EngineTypes.h"
 #include "StatusEffectTriggerComponent.generated.h"
 
-class AActor;
 class UStatusEffect;
 class UPrimitiveComponent;
+class AActor;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UStatusEffectTriggerComponent : public UActorComponent {
@@ -27,7 +27,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSubclassOf<UStatusEffect>> LeaveTriggerEffects;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UPrimitiveComponent* collider;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Engine/DataAsset.h"
-#include "RandInterval.h"
 #include "BarleySpawnItem.h"
+#include "RandInterval.h"
 #include "DrinkSettings.generated.h"
 
 class UResourceData;
@@ -26,11 +26,11 @@ public:
     TArray<UDrinkableDataAsset*> Drinkables;
     
     UDrinkSettings();
-    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContext"))
     static TArray<UDrinkableDataAsset*> GetBarDrinkables(UObject* WorldContext, bool IncludeDailySpecial, bool includeNotUnlocked, bool includePlayerRankTooLow);
     
-    UFUNCTION(BlueprintCallable, BlueprintPure)
-    static UDrinkableDataAsset* GetBarDailySpecial(UObject* WorldContext);
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContext"))
+    static UDrinkableDataAsset* GetBarDailySpecial(UObject* WorldContext, UDrinkableDataAsset* currentDailySpecial);
     
 };
 

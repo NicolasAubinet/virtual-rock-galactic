@@ -3,10 +3,10 @@
 #include "Templates/SubclassOf.h"
 #include "DropPod.h"
 #include "ERefineryState.h"
-#include "EInputKeys.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "EPipelineBuildState.h"
+#include "EInputKeys.h"
 #include "FSDRefinery.generated.h"
 
 class APipelineSegment;
@@ -43,10 +43,10 @@ public:
     FRefineryExtractPodDelegate OnExtractorPodSpawned;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USingleUsableComponent* UsableStartRefining;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USingleUsableComponent* UsableLaunchRocket;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

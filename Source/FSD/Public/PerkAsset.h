@@ -3,17 +3,17 @@
 #include "Templates/SubclassOf.h"
 #include "Engine/DataAsset.h"
 #include "UObject/NoExportTypes.h"
+#include "EPerkHUDActivationLocation.h"
 #include "EPerkUsageType.h"
 #include "EPerkTierState.h"
-#include "EPerkHUDActivationLocation.h"
 #include "PerkAsset.generated.h"
 
-class UPerkHUDIconWidget;
 class UDialogDataAsset;
+class UPerkHUDIconWidget;
 class UTexture2D;
-class APlayerController;
 class UPerkLogic;
 class UPerkHUDActivationWidget;
+class APlayerController;
 class UObject;
 class UPlayerCharacterID;
 class UPerkAsset;
@@ -63,14 +63,14 @@ public:
     bool UseCharge(APlayerController* PlayerController);
     
 protected:
-    UFUNCTION(BlueprintCallable)
+    UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
     bool Unequip(UObject* WorldContext, UPlayerCharacterID* characterID);
     
-    UFUNCTION(BlueprintCallable)
+    UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
     void SetHighlighted(UObject* WorldContext, bool IsHighlighted);
     
 public:
-    UFUNCTION(BlueprintCallable)
+    UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
     static void SetCharacterPerks(UObject* WorldContext, UPlayerCharacterID* characterID, const TArray<UPerkAsset*>& perks);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -80,7 +80,7 @@ public:
     bool IsPerkAvailableInTier(int32 Tier) const;
     
 protected:
-    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContext"))
     bool IsEquippedBy(UObject* WorldContext, UPlayerCharacterID* characterID) const;
     
 public:
@@ -96,7 +96,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     EPerkUsageType GetUsageType() const;
     
-    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContext"))
     EPerkTierState GetStateAtTier(UObject* WorldContext, int32 Tier) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -118,15 +118,18 @@ public:
     int32 GetMaxUseCharges(APlayerController* PlayerController) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    int32 GetMaxRank() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     TSubclassOf<UPerkHUDIconWidget> GetHudIconWidgetClass() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<TSubclassOf<UPerkHUDActivationWidget>> GetHudActivationWidgets(EPerkHUDActivationLocation Location) const;
     
-    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContext"))
     UPerkDelegateItem* GetDelegates(UObject* WorldContext) const;
     
-    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContext"))
     int32 GetCurrentRank(UObject* WorldContext) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -136,14 +139,17 @@ public:
     FString GetAdditionalRankDescription(int32 Rank) const;
     
 protected:
-    UFUNCTION(BlueprintCallable)
+    UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
     bool Equip(UObject* WorldContext, UPlayerCharacterID* characterID);
     
 public:
+    UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
+    void CheatSetCurrentRank(UObject* WorldContext, int32 InRank);
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool CanUseCharge(APlayerController* PlayerController) const;
     
-    UFUNCTION(BlueprintCallable)
+    UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
     bool BuyPerkAtTier(UObject* WorldContext, int32 Tier);
     
 };

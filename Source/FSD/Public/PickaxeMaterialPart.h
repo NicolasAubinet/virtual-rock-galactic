@@ -3,8 +3,8 @@
 #include "PickaxePartItem.h"
 #include "PickaxeMaterialPart.generated.h"
 
-class UMaterialInstanceDynamic;
 class UMaterialInterface;
+class UMaterialInstanceDynamic;
 class UDynamicIcon;
 class UObject;
 

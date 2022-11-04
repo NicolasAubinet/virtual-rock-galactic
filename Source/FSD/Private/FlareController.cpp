@@ -2,8 +2,8 @@
 
 class AFlareGunProjectile;
 class AFlare;
-class UObject;
 class AActor;
+class UObject;
 
 void UFlareController::UnregisterFlareGunProjectile(AFlareGunProjectile* flareprj) {
 }

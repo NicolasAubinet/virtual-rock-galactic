@@ -1,8 +1,8 @@
 #include "OutlineComponent.h"
 
 class AActor;
-class UPrimitiveComponent;
 class UHealthComponentBase;
+class UPrimitiveComponent;
 class AItem;
 
 void UOutlineComponent::UnlockOutline() {

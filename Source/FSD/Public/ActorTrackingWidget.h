@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "FSDUserWidget.h"
 #include "Layout/Margin.h"
+#include "FSDUserWidget.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "ActorTrackingWidget.generated.h"
 
+class APlayerController;
 class USceneComponent;
 class AActor;
-class APlayerController;
 class UActorTrackingWidget;
 
 UCLASS(Abstract, Blueprintable, EditInlineNew)
@@ -37,6 +37,12 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bHideWhenPlayerNearby;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bHideWhenPlayerFarAway;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    float LastTargetDistanceUpdate;
     
 public:
     UActorTrackingWidget();

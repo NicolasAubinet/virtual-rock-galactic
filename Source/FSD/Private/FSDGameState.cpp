@@ -2,24 +2,22 @@
 #include "Net/UnrealNetwork.h"
 #include "SoundMixManagerComponent.h"
 #include "DifficultyManager.h"
-#include "SeasonReplicatorComponent.h"
-#include "PlayerProximityTracker.h"
 #include "SpawnEffectsComponent.h"
-#include "DynamicMeshScaler.h"
-#include "FlareController.h"
 #include "GemProximityTracker.h"
 #include "AttackerManagerComponent.h"
+#include "SeasonReplicatorComponent.h"
 #include "TeamResourcesComponent.h"
+#include "PlayerProximityTracker.h"
 #include "ShowroomManager.h"
 
 class UGeneratedMission;
-class UResourceData;
-class UDifficultySetting;
-class AFSDPlayerState;
-class AProceduralSetup;
-class UObjective;
 class AGameStats;
+class AFSDPlayerState;
+class UDifficultySetting;
+class UObjective;
 class UFSDEvent;
+class AProceduralSetup;
+class UResourceData;
 class USoundCue;
 
 void AFSDGameState::StartCountdown(int32 Duration, const FText& countdownName) {
@@ -113,6 +111,10 @@ AFSDPlayerState* AFSDGameState::GetServerPlayerState() {
     return NULL;
 }
 
+TArray<UObjective*> AFSDGameState::GetSecondaryObjectives() const {
+    return TArray<UObjective*>();
+}
+
 UObjective* AFSDGameState::GetSecondaryObjective() const {
     return NULL;
 }
@@ -203,10 +205,13 @@ bool AFSDGameState::AllMissionEndResultsReceived() const {
     return false;
 }
 
-void AFSDGameState::All_SpawnScaledEffectAt_Implementation(FScaledEffect effect, FVector_NetQuantize Location) {
+void AFSDGameState::All_SpawnScaledEffectAt_Implementation(FScaledEffect Effect, FVector_NetQuantize Location) {
 }
 
-void AFSDGameState::All_SpawnScaledEffectAndCueAt_Implementation(FScaledEffect effect, USoundCue* Audio, FVector_NetQuantize Location) {
+void AFSDGameState::All_SpawnScaledEffectAndCueAt_Implementation(FScaledEffect Effect, USoundCue* Audio, FVector_NetQuantize Location) {
+}
+
+void AFSDGameState::All_ServerQuit_Implementation() {
 }
 
 void AFSDGameState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
@@ -239,6 +244,7 @@ AFSDGameState::AFSDGameState() {
     this->bTeamDown = false;
     this->CSGWorld = NULL;
     this->LastSupplyPodTimeStamp = 0;
+    this->LastCleaningPodTimeStamp = -9999;
     this->ProceduralSetup = NULL;
     this->DelayLateJoin = false;
     this->FakeMovementBase = NULL;
@@ -249,8 +255,7 @@ AFSDGameState::AFSDGameState() {
     this->ObjectivesXPPenaltyDeepDives = 0.20f;
     this->BoscoReviveCounter = -1;
     this->SpawnEffects = CreateDefaultSubobject<USpawnEffectsComponent>(TEXT("SpawnEffects"));
-    this->MeshScaler = CreateDefaultSubobject<UDynamicMeshScaler>(TEXT("MeshScaler"));
-    this->FlareController = CreateDefaultSubobject<UFlareController>(TEXT("FlareController"));
+    this->MeshScaler = NULL;
     this->GemProximityTracker = CreateDefaultSubobject<UGemProximityTracker>(TEXT("GemProximityTracker"));
     this->AttackerManager = CreateDefaultSubobject<UAttackerManagerComponent>(TEXT("AttackerManager"));
     this->DifficultyManagerComponent = CreateDefaultSubobject<UDifficultyManager>(TEXT("DifficultyManager"));

@@ -9,10 +9,10 @@
 #include "EInputKeys.h"
 #include "CrossbowProjectileBase.generated.h"
 
+class UCrossbowProjectileRicochet;
 class ACrossbowProjectileStuck;
 class UCrossbowProjectileRecallable;
 class UCrossbowProjectileMagnetic;
-class UCrossbowProjectileRicochet;
 class UCrossbowStuckProjectileEffectBanshee;
 class UTexture2D;
 class UStatusEffect;
@@ -32,16 +32,16 @@ public:
     float StatusEffectTime;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Replicated, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Replicated, meta=(AllowPrivateAccess=true))
     UCrossbowProjectileRecallable* RecallComponent;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Replicated, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Replicated, meta=(AllowPrivateAccess=true))
     UCrossbowProjectileMagnetic* MagneticComponent;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Replicated, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Replicated, meta=(AllowPrivateAccess=true))
     UCrossbowProjectileRicochet* RicochetComponent;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Replicated, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Replicated, meta=(AllowPrivateAccess=true))
     UCrossbowStuckProjectileEffectBanshee* BansheeComponent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -84,13 +84,13 @@ protected:
     bool IsASpecialProjectile;
     
 private:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USphereComponent* LaserCollider;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UDamageComponent* DamageComponent;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UTerrainDetectComponent* TerrainDetectComponent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

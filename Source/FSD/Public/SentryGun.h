@@ -1,25 +1,25 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
+#include "AmmoCountChangedEventDelegate.h"
+#include "WeaponFireOwner.h"
+#include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "GameFramework/Actor.h"
-#include "AmmoCountChangedEventDelegate.h"
-#include "Upgradable.h"
-#include "WeaponFireOwner.h"
 #include "SentryGunMuzzleSetup.h"
 #include "TracerData.h"
+#include "Upgradable.h"
 #include "Engine/EngineTypes.h"
-#include "UObject/NoExportTypes.h"
 #include "GameplayTagContainer.h"
-#include "LaserPointerTarget.h"
 #include "UObject/NoExportTypes.h"
+#include "LaserPointerTarget.h"
 #include "UObject/NoExportTypes.h"
 #include "SentryGun.generated.h"
 
-class USkeletalMeshComponent;
-class AProjectile;
 class USoundCue;
 class UParticleSystem;
+class USkeletalMeshComponent;
+class AProjectile;
 class USoundBase;
 class UHealthComponentBase;
 class UWeaponFireComponent;
@@ -42,7 +42,7 @@ public:
     FAmmoCountChangedEvent OnMaxAmmoCountChanged;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* SentryGunMesh;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -135,11 +135,11 @@ protected:
     UPROPERTY(EditAnywhere, Export, Replicated, Transient)
     TWeakObjectPtr<UHealthComponentBase> PrioritizedTarget;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     UWeaponFireComponent* WeaponFire;
     
 private:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     UAudioComponent* ShootingAudioComponent;
     
 public:

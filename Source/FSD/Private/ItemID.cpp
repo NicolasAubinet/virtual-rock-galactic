@@ -4,6 +4,7 @@
 class AActor;
 class UItemData;
 class AItem;
+class UItemSkin;
 
 bool UItemID::IsItemClassChildOf(TSubclassOf<AActor> InParentClass) const {
     return false;
@@ -23,6 +24,10 @@ EItemCategory UItemID::GetItemCategory() const {
 
 AItem* UItemID::GetItem() const {
     return NULL;
+}
+
+TArray<UItemSkin*> UItemID::GetAllSkins() {
+    return TArray<UItemSkin*>();
 }
 
 TSubclassOf<AActor> UItemID::GetActorClass() const {

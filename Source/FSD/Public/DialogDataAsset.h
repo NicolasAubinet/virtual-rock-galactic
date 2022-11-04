@@ -41,10 +41,10 @@ protected:
     
 public:
     UDialogDataAsset();
-    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContext"))
     int32 SelectIndex(UObject* WorldContext);
     
-    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContext"))
     bool SelectEntry(UObject* WorldContext, FDialogStruct& Dialog);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)

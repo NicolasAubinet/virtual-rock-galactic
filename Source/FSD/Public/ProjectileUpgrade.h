@@ -2,13 +2,13 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "StandardItemUpgrade.h"
-#include "UpgradeValues.h"
 #include "EProjectileUpgrade.h"
+#include "UpgradeValues.h"
 #include "ProjectileUpgrade.generated.h"
 
+class AFSDPlayerState;
 class AActor;
 class UItemUpgradeCondition;
-class AFSDPlayerState;
 
 UCLASS(Blueprintable, EditInlineNew, MinimalAPI)
 class UProjectileUpgrade : public UStandardItemUpgrade {

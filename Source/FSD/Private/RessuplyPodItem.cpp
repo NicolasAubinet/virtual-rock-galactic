@@ -1,13 +1,10 @@
 #include "RessuplyPodItem.h"
 #include "Net/UnrealNetwork.h"
 
-class UItemPlacerAggregator;
 class UObject;
+class UItemPlacerAggregator;
 
 void ARessuplyPodItem::Server_Call_Resupply_Implementation(const FVector& Location) {
-}
-bool ARessuplyPodItem::Server_Call_Resupply_Validate(const FVector& Location) {
-    return true;
 }
 
 

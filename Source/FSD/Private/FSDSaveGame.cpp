@@ -2,8 +2,8 @@
 #include "Templates/SubclassOf.h"
 
 class UResourceData;
-class UPlayerCharacterID;
 class UObject;
+class UPlayerCharacterID;
 class UItemID;
 class AActor;
 class UFSDSaveGame;

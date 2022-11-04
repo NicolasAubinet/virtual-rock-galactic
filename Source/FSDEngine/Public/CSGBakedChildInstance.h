@@ -1,9 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "DeepCSGFloatTree.h"
 #include "CSGBase.h"
 #include "UObject/NoExportTypes.h"
 #include "CSGBakedChildInstanceProperties.h"
+#include "DeepCSGFloatTree.h"
 #include "UObject/NoExportTypes.h"
 #include "CSGBakedChildInstance.generated.h"
 

@@ -1,17 +1,18 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "EquippedVanity.h"
 #include "Components/ActorComponent.h"
 #include "EHeadVanityType.h"
-#include "EquippedVanity.h"
 #include "TattooArmorItem.h"
 #include "EVanitySlot.h"
 #include "CharacterVanityComponent.generated.h"
 
+class UMaterialInstanceDynamic;
 class UCharacterVanityItems;
 class UBeardColorVanityItem;
-class UMaterialInstanceDynamic;
-class UMaterialInterface;
 class UVanityItem;
+class UMaterialInterface;
+class UArmorMaterialVanityItem;
 class USkeletalMeshComponent;
 class UObject;
 class UPlayerCharacterID;
@@ -44,6 +45,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     UVanityItem* PreviewedItem;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    UArmorMaterialVanityItem* PreviewedArmorMaterial;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     UMaterialInterface* SkinMaterial;
@@ -80,7 +84,7 @@ public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void RemoveMedicalGown();
     
-    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static UVanityItem* Receive_GetEquippedVanityItem(UObject* WorldContextObject, UPlayerCharacterID* Character, EVanitySlot Slot);
     
 protected:

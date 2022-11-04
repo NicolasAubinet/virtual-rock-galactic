@@ -5,11 +5,11 @@
 #include "JellyBreeder.generated.h"
 
 class AActor;
-class AProjectile;
-class UEnemyDescriptor;
-class USoundBase;
-class UAnimSequenceBase;
 class UParticleSystem;
+class UAnimSequenceBase;
+class USoundBase;
+class UEnemyDescriptor;
+class AProjectile;
 class UPhysicalMaterial;
 
 UCLASS(Blueprintable)

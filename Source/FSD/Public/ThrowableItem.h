@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
+#include "UObject/NoExportTypes.h"
 #include "AnimatedItem.h"
 #include "Upgradable.h"
-#include "UObject/NoExportTypes.h"
 #include "ThrowableItem.generated.h"
 
 class AThrowableActor;
-class UItemUpgrade;
 class UAnimMontage;
 class AItem;
+class UItemUpgrade;
 class AActor;
 
 UCLASS(Blueprintable)
@@ -70,7 +70,7 @@ protected:
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
     void Simulate_Throw(TSubclassOf<AThrowableActor> ActorClass);
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_Throw(TSubclassOf<AThrowableActor> ActorClass);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)

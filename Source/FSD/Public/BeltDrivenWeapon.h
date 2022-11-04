@@ -3,16 +3,16 @@
 #include "AmmoDrivenWeapon.h"
 #include "BeltDrivenWeapon.generated.h"
 
+class UAudioComponent;
 class UCurveFloat;
 class USoundCue;
-class UAudioComponent;
 
 UCLASS(Abstract, Blueprintable)
 class ABeltDrivenWeapon : public AAmmoDrivenWeapon {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     UAudioComponent* BarrelAudio;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -44,10 +44,10 @@ public:
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
     
 protected:
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_StopBarrel();
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_StartBarrel();
     
 };

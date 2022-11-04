@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Components/ActorComponent.h"
-#include "ECustomUsableType.h"
-#include "EndUsingDelegateDelegate.h"
-#include "BeginUsingDelegateDelegate.h"
-#include "DepositingEventDelegate.h"
 #include "CharacterUseState.h"
+#include "Components/ActorComponent.h"
+#include "BeginUsingDelegateDelegate.h"
+#include "EndUsingDelegateDelegate.h"
+#include "DepositingEventDelegate.h"
+#include "ECustomUsableType.h"
 #include "CharacterUseComponent.generated.h"
 
-class AActor;
 class UUsableComponentBase;
+class AActor;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UCharacterUseComponent : public UActorComponent {
@@ -43,13 +43,16 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FCharacterUseState LocalState;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FCharacterUseState LastRequestedState;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UUsableComponentBase* LastBeginUseUsable;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     TArray<UUsableComponentBase*> UsableComponentsCache;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UUsableComponentBase* HoveringUsable;
     
 public:

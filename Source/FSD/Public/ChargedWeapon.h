@@ -5,8 +5,8 @@
 #include "ChargedWeapon.generated.h"
 
 class USoundCue;
-class UFXSystemAsset;
 class UAnimMontage;
+class UFXSystemAsset;
 class UFXSystemComponent;
 
 UCLASS(Abstract, Blueprintable)
@@ -35,7 +35,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UFXSystemAsset* ChargeupParticles;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     UFXSystemComponent* ChargeupParticleInstance;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

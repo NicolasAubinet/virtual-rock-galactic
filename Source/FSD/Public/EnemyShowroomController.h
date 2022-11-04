@@ -4,9 +4,9 @@
 #include "EnemyShowroomController.generated.h"
 
 class AEnemyShowroomItem;
+class UEnemyShowroomController;
 class UAnimSequenceBase;
 class UObject;
-class UEnemyShowroomController;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UEnemyShowroomController : public UShowroomController {
@@ -26,7 +26,7 @@ public:
     UFUNCTION(BlueprintCallable)
     void PlayAttack(UAnimSequenceBase* Animation);
     
-    UFUNCTION(BlueprintCallable)
+    UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static UEnemyShowroomController* DisplayEnemy(UObject* WorldContextObject, TSoftClassPtr<AEnemyShowroomItem> EnemyPreviewActor);
     
 };

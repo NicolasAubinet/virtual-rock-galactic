@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Subsystems/GameInstanceSubsystem.h"
-#include "NewMessageSigDelegate.h"
 #include "FSDChatMessage.h"
+#include "NewMessageSigDelegate.h"
 #include "MessagingSubSystem.generated.h"
 
 UCLASS(Blueprintable)
@@ -13,6 +13,9 @@ public:
     FNewMessageSig OnNewMessage;
     
     UMessagingSubSystem();
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    static FString MessageSenderIdAsString(const FFSDChatMessage& Msg);
+    
     UFUNCTION(BlueprintCallable)
     static float MessageAge(const FFSDChatMessage& Msg);
     

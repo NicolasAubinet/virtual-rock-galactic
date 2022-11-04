@@ -1,15 +1,16 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "DeathSigDetailedDelegate.h"
-#include "DamageSigDelegate.h"
 #include "HealthComponentBase.h"
-#include "HealthSegmentChangeDelegate.h"
-#include "ArmorHealedSigDelegate.h"
-#include "EHealthbarType.h"
-#include "HealthChangedSigDelegate.h"
 #include "DamageData.h"
+#include "DamageSigDelegate.h"
+#include "HealthChangedSigDelegate.h"
+#include "ArmorHealedSigDelegate.h"
+#include "DeathSigDetailedDelegate.h"
+#include "HealthSegmentChangeDelegate.h"
+#include "EHealthbarType.h"
 #include "HealthComponent.generated.h"
 
+class AActor;
 class USubHealthComponent;
 class UPawnStat;
 class UPawnStatsComponent;
@@ -43,7 +44,10 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool CanDamageThroughSegments;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    AActor* LastDamageCauser;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     TArray<USubHealthComponent*> SubHealthComponents;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -56,19 +60,22 @@ protected:
     TMap<UPawnStat*, float> Resistances;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float EnvironmentalDamageResistance;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool AffectedByGlobalWeakpointDamageMultiplier;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool UseDormancy;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     UPawnStatsComponent* PawnStats;
     
 public:
     UHealthComponent();
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void ToggleCanTakeDamage();
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
@@ -88,8 +95,8 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetMaxArmor() const;
     
-    /*UFUNCTION(BlueprintCallable, BlueprintPure)*/
-    EHealthbarType GetHealthbarType() const;
+    /*UFUNCTION(BlueprintCallable, BlueprintPure)
+    EHealthbarType GetHealthbarType() const;*/
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     void GetCurrentHealthSegment(int32& Segment, float& segmentHealth, float& segmentHealthPercent);

@@ -1,33 +1,32 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "PendingRewardsStats.h"
 #include "FSDPlayerControllerBase.h"
-#include "ChatOpenedDelegateDelegate.h"
-#include "OnPlayerCharacterPossesedDelegate.h"
-#include "ESpacerigStartType.h"
 #include "EChatSenderType.h"
-#include "PendingRewards.h"
+#include "OnPlayerCharacterPossesedDelegate.h"
+#include "ChatOpenedDelegateDelegate.h"
+#include "ESpacerigStartType.h"
 #include "FSDPlayerController.generated.h"
 
 class UTexture2D;
-class UTerrainLatejoinComponent;
 class UTutorialContentWidget;
+class USoundCue;
+class UItemSkin;
 class AFSDPlayerState;
 class UPerkUsageComponent;
+class UVictoryPose;
+class UTerrainLatejoinComponent;
 class USoundMix;
 class UFSDWidgetEffectsComponent;
+class AHUD;
 class AActor;
-class UVanityItem;
 class UFSDAchievement;
 class UTemporaryBuff;
 class UItemID;
 class APlayerCharacter;
 class UPlayerCharacterID;
-class USoundCue;
 class UTreasureRewarder;
-class UVictoryPose;
-class UItemSkin;
+class UVanityItem;
 class UPickaxePart;
 
 UCLASS(Blueprintable)
@@ -73,10 +72,10 @@ public:
     FChatOpenedDelegate OnChatOpened;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UPerkUsageComponent* PerkUsageComponent;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UTerrainLatejoinComponent* LateJoinComponent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -91,7 +90,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool ServerTravelDone;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UFSDWidgetEffectsComponent* WidgetEffects;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -106,6 +105,12 @@ public:
     void ToggleVoiceOn(bool Enabled);
     
     UFUNCTION(BlueprintCallable)
+    void SpawnHUDLocal(TSubclassOf<AHUD> hudClass);
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void SpawnHUDAsync();
+    
+    UFUNCTION(BlueprintCallable)
     void ShowTutorialWidget(TSubclassOf<UTutorialContentWidget> TutorialWidget, bool ignoreQueue);
     
     UFUNCTION(BlueprintCallable)
@@ -117,34 +122,34 @@ public:
     UFUNCTION(BlueprintCallable, Client, Reliable)
     void SetAchievementProgressFromServer(UFSDAchievement* AchievementToSet, float Progress);
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void ServerSetUserHoldToRun(bool Value);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_TravelDone();
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetLateJoinDone();
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetGenerationStatus(const FString& Status, float Fraction);
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetGenerationFraction(float Fraction);
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetGenerationDone();
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetExtraEndScreenTime(float extraTime);
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetControllerReady();
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_ResetHUD();
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_NewMessage(const FString& Sender, const FString& Text, EChatSenderType SenderType);
     
 protected:
@@ -152,7 +157,7 @@ protected:
     void Server_DrawProjectileDebugPath(bool bDraw);
     
 public:
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_ActivateTemporaryBuff(UTemporaryBuff* buff);
     
 protected:
@@ -172,7 +177,7 @@ protected:
     void Receive_EndLevel_WaitForData(bool areObjectivesCompleted, int32 numberOfPlayersInPod);
     
 public:
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void ReadyToContinueFromEndScreen();
     
 protected:
@@ -199,9 +204,6 @@ public:
     void HideTutorialHint(bool watched);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    bool HasPendingRewards() const;
-    
-    UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetUseToggleTerrainScanner();
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -212,9 +214,6 @@ public:
     
     UFUNCTION(BlueprintCallable)
     AActor* GetPlayerStart();
-    
-    UFUNCTION(BlueprintCallable, BlueprintPure)
-    bool GetPendingRewards(FPendingRewardsStats& OutStats, FPendingRewards& OutRewards) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     AFSDPlayerState* GetFSDPlayerState() const;
@@ -249,9 +248,6 @@ public:
     
     UFUNCTION(BlueprintCallable, Client, Reliable)
     void Client_CollectPickaxePart(const UTreasureRewarder* rewarder, UPickaxePart* targetPart);
-    
-    UFUNCTION(BlueprintCallable)
-    void ApplyPendingRewards();
     
 };
 

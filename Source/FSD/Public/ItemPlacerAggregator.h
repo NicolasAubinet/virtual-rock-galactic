@@ -6,9 +6,9 @@
 #include "GameplayTagContainer.h"
 #include "ItemPlacerAggregator.generated.h"
 
-class AItemMarker;
-class AActor;
 class UDialogDataAsset;
+class AActor;
+class AItemMarker;
 class AItem;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -51,6 +51,12 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagQuery ExcludeTags;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<TSubclassOf<AActor>> InvalidAroundActors;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float InvalidAroundSize;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     AItemMarker* PlacementMarker;

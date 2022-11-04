@@ -2,12 +2,12 @@
 #include "CoreMinimal.h"
 #include "Engine/DataAsset.h"
 #include "UObject/NoExportTypes.h"
-#include "ECommunityGoalType.h"
 #include "ECommunityGoalTier.h"
+#include "ECommunityGoalType.h"
 #include "CommunityGoal.generated.h"
 
-class UObject;
 class UCommunityGoalCategory;
+class UObject;
 class UCommnuityRewardSetup;
 
 UCLASS(Blueprintable)
@@ -67,7 +67,7 @@ protected:
     int32 RewardTier(float Value, int32 Members);
     
 public:
-    UFUNCTION(BlueprintCallable, BlueprintPure=false)
+    UFUNCTION(BlueprintCallable, BlueprintPure=false, meta=(WorldContext="WorldContext"))
     void IncrementGoal(UObject* WorldContext, float Value) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)

@@ -4,8 +4,8 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "StatusEffectsFunctionLibrary.generated.h"
 
-class UDamageClass;
 class UStatusEffect;
+class UDamageClass;
 class AActor;
 
 UCLASS(Blueprintable)

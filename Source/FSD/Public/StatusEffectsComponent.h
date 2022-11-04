@@ -5,11 +5,11 @@
 #include "ActiveStatusEffectBank.h"
 #include "StatusEffectsComponent.generated.h"
 
+class UHealthComponentBase;
+class UObject;
 class AActor;
 class UStatusEffectExclusiveKey;
 class UStatusEffect;
-class UHealthComponentBase;
-class UObject;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UStatusEffectsComponent : public UActorComponent {
@@ -19,7 +19,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<FActiveStatusEffectBank> ActiveStatusEffects;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     UHealthComponentBase* OwnerHealth;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -41,6 +41,9 @@ public:
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     bool PushActiveStatusEffect(TSubclassOf<UStatusEffect> StatusEffect, AActor* Owner);
+    
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
+    void PopAllActiveStatusEffectsOfType(TSubclassOf<UStatusEffect> StatusEffect, AActor* Owner);
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void PopAllActiveStatusEffects(AActor* Owner);

@@ -1,30 +1,31 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
+#include "RandRange.h"
 #include "Engine/DataAsset.h"
 #include "UObject/NoExportTypes.h"
-#include "RandRange.h"
 #include "HeatSource.h"
-#include "UObject/NoExportTypes.h"
 #include "BiomeNoiseItem.h"
 #include "ResourceSpawner.h"
+#include "UObject/NoExportTypes.h"
 #include "BiomeEnemyEntry.h"
 #include "Sound/ReverbSettings.h"
 #include "Biome.generated.h"
 
-class UFloodFillSettings;
-class UDebrisSet;
-class UUserWidget;
+class UParticleSystem;
+class UObject;
 class UFileMediaSource;
 class UTexture2D;
-class UParticleSystem;
-class AActor;
-class UCaveScriptComponent;
 class ADebrisDataActor;
-class UMaterialInstance;
-class UTerrainMaterial;
+class UUserWidget;
 class UMissionStat;
 class UDetailNoise;
+class UCaveScriptComponent;
+class UDebrisSet;
+class AActor;
+class UMaterialInstance;
+class UTerrainMaterial;
+class UFloodFillSettings;
 class UPillarSettings;
 class UTunnelSetting;
 class UEnemyDescriptor;
@@ -32,7 +33,6 @@ class UCritterDescriptor;
 class USoundCue;
 class UReverbEffect;
 class ULevelSequence;
-class UObject;
 
 UCLASS(Blueprintable)
 class FSD_API UBiome : public UDataAsset {
@@ -221,7 +221,7 @@ protected:
     
 public:
     UBiome();
-    UFUNCTION(BlueprintCallable, BlueprintPure=false)
+    UFUNCTION(BlueprintCallable, BlueprintPure=false, meta=(WorldContext="WorldContext"))
     void StartPreload(UObject* WorldContext) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)

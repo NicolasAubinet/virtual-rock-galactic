@@ -2,14 +2,14 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "GameFramework/Actor.h"
-#include "UObject/NoExportTypes.h"
 #include "DrinkableBarSlot.h"
+#include "UObject/NoExportTypes.h"
 #include "SpaceRigBar.generated.h"
 
-class UBarMenuWidget;
-class UDrinkableDataAsset;
 class UBoxComponent;
 class UInstantUsable;
+class UDrinkableDataAsset;
+class UBarMenuWidget;
 class APlayerCharacter;
 class ADrinkableActor;
 
@@ -23,10 +23,10 @@ public:
     FDrinkableSignature OnNewDrinkableSpecial;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UInstantUsable* BarUsable;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UBoxComponent* BarUsableCollider;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

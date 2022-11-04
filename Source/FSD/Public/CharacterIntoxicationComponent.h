@@ -1,9 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "EIntoxicationState.h"
 #include "LerpingPercent.h"
 #include "CountDownFloat.h"
-#include "EIntoxicationState.h"
 #include "EDrinkableAlcoholStrength.h"
 #include "CharacterIntoxicationComponent.generated.h"
 
@@ -100,7 +100,7 @@ protected:
     int32 GetAlcoholPct(EDrinkableAlcoholStrength Strength) const;
     
 public:
-    UFUNCTION(BlueprintCallable, BlueprintAuthorityOnly, BlueprintCallable)
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void Consume(UDrinkableDataAsset* Drinkable);
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)

@@ -2,24 +2,24 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "Objective.h"
-#include "IRandRange.h"
-#include "EnemySpawnedDelegateDelegate.h"
 #include "SubObjective.h"
-#include "UObject/NoExportTypes.h"
+#include "EnemySpawnedDelegateDelegate.h"
 #include "RandInterval.h"
+#include "IRandRange.h"
 #include "UObject/NoExportTypes.h"
 #include "RoomNode.h"
+#include "UObject/NoExportTypes.h"
 #include "FacilityObjective.generated.h"
 
-class APawn;
 class ARessuplyPod;
-class UEncounterManager;
 class AActor;
+class APawn;
 class UEnemyDescriptor;
+class UDebrisPositioning;
 class ATetherStation;
 class UResourceData;
 class AProceduralSetup;
-class UDebrisPositioning;
+class UEncounterManager;
 class UCappedResource;
 
 UCLASS(Abstract, Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))

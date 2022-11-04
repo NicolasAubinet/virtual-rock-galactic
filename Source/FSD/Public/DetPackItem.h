@@ -6,14 +6,14 @@
 #include "UpgradableGear.h"
 #include "DetPackItem.generated.h"
 
-class ADetPack;
 class USkeletalMeshComponent;
-class UForceFeedbackEffect;
-class AItem;
 class UAnimMontage;
+class ADetPack;
+class UItemUpgrade;
+class AItem;
+class UForceFeedbackEffect;
 class UCapacityHoldingItemAggregator;
 class UDialogDataAsset;
-class UItemUpgrade;
 
 UCLASS(Blueprintable)
 class ADetPackItem : public AAnimatedItem, public IUpgradable, public IUpgradableGear {
@@ -44,16 +44,16 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UAnimMontage* WPN_EquipDetonatorAnimation;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* DetonatorFPMesh;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* DetonatorTPMesh;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UForceFeedbackEffect* DetonatorTriggerForceFeedback;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UCapacityHoldingItemAggregator* Capacity;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -109,13 +109,13 @@ protected:
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
     void Simulate_ThrowGrenade();
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_ThrowGrenade();
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_Detonate();
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_CycleItem();
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)

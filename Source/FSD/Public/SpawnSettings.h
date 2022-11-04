@@ -1,11 +1,11 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Engine/DataAsset.h"
 #include "RandRange.h"
+#include "Engine/DataAsset.h"
 #include "SpawnSettings.generated.h"
 
-class USoundCue;
 class UNiagaraSystem;
+class USoundCue;
 
 UCLASS(Blueprintable)
 class USpawnSettings : public UDataAsset {

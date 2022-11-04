@@ -7,9 +7,9 @@
 #include "ResourceData.generated.h"
 
 class UTexture2D;
-class UObject;
 class UMissionStat;
 class AResourceChunk;
+class UObject;
 
 UCLASS(Blueprintable)
 class FSD_API UResourceData : public UDataAsset, public ISaveGameIDInterface {
@@ -74,11 +74,14 @@ protected:
     int32 XPValue;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float SeasonXPMultiplier;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGuid SavegameID;
     
 public:
     UResourceData();
-    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     float GetOwnedAmount(UObject* WorldContextObject) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)

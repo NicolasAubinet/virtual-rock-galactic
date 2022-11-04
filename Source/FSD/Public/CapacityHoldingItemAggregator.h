@@ -24,7 +24,7 @@ public:
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
     
     UFUNCTION(BlueprintCallable)
-    void UseAmmo(int32 count);
+    void UseAmmo(int32 Count);
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetMaxAmmo(int32 InMaxAmmo, bool InChangeCurrentAmount);

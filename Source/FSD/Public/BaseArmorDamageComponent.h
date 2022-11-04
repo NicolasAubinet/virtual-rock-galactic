@@ -1,12 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "ArmorShatterDelegateDelegate.h"
 #include "ArmorDamageEffects.h"
+#include "ArmorShatterDelegateDelegate.h"
 #include "BaseArmorDamageComponent.generated.h"
 
-class USkeletalMeshComponent;
 class UFSDPhysicalMaterial;
+class USkeletalMeshComponent;
 
 UCLASS(Abstract, Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UBaseArmorDamageComponent : public UActorComponent {
@@ -25,7 +25,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UFSDPhysicalMaterial*> ArmorPhysMats;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* Mesh;
     
 public:

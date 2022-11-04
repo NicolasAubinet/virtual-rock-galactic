@@ -1,13 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/Object.h"
-#include "UObject/NoExportTypes.h"
+#include "DeepDiveTesterItem.h"
 #include "DeepDiveBank.h"
+#include "UObject/NoExportTypes.h"
 #include "DeepDiveManager.generated.h"
 
 class UFSDEventsHandler;
 class UDeepDive;
 class UGeneratedMission;
+class UBiome;
 
 UCLASS(Blueprintable)
 class UDeepDiveManager : public UObject {
@@ -33,6 +35,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     UDeepDive* ActiveDeepDive;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    UDeepDive* DebugDeepDive;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     UGeneratedMission* CurrentMission;
@@ -77,6 +82,12 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UDeepDive* GetActiveDeepDive() const;
+    
+    UFUNCTION(BlueprintCallable)
+    UDeepDive* GenerateDebugDeepDive(TArray<FDeepDiveTesterItem> stages, UBiome* Biome, bool IsElite);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    int32 FindDeepDiveSeed(UDeepDive* DeepDive) const;
     
     UFUNCTION(BlueprintCallable)
     bool CompleteCurrentSingleMission();

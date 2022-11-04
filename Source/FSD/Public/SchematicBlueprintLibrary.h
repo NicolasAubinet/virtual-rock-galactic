@@ -3,12 +3,12 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "SchematicBlueprintLibrary.generated.h"
 
-class USchematic;
-class UItemUpgrade;
-class USchematicCategory;
-class UObject;
 class UPlayerCharacterID;
+class USchematic;
 class UItemSkinSchematicCollection;
+class UObject;
+class USchematicCategory;
+class UItemUpgrade;
 
 UCLASS(Blueprintable)
 class USchematicBlueprintLibrary : public UBlueprintFunctionLibrary {
@@ -24,7 +24,7 @@ public:
     UFUNCTION(BlueprintCallable)
     static void LockSchematics(const TSet<USchematic*>& Schematics);
     
-    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static bool HasAnyUnlockableSchematics(UObject* WorldContextObject, UPlayerCharacterID* characterID, TSet<USchematicCategory*>& Categories);
     
     UFUNCTION(BlueprintCallable)

@@ -1,20 +1,21 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EOnProjectileImpactBehaviourEnum.h"
-#include "UObject/NoExportTypes.h"
 #include "GameFramework/Actor.h"
-#include "ProjectileImpact.h"
 #include "Engine/EngineTypes.h"
+#include "ProjectileImpact.h"
+#include "EOnProjectileImpactBehaviourEnum.h"
 #include "Engine/NetSerialization.h"
 #include "Engine/NetSerialization.h"
+#include "UObject/NoExportTypes.h"
 #include "ProjectileBase.generated.h"
 
+class UTerrainMaterial;
 class USoundCue;
 class USphereComponent;
-class UTerrainMaterial;
 class UProjectileUpgradeElement;
 class UPrimitiveComponent;
 class AProjectileBase;
+class UFSDPhysicalMaterial;
 class UDamageComponent;
 class UItemUpgrade;
 
@@ -50,7 +51,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_IsDorment, meta=(AllowPrivateAccess=true))
     bool IsDorment;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USphereComponent* CollisionComponent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -91,13 +92,13 @@ public:
     void StopMovement();
     
 protected:
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetState(FVector_NetQuantize Position, FVector_NetQuantize Velocity);
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_Penetrated(const FProjectileImpact& Impact);
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_Impacted(const FProjectileImpact& Impact);
     
 public:
@@ -151,7 +152,7 @@ public:
     
 protected:
     UFUNCTION(BlueprintCallable)
-    void DamageArmor(UDamageComponent* DamageComponent, const FHitResult& HitResult);
+    UFSDPhysicalMaterial* DamageArmor(UDamageComponent* DamageComponent, const FHitResult& HitResult);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void CustomEvent(const UItemUpgrade* Event);

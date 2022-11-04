@@ -1,14 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "UObject/NoExportTypes.h"
 #include "MULE.h"
+#include "UObject/NoExportTypes.h"
 #include "DelegateDelegate.h"
 #include "Molly.generated.h"
 
-class APlayerCharacter;
 class UResourceBank;
+class APlayerCharacter;
 class UOutlineComponent;
 class UDialogDataAsset;
+class UNiagaraSystem;
 
 UCLASS(Abstract, Blueprintable)
 class FSD_API AMolly : public AMULE {
@@ -20,10 +21,10 @@ public:
     FCalledByDelegate OnCalledByChanged;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UResourceBank* ResourceBank;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UOutlineComponent* OutlineComponent;
     
     UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -55,6 +56,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void EnableButton();
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void AddTrayEffect(UNiagaraSystem* Effect, int32 numberOfTraysAffected);
     
 };
 

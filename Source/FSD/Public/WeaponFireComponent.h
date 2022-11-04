@@ -1,12 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "UObject/NoExportTypes.h"
-#include "WeaponRicochetDelegateDelegate.h"
 #include "Components/ActorComponent.h"
 #include "Upgradable.h"
-#include "Engine/NetSerialization.h"
 #include "WeaponFiredDelegateDelegate.h"
 #include "WeaponFireEndedDelegateDelegate.h"
+#include "Engine/NetSerialization.h"
+#include "WeaponRicochetDelegateDelegate.h"
+#include "UObject/NoExportTypes.h"
 #include "WeaponFireComponent.generated.h"
 
 class UWeaponFireOwner;
@@ -35,7 +35,7 @@ public:
     void StopFire();
     
 protected:
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetShotPower(float shotPower);
     
 public:

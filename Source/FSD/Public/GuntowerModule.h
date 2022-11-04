@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "FSDPawn.h"
 #include "EventParticipant.h"
+#include "FSDPawn.h"
 #include "UObject/NoExportTypes.h"
 #include "GuntowerModule.generated.h"
 
-class USoundCue;
-class UParticleSystem;
-class AActor;
 class UStaticMeshComponent;
+class AActor;
+class USoundCue;
 class UAnimSequenceBase;
+class UParticleSystem;
 class USkeletalMeshComponent;
 class UGunTowerHealthComponent;
 class AGuntowerEvent;
@@ -44,19 +44,19 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UAnimSequenceBase* IntroductionAnimation;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UStaticMeshComponent* ArmorPiece1;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UStaticMeshComponent* ArmorPiece2;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UStaticMeshComponent* ArmorPiece3;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* ModuleMesh;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UGunTowerHealthComponent* GuntowerModuleHealth;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))

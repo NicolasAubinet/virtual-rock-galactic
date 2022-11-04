@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "UObject/NoExportTypes.h"
 #include "EnemyAnimInstance.h"
+#include "UObject/NoExportTypes.h"
 #include "SimpleMovingEnemyAnimInstance.generated.h"
 
 UCLASS(Blueprintable, NonTransient)
@@ -39,7 +39,7 @@ protected:
 public:
     USimpleMovingEnemyAnimInstance();
     UFUNCTION(BlueprintCallable)
-    void SetMeshScale(float newScale);
+    void SetMeshScale(float NewScale);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsNotMoving() const;

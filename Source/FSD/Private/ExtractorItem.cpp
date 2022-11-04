@@ -1,9 +1,9 @@
 #include "ExtractorItem.h"
 #include "Net/UnrealNetwork.h"
-#include "Components/BoxComponent.h"
-#include "Components/SkeletalMeshComponent.h"
-#include "FSDAudioComponent.h"
 #include "Components/PointLightComponent.h"
+#include "FSDAudioComponent.h"
+#include "Components/SkeletalMeshComponent.h"
+#include "Components/BoxComponent.h"
 #include "Particles/ParticleSystemComponent.h"
 
 class AResourceChunk;
@@ -11,32 +11,17 @@ class AResourceChunk;
 
 void AExtractorItem::Server_StopMining_Implementation() {
 }
-bool AExtractorItem::Server_StopMining_Validate() {
-    return true;
-}
 
 void AExtractorItem::Server_StartMining_Implementation() {
-}
-bool AExtractorItem::Server_StartMining_Validate() {
-    return true;
 }
 
 void AExtractorItem::Server_SetReadyToExtract_Implementation(bool IsReady) {
 }
-bool AExtractorItem::Server_SetReadyToExtract_Validate(bool IsReady) {
-    return true;
-}
 
 void AExtractorItem::Server_DigBlock_Implementation(FVector_NetQuantize Start, FVector_NetQuantize End) {
 }
-bool AExtractorItem::Server_DigBlock_Validate(FVector_NetQuantize Start, FVector_NetQuantize End) {
-    return true;
-}
 
 void AExtractorItem::Server_CollectChunk_Implementation(AResourceChunk* chunk) {
-}
-bool AExtractorItem::Server_CollectChunk_Validate(AResourceChunk* chunk) {
-    return true;
 }
 
 void AExtractorItem::ResetCurrentLoad() {

@@ -2,9 +2,9 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "Components/ActorComponent.h"
-#include "Engine/EngineTypes.h"
-#include "Engine/NetSerialization.h"
 #include "UObject/NoExportTypes.h"
+#include "Engine/NetSerialization.h"
+#include "Engine/EngineTypes.h"
 #include "WeaponHitEffectComponent.generated.h"
 
 class AActor;
@@ -23,7 +23,7 @@ protected:
 public:
     UWeaponHitEffectComponent();
 protected:
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SpawnEffect(const FVector_NetQuantize& Location, const FRotator& Rotation);
     
     UFUNCTION(BlueprintCallable)

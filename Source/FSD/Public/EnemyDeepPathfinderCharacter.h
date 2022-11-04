@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "DeepPathfinderCharacter.h"
-#include "NetMontageAble.h"
 #include "QueuedMontage.h"
+#include "NetMontageAble.h"
 #include "EnemyDeepPathfinderCharacter.generated.h"
 
 class UAnimMontage;
 class UEnemyHealthComponent;
-class UMeshComponent;
-class UMaterialInterface;
 class USkeletalMeshComponent;
+class UMaterialInterface;
+class UMeshComponent;
 class UAnimInstance;
 
 UCLASS(Blueprintable)
@@ -17,7 +17,7 @@ class AEnemyDeepPathfinderCharacter : public ADeepPathfinderCharacter, public IN
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UEnemyHealthComponent* HealthComponent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_QueuedMontage, meta=(AllowPrivateAccess=true))

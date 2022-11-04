@@ -1,27 +1,27 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
+#include "EDamageComponentType.h"
 #include "Components/ActorComponent.h"
 #include "OnEnemyKilledDelegateDelegate.h"
 #include "OnEnemyDamagedDelegateDelegate.h"
-#include "OnNoTargetHitDelegate.h"
 #include "OnAsyncAoE_CompleteDelegate.h"
-#include "EDamageComponentType.h"
+#include "OnNoTargetHitDelegate.h"
 #include "EArmorDamageType.h"
 #include "GameplayTagContainer.h"
 #include "Engine/EngineTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "DamageComponent.generated.h"
 
-class UDamageImpulse;
 class UDamageClass;
 class UDamageBonusBase;
-class UDamageModifier;
+class UDamageImpulse;
 class UDamageTag;
+class UFSDPhysicalMaterial;
+class UDamageModifier;
 class UDamageComponent;
 class AActor;
 class UPrimitiveComponent;
-class UFSDPhysicalMaterial;
 
 UCLASS(Blueprintable, EditInlineNew, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UDamageComponent : public UActorComponent {
@@ -56,6 +56,9 @@ protected:
     float ArmorDamageMultiplier;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float ArmorPenetration;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ShattersArmor;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -71,7 +74,7 @@ protected:
     float FrozenDamageBonusScale;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    float friendlyFireModifier;
+    float FriendlyFireModifier;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float SelfFriendlyFireMultiplier;
@@ -91,10 +94,10 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float FearFactor;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     TArray<UDamageBonusBase*> DamageBonuses;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     TArray<UDamageModifier*> DamageModifiers;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

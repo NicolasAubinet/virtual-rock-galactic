@@ -1,13 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EMinersManualSinglePage.h"
-#include "EHUDVisibilityReason.h"
 #include "GameFramework/PlayerController.h"
 #include "LocalVoiceStatusDelegate.h"
+#include "EDisconnectReason.h"
 #include "PlatformComponent.h"
+#include "EMinersManualSinglePage.h"
+#include "EHUDVisibilityReason.h"
 #include "EMinersManualSection.h"
 #include "UObject/NoExportTypes.h"
-#include "EDisconnectReason.h"
 #include "FSDPlayerControllerBase.generated.h"
 
 class UMaterialParameterCollection;
@@ -29,7 +29,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bStartWithBlackScreen;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UWindowManager* WindowManager;
     
     UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -70,6 +70,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OpenStandaloneMinersManual(EMinersManualSection Section, const FGuid& ID);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsPlayerBlocked(const FString& UserId);
     
     UFUNCTION(BlueprintCallable)
     bool IsHUDVisibleFlagSet(EHUDVisibilityReason reason);

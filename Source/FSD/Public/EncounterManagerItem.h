@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "PrePlacedEncounterItem.h"
 #include "ManagedEncounterItem.h"
+#include "PrePlacedEncounterItem.h"
 #include "EnemySpawnedDelegateDelegate.h"
 #include "EncounterManagerItem.generated.h"
 

@@ -3,8 +3,8 @@
 #include "RessuplyPod.h"
 #include "PipelineExtractorPod.generated.h"
 
-class APlayerCharacter;
 class APipelineSegment;
+class APlayerCharacter;
 
 UCLASS(Abstract, Blueprintable)
 class FSD_API APipelineExtractorPod : public ARessuplyPod {
@@ -21,7 +21,7 @@ public:
     APipelineExtractorPod();
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
     
-    UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void SetTargetRotation(APipelineSegment* InPipelineSegment);
     
 protected:

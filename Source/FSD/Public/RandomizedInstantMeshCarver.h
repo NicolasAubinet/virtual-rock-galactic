@@ -1,13 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
 #include "ECarveFilterType.h"
+#include "GameFramework/Actor.h"
 #include "RandRange.h"
 #include "RandomizedInstantMeshCarver.generated.h"
 
+class UStaticMesh;
 class UStaticMeshCarver;
 class USTLMeshCarver;
-class UStaticMesh;
 class UTerrainMaterialBase;
 
 UCLASS(Blueprintable)

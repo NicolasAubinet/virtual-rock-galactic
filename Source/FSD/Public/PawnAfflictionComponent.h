@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "Components/ActorComponent.h"
 #include "AfflictionChangeDelegateDelegate.h"
-#include "EFrozenBitsSize.h"
-#include "AfflictionEntriesArray.h"
+#include "Components/ActorComponent.h"
 #include "PawnAfflictionItem.h"
+#include "AfflictionEntriesArray.h"
+#include "EFrozenBitsSize.h"
 #include "PawnAfflictionComponent.generated.h"
 
-class UFrozenAfflictionEffect;
 class UPawnAffliction;
+class UScalingMeshAfflictionEffect;
 class UBurningAfflictionEffect;
 class UHealthComponentBase;
 
@@ -31,7 +31,7 @@ protected:
     FAfflictionEntriesArray NetworkedAfflictions;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TSubclassOf<UFrozenAfflictionEffect> FrozenEffect;
+    TSubclassOf<UScalingMeshAfflictionEffect> FrozenEffect;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UBurningAfflictionEffect> BurningEffect;

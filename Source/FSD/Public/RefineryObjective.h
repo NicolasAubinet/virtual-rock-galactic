@@ -2,15 +2,15 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "Objective.h"
-#include "UObject/NoExportTypes.h"
 #include "ERefineryState.h"
+#include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "RefineryObjective.generated.h"
 
-class AProceduralSetup;
+class UDebrisPositioning;
 class AFSDRefinery;
 class AActor;
-class UDebrisPositioning;
+class AProceduralSetup;
 
 UCLASS(Abstract, Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class FSD_API URefineryObjective : public UObjective {

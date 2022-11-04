@@ -1,28 +1,31 @@
 #include "FSDWidgetBlueprintLibrary.h"
 #include "Templates/SubclassOf.h"
 
-class UVerticalBoxSlot;
 class UObject;
 class UWidgetAnimation;
-class UVerticalBox;
 class UWidget;
-class UImage;
-class USizeBox;
 class UTexture2D;
-class AFSDPlayerState;
-class UPanelWidget;
-class UUserWidget;
-class UTextBlock;
-class USpacer;
-class UWindowWidget;
-class APlayerController;
-class UFSDCheatManager;
+class UOverlaySlot;
 class UUniformGridPanel;
+class USizeBox;
+class UProgressBar;
+class UUserWidget;
+class UPanelWidget;
+class UCanvasPanelSlot;
+class UOverlay;
+class UTextBlock;
+class UImage;
+class UWindowWidget;
+class AFSDPlayerState;
+class APlayerController;
 class UHorizontalBoxSlot;
+class UFSDCheatManager;
+class UVerticalBox;
+class USpacer;
+class UVerticalBoxSlot;
 class UHorizontalBox;
 class UUniformGridSlot;
 class UCanvasPanel;
-class UCanvasPanelSlot;
 
 void UFSDWidgetBlueprintLibrary::ToggleAnimationLooping(UObject* WorldContext, UWidgetAnimation* InAnimation, FWidgetAnimationSettings InSettings, bool InLoop, bool& OutPlayingChanged, bool& OutIsPlaying) {
 }
@@ -49,6 +52,9 @@ FTimerHandle UFSDWidgetBlueprintLibrary::SetTimerForNextTick(UObject* WorldConte
 void UFSDWidgetBlueprintLibrary::SetSizeBoxSettings(USizeBox*& InSizeBox, const FSizeBoxSettings& InSettings) {
 }
 
+void UFSDWidgetBlueprintLibrary::SetProgressBarType(UProgressBar* InProgressBar, TEnumAsByte<EProgressBarFillType::Type> InType) {
+}
+
 void UFSDWidgetBlueprintLibrary::SetMousePosition(UObject* WorldContextObject, int32 X, int32 Y) {
 }
 
@@ -67,7 +73,7 @@ void UFSDWidgetBlueprintLibrary::ScaleImageToHeight(UImage* Image, float TargetH
 void UFSDWidgetBlueprintLibrary::PrintStrings(UObject* WorldContextObject, const TArray<FString>& InStrings, bool bPrintToScreen, bool bPrintToLog, FLinearColor TextColor, float Duration) {
 }
 
-FString UFSDWidgetBlueprintLibrary::MidIgnoringWhiteSpace(const FString& Source, int32 Index, int32 count) {
+FString UFSDWidgetBlueprintLibrary::MidIgnoringWhiteSpace(const FString& Source, int32 Index, int32 Count) {
     return TEXT("");
 }
 
@@ -174,19 +180,23 @@ USpacer* UFSDWidgetBlueprintLibrary::CreateSpacer(UObject* WorldContext, FVector
     return NULL;
 }
 
-TArray<UUserWidget*> UFSDWidgetBlueprintLibrary::CreateOrReuseChildrenWithCallbackEx(UPanelWidget* Panel, int32 count, TSubclassOf<UUserWidget> WidgetClass, const UFSDWidgetBlueprintLibrary::FWidgetCreatedOrReusedDelegate& OnCreatedOrReused, const UFSDWidgetBlueprintLibrary::FWidgetDelegate& OnCollapsed) {
+TArray<UUserWidget*> UFSDWidgetBlueprintLibrary::CreateOrReuseChildrenWithCallbackEx(UPanelWidget* Panel, int32 Count, TSubclassOf<UUserWidget> WidgetClass, const UFSDWidgetBlueprintLibrary::FWidgetCreatedOrReusedDelegate& OnCreatedOrReused, const UFSDWidgetBlueprintLibrary::FWidgetDelegate& OnCollapsed) {
     return TArray<UUserWidget*>();
 }
 
-TArray<UUserWidget*> UFSDWidgetBlueprintLibrary::CreateOrReuseChildrenWithCallback(UPanelWidget* Panel, int32 count, TSubclassOf<UUserWidget> WidgetClass, const UFSDWidgetBlueprintLibrary::FWidgetCreatedOrReusedDelegate& OnCreatedOrReused) {
+TArray<UUserWidget*> UFSDWidgetBlueprintLibrary::CreateOrReuseChildrenWithCallback(UPanelWidget* Panel, int32 Count, TSubclassOf<UUserWidget> WidgetClass, const UFSDWidgetBlueprintLibrary::FWidgetCreatedOrReusedDelegate& OnCreatedOrReused) {
     return TArray<UUserWidget*>();
 }
 
-TArray<UUserWidget*> UFSDWidgetBlueprintLibrary::CreateOrReuseChildren(UPanelWidget* Panel, int32 count, TSubclassOf<UUserWidget> WidgetClass) {
+TArray<UUserWidget*> UFSDWidgetBlueprintLibrary::CreateOrReuseChildren(UPanelWidget* Panel, int32 Count, TSubclassOf<UUserWidget> WidgetClass) {
     return TArray<UUserWidget*>();
 }
 
 UImage* UFSDWidgetBlueprintLibrary::CreateImageSized(UObject* WorldContext, UTexture2D* Texture, FLinearColor Tint, FVector2D Size) {
+    return NULL;
+}
+
+UImage* UFSDWidgetBlueprintLibrary::CreateImageFromBrush(UObject* WorldContext, FSlateBrush InBrush, FLinearColor InColorAndOpacity) {
     return NULL;
 }
 
@@ -214,6 +224,10 @@ UWidget* UFSDWidgetBlueprintLibrary::AddChildToVerticalBoxEx(UVerticalBox* Verti
 }
 
 UWidget* UFSDWidgetBlueprintLibrary::AddChildToUniformGridEx(UUniformGridPanel* GridPanel, UWidget* Widget, TEnumAsByte<EHorizontalAlignment> HorizontalAlignment, TEnumAsByte<EVerticalAlignment> VerticalAlignment, int32 Column, int32 Row, UUniformGridSlot*& OutSlot, UUniformGridPanel*& OutGridPanel) {
+    return NULL;
+}
+
+UWidget* UFSDWidgetBlueprintLibrary::AddChildToOverlayEx(UOverlay* OverlayPanel, UWidget* Widget, TEnumAsByte<EHorizontalAlignment> HorizontalAlignment, TEnumAsByte<EVerticalAlignment> VerticalAlignment, FMargin Padding, UOverlaySlot*& OutSlot, UOverlay*& OutOverlayPanel) {
     return NULL;
 }
 
