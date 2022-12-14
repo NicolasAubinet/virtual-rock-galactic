@@ -14,8 +14,8 @@ class ACleanupPodItem : public ARessuplyPodItem, public IPlaceableInterface {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere, Transient)
-    TWeakObjectPtr<APlagueControlActor> PlagueController;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient)
+    APlagueControlActor* PlagueController;
     
 public:
     ACleanupPodItem();
