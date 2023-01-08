@@ -23,8 +23,8 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bIconHidden;
     
-    UPROPERTY(EditAnywhere, Export, Transient)
-    TWeakObjectPtr<UActorTrackingWidget> Widget;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient)
+    UActorTrackingWidget* Widget;
     
 public:
     UActorTrackingComponent();

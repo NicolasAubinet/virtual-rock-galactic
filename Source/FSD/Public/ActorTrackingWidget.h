@@ -17,8 +17,8 @@ class UActorTrackingWidget : public UFSDUserWidget {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere, Export, Transient)
-    TWeakObjectPtr<USceneComponent> TargetComponent;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient)
+    USceneComponent* TargetComponent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float WorldHeightOffset;
