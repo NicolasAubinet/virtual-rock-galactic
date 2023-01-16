@@ -52,7 +52,6 @@ class ABosco;
 class UCampaignManager;
 class ACharacterSelectionSwitcher;
 class UDifficultySetting;
-class UDSTelemetryWrapper;
 class UFSDFriendsAndInvites;
 class UFSDCloudLoadSave;
 class AFSDPlayerController;
@@ -285,9 +284,6 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UGoogleAnalyticsWrapper* GoogleAnalyticsWI;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    UDSTelemetryWrapper* DSTelemetryWrapper;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     USpecialEvent* ForcedMachineEvent;

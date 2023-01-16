@@ -311,7 +311,6 @@ UFSDGameInstance::UFSDGameInstance() {
     this->CanPlayOnline = true;
     this->CanCommunicateOnline = true;
     this->GoogleAnalyticsWI = NULL;
-    this->DSTelemetryWrapper = NULL;
     this->ForcedMachineEvent = NULL;
     this->ForcedOtherEvent = NULL;
     this->ShowMinerManualWorkInProgress = false;
