@@ -1,14 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "ItemUpgrade.h"
 #include "ETriggeredStatusEffectType.h"
 #include "UpgradeValues.h"
+#include "ItemUpgrade.h"
 #include "TriggeredStatusEffectUpgrade.generated.h"
 
-class UStatusEffect;
-class AFSDPlayerState;
 class AActor;
+class AFSDPlayerState;
+class UStatusEffect;
 
 UCLASS(Blueprintable, EditInlineNew, MinimalAPI)
 class UTriggeredStatusEffectUpgrade : public UItemUpgrade {

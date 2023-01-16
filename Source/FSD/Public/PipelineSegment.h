@@ -1,27 +1,27 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "TrackBuilderSegment.h"
-#include "EPipelineBuildState.h"
 #include "UObject/NoExportTypes.h"
 #include "Engine/EngineTypes.h"
 #include "EInputKeys.h"
+#include "EPipelineBuildState.h"
+#include "TrackBuilderSegment.h"
 #include "PipelineSegment.generated.h"
 
-class UStaticMesh;
-class USplineMeshComponent;
-class APipelineSegment;
-class USingleUsableComponent;
-class UTrackBuilderUsable;
-class UMaterialInterface;
-class UPathfinderSplineSegmentCollisionComponent;
-class UDroneUseComponent;
-class USplineComponent;
-class USimpleHealthComponent;
 class USkeletalMeshComponent;
 class UStaticMeshComponent;
-class APipelineStart;
-class APlayerCharacter;
+class UDroneUseComponent;
 class UHealthComponentBase;
+class UTrackBuilderUsable;
+class UPathfinderSplineSegmentCollisionComponent;
+class APipelineStart;
+class APipelineSegment;
+class APlayerCharacter;
+class USimpleHealthComponent;
+class USplineMeshComponent;
+class USingleUsableComponent;
+class UMaterialInterface;
+class UStaticMesh;
+class USplineComponent;
 
 UCLASS(Abstract, Blueprintable)
 class APipelineSegment : public ATrackBuilderSegment {
@@ -55,7 +55,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FVector EditorEndLocation;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TEnumAsByte<ETraceTypeQuery> CarvingTraceType;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -109,7 +109,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     EPipelineBuildState PipelineState;
     
-    UPROPERTY(EditAnywhere, Transient)
+    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<APipelineStart> PipelineStart;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

@@ -3,8 +3,8 @@
 #include "CarriableItem.h"
 #include "Gem.generated.h"
 
-class UCarriableInstantUsable;
 class UResourceData;
+class UCarriableInstantUsable;
 
 UCLASS(Abstract, Blueprintable)
 class FSD_API AGem : public ACarriableItem {
@@ -20,7 +20,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float ResourceAmount;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool hasBeenReleased;
     
 public:

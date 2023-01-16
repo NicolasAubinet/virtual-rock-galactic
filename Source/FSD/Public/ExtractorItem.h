@@ -1,27 +1,27 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "AnimatedItem.h"
-#include "Throwable.h"
-#include "FloatDelegateDelegate.h"
-#include "CharacterChangedDelegateDelegate.h"
-#include "EExtractorState.h"
 #include "UObject/NoExportTypes.h"
 #include "Engine/NetSerialization.h"
 #include "UObject/NoExportTypes.h"
+#include "FloatDelegateDelegate.h"
+#include "EExtractorState.h"
+#include "CharacterChangedDelegateDelegate.h"
+#include "AnimatedItem.h"
+#include "Throwable.h"
 #include "ExtractorItem.generated.h"
 
-class UFirstPersonParticleSystemComponent;
-class UBoxComponent;
-class UFSDAudioComponent;
-class UPointLightComponent;
 class USkeletalMeshComponent;
-class UParticleSystemComponent;
-class AResourceChunk;
-class UAnimMontage;
-class UParticleSystem;
-class UForceFeedbackEffect;
 class UResourceData;
 class UDialogDataAsset;
+class UPointLightComponent;
+class UParticleSystemComponent;
+class UFirstPersonParticleSystemComponent;
+class UFSDAudioComponent;
+class AResourceChunk;
+class UBoxComponent;
+class UAnimMontage;
+class UForceFeedbackEffect;
+class UParticleSystem;
 class USoundCue;
 
 UCLASS(Blueprintable)
@@ -250,7 +250,7 @@ public:
     UBoxComponent* GetRootCollider() const;
     
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
-    void All_SimulateDigBlock(FVector_NetQuantize Position, bool spawnParticles, int32 Material);
+    void All_SimulateDigBlock(FVector_NetQuantize Position, bool SpawnParticles, int32 Material);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
     void All_ChunkSplat(AResourceChunk* chunk);

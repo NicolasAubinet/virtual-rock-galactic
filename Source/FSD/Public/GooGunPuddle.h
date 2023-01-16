@@ -1,17 +1,17 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "GameFramework/Actor.h"
+#include "DamageData.h"
 #include "Engine/EngineTypes.h"
 #include "GooPuddleStatusEffectTrigger.h"
-#include "DamageData.h"
+#include "GameFramework/Actor.h"
 #include "GooGunPuddle.generated.h"
 
+class UPrimitiveComponent;
 class USphereComponent;
 class USimpleHealthComponent;
-class USoundBase;
 class UStatusEffect;
-class UPrimitiveComponent;
+class USoundBase;
 
 UCLASS(Blueprintable)
 class AGooGunPuddle : public AActor {

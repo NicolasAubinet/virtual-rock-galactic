@@ -1,21 +1,21 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Engine/DataAsset.h"
+#include "UObject/NoExportTypes.h"
 #include "ESchematicType.h"
 #include "SchematicType.h"
-#include "UObject/NoExportTypes.h"
+#include "Engine/DataAsset.h"
 #include "SchematicSettings.generated.h"
 
-class UDataTable;
-class UOverclockBank;
-class USchematic;
-class USchematicBank;
-class UItemSkinSchematicCollection;
-class USchematicBankBase;
 class USchematicPricingTier;
-class USchematicCategory;
-class USchematicRarity;
+class UItemSkinSchematicCollection;
+class UOverclockBank;
 class UItemID;
+class USchematicCategory;
+class USchematicBank;
+class USchematicBankBase;
+class USchematic;
+class USchematicRarity;
+class UDataTable;
 
 UCLASS(Blueprintable)
 class USchematicSettings : public UDataAsset {

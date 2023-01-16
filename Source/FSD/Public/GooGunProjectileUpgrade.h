@@ -2,8 +2,8 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "EGooGunProjectileUpgrades.h"
-#include "StandardItemUpgrade.h"
 #include "UpgradeValues.h"
+#include "StandardItemUpgrade.h"
 #include "GooGunProjectileUpgrade.generated.h"
 
 class AActor;

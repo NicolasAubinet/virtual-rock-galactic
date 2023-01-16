@@ -1,24 +1,24 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EnemyDeepPathfinderCharacter.h"
-#include "Engine/NetSerialization.h"
 #include "DamageData.h"
+#include "Engine/NetSerialization.h"
+#include "EnemyDeepPathfinderCharacter.h"
 #include "AFlyingBug.generated.h"
 
-class UEnemyComponent;
-class UPawnStatsComponent;
-class UAudioComponent;
-class UOutlineComponent;
-class UPawnSensingComponent;
 class AActor;
-class UPawnAlertComponent;
-class USphereComponent;
-class UFrozenPawnImpactComponent;
-class UHitReactionComponent;
-class USoundBase;
-class UHealthComponentBase;
+class UAudioComponent;
 class UDamageTag;
+class UFrozenPawnImpactComponent;
+class UEnemyComponent;
+class UHealthComponentBase;
 class UHealthComponent;
+class USphereComponent;
+class UHitReactionComponent;
+class UOutlineComponent;
+class UPawnStatsComponent;
+class UPawnAlertComponent;
+class USoundBase;
+class UPawnSensingComponent;
 
 UCLASS(Blueprintable)
 class AAFlyingBug : public AEnemyDeepPathfinderCharacter {
@@ -132,7 +132,7 @@ public:
     bool GetIsInAttackStance() const;
     
 protected:
-    UFUNCTION(NetMulticast, Unreliable)
+    UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
     void All_Ragdoll(const FVector_NetQuantize& Location, const FVector_NetQuantize& Impulse, uint8 BoneIndex);
     
 public:

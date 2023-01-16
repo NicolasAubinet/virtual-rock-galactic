@@ -1,30 +1,30 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "TriggerAI.h"
-#include "FSDPawn.h"
-#include "DelegateDelegate.h"
-#include "MuleActivatedSignatureDelegate.h"
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
 #include "IntDelegateDelegate.h"
-#include "EscortMuleMovementState.h"
-#include "SpeedChangedSignatureDelegate.h"
-#include "GaragePathSignatureDelegate.h"
 #include "FloatDelegateDelegate.h"
-#include "EscortMuleExtractorSlot.h"
-#include "UObject/NoExportTypes.h"
+#include "DelegateDelegate.h"
 #include "EEscortMissionState.h"
-#include "UObject/NoExportTypes.h"
 #include "EEscortExtractorState.h"
+#include "GaragePathSignatureDelegate.h"
+#include "SpeedChangedSignatureDelegate.h"
+#include "MuleActivatedSignatureDelegate.h"
+#include "EscortMuleExtractorSlot.h"
+#include "EscortMuleMovementState.h"
+#include "FSDPawn.h"
+#include "TriggerAI.h"
 #include "EscortMule.generated.h"
 
-class UOutlineComponent;
-class UFriendlyHealthComponent;
-class USimpleObjectInfoComponent;
-class URestrictedResourceBank;
-class UEscortObjective;
 class USkeletalMeshComponent;
-class APlayerCharacter;
 class UInstantUsable;
+class USimpleObjectInfoComponent;
 class AExtractorItem;
+class UEscortObjective;
+class UFriendlyHealthComponent;
+class UOutlineComponent;
+class APlayerCharacter;
+class URestrictedResourceBank;
 
 UCLASS(Blueprintable)
 class FSD_API AEscortMule : public AFSDPawn, public ITriggerAI {

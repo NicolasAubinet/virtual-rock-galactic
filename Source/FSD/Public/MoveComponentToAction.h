@@ -1,13 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "TickableActionBase.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "TickableActionBase.h"
 #include "MoveComponentToAction.generated.h"
 
-class UMoveComponentToAction;
-class USceneComponent;
 class UObject;
+class USceneComponent;
+class UMoveComponentToAction;
 
 UCLASS(Blueprintable)
 class UMoveComponentToAction : public UTickableActionBase {
@@ -16,7 +16,7 @@ public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FCompletedDelegate, USceneComponent*, Component);
     
 protected:
-    UPROPERTY(EditAnywhere, Export)
+    UPROPERTY(EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<USceneComponent> Component;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

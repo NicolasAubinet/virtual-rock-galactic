@@ -1,17 +1,17 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Objective.h"
-#include "EliminationDescriptors.h"
 #include "EliminationTarget.h"
+#include "EliminationDescriptors.h"
+#include "Objective.h"
 #include "EliminationObjective.generated.h"
 
-class UDebrisPositioning;
 class AActor;
-class UDebrisBase;
-class UCaveInfluencer;
 class AFSDPawn;
-class UHealthComponentBase;
+class UDebrisBase;
+class UDebrisPositioning;
 class UEnemyDescriptor;
+class UHealthComponentBase;
+class UCaveInfluencer;
 
 UCLASS(Abstract, Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class FSD_API UEliminationObjective : public UObjective {

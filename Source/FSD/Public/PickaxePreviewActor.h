@@ -1,18 +1,18 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EPickaxePartLocation.h"
-#include "GameFramework/Actor.h"
 #include "UObject/NoExportTypes.h"
-#include "PickaxePartEquip.h"
-#include "SpawnReleasedActor.h"
-#include "ItemIDInterface.h"
+#include "EPickaxePartLocation.h"
 #include "PickaxeMeshInstance.h"
+#include "GameFramework/Actor.h"
+#include "SpawnReleasedActor.h"
+#include "PickaxePartEquip.h"
+#include "ItemIDInterface.h"
 #include "PickaxePreviewActor.generated.h"
 
 class USceneComponent;
 class UItemID;
-class UMaterialInterface;
 class UPickaxePart;
+class UMaterialInterface;
 
 UCLASS(Blueprintable)
 class APickaxePreviewActor : public AActor, public IPickaxePartEquip, public IItemIDInterface, public ISpawnReleasedActor {

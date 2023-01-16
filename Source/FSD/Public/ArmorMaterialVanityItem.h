@@ -3,14 +3,14 @@
 #include "VanityItem.h"
 #include "ArmorMaterialVanityItem.generated.h"
 
-class UMaterialInterface;
-class UMaterialInstanceDynamic;
-class UDynamicIcon;
-class UMaterialInstanceConstant;
-class UArmorVanityItem;
 class UObject;
-class UMaterialInstance;
+class UArmorVanityItem;
 class UArmorMaterialVanityItem;
+class UDynamicIcon;
+class UMaterialInterface;
+class UMaterialInstance;
+class UMaterialInstanceConstant;
+class UMaterialInstanceDynamic;
 
 UCLASS(Blueprintable, EditInlineNew)
 class FSD_API UArmorMaterialVanityItem : public UVanityItem {

@@ -7,9 +7,9 @@
 #include "PlaceableInterface.h"
 #include "PlaceableItem.generated.h"
 
+class AActor;
 class UCapacityHoldingItemAggregator;
 class UItemPlacerAggregator;
-class AActor;
 
 UCLASS(Blueprintable)
 class APlaceableItem : public AAnimatedItem, public IUpgradable, public IPlaceableInterface {

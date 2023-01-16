@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
 #include "GameFramework/Actor.h"
-#include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
 #include "FacilityGeneratorLine.generated.h"
 
-class UMaterialInterface;
-class USplineComponent;
 class USplineDecoratorComponent;
-class UStaticMesh;
 class ATetherStation;
+class UMaterialInterface;
+class UStaticMesh;
+class USplineComponent;
 
 UCLASS(Blueprintable)
 class FSD_API AFacilityGeneratorLine : public AActor {

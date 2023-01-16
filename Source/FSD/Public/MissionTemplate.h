@@ -1,31 +1,31 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "SavableDataAsset.h"
-#include "ResourceSpawner.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "ObjectiveMissionIcon.h"
+#include "ResourceSpawner.h"
+#include "SavableDataAsset.h"
 #include "MissionTemplate.generated.h"
 
-class UWorld;
-class UDebrisActorComponent;
-class UObjective;
-class UMutator;
-class AProceduralSetup;
-class AFSDGameMode;
-class UMissionComplexity;
-class UMissionDuration;
-class UTexture2D;
-class UMissionDNA;
-class UTutorialComponent;
-class UGeneratedMission;
-class UFSDSaveGame;
-class UMissionTemplate;
 class UObject;
+class UObjective;
 class UBiome;
-class UMissionMutator;
+class UDebrisActorComponent;
+class UMissionDNA;
+class AFSDGameMode;
+class UFSDSaveGame;
+class UGeneratedMission;
+class UMissionDuration;
+class UMissionComplexity;
 class UMissionWarning;
+class UMissionTemplate;
+class UMutator;
+class UMissionMutator;
+class AProceduralSetup;
+class UTutorialComponent;
+class UTexture2D;
+class UWorld;
 
 UCLASS(Blueprintable, EditInlineNew)
 class FSD_API UMissionTemplate : public USavableDataAsset {
@@ -131,6 +131,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TSubclassOf<AProceduralSetup> GetPLS() const;
+    
+    UFUNCTION(BlueprintCallable)
+    TSubclassOf<UObjective> GetObjectiveClass();
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetMissionTypeIndex() const;

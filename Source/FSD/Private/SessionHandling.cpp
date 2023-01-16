@@ -1,13 +1,13 @@
 #include "SessionHandling.h"
 #include "Templates/SubclassOf.h"
 
-class UDifficultySetting;
 class UObject;
+class UBiome;
+class UDifficultySetting;
 class UFSDGameInstance;
+class UMissionTemplate;
 class UPlayerCharacterID;
 class APlayerCharacter;
-class UBiome;
-class UMissionTemplate;
 
 void USessionHandling::StopVoice(UObject* WorldContextObject) {
 }

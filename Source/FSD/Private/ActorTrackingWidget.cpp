@@ -1,10 +1,10 @@
 #include "ActorTrackingWidget.h"
 #include "Templates/SubclassOf.h"
 
-class APlayerController;
-class USceneComponent;
 class AActor;
+class USceneComponent;
 class UActorTrackingWidget;
+class APlayerController;
 
 void UActorTrackingWidget::SetTargetComponent(USceneComponent* Component) {
 }

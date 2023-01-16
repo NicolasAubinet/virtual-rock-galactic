@@ -1,13 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "ItemUpgrade.h"
 #include "UpgradeValues.h"
+#include "ItemUpgrade.h"
 #include "GatlingHotShellsBonusUpgrade.generated.h"
 
+class AActor;
 class UDamageClass;
 class AFSDPlayerState;
-class AActor;
 
 UCLASS(Blueprintable, EditInlineNew, MinimalAPI)
 class UGatlingHotShellsBonusUpgrade : public UItemUpgrade {

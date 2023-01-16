@@ -2,17 +2,17 @@
 #include "Templates/SubclassOf.h"
 #include "AsyncPathRequests.h"
 
+class AActor;
 class UPrimitiveComponent;
 class UDebrisBase;
-class AActor;
-class UDebrisMesh;
-class UTerrainMaterial;
-class ADebrisDataActor;
-class ACSGBuilder;
 class ADeepCSGWorld;
+class UDebrisMesh;
+class ADebrisDataActor;
 class USTLMeshCarver;
-class UStaticMeshCarver;
+class UTerrainMaterial;
 class UStaticMesh;
+class ACSGBuilder;
+class UStaticMeshCarver;
 
 void ADeepCSGWorld::UnRegisterScannerComponent(UPrimitiveComponent* Component) {
 }
@@ -91,6 +91,10 @@ bool ADeepCSGWorld::IsPointInsideTerrain(const FVector& Pos) const {
 }
 
 bool ADeepCSGWorld::IsComponentRegisteredWithScanner(UPrimitiveComponent* Component) {
+    return false;
+}
+
+bool ADeepCSGWorld::InitialGenerationDone() const {
     return false;
 }
 

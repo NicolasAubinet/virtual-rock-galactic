@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Subsystems/WorldSubsystem.h"
-#include "FlareMeta.h"
-#include "ShadowQualityChangedDelegate.h"
 #include "UObject/NoExportTypes.h"
+#include "ShadowQualityChangedDelegate.h"
+#include "FlareMeta.h"
+#include "Subsystems/WorldSubsystem.h"
 #include "FlareController.generated.h"
 
-class AFlare;
-class AFlareGunProjectile;
 class UObject;
 class AActor;
+class AFlareGunProjectile;
+class AFlare;
 
 UCLASS(Blueprintable)
 class UFlareController : public UWorldSubsystem {

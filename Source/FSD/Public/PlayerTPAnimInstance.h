@@ -4,8 +4,8 @@
 #include "PlayerAnimInstance.h"
 #include "PlayerTPAnimInstance.generated.h"
 
-class UAnimSequence;
 class UBlendSpace1D;
+class UAnimSequence;
 
 UCLASS(Blueprintable, NonTransient)
 class UPlayerTPAnimInstance : public UPlayerAnimInstance {

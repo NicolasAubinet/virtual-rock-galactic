@@ -1,11 +1,11 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "RunningMissionBP.h"
 #include "GameplayTagContainer.h"
+#include "RunningMissionBP.h"
 #include "ExterminationReward.generated.h"
 
-class UResourceData;
 class AActor;
+class UResourceData;
 
 UCLASS(Abstract, Blueprintable)
 class UExterminationReward : public URunningMissionBP {

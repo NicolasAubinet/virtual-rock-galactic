@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "GameEvent.h"
 #include "GuntowerModuleLevel.h"
+#include "GameEvent.h"
 #include "GuntowerEvent.generated.h"
 
 class USceneComponent;

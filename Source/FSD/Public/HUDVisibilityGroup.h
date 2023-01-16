@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Engine/DataAsset.h"
-#include "EHUDVisibilityGroups.h"
-#include "EHUDVisibilityPresets.h"
 #include "EHUDVisibilityMode.h"
-#include "HUDVisibilityRegisteredWidget.h"
 #include "Components/SlateWrapperTypes.h"
+#include "EHUDVisibilityPresets.h"
+#include "EHUDVisibilityGroups.h"
+#include "HUDVisibilityRegisteredWidget.h"
+#include "Engine/DataAsset.h"
 #include "HUDVisibilityGroup.generated.h"
 
-class UHUDVisibilityGroup;
 class UWidget;
+class UHUDVisibilityGroup;
 
 UCLASS(Blueprintable)
 class FSD_API UHUDVisibilityGroup : public UDataAsset {

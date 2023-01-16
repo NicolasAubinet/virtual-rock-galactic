@@ -4,8 +4,8 @@
 #include "ProspectorObjective.generated.h"
 
 class UDebrisPositioning;
-class AProspectorRobot;
 class UHealthComponentBase;
+class AProspectorRobot;
 
 UCLASS(Abstract, Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UProspectorObjective : public UObjective {
@@ -18,7 +18,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UDebrisPositioning* DebrisPositioning;
     
-    UPROPERTY(EditAnywhere, Transient, ReplicatedUsing=OnRep_ActiveProspector)
+    UPROPERTY(EditAnywhere, Transient, ReplicatedUsing=OnRep_ActiveProspector, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<AProspectorRobot> ActiveProspector;
     
 public:

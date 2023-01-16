@@ -1,14 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "Components/ActorComponent.h"
-#include "WaveEntry.h"
 #include "RandRange.h"
+#include "WaveEntry.h"
+#include "Components/ActorComponent.h"
 #include "EnemyWaveManager.generated.h"
 
 class UObject;
-class UEnemyWaveController;
 class APawn;
+class UEnemyWaveController;
 class UEnemySpawnManager;
 class AFSDGameMode;
 

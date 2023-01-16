@@ -1,12 +1,12 @@
 #include "FSDPlayerState.h"
 #include "Net/UnrealNetwork.h"
 #include "Templates/SubclassOf.h"
-#include "SaveGameStateComponent.h"
 #include "PlayerStatsComponent.h"
 #include "PlayerRejoinState.h"
+#include "SaveGameStateComponent.h"
 
-class UPlayerCharacterID;
 class AFSDPlayerController;
+class UPlayerCharacterID;
 class APlayerCharacter;
 class UPlayerResourceComponent;
 

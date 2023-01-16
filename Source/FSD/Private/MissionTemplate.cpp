@@ -1,18 +1,18 @@
 #include "MissionTemplate.h"
 #include "Templates/SubclassOf.h"
 
-class UMissionDuration;
+class UObject;
+class UObjective;
+class UBiome;
 class UFSDSaveGame;
-class UMissionTemplate;
+class UGeneratedMission;
+class UMissionDuration;
 class UMissionComplexity;
+class UMissionWarning;
+class UMissionTemplate;
+class UMissionMutator;
 class AProceduralSetup;
 class UTexture2D;
-class UObject;
-class UBiome;
-class UMissionMutator;
-class UMissionWarning;
-class UObjective;
-class UGeneratedMission;
 
 
 bool UMissionTemplate::IsLocked(UFSDSaveGame* SaveGame) const {
@@ -40,6 +40,10 @@ FObjectiveMissionIcon UMissionTemplate::GetPrimaryObjectiveIcon(bool getSmallVer
 }
 
 TSubclassOf<AProceduralSetup> UMissionTemplate::GetPLS() const {
+    return NULL;
+}
+
+TSubclassOf<UObjective> UMissionTemplate::GetObjectiveClass() {
     return NULL;
 }
 

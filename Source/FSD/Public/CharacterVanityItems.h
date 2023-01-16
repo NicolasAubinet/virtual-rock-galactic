@@ -1,23 +1,23 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Engine/DataAsset.h"
-#include "EVanitySlot.h"
 #include "UObject/NoExportTypes.h"
+#include "EVanitySlot.h"
+#include "Engine/DataAsset.h"
 #include "CharacterVanityItems.generated.h"
 
-class UMoustacheVanityItem;
-class UArmorVanityItem;
-class UHeadVanityItem;
-class UBeardVanityItem;
-class UVanitySchematicBank;
-class UArmorMaterialVanityItem;
-class UEyeBrowsVanityItem;
-class USideburnsVanityItem;
-class UVanityItem;
-class UBeardColorVanityItem;
-class USkinColorVanityItem;
-class UPlayerCharacterID;
 class UObject;
+class UArmorVanityItem;
+class UVanityItem;
+class UArmorMaterialVanityItem;
+class UBeardVanityItem;
+class UBeardColorVanityItem;
+class UEyeBrowsVanityItem;
+class UHeadVanityItem;
+class UMoustacheVanityItem;
+class UPlayerCharacterID;
+class USkinColorVanityItem;
+class USideburnsVanityItem;
+class UVanitySchematicBank;
 
 UCLASS(Blueprintable)
 class UCharacterVanityItems : public UDataAsset {

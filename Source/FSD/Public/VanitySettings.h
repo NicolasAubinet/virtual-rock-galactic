@@ -1,18 +1,18 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Engine/DataAsset.h"
 #include "UObject/NoExportTypes.h"
+#include "EVanitySlot.h"
 #include "ResourceSpawner.h"
 #include "VanitySlotCharacter.h"
 #include "VanityMasterySettings.h"
-#include "EVanitySlot.h"
+#include "Engine/DataAsset.h"
 #include "VanitySettings.generated.h"
 
-class UTexture2D;
+class UObject;
 class UVanityItem;
 class UDLCBase;
-class UObject;
 class UPlayerCharacterID;
+class UTexture2D;
 
 UCLASS(Blueprintable)
 class FSD_API UVanitySettings : public UDataAsset {

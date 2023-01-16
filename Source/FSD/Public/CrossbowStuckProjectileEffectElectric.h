@@ -4,8 +4,8 @@
 #include "CrossbowStuckProjectileEffect.h"
 #include "CrossbowStuckProjectileEffectElectric.generated.h"
 
-class ACrossbowElectroBeam;
 class AActor;
+class ACrossbowElectroBeam;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UCrossbowStuckProjectileEffectElectric : public UCrossbowStuckProjectileEffect {
@@ -21,7 +21,7 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float PlasmaLineMaxRange;
     
-    UPROPERTY(EditAnywhere, Transient)
+    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<AActor> ElectrocutionActor;
     
 public:

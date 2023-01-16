@@ -1,12 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
 #include "Engine/EngineTypes.h"
+#include "GameFramework/Actor.h"
 #include "DroneStream.generated.h"
 
 class USceneComponent;
-class UCapsuleComponent;
 class UPrimitiveComponent;
+class UCapsuleComponent;
 
 UCLASS(Blueprintable)
 class ADroneStream : public AActor {
@@ -18,7 +18,7 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UCapsuleComponent* Collision;
     
-private:
+protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool CheckStartOverlaps;
     
@@ -27,7 +27,7 @@ private:
     
 public:
     ADroneStream();
-private:
+protected:
     UFUNCTION(BlueprintCallable)
     void OnEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
     

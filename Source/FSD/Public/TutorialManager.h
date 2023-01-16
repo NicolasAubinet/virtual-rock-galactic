@@ -3,9 +3,9 @@
 #include "GameFramework/Actor.h"
 #include "TutorialManager.generated.h"
 
-class APlayerCharacter;
 class AFSDPlayerController;
 class UFSDSaveGame;
+class APlayerCharacter;
 class UTutorialComponent;
 
 UCLASS(Abstract, Blueprintable)
@@ -22,19 +22,19 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ShowTutorialsDebug;
     
-    UPROPERTY(EditAnywhere, Transient)
+    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<AFSDPlayerController> PlayerController;
     
-    UPROPERTY(EditAnywhere, Transient)
+    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<APlayerCharacter> PlayerCharacter;
     
-    UPROPERTY(EditAnywhere, Transient)
+    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UFSDSaveGame> SaveGame;
     
-    UPROPERTY(EditAnywhere, Export, Transient)
+    UPROPERTY(EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
     TArray<TWeakObjectPtr<UTutorialComponent>> Tutorials;
     
-    UPROPERTY(EditAnywhere, Export, Transient)
+    UPROPERTY(EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UTutorialComponent> ActiveTutorial;
     
 public:

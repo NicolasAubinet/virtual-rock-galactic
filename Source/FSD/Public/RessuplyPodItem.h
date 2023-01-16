@@ -7,8 +7,8 @@
 
 class UObject;
 class AActor;
-class UItemPlacerAggregator;
 class ARessuplyPod;
+class UItemPlacerAggregator;
 
 UCLASS(Blueprintable)
 class ARessuplyPodItem : public AAnimatedItem {

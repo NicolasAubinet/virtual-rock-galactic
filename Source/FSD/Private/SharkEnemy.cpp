@@ -1,19 +1,19 @@
 #include "SharkEnemy.h"
 #include "Net/UnrealNetwork.h"
-#include "Perception/PawnSensingComponent.h"
-#include "Components/SphereComponent.h"
-#include "Particles/ParticleSystemComponent.h"
-#include "InDangerComponent.h"
-#include "EnemyComponent.h"
 #include "DamageComponent.h"
+#include "EnemyComponent.h"
+#include "Particles/ParticleSystemComponent.h"
+#include "Components/SphereComponent.h"
 #include "FakePhysGrabberComponent.h"
+#include "InDangerComponent.h"
+#include "Perception/PawnSensingComponent.h"
 
 class AActor;
 class UPrimitiveComponent;
 class APawn;
-class UHealthComponent;
 class UDamageTag;
 class UHealthComponentBase;
+class UHealthComponent;
 
 void ASharkEnemy::SetVulnerable() {
 }

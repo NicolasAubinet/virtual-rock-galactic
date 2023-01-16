@@ -1,25 +1,25 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "UObject/Object.h"
-#include "GMMutatorItem.h"
 #include "EMissionStructure.h"
 #include "ObjectiveMissionIcon.h"
+#include "GMMutatorItem.h"
+#include "UObject/Object.h"
 #include "GeneratedMission.generated.h"
 
-class UMissionWarning;
-class UBiome;
-class UMissionTemplate;
 class UObjective;
-class UMutator;
-class UMissionMutator;
-class UMissionComplexity;
-class UMissionDuration;
+class UBiome;
 class UMissionDNA;
-class ULevelSequence;
-class AProceduralSetup;
 class AFSDPlayerController;
 class UGeneratedMission;
+class UMissionDuration;
+class UMissionComplexity;
+class UMissionWarning;
+class UMissionTemplate;
+class UMutator;
+class UMissionMutator;
+class AProceduralSetup;
+class ULevelSequence;
 
 UCLASS(Blueprintable)
 class FSD_API UGeneratedMission : public UObject {
@@ -45,7 +45,7 @@ protected:
     TSubclassOf<UObjective> PrimaryObjective;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    TSubclassOf<UObjective> SecondaryObjective;
+    TArray<TSubclassOf<UObjective>> SecondaryObjectives;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TMap<TSubclassOf<UMutator>, FGMMutatorItem> Mutators;

@@ -1,11 +1,11 @@
 #include "MicrowaveWeapon.h"
-#include "DamageComponent.h"
 #include "CapsuleHitscanComponent.h"
+#include "DamageComponent.h"
 
-class UPrimitiveComponent;
 class AActor;
-class UFSDPhysicalMaterial;
+class UPrimitiveComponent;
 class UHealthComponentBase;
+class UFSDPhysicalMaterial;
 
 void AMicrowaveWeapon::UpdateMuzzleAnim(bool InIsFiring) {
 }

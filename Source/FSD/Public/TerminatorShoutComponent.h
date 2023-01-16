@@ -1,11 +1,11 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Components/ActorComponent.h"
+#include "Components/AudioComponent.h"
 #include "DelegateDelegate.h"
+#include "ETerminatorShoutState.h"
 #include "TerminatorShoutState.h"
 #include "TerminatorTalkMaterial.h"
-#include "ETerminatorShoutState.h"
-#include "Components/AudioComponent.h"
+#include "Components/ActorComponent.h"
 #include "TerminatorShoutComponent.generated.h"
 
 class UMeshComponent;

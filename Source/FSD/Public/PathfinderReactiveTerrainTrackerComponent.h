@@ -1,11 +1,11 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "ReactiveTerrainTrackerComponent.h"
 #include "RandRange.h"
+#include "ReactiveTerrainTrackerComponent.h"
 #include "PathfinderReactiveTerrainTrackerComponent.generated.h"
 
-class UStatusEffectsComponent;
 class UFSDPhysicalMaterial;
+class UStatusEffectsComponent;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UPathfinderReactiveTerrainTrackerComponent : public UReactiveTerrainTrackerComponent {

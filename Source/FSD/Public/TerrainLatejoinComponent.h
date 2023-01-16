@@ -1,6 +1,5 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Components/ActorComponent.h"
 #include "GrenadeExplodeOperationData.h"
 #include "CarveWithColliderOperationData.h"
 #include "CarveWithSTLMeshOperationData.h"
@@ -11,6 +10,7 @@
 #include "SplineSegmentCarveOperationData.h"
 #include "CSGBuildOperationData.h"
 #include "TerrainSpawnDebrisOperationData.h"
+#include "Components/ActorComponent.h"
 #include "TerrainLatejoinComponent.generated.h"
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))

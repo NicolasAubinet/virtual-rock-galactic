@@ -3,9 +3,9 @@
 #include "DamageComponent.h"
 #include "Components/SphereComponent.h"
 
+class AActor;
 class UPrimitiveComponent;
 class UHealthComponentBase;
-class AActor;
 
 void AFriendlyParasite::SelectNewTarget(UHealthComponentBase* Health) {
 }

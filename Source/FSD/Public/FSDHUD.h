@@ -1,14 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "GameFramework/HUD.h"
 #include "EHUDVisibilityReason.h"
+#include "GameFramework/HUD.h"
 #include "FSDHUD.generated.h"
 
 class APlayerController;
 class AFSDHUD;
 class APlayerCharacter;
-class URadarPointComponent;
 class APlayerCameraDrone;
+class URadarPointComponent;
 
 UCLASS(Blueprintable, NonTransient)
 class AFSDHUD : public AHUD {
@@ -24,7 +24,7 @@ public:
     FHudVisibilityChanged OnHUDVisibilityChanged;
     
 protected:
-    UPROPERTY(EditAnywhere, Transient)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     uint8 IsVisibleFlags;
     
 public:

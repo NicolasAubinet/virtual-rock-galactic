@@ -1,14 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "GameFramework/Actor.h"
-#include "ItemDispenserDelegateDelegate.h"
 #include "EInputKeys.h"
+#include "ItemDispenserDelegateDelegate.h"
+#include "GameFramework/Actor.h"
 #include "ItemDispenser.generated.h"
 
+class USceneComponent;
 class ACarriableItem;
 class UInstantUsable;
-class USceneComponent;
 class APlayerCharacter;
 
 UCLASS(Blueprintable)

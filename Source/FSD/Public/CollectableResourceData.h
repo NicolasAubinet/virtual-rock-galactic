@@ -4,10 +4,10 @@
 #include "ResourceData.h"
 #include "CollectableResourceData.generated.h"
 
+class AActor;
+class UCollectableResourceCreator;
 class UDebrisBase;
 class UDebrisPositioning;
-class UCollectableResourceCreator;
-class AActor;
 
 UCLASS(Blueprintable)
 class UCollectableResourceData : public UResourceData {

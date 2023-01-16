@@ -1,12 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "ChangedStateSigDelegate.h"
 #include "StateStats.h"
 #include "Components/ActorComponent.h"
-#include "ChangedStateSigDelegate.h"
 #include "GroundToAirComponent.generated.h"
 
-class UDeepPathfinderMovement;
 class ADeepPathfinderCharacter;
+class UDeepPathfinderMovement;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UGroundToAirComponent : public UActorComponent {
@@ -52,7 +52,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_StateChange, meta=(AllowPrivateAccess=true))
     bool IsFlying;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<ADeepPathfinderCharacter> OwningPathfinder;
     
 public:

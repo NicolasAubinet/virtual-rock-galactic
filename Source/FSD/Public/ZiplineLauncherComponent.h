@@ -1,9 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "WeaponFireComponent.h"
-#include "Engine/EngineTypes.h"
 #include "Engine/NetSerialization.h"
+#include "Engine/EngineTypes.h"
+#include "WeaponFireComponent.h"
 #include "ZiplineLauncherComponent.generated.h"
 
 class AZipLineProjectile;
@@ -12,7 +12,7 @@ UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UZiplineLauncherComponent : public UWeaponFireComponent {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TEnumAsByte<ECollisionChannel> HitCollisionChannel;
     
 protected:

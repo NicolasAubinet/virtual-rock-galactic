@@ -1,44 +1,45 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "GameFramework/Actor.h"
 #include "UObject/NoExportTypes.h"
-#include "EncounterSpecialItem.h"
-#include "EncountersSpawnedDelegateDelegate.h"
 #include "Engine/LatentActionManager.h"
+#include "UObject/NoExportTypes.h"
+#include "EDebrisItemPass.h"
+#include "ECriticalItemPass.h"
+#include "ESpawnSettings.h"
+#include "RandRange.h"
+#include "EncountersSpawnedDelegateDelegate.h"
+#include "DebrisCapsule.h"
+#include "EncounterSpecialItem.h"
+#include "PathObstacle.h"
+#include "CollectableSpawnableItem.h"
+#include "GeneratedInfluenceSets.h"
+#include "GeneratedDebris.h"
+#include "GeneratedInstantCarvers.h"
 #include "CarvedResource.h"
 #include "GemResourceAmount.h"
-#include "CollectableSpawnableItem.h"
-#include "ESpawnSettings.h"
+#include "InfluenceMap.h"
 #include "RoomNode.h"
 #include "TunnelNode.h"
-#include "GeneratedInfluenceSets.h"
-#include "GeneratedInstantCarvers.h"
-#include "GeneratedDebris.h"
-#include "PathObstacle.h"
-#include "InfluenceMap.h"
-#include "EDebrisItemPass.h"
-#include "UObject/NoExportTypes.h"
-#include "RandRange.h"
-#include "DebrisCapsule.h"
+#include "GameFramework/Actor.h"
 #include "ProceduralSetup.generated.h"
 
-class UProceduralTunnelComponent;
-class USpecialEvent;
-class UNoisyPathfinderComponent;
-class UPLSEncounterComponent;
-class UProceduralVeinsComponent;
 class UBiome;
+class UResourceData;
+class ADeepCSGWorld;
+class UMissionDNA;
+class UFloodFillSettings;
+class AFSDPlayerController;
+class UNoisyPathfinderComponent;
+class UProceduralVeinsComponent;
+class UProceduralTunnelComponent;
+class UCaveInfluencer;
+class AProceduralSetup;
 class UProceduralResources;
 class UProceduralObjectColliders;
-class ADeepCSGWorld;
+class UPLSEncounterComponent;
 class URoomGeneratorBase;
-class AFSDPlayerController;
-class UFloodFillSettings;
-class UMissionDNA;
-class UCaveInfluencer;
-class UResourceData;
-class AProceduralSetup;
+class USpecialEvent;
 class UTunnelParameters;
 
 UCLASS(Blueprintable)
@@ -198,7 +199,7 @@ public:
     void SpawnObjectiveEncounter();
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
-    void SpawnObjectiveCriticalItems();
+    void SpawnObjectiveCriticalItems(const ECriticalItemPass& pass);
     
     UFUNCTION(BlueprintCallable, meta=(Latent, LatentInfo="LatentInfo"))
     static void SpawnItems_Async(AProceduralSetup* setup, FLatentActionInfo LatentInfo);

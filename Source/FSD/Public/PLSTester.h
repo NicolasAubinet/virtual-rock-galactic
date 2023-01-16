@@ -3,20 +3,23 @@
 #include "GameFramework/Actor.h"
 #include "PLSTester.generated.h"
 
-class UMissionTemplate;
-class UMissionComplexity;
-class UMissionDuration;
-class UMissionMutator;
 class UBiome;
-class UMissionWarning;
-class USpecialEvent;
 class UDifficultySetting;
+class UMissionDuration;
+class UMissionComplexity;
+class UMissionWarning;
+class UMissionTemplate;
+class UMissionMutator;
+class USpecialEvent;
 
 UCLASS(Blueprintable)
 class APLSTester : public AActor {
     GENERATED_BODY()
 public:
 protected:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FString FullSeedString;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 PLSSeed;
     

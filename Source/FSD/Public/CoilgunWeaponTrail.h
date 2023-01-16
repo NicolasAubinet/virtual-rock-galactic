@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "GameFramework/Actor.h"
 #include "Engine/EngineTypes.h"
+#include "GameFramework/Actor.h"
 #include "CoilgunWeaponTrail.generated.h"
 
 class USceneComponent;
-class UCapsuleComponent;
-class UNiagaraComponent;
-class UStatusEffect;
 class UPrimitiveComponent;
+class UNiagaraComponent;
+class UCapsuleComponent;
+class UStatusEffect;
 
 UCLASS(Blueprintable)
 class ACoilgunWeaponTrail : public AActor {

@@ -1,20 +1,23 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Engine/DataAsset.h"
 #include "UObject/NoExportTypes.h"
-#include "FSDEventActivateChangedDelegate.h"
+#include "UObject/NoExportTypes.h"
 #include "EHolidayType.h"
+#include "FSDEventActivateChangedDelegate.h"
 #include "ClaimableRewardView.h"
+#include "EncounterSpecialItem.h"
+#include "Engine/DataAsset.h"
 #include "FSDEvent.generated.h"
 
-class UDrinkableDataAsset;
-class UWorld;
-class UFSDEvent;
-class ADebrisDataActor;
-class UCampaign;
-class UTexture2D;
 class UObject;
+class UCampaign;
+class ADebrisDataActor;
+class UDrinkableDataAsset;
+class UFSDEvent;
 class APlayerController;
+class UTexture2D;
+class UWorld;
+class USoundCue;
 
 UCLASS(Blueprintable)
 class FSD_API UFSDEvent : public UDataAsset {
@@ -40,7 +43,25 @@ protected:
     bool bFreeBeerEvent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bFreeBeerConfettiVisible;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDrinkableDataAsset* SpecialEventBeer;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UTexture2D* SeasonEndScreenImage;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSoftObjectPtr<USoundCue> EventAmbienceMusic;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool UseDifferentBarLightColor;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FLinearColor SpaceRigBarLightColor;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FEncounterSpecialItem> EventEncounters;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSoftClassPtr<ADebrisDataActor>> EventDebris;

@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "RandRange.h"
+#include "MeteorSpawnedDelegateDelegate.h"
 #include "DebrisLocationFinder.h"
 #include "PlagueMeteorSpawner.generated.h"
 
@@ -10,6 +11,9 @@ UCLASS(Abstract, Blueprintable)
 class APlagueMeteorSpawner : public ADebrisLocationFinder {
     GENERATED_BODY()
 public:
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FMeteorSpawnedDelegate OnSpawnedMeteor;
+    
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<APlagueMeteor> MeteorActorClass;
@@ -19,6 +23,18 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float EscortSpawnFromImportantRange;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float EscortMinimum2DSpawnDistFromPath;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float EscortMinimumZSpawnDistFromPath;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float DropLocationHeightOffset;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float ImportantLocationRange;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UClass* MeteorActorClassLoaded;

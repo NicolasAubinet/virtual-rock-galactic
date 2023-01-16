@@ -5,11 +5,11 @@
 #include "Components/ActorComponent.h"
 #include "UsableComponentBase.generated.h"
 
-class UUseAnimationSetting;
 class USceneComponent;
-class UUseConditionSet;
-class UTexture2D;
 class APlayerCharacter;
+class UUseConditionSet;
+class UUseAnimationSetting;
+class UTexture2D;
 
 UCLASS(Abstract, Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class FSD_API UUsableComponentBase : public UActorComponent {
@@ -59,6 +59,9 @@ public:
     
     UFUNCTION(BlueprintCallable)
     void SetRayTraceTriggered(bool rayTraceTriggered);
+    
+    UFUNCTION(BlueprintCallable)
+    void SetAnimationSettings(UUseAnimationSetting* Settings);
     
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent, BlueprintPure)
     FText GetUseText(APlayerCharacter* User);

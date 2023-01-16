@@ -1,20 +1,28 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "Templates/SubclassOf.h"
 #include "Components/ActorComponent.h"
 #include "InfectionMasterComponent.generated.h"
 
-class UHealthComponent;
-class UMaterialInterface;
-class UStaticMesh;
 class UStaticMeshComponent;
 class UHealthComponentBase;
+class UHealthComponent;
+class UStatusEffect;
+class UMaterialInterface;
+class UStaticMesh;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UInfectionMasterComponent : public UActorComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere, Replicated)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<UStatusEffect> WeakpointPopSTE;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float WeakpointPopSTERange;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
     uint8 InfectionPoints;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -51,7 +59,7 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     TArray<UStaticMeshComponent*> MeshComponents;
     
-    UPROPERTY(EditAnywhere, ReplicatedUsing=OnRep_RandomSeed)
+    UPROPERTY(EditAnywhere, ReplicatedUsing=OnRep_RandomSeed, meta=(AllowPrivateAccess=true))
     uint32 RandomSeed;
     
 public:
@@ -68,7 +76,7 @@ protected:
     
 public:
     UFUNCTION(BlueprintCallable)
-    void DealWeakpointDamage();
+    void DealWeakpointDamage(const FName& SocketName);
     
 };
 

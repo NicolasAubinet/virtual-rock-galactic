@@ -1,21 +1,21 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "UObject/NoExportTypes.h"
 #include "EMoveType.h"
-#include "WidgetMover.h"
-#include "Components/ActorComponent.h"
-#include "WidgetPing.h"
+#include "EPingType.h"
+#include "CustomCounterDelegateDelegate.h"
 #include "WidgetFade.h"
 #include "WidgetTextCounter.h"
 #include "CustomCounter.h"
-#include "UObject/NoExportTypes.h"
-#include "CustomCounterDelegateDelegate.h"
-#include "EPingType.h"
+#include "WidgetMover.h"
+#include "WidgetPing.h"
+#include "Components/ActorComponent.h"
 #include "FSDWidgetEffectsComponent.generated.h"
 
 class UObject;
-class UTextBlock;
 class UWidget;
 class UUserWidget;
+class UTextBlock;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UFSDWidgetEffectsComponent : public UActorComponent {

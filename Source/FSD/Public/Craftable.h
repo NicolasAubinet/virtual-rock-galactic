@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "UObject/Interface.h"
 #include "CraftingCost.h"
+#include "UObject/Interface.h"
 #include "Craftable.generated.h"
 
 class UObject;

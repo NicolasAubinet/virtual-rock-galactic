@@ -1,14 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "VanityItem.h"
 #include "TattooArmorItem.h"
+#include "VanityItem.h"
 #include "ArmorVanityItem.generated.h"
 
-class USkeletalMesh;
-class UMaterialInterface;
 class UAnimInstance;
 class UArmorMaterialVanityItem;
 class AFSDPlayerState;
+class UMaterialInterface;
+class USkeletalMesh;
 
 UCLASS(Blueprintable, EditInlineNew)
 class UArmorVanityItem : public UVanityItem {

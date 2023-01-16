@@ -1,12 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "ItemUpgrade.h"
 #include "ETargetStateDamageBonusType.h"
+#include "ItemUpgrade.h"
 #include "StatusAndStateDamageBonusUpgrade.generated.h"
 
-class UStatusEffect;
 class UDamageClass;
+class UStatusEffect;
 
 UCLASS(Blueprintable, EditInlineNew, MinimalAPI)
 class UStatusAndStateDamageBonusUpgrade : public UItemUpgrade {

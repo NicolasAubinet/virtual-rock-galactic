@@ -5,9 +5,9 @@
 #include "Steerable.h"
 #include "PathfinderVehicle.generated.h"
 
-class UHealthComponent;
-class UDeepPathfinderMovement;
 class USkeletalMeshComponent;
+class UDeepPathfinderMovement;
+class UHealthComponent;
 
 UCLASS(Blueprintable)
 class APathfinderVehicle : public APawn, public ITargetable, public ISteerable {

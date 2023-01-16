@@ -3,8 +3,8 @@
 #include "SchematicBankItem.generated.h"
 
 class USchematicPricingTier;
-class USchematicRarity;
 class USchematic;
+class USchematicRarity;
 
 USTRUCT(BlueprintType)
 struct FSchematicBankItem {

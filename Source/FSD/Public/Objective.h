@@ -1,20 +1,20 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "Components/ActorComponent.h"
-#include "ObjectiveUpdatedSignatureDelegate.h"
-#include "CreditsReward.h"
 #include "MissionShouts.h"
+#include "CreditsReward.h"
 #include "ObjectiveMissionIcon.h"
+#include "ObjectiveUpdatedSignatureDelegate.h"
+#include "Components/ActorComponent.h"
 #include "Objective.generated.h"
 
-class UMissionStat;
-class UObjectiveWidget;
-class UTexture2D;
-class UOptionalObjectiveWidget;
+class UObjective;
 class UBiome;
 class UResourceData;
-class UObjective;
+class UMissionStat;
+class UOptionalObjectiveWidget;
+class UObjectiveWidget;
+class UTexture2D;
 
 UCLASS(Abstract, Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class FSD_API UObjective : public UActorComponent {

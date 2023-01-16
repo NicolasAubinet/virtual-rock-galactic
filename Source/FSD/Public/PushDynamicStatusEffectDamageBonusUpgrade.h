@@ -1,13 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "ItemUpgrade.h"
 #include "UpgradeValues.h"
+#include "ItemUpgrade.h"
 #include "PushDynamicStatusEffectDamageBonusUpgrade.generated.h"
 
-class UStatusEffectItem;
-class AFSDPlayerState;
 class AActor;
+class AFSDPlayerState;
+class UStatusEffectItem;
 
 UCLASS(Blueprintable, EditInlineNew, MinimalAPI)
 class UPushDynamicStatusEffectDamageBonusUpgrade : public UItemUpgrade {

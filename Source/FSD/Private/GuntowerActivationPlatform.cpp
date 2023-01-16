@@ -4,9 +4,9 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/CapsuleComponent.h"
 
+class AActor;
 class UPrimitiveComponent;
 class UHealthComponentBase;
-class AActor;
 class AFSDPlayerState;
 class AGuntowerModule;
 

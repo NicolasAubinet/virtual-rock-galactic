@@ -24,7 +24,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, BlueprintPure)
     AActor* GetViewerActor() const;
     
-    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, BlueprintPure)
     APlayerCharacter* GetActiveCharacter() const;
     
 };

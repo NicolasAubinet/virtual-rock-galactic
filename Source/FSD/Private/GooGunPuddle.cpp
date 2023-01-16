@@ -4,9 +4,9 @@
 #include "Components/SphereComponent.h"
 #include "SimpleHealthComponent.h"
 
-class UStatusEffect;
-class UPrimitiveComponent;
 class AActor;
+class UPrimitiveComponent;
+class UStatusEffect;
 
 void AGooGunPuddle::SetStatusEffect(TSubclassOf<UStatusEffect> NewStatusEffect) {
 }

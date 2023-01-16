@@ -5,10 +5,10 @@
 #include "AnimatedItem.h"
 #include "CalldownItem.generated.h"
 
-class UItemPlacerAggregator;
-class ARessuplyPod;
-class UResourceData;
 class AActor;
+class UResourceData;
+class ARessuplyPod;
+class UItemPlacerAggregator;
 
 UCLASS(Blueprintable)
 class ACalldownItem : public AAnimatedItem {

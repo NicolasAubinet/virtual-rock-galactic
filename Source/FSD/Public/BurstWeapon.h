@@ -4,8 +4,8 @@
 #include "BurstWeapon.generated.h"
 
 class UPrimitiveComponent;
-class UHealthComponentBase;
 class UDamageComponent;
+class UHealthComponentBase;
 class UFSDPhysicalMaterial;
 
 UCLASS(Blueprintable)

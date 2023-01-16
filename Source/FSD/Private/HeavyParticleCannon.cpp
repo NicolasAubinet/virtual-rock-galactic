@@ -1,10 +1,10 @@
 #include "HeavyParticleCannon.h"
 #include "Net/UnrealNetwork.h"
-#include "FirstPersonNiagaraComponent.h"
+#include "NiagaraComponent.h"
 #include "DamageComponent.h"
+#include "FirstPersonNiagaraComponent.h"
 #include "ReflectionHitscanComponent.h"
 #include "StickyFlameSpawner.h"
-#include "NiagaraComponent.h"
 
 class AActor;
 class UFSDPhysicalMaterial;

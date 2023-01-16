@@ -4,21 +4,21 @@
 #include "GameFramework/Actor.h"
 #include "VanityCharacter.generated.h"
 
-class USideburnsVanityItem;
-class USkinColorVanityItem;
-class UChildActorComponent;
-class UAnimSequenceBase;
-class UBeardColorVanityItem;
 class USkeletalMeshComponent;
-class UHeadVanityItem;
-class UEyeBrowsVanityItem;
-class UMoustacheVanityItem;
-class UBeardVanityItem;
+class AItem;
 class UArmorVanityItem;
 class UArmorMaterialVanityItem;
-class UMaterialInterface;
-class AItem;
+class UBeardVanityItem;
+class UBeardColorVanityItem;
+class UEyeBrowsVanityItem;
+class UHeadVanityItem;
 class UItemSkin;
+class UMoustacheVanityItem;
+class USkinColorVanityItem;
+class USideburnsVanityItem;
+class UMaterialInterface;
+class UAnimSequenceBase;
+class UChildActorComponent;
 
 UCLASS(Blueprintable)
 class AVanityCharacter : public AActor {

@@ -2,10 +2,10 @@
 #include "CoreMinimal.h"
 #include "ControllerSettings.h"
 #include "HUDElements.h"
-#include "EConsoleGraphicsMode.h"
-#include "UDLSSMode.h"
 #include "CharacterOptions.h"
 #include "CustomKeyBinding.h"
+#include "UDLSSMode.h"
+#include "EConsoleGraphicsMode.h"
 #include "ConsoleOptionsInSaveGame.generated.h"
 
 USTRUCT(BlueprintType)

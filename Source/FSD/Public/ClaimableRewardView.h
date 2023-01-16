@@ -3,8 +3,8 @@
 #include "ClaimableRewardEntry.h"
 #include "ClaimableRewardView.generated.h"
 
-class UDialogDataAsset;
 class UUserWidget;
+class UDialogDataAsset;
 class USoundCue;
 
 USTRUCT(BlueprintType)

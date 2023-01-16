@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Components/ActorComponent.h"
-#include "EIntoxicationState.h"
-#include "LerpingPercent.h"
 #include "CountDownFloat.h"
+#include "LerpingPercent.h"
 #include "EDrinkableAlcoholStrength.h"
+#include "EIntoxicationState.h"
+#include "Components/ActorComponent.h"
 #include "CharacterIntoxicationComponent.generated.h"
 
+class UDrinkableDataAsset;
 class APlayerCharacter;
 class UCurveFloat;
-class UDrinkableDataAsset;
 
 UCLASS(Blueprintable, MinimalAPI, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UCharacterIntoxicationComponent : public UActorComponent {
@@ -43,7 +43,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FCountDownFloat SoberingUpCoolDown;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     uint8 SoberingPercent;
     
 public:

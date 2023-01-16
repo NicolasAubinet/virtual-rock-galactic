@@ -4,10 +4,10 @@
 #include "CharacterStateComponent.h"
 #include "InfectedStateComponent.generated.h"
 
-class USoundBase;
-class UAnimMontage;
 class UFSDPhysicalMaterial;
 class UPawnAffliction;
+class USoundBase;
+class UAnimMontage;
 
 UCLASS(Blueprintable, MinimalAPI, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UInfectedStateComponent : public UCharacterStateComponent {

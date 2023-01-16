@@ -1,24 +1,28 @@
 #include "FSDGameState.h"
 #include "Net/UnrealNetwork.h"
-#include "SoundMixManagerComponent.h"
+#include "AttackerManagerComponent.h"
 #include "DifficultyManager.h"
 #include "SpawnEffectsComponent.h"
 #include "GemProximityTracker.h"
-#include "AttackerManagerComponent.h"
-#include "SeasonReplicatorComponent.h"
-#include "TeamResourcesComponent.h"
 #include "PlayerProximityTracker.h"
+#include "SeasonReplicatorComponent.h"
 #include "ShowroomManager.h"
+#include "SoundMixManagerComponent.h"
+#include "TeamResourcesComponent.h"
 
+class UObjective;
+class UResourceData;
+class UDifficultySetting;
+class AFSDGameState;
+class UFSDEvent;
+class AFSDPlayerState;
 class UGeneratedMission;
 class AGameStats;
-class AFSDPlayerState;
-class UDifficultySetting;
-class UObjective;
-class UFSDEvent;
 class AProceduralSetup;
-class UResourceData;
 class USoundCue;
+
+void AFSDGameState::WaitForInitialGenerationDone(AFSDGameState* GameState, FLatentActionInfo LatentInfo) {
+}
 
 void AFSDGameState::StartCountdown(int32 Duration, const FText& countdownName) {
 }
@@ -115,10 +119,6 @@ TArray<UObjective*> AFSDGameState::GetSecondaryObjectives() const {
     return TArray<UObjective*>();
 }
 
-UObjective* AFSDGameState::GetSecondaryObjective() const {
-    return NULL;
-}
-
 AProceduralSetup* AFSDGameState::GetProceduralSetup() {
     return NULL;
 }
@@ -208,7 +208,7 @@ bool AFSDGameState::AllMissionEndResultsReceived() const {
 void AFSDGameState::All_SpawnScaledEffectAt_Implementation(FScaledEffect Effect, FVector_NetQuantize Location) {
 }
 
-void AFSDGameState::All_SpawnScaledEffectAndCueAt_Implementation(FScaledEffect Effect, USoundCue* Audio, FVector_NetQuantize Location) {
+void AFSDGameState::All_SpawnScaledEffectAndCueAt_Implementation(FScaledEffect Effect, USoundCue* audio, FVector_NetQuantize Location) {
 }
 
 void AFSDGameState::All_ServerQuit_Implementation() {
@@ -233,7 +233,7 @@ void AFSDGameState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLif
     DOREPLIFETIME(AFSDGameState, ContinuePressed);
     DOREPLIFETIME(AFSDGameState, ContinuesCountdown);
     DOREPLIFETIME(AFSDGameState, AllDwarvesDown);
-    DOREPLIFETIME(AFSDGameState, MissionAborted);
+    DOREPLIFETIME(AFSDGameState, missionAborted);
     DOREPLIFETIME(AFSDGameState, CountdownRemaining);
     DOREPLIFETIME(AFSDGameState, countdownText);
 }
@@ -278,7 +278,7 @@ AFSDGameState::AFSDGameState() {
     this->ContinuePressed = false;
     this->ContinuesCountdown = 0;
     this->AllDwarvesDown = false;
-    this->MissionAborted = false;
+    this->missionAborted = false;
     this->CountdownRemaining = -1;
     this->CanCarryOverResources = true;
     this->CurrentPlayerSessionLeader = NULL;

@@ -3,8 +3,8 @@
 #include "PawnAfflictionComponent.h"
 #include "PlayerAfflictionComponent.generated.h"
 
-class UPlayerAfflictionOverlay;
 class APlayerCharacter;
+class UPlayerAfflictionOverlay;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UPlayerAfflictionComponent : public UPawnAfflictionComponent {
@@ -22,7 +22,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TMap<UPlayerAfflictionOverlay*, int32> ActiveOverlays;
     
-    UPROPERTY(EditAnywhere, Transient)
+    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<APlayerCharacter> Character;
     
 public:

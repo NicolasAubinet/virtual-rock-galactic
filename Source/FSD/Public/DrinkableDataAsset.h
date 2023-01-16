@@ -1,21 +1,21 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "SavableDataAsset.h"
 #include "EDrinkableAlcoholStrength.h"
+#include "SavableDataAsset.h"
 #include "DrinkableDataAsset.generated.h"
 
-class UTexture2D;
-class UDialogDataAsset;
-class UDrinkableDataAsset;
-class UMissionStat;
-class ADrinkableActor;
-class ADrinkableItem;
-class UTemporaryBuff;
-class UDrinkEffectComponent;
-class UResourceData;
 class UObject;
-class APlayerCharacter;
+class UResourceData;
+class UDialogDataAsset;
+class ADrinkableItem;
+class UDrinkEffectComponent;
+class UDrinkableDataAsset;
+class ADrinkableActor;
 class APlayerController;
+class UMissionStat;
+class APlayerCharacter;
+class UTemporaryBuff;
+class UTexture2D;
 
 UCLASS(Blueprintable)
 class UDrinkableDataAsset : public USavableDataAsset {

@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "ECustomUsableType.h"
+#include "EndUsingDelegateDelegate.h"
+#include "BeginUsingDelegateDelegate.h"
+#include "DepositingEventDelegate.h"
 #include "CharacterUseState.h"
 #include "Components/ActorComponent.h"
-#include "BeginUsingDelegateDelegate.h"
-#include "EndUsingDelegateDelegate.h"
-#include "DepositingEventDelegate.h"
-#include "ECustomUsableType.h"
 #include "CharacterUseComponent.generated.h"
 
-class UUsableComponentBase;
 class AActor;
+class UUsableComponentBase;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UCharacterUseComponent : public UActorComponent {

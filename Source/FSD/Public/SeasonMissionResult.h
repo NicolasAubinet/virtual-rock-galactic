@@ -1,8 +1,10 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "ChallengeInfo.h"
 #include "SeasonEvent.h"
+#include "ChallengeInfo.h"
 #include "SeasonMissionResult.generated.h"
+
+class UTexture2D;
 
 USTRUCT(BlueprintType)
 struct FSeasonMissionResult {
@@ -13,6 +15,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 XPFromChallenges;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 XPFromRewards;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float XPMultiplier;
@@ -28,6 +33,12 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FSeasonEvent> CompletedEvents;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UTexture2D* EndScreenImage;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UTexture2D* EndScreenResourceIcon;
     
     FSD_API FSeasonMissionResult();
 };

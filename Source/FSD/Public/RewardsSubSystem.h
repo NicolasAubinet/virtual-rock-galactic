@@ -1,9 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "PendingRewards.h"
-#include "Subsystems/GameInstanceSubsystem.h"
 #include "ClaimableRewardEntry.h"
 #include "PendingRewardsStats.h"
+#include "PendingRewards.h"
+#include "Subsystems/GameInstanceSubsystem.h"
 #include "RewardsSubSystem.generated.h"
 
 class UObject;

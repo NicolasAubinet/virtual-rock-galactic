@@ -1,13 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "UObject/NoExportTypes.h"
 #include "Engine/NetSerialization.h"
 #include "CharacterStateComponent.h"
-#include "UObject/NoExportTypes.h"
 #include "FallingStateComponent.generated.h"
 
 class UDialogDataAsset;
-class UUseAnimationSetting;
 class UFSDPhysicalMaterial;
+class UUseAnimationSetting;
 
 UCLASS(Blueprintable, MinimalAPI, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UFallingStateComponent : public UCharacterStateComponent {

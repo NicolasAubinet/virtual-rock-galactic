@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "FSDAIController.h"
 #include "Perception/AIPerceptionTypes.h"
+#include "FSDAIController.h"
 #include "HostileGuntowerModuleController.generated.h"
 
 class AActor;

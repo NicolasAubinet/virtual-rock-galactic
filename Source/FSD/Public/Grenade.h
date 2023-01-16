@@ -2,26 +2,26 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
-#include "GameFramework/Actor.h"
-#include "SaveGameIDInterface.h"
-#include "ItemIDInterface.h"
-#include "LoadoutItem.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "Engine/EngineTypes.h"
+#include "GameFramework/Actor.h"
+#include "LoadoutItem.h"
+#include "ItemIDInterface.h"
+#include "SaveGameIDInterface.h"
 #include "Grenade.generated.h"
 
-class USoundCue;
-class UProjectileMovementComponent;
 class UUserWidget;
-class ALoadoutItemProxy;
-class UStaticMesh;
-class UItemID;
-class UGrenadeProjectionSettings;
-class UParticleSystem;
-class UGrenadeAnimationSet;
-class AGrenade;
 class AItem;
+class AGrenade;
+class UProjectileMovementComponent;
+class UGrenadeProjectionSettings;
+class UGrenadeAnimationSet;
+class ALoadoutItemProxy;
+class UItemID;
+class UParticleSystem;
+class USoundCue;
+class UStaticMesh;
 
 UCLASS(Blueprintable)
 class AGrenade : public AActor, public ISaveGameIDInterface, public IItemIDInterface, public ILoadoutItem {

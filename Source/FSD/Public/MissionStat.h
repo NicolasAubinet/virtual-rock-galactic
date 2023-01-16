@@ -1,17 +1,17 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "Engine/DataAsset.h"
 #include "UObject/NoExportTypes.h"
 #include "EMissionStatType.h"
+#include "Engine/DataAsset.h"
 #include "MissionStat.generated.h"
 
 class UObject;
-class UMissionStat;
 class UFSDAchievement;
+class UMissionStat;
 class UMissionStatCategory;
-class APlayerCharacter;
 class UPlayerCharacterID;
+class APlayerCharacter;
 class UTexture2D;
 
 UCLASS(Blueprintable)
@@ -50,6 +50,9 @@ protected:
     
 public:
     UMissionStat();
+    UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
+    float SetStatValue(UObject* WorldContext, APlayerCharacter* Character, float Amount);
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static FText MissionStatToText(EMissionStatType StatType, float Value);
     

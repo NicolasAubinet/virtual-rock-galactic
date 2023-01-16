@@ -1,13 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "SavableDataAsset.h"
 #include "UObject/NoExportTypes.h"
 #include "ESchematicType.h"
+#include "SavableDataAsset.h"
 #include "SchematicCategory.generated.h"
 
+class UDialogDataAsset;
 class UEventRewardType;
 class UTexture2D;
-class UDialogDataAsset;
 
 UCLASS(Blueprintable)
 class USchematicCategory : public USavableDataAsset {

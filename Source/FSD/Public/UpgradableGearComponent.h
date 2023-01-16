@@ -1,26 +1,26 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "Components/ActorComponent.h"
+#include "EItemUpgradeStatus.h"
 #include "CraftingCost.h"
+#include "GearStatEntry.h"
 #include "UpgradeTier.h"
 #include "MasteryItem.h"
-#include "GearStatEntry.h"
-#include "EItemUpgradeStatus.h"
+#include "Components/ActorComponent.h"
 #include "UpgradableGearComponent.generated.h"
 
+class UObject;
+class AActor;
+class UResourceData;
+class AFSDPlayerState;
+class AFSDPlayerController;
 class UItemUpgrade;
 class UItemData;
-class AActor;
-class UPlayerCharacterID;
 class UOverclockBank;
-class UTexture2D;
-class UResourceData;
-class APlayerCharacter;
 class UItemID;
-class AFSDPlayerController;
-class UObject;
-class AFSDPlayerState;
+class UPlayerCharacterID;
+class APlayerCharacter;
+class UTexture2D;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class FSD_API UUpgradableGearComponent : public UActorComponent {
@@ -146,7 +146,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static EItemUpgradeStatus GetItemUpgradeStatus(UObject* WorldContextObject, TSubclassOf<AActor> itemClass, UItemUpgrade* ItemUpgrade, UPlayerCharacterID* characterID);
     
-    UFUNCTION(BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     static TArray<UItemUpgrade*> GetItemUpgrades(TSubclassOf<AActor> itemClass, TSubclassOf<UItemUpgrade> upgradeClass, AFSDPlayerState* Player, uint8 upgradeIndex);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)

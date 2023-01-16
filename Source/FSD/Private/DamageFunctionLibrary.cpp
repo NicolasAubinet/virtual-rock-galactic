@@ -1,14 +1,14 @@
 #include "DamageFunctionLibrary.h"
 
-class UFSDPhysicalMaterial;
+class UObject;
+class AActor;
+class USkeletalMeshComponent;
 class UDamageClass;
 class UDamageTag;
-class AActor;
-class UObject;
-class UPawnStatsComponent;
 class UDamageImpulse;
-class USkeletalMeshComponent;
+class UFSDPhysicalMaterial;
 class ULimbDismembermentList;
+class UPawnStatsComponent;
 
 void UDamageFunctionLibrary::SetPhysicalMaterialOnHit(UFSDPhysicalMaterial* PhysMat, FHitResult& Hit) {
 }

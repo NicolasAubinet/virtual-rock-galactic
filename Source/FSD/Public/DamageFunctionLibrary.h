@@ -1,20 +1,20 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Kismet/BlueprintFunctionLibrary.h"
-#include "Engine/EngineTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "DamageData.h"
+#include "Engine/EngineTypes.h"
+#include "Kismet/BlueprintFunctionLibrary.h"
 #include "DamageFunctionLibrary.generated.h"
 
-class UPawnStatsComponent;
-class UFSDPhysicalMaterial;
-class UDamageClass;
-class UDamageTag;
 class UObject;
 class AActor;
-class UDamageImpulse;
 class USkeletalMeshComponent;
+class UDamageClass;
+class UDamageTag;
+class UDamageImpulse;
+class UFSDPhysicalMaterial;
 class ULimbDismembermentList;
+class UPawnStatsComponent;
 
 UCLASS(Blueprintable)
 class UDamageFunctionLibrary : public UBlueprintFunctionLibrary {

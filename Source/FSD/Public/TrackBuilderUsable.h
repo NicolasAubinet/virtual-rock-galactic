@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "InstantUsable.h"
 #include "UObject/NoExportTypes.h"
+#include "InstantUsable.h"
 #include "TrackBuilderUsable.generated.h"
 
 class AActor;
-class UTrackBuilderUsable;
 class USceneComponent;
 class ATrackBuilderSegment;
 class ATrackBuilderItem;
+class UTrackBuilderUsable;
 class APlayerCharacter;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -34,7 +34,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_NextSegment, meta=(AllowPrivateAccess=true))
     ATrackBuilderSegment* NextSegment;
     
-    UPROPERTY(EditAnywhere, Replicated, Transient)
+    UPROPERTY(EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<APlayerCharacter> InUseBy;
     
 public:

@@ -1,8 +1,8 @@
 #include "PerkFunctionLibrary.h"
 #include "Templates/SubclassOf.h"
 
-class UPerkAsset;
 class UObject;
+class UPerkAsset;
 class UPlayerCharacterID;
 class APlayerCharacter;
 

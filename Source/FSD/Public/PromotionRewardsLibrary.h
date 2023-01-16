@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Kismet/BlueprintFunctionLibrary.h"
 #include "ClaimableRewardEntry.h"
+#include "Kismet/BlueprintFunctionLibrary.h"
 #include "PromotionRewardsLibrary.generated.h"
 
 class UObject;

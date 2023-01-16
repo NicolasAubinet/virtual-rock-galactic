@@ -1,27 +1,27 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "DualAnimatedItem.h"
-#include "RejoinListener.h"
-#include "Upgradable.h"
-#include "UpgradableGear.h"
-#include "EDoubleDrillState.h"
 #include "UObject/NoExportTypes.h"
 #include "Engine/EngineTypes.h"
-#include "DoubleDrillDamageItem.h"
 #include "Engine/NetSerialization.h"
+#include "EDoubleDrillState.h"
+#include "DoubleDrillDamageItem.h"
+#include "DualAnimatedItem.h"
+#include "RejoinListener.h"
+#include "UpgradableGear.h"
+#include "Upgradable.h"
 #include "DoubleDrillItem.generated.h"
 
-class UFSDAudioComponent;
+class AActor;
 class UDamageComponent;
-class UFirstPersonParticleSystemComponent;
+class UDamageClass;
 class UDoubleDrillAggregator;
+class UDialogDataAsset;
+class UFirstPersonParticleSystemComponent;
+class UFSDAudioComponent;
 class UFSDPhysicalMaterial;
 class UAnimMontage;
-class UParticleSystem;
 class UForceFeedbackEffect;
-class UDamageClass;
-class UDialogDataAsset;
-class AActor;
+class UParticleSystem;
 
 UCLASS(Blueprintable)
 class ADoubleDrillItem : public ADualAnimatedItem, public IUpgradable, public IUpgradableGear, public IRejoinListener {
@@ -205,7 +205,7 @@ public:
     void All_SimulateDigDebris(FVector_NetQuantize Position, int32 DebrisIndex);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
-    void All_SimulateDigBlock(FVector_NetQuantize Position, bool spawnParticles, int32 Material);
+    void All_SimulateDigBlock(FVector_NetQuantize Position, bool SpawnParticles, int32 Material);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
     void All_SimulateDamage(const TArray<FDoubleDrillDamageItem>& Targets);

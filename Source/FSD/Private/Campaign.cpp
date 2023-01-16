@@ -2,10 +2,10 @@
 #include "Templates/SubclassOf.h"
 
 class UObject;
-class UDifficultySetting;
-class UCampaign;
-class APlayerController;
 class UCampaignMission;
+class UCampaign;
+class UDifficultySetting;
+class APlayerController;
 class AFSDPlayerController;
 class UTexture2D;
 

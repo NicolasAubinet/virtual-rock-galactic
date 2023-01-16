@@ -4,8 +4,8 @@
 #include "CharacterStateComponent.h"
 #include "FrozenStateComponent.generated.h"
 
-class USoundBase;
 class UFSDPhysicalMaterial;
+class USoundBase;
 
 UCLASS(Blueprintable, MinimalAPI, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UFrozenStateComponent : public UCharacterStateComponent {

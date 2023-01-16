@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
 #include "CablePathSettings.h"
-#include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
+#include "GameFramework/Actor.h"
 #include "SplineCableActor.generated.h"
 
-class UMaterialInterface;
-class USplineComponent;
-class UStaticMesh;
 class USplineMeshComponent;
+class UMaterialInterface;
+class UStaticMesh;
+class USplineComponent;
 
 UCLASS(Abstract, Blueprintable)
 class FSD_API ASplineCableActor : public AActor {

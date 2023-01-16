@@ -1,17 +1,17 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "GameplayTagContainer.h"
 #include "RandRange.h"
-#include "Engine/DataAsset.h"
-#include "RandInterval.h"
 #include "IRandRange.h"
 #include "EncounterRareCritterItem.h"
 #include "EncounterSpecialItem.h"
-#include "GameplayTagContainer.h"
+#include "RandInterval.h"
 #include "EliteEnemyEntry.h"
+#include "Engine/DataAsset.h"
 #include "EncounterSettings.generated.h"
 
-class UEnemyDescriptor;
 class UCritterDescriptor;
+class UEnemyDescriptor;
 class UMutator;
 
 UCLASS(Blueprintable)

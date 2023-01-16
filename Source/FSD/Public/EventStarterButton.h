@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "EInputKeys.h"
 #include "BootUpDelegateDelegate.h"
 #include "GameFramework/Actor.h"
-#include "EInputKeys.h"
 #include "EventStarterButton.generated.h"
 
 class USceneComponent;

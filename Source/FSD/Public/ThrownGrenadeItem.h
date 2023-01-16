@@ -1,19 +1,19 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "Item.h"
-#include "RejoinListener.h"
+#include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "EThrownGrenadeItemState.h"
-#include "UObject/NoExportTypes.h"
+#include "Item.h"
+#include "RejoinListener.h"
 #include "ThrownGrenadeItem.generated.h"
 
-class UPlayerAnimInstance;
-class UItemCharacterAnimationSet;
-class AGrenade;
 class UStaticMeshComponent;
-class UGrenadeAnimationSet;
+class AGrenade;
 class UFSDAudioComponent;
+class UGrenadeAnimationSet;
+class UItemCharacterAnimationSet;
+class UPlayerAnimInstance;
 
 UCLASS(Blueprintable)
 class AThrownGrenadeItem : public AItem, public IRejoinListener {
@@ -49,7 +49,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float GrenadeCooldownRemaining;
     
-    UPROPERTY(EditAnywhere, Transient, ReplicatedUsing=OnRep_State)
+    UPROPERTY(EditAnywhere, Transient, ReplicatedUsing=OnRep_State, meta=(AllowPrivateAccess=true))
     EThrownGrenadeItemState State;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_GrenadeClass, meta=(AllowPrivateAccess=true))

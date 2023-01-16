@@ -3,10 +3,10 @@
 #include "AmmoDrivenWeapon.h"
 #include "DualWieldWeapon.generated.h"
 
-class UFirstPersonSkeletalMeshComponent;
-class USkeletalMeshComponent;
-class UAnimMontage;
 class UFXSystemAsset;
+class USkeletalMeshComponent;
+class UFirstPersonSkeletalMeshComponent;
+class UAnimMontage;
 
 UCLASS(Abstract, Blueprintable)
 class ADualWieldWeapon : public AAmmoDrivenWeapon {

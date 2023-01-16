@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "Engine/DataAsset.h"
 #include "DefaultPickaxeParts.h"
+#include "Engine/DataAsset.h"
 #include "PickaxeSettings.generated.h"
 
-class UPlayerCharacterID;
 class UItemID;
+class UPlayerCharacterID;
+class UPickaxePart;
 class APickaxePreviewActor;
 class UAnimMontage;
-class UPickaxePart;
 
 UCLASS(Blueprintable)
 class UPickaxeSettings : public UDataAsset {

@@ -1,28 +1,28 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "ChargedWeapon.h"
-#include "ShotMultiplier.h"
-#include "ContrailSettings.h"
 #include "UObject/NoExportTypes.h"
-#include "CoilMaterial.h"
-#include "Curves/CurveFloat.h"
+#include "UObject/NoExportTypes.h"
 #include "Engine/NetSerialization.h"
-#include "UObject/NoExportTypes.h"
+#include "Curves/CurveFloat.h"
 #include "BulletPathSegment.h"
+#include "ContrailSettings.h"
+#include "ShotMultiplier.h"
+#include "CoilMaterial.h"
+#include "ChargedWeapon.h"
 #include "CoilGun.generated.h"
 
-class UNiagaraComponent;
-class UPrimitiveComponent;
-class UNiagaraSystem;
-class UDamageComponent;
-class UCoilgunTrailSpawner;
-class UStaticMesh;
-class UStatusEffect;
-class ACoilgunWeaponTrail;
 class AActor;
-class UFSDPhysicalMaterial;
+class UPrimitiveComponent;
+class UNiagaraComponent;
+class UNiagaraSystem;
+class UCoilgunTrailSpawner;
+class ACoilgunWeaponTrail;
+class UDamageComponent;
 class UHealthComponentBase;
+class UFSDPhysicalMaterial;
+class UStatusEffect;
+class UStaticMesh;
 
 UCLASS(Blueprintable)
 class FSD_API ACoilGun : public AChargedWeapon {

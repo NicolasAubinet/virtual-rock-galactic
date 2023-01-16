@@ -1,10 +1,10 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "SavableDataAsset.h"
 #include "IRandRange.h"
-#include "RandInterval.h"
 #include "VeteranComposition.h"
+#include "RandInterval.h"
+#include "SavableDataAsset.h"
 #include "DifficultySetting.generated.h"
 
 class UObject;

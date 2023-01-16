@@ -2,8 +2,8 @@
 
 class UTextBlock;
 class UImage;
-class UTexture2D;
 class UHorizontalBox;
+class UTexture2D;
 
 void UFSDAdvancedLabel::SetText(FText NewText, FText OverrideControllerText) {
 }

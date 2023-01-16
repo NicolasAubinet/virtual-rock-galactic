@@ -1,10 +1,10 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EAsyncLoadPriority.h"
-#include "Subsystems/GameInstanceSubsystem.h"
-#include "AsyncLoadCompleteDelegateDelegate.h"
-#include "EAsyncPersistence.h"
 #include "UObject/NoExportTypes.h"
+#include "EAsyncLoadPriority.h"
+#include "EAsyncPersistence.h"
+#include "AsyncLoadCompleteDelegateDelegate.h"
+#include "Subsystems/GameInstanceSubsystem.h"
 #include "AsyncManager.generated.h"
 
 class UObject;

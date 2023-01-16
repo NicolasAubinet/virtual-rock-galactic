@@ -1,11 +1,11 @@
 #include "CaveLeech.h"
 #include "Net/UnrealNetwork.h"
+#include "Components/SceneComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "GrabberComponent.h"
-#include "Components/SceneComponent.h"
 
-class UHealthComponentBase;
 class AActor;
+class UHealthComponentBase;
 
 void ACaveLeech::OnRep_State() {
 }

@@ -1,26 +1,26 @@
 #include "FSDGameInstance.h"
 #include "Templates/SubclassOf.h"
+#include "FSDCloudLoadSave.h"
 #include "FSDSessionUpdater.h"
 #include "FSDSendToURL.h"
-#include "FSDCloudLoadSave.h"
 
-class AProceduralSetup;
+class UObject;
+class UNetDriver;
 class AActor;
+class ACharacterSelectionSwitcher;
 class AFSDPlayerController;
+class UFSDSaveGame;
 class UGeneratedMission;
 class UIconGenerationManager;
-class UObject;
-class ACharacterSelectionSwitcher;
-class UWorld;
-class UNetDriver;
-class UFSDSaveGame;
-class UMutator;
-class UTemporaryBuff;
-class APlayerCharacter;
-class UItemSkin;
 class UHUDWarningWidget;
-class UTexture2D;
+class UItemSkin;
+class UMutator;
+class APlayerCharacter;
+class AProceduralSetup;
+class UTemporaryBuff;
 class USoundBase;
+class UTexture2D;
+class UWorld;
 
 void UFSDGameInstance::UpdateGlobelMissionSeed() {
 }
@@ -63,6 +63,9 @@ void UFSDGameInstance::SetProceduralMap(TSubclassOf<AProceduralSetup> procedural
 }
 
 void UFSDGameInstance::SetPendingInviteJoinModding(const FBlueprintSessionResult& Result) {
+}
+
+void UFSDGameInstance::SetOverrideMaxPlayerCount(int32 Count) {
 }
 
 void UFSDGameInstance::SetMinersManualNotification(EMinersManualSection Section, UObject* IdentifyingObject, FText Text) {
@@ -202,6 +205,10 @@ TArray<FBlueprintSessionResult> UFSDGameInstance::GetServersFriendsArePlaying(TA
     return TArray<FBlueprintSessionResult>();
 }
 
+int32 UFSDGameInstance::GetOverrideMaxPlayerCount() const {
+    return 0;
+}
+
 TArray<UMutator*> UFSDGameInstance::GetMutators(TSubclassOf<UMutator> mutatorClass) const {
     return TArray<UMutator*>();
 }
@@ -265,6 +272,9 @@ void UFSDGameInstance::ChangeSkinPreview(UItemSkin* PreviewSkin) {
 void UFSDGameInstance::CancelJoin() {
 }
 
+void UFSDGameInstance::CachePSOsOnCommand() {
+}
+
 
 UHUDWarningWidget* UFSDGameInstance::AddWarningToHUD(TSubclassOf<UHUDWarningWidget> WidgetClass, UTexture2D* Texture, USoundBase* PingSound) {
     return NULL;
@@ -301,6 +311,7 @@ UFSDGameInstance::UFSDGameInstance() {
     this->CanPlayOnline = true;
     this->CanCommunicateOnline = true;
     this->GoogleAnalyticsWI = NULL;
+    this->DSTelemetryWrapper = NULL;
     this->ForcedMachineEvent = NULL;
     this->ForcedOtherEvent = NULL;
     this->ShowMinerManualWorkInProgress = false;
@@ -314,7 +325,6 @@ UFSDGameInstance::UFSDGameInstance() {
     this->IconGenerationManagerClass = NULL;
     this->IconGenerationManager = NULL;
     this->CampaignManager = NULL;
-    this->DeepDiveManager = NULL;
     this->GeneratedMission = NULL;
     this->DesiredDifficulty = NULL;
     this->SaveGame = NULL;

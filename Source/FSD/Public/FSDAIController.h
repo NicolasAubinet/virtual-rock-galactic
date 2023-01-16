@@ -1,9 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "DelegateDelegate.h"
+#include "Engine/EngineTypes.h"
 #include "MessageBehaviorTreeDelegate.h"
 #include "AIController.h"
-#include "Engine/EngineTypes.h"
 #include "FSDAIController.generated.h"
 
 class APlayerCharacter;
@@ -19,10 +19,10 @@ public:
     FDelegate OnAlertedEvent;
     
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TEnumAsByte<ECollisionChannel> LOSTraceChannel;
     
-    UPROPERTY(EditAnywhere, Transient)
+    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<APlayerCharacter> TargetedPlayer;
     
 public:

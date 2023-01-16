@@ -4,10 +4,10 @@
 #include "Engine/DataAsset.h"
 #include "MissionMutator.generated.h"
 
-class URunningMissionBP;
 class UObjective;
-class UTexture2D;
+class URunningMissionBP;
 class UMutator;
+class UTexture2D;
 
 UCLASS(Blueprintable)
 class UMissionMutator : public UDataAsset {

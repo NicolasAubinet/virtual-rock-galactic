@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "TentacleBase.h"
-#include "EFacilityTentacleState.h"
-#include "TriggerAI.h"
-#include "TentacleTarget.h"
 #include "UObject/NoExportTypes.h"
+#include "EFacilityTentacleState.h"
+#include "TentacleTarget.h"
+#include "TentacleBase.h"
+#include "TriggerAI.h"
 #include "FacilityTentacle.generated.h"
 
-class UAnimMontage;
 class USkeletalMeshComponent;
 class UDebrisPositioning;
+class UAnimMontage;
 
 UCLASS(Blueprintable)
 class FSD_API AFacilityTentacle : public ATentacleBase, public ITriggerAI {

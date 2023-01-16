@@ -3,8 +3,8 @@
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "BossFightSubSystem.generated.h"
 
-class UUserWidget;
 class AActor;
+class UUserWidget;
 class UBossFightInterface;
 class IBossFightInterface;
 

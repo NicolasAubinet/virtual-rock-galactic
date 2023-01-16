@@ -1,32 +1,32 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "FlaresDelegateDelegate.h"
-#include "GrenadesDelegateDelegate.h"
-#include "InventoryBase.h"
-#include "InventoryItemsLoadedDelegate.h"
-#include "ItemDelegateDelegate.h"
-#include "FlareProductionDelegateDelegate.h"
-#include "ResupplyDelegateDelegate.h"
-#include "CarriableChangedDelegateDelegate.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "EItemCategory.h"
+#include "ResupplyDelegateDelegate.h"
+#include "InventoryItemsLoadedDelegate.h"
+#include "FlareProductionDelegateDelegate.h"
+#include "FlaresDelegateDelegate.h"
+#include "GrenadesDelegateDelegate.h"
+#include "ItemDelegateDelegate.h"
+#include "CarriableChangedDelegateDelegate.h"
+#include "InventoryBase.h"
 #include "InventoryComponent.generated.h"
 
-class ATerrainScannerItem;
-class UInventoryList;
-class AThrownGrenadeItem;
-class AFlare;
-class USoundCue;
-class UDialogDataAsset;
-class AItem;
-class UItemUpgrade;
-class APickaxeItem;
-class ALaserPointerItem;
-class ARessuplyPodItem;
-class ARecallableSentryGunItem;
 class AActor;
+class AItem;
+class ARessuplyPodItem;
+class UDialogDataAsset;
+class AFlare;
+class UItemUpgrade;
+class UInventoryList;
+class ALaserPointerItem;
+class APickaxeItem;
+class ARecallableSentryGunItem;
+class AThrownGrenadeItem;
+class ATerrainScannerItem;
+class USoundCue;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UInventoryComponent : public UInventoryBase {

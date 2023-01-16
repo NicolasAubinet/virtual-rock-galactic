@@ -1,11 +1,11 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "CampaignRequirement.h"
 #include "UObject/NoExportTypes.h"
+#include "CampaignRequirement.h"
 #include "WeeklyTimerCampaignRequirement.generated.h"
 
-class AFSDPlayerController;
 class UCampaign;
+class AFSDPlayerController;
 
 UCLASS(Blueprintable, EditInlineNew)
 class FSD_API UWeeklyTimerCampaignRequirement : public UCampaignRequirement {

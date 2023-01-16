@@ -3,10 +3,10 @@
 #include "Objective.h"
 #include "PlagueObjective.generated.h"
 
-class APlagueInfectionNode;
 class UDialogDataAsset;
-class APlagueControlActor;
 class UEnemyWaveController;
+class APlagueInfectionNode;
+class APlagueControlActor;
 
 UCLASS(Abstract, Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UPlagueObjective : public UObjective {

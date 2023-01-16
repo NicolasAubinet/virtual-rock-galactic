@@ -9,7 +9,7 @@ class UPlayerShieldsDamageCondition : public UDamageCondition {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
     FFloatInterval ShieldPercentageRequired;
     
 public:

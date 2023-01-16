@@ -4,8 +4,8 @@
 #include "WeaponHitCountEffect.h"
 #include "DamageHitCountEffect.generated.h"
 
-class UStatusEffect;
 class UDamageClass;
+class UStatusEffect;
 class UParticleSystem;
 class USoundCue;
 

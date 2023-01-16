@@ -2,13 +2,13 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
-#include "ProjectileAttackComponent.h"
 #include "UObject/NoExportTypes.h"
+#include "ProjectileAttackComponent.h"
 #include "ProjectileThrowerAttack.generated.h"
 
+class UAnimInstance;
 class UAnimMontage;
 class USkeletalMesh;
-class UAnimInstance;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UProjectileThrowerAttack : public UProjectileAttackComponent {

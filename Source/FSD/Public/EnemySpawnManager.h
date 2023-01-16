@@ -1,23 +1,23 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "Components/ActorComponent.h"
-#include "EnemyDestroyedSignatureDelegate.h"
-#include "EnemySpawnedSignatureDelegate.h"
-#include "SpawnQueueItem.h"
-#include "SpawnRarityModifierItem.h"
 #include "GameplayTagContainer.h"
 #include "UObject/NoExportTypes.h"
 #include "EnemySpawnedDelegateDelegate.h"
+#include "EnemySpawnedSignatureDelegate.h"
+#include "EnemyDestroyedSignatureDelegate.h"
+#include "SpawnRarityModifierItem.h"
+#include "SpawnQueueItem.h"
+#include "Components/ActorComponent.h"
 #include "EnemySpawnManager.generated.h"
 
+class AActor;
+class APawn;
 class UEnemyDescriptor;
 class USpawnEffectsComponent;
-class APawn;
-class UStatusEffect;
-class AProceduralSetup;
 class UHealthComponentBase;
-class AActor;
+class AProceduralSetup;
+class UStatusEffect;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class FSD_API UEnemySpawnManager : public UActorComponent {

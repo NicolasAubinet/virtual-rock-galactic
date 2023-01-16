@@ -1,13 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "TickableActionBase.h"
 #include "TextCounterEntry.h"
+#include "TickableActionBase.h"
 #include "MultiTextCounterAction.generated.h"
 
+class UObject;
 class UAudioComponent;
 class UTextBlock;
 class UMultiTextCounterAction;
-class UObject;
 class USoundCue;
 
 UCLASS(Blueprintable)

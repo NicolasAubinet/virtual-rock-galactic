@@ -1,10 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "Projectile.h"
 #include "UObject/NoExportTypes.h"
+#include "Projectile.h"
 #include "GooGunProjectile.generated.h"
 
+class AActor;
+class UPrimitiveComponent;
 class AGooGunPuddle;
 
 UCLASS(Blueprintable)
@@ -23,6 +25,9 @@ public:
 protected:
     UFUNCTION(BlueprintCallable)
     AGooGunPuddle* SpawnPuddle(FTransform Transform, TSubclassOf<AGooGunPuddle> PuddleClass);
+    
+    UFUNCTION(BlueprintCallable)
+    void DealSocketArmorDamage(AActor* Actor, UPrimitiveComponent* Target);
     
 };
 

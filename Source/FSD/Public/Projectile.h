@@ -2,18 +2,18 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
-#include "ProjectileBase.h"
-#include "ProjectileState.h"
 #include "UObject/NoExportTypes.h"
 #include "Engine/EngineTypes.h"
+#include "ProjectileState.h"
+#include "ProjectileBase.h"
 #include "Projectile.generated.h"
 
-class APawn;
-class AActor;
 class UObject;
-class UFSDProjectileMovementComponent;
-class AProjectile;
+class AActor;
 class USceneComponent;
+class APawn;
+class AProjectile;
+class UFSDProjectileMovementComponent;
 class UFSDPhysicalMaterial;
 
 UCLASS(Abstract, Blueprintable)

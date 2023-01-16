@@ -1,53 +1,54 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "GameplayTagContainer.h"
+#include "DamageData.h"
+#include "Engine/NetSerialization.h"
+#include "UObject/NoExportTypes.h"
+#include "EDroneAIState.h"
+#include "EAbilityIndex.h"
+#include "StateChangedSigDelegate.h"
+#include "ReviveUsedSigDelegate.h"
+#include "BoscoLightSetting.h"
 #include "DeepPathfinderCharacter.h"
-#include "WeaponFireOwner.h"
-#include "ItemIDInterface.h"
+#include "NotifyMessageReceiver.h"
 #include "UpgradableGear.h"
 #include "Upgradable.h"
+#include "ItemIDInterface.h"
 #include "SaveGameIDInterface.h"
 #include "Skinnable.h"
-#include "NotifyMessageReceiver.h"
-#include "DamageData.h"
-#include "GameplayTagContainer.h"
-#include "ReviveUsedSigDelegate.h"
-#include "StateChangedSigDelegate.h"
-#include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
-#include "BoscoLightSetting.h"
-#include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
-#include "Engine/NetSerialization.h"
-#include "EDroneAIState.h"
+#include "WeaponFireOwner.h"
 #include "Bosco.generated.h"
 
-class USoundCue;
-class UPointLightComponent;
-class USkeletalMeshComponent;
-class APlayerCharacter;
-class UItemID;
-class UHealthComponent;
-class UBoscoAbillityComponent;
-class UDamageComponent;
-class UDroneSkinnableComponent;
-class UPawnSensingComponent;
-class UDroneMiningToolBase;
-class UBobbingComponent;
-class UHitscanComponent;
-class UBoscoProjectileAbillity;
-class USpotLightComponent;
-class UParticleSystemComponent;
-class UAudioComponent;
-class UDialogDataAsset;
-class USoundBase;
-class UItemUpgrade;
-class UUpgradableBoscoComponent;
-class UAnimSequenceBase;
-class UBoscoAbillity;
 class AActor;
-class UParticleSystem;
+class USkeletalMeshComponent;
+class UAudioComponent;
 class ABoscoController;
+class UBoscoAbillityComponent;
+class UBoscoProjectileAbillity;
+class UBoscoAbillity;
+class UBobbingComponent;
+class UDamageComponent;
+class UDialogDataAsset;
+class UDroneMiningToolBase;
+class UHealthComponent;
+class UPointLightComponent;
+class UParticleSystemComponent;
+class UHitscanComponent;
+class UItemUpgrade;
+class UItemID;
+class APlayerCharacter;
+class UDroneSkinnableComponent;
 class UTerrainMaterial;
+class UUpgradableBoscoComponent;
+class USoundBase;
+class UAnimSequenceBase;
+class UParticleSystem;
+class USoundCue;
+class USpotLightComponent;
+class UPawnSensingComponent;
 
 UCLASS(Blueprintable)
 class FSD_API ABosco : public ADeepPathfinderCharacter, public IWeaponFireOwner, public IUpgradableGear, public IUpgradable, public ISaveGameIDInterface, public ISkinnable, public IItemIDInterface, public INotifyMessageReceiver {
@@ -126,12 +127,6 @@ public:
     UDialogDataAsset* GeneralCallShout;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    UDialogDataAsset* RocketAbillityShout;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    UDialogDataAsset* CryoGrenadeAbillityShout;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDialogDataAsset* VacuumShout;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -157,6 +152,9 @@ public:
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FReviveUsedSig OnReviveused;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool ShouldSelfDestructOnMultiplePlayers;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FStateChangedSig OnStateChanged;
@@ -279,7 +277,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundBase* ReviveSirens;
     
-    UPROPERTY(EditAnywhere, Export, Transient)
+    UPROPERTY(EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UAudioComponent> ReviveSirensComponent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -324,6 +322,9 @@ protected:
 public:
     ABosco();
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+    UFUNCTION(BlueprintCallable)
+    void UsePlayerActivatedAbillity(EAbilityIndex Index, AActor* aTarget, const FVector& aLocation);
     
     UFUNCTION(BlueprintCallable)
     void UseABillity();

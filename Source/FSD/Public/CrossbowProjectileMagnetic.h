@@ -4,11 +4,11 @@
 #include "Components/ActorComponent.h"
 #include "CrossbowProjectileMagnetic.generated.h"
 
-class UStatusEffect;
 class AFSDPawn;
+class UStatusEffect;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
-class FSD_API UCrossbowProjectileMagnetic : public UActorComponent {
+class UCrossbowProjectileMagnetic : public UActorComponent {
     GENERATED_BODY()
 public:
 protected:
@@ -16,7 +16,7 @@ protected:
     TArray<TSubclassOf<UStatusEffect>> ElectricEffects;
     
 private:
-    UPROPERTY(EditAnywhere, Replicated)
+    UPROPERTY(EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<AFSDPawn> TargetEnemy;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

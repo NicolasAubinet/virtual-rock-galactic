@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
 #include "DeepPathfinderCharacter.h"
-#include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
 #include "CaveWorm.generated.h"
 
+class UObject;
 class UResourceData;
+class UHealthComponentBase;
 class AResourceChunk;
 class USimpleHealthComponent;
-class UObject;
-class UHealthComponentBase;
 
 UCLASS(Blueprintable, MinimalAPI)
 class ACaveWorm : public ADeepPathfinderCharacter {

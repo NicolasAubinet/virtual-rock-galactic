@@ -1,13 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Item.h"
 #include "UObject/NoExportTypes.h"
+#include "Item.h"
 #include "AnimatedItem.generated.h"
 
-class USkinnableComponent;
-class UPlayerAnimInstance;
 class USkeletalMeshComponent;
 class UItemCharacterAnimationSet;
+class UPlayerAnimInstance;
+class USkinnableComponent;
 class UAnimMontage;
 
 UCLASS(Abstract, Blueprintable)
@@ -34,7 +34,13 @@ protected:
     UAnimMontage* FP_EquipAnimation;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UAnimMontage* FP_IdleAnimation;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UAnimMontage* TP_EquipAnimation;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UAnimMontage* TP_IdleAnimation;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float EquipDuration;

@@ -1,16 +1,16 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "FSDPawn.h"
 #include "ECaretakerSpawnType.h"
+#include "FSDPawn.h"
 #include "Caretaker.generated.h"
 
-class UEnemyHealthComponent;
 class USceneComponent;
 class USkeletalMeshComponent;
-class UPassthroughSubHealthComponent;
 class UCaretakerActionComponent;
+class UEnemyHealthComponent;
 class UHealthDamageTracker;
 class UPawnStatsComponent;
+class UPassthroughSubHealthComponent;
 class UAnimSequenceBase;
 
 UCLASS(Blueprintable)
@@ -82,7 +82,7 @@ protected:
     int32 AoEStage;
     
 private:
-    UPROPERTY(EditAnywhere, Transient, ReplicatedUsing=OnRep_OpenEye)
+    UPROPERTY(EditAnywhere, Transient, ReplicatedUsing=OnRep_OpenEye, meta=(AllowPrivateAccess=true))
     int8 OpenEye;
     
 public:

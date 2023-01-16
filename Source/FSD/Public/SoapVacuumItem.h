@@ -1,16 +1,16 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "PlagueCleanupItem.h"
 #include "Engine/EngineTypes.h"
 #include "PlagueCleanerResourceChangedDelegate.h"
+#include "PlagueCleanupItem.h"
 #include "SoapVacuumItem.generated.h"
 
-class UCapsuleComponent;
-class UNiagaraComponent;
 class AActor;
-class AFoamPuddle;
-class UPrimitiveComponent;
 class USceneComponent;
+class UPrimitiveComponent;
+class UNiagaraComponent;
+class UCapsuleComponent;
+class AFoamPuddle;
 
 UCLASS(Blueprintable)
 class ASoapVacuumItem : public APlagueCleanupItem {

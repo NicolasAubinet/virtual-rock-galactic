@@ -1,7 +1,7 @@
 #include "NoiseFunctionLibrary.h"
 
-class AActor;
 class UObject;
+class AActor;
 class USceneComponent;
 
 void UNoiseFunctionLibrary::SphericalNoiseMovementComponent(UObject* WorldContextObject, USceneComponent* Component, FVector Center, float Radius, float Speed, float TimeOffset) {

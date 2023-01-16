@@ -4,9 +4,9 @@
 #include "RandRange.h"
 #include "ScaledMeshAfflictionTypeItem.generated.h"
 
-class UStaticMesh;
-class USoundCue;
 class UFXSystemAsset;
+class USoundCue;
+class UStaticMesh;
 
 USTRUCT(BlueprintType)
 struct FScaledMeshAfflictionTypeItem {

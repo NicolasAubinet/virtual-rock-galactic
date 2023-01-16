@@ -1,26 +1,27 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "Objective.h"
-#include "SubObjective.h"
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
 #include "EnemySpawnedDelegateDelegate.h"
-#include "RandInterval.h"
 #include "IRandRange.h"
-#include "UObject/NoExportTypes.h"
+#include "SubObjective.h"
+#include "RandInterval.h"
 #include "RoomNode.h"
-#include "UObject/NoExportTypes.h"
+#include "Objective.h"
 #include "FacilityObjective.generated.h"
 
-class ARessuplyPod;
 class AActor;
 class APawn;
-class UEnemyDescriptor;
-class UDebrisPositioning;
-class ATetherStation;
 class UResourceData;
-class AProceduralSetup;
-class UEncounterManager;
 class UCappedResource;
+class ARessuplyPod;
+class UDebrisPositioning;
+class UEnemyDescriptor;
+class UEncounterManager;
+class AProceduralSetup;
+class ATetherStation;
 
 UCLASS(Abstract, Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class FSD_API UFacilityObjective : public UObjective {
@@ -135,7 +136,7 @@ public:
     void ProgressCurrentObjective();
     
     UFUNCTION(BlueprintCallable)
-    AActor* PlaceObjectInRoom(AProceduralSetup* setup, const FRoomNode& RoomNode, UDebrisPositioning* Positioning, TSubclassOf<AActor> placementActor);
+    AActor* PlaceObjectInRoom(AProceduralSetup* setup, const FRoomNode& RoomNode, UDebrisPositioning* Positioning, TSubclassOf<AActor> placementActor, FRandomStream RandomStream, const bool checkImportantLocations);
     
     UFUNCTION(BlueprintCallable)
     void OnResourceChanged(UCappedResource* Resource, float Amount);
@@ -168,6 +169,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetShieldGeneratorCount() const;
+    
+    UFUNCTION(BlueprintCallable)
+    void GetObjectTransformInRoom(FTransform& Transform, AProceduralSetup* setup, const FRoomNode& RoomNode, UDebrisPositioning* Positioning, TSubclassOf<AActor> placementActor, FRandomStream RandomStream, const bool checkImportantLocations);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetFacilityRoomIndex() const;

@@ -1,16 +1,16 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "ERefineryState.h"
-#include "Animation/AnimInstance.h"
-#include "EPipelineExtractorPodAnimState.h"
 #include "ERessuplyPodState.h"
 #include "EPipelineBuildState.h"
+#include "ERefineryState.h"
+#include "EPipelineExtractorPodAnimState.h"
+#include "Animation/AnimInstance.h"
 #include "PipelineExtractorPodAnimInstance.generated.h"
 
-class APipelineSegment;
-class APipelineStart;
-class APipelineExtractorPod;
 class AFSDRefinery;
+class APipelineStart;
+class APipelineSegment;
+class APipelineExtractorPod;
 
 UCLASS(Abstract, Blueprintable, NonTransient)
 class FSD_API UPipelineExtractorPodAnimInstance : public UAnimInstance {
@@ -35,16 +35,16 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float RotationSpeed;
     
-    UPROPERTY(EditAnywhere, Transient)
+    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<APipelineExtractorPod> Pod;
     
-    UPROPERTY(EditAnywhere, Transient)
+    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<APipelineSegment> ConnectedSegment;
     
-    UPROPERTY(EditAnywhere, Transient)
+    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<APipelineStart> PipelineStart;
     
-    UPROPERTY(EditAnywhere, Transient)
+    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<AFSDRefinery> Refinery;
     
 public:

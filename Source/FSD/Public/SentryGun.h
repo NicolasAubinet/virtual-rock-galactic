@@ -1,30 +1,30 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "AmmoCountChangedEventDelegate.h"
-#include "WeaponFireOwner.h"
 #include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
-#include "GameFramework/Actor.h"
-#include "SentryGunMuzzleSetup.h"
-#include "TracerData.h"
-#include "Upgradable.h"
-#include "Engine/EngineTypes.h"
-#include "GameplayTagContainer.h"
 #include "UObject/NoExportTypes.h"
 #include "LaserPointerTarget.h"
+#include "GameplayTagContainer.h"
 #include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "SentryGunMuzzleSetup.h"
+#include "Engine/EngineTypes.h"
+#include "TracerData.h"
+#include "AmmoCountChangedEventDelegate.h"
+#include "GameFramework/Actor.h"
+#include "Upgradable.h"
+#include "WeaponFireOwner.h"
 #include "SentryGun.generated.h"
 
-class USoundCue;
-class UParticleSystem;
 class USkeletalMeshComponent;
-class AProjectile;
-class USoundBase;
-class UHealthComponentBase;
-class UWeaponFireComponent;
 class UAudioComponent;
+class UWeaponFireComponent;
+class AProjectile;
+class UHealthComponentBase;
 class APlayerCharacter;
+class USoundBase;
+class UParticleSystem;
+class USoundCue;
 
 UCLASS(Abstract, Blueprintable)
 class FSD_API ASentryGun : public AActor, public IWeaponFireOwner, public IUpgradable {
@@ -72,7 +72,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
     bool Enabled;
     
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FOverlapResult> OverlapCache;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -129,10 +129,10 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     float TargetPitch;
     
-    UPROPERTY(EditAnywhere, Export, Transient, ReplicatedUsing=OnRep_LastTarget)
+    UPROPERTY(EditAnywhere, Export, Transient, ReplicatedUsing=OnRep_LastTarget, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UHealthComponentBase> LastTarget;
     
-    UPROPERTY(EditAnywhere, Export, Replicated, Transient)
+    UPROPERTY(EditAnywhere, Export, Replicated, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UHealthComponentBase> PrioritizedTarget;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))

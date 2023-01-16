@@ -1,34 +1,35 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "MatchStartedSignatureDelegate.h"
-#include "GameFramework/GameMode.h"
-#include "AllReadySignatureDelegate.h"
-#include "PlayerLoggedInDelegate.h"
-#include "CallDonkeyDelegate.h"
 #include "UObject/NoExportTypes.h"
 #include "EPauseReason.h"
+#include "ECriticalItemPass.h"
+#include "CallDonkeyDelegate.h"
+#include "PlayerLoggedInDelegate.h"
+#include "AllReadySignatureDelegate.h"
+#include "MatchStartedSignatureDelegate.h"
+#include "GameFramework/GameMode.h"
 #include "FSDGameMode.generated.h"
 
-class UDifficultyManager;
-class AFSDPlayerController;
-class UEnemySpawnManager;
-class UPheromoneSpawnerComponent;
-class UObjectivesManager;
-class UKeepInsideWorld;
-class UMissionManager;
-class UEncounterManager;
-class UCritterManager;
-class UFormationsManagerComponent;
-class AMiningPod;
-class AMolly;
-class ABosco;
-class UWidget;
-class UEnemyDescriptor;
-class UEnemyWaveManager;
 class AActor;
+class UWidget;
+class ABosco;
+class UCritterManager;
+class UDifficultyManager;
+class UEnemyDescriptor;
+class UEncounterManager;
+class UEnemyWaveManager;
+class UPheromoneSpawnerComponent;
+class UEnemySpawnManager;
+class UFormationsManagerComponent;
 class AFSDGameMode;
 class APlayerController;
+class AFSDPlayerController;
+class UKeepInsideWorld;
+class UMissionManager;
+class AMiningPod;
+class AMolly;
+class UObjectivesManager;
 class APlayerCharacter;
 
 UCLASS(Blueprintable, NonTransient)
@@ -129,7 +130,7 @@ public:
     void StartGame();
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-    void SpawnMissionCriticalItems();
+    void SpawnMissionCriticalItems(const ECriticalItemPass& pass);
     
 protected:
     UFUNCTION(BlueprintCallable)
@@ -186,6 +187,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TSubclassOf<AMolly> GetMuleClass() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool GetMissionWasAborted();
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UEncounterManager* GetEncounterManager() const;

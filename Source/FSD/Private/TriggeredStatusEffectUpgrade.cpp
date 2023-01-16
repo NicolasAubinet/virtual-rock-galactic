@@ -1,8 +1,8 @@
 #include "TriggeredStatusEffectUpgrade.h"
 #include "Templates/SubclassOf.h"
 
-class AFSDPlayerState;
 class AActor;
+class AFSDPlayerState;
 class UStatusEffect;
 
 void UTriggeredStatusEffectUpgrade::OnEffectShouldTrigger(AActor* PlayerCharacter) {

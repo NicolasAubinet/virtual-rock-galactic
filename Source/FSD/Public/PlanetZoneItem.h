@@ -2,8 +2,8 @@
 #include "CoreMinimal.h"
 #include "PlanetZoneItem.generated.h"
 
-class UGeneratedMission;
 class UBiome;
+class UGeneratedMission;
 class UPlanetZone;
 
 USTRUCT(BlueprintType)

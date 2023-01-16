@@ -5,9 +5,9 @@
 #include "MatrixWithExactSync.h"
 #include "CarveWithSTLMeshOperationData.generated.h"
 
-class UStaticMeshCarver;
 class USTLMeshCarver;
 class UTerrainMaterial;
+class UStaticMeshCarver;
 
 USTRUCT(BlueprintType)
 struct FCarveWithSTLMeshOperationData {

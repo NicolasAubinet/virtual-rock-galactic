@@ -1,7 +1,7 @@
 #include "BossFightSubSystem.h"
 
-class UUserWidget;
 class AActor;
+class UUserWidget;
 class UBossFightInterface;
 class IBossFightInterface;
 

@@ -4,12 +4,12 @@
 #include "Engine/DataAsset.h"
 #include "MissionWarning.generated.h"
 
+class UObjective;
 class URunningMissionBP;
 class UMissionStat;
-class UObjective;
+class UMutator;
 class UMissionMutator;
 class UTexture2D;
-class UMutator;
 
 UCLASS(Blueprintable)
 class UMissionWarning : public UDataAsset {
@@ -51,6 +51,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UMissionStat* MissionCompletedStat;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float CampaignWeight;
     
 public:
     UMissionWarning();

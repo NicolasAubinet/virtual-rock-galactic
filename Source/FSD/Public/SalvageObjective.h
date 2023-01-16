@@ -1,20 +1,20 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "Objective.h"
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
 #include "DelegateDelegate.h"
-#include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
+#include "Objective.h"
 #include "SalvageObjective.generated.h"
 
-class UDebrisPositioning;
-class AMiningPod;
-class UDebrisBase;
-class UGemResourceData;
-class AMiniMule;
 class AActor;
-class URepairableComponent;
+class UDebrisBase;
+class UDebrisPositioning;
+class UGemResourceData;
+class AMiningPod;
+class AMiniMule;
 class AProceduralSetup;
+class URepairableComponent;
 class UCurveFloat;
 
 UCLASS(Abstract, Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))

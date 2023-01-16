@@ -1,11 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Engine/DataAsset.h"
 #include "EBoscoAbillityTargetPreference.h"
+#include "Engine/DataAsset.h"
 #include "BoscoAbillity.generated.h"
 
+class UAbilityExitStrategy;
+class UDialogDataAsset;
 class UAnimSequenceBase;
-class USoundBase;
 
 UCLASS(Blueprintable)
 class UBoscoAbillity : public UDataAsset {
@@ -18,10 +19,13 @@ public:
     UAnimSequenceBase* AbillityAnimation;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    USoundBase* VoiceOnUse;
+    UDialogDataAsset* VoiceOnUse;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EBoscoAbillityTargetPreference TargetType;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
+    UAbilityExitStrategy* ExitStrategy;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float CoolDown;

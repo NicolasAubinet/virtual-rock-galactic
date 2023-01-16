@@ -4,9 +4,9 @@
 #include "MultiTargeter.h"
 #include "TerminatorEnemy.generated.h"
 
+class AActor;
 class UHitReactionComponent;
 class UAnimMontage;
-class AActor;
 
 UCLASS(Blueprintable)
 class ATerminatorEnemy : public AEnemyDeepPathfinderCharacter, public IMultiTargeter {

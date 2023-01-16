@@ -3,8 +3,8 @@
 #include "Components/SceneComponent.h"
 #include "NiagaraComponent.h"
 
-class UPrimitiveComponent;
 class AActor;
+class UPrimitiveComponent;
 
 
 

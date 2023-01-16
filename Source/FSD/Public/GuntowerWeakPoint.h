@@ -3,14 +3,14 @@
 #include "FSDPawn.h"
 #include "GuntowerWeakPoint.generated.h"
 
+class USceneComponent;
 class UStaticMeshComponent;
 class UDamageClass;
+class UHealthComponentBase;
 class UEnemyHealthComponent;
-class USceneComponent;
 class UWeakpointGlowComponent;
 class UParticleSystem;
 class USoundCue;
-class UHealthComponentBase;
 
 UCLASS(Blueprintable)
 class AGuntowerWeakPoint : public AFSDPawn {
@@ -29,7 +29,7 @@ public:
     UWeakpointGlowComponent* HitGlow;
     
 protected:
-    UPROPERTY(EditAnywhere, Export)
+    UPROPERTY(EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UEnemyHealthComponent> ParentHealth;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

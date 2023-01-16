@@ -1,15 +1,16 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Engine/DataAsset.h"
 #include "DeepDiveLoaderSequence.h"
+#include "Engine/DataAsset.h"
 #include "DeepDiveSettings.generated.h"
 
+class UUserWidget;
 class UDeepDiveTemplate;
-class UMutator;
-class UMissionMutator;
+class UDialogDataAsset;
 class UMissionWarning;
 class UMissionNameBank;
-class UDialogDataAsset;
+class UMutator;
+class UMissionMutator;
 
 UCLASS(Blueprintable)
 class UDeepDiveSettings : public UDataAsset {
@@ -38,6 +39,15 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UMissionNameBank* DeepDiveNameBank;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSoftClassPtr<UUserWidget> MissionBar;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSoftClassPtr<UUserWidget> MissionEndScreen_Success;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSoftClassPtr<UUserWidget> MissionEndScreen_Failure;
     
     UDeepDiveSettings();
 };

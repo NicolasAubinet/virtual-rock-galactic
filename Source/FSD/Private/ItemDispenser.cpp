@@ -1,10 +1,10 @@
 #include "ItemDispenser.h"
 #include "Net/UnrealNetwork.h"
-#include "InstantUsable.h"
 #include "Components/SceneComponent.h"
+#include "InstantUsable.h"
 
-class APlayerCharacter;
 class AActor;
+class APlayerCharacter;
 
 void AItemDispenser::SpawnItem() {
 }

@@ -1,21 +1,21 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
-#include "GameFramework/Actor.h"
-#include "DropInfo.h"
 #include "UObject/NoExportTypes.h"
 #include "Curves/CurveFloat.h"
+#include "DropInfo.h"
+#include "GameFramework/Actor.h"
 #include "PlagueMeteor.generated.h"
 
-class UStaticMesh;
-class AImpactIndicator;
 class USceneComponent;
 class UStaticMeshComponent;
-class UTerrainPlacementComponent;
 class UDamageComponent;
 class UDebrisPositioning;
-class ARockCrackerPod;
+class AImpactIndicator;
 class AProceduralSetup;
+class ARockCrackerPod;
+class UTerrainPlacementComponent;
+class UStaticMesh;
 
 UCLASS(Blueprintable)
 class FSD_API APlagueMeteor : public AActor {
@@ -100,6 +100,9 @@ protected:
     void SignalEventEnded(bool wasSuccess);
     
 public:
+    UFUNCTION(BlueprintCallable)
+    void SetStage(int32 Stage);
+    
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetDropTarget(const FVector& Location);
     
@@ -127,7 +130,13 @@ public:
     void LastaudioSignal();
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void Impacted_Latejoin();
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void Impacted();
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool HasLandedOnTopOfRefineryPipes(float minDistanceToPipes) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<ARockCrackerPod*> GetPods();
@@ -149,6 +158,9 @@ protected:
     void DropRockCrackerPods(int32 Amount, float MinRadius, float maRadius, AProceduralSetup* setup);
     
 public:
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void DestroyAndSpawnHearts_FailSafe();
+    
     UFUNCTION(BlueprintCallable)
     void AdvanceStage();
     

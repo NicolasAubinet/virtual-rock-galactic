@@ -2,18 +2,18 @@
 #include "CoreMinimal.h"
 #include "Templates/SubclassOf.h"
 #include "AnimatedItem.h"
-#include "Upgradable.h"
 #include "UpgradableGear.h"
+#include "Upgradable.h"
 #include "DetPackItem.generated.h"
 
 class USkeletalMeshComponent;
-class UAnimMontage;
-class ADetPack;
-class UItemUpgrade;
 class AItem;
-class UForceFeedbackEffect;
 class UCapacityHoldingItemAggregator;
 class UDialogDataAsset;
+class ADetPack;
+class UItemUpgrade;
+class UAnimMontage;
+class UForceFeedbackEffect;
 
 UCLASS(Blueprintable)
 class ADetPackItem : public AAnimatedItem, public IUpgradable, public IUpgradableGear {

@@ -1,13 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "RejoinListener.h"
-#include "ThrowableItem.h"
 #include "CoolDownProgressStyle.h"
+#include "ThrowableItem.h"
+#include "RejoinListener.h"
 #include "UpgradableGear.h"
 #include "ShieldGeneratorItem.generated.h"
 
-class UDialogDataAsset;
 class UCapacityHoldingItemAggregator;
+class UDialogDataAsset;
 
 UCLASS(Blueprintable)
 class AShieldGeneratorItem : public AThrowableItem, public IUpgradableGear, public IRejoinListener {

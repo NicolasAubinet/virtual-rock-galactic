@@ -4,11 +4,11 @@
 #include "EnemyAttacker.h"
 #include "SpiderEnemy.generated.h"
 
-class UHitReactionComponent;
 class AActor;
+class UStaticMeshComponent;
+class UHitReactionComponent;
 class UPawnStatsComponent;
 class UStaticMesh;
-class UStaticMeshComponent;
 
 UCLASS(Blueprintable)
 class ASpiderEnemy : public AEnemyDeepPathfinderCharacter, public IEnemyAttacker {
