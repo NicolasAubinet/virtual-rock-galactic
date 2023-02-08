@@ -5,6 +5,7 @@
 #include "AnimatedItem.generated.h"
 
 class USkeletalMeshComponent;
+class UFirstPersonSkeletalMeshComponent;
 class UItemCharacterAnimationSet;
 class UPlayerAnimInstance;
 class USkinnableComponent;
@@ -25,7 +26,7 @@ protected:
     UPlayerAnimInstance* TPAnimInstance;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
-    USkeletalMeshComponent* FPMesh;
+    UFirstPersonSkeletalMeshComponent* FPMesh;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* TPMesh;

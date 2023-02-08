@@ -56,8 +56,8 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool DebugDrawDebrisLight;
     
-    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    TWeakObjectPtr<APlagueInfectionNode> TargetedPlagueNode;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    APlagueInfectionNode* TargetedPlagueNode;
     
 public:
     APlagueControlActor();
