@@ -11,8 +11,8 @@ USTRUCT(BlueprintType)
 struct FDoubleDrillDamageItem {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
-    TWeakObjectPtr<UPrimitiveComponent> Target;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPrimitiveComponent* Target;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FVector_NetQuantize Location;
