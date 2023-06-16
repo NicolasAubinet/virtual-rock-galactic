@@ -5,7 +5,7 @@
 			"app_key": "application.generated.ue.fsd-18319896.ue4editor.exe",
 			"launch_type": "url",
 			"url": "steam://launch/",
-			"action_manifest_path": "D:/Unreal Projects/virtual-rock-galactic/Config/SteamVRBindings/steamvr_manifest.json",
+			"action_manifest_path": "C:/Users/Nico/Documents/Unreal Projects/DRG Modding/FSD/Config/SteamVRBindings/steamvr_manifest.json",
 			"strings":
 			{
 				"en_us":
