@@ -169,7 +169,7 @@ public:
     bool ShowingReconnectScreen;
     
     UPROPERTY(EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
-    TWeakObjectPtr<UMouseCursorWidget> MouseCursorWidget;
+    UMouseCursorWidget* MouseCursorWidget;
     
     UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FShowCharacterSelectorSignature OnShowCharacterSelector;
@@ -300,24 +300,24 @@ public:
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FNewHUDWarningDelegate OnNewHUDWarning;
     
-protected:
+public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float LastDreadnaughtKillTime;
     
     UPROPERTY(EditAnywhere, Export, meta=(AllowPrivateAccess=true))
-    TWeakObjectPtr<UWindowWidget> ActiveEscapeMenu;
+    UWindowWidget* ActiveEscapeMenu;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    APostProcessingManager* PostProcessingManager;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    ABosco* Drone;
+    
+    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
+    APlayerCharacter* LocalPlayerCharacter;
     
     UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    TWeakObjectPtr<APostProcessingManager> PostProcessingManager;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    TWeakObjectPtr<ABosco> Drone;
-    
-    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    TWeakObjectPtr<APlayerCharacter> LocalPlayerCharacter;
-    
-    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    TWeakObjectPtr<ATutorialManager> TutorialManager;
+    ATutorialManager* TutorialManager;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     ACharacterSelectionSwitcher* CharacterSelectionSwitcher;
