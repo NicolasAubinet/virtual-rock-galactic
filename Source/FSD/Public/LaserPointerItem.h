@@ -100,7 +100,7 @@ public:
     
 protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
-    void ServerPlaceMarker(FVector Location, AActor* Actor, UPrimitiveComponent* Cmponent, UTerrainMaterial* TerrainMaterial, ELaserPointerMarkerType eMarkerType);
+    void ServerPlaceMarker(FVector Location, FVector Normal, AActor* Actor, UPrimitiveComponent* Cmponent, UTerrainMaterial* TerrainMaterial, ELaserPointerMarkerType eMarkerType);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SecondaryUse();
