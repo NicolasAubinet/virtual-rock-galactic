@@ -5,7 +5,7 @@ class AProjectileBase;
 void UProjectileLauncherBaseComponent::Server_StopFire_Implementation() {
 }
 
-void UProjectileLauncherBaseComponent::Server_Fire_Implementation(FVector Origin, FVector_NetQuantizeNormal Direction, FVector_NetQuantizeNormal initialBonusVelocity, AProjectileBase* DormentProjectile, bool notifyClients) {
+void UProjectileLauncherBaseComponent::Server_Fire_Implementation(FTransform Transform, FVector_NetQuantizeNormal initialBonusVelocity, AProjectileBase* DormentProjectile, bool notifyClients) {
 }
 
 void UProjectileLauncherBaseComponent::All_ShowHit_Implementation() {
