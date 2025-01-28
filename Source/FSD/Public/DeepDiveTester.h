@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EMissionStructure.h"
-#include "DeepDiveTesterItem.h"
 #include "GameFramework/Actor.h"
+#include "DeepDiveTesterItem.h"
+#include "EMissionStructure.h"
 #include "DeepDiveTester.generated.h"
 
 class UBiome;
@@ -25,6 +25,7 @@ protected:
     TArray<FDeepDiveTesterItem> stages;
     
 public:
-    ADeepDiveTester();
+    ADeepDiveTester(const FObjectInitializer& ObjectInitializer);
+
 };
 

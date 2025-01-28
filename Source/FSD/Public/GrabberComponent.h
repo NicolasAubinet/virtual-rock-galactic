@@ -1,19 +1,19 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EOutline.h"
-#include "EGrabbedStateCameraMode.h"
-#include "ReleasedActorSigDelegate.h"
-#include "GrabbedActorSigDelegate.h"
-#include "GameplayTagContainer.h"
 #include "Components/ActorComponent.h"
+#include "GameplayTagContainer.h"
+#include "EGrabbedStateCameraMode.h"
+#include "EOutline.h"
+#include "GrabbedActorSigDelegate.h"
+#include "ReleasedActorSigDelegate.h"
 #include "GrabberComponent.generated.h"
 
 class AActor;
+class ADeepPathfinderCharacter;
+class UAudioComponent;
+class UDialogDataAsset;
 class UPrimitiveComponent;
 class USkeletalMeshComponent;
-class UAudioComponent;
-class ADeepPathfinderCharacter;
-class UDialogDataAsset;
 class USoundCue;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -33,10 +33,10 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     UAudioComponent* GrabLoopSoundInstance;
     
-    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<ADeepPathfinderCharacter> PathfinderOwner;
     
-    UPROPERTY(EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<USkeletalMeshComponent> OwnerMesh;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -94,9 +94,10 @@ protected:
     bool NeedsPathToTarget;
     
 public:
-    UGrabberComponent();
+    UGrabberComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void Timer_ReleaseTarget();

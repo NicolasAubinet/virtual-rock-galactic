@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "NameDelegateDelegate.h"
 #include "AttackBaseComponent.h"
+#include "NameDelegateDelegate.h"
 #include "SpecialAttackComponent.generated.h"
 
 class UAnimMontage;
@@ -18,7 +18,8 @@ protected:
     FNameDelegate OnAttackActionNotify;
     
 public:
-    USpecialAttackComponent();
+    USpecialAttackComponent(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void TriggerAttack(FName Name);

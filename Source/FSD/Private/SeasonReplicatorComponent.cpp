@@ -1,10 +1,20 @@
 #include "SeasonReplicatorComponent.h"
+#include "Net/UnrealNetwork.h"
 
-class USeasonEventData;
-
-void USeasonReplicatorComponent::CompleteSeasonEvent_Implementation(USeasonEventData* inEvent) {
+USeasonReplicatorComponent::USeasonReplicatorComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->HostActiveSeason = NULL;
 }
 
-USeasonReplicatorComponent::USeasonReplicatorComponent() {
+void USeasonReplicatorComponent::OnRep_HostActiveSeason() {
 }
+
+void USeasonReplicatorComponent::CompleteSeasonEvent_Implementation(USeasonEventData* InEvent) {
+}
+
+void USeasonReplicatorComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
+    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+    
+    DOREPLIFETIME(USeasonReplicatorComponent, HostActiveSeason);
+}
+
 

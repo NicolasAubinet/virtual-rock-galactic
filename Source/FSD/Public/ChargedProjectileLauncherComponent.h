@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "ProjectileLauncherBaseComponent.h"
+#include "Templates/SubclassOf.h"
 #include "ChargedProjectileLauncherComponent.generated.h"
 
 class AProjectileBase;
@@ -21,7 +21,8 @@ protected:
     float ProjectileChangeChargeValue;
     
 public:
-    UChargedProjectileLauncherComponent();
+    UChargedProjectileLauncherComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetProjectileClassCharged(TSubclassOf<AProjectileBase> NewProjectileClass);
     

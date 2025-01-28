@@ -1,9 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "ProjectileAttackComponent.h"
+#include "Templates/SubclassOf.h"
 #include "ProjectileThrowerAttack.generated.h"
 
 class UAnimInstance;
@@ -37,7 +37,8 @@ private:
     FVector ThrowerOffset;
     
 public:
-    UProjectileThrowerAttack();
+    UProjectileThrowerAttack(const FObjectInitializer& ObjectInitializer);
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnThrowerMontageEnded(UAnimMontage* Montage, bool bInterrupted);

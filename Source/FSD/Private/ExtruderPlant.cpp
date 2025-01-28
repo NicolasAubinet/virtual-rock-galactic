@@ -1,11 +1,12 @@
 #include "ExtruderPlant.h"
-#include "Components/SkeletalMeshComponent.h"
 #include "Components/AudioComponent.h"
+#include "Components/SkeletalMeshComponent.h"
 
-AExtruderPlant::AExtruderPlant() {
+AExtruderPlant::AExtruderPlant(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
     this->SkeletalMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Mesh"));
     this->ExtrudeAnimation = NULL;
     this->RetractAnimation = NULL;
-    this->audio = CreateDefaultSubobject<UAudioComponent>(TEXT("audio"));
+    this->Audio = CreateDefaultSubobject<UAudioComponent>(TEXT("Audio"));
 }
+
 

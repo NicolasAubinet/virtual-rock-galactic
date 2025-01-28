@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "LoSDelegateDelegate.h"
 #include "Components/ActorComponent.h"
+#include "LoSDelegateDelegate.h"
 #include "EnemyLineOfSightComponent.generated.h"
 
 class UMeshComponent;
@@ -33,7 +33,8 @@ protected:
     bool AutoSetupOwnerMesh;
     
 public:
-    UEnemyLineOfSightComponent();
+    UEnemyLineOfSightComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool HasLineOfSight() const;
     

@@ -1,6 +1,10 @@
 #include "ProjectileThrowerAttack.h"
 
-class UAnimMontage;
+UProjectileThrowerAttack::UProjectileThrowerAttack(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->ThrowerMesh = NULL;
+    this->ThrowerAnimInstance = NULL;
+    this->RotateToTarget = false;
+}
 
 void UProjectileThrowerAttack::OnThrowerMontageEnded(UAnimMontage* Montage, bool bInterrupted) {
 }
@@ -8,9 +12,4 @@ void UProjectileThrowerAttack::OnThrowerMontageEnded(UAnimMontage* Montage, bool
 void UProjectileThrowerAttack::All_ShowThrowerAnimation_Implementation() {
 }
 
-UProjectileThrowerAttack::UProjectileThrowerAttack() {
-    this->ThrowerMesh = NULL;
-    this->ThrowerAnimInstance = NULL;
-    this->RotateToTarget = false;
-}
 

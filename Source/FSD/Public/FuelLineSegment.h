@@ -5,12 +5,12 @@
 #include "TrackBuilderSegment.h"
 #include "FuelLineSegment.generated.h"
 
-class USceneComponent;
-class UStaticMeshComponent;
 class UHealthComponentBase;
+class USceneComponent;
 class USimpleHealthComponent;
-class USplineMeshComponent;
 class USplineComponent;
+class USplineMeshComponent;
+class UStaticMeshComponent;
 
 UCLASS(Abstract, Blueprintable)
 class FSD_API AFuelLineSegment : public ATrackBuilderSegment {
@@ -45,7 +45,8 @@ protected:
     float MaxTurnAngle;
     
 public:
-    AFuelLineSegment();
+    AFuelLineSegment(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable, Client, Unreliable)
     void ClientUpdateStartTransform(const FVector& NewStartLocation);

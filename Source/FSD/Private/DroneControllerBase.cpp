@@ -1,20 +1,24 @@
 #include "DroneControllerBase.h"
 
-class APlayerCharacter;
+ADroneControllerBase::ADroneControllerBase(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+}
 
-void ADroneControllerBase::OnShout(APlayerCharacter* ShoutingPlayer) {
+void ADroneControllerBase::OnShout(APlayerCharacter* Player) {
 }
 
 void ADroneControllerBase::OnSecondaryLaserPointer(const FLaserPointerTarget& HitInfo) {
 }
 
-void ADroneControllerBase::OnSalute(APlayerCharacter* aCharacater) {
+void ADroneControllerBase::OnSalute(APlayerCharacter* Player) {
 }
 
 void ADroneControllerBase::OnPrimaryLaserpointer(const FLaserPointerTarget& HitInfo) {
 }
 
-ADroneControllerBase::ADroneControllerBase() {
-    this->ControlledDrone = NULL;
+void ADroneControllerBase::OnPlayerLeave(AFSDPlayerState* State) {
 }
+
+void ADroneControllerBase::OnPlayerJoin(APlayerCharacter* Player) {
+}
+
 

@@ -1,7 +1,7 @@
 #include "FSDConversionLibrary.h"
 
-class AActor;
-class USceneComponent;
+UFSDConversionLibrary::UFSDConversionLibrary() {
+}
 
 FVector_NetQuantizeNormal UFSDConversionLibrary::VectorToNetQuantizeNormal(FVector Vec) {
     return FVector_NetQuantizeNormal{};
@@ -31,6 +31,4 @@ FVector UFSDConversionLibrary::ActorToWorldLocation(AActor* Actor) {
     return FVector{};
 }
 
-UFSDConversionLibrary::UFSDConversionLibrary() {
-}
 

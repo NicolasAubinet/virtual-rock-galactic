@@ -1,9 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "GameplayTagContainer.h"
+#include "GameplayTagAssetInterface.h"
 #include "GameplayTagContainer.h"
 #include "Projectile.h"
-#include "GameplayTagAssetInterface.h"
 #include "HomingDroneBomb.generated.h"
 
 class UEnemyHealthComponent;
@@ -36,9 +36,10 @@ protected:
     float HomingAccelerationMagnitude;
     
 public:
-    AHomingDroneBomb();
+    AHomingDroneBomb(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void UpdateHomingSpeed();
     
@@ -49,7 +50,7 @@ protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_HomingAccelerationMagnitude();
     
-    
+
     // Fix for true pure virtual functions not being implemented
 public:
     UFUNCTION(BlueprintCallable)

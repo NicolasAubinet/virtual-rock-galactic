@@ -2,18 +2,18 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "Engine/NetSerialization.h"
-#include "ECaveLeechState.h"
 #include "AttackingPointInterface.h"
+#include "ECaveLeechState.h"
 #include "EnemyPawn.h"
 #include "CaveLeech.generated.h"
 
 class AActor;
+class UGrabberComponent;
+class UHealthComponent;
+class UHealthComponentBase;
+class UPawnAffliction;
 class USceneComponent;
 class USkeletalMeshComponent;
-class UHealthComponentBase;
-class UHealthComponent;
-class UGrabberComponent;
-class UPawnAffliction;
 
 UCLASS(Abstract, Blueprintable)
 class ACaveLeech : public AEnemyPawn, public IAttackingPointInterface {
@@ -89,7 +89,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     FVector_NetQuantize TentacleVelocity;
     
-    UPROPERTY(EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<AActor> Target;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
@@ -99,9 +99,10 @@ protected:
     USceneComponent* TentacleHead;
     
 public:
-    ACaveLeech();
+    ACaveLeech(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_State();
@@ -121,7 +122,7 @@ protected:
     void Died(UHealthComponentBase* HealthComponent);
     
     UFUNCTION(BlueprintCallable)
-    void Damaged(float Amount);
+    void Damaged(float amount);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void BP_OnStateChanged(ECaveLeechState NewState);
@@ -129,7 +130,7 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void BP_OnBite(UHealthComponent* TargetHealth);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

@@ -1,10 +1,7 @@
 #include "AIFunctionLibrary.h"
 
-class UObject;
-class AActor;
-class APawn;
-class UAttackerPositioningComponent;
-class APlayerCharacter;
+UAIFunctionLibrary::UAIFunctionLibrary() {
+}
 
 void UAIFunctionLibrary::SetAICanSense(bool canSense) {
 }
@@ -20,19 +17,23 @@ bool UAIFunctionLibrary::IsEnemyAlertet(APawn* enemy) {
     return false;
 }
 
-APlayerCharacter* UAIFunctionLibrary::GetPlayerTarget(AActor* From, float MaxDistance, bool MustBeAlive, bool MustBeUnparalyzed, bool accountForAttackers, AActor* ignoreTarget, bool IsFlying) {
+APlayerCharacter* UAIFunctionLibrary::GetPlayerTarget(AActor* from, float MaxDistance, bool MustBeAlive, bool MustBeUnparalyzed, bool accountForAttackers, AActor* ignoreTarget, bool IsFlying) {
     return NULL;
 }
 
-bool UAIFunctionLibrary::GetAttackableTargetsInRange(AActor* From, TArray<UAttackerPositioningComponent*>& outArray, float MaxDistance, bool MustBeAlive, bool MustBeUnparalyzed, bool accountForAttackers, AActor* ignoreTarget, bool IsFlying) {
+bool UAIFunctionLibrary::GetAttackableTargetsInRange(AActor* from, TArray<UAttackerPositioningComponent*>& outArray, float MaxDistance, bool MustBeAlive, bool MustBeUnparalyzed, bool accountForAttackers, AActor* ignoreTarget, bool IsFlying) {
     return false;
 }
 
-UAttackerPositioningComponent* UAIFunctionLibrary::GetAttackableTarget(AActor* From, float MaxDistance, bool MustBeAlive, bool MustBeUnparalyzed, bool accountForAttackers, AActor* ignoreTarget, bool IsFlying) {
+UAttackerPositioningComponent* UAIFunctionLibrary::GetAttackableTarget(AActor* from, float MaxDistance, bool MustBeAlive, bool MustBeUnparalyzed, bool accountForAttackers, AActor* ignoreTarget, bool IsFlying) {
     return NULL;
 }
 
-APlayerCharacter* UAIFunctionLibrary::ConsiderChangingTarget(APlayerCharacter* CurrentTarget, AActor* From, float MaxDistance, bool MustBeAlive, bool MustBeUnparalyzed, bool CurrentTargetMustBeAlive, bool IsFlying) {
+APlayerCharacter* UAIFunctionLibrary::ConsiderChangingTarget_WithLineOfSight(APlayerCharacter* CurrentTarget, AActor* from, float MaxDistance, FName TraceSocketName, bool MustBeAlive, bool MustBeUnparalyzed, bool CurrentTargetMustBeAlive, bool IsFlying) {
+    return NULL;
+}
+
+APlayerCharacter* UAIFunctionLibrary::ConsiderChangingTarget(APlayerCharacter* CurrentTarget, AActor* from, float MaxDistance, bool MustBeAlive, bool MustBeUnparalyzed, bool CurrentTargetMustBeAlive, bool IsFlying) {
     return NULL;
 }
 
@@ -42,6 +43,4 @@ void UAIFunctionLibrary::AlertEnemy(APawn* enemy) {
 void UAIFunctionLibrary::AlertEnemiesInRange(UObject* WorldContextObject, FVector Origin, float range, APawn* alerter) {
 }
 
-UAIFunctionLibrary::UAIFunctionLibrary() {
-}
 

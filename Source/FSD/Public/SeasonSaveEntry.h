@@ -2,14 +2,20 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
-#include "RewardsClaimed.h"
 #include "ChallengeSaveInfo.h"
+#include "RewardsClaimed.h"
 #include "SeasonSaveEntry.generated.h"
 
 USTRUCT(BlueprintType)
 struct FSeasonSaveEntry {
     GENERATED_BODY()
 public:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 CountSeasonContentDisabled;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 CountSeasonContentReenabled;
+    
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 XP;
@@ -19,6 +25,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FRewardsClaimed> RewardsClaimed;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bSeasonCompletedAnnounced;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool HasClaimedAllRewards;
@@ -45,13 +54,16 @@ protected:
     int32 ClaimedScripChallenges;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    int32 PlagueHeartsdUsed;
+    int32 PlagueHeartsUsed;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float TimePlayedAtSeasonStart;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ChallengesCompletedAtSeasonStart;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool OptedOutOfSeasonContent;
     
 public:
     FSD_API FSeasonSaveEntry();

@@ -5,8 +5,8 @@
 #include "TerminatorEnemy.generated.h"
 
 class AActor;
-class UHitReactionComponent;
 class UAnimMontage;
+class UHitReactionComponent;
 
 UCLASS(Blueprintable)
 class ATerminatorEnemy : public AEnemyDeepPathfinderCharacter, public IMultiTargeter {
@@ -29,12 +29,13 @@ protected:
     TSet<AActor*> CurrentTargets;
     
 public:
-    ATerminatorEnemy();
+    ATerminatorEnemy(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
     void All_PlayFlairAnimation();
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

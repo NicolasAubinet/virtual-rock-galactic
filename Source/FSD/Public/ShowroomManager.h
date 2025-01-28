@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
 #include "Components/ActorComponent.h"
+#include "Templates/SubclassOf.h"
 #include "ShowroomManager.generated.h"
 
 class AShowroomStage;
@@ -27,7 +27,8 @@ protected:
     UTextureRenderTarget2D* RenderTarget;
     
 public:
-    UShowroomManager();
+    UShowroomManager(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UShowroomController* GetController();
     

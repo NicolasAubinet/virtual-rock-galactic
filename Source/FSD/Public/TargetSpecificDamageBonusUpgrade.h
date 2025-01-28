@@ -1,9 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
-#include "UpgradeValues.h"
 #include "GameplayTagContainer.h"
 #include "ItemUpgrade.h"
+#include "Templates/SubclassOf.h"
+#include "UpgradeValues.h"
 #include "TargetSpecificDamageBonusUpgrade.generated.h"
 
 class AActor;
@@ -25,6 +25,7 @@ protected:
     
 public:
     UTargetSpecificDamageBonusUpgrade();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static FUpgradeValues GetUpgradedValue(TSubclassOf<AActor> Item, AFSDPlayerState* Player, FName NewKey);
     

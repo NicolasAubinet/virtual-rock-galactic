@@ -3,8 +3,8 @@
 #include "DynamicIcon.h"
 #include "TextureDynamicIcon.generated.h"
 
-class UTexture2D;
 class UMaterialInstanceDynamic;
+class UTexture2D;
 
 UCLASS(Blueprintable, EditInlineNew)
 class FSD_API UTextureDynamicIcon : public UDynamicIcon {
@@ -19,6 +19,7 @@ protected:
     
 public:
     UTextureDynamicIcon();
+
 protected:
     UFUNCTION(BlueprintCallable)
     void UpdatePreview();

@@ -2,8 +2,12 @@
 #include "Templates/SubclassOf.h"
 #include "UpgradableGearComponent.h"
 
-class AActor;
-class AArmorPiece;
+AArmorPiece::AArmorPiece(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->Upgradable = CreateDefaultSubobject<UUpgradableGearComponent>(TEXT("Upgradable"));
+    this->LoadoutProxy = NULL;
+    this->ItemID = NULL;
+    this->WeaponPreviewClass = NULL;
+}
 
 TSubclassOf<AActor> AArmorPiece::GetWeaponViewClass() const {
     return NULL;
@@ -13,10 +17,4 @@ AArmorPiece* AArmorPiece::GetArmorPieceDefaultObject(TSubclassOf<AArmorPiece> ar
     return NULL;
 }
 
-AArmorPiece::AArmorPiece() {
-    this->Upgradable = CreateDefaultSubobject<UUpgradableGearComponent>(TEXT("Upgradable"));
-    this->LoadoutProxy = NULL;
-    this->ItemID = NULL;
-    this->WeaponPreviewClass = NULL;
-}
 

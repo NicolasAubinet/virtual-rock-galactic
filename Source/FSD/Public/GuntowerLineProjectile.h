@@ -5,9 +5,9 @@
 #include "Projectile.h"
 #include "GuntowerLineProjectile.generated.h"
 
-class USceneComponent;
 class UDamageComponent;
 class UParticleSystemComponent;
+class USceneComponent;
 
 UCLASS(Blueprintable)
 class AGuntowerLineProjectile : public AProjectile {
@@ -44,7 +44,8 @@ protected:
     float TimeBetweenLineChecks;
     
 public:
-    AGuntowerLineProjectile();
+    AGuntowerLineProjectile(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void TurnOffParticles();

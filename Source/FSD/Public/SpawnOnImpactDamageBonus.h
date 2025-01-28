@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "DamageBonusBase.h"
+#include "Templates/SubclassOf.h"
 #include "SpawnOnImpactDamageBonus.generated.h"
 
 class AActor;
@@ -16,5 +16,6 @@ protected:
     
 public:
     USpawnOnImpactDamageBonus();
+
 };
 

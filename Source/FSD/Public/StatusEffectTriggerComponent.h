@@ -1,9 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
+#include "Components/ActorComponent.h"
 #include "Engine/EngineTypes.h"
 #include "EffectTriggeredDelegateDelegate.h"
-#include "Components/ActorComponent.h"
+#include "Templates/SubclassOf.h"
 #include "StatusEffectTriggerComponent.generated.h"
 
 class AActor;
@@ -34,7 +34,8 @@ protected:
     bool RemoveStatusEffectOnEndOverlap;
     
 public:
-    UStatusEffectTriggerComponent();
+    UStatusEffectTriggerComponent(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnOverlapEnd(AActor* MyActor, AActor* OtherActor);

@@ -3,18 +3,18 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "SchematicBlueprintLibrary.generated.h"
 
-class UObject;
 class UItemUpgrade;
-class UItemSkinSchematicCollection;
+class UObject;
 class UPlayerCharacterID;
-class USchematicCategory;
 class USchematic;
+class USchematicCategory;
 
 UCLASS(Blueprintable)
 class USchematicBlueprintLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
     USchematicBlueprintLibrary();
+
     UFUNCTION(BlueprintCallable)
     static void PriceSchematics(const TSet<USchematic*>& Schematics);
     
@@ -29,9 +29,6 @@ public:
     
     UFUNCTION(BlueprintCallable)
     static USchematicCategory* FindItemUpgradeSchematicCategory(UItemUpgrade* Upgrade);
-    
-    UFUNCTION(BlueprintCallable)
-    static void AddSkinSchematicCollectionToSettings(UItemSkinSchematicCollection* Collection);
     
 };
 

@@ -1,10 +1,9 @@
 #include "AfflictionFunctionLibrary.h"
 
-class AFSDPawn;
+UAfflictionFunctionLibrary::UAfflictionFunctionLibrary() {
+}
 
 void UAfflictionFunctionLibrary::PlayEnemyExplosionEffects(AFSDPawn* enemy) {
 }
 
-UAfflictionFunctionLibrary::UAfflictionFunctionLibrary() {
-}
 

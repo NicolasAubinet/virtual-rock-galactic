@@ -1,20 +1,19 @@
 #include "SeasonsSubsystem.h"
 
-class UObject;
-class UDataAsset;
-class UVanityItem;
-class AFSDPlayerState;
-class AFSDPlayerController;
-class UItemSkin;
-class UMissionStat;
-class UPlayerCharacterID;
-class UPickaxePart;
-class USeasonEventData;
-class USeasonChallenge;
-class UTextureRenderTarget2D;
+USeasonsSubsystem::USeasonsSubsystem() {
+    this->DesiredSeason = -1;
+    this->ActiveSeason = -1;
+    this->TrackedScripChallenge = NULL;
+}
 
 FTimespan USeasonsSubsystem::TimeToNewChallenge() {
     return FTimespan{};
+}
+
+void USeasonsSubsystem::SetSeasonCompletedAnnounced(bool IsAnnounced) const {
+}
+
+void USeasonsSubsystem::SetActiveSeason(USeason* Season) {
 }
 
 void USeasonsSubsystem::RerollChallenge(int32 Index) {
@@ -48,12 +47,20 @@ bool USeasonsSubsystem::HasClaimedLevelRewards(int32 startLevel, int32 numberOfL
     return false;
 }
 
-bool USeasonsSubsystem::HasClaimedAllRewards() {
+bool USeasonsSubsystem::HasClaimedAllRewards() const {
     return false;
 }
 
 int32 USeasonsSubsystem::GetUnusedHearts() {
     return 0;
+}
+
+UReward* USeasonsSubsystem::GetTreeOfVanityReward(UReward* currentReward) const {
+    return NULL;
+}
+
+UGameDLC* USeasonsSubsystem::GetStoreSeasonDLC(UObject* WorldContext) const {
+    return NULL;
 }
 
 int32 USeasonsSubsystem::GetSeasonXPFromMissionXP(AFSDPlayerState* PlayerState) {
@@ -83,6 +90,10 @@ void USeasonsSubsystem::GetSeasonLevel(int32& Level, float& currentLevelPercent,
 }
 
 bool USeasonsSubsystem::GetSeasonExpiryDate(FDateTime& ExpiryDate) {
+    return false;
+}
+
+bool USeasonsSubsystem::GetSeasonCompletedAnnounced() const {
     return false;
 }
 
@@ -119,6 +130,10 @@ FSeasonLevel USeasonsSubsystem::GetLevelReward(int32 Level) {
 void USeasonsSubsystem::GetLevelProgress(int32 Level, float& levelPercent) {
 }
 
+USeason* USeasonsSubsystem::GetCurrentSeason() const {
+    return NULL;
+}
+
 TArray<UDataAsset*> USeasonsSubsystem::GetAssetReferences(int32 ChallengeIndex, USeasonChallenge*& outChallenge) {
     return TArray<UDataAsset*>();
 }
@@ -127,23 +142,11 @@ TArray<FChallengeInfo> USeasonsSubsystem::GetActiveChallenges(bool canGenerateNe
     return TArray<FChallengeInfo>();
 }
 
-UTextureRenderTarget2D* USeasonsSubsystem::GenerateVanityRewardIcon(UVanityItem* Item, UPlayerCharacterID* Character, FTransform Offset, bool rebuildMesh, FVector2D Size) {
-    return NULL;
-}
-
-UTextureRenderTarget2D* USeasonsSubsystem::GenerateSkinRewardIcon(UItemSkin* Skin, UPlayerCharacterID* Character, bool bShowCloseUp, FTransform Offset, bool rebuildMesh, FVector2D Size) {
-    return NULL;
-}
-
-UTextureRenderTarget2D* USeasonsSubsystem::GeneratePickaxeRewardIcon(UPickaxePart* part, EPickaxePartLocation PickaxePartLocation, UPlayerCharacterID* Character, FTransform Offset, bool rebuildMesh, FVector2D Size) {
-    return NULL;
-}
-
 bool USeasonsSubsystem::ConvertHeartsToScrip(int32& scripGained) {
     return false;
 }
 
-void USeasonsSubsystem::CompleteSeasonEvent_Server(USeasonEventData* inEvent) {
+void USeasonsSubsystem::CompleteSeasonEvent_Server(USeasonEventData* InEvent) {
 }
 
 bool USeasonsSubsystem::ClaimScripChallenge() {
@@ -174,6 +177,4 @@ bool USeasonsSubsystem::BuyTreeNode(UObject* WorldContextObject, AFSDPlayerContr
     return false;
 }
 
-USeasonsSubsystem::USeasonsSubsystem() {
-}
 

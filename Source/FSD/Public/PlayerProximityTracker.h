@@ -1,10 +1,10 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "PlayerProximityDelegateDelegate.h"
-#include "ProximityTriggerItem.h"
-#include "PlayerSphere.h"
 #include "Components/ActorComponent.h"
+#include "PlayerProximityDelegateDelegate.h"
+#include "PlayerSphere.h"
+#include "ProximityTriggerItem.h"
 #include "PlayerProximityTracker.generated.h"
 
 class UObject;
@@ -30,7 +30,8 @@ protected:
     TArray<FProximityTriggerItem> AnyPlayerProximityTriggers;
     
 public:
-    UPlayerProximityTracker();
+    UPlayerProximityTracker(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static void Receive_RegisterForLocalPlayerProximity(UObject* WorldContextObject, const FVector& Location, float Distance, const FPlayerProximityDelegate& proximityCallback, bool triggerOnlyOnce);
     

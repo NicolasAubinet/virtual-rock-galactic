@@ -1,6 +1,15 @@
 #include "CommunityGoal.h"
 
-class UObject;
+UCommunityGoal::UCommunityGoal() {
+    this->TierValuesAreInitialized = false;
+    this->Active = false;
+    this->Category = NULL;
+    this->CommunityGoalType = ECommunityGoalType::Float;
+    this->GoalPerMemberTier1 = 0.00f;
+    this->GoalPerMemberTier2 = 0.00f;
+    this->GoalPerMemberTier3 = 0.00f;
+    this->RewardSetup = NULL;
+}
 
 float UCommunityGoal::TotalTierProgress(float Value, int32 Members) {
     return 0.0f;
@@ -37,14 +46,4 @@ bool UCommunityGoal::AreTiersInitialized() const {
     return false;
 }
 
-UCommunityGoal::UCommunityGoal() {
-    this->TierValuesAreInitialized = false;
-    this->Active = false;
-    this->Category = NULL;
-    this->CommunityGoalType = ECommunityGoalType::Float;
-    this->GoalPerMemberTier1 = 0.00f;
-    this->GoalPerMemberTier2 = 0.00f;
-    this->GoalPerMemberTier3 = 0.00f;
-    this->RewardSetup = NULL;
-}
 

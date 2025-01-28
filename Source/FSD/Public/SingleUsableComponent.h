@@ -1,21 +1,21 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "EInputKeys.h"
-#include "UsableChangedSignatureDelegate.h"
-#include "ProgressSignatureDelegate.h"
-#include "UsedBySignatureDelegate.h"
-#include "UserCountChangedDelegateDelegate.h"
 #include "GenericUsableDelegateDelegate.h"
 #include "OnFailedDelegate.h"
+#include "ProgressSignatureDelegate.h"
+#include "UsableChangedSignatureDelegate.h"
 #include "UsableComponent.h"
+#include "UsedBySignatureDelegate.h"
+#include "UserCountChangedDelegateDelegate.h"
 #include "SingleUsableComponent.generated.h"
 
+class APlayerCharacter;
 class UAudioComponent;
 class UDialogDataAsset;
 class UPawnStat;
-class APlayerCharacter;
-class UTexture2D;
 class USoundCue;
+class UTexture2D;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class USingleUsableComponent : public UUsableComponent {
@@ -95,9 +95,10 @@ protected:
     UAudioComponent* AudioBeginUseInstance;
     
 public:
-    USingleUsableComponent();
+    USingleUsableComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void Use(APlayerCharacter* User, EInputKeys Key, float DeltaTime);
     

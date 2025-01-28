@@ -1,25 +1,25 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "EEscortMissionState.h"
 #include "CannisterRegisteredDelegate.h"
-#include "ShellBreakPauseChangeSignatureDelegate.h"
-#include "ShellBreakTimerSignatureDelegate.h"
+#include "EEscortMissionState.h"
 #include "MuleRefueledDelegate.h"
 #include "Objective.h"
+#include "ShellBreakPauseChangeSignatureDelegate.h"
+#include "ShellBreakTimerSignatureDelegate.h"
 #include "EscortObjective.generated.h"
 
 class AActor;
-class UResourceData;
-class UCarvedResourceData;
+class AEscortDestination;
+class AEscortMule;
+class AExtractorItem;
 class UCappedResource;
+class UCarvedResourceData;
+class UCurveFloat;
 class UDebrisBase;
 class UDebrisPositioning;
-class AExtractorItem;
-class AEscortMule;
-class AEscortDestination;
 class UHealthComponentBase;
-class UCurveFloat;
+class UResourceData;
 
 UCLASS(Abstract, Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class FSD_API UEscortObjective : public UObjective {
@@ -120,9 +120,10 @@ protected:
     AEscortDestination* EscortDestination;
     
 public:
-    UEscortObjective();
+    UEscortObjective(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void SyncProgressTimer();
     
@@ -149,7 +150,7 @@ protected:
     void RecordFailStage(bool muleDied, bool missionAborted);
     
     UFUNCTION(BlueprintCallable)
-    void OnResourceChanged(UCappedResource* CappedResource, float Amount);
+    void OnResourceChanged(UCappedResource* CappedResource, float amount);
     
     UFUNCTION(BlueprintCallable)
     void OnRep_FullCanisters();
@@ -173,7 +174,7 @@ protected:
     void OnHealthChanged(float Health);
     
     UFUNCTION(BlueprintCallable)
-    void OnFullCanistersChanged(int32 Amount);
+    void OnFullCanistersChanged(int32 amount);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnEscortMuleSpawnedEvent();

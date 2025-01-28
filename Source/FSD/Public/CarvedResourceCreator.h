@@ -1,12 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
-#include "ECarveFilterType.h"
 #include "CarveOptionsCellSize.h"
-#include "UDebrisCarveMesh.h"
+#include "ECarveFilterType.h"
 #include "IRandRange.h"
-#include "ResourceDebris.h"
 #include "ResourceCreator.h"
+#include "ResourceDebris.h"
+#include "Templates/SubclassOf.h"
+#include "UDebrisCarveMesh.h"
 #include "CarvedResourceCreator.generated.h"
 
 class AActor;
@@ -58,5 +58,6 @@ public:
     TArray<FResourceDebris> Debris;
     
     UCarvedResourceCreator();
+
 };
 

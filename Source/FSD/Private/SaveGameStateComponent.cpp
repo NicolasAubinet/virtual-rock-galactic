@@ -1,9 +1,10 @@
 #include "SaveGameStateComponent.h"
 #include "Net/UnrealNetwork.h"
 
-class UGeneratedMission;
-class UPlayerCharacterID;
-class UVictoryPose;
+USaveGameStateComponent::USaveGameStateComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->Credits = 0;
+    this->VictoryPose = NULL;
+}
 
 void USaveGameStateComponent::SetCampaign() {
 }
@@ -20,7 +21,7 @@ void USaveGameStateComponent::Server_SetLoadout_Implementation(const FItemLoadou
 void USaveGameStateComponent::Server_SetEquippedPerks_Implementation(const TArray<FSaveGameStatePerkItem>& perks) {
 }
 
-void USaveGameStateComponent::Server_SetCredits_Implementation(const int32 Amount) {
+void USaveGameStateComponent::Server_SetCredits_Implementation(const int32 amount) {
 }
 
 void USaveGameStateComponent::Server_SetCharacterStats_Implementation(const TArray<FCharacterProgress>& Stats) {
@@ -47,12 +48,12 @@ void USaveGameStateComponent::OnRep_CharacterStats() {
 void USaveGameStateComponent::OnRep_ActiveCampaignMission() {
 }
 
-FCharacterProgress USaveGameStateComponent::GetCharacterStat(UPlayerCharacterID* characterID) {
-    return FCharacterProgress{};
+bool USaveGameStateComponent::IsActiveCampaignMission(UGeneratedMission* mission) const {
+    return false;
 }
 
-UGeneratedMission* USaveGameStateComponent::GetActiveCampaignMission() const {
-    return NULL;
+FCharacterProgress USaveGameStateComponent::GetCharacterStat(UPlayerCharacterID* characterID) {
+    return FCharacterProgress{};
 }
 
 void USaveGameStateComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
@@ -66,8 +67,4 @@ void USaveGameStateComponent::GetLifetimeReplicatedProps(TArray<FLifetimePropert
     DOREPLIFETIME(USaveGameStateComponent, CharacterStats);
 }
 
-USaveGameStateComponent::USaveGameStateComponent() {
-    this->Credits = 0;
-    this->VictoryPose = NULL;
-}
 

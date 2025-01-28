@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "LineSegmentCarverPoint.h"
 #include "GenerationComponent.h"
+#include "LineSegmentCarverPoint.h"
 #include "LineSegmentCarverComponent.generated.h"
 
 class UFloodFillSettings;
@@ -37,6 +37,7 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool UseDetailNoise;
     
-    ULineSegmentCarverComponent();
+    ULineSegmentCarverComponent(const FObjectInitializer& ObjectInitializer);
+
 };
 

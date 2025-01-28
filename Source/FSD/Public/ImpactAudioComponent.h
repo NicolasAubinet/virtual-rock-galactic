@@ -1,13 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "Components/AudioComponent.h"
+#include "Templates/SubclassOf.h"
 #include "ImpactAudioComponent.generated.h"
 
 class AActor;
-class USceneComponent;
 class UHealthComponentBase;
 class UImpactAudioComponent;
+class USceneComponent;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UImpactAudioComponent : public UAudioComponent {
@@ -23,8 +23,12 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ListenForDeath;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
+    UHealthComponentBase* ParentHealth;
+    
 public:
-    UImpactAudioComponent();
+    UImpactAudioComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void OnOwnerDeath(UHealthComponentBase* HealthComponent);
     

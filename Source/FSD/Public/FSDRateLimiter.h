@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "OnOpenRateLimitDelegate.h"
 #include "UObject/Object.h"
+#include "OnOpenRateLimitDelegate.h"
 #include "FSDRateLimiter.generated.h"
 
 UCLASS(Blueprintable)
@@ -9,6 +9,7 @@ class FSD_API UFSDRateLimiter : public UObject {
     GENERATED_BODY()
 public:
     UFSDRateLimiter();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool RateLimted();
     

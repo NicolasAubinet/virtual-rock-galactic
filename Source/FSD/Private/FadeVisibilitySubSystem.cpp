@@ -1,8 +1,7 @@
 #include "FadeVisibilitySubSystem.h"
 
-class UPrimitiveComponent;
-class UMeshComponent;
-class ULightComponent;
+UFadeVisibilitySubSystem::UFadeVisibilitySubSystem() {
+}
 
 void UFadeVisibilitySubSystem::ScalePrimitive(UPrimitiveComponent*& Component, FVector StartScale, FVector EndScale, float Duration) {
 }
@@ -31,9 +30,7 @@ void UFadeVisibilitySubSystem::FadeInMaterialByName(UMeshComponent*& Component, 
 void UFadeVisibilitySubSystem::FadeInMaterialByIndex(UMeshComponent*& Component, int32 MaterialIndex, FName ParameterName, float Duration) {
 }
 
-void UFadeVisibilitySubSystem::FadeInLight(ULightComponent*& Light, float Duration) {
+void UFadeVisibilitySubSystem::FadeInLight(ULightComponent*& Light, float Duration, float startIntensityAtPercent) {
 }
 
-UFadeVisibilitySubSystem::UFadeVisibilitySubSystem() {
-}
 

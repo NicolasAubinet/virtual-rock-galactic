@@ -1,11 +1,11 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
-#include "Engine/NetSerialization.h"
+#include "Components/ActorComponent.h"
 #include "Engine/EngineTypes.h"
 #include "Engine/NetSerialization.h"
-#include "Components/ActorComponent.h"
+#include "Engine/NetSerialization.h"
+#include "Templates/SubclassOf.h"
 #include "StickyFlameSpawner.generated.h"
 
 class AStickyFlame;
@@ -42,14 +42,14 @@ protected:
     FVector StickyFlameLastLocation;
     
 public:
-    UStickyFlameSpawner();
+    UStickyFlameSpawner(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     bool TrySpawnStickyFlameHit(const FHitResult& Hit);
     
     UFUNCTION(BlueprintCallable)
     bool TrySpawnStickyFlame(FVector Location, FVector Normal);
     
-protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void ServerSpawnStickyFlame(FVector_NetQuantize Location, FVector_NetQuantizeNormal Normal);
     

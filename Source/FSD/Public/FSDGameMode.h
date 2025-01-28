@@ -1,36 +1,37 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
-#include "EPauseReason.h"
-#include "ECriticalItemPass.h"
-#include "CallDonkeyDelegate.h"
-#include "PlayerLoggedInDelegate.h"
-#include "AllReadySignatureDelegate.h"
-#include "MatchStartedSignatureDelegate.h"
 #include "GameFramework/GameMode.h"
+#include "AllReadySignatureDelegate.h"
+#include "CallDonkeyDelegate.h"
+#include "DelegateDelegate.h"
+#include "ECriticalItemPass.h"
+#include "EPauseReason.h"
+#include "MatchStartedSignatureDelegate.h"
+#include "PlayerLoggedInDelegate.h"
+#include "Templates/SubclassOf.h"
 #include "FSDGameMode.generated.h"
 
 class AActor;
-class UWidget;
 class ABosco;
+class AFSDGameMode;
+class AFSDPlayerController;
+class AMolly;
+class APlayerCharacter;
+class APlayerController;
+class ATeamTransport;
 class UCritterManager;
 class UDifficultyManager;
-class UEnemyDescriptor;
 class UEncounterManager;
-class UEnemyWaveManager;
-class UPheromoneSpawnerComponent;
+class UEnemyDescriptor;
 class UEnemySpawnManager;
+class UEnemyWaveManager;
 class UFormationsManagerComponent;
-class AFSDGameMode;
-class APlayerController;
-class AFSDPlayerController;
 class UKeepInsideWorld;
 class UMissionManager;
-class AMiningPod;
-class AMolly;
 class UObjectivesManager;
-class APlayerCharacter;
+class UPheromoneSpawnerComponent;
+class UWidget;
 
 UCLASS(Blueprintable, NonTransient)
 class FSD_API AFSDGameMode : public AGameMode {
@@ -47,6 +48,9 @@ public:
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FCallDonkey OnDonkeyCalled;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FDelegate OnDonkeyButtonPressed;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool GenerationStarted;
@@ -80,13 +84,13 @@ protected:
     UFormationsManagerComponent* FormationsManager;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TSoftClassPtr<AMiningPod> DropPodClass;
+    TSoftClassPtr<ATeamTransport> DropPodClass;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<AMolly> MuleClass;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TSoftClassPtr<AMiningPod> DropodEscapeClass;
+    TSoftClassPtr<ATeamTransport> DropodEscapeClass;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<ABosco> droneClass;
@@ -99,6 +103,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool PreventAllLatejoin;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    bool AllowRejoin;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool PreventLateJoinOnMissionStart;
@@ -125,7 +132,8 @@ protected:
     UEnemyWaveManager* CachedWaveManager;
     
 public:
-    AFSDGameMode();
+    AFSDGameMode(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void StartGame();
     
@@ -137,6 +145,9 @@ protected:
     void SignalEndLevelToClients();
     
 public:
+    UFUNCTION(BlueprintCallable)
+    void SignalDonkeyPressed();
+    
     UFUNCTION(BlueprintCallable)
     void ResetDeaths();
     
@@ -201,10 +212,10 @@ public:
     FSoftObjectPath GetDropPodEscapePath() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    TSubclassOf<AMiningPod> GetDropPodEscapeClass() const;
+    TSubclassOf<ATeamTransport> GetDropPodEscapeClass() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    TSubclassOf<AMiningPod> GetDropPodClass() const;
+    TSubclassOf<ATeamTransport> GetDropPodClass() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FSoftObjectPath GetDronePath() const;

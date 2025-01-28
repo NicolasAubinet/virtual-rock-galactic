@@ -1,26 +1,7 @@
 #include "AimingFacilityTurret.h"
 #include "Net/UnrealNetwork.h"
 
-class UParticleSystemComponent;
-
-void AAimingFacilityTurret::SetupAimindicator(UParticleSystemComponent* NewAimIndicator, UParticleSystemComponent* NewAimIndicatorLock) {
-}
-
-void AAimingFacilityTurret::OnRep_IsLockedOn() {
-}
-
-void AAimingFacilityTurret::OnRep_IndicatorMode() {
-}
-
-
-void AAimingFacilityTurret::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
-    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-    
-    DOREPLIFETIME(AAimingFacilityTurret, IsLockedOn);
-    DOREPLIFETIME(AAimingFacilityTurret, IndicatorMode);
-}
-
-AAimingFacilityTurret::AAimingFacilityTurret() {
+AAimingFacilityTurret::AAimingFacilityTurret(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
     this->IsLockedOn = false;
     this->aimIndicator = NULL;
     this->aimIndicatorLock = NULL;
@@ -44,4 +25,22 @@ AAimingFacilityTurret::AAimingFacilityTurret() {
     this->UseTraceForLockOn = false;
     this->IndicatorMode = EIndicatorMode::EConstant;
 }
+
+void AAimingFacilityTurret::SetupAimindicator(UParticleSystemComponent* NewAimIndicator, UParticleSystemComponent* NewAimIndicatorLock) {
+}
+
+void AAimingFacilityTurret::OnRep_IsLockedOn() {
+}
+
+void AAimingFacilityTurret::OnRep_IndicatorMode() {
+}
+
+
+void AAimingFacilityTurret::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
+    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+    
+    DOREPLIFETIME(AAimingFacilityTurret, IsLockedOn);
+    DOREPLIFETIME(AAimingFacilityTurret, IndicatorMode);
+}
+
 

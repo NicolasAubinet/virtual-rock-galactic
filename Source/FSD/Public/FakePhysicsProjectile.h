@@ -1,14 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Engine/EngineTypes.h"
-#include "FakeMoverState.h"
 #include "FakeMoveState.h"
+#include "FakeMoverState.h"
 #include "ProjectileBase.h"
 #include "FakePhysicsProjectile.generated.h"
 
 class AActor;
-class UPrimitiveComponent;
 class UFakeMoverSettings;
+class UPrimitiveComponent;
 
 UCLASS(Blueprintable)
 class AFakePhysicsProjectile : public AProjectileBase {
@@ -32,9 +32,10 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float SyncTime;
     
-    AFakePhysicsProjectile();
+    AFakePhysicsProjectile(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 private:
     UFUNCTION(BlueprintCallable)
     void SphereBeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* Other, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);

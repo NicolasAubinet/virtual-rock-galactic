@@ -24,12 +24,13 @@ protected:
     UGemResourceData* GemResource;
     
 public:
-    UGatherGemsObjective();
+    UGatherGemsObjective(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
-    void OnResourceChanged(UCappedResource* CappedResource, float Amount);
+    void OnResourceChanged(UCappedResource* CappedResource, float amount);
     
     UFUNCTION(BlueprintCallable)
     void OnRep_GemsCollected(int32 prevAmount);

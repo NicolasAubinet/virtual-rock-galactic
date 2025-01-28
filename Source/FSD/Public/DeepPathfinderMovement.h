@@ -2,25 +2,25 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
-#include "Engine/LatentActionManager.h"
 #include "UObject/NoExportTypes.h"
 #include "Engine/EngineTypes.h"
-#include "EDeepMovementState.h"
-#include "EDeepMovementMode.h"
-#include "EOffsetFrom.h"
-#include "PathStateChangedDelegateDelegate.h"
-#include "RefreshDestinationDelegate.h"
-#include "PathFinishedDelegate.h"
-#include "PathBeginDelegate.h"
-#include "PauseMovementElapsedDelegate.h"
+#include "Engine/LatentActionManager.h"
+#include "GameFramework/PawnMovementComponent.h"
 #include "DeepPathFinderPreference.h"
 #include "DeepPathFinderSize.h"
 #include "DeepPathFinderType.h"
-#include "DeepRepPath.h"
-#include "HandleRotationOptions.h"
-#include "FakeMoverState.h"
-#include "GameFramework/PawnMovementComponent.h"
 #include "AsyncPathRequestsInterface.h"
+#include "DeepRepPath.h"
+#include "EDeepMovementMode.h"
+#include "EDeepMovementState.h"
+#include "EOffsetFrom.h"
+#include "FakeMoverState.h"
+#include "HandleRotationOptions.h"
+#include "PathBeginDelegate.h"
+#include "PathFinishedDelegate.h"
+#include "PathStateChangedDelegateDelegate.h"
+#include "PauseMovementElapsedDelegate.h"
+#include "RefreshDestinationDelegate.h"
 #include "DeepPathfinderMovement.generated.h"
 
 class AActor;
@@ -87,6 +87,9 @@ public:
     float AlignToTargetMinRequiredAngle;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FVector AlignTowardsLocation;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool AllowSlowTickRateWhenNotVisible;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -110,11 +113,14 @@ public:
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FPathStateChangedDelegate OnStateChanged;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
+    bool IsStrafingOverride;
+    
 private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     ADeepCSGWorld* CSGWorld;
     
-    UPROPERTY(EditAnywhere, Transient, ReplicatedUsing=OnRep_PathMovedDist, meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     uint32 PathMovedDist;
     
     UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -204,6 +210,9 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool SnapToPathfinderOnFirstMove;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool DisablePathfinderErrors;
+    
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FFakeMoverState FakePhysicsMove;
@@ -213,9 +222,10 @@ private:
     float FakeSyncTime;
     
 public:
-    UDeepPathfinderMovement();
+    UDeepPathfinderMovement(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void UpdateTargetActor(AActor* NewTarget);
     
@@ -280,12 +290,9 @@ public:
     bool PathExistTo(const FVector& Dest);
     
     UFUNCTION(BlueprintCallable)
-    bool PathExistsBetween(const FVector& From, const FVector& To);
+    bool PathExistsBetween(const FVector& from, const FVector& to);
     
 private:
-    UFUNCTION()
-    void OnRep_PathMovedDist(uint32 lastPathMovedDist);
-    
     UFUNCTION(BlueprintCallable)
     void OnRep_Path(const FDeepRepPath& oldPath);
     
@@ -335,11 +342,17 @@ public:
     UFUNCTION(BlueprintCallable)
     UFakeMoverSettings* GetCurrentFakePhysicsMoveSet();
     
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    float GetApproximatePathLength(FVector Start, FVector End) const;
+    
     UFUNCTION(BlueprintCallable)
     bool FlyToConnectedPosition(const FVector& destPos);
     
     UFUNCTION(BlueprintCallable)
     bool FindPointKeepingDistance(const FVector& Origin, float MinDistance, float MaxDistance, const FVector& Target, float idealTargetDistance, FVector& outPos);
+    
+    UFUNCTION(BlueprintCallable)
+    bool FindPointDiagonalTowardsTarget(const FVector& Origin, const FVector& Target, float dodgeAngle, float maxSampleDistance, float moveDistance, float RandomDeviation, FVector& outPos);
     
     UFUNCTION(BlueprintCallable)
     FVector FindPathfinderPointBelow(const FVector& Pos, float HeightOffset);
@@ -371,7 +384,7 @@ public:
     UFUNCTION(BlueprintCallable)
     void AddFakeMoverImpulse(const FVector& Impulse);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

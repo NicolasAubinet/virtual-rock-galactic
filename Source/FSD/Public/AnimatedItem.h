@@ -4,12 +4,11 @@
 #include "Item.h"
 #include "AnimatedItem.generated.h"
 
-class USkeletalMeshComponent;
-class UFirstPersonSkeletalMeshComponent;
+class UAnimMontage;
 class UItemCharacterAnimationSet;
 class UPlayerAnimInstance;
+class USkeletalMeshComponent;
 class USkinnableComponent;
-class UAnimMontage;
 
 UCLASS(Abstract, Blueprintable)
 class AAnimatedItem : public AItem {
@@ -26,7 +25,7 @@ protected:
     UPlayerAnimInstance* TPAnimInstance;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
-    UFirstPersonSkeletalMeshComponent* FPMesh;
+    USkeletalMeshComponent* FPMesh;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* TPMesh;
@@ -50,7 +49,8 @@ protected:
     UItemCharacterAnimationSet* CharacterAnimationSet;
     
 public:
-    AAnimatedItem();
+    AAnimatedItem(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnReceiveEquippedFinished();

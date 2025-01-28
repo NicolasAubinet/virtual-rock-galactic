@@ -1,11 +1,11 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "SchematicBankItem.h"
 #include "SchematicBankBase.h"
+#include "SchematicBankItem.h"
 #include "VanitySchematicBank.generated.h"
 
-class UVanityItem;
 class USchematicCategory;
+class UVanityItem;
 
 UCLASS(Blueprintable)
 class FSD_API UVanitySchematicBank : public USchematicBankBase {
@@ -18,6 +18,7 @@ public:
     TMap<UVanityItem*, FSchematicBankItem> VanityItems;
     
     UVanitySchematicBank();
+
     UFUNCTION(BlueprintCallable)
     void AppendItems(TArray<UVanityItem*>& toArray) const;
     

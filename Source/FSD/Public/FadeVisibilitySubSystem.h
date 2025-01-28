@@ -5,15 +5,16 @@
 #include "Subsystems/WorldSubsystem.h"
 #include "FadeVisibilitySubSystem.generated.h"
 
-class UPrimitiveComponent;
-class UMeshComponent;
 class ULightComponent;
+class UMeshComponent;
+class UPrimitiveComponent;
 
 UCLASS(Blueprintable)
 class UFadeVisibilitySubSystem : public UWorldSubsystem {
     GENERATED_BODY()
 public:
     UFadeVisibilitySubSystem();
+
     UFUNCTION(BlueprintCallable)
     static void ScalePrimitive(UPrimitiveComponent*& Component, FVector StartScale, FVector EndScale, float Duration);
     
@@ -42,7 +43,7 @@ public:
     static void FadeInMaterialByIndex(UMeshComponent*& Component, int32 MaterialIndex, FName ParameterName, float Duration);
     
     UFUNCTION(BlueprintCallable)
-    static void FadeInLight(ULightComponent*& Light, float Duration);
+    static void FadeInLight(ULightComponent*& Light, float Duration, float startIntensityAtPercent);
     
 };
 

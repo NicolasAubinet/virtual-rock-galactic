@@ -1,24 +1,23 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
+#include "Components/ActorComponent.h"
 #include "GameplayTagContainer.h"
+#include "ActiveOutline.h"
 #include "EAsyncLoadPriority.h"
 #include "EShoutType.h"
-#include "ActiveOutline.h"
-#include "MissionShoutQueueItem.h"
 #include "MissionShoutDelegateDelegate.h"
-#include "AudioCallbackDelegate.h"
 #include "MissionShoutEndDelegateDelegate.h"
-#include "Components/ActorComponent.h"
+#include "MissionShoutQueueItem.h"
+#include "Templates/SubclassOf.h"
 #include "CommunicationComponent.generated.h"
 
-class UObject;
+class APlayerCharacter;
 class UAudioComponent;
-class UShoutWidget;
 class UCharacterShoutsData;
 class UDialogDataAsset;
-class APlayerCharacter;
+class UObject;
+class UShoutWidget;
 class USoundBase;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -73,9 +72,6 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UAudioComponent* MissionControlAudioComponent;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FAudioCallback ShoutCallback;
-    
 private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     TArray<UShoutWidget*> ActiveShouts;
@@ -89,7 +85,7 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     UDialogDataAsset* LastShout;
     
-    UPROPERTY(EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UAudioComponent> ShoutAudioComponent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -99,7 +95,8 @@ private:
     TArray<FMissionShoutQueueItem> MissionShoutQueue;
     
 public:
-    UCommunicationComponent();
+    UCommunicationComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void ShoutCustomOrDefault(UDialogDataAsset* CustomShout, EShoutType DefaultShout);
     

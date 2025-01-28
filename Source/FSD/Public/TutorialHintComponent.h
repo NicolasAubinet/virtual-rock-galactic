@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "TutorialHint.h"
 #include "TutorialComponent.h"
+#include "TutorialHint.h"
 #include "TutorialHintComponent.generated.h"
 
 class UObject;
@@ -15,7 +15,8 @@ protected:
     FTutorialHint Hint;
     
 public:
-    UTutorialHintComponent();
+    UTutorialHintComponent(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void SetRemainingVisibleTime(float remainingTime);

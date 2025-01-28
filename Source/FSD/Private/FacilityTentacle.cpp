@@ -1,9 +1,14 @@
 #include "FacilityTentacle.h"
 #include "Net/UnrealNetwork.h"
 
-class UDebrisPositioning;
+AFacilityTentacle::AFacilityTentacle(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->SwaySpeed = 50.00f;
+    this->Extended = false;
+    this->TentacleState = EFacilityTentacleState::Idle;
+    this->HeadMesh = NULL;
+}
 
-void AFacilityTentacle::PlayHitReaction(float Amount) {
+void AFacilityTentacle::PlayHitReaction(float amount) {
 }
 
 
@@ -24,10 +29,4 @@ void AFacilityTentacle::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Ou
     DOREPLIFETIME(AFacilityTentacle, DesiredTarget);
 }
 
-AFacilityTentacle::AFacilityTentacle() {
-    this->SwaySpeed = 50.00f;
-    this->Extended = false;
-    this->TentacleState = EFacilityTentacleState::Idle;
-    this->HeadMesh = NULL;
-}
 

@@ -1,17 +1,17 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "Curves/CurveFloat.h"
-#include "Components/SplineMeshComponent.h"
 #include "GameFramework/Actor.h"
+#include "Components/SplineMeshComponent.h"
+#include "Curves/CurveFloat.h"
 #include "SplinePlant.generated.h"
 
-class USceneComponent;
 class UAudioComponent;
-class USplineMeshComponent;
+class USceneComponent;
 class USoundCue;
-class UStaticMesh;
 class USplineComponent;
+class USplineMeshComponent;
+class UStaticMesh;
 
 UCLASS(Blueprintable)
 class FSD_API ASplinePlant : public AActor {
@@ -88,9 +88,10 @@ protected:
     int32 Seed;
     
 public:
-    ASplinePlant();
+    ASplinePlant(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void SetTargetPlantLengthPercent(float InTargetPercent, float InPercentPerSecond, float InEaseExp);
     

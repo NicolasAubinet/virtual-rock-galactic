@@ -1,28 +1,7 @@
 #include "LaserPointerItem.h"
 #include "Components/SceneComponent.h"
 
-class UObject;
-class AActor;
-class UPrimitiveComponent;
-class UTerrainMaterial;
-
-void ALaserPointerItem::UnlockToMinersManual(UObject* WorldContextObject, FGuid ObjectID) {
-}
-
-void ALaserPointerItem::ToggleLaserVisible_Implementation(bool aVisible) {
-}
-
-void ALaserPointerItem::ServerPlaceMarker_Implementation(FVector Location, FVector Normal, AActor* Actor, UPrimitiveComponent* Cmponent, UTerrainMaterial* TerrainMaterial, ELaserPointerMarkerType eMarkerType) {
-}
-
-void ALaserPointerItem::Server_SecondaryUse_Implementation() {
-}
-
-
-void ALaserPointerItem::GetPointTransform_Implementation(FTransform& PointTransform) {
-}
-
-ALaserPointerItem::ALaserPointerItem() {
+ALaserPointerItem::ALaserPointerItem(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
     this->MarkerType = NULL;
     this->SecondaryMarkerType = NULL;
     this->WaypointType = NULL;
@@ -37,4 +16,25 @@ ALaserPointerItem::ALaserPointerItem() {
     this->MissionControlLookAtShout = NULL;
     this->GameState = NULL;
 }
+
+void ALaserPointerItem::UnlockToMinersManual(UObject* WorldContextObject, FGuid ObjectID) {
+}
+
+void ALaserPointerItem::ToggleLaserVisible_Implementation(bool aVisible) {
+}
+
+void ALaserPointerItem::ServerPlaceMarker_Implementation(FVector Location, FVector Normal, AActor* Actor, UPrimitiveComponent* Cmponent, UTerrainMaterial* TerrainMaterial, ELaserPointerMarkerType eMarkerType) {
+}
+
+void ALaserPointerItem::Server_SecondaryUse_Implementation(FVector Location, FVector Normal, AActor* Actor, UPrimitiveComponent* Cmponent, UTerrainMaterial* TerrainMaterial) {
+}
+
+
+void ALaserPointerItem::GetPointTransform_Implementation(FTransform& PointTransform) {
+}
+
+FVector ALaserPointerItem::GetActiveMarkerLocation() const {
+    return FVector{};
+}
+
 

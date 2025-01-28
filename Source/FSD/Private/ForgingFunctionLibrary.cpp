@@ -1,7 +1,7 @@
 #include "ForgingFunctionLibrary.h"
 
-class UObject;
-class USchematic;
+UForgingFunctionLibrary::UForgingFunctionLibrary() {
+}
 
 USchematic* UForgingFunctionLibrary::PickForgingMasteryDefaultReward(UObject* WorldContextObject, ESchematicType InType) {
     return NULL;
@@ -45,6 +45,4 @@ TArray<USchematic*> UForgingFunctionLibrary::GetForgedSchematics(UObject* WorldC
 void UForgingFunctionLibrary::ClaimForgingPendingMasteryReward(UObject* WorldContextObject, int32 Level, USchematic* Reward) {
 }
 
-UForgingFunctionLibrary::UForgingFunctionLibrary() {
-}
 

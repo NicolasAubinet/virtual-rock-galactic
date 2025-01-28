@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "Components/ActorComponent.h"
+#include "Templates/SubclassOf.h"
 #include "MolotovComponent.generated.h"
 
 class AActor;
@@ -22,7 +22,8 @@ protected:
     float Radius;
     
 public:
-    UMolotovComponent();
+    UMolotovComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void Trigger();
     

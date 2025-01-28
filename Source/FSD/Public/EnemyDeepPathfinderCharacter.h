@@ -1,16 +1,16 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "QueuedMontage.h"
 #include "DeepPathfinderCharacter.h"
 #include "NetMontageAble.h"
+#include "QueuedMontage.h"
 #include "EnemyDeepPathfinderCharacter.generated.h"
 
-class UMeshComponent;
 class UAnimInstance;
-class USkeletalMeshComponent;
+class UAnimMontage;
 class UEnemyHealthComponent;
 class UMaterialInterface;
-class UAnimMontage;
+class UMeshComponent;
+class USkeletalMeshComponent;
 
 UCLASS(Blueprintable)
 class AEnemyDeepPathfinderCharacter : public ADeepPathfinderCharacter, public INetMontageAble {
@@ -24,17 +24,18 @@ protected:
     FQueuedMontage QueuedMontage;
     
 public:
-    AEnemyDeepPathfinderCharacter();
+    AEnemyDeepPathfinderCharacter(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
-protected:
+
     UFUNCTION(BlueprintCallable, BlueprintPure=false)
     void SwitchToDynamicBaseShader(UMaterialInterface* baseShader, UMeshComponent* MeshComponent) const;
     
+protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_QueuedMontage();
     
-    
+
     // Fix for true pure virtual functions not being implemented
 public:
     UFUNCTION(BlueprintCallable)
@@ -42,6 +43,9 @@ public:
     
     UFUNCTION(BlueprintCallable)
     USkeletalMeshComponent* GetSkeletalMesh() const override PURE_VIRTUAL(GetSkeletalMesh, return NULL;);
+    
+    UFUNCTION(BlueprintCallable)
+    FName GetCenterOfMassSocketName() const override PURE_VIRTUAL(GetCenterOfMassSocketName, return NAME_None;);
     
     UFUNCTION(BlueprintCallable)
     UAnimInstance* GetAnimInstance() const override PURE_VIRTUAL(GetAnimInstance, return NULL;);

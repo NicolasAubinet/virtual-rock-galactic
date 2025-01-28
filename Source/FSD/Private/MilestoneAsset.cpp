@@ -1,9 +1,14 @@
 #include "MilestoneAsset.h"
 
-class UObject;
-class UMilestoneAsset;
-class UMissionStat;
-class UTexture2D;
+UMilestoneAsset::UMilestoneAsset() {
+    this->FormattedTitle = FText::FromString(TEXT("Parameters: {value} {float_value} {character}"));
+    this->FormattedValueOffset = 0;
+    this->CountValueAsTotal = false;
+    this->TrackingStat = NULL;
+    this->TrackingCharacterID = NULL;
+    this->LastTierReached = 0;
+    this->bPendingMilestoneReached = false;
+}
 
 TArray<UMilestoneAsset*> UMilestoneAsset::SortMilestonesByProgress(UObject* WorldContext, TArray<UMilestoneAsset*>& Milestones) {
     return TArray<UMilestoneAsset*>();
@@ -54,13 +59,4 @@ int32 UMilestoneAsset::ClaimNextTier(UObject* WorldContext) {
     return 0;
 }
 
-UMilestoneAsset::UMilestoneAsset() {
-    this->LargeImage = NULL;
-    this->FormattedValueOffset = 0;
-    this->CountValueAsTotal = false;
-    this->TrackingStat = NULL;
-    this->TrackingCharacterID = NULL;
-    this->LastTierReached = 0;
-    this->bPendingMilestoneReached = false;
-}
 

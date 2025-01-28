@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "GenerationItem.h"
+#include "Templates/SubclassOf.h"
 #include "SpawnActorGenerationItem.generated.h"
 
 class AActor;
@@ -19,6 +19,7 @@ protected:
     UBoxComponent* Box;
     
 public:
-    ASpawnActorGenerationItem();
+    ASpawnActorGenerationItem(const FObjectInitializer& ObjectInitializer);
+
 };
 

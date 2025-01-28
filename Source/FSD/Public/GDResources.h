@@ -2,8 +2,8 @@
 #include "CoreMinimal.h"
 #include "GDResources.generated.h"
 
-class UResourceData;
 class UGemResourceData;
+class UResourceData;
 
 USTRUCT(BlueprintType)
 struct FGDResources {
@@ -56,6 +56,12 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UResourceData* OilShaleResource;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UResourceData* ErrorCubeResource;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UResourceData* CompressedGoldResource;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UResourceData* Barly1;

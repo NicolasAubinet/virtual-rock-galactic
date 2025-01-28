@@ -1,17 +1,17 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
-#include "DelegateDelegate.h"
-#include "PlagueCenterKilledDelegate.h"
-#include "FirstPlayerNearCenterDelegate.h"
 #include "GameFramework/Actor.h"
+#include "DelegateDelegate.h"
+#include "FirstPlayerNearCenterDelegate.h"
+#include "PlagueCenterKilledDelegate.h"
+#include "Templates/SubclassOf.h"
 #include "PlagueInfectionNode.generated.h"
 
+class UCurveFloat;
 class UDebrisPositioning;
 class UHealthComponentBase;
 class USimpleHealthComponent;
 class UTerrainMaterial;
-class UCurveFloat;
 
 UCLASS(Abstract, Blueprintable)
 class APlagueInfectionNode : public AActor {
@@ -91,9 +91,10 @@ protected:
     bool HasCleanPodBeenSpawned;
     
 public:
-    APlagueInfectionNode();
+    APlagueInfectionNode(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnWormSpawned(AActor* worm);

@@ -1,22 +1,22 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "ReplicatedCharacterData.h"
-#include "Engine/EngineTypes.h"
 #include "Components/ActorComponent.h"
+#include "Engine/EngineTypes.h"
+#include "ReplicatedCharacterData.h"
 #include "CharacterSightComponent.generated.h"
 
 class AActor;
-class UPrimitiveComponent;
+class APlayerCharacter;
+class IHealth;
+class UHealth;
+class ITargetable;
+class UTargetable;
 class UCharacterSightSensorBase;
+class UPawnAfflictionComponent;
+class UPrimitiveComponent;
 class USimpleObjectInfoComponent;
 class UTemperatureComponent;
-class UHealth;
-class IHealth;
-class UTargetable;
-class ITargetable;
-class UPawnAfflictionComponent;
-class APlayerCharacter;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UCharacterSightComponent : public UActorComponent {
@@ -40,19 +40,19 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     APlayerCharacter* Character;
     
-    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<AActor> TargetActor;
     
-    UPROPERTY(EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UPrimitiveComponent> TargetPrimitive;
     
-    UPROPERTY(EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<USimpleObjectInfoComponent> TargetInfo;
     
-    UPROPERTY(EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UTemperatureComponent> TargetTemperature;
     
-    UPROPERTY(EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UPawnAfflictionComponent> TargetAfflictions;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -71,9 +71,10 @@ protected:
     FReplicatedCharacterData ReplicatedData;
     
 public:
-    UCharacterSightComponent();
+    UCharacterSightComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_UpdateTarget(AActor* NewActor, UPrimitiveComponent* NewPrimitive);

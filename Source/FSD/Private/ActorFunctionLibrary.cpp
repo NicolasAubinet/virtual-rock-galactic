@@ -1,30 +1,8 @@
 #include "ActorFunctionLibrary.h"
 #include "Templates/SubclassOf.h"
 
-class UObject;
-class AActor;
-class UActorComponent;
-class USceneComponent;
-class UFXSystemAsset;
-class UMeshComponent;
-class UUserWidget;
-class UWindowWidget;
-class UEnemyComponent;
-class AFSDGameState;
-class AFSDGameMode;
-class APlayerController;
-class UFSDPhysicalMaterial;
-class UInventoryList;
-class UItemID;
-class UPlayerCharacterID;
-class UPathfinderCollisionComponent;
-class APlayerCharacter;
-class UBlendableInterface;
-class IBlendableInterface;
-class UTexture2D;
-class UMaterialInstanceDynamic;
-class UPostProcessComponent;
-class USoundCue;
+UActorFunctionLibrary::UActorFunctionLibrary() {
+}
 
 void UActorFunctionLibrary::UnlockSpecificCharacters(TArray<APlayerCharacter*> Characters, ECharacterState UnlockIf, ECharacterState UnlockTo) {
 }
@@ -86,6 +64,10 @@ bool UActorFunctionLibrary::IsWeakPoint(UFSDPhysicalMaterial* Material) {
 }
 
 bool UActorFunctionLibrary::IsSingleplayer(UObject* WorldContextObject) {
+    return false;
+}
+
+bool UActorFunctionLibrary::IsMovingPlatform(AActor* Actor) {
     return false;
 }
 
@@ -206,7 +188,7 @@ FVector UActorFunctionLibrary::FindLatejoinDroppodLocation(AFSDGameMode* GameMod
     return FVector{};
 }
 
-AActor* UActorFunctionLibrary::FindClosestEnemyFromLocation(const FVector& fromLocation, float range, bool LineOfSightCheck, UObject* WorldContextObject, const TArray<AActor*>& IgnoredActors, const FVector& Offset) {
+AActor* UActorFunctionLibrary::FindClosestEnemyFromLocation(const FVector& fromLocation, float range, bool LineOfSightCheck, UObject* WorldContextObject, const TArray<AActor*>& IgnoredActors, const FVector& Offset, bool onlyTargetable) {
     return NULL;
 }
 
@@ -236,7 +218,7 @@ TArray<UMaterialInstanceDynamic*> UActorFunctionLibrary::CreateDynamicMaterialIn
     return TArray<UMaterialInstanceDynamic*>();
 }
 
-float UActorFunctionLibrary::AddHeroXP(UObject* WorldContextObject, UPlayerCharacterID* characterID, float Amount) {
+float UActorFunctionLibrary::AddHeroXP(UObject* WorldContextObject, UPlayerCharacterID* characterID, float amount) {
     return 0.0f;
 }
 
@@ -247,6 +229,4 @@ bool UActorFunctionLibrary::ActorMatchesTagQuery(const FGameplayTagQuery& Query,
     return false;
 }
 
-UActorFunctionLibrary::UActorFunctionLibrary() {
-}
 

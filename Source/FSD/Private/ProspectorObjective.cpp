@@ -1,7 +1,9 @@
 #include "ProspectorObjective.h"
 #include "Net/UnrealNetwork.h"
 
-class UHealthComponentBase;
+UProspectorObjective::UProspectorObjective(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->DebrisPositioning = NULL;
+}
 
 void UProspectorObjective::OnRep_ActiveProspector() {
 }
@@ -19,7 +21,4 @@ void UProspectorObjective::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>&
     DOREPLIFETIME(UProspectorObjective, ActiveProspector);
 }
 
-UProspectorObjective::UProspectorObjective() {
-    this->DebrisPositioning = NULL;
-}
 

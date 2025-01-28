@@ -1,8 +1,7 @@
 #include "VictoryPoseFunctionLibrary.h"
 
-class UObject;
-class UPlayerCharacterID;
-class UVictoryPose;
+UVictoryPoseFunctionLibrary::UVictoryPoseFunctionLibrary() {
+}
 
 bool UVictoryPoseFunctionLibrary::IsRandomVictoryPose(UVictoryPose* VictoryPose) {
     return false;
@@ -16,6 +15,4 @@ UVictoryPose* UVictoryPoseFunctionLibrary::GetEquippedVictoryPose(UObject* World
     return NULL;
 }
 
-UVictoryPoseFunctionLibrary::UVictoryPoseFunctionLibrary() {
-}
 

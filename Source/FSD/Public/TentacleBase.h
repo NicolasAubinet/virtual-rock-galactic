@@ -6,8 +6,8 @@
 #include "EnemyPawn.h"
 #include "TentacleBase.generated.h"
 
-class USceneComponent;
 class AStabberVineRoot;
+class USceneComponent;
 class USplineComponent;
 
 UCLASS(Abstract, Blueprintable)
@@ -58,7 +58,8 @@ protected:
     USceneComponent* HeadRotator;
     
 public:
-    ATentacleBase();
+    ATentacleBase(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void SetRestingTransform(const FTransform& restingTransform, bool startAtRest);
     

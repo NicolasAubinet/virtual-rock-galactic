@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "ItemUpgrade.h"
 #include "Templates/SubclassOf.h"
 #include "UpgradeValues.h"
-#include "ItemUpgrade.h"
 #include "LockCountSTEBonusUpgrade.generated.h"
 
 class AActor;
@@ -21,10 +21,11 @@ protected:
     bool UseTotalLockCount;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    float Amount;
+    float amount;
     
 public:
     ULockCountSTEBonusUpgrade();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static FUpgradeValues GetUpgradedValue(TSubclassOf<AActor> Item, AFSDPlayerState* Player, TSubclassOf<UStatusEffect> NewStatusEffect);
     

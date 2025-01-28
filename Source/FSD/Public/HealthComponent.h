@@ -1,18 +1,18 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "DamageData.h"
-#include "EHealthbarType.h"
-#include "HealthSegmentChangeDelegate.h"
 #include "ArmorHealedSigDelegate.h"
+#include "DamageData.h"
 #include "DamageSigDelegate.h"
-#include "HealthChangedSigDelegate.h"
 #include "DeathSigDetailedDelegate.h"
+#include "EHealthbarType.h"
+#include "HealthChangedSigDelegate.h"
 #include "HealthComponentBase.h"
+#include "HealthSegmentChangeDelegate.h"
 #include "HealthComponent.generated.h"
 
 class AActor;
-class UPawnStatsComponent;
 class UPawnStat;
+class UPawnStatsComponent;
 class USubHealthComponent;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -72,11 +72,15 @@ protected:
     UPawnStatsComponent* PawnStats;
     
 public:
-    UHealthComponent();
+    UHealthComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void ToggleCanTakeDamage();
+    
+    UFUNCTION(BlueprintCallable)
+    float TakePercentDamage(float PercentOfMax, const FDamageData& DamageData);
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void Resupply(float percentage);
@@ -87,7 +91,7 @@ protected:
     
 public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
-    void HealArmor(float Amount);
+    void HealArmor(float amount);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool HasArmor() const;
@@ -95,7 +99,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetMaxArmor() const;
     
-    //UFUNCTION(BlueprintCallable, BlueprintPure)
+	//UFUNCTION(BlueprintCallable)
     EHealthbarType GetHealthbarType() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -109,7 +113,7 @@ public:
     
 protected:
     UFUNCTION(BlueprintCallable, Client, Unreliable)
-    void Client_ReceivedHit(float Amount, const FDamageData& DamageData, bool anyHealthLost);
+    void Client_ReceivedHit(float amount, const FDamageData& DamageData, bool anyHealthLost);
     
 };
 

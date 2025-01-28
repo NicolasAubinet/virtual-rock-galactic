@@ -1,7 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EquippedActorData.h"
 #include "Components/ActorComponent.h"
+#include "DelayedActorSwitchData.h"
+#include "EquippedActorData.h"
 #include "InventoryBase.generated.h"
 
 class AActor;
@@ -18,15 +19,22 @@ private:
     TArray<AActor*> ActorsNonSelectable;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_EquippedActor, meta=(AllowPrivateAccess=true))
+    FEquippedActorData ReplicatedEquippedActor;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FEquippedActorData EquippedActor;
     
     UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
     AActor* LastEquippedActors[2];
     
-public:
-    UInventoryBase();
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    FDelayedActorSwitchData DelayedActorSwitchOldActor;
     
+public:
+    UInventoryBase(const FObjectInitializer& ObjectInitializer);
+
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
 private:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetEquippedActor(const FEquippedActorData& Actor, bool CallClientDelayed);

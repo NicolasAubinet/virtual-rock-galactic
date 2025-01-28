@@ -1,10 +1,10 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "ReloadStartedSignatureDelegate.h"
-#include "ReloadCompleteSignatureDelegate.h"
-#include "ReloadTimeLeftSignatureDelegate.h"
 #include "AmountChangedSignatureDelegate.h"
 #include "ItemAggregator.h"
+#include "ReloadCompleteSignatureDelegate.h"
+#include "ReloadStartedSignatureDelegate.h"
+#include "ReloadTimeLeftSignatureDelegate.h"
 #include "ClipBasedItemAggregator.generated.h"
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -38,7 +38,8 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ShowClipAndTotalAsOne;
     
-    UClipBasedItemAggregator();
+    UClipBasedItemAggregator(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void ReloadStarted();
     

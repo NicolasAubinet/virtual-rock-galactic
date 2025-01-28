@@ -1,9 +1,17 @@
 #include "UsableComponentBase.h"
 
-class APlayerCharacter;
-class UUseConditionSet;
-class UUseAnimationSetting;
-class UTexture2D;
+UUsableComponentBase::UUsableComponentBase(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->CallbackKeys = 1;
+    this->UseCooldown = 0.00f;
+    this->AnimationSettings = NULL;
+    this->Priority = 0;
+    this->RestrictToCollider = NULL;
+    this->UsableHidesPlaceables = true;
+    this->IsRayTraceTriggered = true;
+    this->ResetUsingOnCompletion = true;
+    this->IsClientPredictive = false;
+    this->ThirdPersonWhileUsing = false;
+}
 
 void UUsableComponentBase::SetUseRestrictions(UUseConditionSet* set) {
 }
@@ -48,16 +56,4 @@ void UUsableComponentBase::EndUse(APlayerCharacter* User) {
 void UUsableComponentBase::BeginUse(APlayerCharacter* User, EInputKeys Key) {
 }
 
-UUsableComponentBase::UUsableComponentBase() {
-    this->CallbackKeys = 1;
-    this->UseCooldown = 0.00f;
-    this->AnimationSettings = NULL;
-    this->Priority = 0;
-    this->RestrictToCollider = NULL;
-    this->UsableHidesPlaceables = true;
-    this->IsRayTraceTriggered = true;
-    this->ResetUsingOnCompletion = true;
-    this->IsClientPredictive = false;
-    this->ThirdPersonWhileUsing = false;
-}
 

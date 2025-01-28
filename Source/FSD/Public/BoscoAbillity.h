@@ -1,12 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EBoscoAbillityTargetPreference.h"
 #include "Engine/DataAsset.h"
+#include "EBoscoAbillityTargetPreference.h"
 #include "BoscoAbillity.generated.h"
 
 class UAbilityExitStrategy;
-class UDialogDataAsset;
 class UAnimSequenceBase;
+class UDialogDataAsset;
 
 UCLASS(Blueprintable)
 class UBoscoAbillity : public UDataAsset {
@@ -52,5 +52,6 @@ public:
     bool RotateTowardsTarget;
     
     UBoscoAbillity();
+
 };
 

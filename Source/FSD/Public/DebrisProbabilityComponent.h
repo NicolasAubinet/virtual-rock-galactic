@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "RandRange.h"
 #include "DebrisActorComponent.h"
+#include "RandRange.h"
 #include "DebrisProbabilityComponent.generated.h"
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -16,6 +16,7 @@ protected:
     bool IsProbabilityShared;
     
 public:
-    UDebrisProbabilityComponent();
+    UDebrisProbabilityComponent(const FObjectInitializer& ObjectInitializer);
+
 };
 

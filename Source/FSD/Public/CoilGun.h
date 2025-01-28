@@ -1,28 +1,28 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
-#include "Engine/NetSerialization.h"
 #include "Curves/CurveFloat.h"
+#include "Engine/NetSerialization.h"
 #include "BulletPathSegment.h"
+#include "ChargedWeapon.h"
+#include "CoilMaterial.h"
 #include "ContrailSettings.h"
 #include "ShotMultiplier.h"
-#include "CoilMaterial.h"
-#include "ChargedWeapon.h"
+#include "Templates/SubclassOf.h"
 #include "CoilGun.generated.h"
 
 class AActor;
-class UPrimitiveComponent;
+class ACoilgunWeaponTrail;
+class UCoilgunTrailSpawner;
+class UDamageComponent;
+class UFSDPhysicalMaterial;
+class UHealthComponentBase;
 class UNiagaraComponent;
 class UNiagaraSystem;
-class UCoilgunTrailSpawner;
-class ACoilgunWeaponTrail;
-class UDamageComponent;
-class UHealthComponentBase;
-class UFSDPhysicalMaterial;
-class UStatusEffect;
+class UPrimitiveComponent;
 class UStaticMesh;
+class UStatusEffect;
 
 UCLASS(Blueprintable)
 class FSD_API ACoilGun : public AChargedWeapon {
@@ -138,7 +138,8 @@ protected:
     int32 LastDynamicIndex;
     
 public:
-    ACoilGun();
+    ACoilGun(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void UpdateAfflictions();
@@ -197,7 +198,7 @@ protected:
     void OnEnemyKilled(AActor* Target, UFSDPhysicalMaterial* PhysicalMaterial, bool wasDirectHit);
     
     UFUNCTION(BlueprintCallable)
-    void OnDamageTarget(UHealthComponentBase* Health, float Amount, UPrimitiveComponent* Component, UFSDPhysicalMaterial* PhysicalMaterial);
+    void OnDamageTarget(UHealthComponentBase* Health, float amount, UPrimitiveComponent* Component, UFSDPhysicalMaterial* PhysicalMaterial);
     
     UFUNCTION(BlueprintCallable)
     void OnCharacterShieldBroke(AActor* brokeChar);

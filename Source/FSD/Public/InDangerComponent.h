@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "IsInDangerSigDelegate.h"
 #include "Components/ActorComponent.h"
+#include "IsInDangerSigDelegate.h"
 #include "InDangerComponent.generated.h"
 
 class UHealthComponentBase;
@@ -14,7 +14,7 @@ public:
     FIsInDangerSig OnInDanger;
     
 protected:
-    UPROPERTY(EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UHealthComponentBase> ParentHealthComponent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -27,12 +27,13 @@ protected:
     bool RunsOnClients;
     
 public:
-    UInDangerComponent();
+    UInDangerComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void SetIsActive(bool aFlag);
     
     UFUNCTION(BlueprintCallable)
-    void OnDamage(float Amount);
+    void OnDamage(float amount);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetIsActive() const;

@@ -1,11 +1,11 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "Engine/NetSerialization.h"
-#include "EDashPointsGenerationMode.h"
-#include "DashSigDelegate.h"
-#include "Curves/CurveFloat.h"
 #include "Components/ActorComponent.h"
+#include "Curves/CurveFloat.h"
+#include "Engine/NetSerialization.h"
+#include "DashSigDelegate.h"
+#include "EDashPointsGenerationMode.h"
 #include "DashPoints.generated.h"
 
 class AActor;
@@ -68,9 +68,10 @@ protected:
     bool IgnoreRules;
     
 public:
-    UDashPoints();
+    UDashPoints(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void UpdateDashPointData();
     

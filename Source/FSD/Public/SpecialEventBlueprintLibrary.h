@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "ESchematicType.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "ESchematicType.h"
 #include "SpecialEventBlueprintLibrary.generated.h"
 
 class UObject;
@@ -14,6 +14,7 @@ class USpecialEventBlueprintLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
     USpecialEventBlueprintLibrary();
+
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static USchematic* TryGivePendingReward(UObject* WorldContextObject);
     

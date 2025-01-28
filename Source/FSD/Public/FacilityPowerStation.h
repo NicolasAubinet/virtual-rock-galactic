@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Hackprogress_DelegateDelegate.h"
 #include "GameFramework/Actor.h"
+#include "Hackprogress_DelegateDelegate.h"
 #include "FacilityPowerStation.generated.h"
 
 UCLASS(Blueprintable)
@@ -31,9 +31,10 @@ protected:
     bool IsHacking;
     
 public:
-    AFacilityPowerStation();
+    AFacilityPowerStation(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void StopHacking();
     

@@ -7,11 +7,11 @@
 #include "WeaponFireOwner.h"
 #include "HostileGuntowerModule.generated.h"
 
-class USkeletalMeshComponent;
+class APlayerCharacter;
 class UEnemyComponent;
 class UHealthComponentBase;
 class UParticleSystemComponent;
-class APlayerCharacter;
+class USkeletalMeshComponent;
 
 UCLASS(Blueprintable)
 class AHostileGuntowerModule : public AGuntowerModule, public IWeaponFireOwner {
@@ -34,9 +34,10 @@ protected:
     FRotator CurrentAimRotation;
     
 public:
-    AHostileGuntowerModule();
+    AHostileGuntowerModule(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnWeakpointDied(UHealthComponentBase* Health);
@@ -47,7 +48,7 @@ protected:
     UFUNCTION(BlueprintCallable)
     void OnModuleDied(UHealthComponentBase* Health);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 public:
     UFUNCTION(BlueprintCallable)

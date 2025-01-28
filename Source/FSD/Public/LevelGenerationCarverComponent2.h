@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
-#include "BakeSettings.h"
 #include "Components/PrimitiveComponent.h"
+#include "BakeSettings.h"
+#include "Templates/SubclassOf.h"
 #include "LevelGenerationCarverComponent2.generated.h"
 
 class ACSGBuilder;
@@ -32,6 +32,7 @@ protected:
     UCSGPreviewComponent* PreviewComponent;
     
 public:
-    ULevelGenerationCarverComponent2();
+    ULevelGenerationCarverComponent2(const FObjectInitializer& ObjectInitializer);
+
 };
 

@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "VisualLogger/VisualLoggerDebugSnapshotInterface.h"
 #include "FSDPawn.h"
 #include "TriggerAI.h"
-#include "VisualLogger/VisualLoggerDebugSnapshotInterface.h"
 #include "DeepPathfinderCharacter.generated.h"
 
-class USkeletalMeshComponent;
-class UDeepPathfinderMovement;
-class UPawnAffliction;
 class UDeepPatherFinderCharacterAfflictionComponent;
+class UDeepPathfinderMovement;
 class UMaterialInterface;
+class UPawnAffliction;
+class USkeletalMeshComponent;
 
 UCLASS(Blueprintable)
 class ADeepPathfinderCharacter : public AFSDPawn, public ITriggerAI, public IVisualLoggerDebugSnapshotInterface {
@@ -68,7 +68,8 @@ protected:
     float AllowedInFormationChance;
     
 public:
-    ADeepPathfinderCharacter();
+    ADeepPathfinderCharacter(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     bool TryJoinFormation();
     
@@ -86,7 +87,7 @@ public:
     UFUNCTION(BlueprintCallable)
     void LeaveFormation();
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

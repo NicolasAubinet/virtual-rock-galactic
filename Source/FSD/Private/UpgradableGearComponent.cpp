@@ -1,18 +1,18 @@
 #include "UpgradableGearComponent.h"
 #include "Templates/SubclassOf.h"
 
-class UObject;
-class AActor;
-class UResourceData;
-class AFSDPlayerState;
-class AFSDPlayerController;
-class UItemUpgrade;
-class UItemID;
-class UPlayerCharacterID;
-class APlayerCharacter;
-class UTexture2D;
+UUpgradableGearComponent::UUpgradableGearComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->bUpgradesAddedToItem = false;
+    this->ItemData = NULL;
+    this->OverclockBank = NULL;
+    this->IconLine = NULL;
+    this->IconBG = NULL;
+    this->IconDetailed = NULL;
+    this->CreditCost = 0;
+    this->RequiredCharacterLevel = 0;
+}
 
-void UUpgradableGearComponent::SetGearStatText(FGearStatEntry& Entry, FText Text) {
+void UUpgradableGearComponent::SetGearStatText(FGearStatEntry& entry, FText Text) {
 }
 
 bool UUpgradableGearComponent::PurchaseUpgrade(UItemID* ItemID, UItemUpgrade* Upgrade, AFSDPlayerController* PlayerController, TSubclassOf<APlayerCharacter> previewedCharacter) {
@@ -27,18 +27,18 @@ bool UUpgradableGearComponent::PlayerOwnesUpgradeInAllTiers(TSubclassOf<AActor> 
     return false;
 }
 
-void UUpgradableGearComponent::MirrorUpgradePreviewStatus(FGearStatEntry& From, FGearStatEntry& To) {
+void UUpgradableGearComponent::MirrorUpgradePreviewStatus(FGearStatEntry& from, FGearStatEntry& to) {
 }
 
 bool UUpgradableGearComponent::IsUpgradeEquipped(TSubclassOf<AActor> itemClass, UItemUpgrade* Upgrade, AFSDPlayerState* Player) {
     return false;
 }
 
-bool UUpgradableGearComponent::IsTierUnLocked(TSubclassOf<AActor> itemClass, int32 tierIndex, AFSDPlayerState* Player, UPlayerCharacterID* characterID) {
+bool UUpgradableGearComponent::IsTierUnLocked(UObject* WorldContextObject, TSubclassOf<AActor> itemClass, int32 tierIndex, UPlayerCharacterID* characterID) {
     return false;
 }
 
-bool UUpgradableGearComponent::IsOverclockingEnabled(UObject* WorldContextObject, AFSDPlayerState* Player, UPlayerCharacterID* characterID, TSubclassOf<AActor> itemClass) {
+bool UUpgradableGearComponent::IsOverclockingEnabled(UObject* WorldContextObject, UPlayerCharacterID* characterID, TSubclassOf<AActor> itemClass) {
     return false;
 }
 
@@ -102,7 +102,7 @@ EItemUpgradeStatus UUpgradableGearComponent::GetItemUpgradeStatus(UObject* World
     return EItemUpgradeStatus::Locked;
 }
 
-TArray<UItemUpgrade*> UUpgradableGearComponent::GetItemUpgrades(TSubclassOf<AActor> itemClass, TSubclassOf<UItemUpgrade> upgradeClass, AFSDPlayerState* Player, uint8 upgradeIndex) {
+TArray<UItemUpgrade*> UUpgradableGearComponent::GetItemUpgradesFromSave(TSubclassOf<AActor> itemClass, TSubclassOf<UItemUpgrade> upgradeClass, AFSDPlayerState* Player, uint8 upgradeIndex) {
     return TArray<UItemUpgrade*>();
 }
 
@@ -118,6 +118,10 @@ bool UUpgradableGearComponent::GetItemMasteryForLevel(UItemID* ItemID, int32 Lev
     return false;
 }
 
+bool UUpgradableGearComponent::GetIsItemUpgradeEquipped(AFSDPlayerState* Player, TSubclassOf<AActor> itemClass, UItemUpgrade* ItemUpgrade, UPlayerCharacterID* characterID) {
+    return false;
+}
+
 UTexture2D* UUpgradableGearComponent::GetIconLine() const {
     return NULL;
 }
@@ -130,11 +134,11 @@ UTexture2D* UUpgradableGearComponent::GetIconBG() {
     return NULL;
 }
 
-FText UUpgradableGearComponent::GetGearStatValue(FGearStatEntry& Entry) {
+FText UUpgradableGearComponent::GetGearStatValue(FGearStatEntry& entry) {
     return FText::GetEmpty();
 }
 
-TArray<FGearStatEntry> UUpgradableGearComponent::GetGearStats(AFSDPlayerState* PlayerState, TSubclassOf<AActor> ActorClass) {
+TArray<FGearStatEntry> UUpgradableGearComponent::GetGearStats(AFSDPlayerState* PlayerState, TSubclassOf<AActor> actorClass) {
     return TArray<FGearStatEntry>();
 }
 
@@ -204,13 +208,4 @@ bool UUpgradableGearComponent::CanAffordItem(UObject* WorldContextObject, UItemI
     return false;
 }
 
-UUpgradableGearComponent::UUpgradableGearComponent() {
-    this->ItemData = NULL;
-    this->OverclockBank = NULL;
-    this->IconLine = NULL;
-    this->IconBG = NULL;
-    this->IconDetailed = NULL;
-    this->CreditCost = 0;
-    this->RequiredCharacterLevel = 0;
-}
 

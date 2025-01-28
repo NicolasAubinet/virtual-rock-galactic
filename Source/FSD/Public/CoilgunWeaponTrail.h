@@ -1,14 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
-#include "Engine/EngineTypes.h"
 #include "GameFramework/Actor.h"
+#include "Engine/EngineTypes.h"
+#include "Templates/SubclassOf.h"
 #include "CoilgunWeaponTrail.generated.h"
 
-class USceneComponent;
-class UPrimitiveComponent;
-class UNiagaraComponent;
 class UCapsuleComponent;
+class UNiagaraComponent;
+class UPrimitiveComponent;
+class USceneComponent;
 class UStatusEffect;
 
 UCLASS(Blueprintable)
@@ -43,10 +43,14 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSubclassOf<UStatusEffect>> EffectsToApply;
     
-public:
-    ACoilgunWeaponTrail();
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TSet<AActor*> HitActors;
     
+public:
+    ACoilgunWeaponTrail(const FObjectInitializer& ObjectInitializer);
+
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
     UFUNCTION(BlueprintCallable)
     void OnRep_TrailHalfLength();
     

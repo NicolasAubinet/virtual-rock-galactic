@@ -84,15 +84,16 @@ protected:
     bool JumpBootsActive;
     
 public:
-    UFallingStateComponent();
+    UFallingStateComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ShowJumpBootsActivation();
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
-    void Server_TakeFallDamage(float Amount);
+    void Server_TakeFallDamage(float amount);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetJumpPressed(bool Pressed);

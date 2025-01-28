@@ -1,9 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Fonts/SlateFontInfo.h"
 #include "Styling/SlateColor.h"
-#include "TextStyleOverride.h"
+#include "Fonts/SlateFontInfo.h"
 #include "Components/RichTextBlock.h"
+#include "TextStyleOverride.h"
 #include "RichTextStylable.generated.h"
 
 UCLASS(Blueprintable)
@@ -22,5 +22,6 @@ protected:
     
 public:
     URichTextStylable();
+
 };
 

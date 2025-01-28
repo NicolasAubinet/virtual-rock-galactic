@@ -1,23 +1,23 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
+#include "GameFramework/Pawn.h"
 #include "GameplayTagContainer.h"
+#include "GameplayTagAssetInterface.h"
 #include "GameplayTagContainer.h"
 #include "BoolDelegateDelegate.h"
 #include "EPawnAttitude.h"
-#include "GameFramework/Pawn.h"
-#include "Targetable.h"
 #include "ProjectileSpawner.h"
-#include "GameplayTagAssetInterface.h"
+#include "Targetable.h"
 #include "FSDPawn.generated.h"
 
 class AActor;
-class USkeletalMeshComponent;
 class AFSDAIController;
 class UEnemyDescriptor;
 class UEnemyTemperatureComponent;
 class UHealthComponentBase;
 class UPawnStatsComponent;
+class USkeletalMeshComponent;
 class UStatusEffectsComponent;
 
 UCLASS(Abstract, Blueprintable)
@@ -32,7 +32,7 @@ protected:
     UStatusEffectsComponent* StatusEffects;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
-    UEnemyTemperatureComponent* Temperature;
+    UEnemyTemperatureComponent* temperature;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagContainer GameplayTags;
@@ -46,6 +46,9 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool CanFlee;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    bool IsInRagdoll;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool FleeInsteadOfBackingOff;
     
@@ -56,11 +59,15 @@ protected:
     UPawnStatsComponent* PawnStatsInstance;
     
 public:
-    AFSDPawn();
+    AFSDPawn(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void UnFreeze();
+    
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, NetMulticast, Unreliable)
+    void TriggerFadeRagdoll();
     
     UFUNCTION(BlueprintCallable)
     void StopFleeing();
@@ -77,6 +84,9 @@ protected:
     
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     void OnUnFrozen();
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void OnTriggerFadeRagdoll();
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnStoppedFleeing();
@@ -133,7 +143,7 @@ public:
     UFUNCTION(BlueprintCallable)
     void BackOffFromLocation(const FVector& fromLocation);
     
-    
+
     // Fix for true pure virtual functions not being implemented
     UFUNCTION(BlueprintCallable)
     bool HasMatchingGameplayTag(FGameplayTag TagToCheck) const override PURE_VIRTUAL(HasMatchingGameplayTag, return false;);

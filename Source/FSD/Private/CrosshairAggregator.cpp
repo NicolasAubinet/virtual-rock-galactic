@@ -1,9 +1,13 @@
 #include "CrosshairAggregator.h"
 
-class UObject;
-class UUserWidget;
-class UCustomAmmoCountWidget;
-class APlayerController;
+UCrosshairAggregator::UCrosshairAggregator(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->CrosshairWidget = NULL;
+    this->CrossHairType = NULL;
+    this->CustomAmmoCounterWidget = NULL;
+    this->AdditionalAmmoCounterWidget = NULL;
+    this->CustomAmmoCounterType = NULL;
+    this->AdditionalAmmoCounterType = NULL;
+}
 
 void UCrosshairAggregator::SetCrosshair(UUserWidget* Widget) {
 }
@@ -12,14 +16,12 @@ UUserWidget* UCrosshairAggregator::GetOrCreateCrosshair() {
     return NULL;
 }
 
-UCustomAmmoCountWidget* UCrosshairAggregator::GetCustomAmmoCounterWidget(UObject* WorldContext, APlayerController* InOwner) {
+UCustomAmmoCountWidget* UCrosshairAggregator::GetCustomAmmoCounterWidget(UObject* WorldContext, const APlayerController* InOwner) {
     return NULL;
 }
 
-UCrosshairAggregator::UCrosshairAggregator() {
-    this->CrosshairWidget = NULL;
-    this->CrossHairType = NULL;
-    this->CustomAmmoCounterWidget = NULL;
-    this->CustomAmmoCounterType = NULL;
+UCustomAmmoCountWidget* UCrosshairAggregator::GetAdditionalAmmoCounterWidget(UObject* WorldContext, const APlayerController* InOwner) {
+    return NULL;
 }
+
 

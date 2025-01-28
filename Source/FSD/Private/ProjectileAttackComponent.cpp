@@ -1,11 +1,10 @@
 #include "ProjectileAttackComponent.h"
 
-class UAnimMontage;
+UProjectileAttackComponent::UProjectileAttackComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->ManualyComplete = false;
+}
 
 void UProjectileAttackComponent::AddAttackMontage(UAnimMontage* attackMontage) {
 }
 
-UProjectileAttackComponent::UProjectileAttackComponent() {
-    this->ManualyComplete = false;
-}
 

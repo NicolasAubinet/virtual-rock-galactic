@@ -1,17 +1,17 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
+#include "Engine/DataAsset.h"
 #include "Curves/CurveFloat.h"
 #include "DecalData.h"
-#include "Engine/DataAsset.h"
+#include "Templates/SubclassOf.h"
 #include "DamageSettings.generated.h"
 
-class UNiagaraSystem;
 class UDamageComponent;
-class UDamageTag;
 class UDamageImpulse;
-class UStatusEffect;
+class UDamageTag;
+class UNiagaraSystem;
 class USoundCue;
+class UStatusEffect;
 
 UCLASS(Blueprintable)
 class UDamageSettings : public UDataAsset {
@@ -69,6 +69,12 @@ public:
     FRuntimeFloatCurve ArmorToArmorDamageBreakingCurve;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float RadialHealthArmorDamageFalloff;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 HealthArmorBonesAffectedByRadialDamage;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDamageTag* DetonateFrozen;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -102,5 +108,6 @@ public:
     float RagdollGlobalForceMultiplier;
     
     UDamageSettings();
+
 };
 

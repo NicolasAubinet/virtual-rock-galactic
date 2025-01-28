@@ -3,8 +3,8 @@
 #include "ResourceBasedObjective.h"
 #include "ResourceObjective.generated.h"
 
-class UResourceData;
 class UCappedResource;
+class UResourceData;
 
 UCLASS(Abstract, Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class FSD_API UResourceObjective : public UResourceBasedObjective {
@@ -33,12 +33,13 @@ protected:
     FText CreditsRewardText;
     
 public:
-    UResourceObjective();
+    UResourceObjective(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
-    void OnResourceChanged(UCappedResource* CappedResource, float Amount);
+    void OnResourceChanged(UCappedResource* CappedResource, float amount);
     
     UFUNCTION(BlueprintCallable)
     void OnRep_ResourcesCollected(float prevAmount);

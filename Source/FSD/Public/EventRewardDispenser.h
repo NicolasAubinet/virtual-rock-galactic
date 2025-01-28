@@ -1,11 +1,11 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "GameFramework/OnlineReplStructs.h"
 #include "GameFramework/Actor.h"
+#include "GameFramework/OnlineReplStructs.h"
 #include "EventRewardDispenser.generated.h"
 
-class AFSDPlayerState;
 class AEventRewardFrame;
+class AFSDPlayerState;
 class APlayerCharacter;
 class USchematic;
 
@@ -30,9 +30,10 @@ protected:
     USchematic* SelectedReward;
     
 public:
-    AEventRewardDispenser();
+    AEventRewardDispenser(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void SetSelectedReward(USchematic* InReward);
     

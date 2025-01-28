@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "RequiredMissionItem.h"
 #include "Engine/DataAsset.h"
+#include "RequiredMissionItem.h"
 #include "SaveGameIDInterface.h"
 #include "PlanetZone.generated.h"
 
@@ -28,6 +28,7 @@ protected:
     
 public:
     UPlanetZone();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsUnlocked(UFSDSaveGame* SaveGame) const;
     
@@ -37,7 +38,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<UBiome*> GetBiomes() const;
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

@@ -1,21 +1,21 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
+#include "Components/ActorComponent.h"
+#include "CustomCounter.h"
+#include "CustomCounterDelegateDelegate.h"
 #include "EMoveType.h"
 #include "EPingType.h"
-#include "CustomCounterDelegateDelegate.h"
 #include "WidgetFade.h"
-#include "WidgetTextCounter.h"
-#include "CustomCounter.h"
 #include "WidgetMover.h"
 #include "WidgetPing.h"
-#include "Components/ActorComponent.h"
+#include "WidgetTextCounter.h"
 #include "FSDWidgetEffectsComponent.generated.h"
 
 class UObject;
-class UWidget;
-class UUserWidget;
 class UTextBlock;
+class UUserWidget;
+class UWidget;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UFSDWidgetEffectsComponent : public UActorComponent {
@@ -38,7 +38,8 @@ protected:
     TArray<FWidgetMover> WidgetMovers;
     
 public:
-    UFSDWidgetEffectsComponent();
+    UFSDWidgetEffectsComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
     static void StartTextCounter(UObject* WorldContext, UPARAM(Ref) UTextBlock*& Widget, float Start, float End, float Duration, int32 MaxDigits, float StartDelay);
     
@@ -46,7 +47,7 @@ public:
     static void StartCounter(UObject* WorldContext, UObject* Owner, float Start, float End, float Duration, const FCustomCounterDelegate& OnCount, float StartDelay);
     
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
-    static void PingWidget(UObject* WorldContext, UWidget* Widget, float Amount, float Duration, EPingType PingType, float StartDelay);
+    static void PingWidget(UObject* WorldContext, UWidget* Widget, float amount, float Duration, EPingType PingType, float StartDelay);
     
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
     static void MoveWidget(UObject* WorldContext, UUserWidget* Widget, FVector2D Start, FVector2D End, float Duration, EMoveType MoveType, float StartDelay);

@@ -1,12 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "Curves/CurveFloat.h"
 #include "AmmoDrivenWeapon.h"
+#include "Templates/SubclassOf.h"
 #include "AutoCannon.generated.h"
 
-class UStatusEffect;
 class UAnimMontage;
+class UStatusEffect;
 
 UCLASS(Abstract, Blueprintable)
 class AAutoCannon : public AAmmoDrivenWeapon {
@@ -53,7 +53,8 @@ protected:
     float CurrentFireTime;
     
 public:
-    AAutoCannon();
+    AAutoCannon(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetStatusActive(bool IsActive);

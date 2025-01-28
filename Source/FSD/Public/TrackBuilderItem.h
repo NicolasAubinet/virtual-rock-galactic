@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
-#include "EPlaceableObstructionType.h"
 #include "AnimatedItem.h"
+#include "EPlaceableObstructionType.h"
 #include "PlaceableInterface.h"
+#include "Templates/SubclassOf.h"
 #include "TrackBuilderItem.generated.h"
 
-class UCrosshairAggregator;
 class ATrackBuilderSegment;
+class UCrosshairAggregator;
 class UTrackBuilderConnectPoint;
 class UTrackBuilderUsable;
 
@@ -40,9 +40,10 @@ protected:
     bool bIsPlacingSegment;
     
 public:
-    ATrackBuilderItem();
+    ATrackBuilderItem(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void UpdatePlacement(const FTransform& InTransform, UTrackBuilderConnectPoint* InConnectPoint, bool bPlacementValid, bool InUpdateServer);
     
@@ -78,7 +79,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FVector AdjustInitialLocation(const FVector& Location) const;
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

@@ -1,14 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "ECarveFilterType.h"
-#include "CarveOptionsCellSize.h"
 #include "Components/PrimitiveComponent.h"
+#include "CarveOptionsCellSize.h"
+#include "ECarveFilterType.h"
 #include "LevelGenerationCarverComponent.generated.h"
 
 class USTLMeshCarver;
-class UTerrainMaterialBase;
 class UStaticMesh;
 class UStaticMeshCarver;
+class UTerrainMaterialBase;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class ULevelGenerationCarverComponent : public UPrimitiveComponent {
@@ -41,11 +41,21 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool CarvingDisabled;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool DestroyOwnerOnCarve;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool DestroySelfAndChilded;
+    
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool SelfActivate;
     
 public:
-    ULevelGenerationCarverComponent();
+    ULevelGenerationCarverComponent(const FObjectInitializer& ObjectInitializer);
+
+    UFUNCTION(BlueprintCallable)
+    void OnCarvedCallback();
+    
 };
 

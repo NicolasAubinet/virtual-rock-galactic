@@ -1,12 +1,33 @@
 #include "PlagueMeteor.h"
-#include "Net/UnrealNetwork.h"
 #include "Components/SceneComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "DamageComponent.h"
+#include "Net/UnrealNetwork.h"
 #include "TerrainPlacementComponent.h"
 
-class AProceduralSetup;
-class ARockCrackerPod;
+APlagueMeteor::APlagueMeteor(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
+    this->Root = (USceneComponent*)RootComponent;
+    this->MeteorMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeteorMesh"));
+    this->terrainPlacement = CreateDefaultSubobject<UTerrainPlacementComponent>(TEXT("terrainPlacement"));
+    this->ImpactDamage = CreateDefaultSubobject<UDamageComponent>(TEXT("ImpactDamgage"));
+    this->ManuallyTargeted = false;
+    this->CrackStage = 0;
+    this->DropzoneIndicatorClass = NULL;
+    this->DropZoneIndicator = NULL;
+    this->Positioning = NULL;
+    this->IndicatorTime = 5.00f;
+    this->VisualsTime = 10.00f;
+    this->NearImpactTime = 0.00f;
+    this->LastAudioTime = 0.00f;
+    this->LocationVariance = 1000.00f;
+    this->RockCrackerPod = NULL;
+    this->RockCrackerIndicator = NULL;
+    this->RockCrackerPodPositioning = NULL;
+    this->SpawnedTime = 0.00f;
+    this->MeteorMesh->SetupAttachment(RootComponent);
+    this->terrainPlacement->SetupAttachment(RootComponent);
+}
 
 void APlagueMeteor::SignalEventStarted() {
 }
@@ -55,7 +76,7 @@ int32 APlagueMeteor::GetNumActivePods() const {
 
 
 
-void APlagueMeteor::DropRockCrackerPods(int32 Amount, float MinRadius, float maRadius, AProceduralSetup* setup) {
+void APlagueMeteor::DropRockCrackerPods(int32 amount, float MinRadius, float maRadius, AProceduralSetup* Setup) {
 }
 
 
@@ -68,25 +89,7 @@ void APlagueMeteor::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLif
     DOREPLIFETIME(APlagueMeteor, CrackStage);
     DOREPLIFETIME(APlagueMeteor, DropInfo);
     DOREPLIFETIME(APlagueMeteor, SpawnedPods);
+    DOREPLIFETIME(APlagueMeteor, SpawnedTime);
 }
 
-APlagueMeteor::APlagueMeteor() {
-    this->Root = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
-    this->MeteorMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeteorMesh"));
-    this->terrainPlacement = CreateDefaultSubobject<UTerrainPlacementComponent>(TEXT("terrainPlacement"));
-    this->ImpactDamage = CreateDefaultSubobject<UDamageComponent>(TEXT("ImpactDamgage"));
-    this->ManuallyTargeted = false;
-    this->CrackStage = 0;
-    this->DropzoneIndicatorClass = NULL;
-    this->DropZoneIndicator = NULL;
-    this->Positioning = NULL;
-    this->IndicatorTime = 5.00f;
-    this->VisualsTime = 10.00f;
-    this->NearImpactTime = 0.00f;
-    this->LastAudioTime = 0.00f;
-    this->LocationVariance = 1000.00f;
-    this->RockCrackerPod = NULL;
-    this->RockCrackerIndicator = NULL;
-    this->RockCrackerPodPositioning = NULL;
-}
 

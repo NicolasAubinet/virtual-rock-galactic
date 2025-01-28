@@ -1,10 +1,22 @@
 #include "DrinkableDataAsset.h"
 
-class UObject;
-class UDrinkableDataAsset;
-class APlayerController;
-class APlayerCharacter;
-class UTexture2D;
+UDrinkableDataAsset::UDrinkableDataAsset() {
+    this->DrinkablePrice = 50;
+    this->IsSpecialBeer = false;
+    this->RequiredPlayerRank = 0;
+    this->ParticipatesInFreeBeerEvent = false;
+    this->AlcoholStrength = EDrinkableAlcoholStrength::Regular;
+    this->SpecialEdition = NULL;
+    this->RequiredDLC = NULL;
+    this->bPlayFireworks = false;
+    this->StatConsumed = NULL;
+    this->StatRoundOrdered = NULL;
+    this->OrderShout = NULL;
+    this->OrderCheeringShout = NULL;
+    this->DrinkSaluteShout = NULL;
+    this->buff = NULL;
+    this->OneEffectComponentPerCharacter = false;
+}
 
 bool UDrinkableDataAsset::TryUnlockSpecialDrinks(UObject* WorldContext) {
     return false;
@@ -33,15 +45,15 @@ bool UDrinkableDataAsset::IsDrinkFree(UObject* WorldContext) {
     return false;
 }
 
-bool UDrinkableDataAsset::HasSupporterEdition() const {
+bool UDrinkableDataAsset::HasSpecialEdition() const {
     return false;
 }
 
-UTexture2D* UDrinkableDataAsset::GetDrinkableIcon() const {
+UDrinkableDataAsset* UDrinkableDataAsset::GetSpecialEdition(UObject* WorldContext) {
     return NULL;
 }
 
-UDrinkableDataAsset* UDrinkableDataAsset::GetDrinkableEdition(UObject* WorldContext, APlayerController* Player) {
+UTexture2D* UDrinkableDataAsset::GetDrinkableIcon() const {
     return NULL;
 }
 
@@ -49,18 +61,4 @@ bool UDrinkableDataAsset::AreSpecialDrinksUnlocked(UObject* WorldContext) {
     return false;
 }
 
-UDrinkableDataAsset::UDrinkableDataAsset() {
-    this->DrinkablePrice = 50;
-    this->RequiredPlayerRank = 0;
-    this->ParticipatesInFreeBeerEvent = false;
-    this->AlcoholStrength = EDrinkableAlcoholStrength::Regular;
-    this->SupporterEdition = NULL;
-    this->bPlayFireworks = false;
-    this->StatConsumed = NULL;
-    this->StatRoundOrdered = NULL;
-    this->OrderShout = NULL;
-    this->OrderCheeringShout = NULL;
-    this->DrinkSaluteShout = NULL;
-    this->buff = NULL;
-}
 

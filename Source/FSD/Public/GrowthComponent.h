@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Curves/CurveFloat.h"
 #include "Components/ActorComponent.h"
+#include "Curves/CurveFloat.h"
 #include "GrowthComponent.generated.h"
 
 class USceneComponent;
@@ -18,7 +18,8 @@ private:
     FRuntimeFloatCurve CurrentGrowthCurve;
     
 public:
-    UGrowthComponent();
+    UGrowthComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void StopGrow();
     

@@ -5,10 +5,10 @@
 #include "ItemRackComponent.generated.h"
 
 class AActor;
-class USceneComponent;
-class UUsableComponent;
 class APlayerCharacter;
 class URackableItemComponent;
+class USceneComponent;
+class UUsableComponent;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class FSD_API UItemRackComponent : public USingleUsableComponent {
@@ -37,9 +37,10 @@ protected:
     URackableItemComponent* Item;
     
 public:
-    UItemRackComponent();
+    UItemRackComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void RackItem(AActor* NewItem, APlayerCharacter* Character);
     

@@ -1,14 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Curves/CurveFloat.h"
-#include "DisplayContent.h"
-#include "DisplayCaseDelegateDelegate.h"
 #include "GameFramework/Actor.h"
+#include "Curves/CurveFloat.h"
+#include "DisplayCaseDelegateDelegate.h"
+#include "DisplayContent.h"
 #include "DisplayCase.generated.h"
 
+class UDialogDataAsset;
 class USceneComponent;
 class USkeletalMeshComponent;
-class UDialogDataAsset;
 
 UCLASS(Blueprintable)
 class ADisplayCase : public AActor {
@@ -61,8 +61,12 @@ protected:
     UDialogDataAsset* BeerMugShout;
     
 public:
-    ADisplayCase();
+    ADisplayCase(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
+    UFUNCTION(BlueprintCallable)
+    void RefreshContent();
     
 protected:
     UFUNCTION(BlueprintCallable)
@@ -70,6 +74,9 @@ protected:
     
     UFUNCTION(BlueprintCallable)
     void OnRep_ContentIndex();
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsSpecialContent() const;
     
 public:
     UFUNCTION(BlueprintCallable)

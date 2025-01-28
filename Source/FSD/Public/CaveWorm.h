@@ -5,10 +5,10 @@
 #include "DeepPathfinderCharacter.h"
 #include "CaveWorm.generated.h"
 
+class AResourceChunk;
+class UHealthComponentBase;
 class UObject;
 class UResourceData;
-class UHealthComponentBase;
-class AResourceChunk;
 class USimpleHealthComponent;
 
 UCLASS(Blueprintable, MinimalAPI)
@@ -26,7 +26,8 @@ protected:
     float SearchChunksInterval;
     
 public:
-    ACaveWorm();
+    ACaveWorm(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
     static AResourceChunk* SpawnResource(UObject* WorldContext, UResourceData* Data, float Size, FTransform Transform, FVector Impulse, FVector DropOffset);
     

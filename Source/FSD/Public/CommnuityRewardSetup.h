@@ -3,9 +3,9 @@
 #include "Engine/DataAsset.h"
 #include "CommnuityRewardSetup.generated.h"
 
+class UCommnuityRewardBundle;
 class UObject;
 class UResourceData;
-class UCommnuityRewardBundle;
 
 UCLASS(Blueprintable)
 class UCommnuityRewardSetup : public UDataAsset {
@@ -17,6 +17,7 @@ protected:
     
 public:
     UCommnuityRewardSetup();
+
     UFUNCTION(BlueprintCallable)
     TMap<UResourceData*, int32> GetResourcesTierOnlyReward(int32 Tier);
     

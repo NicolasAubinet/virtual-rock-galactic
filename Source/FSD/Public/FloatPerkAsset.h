@@ -1,12 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "FloatPerkRank.h"
 #include "FloatPerkEffect.h"
+#include "FloatPerkRank.h"
 #include "PerkAsset.h"
 #include "FloatPerkAsset.generated.h"
 
-class UObject;
 class UFloatPerkAsset;
+class UObject;
 
 UCLASS(Blueprintable)
 class UFloatPerkAsset : public UPerkAsset {
@@ -21,6 +21,7 @@ protected:
     
 public:
     UFloatPerkAsset();
+
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContext"))
     float GetPerkValue(UObject* WorldContext) const;
     

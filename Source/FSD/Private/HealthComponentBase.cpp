@@ -1,11 +1,10 @@
 #include "HealthComponentBase.h"
 
-class AActor;
-class UPrimitiveComponent;
-class UDamageClass;
-class UHealth;
-class IHealth;
-class UParticleSystem;
+UHealthComponentBase::UHealthComponentBase(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->ShowLaserPointMarkerWhenDead = false;
+    this->canTakeDamage = true;
+    this->PassthroughTemperatureDamage = false;
+}
 
 float UHealthComponentBase::TakeRadialDamage(float damageAmount, FVector BlastCenter, float BlastRadius, float MaxDamageRadius, float MinDamagePct, FDamageData& DamageData) {
     return 0.0f;
@@ -31,7 +30,7 @@ bool UHealthComponentBase::IsAlive() const {
     return false;
 }
 
-float UHealthComponentBase::Heal(float Amount) {
+float UHealthComponentBase::Heal(float amount) {
     return 0.0f;
 }
 
@@ -67,9 +66,4 @@ bool UHealthComponentBase::CanTakeDamageFrom(UDamageClass* DamageClass) const {
     return false;
 }
 
-UHealthComponentBase::UHealthComponentBase() {
-    this->ShowLaserPointMarkerWhenDead = false;
-    this->canTakeDamage = true;
-    this->PassthroughTemperatureDamage = false;
-}
 

@@ -8,7 +8,7 @@ class UOverheatingAggregator : public UItemAggregator {
     GENERATED_BODY()
 public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOverheatingProgressChanged, float, Progress);
-    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOverheatedChanged, bool, Overheated);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOverheatedChanged, bool, overheated);
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOverheatingProgressChanged OnOverheatingProgressChanged;
@@ -27,12 +27,13 @@ protected:
     bool bIsOverheated;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_Temperature, meta=(AllowPrivateAccess=true))
-    float Temperature;
+    float temperature;
     
 public:
-    UOverheatingAggregator();
+    UOverheatingAggregator(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable, Server, Unreliable)
     void Server_SetTemperature(float NewTemperature);

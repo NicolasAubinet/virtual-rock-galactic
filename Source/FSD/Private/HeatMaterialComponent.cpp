@@ -1,14 +1,13 @@
 #include "HeatMaterialComponent.h"
 
-class UMaterialInstanceDynamic;
+UHeatMaterialComponent::UHeatMaterialComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->MaxEffect = 1.00f;
+}
 
-void UHeatMaterialComponent::OnTemperatureChanged(float Temperature, bool Overheated) {
+void UHeatMaterialComponent::OnTemperatureChanged(float temperature, bool overheated) {
 }
 
 void UHeatMaterialComponent::AddHeatMaterial(UMaterialInstanceDynamic* MaterialInstance) {
 }
 
-UHeatMaterialComponent::UHeatMaterialComponent() {
-    this->MaxEffect = 1.00f;
-}
 

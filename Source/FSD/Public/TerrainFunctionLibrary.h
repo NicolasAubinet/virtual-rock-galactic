@@ -2,9 +2,10 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
-#include "ESpecialDebrisType.h"
-#include "DeepPathFinderSize.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "DeepPathFinderSize.h"
+#include "DeepPathFinderType.h"
+#include "ESpecialDebrisType.h"
 #include "TerrainFunctionLibrary.generated.h"
 
 class UObject;
@@ -15,11 +16,21 @@ class UTerrainFunctionLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
     UTerrainFunctionLibrary();
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static bool GetDebrisTransformsInSphere(UObject* WorldContextObject, TArray<FMatrix>& outPositions, const FVector& Location, const float& Radius, const ESpecialDebrisType& debrisType, float minDistToOther, bool calcPriority);
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, meta=(WorldContext="WorldContextObject"))
-    static TArray<FVector> GetAllNavPointsInSphere(UObject* WorldContextObject, FVector Origin, float Radius, DeepPathFinderSize pfSize);
+    static TArray<FVector> GetAllNavPointsInSphere(UObject* WorldContextObject, FVector Origin, float Radius, DeepPathFinderSize pfSize, const FVector searchNormal, float maxDegreesToSearchNormal);
+    
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, meta=(WorldContext="WorldContextObject"))
+    static TArray<FVector> FindPath(UObject* WorldContextObject, FVector Origin, FVector Destination, DeepPathFinderSize pfSize, DeepPathFinderType pfType);
+    
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, meta=(WorldContext="WorldContextObject"))
+    static void FindNearestSurfacePoint(UObject* WorldContextObject, FVector inPoint, FVector& outPoint, FVector& Normal, bool& IsBLocked);
+    
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, meta=(WorldContext="WorldContextObject"))
+    static bool DoesPathExist(UObject* WorldContextObject, FVector Origin, FVector Destination, DeepPathFinderSize pfSize, DeepPathFinderType pfType);
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static void CreateExplosionCrater2(UObject* WorldContextObject, FVector Location, float CarveDiameter, float carveNoiseSize, float carveBurnThickness, FVector Normal, float NormalOffset, float NormalSqueeze, bool allowCustomBurntMaterial, bool DissolvePlatforms, UTerrainMaterial* overrideBurnedMaterial);

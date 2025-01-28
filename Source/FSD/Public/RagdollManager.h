@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "RagdollItem.h"
 #include "Components/ActorComponent.h"
+#include "RagdollItem.h"
 #include "RagdollManager.generated.h"
 
 class AActor;
@@ -16,7 +16,8 @@ protected:
     TArray<FRagdollItem> Items;
     
 public:
-    URagdollManager();
+    URagdollManager(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void StartRagdoll(AActor* Actor, const TArray<UMaterialInstanceDynamic*>& Materials, float desiredDuration);
     

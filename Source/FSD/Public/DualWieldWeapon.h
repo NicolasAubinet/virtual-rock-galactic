@@ -3,10 +3,10 @@
 #include "AmmoDrivenWeapon.h"
 #include "DualWieldWeapon.generated.h"
 
-class UFXSystemAsset;
-class USkeletalMeshComponent;
-class UFirstPersonSkeletalMeshComponent;
 class UAnimMontage;
+class UFXSystemAsset;
+class UFirstPersonSkeletalMeshComponent;
+class USkeletalMeshComponent;
 
 UCLASS(Abstract, Blueprintable)
 class ADualWieldWeapon : public AAmmoDrivenWeapon {
@@ -32,6 +32,7 @@ protected:
     FName MuzzleLeft;
     
 public:
-    ADualWieldWeapon();
+    ADualWieldWeapon(const FObjectInitializer& ObjectInitializer);
+
 };
 

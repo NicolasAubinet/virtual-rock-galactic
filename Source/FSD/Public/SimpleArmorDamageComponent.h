@@ -1,10 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EArmorDamageType.h"
-#include "SimpleArmorRadialDamagedDelegateDelegate.h"
 #include "ArmorDamageInfo.h"
-#include "DestructableBodypartItem.h"
 #include "BaseArmorDamageComponent.h"
+#include "DestructableBodypartItem.h"
+#include "SimpleArmorRadialDamagedDelegateDelegate.h"
 #include "SimpleArmorDamageComponent.generated.h"
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -25,13 +24,11 @@ protected:
     FArmorDamageInfo ArmorDamageInfo;
     
 public:
-    USimpleArmorDamageComponent();
+    USimpleArmorDamageComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
-    UFUNCTION(BlueprintCallable, Reliable, Server)
-    void Server_SetArmorIndexDestroyed(int32 Index, EArmorDamageType DamageType);
-    
     UFUNCTION(BlueprintCallable)
     void OnRep_ArmorDamageInfo(FArmorDamageInfo OldArmorDamageInfo);
     

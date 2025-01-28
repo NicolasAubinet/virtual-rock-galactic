@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EImpulseDirectionSource.h"
 #include "Engine/DataAsset.h"
+#include "EImpulseDirectionSource.h"
 #include "DamageImpulse.generated.h"
 
 UCLASS(Blueprintable)
@@ -21,5 +21,6 @@ public:
     bool ApplyImpulseToWholeBody;
     
     UDamageImpulse();
+
 };
 

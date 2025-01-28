@@ -1,14 +1,7 @@
 #include "DamageFunctionLibrary.h"
 
-class UObject;
-class AActor;
-class USkeletalMeshComponent;
-class UDamageClass;
-class UDamageTag;
-class UDamageImpulse;
-class UFSDPhysicalMaterial;
-class ULimbDismembermentList;
-class UPawnStatsComponent;
+UDamageFunctionLibrary::UDamageFunctionLibrary() {
+}
 
 void UDamageFunctionLibrary::SetPhysicalMaterialOnHit(UFSDPhysicalMaterial* PhysMat, FHitResult& Hit) {
 }
@@ -49,6 +42,4 @@ FName UDamageFunctionLibrary::FindClosestBone(USkeletalMeshComponent*& Mesh, con
     return NAME_None;
 }
 
-UDamageFunctionLibrary::UDamageFunctionLibrary() {
-}
 

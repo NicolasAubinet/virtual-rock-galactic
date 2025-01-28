@@ -1,49 +1,63 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
+#include "GameFramework/Actor.h"
 #include "Engine/EngineTypes.h"
 #include "AudioWithCooldown.h"
-#include "ItemLoadoutAnimations.h"
-#include "GameFramework/Actor.h"
-#include "PlaySoundInterface.h"
-#include "LoadoutItem.h"
+#include "DelegateDelegate.h"
 #include "ItemIDInterface.h"
+#include "ItemLoadoutAnimations.h"
+#include "LoadoutItem.h"
+#include "PlaySoundInterface.h"
 #include "SaveGameIDInterface.h"
 #include "Skinnable.h"
+#include "Templates/SubclassOf.h"
 #include "Item.generated.h"
 
-class USceneComponent;
-class UCameraShakeBase;
-class UAudioComponent;
+class ACharacter;
 class AItem;
-class UStaticMeshComponent;
+class APlayerCharacter;
+class UAudioComponent;
+class UCameraShakeBase;
+class UCurveFloat;
 class UDialogDataAsset;
 class UFirstPersonStaticMeshComponent;
-class UItemsBarIcon;
 class UItemCharacterAnimationSet;
 class UItemID;
-class ACharacter;
-class APlayerCharacter;
+class UItemsBarIcon;
+class USceneComponent;
 class USkinEffect;
-class UUpgradableItemComponent;
-class USoundBase;
-class UTexture2D;
-class UCurveFloat;
-class USoundConcurrency;
 class USoundAttenuation;
+class USoundBase;
+class USoundConcurrency;
+class UStaticMeshComponent;
+class UTexture2D;
+class UUpgradableItemComponent;
 
 UCLASS(Abstract, Blueprintable)
 class FSD_API AItem : public AActor, public ISaveGameIDInterface, public ISkinnable, public IItemIDInterface, public ILoadoutItem, public IPlaySoundInterface {
     GENERATED_BODY()
+public:
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FItemAddedToInventory);
+    
+protected:
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FItemAddedToInventory OnItemAddedToInventory;
+    
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FVector FPCameraOffset;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FAudioWithCooldown AudioFriendlyFire;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FDelegate OnEqipped;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FDelegate OnUnEquipped;
     
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -77,6 +91,9 @@ protected:
     float ManualHeatPerUse;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float HeatOnStartUse;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float CooldownRate;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -101,7 +118,7 @@ protected:
     UAudioComponent* TemperatureAudioComponent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
-    bool Overheated;
+    bool overheated;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDialogDataAsset* ShoutOverheated;
@@ -122,6 +139,9 @@ protected:
     bool CanSprintWithItem;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool CanBeUsed;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UItemsBarIcon> CustomIconWidget;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -131,14 +151,18 @@ protected:
     bool IsEquipped;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_IsUsing, meta=(AllowPrivateAccess=true))
-    bool IsUsing;
+    bool isUsing;
     
 public:
-    AItem();
+    AItem(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void UpdateSkin();
+    
+    UFUNCTION(BlueprintCallable)
+    void StopUsing(bool Cancelled);
     
     UFUNCTION(BlueprintCallable)
     UAudioComponent* SpawnSoundAttached(USoundBase* Sound, USceneComponent* AttachToComponent, float PriorityOverride, FName AttachPointName, FVector Location, FRotator Rotation, TEnumAsByte<EAttachLocation::Type> LocationType, bool bStopWhenAttachedToDestroyed, float VolumeMultiplier, float PitchMultiplier, float StartTime, USoundAttenuation* AttenuationSettings, USoundConcurrency* ConcurrencySettings, bool bAutoDestroy, bool SendVibration);
@@ -193,7 +217,7 @@ protected:
     
 public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-    void OnTemperatureChanged(float Temperature, bool NewOverheated);
+    void OnTemperatureChanged(float temperature, bool NewOverheated);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnSkinChanged(USkinEffect* Skin);
@@ -251,7 +275,7 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void AddedToInventory(APlayerCharacter* ItemOwner);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 public:
     UFUNCTION(BlueprintCallable)

@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "ConvexMeshWithCachedTree.h"
 #include "CSGConeProperties.h"
+#include "ConvexMeshWithCachedTree.h"
 #include "CSGCone.generated.h"
 
 UCLASS(Blueprintable)
@@ -12,5 +12,6 @@ public:
     FCSGConeProperties Properties;
     
     UCSGCone();
+
 };
 

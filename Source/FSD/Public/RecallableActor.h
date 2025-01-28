@@ -1,17 +1,17 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
+#include "DeepPathfinderCharacter.h"
 #include "ERecallableActorState.h"
 #include "ReturnedSignatureDelegate.h"
-#include "DeepPathfinderCharacter.h"
+#include "Templates/SubclassOf.h"
 #include "Upgradable.h"
 #include "RecallableActor.generated.h"
 
 class AActor;
 class ARecallableActor;
+class UPrimitiveComponent;
 
 UCLASS(Abstract, Blueprintable)
 class ARecallableActor : public ADeepPathfinderCharacter, public IUpgradable {
@@ -41,33 +41,31 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<AActor> RelocationMarkerType;
     
-    UPROPERTY(EditAnywhere, Transient, ReplicatedUsing=OnRep_RecallTarget, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_RecallTarget, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<AActor> RecallTarget;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_State, meta=(AllowPrivateAccess=true))
     ERecallableActorState State;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    FTransform RelocateTransform;
+    bool RelocateLanding;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    bool RelocateLanded;
-    
-    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<AActor> RelocationMarker;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool bInitialized;
     
 public:
-    ARecallableActor();
+    ARecallableActor(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void SetRecallTarget(AActor* NewTarget);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
-    void Relocate(FVector NewLocation, FRotator NewRotation);
+    void Relocate(FVector NewLocation, FRotator NewRotation, AActor* NewAttachToActor, UPrimitiveComponent* NewAttachToComponent, FName NewAttachToBone);
     
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
@@ -125,7 +123,7 @@ protected:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void BeginMove();
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

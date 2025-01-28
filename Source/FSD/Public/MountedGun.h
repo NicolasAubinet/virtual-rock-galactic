@@ -7,10 +7,10 @@
 #include "WeaponFireOwner.h"
 #include "MountedGun.generated.h"
 
+class APlayerCharacter;
+class UGunLogicComponent;
 class USkeletalMeshComponent;
 class UWeaponFireComponent;
-class UGunLogicComponent;
-class APlayerCharacter;
 
 UCLASS(Blueprintable)
 class AMountedGun : public AActor, public ISteerable, public IWeaponFireOwner {
@@ -27,11 +27,12 @@ protected:
     UGunLogicComponent* GunLogic;
     
 public:
-    AMountedGun();
+    AMountedGun(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_Test();
     
-    
+
     // Fix for true pure virtual functions not being implemented
     UFUNCTION(BlueprintCallable)
     APlayerCharacter* GetPlayerCharacter() const override PURE_VIRTUAL(GetPlayerCharacter, return NULL;);

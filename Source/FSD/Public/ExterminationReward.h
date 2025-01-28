@@ -18,11 +18,9 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float AwardSize;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FGameplayTagContainer AllowedFilter;
-    
 public:
     UExterminationReward();
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnEnemyKilled(const FGameplayTagContainer& GameplayTags, AActor* killedEnemy);

@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "FSDTranslationProgress.h"
 #include "Engine/DeveloperSettings.h"
+#include "FSDTranslationProgress.h"
 #include "FSDLocalizationSettings.generated.h"
 
 UCLASS(Blueprintable, DefaultConfig, Config=Game)
@@ -14,5 +14,6 @@ private:
     
 public:
     UFSDLocalizationSettings();
+
 };
 

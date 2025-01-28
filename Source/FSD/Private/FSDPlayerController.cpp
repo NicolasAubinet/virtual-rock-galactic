@@ -1,25 +1,27 @@
 #include "FSDPlayerController.h"
-#include "Templates/SubclassOf.h"
+#include "FSDCheatManager.h"
 #include "FSDWidgetEffectsComponent.h"
+#include "Net/UnrealNetwork.h"
 #include "PerkUsageComponent.h"
+#include "Templates/SubclassOf.h"
 #include "TerrainLatejoinComponent.h"
 
-class AActor;
-class UVanityItem;
-class UFSDAchievement;
-class AFSDPlayerState;
-class AHUD;
-class UItemSkin;
-class UItemID;
-class UPlayerCharacterID;
-class UPickaxePart;
-class APlayerCharacter;
-class UTemporaryBuff;
-class UTreasureRewarder;
-class UTutorialContentWidget;
-class UVictoryPose;
-class UTexture2D;
-class USoundCue;
+AFSDPlayerController::AFSDPlayerController(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->CheatClass = UFSDCheatManager::StaticClass();
+    this->ClickEventKeys.AddDefaulted(1);
+    this->DebugEnemy = NULL;
+    this->DebugEnemySpeed = -1.00f;
+    this->DebugEnemySpeedMod = -1.00f;
+    this->DebugEnemyLast = NULL;
+    this->PerkUsageComponent = CreateDefaultSubobject<UPerkUsageComponent>(TEXT("PerkUsageCompent"));
+    this->LateJoinComponent = CreateDefaultSubobject<UTerrainLatejoinComponent>(TEXT("TerrainLateJoin"));
+    this->IsOnSpaceRig = false;
+    this->bReceivedEndLevel = false;
+    this->ServerTravelDone = true;
+    this->WidgetEffects = CreateDefaultSubobject<UFSDWidgetEffectsComponent>(TEXT("WidgetEffects"));
+    this->SpacerigSpawnType = ESpacerigStartType::PlayerHub;
+    this->bDetectGravityChanges = false;
+}
 
 void AFSDPlayerController::ToggleVoiceOn(bool Enabled) {
 }
@@ -46,6 +48,9 @@ void AFSDPlayerController::ServerSetUserHoldToRun_Implementation(bool Value) {
 void AFSDPlayerController::Server_TravelDone_Implementation() {
 }
 
+void AFSDPlayerController::Server_TakeDamageFrom_Implementation(UDamageComponent* Damage, FVector Location) {
+}
+
 void AFSDPlayerController::Server_SetLateJoinDone_Implementation() {
 }
 
@@ -61,19 +66,22 @@ void AFSDPlayerController::Server_SetGenerationDone_Implementation() {
 void AFSDPlayerController::Server_SetExtraEndScreenTime_Implementation(float extraTime) {
 }
 
+void AFSDPlayerController::Server_SetDebugEnemy_Implementation(ADeepPathfinderCharacter* NewDebugEnemy) {
+}
+
 void AFSDPlayerController::Server_SetControllerReady_Implementation() {
 }
 
 void AFSDPlayerController::Server_ResetHUD_Implementation() {
 }
 
+void AFSDPlayerController::Server_Relay_SetArmorIndexDestroyed_Implementation(USimpleArmorDamageComponent* ArmorComponent, int32 Index, EArmorDamageType DamageType) {
+}
+
 void AFSDPlayerController::Server_NewMessage_Implementation(const FString& Sender, const FString& Text, EChatSenderType SenderType) {
 }
 
 void AFSDPlayerController::Server_DrawProjectileDebugPath_Implementation(bool bDraw) {
-}
-
-void AFSDPlayerController::Server_ActivateTemporaryBuff_Implementation(UTemporaryBuff* buff) {
 }
 
 void AFSDPlayerController::SendLevelUpStatistics(const int32 currentRank) {
@@ -93,6 +101,9 @@ void AFSDPlayerController::OnSaveGameCreditsChanged(int32 Credits) {
 }
 
 void AFSDPlayerController::OnSaveGameCharacterProgressChanged(TSubclassOf<APlayerCharacter> CharacterClass, int32 Level, float Progress) {
+}
+
+void AFSDPlayerController::OnRep_DebugEnemyLocation() {
 }
 
 void AFSDPlayerController::OnPlayerStateSelectedCharacterChanged(TSubclassOf<APlayerCharacter> CharacterClass) {
@@ -145,20 +156,19 @@ void AFSDPlayerController::Client_CollectVanityItem_Implementation(UTreasureRewa
 void AFSDPlayerController::Client_CollectTreasureVictoryPose_Implementation(UTreasureRewarder* rewarder, UVictoryPose* targetPose, UPlayerCharacterID* targetCharacter) {
 }
 
-void AFSDPlayerController::Client_CollectTreasureSkin_Implementation(UTreasureRewarder* rewarder, UItemSkin* targetSkin, UItemID* targetItem) {
+void AFSDPlayerController::Client_CollectTreasureSkin_Implementation(USkinTreasureRewarder* rewarder, UItemSkin* targetSkin, UItemID* targetItem) {
 }
 
 void AFSDPlayerController::Client_CollectPickaxePart_Implementation(const UTreasureRewarder* rewarder, UPickaxePart* targetPart) {
 }
 
-AFSDPlayerController::AFSDPlayerController() {
-    this->PerkUsageComponent = CreateDefaultSubobject<UPerkUsageComponent>(TEXT("PerkUsageCompent"));
-    this->LateJoinComponent = CreateDefaultSubobject<UTerrainLatejoinComponent>(TEXT("TerrainLateJoin"));
-    this->IsOnSpaceRig = false;
-    this->bReceivedEndLevel = false;
-    this->ServerTravelDone = true;
-    this->WidgetEffects = CreateDefaultSubobject<UFSDWidgetEffectsComponent>(TEXT("WidgetEffects"));
-    this->SpacerigSpawnType = ESpacerigStartType::PlayerHub;
-    this->bDetectGravityChanges = false;
+void AFSDPlayerController::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
+    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+    
+    DOREPLIFETIME(AFSDPlayerController, DebugEnemy);
+    DOREPLIFETIME(AFSDPlayerController, DebugEnemyLocation);
+    DOREPLIFETIME(AFSDPlayerController, DebugEnemySpeed);
+    DOREPLIFETIME(AFSDPlayerController, DebugEnemySpeedMod);
 }
+
 

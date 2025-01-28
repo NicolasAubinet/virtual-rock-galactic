@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "HeightenedSenseTracker.h"
 #include "FloatPerkComponent.h"
+#include "HeightenedSenseTracker.h"
 #include "HeightenedSenseComponent.generated.h"
 
 class AActor;
@@ -25,7 +25,8 @@ protected:
     bool bAfflictionActivated;
     
 public:
-    UHeightenedSenseComponent();
+    UHeightenedSenseComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void RemoveTracker(AActor* TrackerActor);
     

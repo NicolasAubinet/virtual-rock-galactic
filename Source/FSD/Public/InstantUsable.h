@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UsableChangedSignatureDelegate.h"
-#include "UsedBySignatureDelegate.h"
 #include "UsableComponent.h"
+#include "UsedBySignatureDelegate.h"
 #include "InstantUsable.generated.h"
 
 class USoundCue;
@@ -40,9 +40,10 @@ protected:
     bool TurnOffAfterUse;
     
 public:
-    UInstantUsable();
+    UInstantUsable(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void SetCanUse(bool CanUse);
     

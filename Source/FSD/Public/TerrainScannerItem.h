@@ -3,9 +3,9 @@
 #include "AnimatedItem.h"
 #include "TerrainScannerItem.generated.h"
 
-class USceneComponent;
-class USceneCaptureComponent2D;
 class UAnimMontage;
+class USceneCaptureComponent2D;
+class USceneComponent;
 
 UCLASS(Blueprintable)
 class ATerrainScannerItem : public AAnimatedItem {
@@ -55,9 +55,10 @@ protected:
     USceneCaptureComponent2D* TerrainScannerCapture;
     
 public:
-    ATerrainScannerItem();
+    ATerrainScannerItem(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetIslookingAtMap(bool lookingAtMap);

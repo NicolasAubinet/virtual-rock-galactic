@@ -1,14 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EOutline.h"
 #include "Components/ActorComponent.h"
+#include "DelegateDelegate.h"
+#include "EOutline.h"
 #include "OutlineComponent.generated.h"
 
 class AActor;
-class UPrimitiveComponent;
 class AItem;
-class UHealthComponentBase;
 class APlayerCharacter;
+class UHealthComponentBase;
+class UPrimitiveComponent;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UOutlineComponent : public UActorComponent {
@@ -18,6 +19,9 @@ public:
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOutlineChanged OnOutlineChanged;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FDelegate OnPingedByLaserPointer;
     
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -41,11 +45,12 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     TArray<UPrimitiveComponent*> ExcludedComponents;
     
-    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<APlayerCharacter> Character;
     
 public:
-    UOutlineComponent();
+    UOutlineComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void UnlockOutline();
     

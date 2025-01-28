@@ -1,43 +1,17 @@
 #include "LineCutterProjectile.h"
-#include "Net/UnrealNetwork.h"
+#include "Particles/ParticleSystemComponent.h"
 #include "Components/SceneComponent.h"
 #include "DamageComponent.h"
-#include "Particles/ParticleSystemComponent.h"
+#include "Net/UnrealNetwork.h"
 
-void ALineCutterProjectile::UpdateBeamLocations() {
-}
-
-void ALineCutterProjectile::TerrainSweep(const FVector& Left, const FVector& Right) {
-}
-
-
-void ALineCutterProjectile::SpawnDecal(FHitResult& Result) {
-}
-
-
-void ALineCutterProjectile::Server_RemoveDebris_Implementation(int32 instance, int32 Component) {
-}
-
-void ALineCutterProjectile::OnRep_LineRotation() {
-}
-
-void ALineCutterProjectile::Fire(const FVector& Origin, const FVector& Direction, float Distance) {
-}
-
-void ALineCutterProjectile::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
-    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-    
-    DOREPLIFETIME(ALineCutterProjectile, LineRotation);
-    DOREPLIFETIME(ALineCutterProjectile, RotationMode);
-}
-
-ALineCutterProjectile::ALineCutterProjectile() {
+ALineCutterProjectile::ALineCutterProjectile(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
     this->SwipeRadius = 5.00f;
     this->DoubleLineDistanceMultiplier = 2.00f;
     this->OverlapRadius = 5.00f;
     this->DestroyOnTerrainCollision = true;
     this->IsDead = false;
     this->bHasReversedDirection = false;
+    this->bIsHoming = false;
     this->FlyStraighTime = 0.20f;
     this->EletricDecalSize = EImpactDecalSize::Small;
     this->ImpactDecalSize = EImpactDecalSize::Small;
@@ -68,5 +42,36 @@ ALineCutterProjectile::ALineCutterProjectile() {
     this->InitialHitDamageMultiplier = 5;
     this->InhibitImpactDecalsTime = 0.00f;
     this->MinTimeBetweenImpactDecals = 0.15f;
+    this->LeftHitParticles->SetupAttachment(RootComponent);
+    this->RightHitParticles->SetupAttachment(RootComponent);
+    this->LineRoot->SetupAttachment(RootComponent);
 }
+
+void ALineCutterProjectile::UpdateBeamLocations() {
+}
+
+void ALineCutterProjectile::TerrainSweep(const FVector& Left, const FVector& Right) {
+}
+
+
+void ALineCutterProjectile::SpawnDecal(FHitResult& Result) {
+}
+
+
+void ALineCutterProjectile::Server_RemoveDebris_Implementation(int32 instance, int32 Component) {
+}
+
+void ALineCutterProjectile::OnRep_LineRotation() {
+}
+
+void ALineCutterProjectile::Fire(const FVector& Origin, const FVector& Direction, float Distance) {
+}
+
+void ALineCutterProjectile::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
+    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+    
+    DOREPLIFETIME(ALineCutterProjectile, LineRotation);
+    DOREPLIFETIME(ALineCutterProjectile, RotationMode);
+}
+
 

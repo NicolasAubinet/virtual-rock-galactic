@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
 #include "HostileGuntowerModule.h"
+#include "Templates/SubclassOf.h"
 #include "RadialFireModule.generated.h"
 
 class AProjectile;
@@ -40,9 +40,10 @@ protected:
     FName BackFireSocket;
     
 public:
-    ARadialFireModule();
+    ARadialFireModule(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnFire();

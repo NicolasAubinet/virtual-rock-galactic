@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "SpawnEffectsArray.h"
 #include "Components/ActorComponent.h"
+#include "SpawnEffectsArray.h"
 #include "SpawnEffectsComponent.generated.h"
 
 class UMaterialInstance;
@@ -18,8 +18,9 @@ protected:
     UMaterialInstance* BiomeMaterialOverride;
     
 public:
-    USpawnEffectsComponent();
+    USpawnEffectsComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 };
 

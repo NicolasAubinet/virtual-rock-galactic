@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Curves/CurveFloat.h"
 #include "GameFramework/Actor.h"
+#include "Curves/CurveFloat.h"
 #include "ImpactIndicator.generated.h"
 
 class USceneComponent;
@@ -30,7 +30,8 @@ protected:
     float Radius;
     
 public:
-    AImpactIndicator();
+    AImpactIndicator(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void SetRadius(float NewRadius);
     

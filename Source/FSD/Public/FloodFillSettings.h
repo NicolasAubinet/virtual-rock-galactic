@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "LayeredNoise.h"
 #include "Engine/DataAsset.h"
+#include "LayeredNoise.h"
 #include "FloodFillSettings.generated.h"
 
 UCLASS(Blueprintable)
@@ -37,5 +37,6 @@ public:
     TArray<FLayeredNoise> NoiseLayers;
     
     UFloodFillSettings();
+
 };
 

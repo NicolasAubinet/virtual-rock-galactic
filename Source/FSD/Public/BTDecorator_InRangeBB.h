@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "AITypes.h"
-#include "BehaviorTree/BehaviorTreeTypes.h"
 #include "BehaviorTree/Decorators/BTDecorator_BlackboardBase.h"
+#include "BehaviorTree/BehaviorTreeTypes.h"
+#include "AITypes.h"
 #include "BTDecorator_InRangeBB.generated.h"
 
 UCLASS(Blueprintable)
@@ -19,5 +19,6 @@ public:
     FAIDistanceType GeometricDistanceType;
     
     UBTDecorator_InRangeBB();
+
 };
 

@@ -4,8 +4,8 @@
 #include "PlaySoundInterface.h"
 #include "CharacterStateComponent.generated.h"
 
-class UDialogDataAsset;
 class APlayerCharacter;
+class UDialogDataAsset;
 class UPlayerMovementComponent;
 
 UCLASS(Abstract, Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -33,7 +33,8 @@ private:
     UPlayerMovementComponent* PlayerMovement;
     
 public:
-    UCharacterStateComponent();
+    UCharacterStateComponent(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ReceiveStateTick(float DeltaTime);
@@ -64,7 +65,7 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UPlayerMovementComponent* GetCharacterMovement() const;
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

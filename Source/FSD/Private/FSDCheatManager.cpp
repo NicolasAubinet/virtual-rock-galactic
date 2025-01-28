@@ -1,16 +1,17 @@
 #include "FSDCheatManager.h"
 #include "Templates/SubclassOf.h"
 
-class UObject;
-class AActor;
-class APawn;
-class AFSDAIController;
-class UResourceData;
-class UBaseCritterDescriptor;
-class UEnemyDescriptor;
-class UItemID;
-class UPlayerCharacterID;
-class APlayerCharacter;
+UFSDCheatManager::UFSDCheatManager() {
+    this->RoomJumpCount = 0;
+    this->PreviousMaxDistanceBeforeCleanup = 0.00f;
+    this->UnlimitedScoutFlareDuration = false;
+    this->SpawnPosMarker = NULL;
+    this->EscortShowSmartRockDebug = false;
+    this->IsUsingSavedCheats = false;
+}
+
+void UFSDCheatManager::ToggleDebugEvent(UFSDEvent* InEvent) {
+}
 
 void UFSDCheatManager::SwitchCharacter(UPlayerCharacterID* characterID) {
 }
@@ -49,7 +50,7 @@ void UFSDCheatManager::SetGodMode(bool God) {
 void UFSDCheatManager::SetFastMovement(bool fast) {
 }
 
-void UFSDCheatManager::Server_Refresh_Daily_Special_Implementation() {
+void UFSDCheatManager::Server_Refresh_Daily_Special_Implementation(int32 Index) {
 }
 
 void UFSDCheatManager::ResetTutorials() {
@@ -64,10 +65,10 @@ void UFSDCheatManager::R_RemoveResources(int32 Number) {
 void UFSDCheatManager::R_RemoveCredits(int32 Number) {
 }
 
-void UFSDCheatManager::R_RemoveCraftingResource(int32 Amount, int32 Type) {
+void UFSDCheatManager::R_RemoveCraftingResource(int32 amount, int32 Type) {
 }
 
-void UFSDCheatManager::R_AddSeasonToken(int32 Number) {
+void UFSDCheatManager::R_AddSeasonToken(UObject* WorldContextObject, int32 Number) {
 }
 
 void UFSDCheatManager::R_AddResources_Player(float Number) {
@@ -76,40 +77,40 @@ void UFSDCheatManager::R_AddResources_Player(float Number) {
 void UFSDCheatManager::R_AddResources(float Number) {
 }
 
-void UFSDCheatManager::R_AddPerkPoints(int32 Amount) {
+void UFSDCheatManager::R_AddPerkPoints(int32 amount) {
 }
 
-void UFSDCheatManager::R_AddNitra(float Amount) {
+void UFSDCheatManager::R_AddNitra(float amount) {
 }
 
-void UFSDCheatManager::R_AddMorkite(float Amount) {
+void UFSDCheatManager::R_AddMorkite(float amount) {
 }
 
 void UFSDCheatManager::R_AddMatrixCores(int32 Number) {
 }
 
-void UFSDCheatManager::R_AddHollomite(float Amount) {
+void UFSDCheatManager::R_AddHollomite(float amount) {
 }
 
-void UFSDCheatManager::R_AddGold(float Amount) {
+void UFSDCheatManager::R_AddGold(float amount) {
 }
 
-void UFSDCheatManager::R_AddDystrum(float Amount) {
+void UFSDCheatManager::R_AddDystrum(float amount) {
 }
 
 void UFSDCheatManager::R_AddCredits(int32 Number) {
 }
 
-void UFSDCheatManager::R_AddCraftingResource(int32 Amount, int32 Type) {
+void UFSDCheatManager::R_AddCraftingResource(int32 amount, int32 Type) {
 }
 
-void UFSDCheatManager::R_Add_Phazyonite(int32 Amount) {
+void UFSDCheatManager::R_Add_Phazyonite(int32 amount) {
 }
 
-void UFSDCheatManager::R_Add_BitterGem(int32 Amount) {
+void UFSDCheatManager::R_Add_BitterGem(int32 amount) {
 }
 
-void UFSDCheatManager::R_Add_Aquarq(int32 Amount) {
+void UFSDCheatManager::R_Add_Aquarq(int32 amount) {
 }
 
 bool UFSDCheatManager::IsInGodMode() {
@@ -122,6 +123,9 @@ bool UFSDCheatManager::IsFlyModeActive() const {
 
 bool UFSDCheatManager::IsFastMovementActive() const {
     return false;
+}
+
+void UFSDCheatManager::InstantDropResuppyPod(ARessuplyPod* pod) {
 }
 
 bool UFSDCheatManager::GetSavedCheatValue(const FName CheatName, int32& ValueToGet) {
@@ -179,16 +183,19 @@ void UFSDCheatManager::Cheat_Schematic_ResetAll(UObject* WorldContextObject) {
 void UFSDCheatManager::Cheat_Schematic_GiveRandom(UObject* WorldContextObject) {
 }
 
+void UFSDCheatManager::Cheat_Schematic_ForgeAll_Owned(UObject* WorldContextObject) {
+}
+
 void UFSDCheatManager::Cheat_Schematic_ForgeAll(UObject* WorldContextObject) {
 }
 
-void UFSDCheatManager::Cheat_Resources(UObject* WorldContextObject, float Amount) {
+void UFSDCheatManager::Cheat_Resources(UObject* WorldContextObject, float amount) {
 }
 
 void UFSDCheatManager::Cheat_ResetEquippedUpgrades(UObject* WorldContextObject) {
 }
 
-void UFSDCheatManager::Cheat_RemoveResources(UObject* WorldContextObject, int32 Amount) {
+void UFSDCheatManager::Cheat_RemoveResources(UObject* WorldContextObject, int32 amount) {
 }
 
 void UFSDCheatManager::Cheat_PickAxeVanity_UnlockAll(UObject* WorldContextObject) {
@@ -218,19 +225,25 @@ void UFSDCheatManager::Cheat_Campaign_Complete(UObject* WorldContextObject) {
 void UFSDCheatManager::Cheat_Campaign_Advance(UObject* WorldContextObject) {
 }
 
-void UFSDCheatManager::Cheat_AddXP(UObject* WorldContextObject, int32 Amount) {
+void UFSDCheatManager::Cheat_AddXP(UObject* WorldContextObject, int32 amount) {
 }
 
-void UFSDCheatManager::Cheat_AddPerkPoints(UObject* WorldContextObject, int32 Amount) {
+void UFSDCheatManager::Cheat_AddPerkPoints(UObject* WorldContextObject, int32 amount) {
 }
 
-void UFSDCheatManager::Cheat_AddCredits(UObject* WorldContextObject, int32 Amount) {
+void UFSDCheatManager::Cheat_AddCredits(UObject* WorldContextObject, int32 amount) {
 }
 
 void UFSDCheatManager::C_Windows_PrintStack() const {
 }
 
 void UFSDCheatManager::C_Windows_CloseAll() const {
+}
+
+void UFSDCheatManager::C_WeaponMaintenance_Reset() {
+}
+
+void UFSDCheatManager::C_WeaponMaintenance_AddXP(int32 XP) {
 }
 
 void UFSDCheatManager::C_VanityMasteryResetXP() {
@@ -305,7 +318,22 @@ void UFSDCheatManager::C_ToggleFadingDebug() {
 void UFSDCheatManager::C_ToggleCanShowBlood() {
 }
 
+void UFSDCheatManager::C_TestSpecialEventChance() {
+}
+
+void UFSDCheatManager::C_TeleportToPlayer(int32 InPlayerIndex) {
+}
+
+void UFSDCheatManager::C_TeleportPlayerToMe(int32 InPlayerIndex) {
+}
+
+void UFSDCheatManager::C_TeleportAllPlayersToMe() {
+}
+
 void UFSDCheatManager::C_StopMovement(bool shouldMove) {
+}
+
+void UFSDCheatManager::C_StartCountDown() {
 }
 
 void UFSDCheatManager::C_SpawnScriptedWaveIndex(int32 Index) {
@@ -320,7 +348,13 @@ void UFSDCheatManager::C_SpawnNormalWave() {
 void UFSDCheatManager::C_SpawnEvenRewarder() {
 }
 
-void UFSDCheatManager::C_SpawnBarrelOnPlayer(int32 Amount) {
+void UFSDCheatManager::C_SpawnDropPodOnSelf(float Delay) {
+}
+
+void UFSDCheatManager::C_SpawnDancingCharacterOnSelf(int32 InDanceIndex) {
+}
+
+void UFSDCheatManager::C_SpawnBarrelOnPlayer(int32 amount) {
 }
 
 void UFSDCheatManager::C_SpawnAllParticles() {
@@ -335,10 +369,19 @@ void UFSDCheatManager::C_SetTestMission(int32 missionIndex) {
 void UFSDCheatManager::C_SetTestingCharacter(UPlayerCharacterID* characterID) {
 }
 
+void UFSDCheatManager::C_SetSuperRapidFireEnabled(bool Enabled) {
+}
+
+void UFSDCheatManager::C_SetStandingDown(bool standingDown) {
+}
+
 void UFSDCheatManager::C_SetSavedCheats() {
 }
 
 void UFSDCheatManager::C_SetPlayers(int32 Number) {
+}
+
+void UFSDCheatManager::C_SetInWorldSubtitlesActive(bool Active) {
 }
 
 void UFSDCheatManager::C_SetInstantUsables(bool Value) {
@@ -356,13 +399,16 @@ void UFSDCheatManager::C_SetFastFlares() {
 void UFSDCheatManager::C_SetEnglish(int32 Val) {
 }
 
-void UFSDCheatManager::C_SetDancing(bool shouldDance) {
+void UFSDCheatManager::C_SetDancing(bool shouldDance, int32 danceMove) {
 }
 
 void UFSDCheatManager::C_SetAmmoCostEnabled(bool Enabled) {
 }
 
-void UFSDCheatManager::C_Seasons_ResetXP() {
+void UFSDCheatManager::C_SetActorTrackingVisible(bool Visible) {
+}
+
+void UFSDCheatManager::C_Seasons_ResetXP(UObject* WorldContextObject) {
 }
 
 void UFSDCheatManager::C_Seasons_ResetTreeOfVanity() {
@@ -377,10 +423,22 @@ void UFSDCheatManager::C_Seasons_ResetReroll() {
 void UFSDCheatManager::C_Seasons_ResetPlagueHeartsCollected() {
 }
 
+void UFSDCheatManager::C_Seasons_PrintScripProgress() {
+}
+
 void UFSDCheatManager::C_Seasons_IncrementChallenge(int32 Index) {
 }
 
+void UFSDCheatManager::C_Seasons_CompleteSeasonAlmost() {
+}
+
+void UFSDCheatManager::C_Seasons_CompleteSeason() {
+}
+
 void UFSDCheatManager::C_Seasons_CompleteScripChallenge(int32 Number) {
+}
+
+void UFSDCheatManager::C_Seasons_ClearSeasonCompletedAnnounced() {
 }
 
 void UFSDCheatManager::C_Seasons_ClearChallenges() {
@@ -389,7 +447,7 @@ void UFSDCheatManager::C_Seasons_ClearChallenges() {
 void UFSDCheatManager::C_Seasons_ClearAllProgress() {
 }
 
-void UFSDCheatManager::C_Seasons_AddXP(int32 Number) {
+void UFSDCheatManager::C_Seasons_AddXP(UObject* WorldContextObject, int32 Number) {
 }
 
 void UFSDCheatManager::C_Seasons_AddHeartsCollecdted(int32 Number) {
@@ -398,13 +456,16 @@ void UFSDCheatManager::C_Seasons_AddHeartsCollecdted(int32 Number) {
 void UFSDCheatManager::C_Seasons_AddChallenge() {
 }
 
-void UFSDCheatManager::C_ScoutFlareInfiniteDuration(bool Enabled) {
+void UFSDCheatManager::C_Season_SetActiveSeason(UObject* WorldContextObject, int32 Index) {
 }
 
 void UFSDCheatManager::C_Schematics_UnlockAll() {
 }
 
 void UFSDCheatManager::C_Schematics_ResetAll() {
+}
+
+void UFSDCheatManager::C_Schematics_ForgeAll_Owned() {
 }
 
 void UFSDCheatManager::C_Schematics_ForgeAll() {
@@ -479,16 +540,28 @@ void UFSDCheatManager::C_RemovePlayerRanks(int32 Number) {
 void UFSDCheatManager::C_RemoveAllWidgets() {
 }
 
+void UFSDCheatManager::C_Remove_WeaponSkinsFromCrate_Framwork() {
+}
+
+void UFSDCheatManager::C_Remove_VictoryPose() {
+}
+
 void UFSDCheatManager::C_RefreshDailyDeal(int32 Seed) {
 }
 
-void UFSDCheatManager::C_Refresh_Daily_Special() {
+void UFSDCheatManager::C_Refresh_Daily_Special(int32 Index) {
 }
 
 void UFSDCheatManager::C_Refinery_BreakPipes() {
 }
 
 void UFSDCheatManager::C_RecordMode() {
+}
+
+void UFSDCheatManager::C_PropHunt_Stop() {
+}
+
+void UFSDCheatManager::C_PropHunt_Start(int32 InServerIndex) {
 }
 
 void UFSDCheatManager::C_Promotion_SetLevelSpecific(APlayerCharacter* onCharacter, int32 Number) {
@@ -509,7 +582,19 @@ void UFSDCheatManager::C_ProjectileDrawPaths() {
 void UFSDCheatManager::C_ProjectileDebugPrintToggle() {
 }
 
+void UFSDCheatManager::C_PrintLoadout() {
+}
+
+void UFSDCheatManager::C_PreventMeteors() {
+}
+
+void UFSDCheatManager::C_PlayNewMusic(int32 songIndex) const {
+}
+
 void UFSDCheatManager::C_MissionMap_TestDistribution() {
+}
+
+void UFSDCheatManager::C_MissionMap_SetSeed(int32 Seed) {
 }
 
 void UFSDCheatManager::C_MissionMap_Rotate() {
@@ -536,13 +621,16 @@ void UFSDCheatManager::C_MachineEvents_Track(bool Track) {
 void UFSDCheatManager::C_MachineEvents_FinishCurrent() {
 }
 
-void UFSDCheatManager::C_LevelUpCharacter(int32 Amount) {
+void UFSDCheatManager::C_LevelUpCharacter(int32 amount) {
 }
 
 void UFSDCheatManager::C_KillTeam() {
 }
 
 void UFSDCheatManager::C_KillPlayer() {
+}
+
+void UFSDCheatManager::C_KillAllNeutral() {
 }
 
 void UFSDCheatManager::C_KillAllFriendly() {
@@ -554,13 +642,22 @@ void UFSDCheatManager::C_KillAll() {
 void UFSDCheatManager::C_JumpToNextRoom() {
 }
 
+void UFSDCheatManager::C_JetBoots_Enable_MK2() {
+}
+
+void UFSDCheatManager::C_JetBoots_Enable() {
+}
+
 void UFSDCheatManager::C_Intoxication_SetAll(int32 Percent) {
 }
 
 void UFSDCheatManager::C_Intoxication_Set(int32 Percent) {
 }
 
-void UFSDCheatManager::C_IncrementAllMissionStats(int32 Amount) {
+void UFSDCheatManager::C_IncrementAllMissionStats(int32 amount) {
+}
+
+void UFSDCheatManager::C_IncreasePlagueInfection(float Increment) {
 }
 
 void UFSDCheatManager::C_GodMode(int32 forceEnable) {
@@ -575,10 +672,16 @@ void UFSDCheatManager::C_GameDLC_ResetAnnouncements() {
 void UFSDCheatManager::C_FSDEvent_SetDebugEvent(const FString& EventName) {
 }
 
+void UFSDCheatManager::C_FSDEvent_ListEvents() {
+}
+
 void UFSDCheatManager::C_FSDEvent_ClearSeenRewards() {
 }
 
 void UFSDCheatManager::C_ForceCrash() {
+}
+
+void UFSDCheatManager::C_FlareInfiniteDuration(bool Enabled) {
 }
 
 void UFSDCheatManager::C_FixedPLSSeed(int32 Seed) {
@@ -617,6 +720,9 @@ void UFSDCheatManager::C_DLC_ClearAnnounced() {
 void UFSDCheatManager::C_DisableBackendEvents() {
 }
 
+void UFSDCheatManager::C_DestroyAllDancingCharacters() {
+}
+
 void UFSDCheatManager::C_DeepDives_UnlockAll() {
 }
 
@@ -632,6 +738,9 @@ void UFSDCheatManager::C_DeepDives_Refresh() {
 void UFSDCheatManager::C_DeepDives_List() {
 }
 
+void UFSDCheatManager::C_DebugTargetEnemySync(bool FindIt) {
+}
+
 void UFSDCheatManager::C_CompleteObjectives() {
 }
 
@@ -642,6 +751,12 @@ void UFSDCheatManager::C_ClearAllMissionStats() {
 }
 
 void UFSDCheatManager::C_ClearAllMilestones() {
+}
+
+void UFSDCheatManager::C_ClearAllDecalsLocal() {
+}
+
+void UFSDCheatManager::C_ClearAllDecalsAll() {
 }
 
 void UFSDCheatManager::C_Campaign_ResetProgress() {
@@ -656,27 +771,31 @@ void UFSDCheatManager::C_Campaign_CompleteMain() {
 void UFSDCheatManager::C_Campaign_CompleteCurrent() {
 }
 
+void UFSDCheatManager::C_Campaign_CompleteAll() {
+}
+
 void UFSDCheatManager::C_Campaign_Advance() {
+}
+
+void UFSDCheatManager::C_BreakAllEnemyArmor() {
+}
+
+void UFSDCheatManager::C_BiomeEffectsEnabled(bool Enabled) {
 }
 
 void UFSDCheatManager::C_AddXP(int32 Number) {
 }
 
-void UFSDCheatManager::C_AddUncappedXP(int32 Amount) {
+void UFSDCheatManager::C_AddUncappedXP(int32 amount) {
 }
 
 void UFSDCheatManager::C_AddForgingXP(int32 Number) {
 }
 
-void UFSDCheatManager::AddResourceToTeamDeposit(UResourceData* Resource, float Amount) {
+void UFSDCheatManager::C_AddAllResourcesToInventory(float amount) {
 }
 
-UFSDCheatManager::UFSDCheatManager() {
-    this->RoomJumpCount = 0;
-    this->PreviousMaxDistanceBeforeCleanup = 0.00f;
-    this->UnlimitedScoutFlareDuration = false;
-    this->SpawnPosMarker = NULL;
-    this->EscortShowSmartRockDebug = false;
-    this->IsUsingSavedCheats = false;
+void UFSDCheatManager::AddResourceToTeamDeposit(UResourceData* Resource, float amount) {
 }
+
 

@@ -2,17 +2,17 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
-#include "Curves/CurveFloat.h"
 #include "Components/SplineMeshComponent.h"
-#include "SplineTrailMaterial.h"
+#include "Curves/CurveFloat.h"
 #include "Components/SceneComponent.h"
+#include "SplineTrailMaterial.h"
 #include "SplineTrailComponent.generated.h"
 
 class UCapsuleComponent;
 class UFSDPhysicalMaterial;
+class USplineComponent;
 class USplineMeshComponent;
 class UStaticMesh;
-class USplineComponent;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class FSD_API USplineTrailComponent : public USceneComponent {
@@ -74,8 +74,9 @@ protected:
     int32 Seed;
     
 public:
-    USplineTrailComponent();
+    USplineTrailComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 };
 

@@ -1,11 +1,9 @@
 #include "FSDPostProcessingActor.h"
 
-class UObject;
-class APostProcessingManager;
-class UMaterialInterface;
-class UBlendableInterface;
-class IBlendableInterface;
-class UMaterialInstanceDynamic;
+AFSDPostProcessingActor::AFSDPostProcessingActor(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->PostProcessingType = EPostProcessingType::GameWorld;
+    this->PostProcessComponent = NULL;
+}
 
 void AFSDPostProcessingActor::UnapplyPostProcessingBlendablesByType(UObject* WorldContext, EPostProcessingType Type) {
 }
@@ -36,8 +34,4 @@ UMaterialInstanceDynamic* AFSDPostProcessingActor::ApplyPostProcessingMaterial(U
 void AFSDPostProcessingActor::ApplyPostProcessingBlendable(UObject* WorldContext, EPostProcessingType Type, TScriptInterface<IBlendableInterface> InBlendableObject, float InWeight, const FName InID) {
 }
 
-AFSDPostProcessingActor::AFSDPostProcessingActor() {
-    this->PostProcessingType = EPostProcessingType::GameWorld;
-    this->PostProcessComponent = NULL;
-}
 

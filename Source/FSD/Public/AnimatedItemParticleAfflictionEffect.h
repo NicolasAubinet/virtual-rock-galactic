@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EItemCategory.h"
 #include "AfflictionEffect.h"
+#include "EItemCategory.h"
 #include "AnimatedItemParticleAfflictionEffect.generated.h"
 
 class UParticleSystem;
@@ -22,5 +22,6 @@ protected:
     
 public:
     UAnimatedItemParticleAfflictionEffect();
+
 };
 

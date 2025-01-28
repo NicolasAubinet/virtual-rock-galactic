@@ -1,36 +1,12 @@
 #include "FlameThrowerItem.h"
+#include "BasicWeaponFireComponent.h"
 #include "DamageComponent.h"
 #include "MotionAudioController.h"
 #include "ProjectileLauncherComponent.h"
 #include "StickyFlameSpawner.h"
 
-class AActor;
-class UPrimitiveComponent;
-class UHealthComponentBase;
-class UFSDPhysicalMaterial;
-
-void AFlameThrowerItem::TriggerAoEHeat() {
-}
-
-void AFlameThrowerItem::ServerMeltIce_Implementation(const TArray<FVector>& meltPoints) {
-}
-
-void AFlameThrowerItem::ServerDoDamage_Implementation(FVector_NetQuantize Start, FVector_NetQuantize End) {
-}
-
-void AFlameThrowerItem::OnTargetKilled(AActor* Target, UFSDPhysicalMaterial* PhysMat, bool wasDirectHit) {
-}
-
-void AFlameThrowerItem::OnTargetDamaged(UHealthComponentBase* Health, float Amount, UPrimitiveComponent* HitComponent, UFSDPhysicalMaterial* PhysicalMaterial) {
-}
-
-void AFlameThrowerItem::All_ShowTargetBurstIntoFire_Implementation(FVector_NetQuantize Location, FRotator Rotation) {
-}
-
-void AFlameThrowerItem::All_FlameFeedback_Implementation(FVector_NetQuantize Location, FRotator Rotation) {
-}
-
-AFlameThrowerItem::AFlameThrowerItem() {
+AFlameThrowerItem::AFlameThrowerItem(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->WeaponFire = CreateDefaultSubobject<UBasicWeaponFireComponent>(TEXT("WeaponFire"));
     this->FlameParticleComponent = NULL;
     this->DamageComponent = CreateDefaultSubobject<UDamageComponent>(TEXT("Damage"));
     this->StickyFlames = CreateDefaultSubobject<UStickyFlameSpawner>(TEXT("StickyFlames"));
@@ -52,6 +28,7 @@ AFlameThrowerItem::AFlameThrowerItem() {
     this->FlameGrowthPerSecond = 1000.00f;
     this->FlameEndPointResponsiveness = 0.25f;
     this->FlameIntensityPerSecond = 1.00f;
+    this->DirectDamageTimeLimit = 0.25f;
     this->OnFireStatusEffect = NULL;
     this->ChanceToFleeOnDamage = 0.00f;
     this->MeltPointRadius = 40.00f;
@@ -66,5 +43,32 @@ AFlameThrowerItem::AFlameThrowerItem() {
     this->KilledTargetsExplodingParticles = NULL;
     this->KilledTargetsExplodingSound = NULL;
     this->ProjectileLancher = CreateDefaultSubobject<UProjectileLauncherComponent>(TEXT("projectileLauncher"));
+    this->FireProjectileHoldDuration = 0.50f;
+    this->MotionAudio->SetupAttachment(FPMesh);
 }
+
+void AFlameThrowerItem::TriggerAoEHeat() {
+}
+
+void AFlameThrowerItem::SetIsChargingForProjectile_Implementation(bool isCharging) {
+}
+
+void AFlameThrowerItem::ServerMeltIce_Implementation(const TArray<FVector>& meltPoints) {
+}
+
+void AFlameThrowerItem::ServerDoDamage_Implementation(FVector_NetQuantize Start, FVector_NetQuantize End) {
+}
+
+void AFlameThrowerItem::OnTargetKilled(UHealthComponentBase* Health) {
+}
+
+void AFlameThrowerItem::OnTargetDamaged(UHealthComponentBase* Health, float amount, UPrimitiveComponent* HitComponent, UFSDPhysicalMaterial* PhysicalMaterial) {
+}
+
+void AFlameThrowerItem::All_ShowTargetBurstIntoFire_Implementation(FVector_NetQuantize Location, FRotator Rotation) {
+}
+
+void AFlameThrowerItem::All_FlameFeedback_Implementation(FVector_NetQuantize Location, FRotator Rotation) {
+}
+
 

@@ -1,14 +1,19 @@
 #include "CappedResource.h"
 #include "Net/UnrealNetwork.h"
 
-class UObject;
-class UCappedResource;
+UCappedResource::UCappedResource() {
+    this->Data = NULL;
+    this->currentAmount = 0.00f;
+    this->MaxAmount = 50.00f;
+    this->TotalCollected = 0.00f;
+    this->FullFlag = 0;
+}
 
 float UCappedResource::TransferAll(UCappedResource* Receiver) {
     return 0.0f;
 }
 
-float UCappedResource::Transfer(float Amount, UCappedResource* Receiver) {
+float UCappedResource::Transfer(float amount, UCappedResource* Receiver) {
     return 0.0f;
 }
 
@@ -46,11 +51,11 @@ float UCappedResource::GetCapacityPct() const {
     return 0.0f;
 }
 
-float UCappedResource::Deduct(float Amount) {
+float UCappedResource::Deduct(float amount) {
     return 0.0f;
 }
 
-float UCappedResource::Add(float Amount) {
+float UCappedResource::Add(float amount) {
     return 0.0f;
 }
 
@@ -64,11 +69,4 @@ void UCappedResource::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutL
     DOREPLIFETIME(UCappedResource, FullFlag);
 }
 
-UCappedResource::UCappedResource() {
-    this->Data = NULL;
-    this->currentAmount = 0.00f;
-    this->MaxAmount = 50.00f;
-    this->TotalCollected = 0.00f;
-    this->FullFlag = 0;
-}
 

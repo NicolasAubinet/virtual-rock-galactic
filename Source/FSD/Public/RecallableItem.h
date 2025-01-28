@@ -1,14 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "AnimatedItem.h"
+#include "Templates/SubclassOf.h"
 #include "Upgradable.h"
 #include "RecallableItem.generated.h"
 
 class AActor;
 class ARecallableActor;
+class UPrimitiveComponent;
 
 UCLASS(Abstract, Blueprintable)
 class ARecallableItem : public AAnimatedItem, public IUpgradable {
@@ -22,12 +23,16 @@ protected:
     TArray<TWeakObjectPtr<ARecallableActor>> ActiveItems;
     
 public:
-    ARecallableItem();
+    ARecallableItem(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
-    void ServerSpawnItem(const FVector& Location, const FRotator& Rotation);
+    void ServerSpawnItemAttached(AActor* InAttachActor, UPrimitiveComponent* InAttachComponent, FName InAttachBoneName, const FVector& LocalLocation, const FRotator& LocalRotation);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void ServerSpawnItem(const FVector& WorldLocation, const FRotator& WorldRotation);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ReceiveOnItemSpawned(ARecallableActor* Item);
@@ -41,7 +46,7 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     bool CanSpawnItem(const FVector& Location, const FRotator& Rotation);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

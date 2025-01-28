@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "SplineWarpProperties.h"
 #include "CSGWarpedComponent.h"
+#include "SplineWarpProperties.h"
 #include "CSGSplineWarpComponent.generated.h"
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -11,6 +11,7 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSplineWarpProperties SplineProperties;
     
-    UCSGSplineWarpComponent();
+    UCSGSplineWarpComponent(const FObjectInitializer& ObjectInitializer);
+
 };
 

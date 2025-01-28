@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "ECarveFilterType.h"
 #include "Components/PrimitiveComponent.h"
+#include "ECarveFilterType.h"
 #include "STLMeshCarverComponent.generated.h"
 
 class USTLMeshCarver;
@@ -23,6 +23,7 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool PreviewEnabled;
     
-    USTLMeshCarverComponent();
+    USTLMeshCarverComponent(const FObjectInitializer& ObjectInitializer);
+
 };
 

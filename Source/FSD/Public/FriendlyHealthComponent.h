@@ -29,8 +29,9 @@ protected:
     UParticleSystem* GenericImpactParticles;
     
 public:
-    UFriendlyHealthComponent();
-    //UFUNCTION(BlueprintCallable, BlueprintPure)
+    UFriendlyHealthComponent(const FObjectInitializer& ObjectInitializer);
+
+	//UFUNCTION(BlueprintCallable)
     float GetMaxHealth() const;
     
 };

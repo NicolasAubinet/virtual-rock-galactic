@@ -1,16 +1,16 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EPostProcessingType.h"
-#include "Engine/Scene.h"
 #include "GameFramework/Actor.h"
+#include "Engine/Scene.h"
+#include "EPostProcessingType.h"
 #include "FSDPostProcessingActor.generated.h"
 
-class UObject;
 class APostProcessingManager;
-class UMaterialInterface;
-class UBlendableInterface;
 class IBlendableInterface;
+class UBlendableInterface;
 class UMaterialInstanceDynamic;
+class UMaterialInterface;
+class UObject;
 class UPostProcessComponent;
 
 UCLASS(Abstract, Blueprintable)
@@ -28,7 +28,8 @@ protected:
     FWeightedBlendables InitialBlendables;
     
 public:
-    AFSDPostProcessingActor();
+    AFSDPostProcessingActor(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
     static void UnapplyPostProcessingBlendablesByType(UObject* WorldContext, EPostProcessingType Type);
     

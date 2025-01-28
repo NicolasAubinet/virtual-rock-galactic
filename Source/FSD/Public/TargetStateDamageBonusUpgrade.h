@@ -1,14 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "ETargetStateDamageBonusType.h"
-#include "UpgradeValues.h"
 #include "ItemUpgrade.h"
+#include "Templates/SubclassOf.h"
+#include "UpgradeValues.h"
 #include "TargetStateDamageBonusUpgrade.generated.h"
 
 class AActor;
-class UDamageClass;
 class AFSDPlayerState;
+class UDamageClass;
 
 UCLASS(Blueprintable, EditInlineNew, MinimalAPI)
 class UTargetStateDamageBonusUpgrade : public UItemUpgrade {
@@ -26,6 +26,7 @@ protected:
     
 public:
     UTargetStateDamageBonusUpgrade();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static FUpgradeValues GetUpgradedValue(TSubclassOf<AActor> Item, AFSDPlayerState* Player, ETargetStateDamageBonusType NewTargetState);
     

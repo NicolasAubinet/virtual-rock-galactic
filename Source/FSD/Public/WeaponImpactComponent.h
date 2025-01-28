@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "Components/ActorComponent.h"
 #include "HightAccelerationSignatureDelegate.h"
 #include "ImpactedSignatureDelegate.h"
-#include "Components/ActorComponent.h"
 #include "WeaponImpactComponent.generated.h"
 
 class USkeletalMeshComponent;
@@ -40,7 +40,8 @@ protected:
     float TriggerAtVelocityDifference;
     
 public:
-    UWeaponImpactComponent();
+    UWeaponImpactComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void EnableImpactCheckhing(USkeletalMeshComponent* cmp);
     

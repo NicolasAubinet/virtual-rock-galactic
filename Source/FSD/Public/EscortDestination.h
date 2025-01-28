@@ -1,12 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "ShellCrackedSignatureDelegate.h"
 #include "GameFramework/Actor.h"
+#include "EOmmoranStage.h"
+#include "ShellCrackedSignatureDelegate.h"
 #include "EscortDestination.generated.h"
 
-class UDamageComponent;
 class ADeepCSGWorld;
+class UDamageComponent;
 class UTerrainMaterial;
 
 UCLASS(Blueprintable)
@@ -38,10 +39,14 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ShellThickness;
     
-public:
-    AEscortDestination();
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
+    TArray<EOmmoranStage> OmmoranStages;
     
+public:
+    AEscortDestination(const FObjectInitializer& ObjectInitializer);
+
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
 protected:
     UFUNCTION(BlueprintCallable)
     void MeltPlatforms(ADeepCSGWorld* CSGWorld, TArray<FVector> meltPoints, float meltRadius);
@@ -55,6 +60,9 @@ public:
     
     UFUNCTION(BlueprintCallable)
     FVector GetClosestPointOnRadius(FVector CurrentLocation, int32 numberOfShellsCracked, FVector& dirFromCenter);
+    
+    UFUNCTION(BlueprintCallable)
+    void Cheat_OverrideStages(TArray<EOmmoranStage> newStages);
     
 };
 

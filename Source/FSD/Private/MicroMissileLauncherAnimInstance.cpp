@@ -1,11 +1,10 @@
 #include "MicroMissileLauncherAnimInstance.h"
 
-class UAnimMontage;
+UMicroMissileLauncherAnimInstance::UMicroMissileLauncherAnimInstance() {
+    this->Weapon = NULL;
+}
 
 void UMicroMissileLauncherAnimInstance::OnMontageEndedInternal(UAnimMontage* Montage, bool interrupted) {
 }
 
-UMicroMissileLauncherAnimInstance::UMicroMissileLauncherAnimInstance() {
-    this->Weapon = NULL;
-}
 

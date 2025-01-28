@@ -5,13 +5,13 @@
 #include "Engine/EngineTypes.h"
 #include "EImpactDecalSize.h"
 #include "ELineRotation.h"
-#include "ScaledEffect.h"
 #include "Projectile.h"
+#include "ScaledEffect.h"
 #include "LineCutterProjectile.generated.h"
 
-class USceneComponent;
 class UDamageComponent;
 class UParticleSystemComponent;
+class USceneComponent;
 
 UCLASS(Blueprintable)
 class ALineCutterProjectile : public AProjectile {
@@ -46,6 +46,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bHasReversedDirection;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bIsHoming;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float FlyStraighTime;
@@ -159,9 +162,10 @@ protected:
     float MinTimeBetweenImpactDecals;
     
 public:
-    ALineCutterProjectile();
+    ALineCutterProjectile(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void UpdateBeamLocations();

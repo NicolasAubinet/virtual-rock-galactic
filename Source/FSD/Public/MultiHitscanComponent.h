@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "HitDelegateDelegate.h"
-#include "MultiHitScanHits.h"
 #include "HitscanBaseComponent.h"
+#include "MultiHitScanHits.h"
 #include "MultiHitscanComponent.generated.h"
 
 class AActor;
@@ -35,7 +35,8 @@ protected:
     TArray<AActor*> ActorsHit;
     
 public:
-    UMultiHitscanComponent();
+    UMultiHitscanComponent(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_RegisterHit(const FMultiHitScanHits& hitResults);

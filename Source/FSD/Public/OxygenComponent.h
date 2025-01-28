@@ -1,11 +1,11 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
-#include "OxygenTriggerDelegateDelegate.h"
-#include "OxygenActiveDelegateDelegate.h"
-#include "OxygenDelegateDelegate.h"
-#include "OxygenCallback.h"
 #include "Components/ActorComponent.h"
+#include "OxygenActiveDelegateDelegate.h"
+#include "OxygenCallback.h"
+#include "OxygenDelegateDelegate.h"
+#include "OxygenTriggerDelegateDelegate.h"
+#include "Templates/SubclassOf.h"
 #include "OxygenComponent.generated.h"
 
 class UHealthComponentBase;
@@ -47,9 +47,10 @@ protected:
     TSubclassOf<UStatusEffect> NoOxygenStatusEffect;
     
 public:
-    UOxygenComponent();
+    UOxygenComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void RegisterOxygenEvent(FOxygenTriggerDelegate OxygenCallback, float oxygenLevel, bool triggerOnOxygenLoss);
     

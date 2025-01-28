@@ -1,11 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "AmorPartDestroyedDelegateDelegate.h"
-#include "ArmorPartDamagedDelegateDelegate.h"
 #include "ArmorDamageInfo.h"
 #include "ArmorHealthItem.h"
+#include "ArmorPartDamagedDelegateDelegate.h"
 #include "BaseArmorDamageComponent.h"
+#include "EArmorDamageType.h"
 #include "ArmorHealthDamageComponent.generated.h"
+
+class UPrimitiveComponent;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UArmorHealthDamageComponent : public UBaseArmorDamageComponent {
@@ -37,14 +40,18 @@ protected:
     bool AffectedByAmorBreak;
     
 public:
-    UArmorHealthDamageComponent();
+    UArmorHealthDamageComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     bool SetHealthOnBodypartItem(FName BoneName, float newHealth);
     
     UFUNCTION(BlueprintCallable)
     void SetHealthOnAllItems(float newHealth);
+    
+    UFUNCTION(BlueprintCallable)
+    bool SetArmorDamageEnabledOnItem(FName BoneName, bool Enabled);
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void RegrowAllArmor(float baseHealth);
@@ -55,6 +62,10 @@ protected:
     
     UFUNCTION(BlueprintCallable)
     void OnRep_ArmorDamageInfo(FArmorDamageInfo OldValue);
+    
+public:
+    UFUNCTION(BlueprintCallable)
+    void DealSocketArmorDamage(float Damage, float armorDamageMultiplier, UPrimitiveComponent* collider, bool shatter, EArmorDamageType DamageType);
     
 };
 

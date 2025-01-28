@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "PostProcessingBlendable.h"
 #include "GameFramework/Actor.h"
+#include "PostProcessingBlendable.h"
 #include "PostProcessingManager.generated.h"
 
 class AFSDPostProcessingActor;
@@ -22,6 +22,7 @@ protected:
     TArray<UMaterialInstanceDynamic*> Materials;
     
 public:
-    APostProcessingManager();
+    APostProcessingManager(const FObjectInitializer& ObjectInitializer);
+
 };
 

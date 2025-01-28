@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "Components/ActorComponent.h"
 #include "HightAccelerationSignatureDelegate.h"
 #include "ImpactedSignatureDelegate.h"
-#include "Components/ActorComponent.h"
 #include "ImpactComponent.generated.h"
 
 class USceneComponent;
@@ -34,7 +34,8 @@ protected:
     float TriggerAtVelocityDifference;
     
 public:
-    UImpactComponent();
+    UImpactComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void SetCheckVelocity(bool aCheckVelocity);
     

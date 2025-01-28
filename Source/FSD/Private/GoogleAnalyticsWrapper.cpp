@@ -1,10 +1,17 @@
 #include "GoogleAnalyticsWrapper.h"
 
-class AActor;
-class AFSDGameState;
-class APlayerController;
-class AFSDPlayerState;
-class USeasonChallenge;
+UGoogleAnalyticsWrapper::UGoogleAnalyticsWrapper() {
+    this->LastUnlockedWeapons = TEXT("None");
+    this->LastKnownClass = TEXT("None");
+    this->BoscoLoadOut = TEXT("Bosco=;");
+    this->WasCampaign = false;
+    this->LastCampaignProgress = 0;
+    this->WasLastCampaignMission = false;
+    this->LastCampaignSize = 0;
+    this->DiscordCommunityTrackingID = TEXT("UA-85959451-10");
+    this->CommunityGoalsTrackingID = TEXT("UA-85959451-12");
+    this->ShouldUpdateSchematicTrackingInformation = true;
+}
 
 void UGoogleAnalyticsWrapper::StartMissionPartyInfo(AFSDGameState* GameState) {
 }
@@ -54,7 +61,7 @@ void UGoogleAnalyticsWrapper::RecordGaChallengeReroll(int32 ChallengeIndex, USea
 void UGoogleAnalyticsWrapper::RecordExtraFailInfo(const FString& MissionName, const FString& Stage, const FString& ExtraText) {
 }
 
-void UGoogleAnalyticsWrapper::RecordCustomGAEvent(const FString& EventCategory, const FString& EventAction, const FString& EventLabel, const int32 EventValue, const FString& TrackingId) {
+void UGoogleAnalyticsWrapper::RecordCustomGAEvent(const FString& EventCategory, const FString& EventAction, const FString& EventLabel, const int32 EventValue, const FString& TrackingID) {
 }
 
 void UGoogleAnalyticsWrapper::RecordContinuousDamage(AActor* DamageCauser) {
@@ -89,16 +96,4 @@ FString UGoogleAnalyticsWrapper::GetAnalyticsFText(FText Text) {
 void UGoogleAnalyticsWrapper::EndMissionPartyInfo() {
 }
 
-UGoogleAnalyticsWrapper::UGoogleAnalyticsWrapper() {
-    this->LastUnlockedWeapons = TEXT("None");
-    this->LastKnownClass = TEXT("None");
-    this->BoscoLoadOut = TEXT("Bosco=;");
-    this->WasCampaign = false;
-    this->LastCampaignProgress = 0;
-    this->WasLastCampaignMission = false;
-    this->LastCampaignSize = 0;
-    this->DiscordCommunityTrackingID = TEXT("UA-85959451-10");
-    this->CommunityGoalsTrackingID = TEXT("UA-85959451-12");
-    this->ShouldUpdateSchematicTrackingInformation = true;
-}
 

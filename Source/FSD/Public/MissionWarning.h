@@ -1,14 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "Engine/DataAsset.h"
+#include "Templates/SubclassOf.h"
 #include "MissionWarning.generated.h"
 
-class UObjective;
-class URunningMissionBP;
+class UMissionMutator;
 class UMissionStat;
 class UMutator;
-class UMissionMutator;
+class UObjective;
+class URunningMissionBP;
 class UTexture2D;
 
 UCLASS(Blueprintable)
@@ -18,6 +18,12 @@ public:
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<URunningMissionBP> MissionBP;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool IsOptionalExtraObjectiveMandatory;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool OptionalExtraObjectiveIsRandom;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UObjective> OptionalExtraObjective;
@@ -57,5 +63,6 @@ protected:
     
 public:
     UMissionWarning();
+
 };
 

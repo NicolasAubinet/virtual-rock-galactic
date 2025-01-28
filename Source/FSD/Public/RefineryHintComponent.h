@@ -4,19 +4,20 @@
 #include "RefineryHintComponent.generated.h"
 
 class AFSDRefinery;
-class APipelineSegment;
 class APipelineExtractorPod;
+class APipelineSegment;
 
 UCLASS(Abstract, Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class URefineryHintComponent : public UTutorialHintComponent {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<AFSDRefinery> Refinery;
     
 public:
-    URefineryHintComponent();
+    URefineryHintComponent(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ReceiveRefinerySpawned(AFSDRefinery* InRefinery);

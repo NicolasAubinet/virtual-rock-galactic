@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "CSGGroupComponent.h"
-#include "MeshLayerProperties.h"
 #include "GeneralTerrainMaterialCombiner.h"
+#include "MeshLayerProperties.h"
 #include "CSGLayerComponent.generated.h"
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -15,6 +15,7 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGeneralTerrainMaterialCombiner Materials;
     
-    UCSGLayerComponent();
+    UCSGLayerComponent(const FObjectInitializer& ObjectInitializer);
+
 };
 

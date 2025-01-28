@@ -1,23 +1,23 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
+#include "Components/ActorComponent.h"
+#include "BodypartHitSigDelegate.h"
 #include "DamageData.h"
+#include "DamageSigDelegate.h"
+#include "DeathSigDelegate.h"
 #include "EHealthbarType.h"
+#include "Health.h"
+#include "HealthChangedSigDelegate.h"
+#include "HitSigDelegate.h"
 #include "OnHitByHitScanDelegate.h"
 #include "OnRadialDamageDelegate.h"
-#include "HitSigDelegate.h"
-#include "BodypartHitSigDelegate.h"
-#include "DamageSigDelegate.h"
-#include "HealthChangedSigDelegate.h"
-#include "DeathSigDelegate.h"
-#include "Components/ActorComponent.h"
-#include "Health.h"
 #include "HealthComponentBase.generated.h"
 
 class AActor;
-class UPrimitiveComponent;
 class UDamageClass;
 class UParticleSystem;
+class UPrimitiveComponent;
 
 UCLASS(Abstract, Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UHealthComponentBase : public UActorComponent, public IHealth {
@@ -63,7 +63,8 @@ protected:
     bool PassthroughTemperatureDamage;
     
 public:
-    UHealthComponentBase();
+    UHealthComponentBase(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     float TakeRadialDamage(float damageAmount, FVector BlastCenter, float BlastRadius, float MaxDamageRadius, float MinDamagePct, FDamageData& DamageData);
     
@@ -86,7 +87,7 @@ public:
     bool IsAlive() const;
     
     UFUNCTION(BlueprintCallable)
-    float Heal(float Amount);
+    float Heal(float amount);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetShowHealthBar() const;
@@ -112,9 +113,9 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool CanTakeDamageFrom(UDamageClass* DamageClass) const;
     
-    
+
     // Fix for true pure virtual functions not being implemented
-    //UFUNCTION(BlueprintCallable)
+	//UFUNCTION(BlueprintCallable)
     AActor* GetOwner() const override PURE_VIRTUAL(GetOwner, return NULL;);
     
     UFUNCTION(BlueprintCallable)

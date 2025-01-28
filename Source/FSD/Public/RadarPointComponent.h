@@ -1,9 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
-#include "RadarPointRemovedSignatureDelegate.h"
 #include "Components/ActorComponent.h"
+#include "RadarPointRemovedSignatureDelegate.h"
+#include "Templates/SubclassOf.h"
 #include "RadarPointComponent.generated.h"
 
 class UUserWidget;
@@ -21,7 +21,8 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UUserWidget> WidgetClass;
     
-    URadarPointComponent();
+    URadarPointComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     static void MapToRadarPosition(FVector playerPos, FVector playerForward, FVector Pos, bool snap, FVector& radarPos, float& alpha);
     

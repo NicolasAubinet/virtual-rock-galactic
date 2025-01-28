@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "FloatPerkComponent.h"
+#include "Templates/SubclassOf.h"
 #include "ShieldLinkComponent.generated.h"
 
 class APlayerCharacter;
@@ -28,7 +28,8 @@ protected:
     TSubclassOf<UStatusEffect> LinkStatusEffect;
     
 public:
-    UShieldLinkComponent();
+    UShieldLinkComponent(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void TimerFunction();

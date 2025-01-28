@@ -1,16 +1,17 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
-#include "BoolDelegateDelegate.h"
-#include "GameplayTagContainer.h"
 #include "Components/ActorComponent.h"
+#include "GameplayTagContainer.h"
+#include "BoolDelegateDelegate.h"
+#include "Templates/SubclassOf.h"
 #include "EnemyBufferComponent.generated.h"
 
+class AActor;
 class AFSDPawn;
 class UHealthComponentBase;
+class UParticleSystem;
 class UParticleSystemComponent;
 class UStatusEffect;
-class UParticleSystem;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UEnemyBufferComponent : public UActorComponent {
@@ -41,6 +42,9 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagQuery BuffQuery;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<AActor> SubclassBuffQuery;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     TArray<AFSDPawn*> BuffTargets;
     
@@ -48,9 +52,10 @@ protected:
     TArray<UParticleSystemComponent*> ParticleInstances;
     
 public:
-    UEnemyBufferComponent();
+    UEnemyBufferComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void SetBuffingEnabled(bool Enabled);
     

@@ -1,7 +1,7 @@
 #include "SchematicItem.h"
 
-class UObject;
-class UTexture;
+USchematicItem::USchematicItem() {
+}
 
 FText USchematicItem::GetTitle() const {
     return FText::GetEmpty();
@@ -19,6 +19,4 @@ FText USchematicItem::GetDescription() const {
     return FText::GetEmpty();
 }
 
-USchematicItem::USchematicItem() {
-}
 

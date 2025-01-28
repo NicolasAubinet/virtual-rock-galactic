@@ -1,12 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EHealthbarType.h"
-#include "EEnemyHealthScaling.h"
+#include "Components/ActorComponent.h"
 #include "DamageSigDelegate.h"
+#include "EEnemyHealthScaling.h"
+#include "EHealthbarType.h"
+#include "Health.h"
 #include "HealthChangedSigDelegate.h"
 #include "SubHealthComponentDelegateDelegate.h"
-#include "Components/ActorComponent.h"
-#include "Health.h"
 #include "SubHealthComponent.generated.h"
 
 class AActor;
@@ -29,10 +29,14 @@ protected:
     EHealthbarType HealthbarType;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool PassthroughDamageWhenDisabled;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EEnemyHealthScaling EnemyHealthScaling;
     
 public:
-    USubHealthComponent();
+    USubHealthComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void SetCanTakeDamage(bool canTakeDamage);
     
@@ -51,9 +55,9 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetCanTakeDamage() const;
     
-    
+
     // Fix for true pure virtual functions not being implemented
-    //UFUNCTION(BlueprintCallable)
+	//UFUNCTION(BlueprintCallable)
     AActor* GetOwner() const override PURE_VIRTUAL(GetOwner, return NULL;);
     
     UFUNCTION(BlueprintCallable)

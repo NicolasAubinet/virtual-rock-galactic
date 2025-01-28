@@ -2,19 +2,19 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
-#include "ECharacterState.h"
-#include "ECharacterMoveDirection.h"
-#include "GliderAnimSync.h"
 #include "Animation/AnimInstance.h"
+#include "ECharacterMoveDirection.h"
+#include "ECharacterState.h"
 #include "FootStepNotifyTarget.h"
+#include "GliderAnimSync.h"
 #include "PlayerAnimInstance.generated.h"
 
-class UItemCharacterAnimationSet;
 class APlayerCharacter;
-class UUseAnimationSetting;
 class UAnimMontage;
+class UItemCharacterAnimationSet;
 class UParticleSystem;
 class USoundCue;
+class UUseAnimationSetting;
 
 UCLASS(Blueprintable, NonTransient)
 class UPlayerAnimInstance : public UAnimInstance, public IFootStepNotifyTarget {
@@ -124,6 +124,9 @@ protected:
     bool IsControllingEnemy;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    bool IsUsingJetBoots;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool IsUsingTraversalTool;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -191,6 +194,7 @@ protected:
     
 public:
     UPlayerAnimInstance();
+
     UFUNCTION(BlueprintCallable)
     bool StopUseMontage(bool stopImmediately);
     
@@ -218,7 +222,7 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float CalculateDirectionVertical(const FVector& TargetDirection, const FRotator& BaseRotation) const;
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

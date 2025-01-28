@@ -3,8 +3,8 @@
 #include "GameFramework/Actor.h"
 #include "InfluenceTester.generated.h"
 
-class USphereComponent;
 class UCaveInfluencer;
+class USphereComponent;
 
 UCLASS(Blueprintable)
 class AInfluenceTester : public AActor {
@@ -16,6 +16,7 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USphereComponent* Sphere;
     
-    AInfluenceTester();
+    AInfluenceTester(const FObjectInitializer& ObjectInitializer);
+
 };
 

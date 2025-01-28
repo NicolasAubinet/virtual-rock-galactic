@@ -2,8 +2,18 @@
 #include "Net/UnrealNetwork.h"
 #include "SingleUsableComponent.h"
 
-class APipelineStart;
-class APlayerCharacter;
+AFSDRefinery::AFSDRefinery(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->UsableStartRefining = CreateDefaultSubobject<USingleUsableComponent>(TEXT("UsableStartRefining"));
+    this->UsableLaunchRocket = CreateDefaultSubobject<USingleUsableComponent>(TEXT("UsableLaunchRocket"));
+    this->LaunchRocketButtonPressedShout = NULL;
+    this->BuilderItem = NULL;
+    this->RefiningTotalDuration = 120.00f;
+    this->PipelineBreakTimePenaltyPerAdditionalPlayers = 5.00f;
+    this->SegmentBreakDownPenaltyPerAdditionalPlayers = 1;
+    this->RefineryState = ERefineryState::Landing;
+    this->PreviousRefineryState = ERefineryState::Landing;
+    this->RefiningProgressReplicated = 0;
+}
 
 void AFSDRefinery::SetRefineryState(ERefineryState InState) {
 }
@@ -40,16 +50,4 @@ void AFSDRefinery::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLife
     DOREPLIFETIME(AFSDRefinery, RefiningProgressReplicated);
 }
 
-AFSDRefinery::AFSDRefinery() {
-    this->UsableStartRefining = CreateDefaultSubobject<USingleUsableComponent>(TEXT("UsableStartRefining"));
-    this->UsableLaunchRocket = CreateDefaultSubobject<USingleUsableComponent>(TEXT("UsableLaunchRocket"));
-    this->LaunchRocketButtonPressedShout = NULL;
-    this->BuilderItem = NULL;
-    this->RefiningTotalDuration = 120.00f;
-    this->PipelineBreakTimePenaltyPerAdditionalPlayers = 5.00f;
-    this->SegmentBreakDownPenaltyPerAdditionalPlayers = 1;
-    this->RefineryState = ERefineryState::Landing;
-    this->PreviousRefineryState = ERefineryState::Landing;
-    this->RefiningProgressReplicated = 0;
-}
 

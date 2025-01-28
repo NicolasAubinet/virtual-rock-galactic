@@ -1,17 +1,28 @@
 #include "RedeployableSentryGun.h"
-#include "Net/UnrealNetwork.h"
 #include "ActorTrackingComponent.h"
+#include "Net/UnrealNetwork.h"
 #include "OutlineComponent.h"
 
-class AActor;
-class USkeletalMeshComponent;
-class APlayerCharacter;
+ARedeployableSentryGun::ARedeployableSentryGun(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->ActorTrackingIcon = CreateDefaultSubobject<UActorTrackingComponent>(TEXT("ActorTrackingIcon"));
+    this->outline = CreateDefaultSubobject<UOutlineComponent>(TEXT("outline"));
+    this->bOutlineAndIconVisible = false;
+    this->State = ERedeployableSentryGunState::Deploying;
+    this->PlasmaLineMaxRange = 1000.00f;
+    this->PlasmaBeamClass = NULL;
+    this->ElectrocutionActorClass = NULL;
+    this->ElectrocutionActor = NULL;
+    this->EMPDischargeActorClass = NULL;
+    this->EMPDiscargeCooldown = 3.00f;
+    this->ActorTrackingIcon->SetupAttachment(RootComponent);
+}
 
 void ARedeployableSentryGun::ToggleOutlineAndIcon(bool Visible) {
 }
 
 void ARedeployableSentryGun::SetSentryGunOwner(APlayerCharacter* Character) {
 }
+
 
 
 
@@ -60,16 +71,4 @@ void ARedeployableSentryGun::GetLifetimeReplicatedProps(TArray<FLifetimeProperty
     DOREPLIFETIME(ARedeployableSentryGun, State);
 }
 
-ARedeployableSentryGun::ARedeployableSentryGun() {
-    this->ActorTrackingIcon = CreateDefaultSubobject<UActorTrackingComponent>(TEXT("ActorTrackingIcon"));
-    this->outline = CreateDefaultSubobject<UOutlineComponent>(TEXT("outline"));
-    this->bOutlineAndIconVisible = false;
-    this->State = ERedeployableSentryGunState::Deploying;
-    this->PlasmaLineMaxRange = 1000.00f;
-    this->PlasmaBeamClass = NULL;
-    this->ElectrocutionActorClass = NULL;
-    this->ElectrocutionActor = NULL;
-    this->EMPDischargeActorClass = NULL;
-    this->EMPDiscargeCooldown = 3.00f;
-}
 

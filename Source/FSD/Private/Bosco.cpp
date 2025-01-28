@@ -1,124 +1,29 @@
 #include "Bosco.h"
-#include "Net/UnrealNetwork.h"
-#include "Components/SkeletalMeshComponent.h"
-#include "Components/AudioComponent.h"
-#include "BoscoAbillityComponent.h"
-#include "BobbingComponent.h"
-#include "DamageComponent.h"
-#include "DroneMiningToolBase.h"
-#include "HealthComponent.h"
-#include "Components/PointLightComponent.h"
-#include "Particles/ParticleSystemComponent.h"
-#include "HitscanComponent.h"
-#include "DroneSkinnableComponent.h"
-#include "UpgradableBoscoComponent.h"
-#include "Components/SpotLightComponent.h"
 #include "Perception/PawnSensingComponent.h"
+#include "Components/AudioComponent.h"
+#include "Particles/ParticleSystemComponent.h"
+#include "Components/PointLightComponent.h"
+#include "Components/SkeletalMeshComponent.h"
+#include "Components/SpotLightComponent.h"
+#include "BobbingComponent.h"
+#include "BoscoAbillityComponent.h"
+#include "DamageComponent.h"
+#include "DroneMeleeTool.h"
+#include "DroneMiningToolBase.h"
+#include "DroneSkinnableComponent.h"
+#include "HealthComponent.h"
+#include "HitscanComponent.h"
+#include "Net/UnrealNetwork.h"
+#include "UpgradableBoscoComponent.h"
 
-class AActor;
-class UTerrainMaterial;
-
-void ABosco::UsePlayerActivatedAbillity(EAbilityIndex Index, AActor* aTarget, const FVector& aLocation) {
-}
-
-void ABosco::UseABillity() {
-}
-
-void ABosco::StopShootingSound_Implementation() {
-}
-
-
-void ABosco::StartSelfDestruct() {
-}
-
-void ABosco::SetIsReviving(bool aIsReviving) {
-}
-
-void ABosco::SetIsRepairing(bool isRepairing) {
-}
-
-
-void ABosco::ReviveCounterChanged(int32 remainingCharges) {
-}
-
-void ABosco::Respond() {
-}
-
-void ABosco::PlaySalute_Implementation() {
-}
-
-void ABosco::OnWeaponFired(const FVector& Location) {
-}
-
-void ABosco::OnTargetBurrowChange(bool burrowed) {
-}
-
-void ABosco::OnRep_State(EDroneAIState prevState) {
-}
-
-void ABosco::OnReadyToShoot() {
-}
-
-void ABosco::OnNotReadyToShoot() {
-}
-
-void ABosco::OnHit(float Amount, float BaseAmount, const FDamageData& DamageData) {
-}
-
-void ABosco::OnGrabbedGem() {
-}
-
-void ABosco::MineEffects_Implementation(UTerrainMaterial* aTerrainMaterial, FVector_NetQuantize aLocation, FRotator aRotation) {
-}
-
-UUpgradableBoscoComponent* ABosco::GetUpgradeComponent() {
-    return NULL;
-}
-
-int32 ABosco::GetReviveCharges() const {
-    return 0;
-}
-
-UBoscoAbillityComponent* ABosco::GetPlayerAbillity() const {
-    return NULL;
-}
-
-EDroneAIState ABosco::GetCurrentState() const {
-    return EDroneAIState::Follow;
-}
-
-bool ABosco::GetCarryInterrupted() const {
-    return false;
-}
-
-bool ABosco::DoPickupGemAnimation() {
-    return false;
-}
-
-void ABosco::All_OnSelfDestruct_Implementation() {
-}
-
-void ABosco::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
-    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-    
-    DOREPLIFETIME(ABosco, RotateTarget);
-    DOREPLIFETIME(ABosco, LookAtLocation);
-    DOREPLIFETIME(ABosco, IsFiring);
-    DOREPLIFETIME(ABosco, IsInRangeToMine);
-    DOREPLIFETIME(ABosco, IsPreparedToMine);
-    DOREPLIFETIME(ABosco, IsMining);
-    DOREPLIFETIME(ABosco, IsReviving);
-    DOREPLIFETIME(ABosco, IsRotateMode);
-    DOREPLIFETIME(ABosco, CurrentState);
-}
-
-ABosco::ABosco() {
+ABosco::ABosco(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
     this->HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"));
     this->PrimaryAbility = CreateDefaultSubobject<UBoscoAbillityComponent>(TEXT("PrimaryAbility"));
     this->SecondaryAbility = CreateDefaultSubobject<UBoscoAbillityComponent>(TEXT("SecondaryAbility"));
     this->Damage = CreateDefaultSubobject<UDamageComponent>(TEXT("Damage"));
     this->Senses = CreateDefaultSubobject<UPawnSensingComponent>(TEXT("Senses"));
     this->MiningTool = CreateDefaultSubobject<UDroneMiningToolBase>(TEXT("MiningTool"));
+    this->MeleeTool = CreateDefaultSubobject<UDroneMeleeTool>(TEXT("MeleeTool"));
     this->BobbingComponent = CreateDefaultSubobject<UBobbingComponent>(TEXT("BobbingComponent"));
     this->BoscoMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("BoscoMesh"));
     this->DroneHitScan = CreateDefaultSubobject<UHitscanComponent>(TEXT("BoscoHitscan"));
@@ -136,6 +41,7 @@ ABosco::ABosco() {
     this->PickupGemShout = NULL;
     this->ReviveThankShout = NULL;
     this->GeneralCallShout = NULL;
+    this->RiftCrystalShout = NULL;
     this->VacuumShout = NULL;
     this->MineResponse = NULL;
     this->CombatResponse = NULL;
@@ -186,9 +92,113 @@ ABosco::ABosco() {
     this->IsInRangeToMine = false;
     this->IsPreparedToMine = false;
     this->IsMining = false;
+    this->IsMelee = false;
     this->IsReviving = false;
     this->IsRotateMode = false;
     this->DroneController = NULL;
     this->CurrentState = EDroneAIState::Follow;
+    this->BobbingComponent->SetupAttachment(RootComponent);
+    this->BoscoMesh->SetupAttachment(BobbingComponent);
+    this->SpotLightComponent->SetupAttachment(BoscoMesh);
+    this->PointLightComponent->SetupAttachment(BoscoMesh);
+    this->LTrail->SetupAttachment(BoscoMesh);
+    this->RTrail->SetupAttachment(BoscoMesh);
+    this->MomentumSound->SetupAttachment(BoscoMesh);
 }
+
+void ABosco::UsePlayerActivatedAbillity(EAbilityIndex Index, AActor* aTarget, const FVector& aLocation) {
+}
+
+void ABosco::UseABillity() {
+}
+
+void ABosco::StopShootingSound_Implementation() {
+}
+
+
+void ABosco::StartSelfDestruct() {
+}
+
+void ABosco::SetIsReviving(bool aIsReviving) {
+}
+
+void ABosco::SetIsRepairing(bool isRepairing) {
+}
+
+
+void ABosco::ReviveCounterChanged(int32 remainingCharges) {
+}
+
+void ABosco::Respond() {
+}
+
+void ABosco::PlaySalute_Implementation() {
+}
+
+void ABosco::OnWeaponFired(const FVector& Location) {
+}
+
+void ABosco::OnTargetBurrowChange(bool burrowed) {
+}
+
+void ABosco::OnRep_State(EDroneAIState prevState) {
+}
+
+void ABosco::OnReadyToShoot() {
+}
+
+void ABosco::OnNotReadyToShoot() {
+}
+
+void ABosco::OnHit(float amount, float BaseAmount, const FDamageData& DamageData) {
+}
+
+void ABosco::OnGrabbedGem() {
+}
+
+void ABosco::MineEffects_Implementation(UTerrainMaterial* aTerrainMaterial, FVector_NetQuantize aLocation, FRotator aRotation) {
+}
+
+UUpgradableBoscoComponent* ABosco::GetUpgradeComponent() {
+    return NULL;
+}
+
+int32 ABosco::GetReviveCharges() const {
+    return 0;
+}
+
+UBoscoAbillityComponent* ABosco::GetPlayerAbillity() const {
+    return NULL;
+}
+
+EDroneAIState ABosco::GetCurrentState() const {
+    return EDroneAIState::Follow;
+}
+
+bool ABosco::GetCarryInterrupted() const {
+    return false;
+}
+
+bool ABosco::DoPickupGemAnimation() {
+    return false;
+}
+
+void ABosco::All_OnSelfDestruct_Implementation() {
+}
+
+void ABosco::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
+    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+    
+    DOREPLIFETIME(ABosco, RotateTarget);
+    DOREPLIFETIME(ABosco, LookAtLocation);
+    DOREPLIFETIME(ABosco, IsFiring);
+    DOREPLIFETIME(ABosco, IsInRangeToMine);
+    DOREPLIFETIME(ABosco, IsPreparedToMine);
+    DOREPLIFETIME(ABosco, IsMining);
+    DOREPLIFETIME(ABosco, IsMelee);
+    DOREPLIFETIME(ABosco, IsReviving);
+    DOREPLIFETIME(ABosco, IsRotateMode);
+    DOREPLIFETIME(ABosco, CurrentState);
+}
+
 

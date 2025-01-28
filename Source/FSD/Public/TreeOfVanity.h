@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "VanityNode.h"
 #include "SavableDataAsset.h"
+#include "VanityNode.h"
 #include "TreeOfVanity.generated.h"
 
 class UReward;
@@ -15,6 +15,7 @@ public:
     TArray<FVanityNode> Nodes;
     
     UTreeOfVanity();
+
     UFUNCTION(BlueprintCallable)
     void ClearNodes();
     

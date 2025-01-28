@@ -1,38 +1,32 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
-#include "EInputKeys.h"
 #include "ECrossbowStuckType.h"
+#include "EInputKeys.h"
 #include "FSDPhysicsActor.h"
+#include "Templates/SubclassOf.h"
 #include "CrossbowProjectileStuck.generated.h"
 
-class USceneComponent;
-class UNiagaraComponent;
-class UCrossbowProjectileRecallable;
 class ACrossbowProjectileBase;
+class APlayerCharacter;
+class UCrossbowProjectileRecallable;
 class UCrossbowStuckProjectileEffectBanshee;
 class UHealthComponentBase;
+class UNiagaraComponent;
+class USceneComponent;
 class USphereComponent;
-class APlayerCharacter;
 class UStatusEffect;
 
 UCLASS(Blueprintable)
 class ACrossbowProjectileStuck : public AFSDPhysicsActor {
     GENERATED_BODY()
 public:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    ECrossbowStuckType StuckProjectileEffect;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_BansheePulseEnabled, meta=(AllowPrivateAccess=true))
     bool BansheePulseEnabled;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
-    UCrossbowProjectileRecallable* RecallComponent;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
-    UCrossbowStuckProjectileEffectBanshee* BansheeComponent;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    ECrossbowStuckType StuckProjectileEffect;
-    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool IsPlayingElectricRangeEffect;
     
@@ -45,6 +39,12 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USphereComponent* AttachmentRoot;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
+    UCrossbowProjectileRecallable* RecallComponent;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
+    UCrossbowStuckProjectileEffectBanshee* BansheeComponent;
+    
 private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     UNiagaraComponent* BansheePulseComponent;
@@ -56,9 +56,15 @@ private:
     ACrossbowProjectileBase* BaseProjectile;
     
 public:
-    ACrossbowProjectileStuck();
+    ACrossbowProjectileStuck(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
+private:
+    UFUNCTION(BlueprintCallable)
+    void UsableChanged(bool CanUse);
     
+public:
     UFUNCTION(BlueprintCallable)
     void OnUsedBy(APlayerCharacter* Player, EInputKeys Key);
     

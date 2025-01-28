@@ -1,12 +1,11 @@
 #include "ProjectileLauncherComponent.h"
 #include "Templates/SubclassOf.h"
 
-class AProjectileBase;
+UProjectileLauncherComponent::UProjectileLauncherComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->ProjectileClass = NULL;
+}
 
 void UProjectileLauncherComponent::SetProjectileClass(TSubclassOf<AProjectileBase> NewProjectileClass) {
 }
 
-UProjectileLauncherComponent::UProjectileLauncherComponent() {
-    this->ProjectileClass = NULL;
-}
 

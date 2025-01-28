@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "PlagueCleanerResourceChangedDelegate.h"
 #include "PlagueCleanupItem.h"
+#include "Templates/SubclassOf.h"
 #include "WeaponFireOwner.h"
 #include "PlagueSoaperItem.generated.h"
 
-class AProjectileBase;
 class APlayerCharacter;
+class AProjectileBase;
 class UProjectileLauncherComponent;
 
 UCLASS(Blueprintable)
@@ -25,12 +25,13 @@ public:
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FPlagueCleanerResourceChanged OnAmmoChanged;
     
-    APlagueSoaperItem();
+    APlagueSoaperItem(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnWeaponFired(const FVector& Location);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 public:
     UFUNCTION(BlueprintCallable)

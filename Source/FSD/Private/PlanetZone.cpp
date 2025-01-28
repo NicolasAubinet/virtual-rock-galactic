@@ -1,7 +1,8 @@
 #include "PlanetZone.h"
 
-class UBiome;
-class UFSDSaveGame;
+UPlanetZone::UPlanetZone() {
+    this->MustBeUnlocked = true;
+}
 
 bool UPlanetZone::IsUnlocked(UFSDSaveGame* SaveGame) const {
     return false;
@@ -15,7 +16,4 @@ TArray<UBiome*> UPlanetZone::GetBiomes() const {
     return TArray<UBiome*>();
 }
 
-UPlanetZone::UPlanetZone() {
-    this->MustBeUnlocked = true;
-}
 

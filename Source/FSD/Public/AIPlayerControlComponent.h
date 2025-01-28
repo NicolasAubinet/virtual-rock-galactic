@@ -4,9 +4,9 @@
 #include "Components/ActorComponent.h"
 #include "AIPlayerControlComponent.generated.h"
 
-class UDialogDataAsset;
-class UControlEnemyUsable;
 class UAnimMontage;
+class UControlEnemyUsable;
+class UDialogDataAsset;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UAIPlayerControlComponent : public UActorComponent {
@@ -74,6 +74,7 @@ protected:
     UControlEnemyUsable* Usable;
     
 public:
-    UAIPlayerControlComponent();
+    UAIPlayerControlComponent(const FObjectInitializer& ObjectInitializer);
+
 };
 

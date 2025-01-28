@@ -1,7 +1,11 @@
 #include "ChargedProjectileLauncherComponent.h"
 #include "Templates/SubclassOf.h"
 
-class AProjectileBase;
+UChargedProjectileLauncherComponent::UChargedProjectileLauncherComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->NormalProjectileClass = NULL;
+    this->ChargedProjectileClass = NULL;
+    this->ProjectileChangeChargeValue = 1.00f;
+}
 
 void UChargedProjectileLauncherComponent::SetProjectileClassCharged(TSubclassOf<AProjectileBase> NewProjectileClass) {
 }
@@ -9,9 +13,4 @@ void UChargedProjectileLauncherComponent::SetProjectileClassCharged(TSubclassOf<
 void UChargedProjectileLauncherComponent::SetProjectileClass(TSubclassOf<AProjectileBase> NewProjectileClass) {
 }
 
-UChargedProjectileLauncherComponent::UChargedProjectileLauncherComponent() {
-    this->NormalProjectileClass = NULL;
-    this->ChargedProjectileClass = NULL;
-    this->ProjectileChangeChargeValue = 1.00f;
-}
 

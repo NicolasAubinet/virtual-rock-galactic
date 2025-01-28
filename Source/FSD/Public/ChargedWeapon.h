@@ -1,12 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "ChargeChangedSignatureDelegate.h"
 #include "AmmoDrivenWeapon.h"
+#include "ChargeChangedSignatureDelegate.h"
 #include "ChargedWeapon.generated.h"
 
-class UFXSystemComponent;
-class UFXSystemAsset;
 class UAnimMontage;
+class UFXSystemAsset;
+class UFXSystemComponent;
 class USoundCue;
 
 UCLASS(Abstract, Blueprintable)
@@ -87,9 +87,10 @@ protected:
     float HeatPerChargedShot;
     
 public:
-    AChargedWeapon();
+    AChargedWeapon(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void SetOverheated(bool isOverheated);

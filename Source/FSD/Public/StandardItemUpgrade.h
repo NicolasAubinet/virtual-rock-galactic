@@ -9,12 +9,13 @@ class UStandardItemUpgrade : public UItemUpgrade {
 public:
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    float Amount;
+    float amount;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool IsPercentage;
     
 public:
     UStandardItemUpgrade();
+
 };
 

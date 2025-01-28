@@ -1,8 +1,11 @@
 #include "EnemyControlStateComponent.h"
 #include "Net/UnrealNetwork.h"
 
-class UAIPlayerControlComponent;
-class UAnimMontage;
+UEnemyControlStateComponent::UEnemyControlStateComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->StateId = 17;
+    this->UseThirdPersonCam = true;
+    this->ControlState = EEnemyControlState::Disconneced;
+}
 
 void UEnemyControlStateComponent::ServerExit_Implementation() {
 }
@@ -34,8 +37,4 @@ void UEnemyControlStateComponent::GetLifetimeReplicatedProps(TArray<FLifetimePro
     DOREPLIFETIME(UEnemyControlStateComponent, ControlRotation);
 }
 
-UEnemyControlStateComponent::UEnemyControlStateComponent() {
-    this->UseThirdPersonCam = true;
-    this->ControlState = EEnemyControlState::Disconneced;
-}
 

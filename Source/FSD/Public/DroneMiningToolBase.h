@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "Components/ActorComponent.h"
 #include "Engine/NetSerialization.h"
 #include "MineHitEventDelegate.h"
-#include "Components/ActorComponent.h"
 #include "DroneMiningToolBase.generated.h"
 
 class UTerrainMaterial;
@@ -28,7 +28,8 @@ protected:
     int32 MineStrength;
     
 public:
-    UDroneMiningToolBase();
+    UDroneMiningToolBase(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void StopMining();
     

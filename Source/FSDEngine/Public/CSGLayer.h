@@ -1,12 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "DeepCSGTree.h"
-#include "MeshLayerProperties.h"
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
 #include "CSGGroup.h"
-#include "GeneralTerrainMaterialCombiner.h"
-#include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
 #include "DeepCSGFloatTree.h"
+#include "DeepCSGTree.h"
+#include "GeneralTerrainMaterialCombiner.h"
+#include "MeshLayerProperties.h"
 #include "CSGLayer.generated.h"
 
 UCLASS(Blueprintable)
@@ -32,5 +32,6 @@ public:
     FMatrix TransformMatInv;
     
     UCSGLayer();
+
 };
 

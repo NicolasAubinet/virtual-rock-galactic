@@ -1,6 +1,8 @@
 #include "GrowthComponent.h"
 
-class USceneComponent;
+UGrowthComponent::UGrowthComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->ScaleComponent = NULL;
+}
 
 void UGrowthComponent::StopGrow() {
 }
@@ -8,7 +10,4 @@ void UGrowthComponent::StopGrow() {
 void UGrowthComponent::StartGrow(USceneComponent* aComponentToScale, FRuntimeFloatCurve aCurve) {
 }
 
-UGrowthComponent::UGrowthComponent() {
-    this->ScaleComponent = NULL;
-}
 

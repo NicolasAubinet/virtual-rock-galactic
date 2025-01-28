@@ -1,23 +1,24 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
-#include "HitSigDelegate.h"
-#include "HealthRegeneratingChangedDelegate.h"
-#include "FullHealthSignatureDelegate.h"
 #include "AudioWithCooldown.h"
-#include "HealthRegenerationParams.h"
+#include "FullHealthSignatureDelegate.h"
 #include "HealthComponent.h"
+#include "HealthRegeneratingChangedDelegate.h"
+#include "HealthRegenerationParams.h"
+#include "HitSigDelegate.h"
 #include "RejoinListener.h"
+#include "Templates/SubclassOf.h"
 #include "PlayerHealthComponent.generated.h"
 
 class AActor;
 class AController;
-class UParticleSystemComponent;
-class UPlayerDamageTakenMutator;
 class APlayerCharacter;
-class UStatusEffect;
 class UCurveFloat;
 class UParticleSystem;
+class UParticleSystemComponent;
+class UPlayerDamageTakenMutator;
+class USharedHealthMutator;
+class UStatusEffect;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UPlayerHealthComponent : public UHealthComponent, public IRejoinListener {
@@ -99,10 +100,14 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float IronWillTimeToActivate;
     
-public:
-    UPlayerHealthComponent();
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    USharedHealthMutator* SharedHealthMutator;
     
+public:
+    UPlayerHealthComponent(const FObjectInitializer& ObjectInitializer);
+
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     UStatusEffect* SetIronWillStatusEffect(TSubclassOf<UStatusEffect> steClass);
     
@@ -149,7 +154,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool CanActivateIronWill() const;
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

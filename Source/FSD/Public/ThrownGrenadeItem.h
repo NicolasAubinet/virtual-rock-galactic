@@ -1,19 +1,19 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "EThrownGrenadeItemState.h"
 #include "Item.h"
 #include "RejoinListener.h"
+#include "Templates/SubclassOf.h"
 #include "ThrownGrenadeItem.generated.h"
 
-class UStaticMeshComponent;
 class AGrenade;
 class UFSDAudioComponent;
 class UGrenadeAnimationSet;
 class UItemCharacterAnimationSet;
 class UPlayerAnimInstance;
+class UStaticMeshComponent;
 
 UCLASS(Blueprintable)
 class AThrownGrenadeItem : public AItem, public IRejoinListener {
@@ -71,9 +71,10 @@ protected:
     bool HasRejoinedInitialized;
     
 public:
-    AThrownGrenadeItem();
+    AThrownGrenadeItem(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void UpdateCookTime(float Time);
@@ -94,7 +95,7 @@ public:
     void Server_Resupply(float percentage);
     
     UFUNCTION(BlueprintCallable)
-    void ResupplyGrenadesAmount(const int32& Amount);
+    void ResupplyGrenadesAmount(const int32& amount);
     
     UFUNCTION(BlueprintCallable)
     void ResupplyGrenades(float percentage);
@@ -132,7 +133,7 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetGrenadeDuration() const;
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

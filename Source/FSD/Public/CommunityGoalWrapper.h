@@ -1,13 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "UObject/Object.h"
+#include "CommunityFactionData.h"
+#include "CommunityGoalStateData.h"
+#include "CommunityRewardNotification.h"
+#include "FactionsDataDelegateDelegate.h"
+#include "GoalStateDelegateDelegate.h"
 #include "OnFreeBeersChangedDelegateDelegate.h"
 #include "UICheckDelegateDelegate.h"
-#include "GoalStateDelegateDelegate.h"
-#include "FactionsDataDelegateDelegate.h"
-#include "CommunityRewardNotification.h"
-#include "CommunityGoalStateData.h"
-#include "CommunityFactionData.h"
-#include "UObject/Object.h"
 #include "CommunityGoalWrapper.generated.h"
 
 class UCommunityGoal;
@@ -59,6 +59,7 @@ protected:
     
 public:
     UCommunityGoalWrapper();
+
     UFUNCTION(BlueprintCallable)
     void UpdateAllGoalsInitialized();
     

@@ -1,10 +1,9 @@
 #include "PendingLatentActionLibrary.h"
 
-class UObject;
+UPendingLatentActionLibrary::UPendingLatentActionLibrary() {
+}
 
 void UPendingLatentActionLibrary::WaitOneFrame(UObject* WorldContextObject, FLatentActionInfo LatentInfo) {
 }
 
-UPendingLatentActionLibrary::UPendingLatentActionLibrary() {
-}
 

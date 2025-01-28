@@ -1,13 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
+#include "GameFramework/Actor.h"
 #include "Engine/EngineTypes.h"
 #include "DelegateEventDelegate.h"
-#include "GameFramework/Actor.h"
 #include "AnchorTurner.generated.h"
 
-class USceneComponent;
 class UPrimitiveComponent;
+class USceneComponent;
 class USkeletalMeshComponent;
 class USphereComponent;
 
@@ -62,9 +62,10 @@ protected:
     float DecaySpeed;
     
 public:
-    AAnchorTurner();
+    AAnchorTurner(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_Finished();

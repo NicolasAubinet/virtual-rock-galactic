@@ -1,13 +1,11 @@
 #include "SendInviteBlueprintCallProxy.h"
 
-class UObject;
-class USendInviteBlueprintCallProxy;
+USendInviteBlueprintCallProxy::USendInviteBlueprintCallProxy() {
+    this->WorldContextObject = NULL;
+}
 
 USendInviteBlueprintCallProxy* USendInviteBlueprintCallProxy::SendInvite(UObject* NewWorldContextObject, const FString& ListName, const FString& UserId) {
     return NULL;
 }
 
-USendInviteBlueprintCallProxy::USendInviteBlueprintCallProxy() {
-    this->WorldContextObject = NULL;
-}
 

@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "Components/SceneComponent.h"
+#include "Templates/SubclassOf.h"
 #include "ActorTrackingComponent.generated.h"
 
 class UActorTrackingWidget;
@@ -10,6 +10,7 @@ UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UActorTrackingComponent : public USceneComponent {
     GENERATED_BODY()
 public:
+protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UActorTrackingWidget> WidgetType;
     
@@ -22,17 +23,18 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bIconHidden;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient)
-    UActorTrackingWidget* Widget;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    TWeakObjectPtr<UActorTrackingWidget> Widget;
     
 public:
-    UActorTrackingComponent();
+    UActorTrackingComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void ToggleIcon(bool Visible);
     
 protected:
     UFUNCTION(BlueprintCallable)
-    void ShowAlwaysOn();
+    void ShowAlwaysOn(bool IsActive);
     
     UFUNCTION(BlueprintCallable)
     void OnHoldTAB(bool IsDown);

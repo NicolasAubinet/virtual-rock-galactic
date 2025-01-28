@@ -3,23 +3,23 @@
 #include "UObject/NoExportTypes.h"
 #include "Engine/EngineTypes.h"
 #include "Engine/NetSerialization.h"
-#include "EDoubleDrillState.h"
 #include "DoubleDrillDamageItem.h"
 #include "DualAnimatedItem.h"
+#include "EDoubleDrillState.h"
 #include "RejoinListener.h"
-#include "UpgradableGear.h"
 #include "Upgradable.h"
+#include "UpgradableGear.h"
 #include "DoubleDrillItem.generated.h"
 
 class AActor;
-class UDamageComponent;
+class UAnimMontage;
 class UDamageClass;
-class UDoubleDrillAggregator;
+class UDamageComponent;
 class UDialogDataAsset;
-class UFirstPersonParticleSystemComponent;
+class UDoubleDrillAggregator;
 class UFSDAudioComponent;
 class UFSDPhysicalMaterial;
-class UAnimMontage;
+class UFirstPersonParticleSystemComponent;
 class UForceFeedbackEffect;
 class UParticleSystem;
 
@@ -121,7 +121,7 @@ public:
     float Damage;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    float ArmorDamageMultiplier;
+    float armorDamageMultiplier;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDamageClass* DamageClass;
@@ -162,9 +162,10 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_IsGunslinging, meta=(AllowPrivateAccess=true))
     bool IsGunslinging;
     
-    ADoubleDrillItem();
+    ADoubleDrillItem(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_StopMining();
     
@@ -210,7 +211,7 @@ public:
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
     void All_SimulateDamage(const TArray<FDoubleDrillDamageItem>& Targets);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

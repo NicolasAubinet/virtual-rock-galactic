@@ -1,11 +1,7 @@
 #include "SchematicBlueprintLibrary.h"
 
-class UObject;
-class UItemUpgrade;
-class UItemSkinSchematicCollection;
-class UPlayerCharacterID;
-class USchematicCategory;
-class USchematic;
+USchematicBlueprintLibrary::USchematicBlueprintLibrary() {
+}
 
 void USchematicBlueprintLibrary::PriceSchematics(const TSet<USchematic*>& Schematics) {
 }
@@ -24,9 +20,4 @@ USchematicCategory* USchematicBlueprintLibrary::FindItemUpgradeSchematicCategory
     return NULL;
 }
 
-void USchematicBlueprintLibrary::AddSkinSchematicCollectionToSettings(UItemSkinSchematicCollection* Collection) {
-}
-
-USchematicBlueprintLibrary::USchematicBlueprintLibrary() {
-}
 

@@ -1,17 +1,13 @@
 #include "FSDGameplayStatics.h"
 
-class UObject;
-class AActor;
-class UFXSystemComponent;
-class UAudioComponent;
-class UMaterialInterface;
-class UDecalComponent;
+UFSDGameplayStatics::UFSDGameplayStatics() {
+}
 
 UFXSystemComponent* UFSDGameplayStatics::SpawnScaledEmitterAtLocation(UObject* WorldContextObject, FScaledEffect ScaledEffect, FVector Location, FRotator Rotation, bool bAutoDestroy) {
     return NULL;
 }
 
-UDecalComponent* UFSDGameplayStatics::SpawnDecalData(const UObject* WorldContextObject, const FVector& Location, const FVector& upVector, const FDecalData& DecalData, bool randomRollRotation) {
+UDecalComponent* UFSDGameplayStatics::SpawnDecalData(const UObject* WorldContextObject, const FVector& Location, const FVector& UpVector, const FDecalData& DecalData, bool randomRollRotation) {
     return NULL;
 }
 
@@ -19,7 +15,7 @@ UDecalComponent* UFSDGameplayStatics::SpawnDecalAtActor(AActor* Actor, UMaterial
     return NULL;
 }
 
-UDecalComponent* UFSDGameplayStatics::SpawnDecal(const UObject* WorldContextObject, UMaterialInterface* DecalMaterial, const FVector& Location, const FVector& upVector, float Size, float Duration, float FadeDuration) {
+UDecalComponent* UFSDGameplayStatics::SpawnDecal(const UObject* WorldContextObject, UMaterialInterface* DecalMaterial, const FVector& Location, const FVector& UpVector, float Size, float Duration, float FadeDuration) {
     return NULL;
 }
 
@@ -29,6 +25,4 @@ void UFSDGameplayStatics::SetControllerVibrationSubmixSend(const UObject* WorldC
 void UFSDGameplayStatics::SetControllerSpeakerSubmixSend(const UObject* WorldContextObject, UAudioComponent* AudioComponent, float SendLevel) {
 }
 
-UFSDGameplayStatics::UFSDGameplayStatics() {
-}
 

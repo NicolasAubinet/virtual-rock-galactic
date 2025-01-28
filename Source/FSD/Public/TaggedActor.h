@@ -1,9 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "GameplayTagContainer.h"
-#include "GameplayTagContainer.h"
 #include "GameFramework/Actor.h"
+#include "GameplayTagContainer.h"
 #include "GameplayTagAssetInterface.h"
+#include "GameplayTagContainer.h"
 #include "TaggedActor.generated.h"
 
 UCLASS(Blueprintable)
@@ -15,8 +15,9 @@ protected:
     FGameplayTagContainer GameplayTags;
     
 public:
-    ATaggedActor();
-    
+    ATaggedActor(const FObjectInitializer& ObjectInitializer);
+
+
     // Fix for true pure virtual functions not being implemented
     UFUNCTION(BlueprintCallable)
     bool HasMatchingGameplayTag(FGameplayTag TagToCheck) const override PURE_VIRTUAL(HasMatchingGameplayTag, return false;);

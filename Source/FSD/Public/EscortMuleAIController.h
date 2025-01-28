@@ -2,8 +2,8 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
-#include "FSDAIController.h"
 #include "AsyncPathRequestsInterface.h"
+#include "FSDAIController.h"
 #include "EscortMuleAIController.generated.h"
 
 class UEscortObjective;
@@ -38,7 +38,8 @@ protected:
     FRandomStream RandomStream;
     
 public:
-    AEscortMuleAIController();
+    AEscortMuleAIController(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void SetDozerNextPathSegment();
     
@@ -62,7 +63,10 @@ public:
     UFUNCTION(BlueprintCallable)
     void FindDozerPath(FVector StartPosition);
     
+    UFUNCTION(BlueprintCallable)
+    void CHEAT_SetDozerLastPathSegment();
     
+
     // Fix for true pure virtual functions not being implemented
 };
 

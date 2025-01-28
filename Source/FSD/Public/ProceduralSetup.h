@@ -1,43 +1,43 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
-#include "Engine/LatentActionManager.h"
 #include "UObject/NoExportTypes.h"
-#include "EDebrisItemPass.h"
-#include "ECriticalItemPass.h"
-#include "ESpawnSettings.h"
-#include "RandRange.h"
-#include "EncountersSpawnedDelegateDelegate.h"
-#include "DebrisCapsule.h"
-#include "EncounterSpecialItem.h"
-#include "PathObstacle.h"
-#include "CollectableSpawnableItem.h"
-#include "GeneratedInfluenceSets.h"
-#include "GeneratedDebris.h"
-#include "GeneratedInstantCarvers.h"
-#include "CarvedResource.h"
-#include "GemResourceAmount.h"
-#include "InfluenceMap.h"
-#include "RoomNode.h"
-#include "TunnelNode.h"
 #include "GameFramework/Actor.h"
+#include "Engine/LatentActionManager.h"
+#include "CarvedResource.h"
+#include "CollectableSpawnableItem.h"
+#include "DebrisCapsule.h"
+#include "ECriticalItemPass.h"
+#include "EDebrisItemPass.h"
+#include "ESpawnSettings.h"
+#include "EncounterSpecialItem.h"
+#include "EncountersSpawnedDelegateDelegate.h"
+#include "GemResourceAmount.h"
+#include "GeneratedDebris.h"
+#include "GeneratedInfluenceSets.h"
+#include "GeneratedInstantCarvers.h"
+#include "InfluenceMap.h"
+#include "PathObstacle.h"
+#include "RandRange.h"
+#include "RoomNode.h"
+#include "Templates/SubclassOf.h"
+#include "TunnelNode.h"
 #include "ProceduralSetup.generated.h"
 
-class UBiome;
-class UResourceData;
 class ADeepCSGWorld;
-class UMissionDNA;
-class UFloodFillSettings;
 class AFSDPlayerController;
-class UNoisyPathfinderComponent;
-class UProceduralVeinsComponent;
-class UProceduralTunnelComponent;
-class UCaveInfluencer;
 class AProceduralSetup;
-class UProceduralResources;
-class UProceduralObjectColliders;
+class UBiome;
+class UCaveInfluencer;
+class UFloodFillSettings;
+class UMissionDNA;
+class UNoisyPathfinderComponent;
 class UPLSEncounterComponent;
+class UProceduralObjectColliders;
+class UProceduralResources;
+class UProceduralTunnelComponent;
+class UProceduralVeinsComponent;
+class UResourceData;
 class URoomGeneratorBase;
 class USpecialEvent;
 class UTunnelParameters;
@@ -186,8 +186,12 @@ protected:
     FString LastCompletedPLSPass;
     
 public:
-    AProceduralSetup();
+    AProceduralSetup(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void StartMusicAndAmbient(int32 Music);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void StartGenerationOnClient(AFSDPlayerController* client);
@@ -202,7 +206,7 @@ public:
     void SpawnObjectiveCriticalItems(const ECriticalItemPass& pass);
     
     UFUNCTION(BlueprintCallable, meta=(Latent, LatentInfo="LatentInfo"))
-    static void SpawnItems_Async(AProceduralSetup* setup, FLatentActionInfo LatentInfo);
+    static void SpawnItems_Async(AProceduralSetup* Setup, FLatentActionInfo LatentInfo);
     
     UFUNCTION(BlueprintCallable)
     void SpawnItems();
@@ -211,7 +215,7 @@ public:
     void SpawnEncounters();
     
     UFUNCTION(BlueprintCallable, meta=(Latent, LatentInfo="LatentInfo"))
-    static void SpawnDebrisItems_Async(AProceduralSetup* setup, FLatentActionInfo LatentInfo, EDebrisItemPass pass, int32 Depth);
+    static void SpawnDebrisItems_Async(AProceduralSetup* Setup, FLatentActionInfo LatentInfo, EDebrisItemPass pass, int32 Depth);
     
     UFUNCTION(BlueprintCallable)
     void SpawnDebrisItems(EDebrisItemPass pass);
@@ -262,7 +266,7 @@ protected:
     
 public:
     UFUNCTION(BlueprintCallable, meta=(Latent, LatentInfo="LatentInfo"))
-    static void GenerateRoomsFromGraph_Async(AProceduralSetup* setup, FLatentActionInfo LatentInfo, int32 CarvePass);
+    static void GenerateRoomsFromGraph_Async(AProceduralSetup* Setup, FLatentActionInfo LatentInfo, int32 CarvePass);
     
     UFUNCTION(BlueprintCallable)
     void GenerateRoomsFromGraph(int32 CarvePass);
@@ -280,7 +284,7 @@ public:
     void FindEntrancesForAllConnections();
     
     UFUNCTION(BlueprintCallable, meta=(Latent, LatentInfo="LatentInfo"))
-    static void FillTunnels_Async(AProceduralSetup* setup, FLatentActionInfo LatentInfo);
+    static void FillTunnels_Async(AProceduralSetup* Setup, FLatentActionInfo LatentInfo);
     
     UFUNCTION(BlueprintCallable)
     void FillTunnels();
@@ -301,7 +305,7 @@ public:
     void CreateGeneratedInfluenceSet();
     
     UFUNCTION(BlueprintCallable)
-    int32 ConnectRooms(UPARAM(Ref) FRoomNode& From, UPARAM(Ref) FRoomNode& To, bool hasDirt, UTunnelParameters* tunnelParameterOverride);
+    int32 ConnectRooms(UPARAM(Ref) FRoomNode& from, UPARAM(Ref) FRoomNode& to, bool hasDirt, UTunnelParameters* tunnelParameterOverride);
     
     UFUNCTION(BlueprintCallable)
     int32 ConnectRoomIds(int32 fromID, int32 toID, bool hasDirt, UTunnelParameters* tunnelParameterOverride);

@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EDirectDamageConditionEnum.h"
 #include "DamageCondition.h"
+#include "EDirectDamageConditionEnum.h"
 #include "DirectDamageCondition.generated.h"
 
 UCLASS(Blueprintable, EditInlineNew)
@@ -14,5 +14,6 @@ protected:
     
 public:
     UDirectDamageCondition();
+
 };
 

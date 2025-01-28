@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "CSGSingleChildBase.h"
 #include "CSGRandomizeTransformProperties.h"
+#include "CSGSingleChildBase.h"
 #include "CSGRandomizeTransform.generated.h"
 
 UCLASS(Blueprintable)
@@ -12,5 +12,6 @@ public:
     FCSGRandomizeTransformProperties Properties;
     
     UCSGRandomizeTransform();
+
 };
 

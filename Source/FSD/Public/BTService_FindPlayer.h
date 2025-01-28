@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "BehaviorTree/BehaviorTreeTypes.h"
 #include "BehaviorTree/BTService.h"
+#include "BehaviorTree/BehaviorTreeTypes.h"
 #include "BTService_FindPlayer.generated.h"
 
 UCLASS(Blueprintable)
@@ -35,5 +35,6 @@ protected:
     
 public:
     UBTService_FindPlayer();
+
 };
 

@@ -1,57 +1,59 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
-#include "ItemUINotifications.h"
-#include "ResourcesSave.h"
-#include "WatchedTutorial.h"
-#include "ConsoleOptionsInSaveGame.h"
-#include "GDKWinOptionsInSaveGame.h"
-#include "OptionsInSaveGame.h"
-#include "SonyInputSettings.h"
-#include "VanityMasterySave.h"
-#include "VanityMasteryResult.h"
-#include "SeasonSave.h"
-#include "GameDLCSave.h"
-#include "UnLockedMissionParameters.h"
-#include "CampaignSave.h"
-#include "DeepDiveSave.h"
-#include "CharacterSave.h"
-#include "ForgingSave.h"
-#include "DrinkSave.h"
-#include "ItemUpgradeSelection.h"
-#include "UpgradeLoadout.h"
-#include "ItemNotificationInfo.h"
-#include "SkinList.h"
-#include "EventRewardSave.h"
-#include "AchievementSave.h"
-#include "CharacterPerksSave.h"
-#include "SchematicSave.h"
-#include "PromotionRewardsSave.h"
-#include "FSDEventRewardsSave.h"
-#include "ESonyControllerMotionMapping.h"
-#include "ESonyControllerLightMode.h"
-#include "ESonyInputSettingsFloats.h"
-#include "ESonyInputSettingsBools.h"
-#include "EItemCategory.h"
-#include "EFSDFaction.h"
-#include "MissionStatSave.h"
-#include "MilestoneSave.h"
-#include "PerkClaimsSave.h"
 #include "GameFramework/SaveGame.h"
+#include "AchievementSave.h"
+#include "CampaignSave.h"
+#include "CharacterPerksSave.h"
+#include "CharacterSave.h"
+#include "ConsoleOptionsInSaveGame.h"
+#include "DeepDiveSave.h"
+#include "DrinkSave.h"
+#include "EFSDFaction.h"
+#include "EItemCategory.h"
+#include "ESonyControllerLightMode.h"
+#include "ESonyControllerMotionMapping.h"
+#include "ESonyInputSettingsBools.h"
+#include "ESonyInputSettingsFloats.h"
+#include "EventRewardSave.h"
+#include "FSDEventRewardsSave.h"
+#include "ForgingSave.h"
+#include "GDKWinOptionsInSaveGame.h"
+#include "GameDLCSave.h"
+#include "ItemNotificationInfo.h"
+#include "ItemUINotifications.h"
+#include "JettyBootsSave.h"
+#include "MilestoneSave.h"
+#include "MissionStatSave.h"
+#include "OptionsInSaveGame.h"
+#include "PerkClaimsSave.h"
+#include "PromotionRewardsSave.h"
+#include "ResourcesSave.h"
+#include "SchematicSave.h"
+#include "SeasonSave.h"
+#include "SkinList.h"
+#include "SonyInputSettings.h"
+#include "Templates/SubclassOf.h"
+#include "UnLockedMissionParameters.h"
+#include "UpgradeLoadout.h"
+#include "VanityMasteryResult.h"
+#include "VanityMasterySave.h"
+#include "WatchedTutorial.h"
+#include "WeaponMaintenance.h"
+#include "WeaponMaintenanceChangedDelegate.h"
 #include "FSDSaveGame.generated.h"
 
-class UObject;
 class AActor;
-class UVanityItem;
-class UResourceData;
+class APlayerCharacter;
 class UFSDGameInstance;
 class UFSDSaveGame;
-class UItemSkin;
 class UItemID;
+class UItemSkin;
+class UObject;
 class UPlayerCharacterID;
-class APlayerCharacter;
+class UResourceData;
+class UVanityItem;
 
 UCLASS(Blueprintable)
 class FSD_API UFSDSaveGame : public USaveGame {
@@ -149,10 +151,16 @@ public:
     TArray<FCharacterPerksSave> EquippedPerkLoadouts;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FCharacterPerksSave RandomEquippedPerkLoadout;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FVanityMasterySave VanityMasterySave;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FCraftingMasteryChanged OnVanityMasteryChanged;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FJettyBootsSave JettyBootsSave;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSchematicSave SchematicSave;
@@ -168,6 +176,12 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameDLCSave GameDLCSave;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FWeaponMaintenanceChanged OnWeaponMaintenanceChanged;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FWeaponMaintenance WeaponMaintenance;
     
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -216,10 +230,10 @@ protected:
     FDrinkSave Drinks;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TMap<FGuid, FItemUpgradeSelection> ItemUpgradeSelections;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FUpgradeLoadout> ItemUpgradeLoadouts;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    bool bIgnoreRandomLoadout;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FGuid> PurchasedItemUpgrades;
@@ -270,7 +284,7 @@ protected:
     bool FirstRejoinAttempt;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    bool HaveSkinsBeenReset;
+    bool HaveItemUpgradesBeenFixed;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bHasOpenedDeepDiveTerminal;
@@ -376,17 +390,18 @@ protected:
     
 public:
     UFSDSaveGame();
+
     UFUNCTION(BlueprintCallable)
-    bool TrySellResource(UResourceData* Resource, int32 Amount, int32& Price);
+    bool TrySellResource(UResourceData* Resource, int32 amount, int32& Price);
     
     UFUNCTION(BlueprintCallable)
     bool TryDeductResources(const TMap<UResourceData*, int32>& NewResources);
     
     UFUNCTION(BlueprintCallable)
-    bool TryDeductCredits(int32 Amount);
+    bool TryDeductCredits(int32 amount);
     
     UFUNCTION(BlueprintCallable)
-    bool TryBuyResource(UResourceData* Resource, int32 Amount, int32& Price);
+    bool TryBuyResource(UResourceData* Resource, int32 amount, int32& Price);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool ShouldDisplayFirstSchematicMessage() const;
@@ -411,6 +426,9 @@ public:
     
     UFUNCTION(BlueprintCallable)
     void SetIndexAndName(int32 NewIndex, const FString& NewName);
+    
+    UFUNCTION(BlueprintCallable)
+    void SetIgnoreRandomLoadout(bool inIgnoreRandomLoadout);
     
     UFUNCTION(BlueprintCallable)
     void SetHasSentSteamInfo();
@@ -500,7 +518,7 @@ public:
     bool HasSeenRetirementRewardScreen() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    bool HasCredits(int32 Amount) const;
+    bool HasCredits(int32 amount) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool HasCharacterRetired(UPlayerCharacterID* characterID) const;
@@ -547,10 +565,10 @@ public:
     static FString GetSaveSlotName(int32 NewUserIdx);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    int32 GetResourceSellingPrice(UResourceData* Resource, int32 Amount) const;
+    int32 GetResourceSellingPrice(UResourceData* Resource, int32 amount) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    int32 GetResourceBuyingPrice(UResourceData* Resource, int32 Amount) const;
+    int32 GetResourceBuyingPrice(UResourceData* Resource, int32 amount) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetResourceAmount(const UResourceData* Resource) const;
@@ -634,7 +652,7 @@ public:
     static bool DeleteFromDisk(UFSDGameInstance* GameInstance, const FString& slotName, int32 NewUserIdx);
     
     UFUNCTION(BlueprintCallable)
-    bool DeductPerkPoints(int32 Amount);
+    bool DeductPerkPoints(int32 amount);
     
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
     void CheckPromotionAchievementProgress(UObject* WorldContext, bool IsRetroactive);
@@ -643,13 +661,13 @@ public:
     bool CanAfford(const TMap<UResourceData*, int32>& NewResources) const;
     
     UFUNCTION(BlueprintCallable)
-    void AddPerkPoints(int32 Amount);
+    void AddPerkPoints(int32 amount);
     
     UFUNCTION(BlueprintCallable)
     void AddGamePlayed();
     
     UFUNCTION(BlueprintCallable)
-    int32 AddCredits(int32 Amount);
+    int32 AddCredits(int32 amount);
     
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
     int32 AddClassXP(UObject* WorldContext, UPlayerCharacterID* characterID, int32 XP);

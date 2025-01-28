@@ -1,17 +1,17 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "EPlayerTemperatureState.h"
-#include "PlayerTemperatureShowBarDelegate.h"
 #include "PlayerDefrostingSignatureDelegate.h"
 #include "PlayerTemperatureChangeRateSignatureDelegate.h"
-#include "PlayerTemperatureStateChangedSignatureDelegate.h"
 #include "PlayerTemperatureChangedSignatureDelegate.h"
+#include "PlayerTemperatureShowBarDelegate.h"
+#include "PlayerTemperatureStateChangedSignatureDelegate.h"
 #include "TemperatureComponent.h"
+#include "Templates/SubclassOf.h"
 #include "PlayerTemperatureComponent.generated.h"
 
-class UHealthComponentBase;
 class APlayerCharacter;
+class UHealthComponentBase;
 class UStatusEffect;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -83,9 +83,10 @@ protected:
     EPlayerTemperatureState TemperatureState;
     
 public:
-    UPlayerTemperatureComponent();
+    UPlayerTemperatureComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetNormalTemperature();
     
@@ -119,7 +120,7 @@ public:
     float GetCurrentTemperatureNormalized() const;
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
-    void Defrost(float Amount);
+    void Defrost(float amount);
     
 };
 

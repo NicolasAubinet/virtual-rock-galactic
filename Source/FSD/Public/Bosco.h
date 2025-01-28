@@ -3,52 +3,53 @@
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
-#include "GameplayTagContainer.h"
-#include "DamageData.h"
-#include "Engine/NetSerialization.h"
 #include "UObject/NoExportTypes.h"
-#include "EDroneAIState.h"
-#include "EAbilityIndex.h"
-#include "StateChangedSigDelegate.h"
-#include "ReviveUsedSigDelegate.h"
+#include "Engine/NetSerialization.h"
+#include "GameplayTagContainer.h"
 #include "BoscoLightSetting.h"
+#include "DamageData.h"
 #include "DeepPathfinderCharacter.h"
-#include "NotifyMessageReceiver.h"
-#include "UpgradableGear.h"
-#include "Upgradable.h"
+#include "EAbilityIndex.h"
+#include "EDroneAIState.h"
 #include "ItemIDInterface.h"
+#include "NotifyMessageReceiver.h"
+#include "ReviveUsedSigDelegate.h"
 #include "SaveGameIDInterface.h"
 #include "Skinnable.h"
+#include "StateChangedSigDelegate.h"
+#include "Upgradable.h"
+#include "UpgradableGear.h"
 #include "WeaponFireOwner.h"
 #include "Bosco.generated.h"
 
 class AActor;
-class USkeletalMeshComponent;
-class UAudioComponent;
 class ABoscoController;
+class APlayerCharacter;
+class UAnimSequenceBase;
+class UAudioComponent;
+class UBobbingComponent;
+class UBoscoAbillity;
 class UBoscoAbillityComponent;
 class UBoscoProjectileAbillity;
-class UBoscoAbillity;
-class UBobbingComponent;
 class UDamageComponent;
 class UDialogDataAsset;
+class UDroneMeleeTool;
 class UDroneMiningToolBase;
-class UHealthComponent;
-class UPointLightComponent;
-class UParticleSystemComponent;
-class UHitscanComponent;
-class UItemUpgrade;
-class UItemID;
-class APlayerCharacter;
 class UDroneSkinnableComponent;
-class UTerrainMaterial;
-class UUpgradableBoscoComponent;
-class USoundBase;
-class UAnimSequenceBase;
+class UHealthComponent;
+class UHitscanComponent;
+class UItemID;
+class UItemUpgrade;
 class UParticleSystem;
+class UParticleSystemComponent;
+class UPawnSensingComponent;
+class UPointLightComponent;
+class USkeletalMeshComponent;
+class USoundBase;
 class USoundCue;
 class USpotLightComponent;
-class UPawnSensingComponent;
+class UTerrainMaterial;
+class UUpgradableBoscoComponent;
 
 UCLASS(Blueprintable)
 class FSD_API ABosco : public ADeepPathfinderCharacter, public IWeaponFireOwner, public IUpgradableGear, public IUpgradable, public ISaveGameIDInterface, public ISkinnable, public IItemIDInterface, public INotifyMessageReceiver {
@@ -74,6 +75,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UDroneMiningToolBase* MiningTool;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
+    UDroneMeleeTool* MeleeTool;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UBobbingComponent* BobbingComponent;
@@ -125,6 +129,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDialogDataAsset* GeneralCallShout;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UDialogDataAsset* RiftCrystalShout;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDialogDataAsset* VacuumShout;
@@ -179,7 +186,7 @@ protected:
     float MiningBoosMultiplier;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    TArray<UItemUpgrade*> upgrades;
+    TArray<UItemUpgrade*> Upgrades;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UBoscoProjectileAbillity* RocketAbillity;
@@ -277,7 +284,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundBase* ReviveSirens;
     
-    UPROPERTY(EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UAudioComponent> ReviveSirensComponent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -308,6 +315,9 @@ protected:
     bool IsMining;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    bool IsMelee;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     bool IsReviving;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
@@ -320,9 +330,10 @@ protected:
     EDroneAIState CurrentState;
     
 public:
-    ABosco();
+    ABosco(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void UsePlayerActivatedAbillity(EAbilityIndex Index, AActor* aTarget, const FVector& aLocation);
     
@@ -379,7 +390,7 @@ protected:
     void OnNotReadyToShoot();
     
     UFUNCTION(BlueprintCallable)
-    void OnHit(float Amount, float BaseAmount, const FDamageData& DamageData);
+    void OnHit(float amount, float BaseAmount, const FDamageData& DamageData);
     
 public:
     UFUNCTION(BlueprintCallable)
@@ -409,7 +420,7 @@ public:
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
     void All_OnSelfDestruct();
     
-    
+
     // Fix for true pure virtual functions not being implemented
     UFUNCTION(BlueprintCallable)
     APlayerCharacter* GetPlayerCharacter() const override PURE_VIRTUAL(GetPlayerCharacter, return NULL;);

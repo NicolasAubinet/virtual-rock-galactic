@@ -5,9 +5,10 @@
 #include "MatrixWithExactSync.h"
 #include "CarveWithSTLMeshOperationData.generated.h"
 
+class ULevelGenerationCarverComponent;
 class USTLMeshCarver;
-class UTerrainMaterial;
 class UStaticMeshCarver;
+class UTerrainMaterial;
 
 USTRUCT(BlueprintType)
 struct FCarveWithSTLMeshOperationData {
@@ -33,6 +34,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FMatrixWithExactSync Transform;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
+    ULevelGenerationCarverComponent* LevelGenerationComponent;
     
     FSD_API FCarveWithSTLMeshOperationData();
 };

@@ -1,13 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
+#include "Components/ActorComponent.h"
 #include "DelegateDelegate.h"
 #include "EndMissionResult.h"
-#include "Components/ActorComponent.h"
+#include "Templates/SubclassOf.h"
 #include "PlayerStatsComponent.generated.h"
 
-class UCappedResource;
 class APlayerCharacter;
+class UCappedResource;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UPlayerStatsComponent : public UActorComponent {
@@ -56,9 +56,10 @@ protected:
     FEndMissionResultDelegate OnEndMissionResultReady;
     
 public:
-    UPlayerStatsComponent();
+    UPlayerStatsComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void SendMissionAnalytics(bool trackMorkite);
     
@@ -66,7 +67,7 @@ public:
     void SendEndMissionResult(const FEndMissionResult& Result);
     
     UFUNCTION(BlueprintCallable)
-    void OnResourceMined(UCappedResource* Resource, float Amount);
+    void OnResourceMined(UCappedResource* Resource, float amount);
     
 protected:
     UFUNCTION(BlueprintCallable)

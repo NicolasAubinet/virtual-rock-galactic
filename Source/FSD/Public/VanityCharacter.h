@@ -1,24 +1,25 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "GameFramework/Actor.h"
+#include "EArmorMeshType.h"
+#include "Templates/SubclassOf.h"
 #include "VanityCharacter.generated.h"
 
-class USkeletalMeshComponent;
 class AItem;
-class UArmorVanityItem;
+class UAnimSequenceBase;
 class UArmorMaterialVanityItem;
-class UBeardVanityItem;
+class UArmorVanityItem;
 class UBeardColorVanityItem;
+class UBeardVanityItem;
+class UChildActorComponent;
 class UEyeBrowsVanityItem;
 class UHeadVanityItem;
 class UItemSkin;
-class UMoustacheVanityItem;
-class USkinColorVanityItem;
-class USideburnsVanityItem;
 class UMaterialInterface;
-class UAnimSequenceBase;
-class UChildActorComponent;
+class UMoustacheVanityItem;
+class USideburnsVanityItem;
+class USkeletalMeshComponent;
+class USkinColorVanityItem;
 
 UCLASS(Blueprintable)
 class AVanityCharacter : public AActor {
@@ -44,7 +45,7 @@ protected:
     UHeadVanityItem* Head;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    UEyeBrowsVanityItem* EyeBrows;
+    UEyeBrowsVanityItem* Eyebrows;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USideburnsVanityItem* Sideburns;
@@ -57,6 +58,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UArmorVanityItem* Armor;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    EArmorMeshType ArmorMeshType;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UArmorMaterialVanityItem* ArmorColor;
@@ -83,7 +87,8 @@ protected:
     UItemSkin* Paintjob;
     
 public:
-    AVanityCharacter();
+    AVanityCharacter(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void DisplayVanity();
     

@@ -4,6 +4,7 @@
 #include "TemperatureComponent.h"
 #include "EnemyTemperatureComponent.generated.h"
 
+class AActor;
 class UDamageTag;
 class UEnemyDetonationSetting;
 class UHealthComponent;
@@ -70,7 +71,8 @@ protected:
     uint8 IceDetonationStack;
     
 public:
-    UEnemyTemperatureComponent();
+    UEnemyTemperatureComponent(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void TimerCallback();
@@ -79,7 +81,7 @@ protected:
     void OnDeath(UHealthComponent* HealthComponent, float damageAmount, const FDamageData& DamageData, const TArray<UDamageTag*>& Tags);
     
     UFUNCTION(BlueprintCallable)
-    void DoTemperatureShock(UStatusEffectsComponent* Status);
+    void DoTemperatureShock(UStatusEffectsComponent* Status, AActor* Source);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void All_IceDetonation();

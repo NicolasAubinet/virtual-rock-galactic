@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "UObject/NoExportTypes.h"
 #include "ClaimableRewardEntry.generated.h"
 
+class UClaimableRewardEntryWidget;
 class UObject;
 class UReward;
 
@@ -23,7 +23,7 @@ public:
     TArray<UReward*> Rewards;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FGuid SavegameID;
+    TSoftClassPtr<UClaimableRewardEntryWidget> EntryWidgetOverride;
     
     FSD_API FClaimableRewardEntry();
 };

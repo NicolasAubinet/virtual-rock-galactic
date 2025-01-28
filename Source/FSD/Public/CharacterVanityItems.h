@@ -1,80 +1,19 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "EVanitySlot.h"
 #include "Engine/DataAsset.h"
+#include "EVanitySlot.h"
 #include "CharacterVanityItems.generated.h"
 
 class UObject;
-class UArmorVanityItem;
-class UVanityItem;
-class UArmorMaterialVanityItem;
-class UBeardVanityItem;
-class UBeardColorVanityItem;
-class UEyeBrowsVanityItem;
-class UHeadVanityItem;
-class UMoustacheVanityItem;
 class UPlayerCharacterID;
-class USkinColorVanityItem;
-class USideburnsVanityItem;
-class UVanitySchematicBank;
+class UVanityItem;
 
 UCLASS(Blueprintable)
 class UCharacterVanityItems : public UDataAsset {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TArray<UHeadVanityItem*> HeadItems;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    UVanitySchematicBank* HeadSchematicBank;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TArray<UBeardVanityItem*> BeardItems;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    UVanitySchematicBank* BeardSchematicBank;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TArray<UArmorVanityItem*> ArmorItems;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TArray<UArmorMaterialVanityItem*> ArmorMaterialItems;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TArray<UArmorMaterialVanityItem*> ArmorMaterialItemsInTreassures;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TArray<UEyeBrowsVanityItem*> EyebrowsItems;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    UVanitySchematicBank* EyebrowSchematicBank;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TArray<UMoustacheVanityItem*> MoustacheItems;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    UVanitySchematicBank* MoustacheSchematicBank;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TArray<USideburnsVanityItem*> SideburnItems;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    UVanitySchematicBank* SideburnSchematicBank;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TArray<UBeardColorVanityItem*> BeardMaterialItems;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    UVanitySchematicBank* BeardMaterialSchematicBank;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TArray<USkinColorVanityItem*> SkinMaterialItems;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    UVanitySchematicBank* SkinMaterialSchematicBank;
-    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<EVanitySlot, UVanityItem*> DefaultItems;
     
@@ -83,6 +22,7 @@ protected:
     
 public:
     UCharacterVanityItems();
+
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static void SortVanityItems(UObject* WorldContextObject, UPlayerCharacterID* characterID, UPARAM(Ref) TArray<UVanityItem*>& VanityItems);
     
@@ -103,6 +43,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContext"))
     static UVanityItem* GetDefaultVanityItem(UObject* WorldContext, EVanitySlot Slot, UPlayerCharacterID* characterID);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    static bool DoesVanitySlotAllowStyleTags(EVanitySlot Slot);
     
 };
 

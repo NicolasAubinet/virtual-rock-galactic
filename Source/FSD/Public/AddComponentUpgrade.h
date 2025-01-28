@@ -1,12 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "ItemUpgrade.h"
+#include "Templates/SubclassOf.h"
 #include "AddComponentUpgrade.generated.h"
 
-class UActorComponent;
-class AItem;
 class AFSDPlayerState;
+class AItem;
+class UActorComponent;
 
 UCLASS(Blueprintable, EditInlineNew, MinimalAPI)
 class UAddComponentUpgrade : public UItemUpgrade {
@@ -21,6 +21,7 @@ protected:
     
 public:
     UAddComponentUpgrade();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static bool GetUpgradedValue(TSubclassOf<AItem> Item, AFSDPlayerState* Player, TSubclassOf<UActorComponent> NewComponentClass, bool includePreview);
     

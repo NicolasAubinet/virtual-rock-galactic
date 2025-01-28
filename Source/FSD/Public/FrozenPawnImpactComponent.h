@@ -1,16 +1,16 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
+#include "Components/ActorComponent.h"
 #include "Engine/EngineTypes.h"
 #include "DelegateDelegate.h"
-#include "Components/ActorComponent.h"
 #include "FrozenPawnImpactComponent.generated.h"
 
 class AActor;
-class UPrimitiveComponent;
-class UPhysicalMaterial;
 class UParticleSystem;
+class UPhysicalMaterial;
 class UPhysicsAsset;
+class UPrimitiveComponent;
 class USoundCue;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -34,10 +34,11 @@ protected:
     USoundCue* FrozenDeathSound;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    UParticleSystem* FrozenDeathparticles;
+    UParticleSystem* FrozenDeathParticles;
     
 public:
-    UFrozenPawnImpactComponent();
+    UFrozenPawnImpactComponent(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void TriggerFrozenRagdoll();

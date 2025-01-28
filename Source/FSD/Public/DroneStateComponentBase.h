@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EDroneState.h"
 #include "Components/ActorComponent.h"
+#include "EDroneState.h"
 #include "DroneStateComponentBase.generated.h"
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -13,6 +13,7 @@ protected:
     EDroneState SubsequentState;
     
 public:
-    UDroneStateComponentBase();
+    UDroneStateComponentBase(const FObjectInitializer& ObjectInitializer);
+
 };
 

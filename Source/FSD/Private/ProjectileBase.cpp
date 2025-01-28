@@ -1,13 +1,32 @@
 #include "ProjectileBase.h"
-#include "Net/UnrealNetwork.h"
 #include "Components/SphereComponent.h"
+#include "Net/UnrealNetwork.h"
 
-class AActor;
-class UPrimitiveComponent;
-class AProjectileBase;
-class UDamageComponent;
-class UFSDPhysicalMaterial;
-class UTerrainMaterial;
+AProjectileBase::AProjectileBase(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->bReplicates = true;
+    const FProperty* p_RemoteRole = GetClass()->FindPropertyByName("RemoteRole");
+    (*p_RemoteRole->ContainerPtrToValuePtr<TEnumAsByte<ENetRole>>(this)) = ROLE_SimulatedProxy;
+    this->RootComponent = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComponent"));
+    this->ApplyShotPower = false;
+    this->IsSpawnedFromWeapon = false;
+    this->Exploded = false;
+    this->DoOnImpact = false;
+    this->DoOnImpact2 = false;
+    this->DoOnImpact3 = false;
+    this->DoOnSpawnVar = false;
+    this->GravityMultiplier = 1.00f;
+    this->IsDorment = false;
+    this->CollisionComponent = (USphereComponent*)RootComponent;
+    this->LifeSpan = 60.00f;
+    this->VelocityMultiplier = 1.00f;
+    this->AffectedByDifficultySpeedModifier = false;
+    this->SetInitialSpeedToMaxSpeed = false;
+    this->AutoDisableCollisionOnImpact = true;
+    this->WhizbySound = NULL;
+    this->WhizByCooldown = 0.30f;
+    this->WhizByStartDistance = 500.00f;
+    this->EOnImpactBehaviour = EOnProjectileImpactBehaviourEnum::ClientAuthoritative;
+}
 
 UTerrainMaterial* AProjectileBase::TryGetTerrainMaterial() const {
     return NULL;
@@ -53,6 +72,7 @@ float AProjectileBase::GetGameTimeSinceActivation() const {
     return 0.0f;
 }
 
+
 int32 AProjectileBase::GetBoneIndex() const {
     return 0;
 }
@@ -83,24 +103,4 @@ void AProjectileBase::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutL
     DOREPLIFETIME(AProjectileBase, IsDorment);
 }
 
-AProjectileBase::AProjectileBase() {
-    this->IsSpawnedFromWeapon = false;
-    this->Exploded = false;
-    this->DoOnImpact = false;
-    this->DoOnImpact2 = false;
-    this->DoOnImpact3 = false;
-    this->DoOnSpawnVar = false;
-    this->GravityMultiplier = 1.00f;
-    this->IsDorment = false;
-    this->CollisionComponent = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComponent"));
-    this->LifeSpan = 60.00f;
-    this->VelocityMultiplier = 1.00f;
-    this->AffectedByDifficultySpeedModifier = false;
-    this->SetInitialSpeedToMaxSpeed = false;
-    this->AutoDisableCollisionOnImpact = true;
-    this->WhizbySound = NULL;
-    this->WhizByCooldown = 0.30f;
-    this->WhizByStartDistance = 500.00f;
-    this->EOnImpactBehaviour = EOnProjectileImpactBehaviourEnum::ClientAuthoritative;
-}
 

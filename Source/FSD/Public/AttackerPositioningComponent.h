@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "AttackerInfo.h"
 #include "Components/ActorComponent.h"
+#include "AttackerInfo.h"
 #include "AttackerPositioningComponent.generated.h"
 
 class AActor;
@@ -41,7 +41,8 @@ protected:
     float CostModifier;
     
 public:
-    UAttackerPositioningComponent();
+    UAttackerPositioningComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void UnregisterAttacker(AActor* Attacker, bool IsFlying);
     

@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "SchematicBankItem.h"
 #include "SchematicBankBase.h"
+#include "SchematicBankItem.h"
 #include "VictoryPoseSchematicBank.generated.h"
 
 class USchematicCategory;
@@ -18,5 +18,6 @@ public:
     TMap<UVictoryPose*, FSchematicBankItem> VictoryPoses;
     
     UVictoryPoseSchematicBank();
+
 };
 

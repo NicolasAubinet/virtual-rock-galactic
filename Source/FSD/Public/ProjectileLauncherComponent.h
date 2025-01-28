@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "ProjectileLauncherBaseComponent.h"
+#include "Templates/SubclassOf.h"
 #include "ProjectileLauncherComponent.generated.h"
 
 class AProjectileBase;
@@ -15,7 +15,8 @@ protected:
     TSubclassOf<AProjectileBase> ProjectileClass;
     
 public:
-    UProjectileLauncherComponent();
+    UProjectileLauncherComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetProjectileClass(TSubclassOf<AProjectileBase> NewProjectileClass);
     

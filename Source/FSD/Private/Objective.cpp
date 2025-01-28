@@ -2,11 +2,19 @@
 #include "Net/UnrealNetwork.h"
 #include "Templates/SubclassOf.h"
 
-class UObjective;
-class UResourceData;
-class UOptionalObjectiveWidget;
-class UObjectiveWidget;
-class UTexture2D;
+UObjective::UObjective(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->ObjectiveWidgetClass = NULL;
+    this->CompletionRewardInCredits = 0;
+    this->CompletionRewardInXP = 0;
+    this->ScaleObjectiveToMission = true;
+    this->bHasReturnObjective = false;
+    this->RequiredReturnObjectiveCompleted = false;
+    this->ShowObjectiveInHUD = true;
+    this->ObjectiveCompletedStat = NULL;
+    this->IsPrimaryObjective = -1;
+    this->bIsNeededForMissionCompletion = false;
+    this->MissionScale = 1.00f;
+}
 
 void UObjective::SignalObjectiveUpdated() {
 }
@@ -101,16 +109,4 @@ void UObjective::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifeti
     DOREPLIFETIME(UObjective, bIsNeededForMissionCompletion);
 }
 
-UObjective::UObjective() {
-    this->ObjectiveWidgetClass = NULL;
-    this->CompletionRewardInCredits = 0;
-    this->CompletionRewardInXP = 0;
-    this->ScaleObjectiveToMission = true;
-    this->bHasReturnObjective = false;
-    this->RequiredReturnObjectiveCompleted = false;
-    this->ObjectiveCompletedStat = NULL;
-    this->IsPrimaryObjective = -1;
-    this->bIsNeededForMissionCompletion = false;
-    this->MissionScale = 1.00f;
-}
 

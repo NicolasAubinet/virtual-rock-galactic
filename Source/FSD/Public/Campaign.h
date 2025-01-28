@@ -1,23 +1,24 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
-#include "ECampaignType.h"
-#include "ECampaignMutators.h"
 #include "UObject/Object.h"
+#include "ECampaignMutators.h"
+#include "ECampaignType.h"
+#include "Templates/SubclassOf.h"
 #include "Campaign.generated.h"
 
-class UGameActivityAssignmentType;
-class UReward;
-class UCampaignRequirement;
-class UCampaignMission;
-class UCampaign;
-class UDifficultySetting;
-class UDialogDataAsset;
-class APlayerController;
 class AFSDPlayerController;
+class APlayerController;
+class UCampaign;
+class UCampaignMission;
+class UCampaignRequirement;
+class UDialogDataAsset;
+class UDifficultySetting;
+class UGameActivityAssignmentType;
 class UMissionStat;
+class UMissionWarning;
 class UPlayerCharacterID;
+class UReward;
 class UTexture2D;
 
 UCLASS(Abstract, Blueprintable)
@@ -103,8 +104,12 @@ protected:
     UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
     ECampaignMutators Mutators;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<UMissionWarning*> BannedWarnings;
+    
 public:
     UCampaign();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsComplete() const;
     

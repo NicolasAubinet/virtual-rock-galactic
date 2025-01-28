@@ -1,14 +1,12 @@
 #include "Projectile.h"
+#include "FSDProjectileMovementComponent.h"
 #include "Net/UnrealNetwork.h"
 #include "Templates/SubclassOf.h"
-#include "FSDProjectileMovementComponent.h"
 
-class UObject;
-class USceneComponent;
-class APawn;
-class AProjectileBase;
-class AProjectile;
-class UFSDPhysicalMaterial;
+AProjectile::AProjectile(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->UseArmorDamageBoneCheck = false;
+    this->MovementComponent = CreateDefaultSubobject<UFSDProjectileMovementComponent>(TEXT("ProjectileComponent"));
+}
 
 AProjectileBase* AProjectile::SpawnProjectileFromSelf(UObject* WorldContextObject, TSubclassOf<AProjectileBase> ProjectileClass, FVector Origin, FRotator velocityDirection) {
     return NULL;
@@ -44,14 +42,13 @@ UFSDPhysicalMaterial* AProjectile::FindBoneIndexFromArmor(const FHitResult& HitR
     return NULL;
 }
 
+void AProjectile::DisableHoming() {
+}
+
 void AProjectile::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
     Super::GetLifetimeReplicatedProps(OutLifetimeProps);
     
     DOREPLIFETIME(AProjectile, State);
 }
 
-AProjectile::AProjectile() {
-    this->UseArmorDamageBoneCheck = false;
-    this->MovementComponent = CreateDefaultSubobject<UFSDProjectileMovementComponent>(TEXT("ProjectileComponent"));
-}
 

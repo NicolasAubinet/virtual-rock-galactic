@@ -4,8 +4,8 @@
 #include "HMMinMaxLevel.h"
 #include "HeightMapWithMinMaxQuadTree.generated.h"
 
-class UTextureRenderTarget2D;
 class UTexture;
+class UTextureRenderTarget2D;
 
 UCLASS(Blueprintable)
 class FSDENGINE_API UHeightMapWithMinMaxQuadTree : public UDataAsset {
@@ -39,6 +39,7 @@ public:
     bool Initialized;
     
     UHeightMapWithMinMaxQuadTree();
+
     UFUNCTION(BlueprintCallable)
     void Generate();
     

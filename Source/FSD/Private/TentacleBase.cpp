@@ -1,6 +1,16 @@
 #include "TentacleBase.h"
 
-class AStabberVineRoot;
+ATentacleBase::ATentacleBase(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->SplineComponent = NULL;
+    this->HeadMovementDuration = 0.00f;
+    this->CanSwayCooldown = 0.00f;
+    this->NeckBaseTangentLength = 0.00f;
+    this->NeckTopTangentLength = 0.00f;
+    this->DurationTentacleRetract = 1.00f;
+    this->DurationTentacleFoldout = 1.00f;
+    this->HeadRoot = NULL;
+    this->HeadRotator = NULL;
+}
 
 void ATentacleBase::SetRestingTransform(const FTransform& restingTransform, bool startAtRest) {
 }
@@ -15,15 +25,4 @@ AStabberVineRoot* ATentacleBase::GetStabberVineRoot() const {
 
 
 
-ATentacleBase::ATentacleBase() {
-    this->SplineComponent = NULL;
-    this->HeadMovementDuration = 0.00f;
-    this->CanSwayCooldown = 0.00f;
-    this->NeckBaseTangentLength = 0.00f;
-    this->NeckTopTangentLength = 0.00f;
-    this->DurationTentacleRetract = 1.00f;
-    this->DurationTentacleFoldout = 1.00f;
-    this->HeadRoot = NULL;
-    this->HeadRotator = NULL;
-}
 

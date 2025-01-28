@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "ProjectileSpawnData.h"
 #include "Components/ActorComponent.h"
+#include "ProjectileSpawnData.h"
 #include "MultiprojectileSpawner.generated.h"
 
 class AActor;
@@ -21,7 +21,8 @@ protected:
     bool ProjectilesIgnoreEachOther;
     
 public:
-    UMultiprojectileSpawner();
+    UMultiprojectileSpawner(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetIsFiring() const;
     

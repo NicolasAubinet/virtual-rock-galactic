@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "IRandRange.h"
-#include "VeteranComposition.h"
 #include "RandInterval.h"
 #include "SavableDataAsset.h"
+#include "Templates/SubclassOf.h"
+#include "VeteranComposition.h"
 #include "DifficultySetting.generated.h"
 
-class UObject;
 class UCampaign;
 class UMissionStat;
+class UObject;
 
 UCLASS(Blueprintable)
 class FSD_API UDifficultySetting : public USavableDataAsset {
@@ -57,6 +57,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float EnemyToEnemyDamageModifier;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool SupportsHazardPlus;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, EditFixedSize, meta=(AllowPrivateAccess=true))
     TArray<float> EnemyCountModifier;
@@ -144,6 +147,7 @@ protected:
     
 public:
     UDifficultySetting();
+
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContext"))
     bool IsUnlocked(UObject* WorldContext) const;
     

@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "OxygenActiveDelegateDelegate.h"
 #include "Components/ActorComponent.h"
+#include "OxygenActiveDelegateDelegate.h"
 #include "OxygenSourceComponent.generated.h"
 
 class UNoOxygenMutator;
@@ -24,7 +24,8 @@ protected:
     UNoOxygenMutator* Mutator;
     
 public:
-    UOxygenSourceComponent();
+    UOxygenSourceComponent(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnTimerTick();

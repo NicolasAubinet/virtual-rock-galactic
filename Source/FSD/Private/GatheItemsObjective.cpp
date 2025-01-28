@@ -1,12 +1,20 @@
 #include "GatheItemsObjective.h"
 #include "Net/UnrealNetwork.h"
 
-class UCappedResource;
+UGatheItemsObjective::UGatheItemsObjective(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->ItemsRequired = 0;
+    this->ItemsSpawnedModifier = 1.50f;
+    this->ItemsCollected = 0;
+    this->ItemResource = NULL;
+}
 
-void UGatheItemsObjective::OnResourceChanged(UCappedResource* CappedResource, float Amount) {
+void UGatheItemsObjective::OnResourceChanged(UCappedResource* CappedResource, float amount) {
 }
 
 void UGatheItemsObjective::OnRep_ItemsCollected(int32 prevAmount) {
+}
+
+void UGatheItemsObjective::AddItemCollected(int32 Count) {
 }
 
 void UGatheItemsObjective::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
@@ -15,10 +23,4 @@ void UGatheItemsObjective::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>&
     DOREPLIFETIME(UGatheItemsObjective, ItemsCollected);
 }
 
-UGatheItemsObjective::UGatheItemsObjective() {
-    this->ItemsRequired = 0;
-    this->ItemsSpawnedModifier = 1.50f;
-    this->ItemsCollected = 0;
-    this->ItemResource = NULL;
-}
 

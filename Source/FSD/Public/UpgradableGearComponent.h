@@ -1,32 +1,40 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
-#include "EItemUpgradeStatus.h"
-#include "CraftingCost.h"
-#include "GearStatEntry.h"
-#include "UpgradeTier.h"
-#include "MasteryItem.h"
 #include "Components/ActorComponent.h"
+#include "CraftingCost.h"
+#include "EItemUpgradeStatus.h"
+#include "GearStatEntry.h"
+#include "MasteryItem.h"
+#include "Templates/SubclassOf.h"
+#include "UpgradeTier.h"
 #include "UpgradableGearComponent.generated.h"
 
-class UObject;
 class AActor;
-class UResourceData;
-class AFSDPlayerState;
 class AFSDPlayerController;
-class UItemUpgrade;
-class UItemData;
-class UOverclockBank;
-class UItemID;
-class UPlayerCharacterID;
+class AFSDPlayerState;
 class APlayerCharacter;
+class UItemData;
+class UItemID;
+class UItemUpgrade;
+class UObject;
+class UOverclockBank;
+class UPlayerCharacterID;
+class UResourceData;
 class UTexture2D;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class FSD_API UUpgradableGearComponent : public UActorComponent {
     GENERATED_BODY()
 public:
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FUpgradesAddedToItem);
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FUpgradesAddedToItem OnUpgradesAddedToItem;
+    
 protected:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bUpgradesAddedToItem;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UItemData* ItemData;
     
@@ -76,9 +84,10 @@ protected:
     TArray<FMasteryItem> masteryLevels;
     
 public:
-    UUpgradableGearComponent();
+    UUpgradableGearComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
-    static void SetGearStatText(UPARAM(Ref) FGearStatEntry& Entry, FText Text);
+    static void SetGearStatText(UPARAM(Ref) FGearStatEntry& entry, FText Text);
     
     UFUNCTION(BlueprintCallable)
     bool PurchaseUpgrade(UItemID* ItemID, UItemUpgrade* Upgrade, AFSDPlayerController* PlayerController, TSubclassOf<APlayerCharacter> previewedCharacter);
@@ -90,16 +99,16 @@ public:
     static bool PlayerOwnesUpgradeInAllTiers(TSubclassOf<AActor> itemClass, UObject* WorldContextObject);
     
     UFUNCTION(BlueprintCallable)
-    static void MirrorUpgradePreviewStatus(UPARAM(Ref) FGearStatEntry& From, UPARAM(Ref) FGearStatEntry& To);
+    static void MirrorUpgradePreviewStatus(UPARAM(Ref) FGearStatEntry& from, UPARAM(Ref) FGearStatEntry& to);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static bool IsUpgradeEquipped(TSubclassOf<AActor> itemClass, UItemUpgrade* Upgrade, AFSDPlayerState* Player);
     
-    UFUNCTION(BlueprintCallable, BlueprintPure)
-    static bool IsTierUnLocked(TSubclassOf<AActor> itemClass, int32 tierIndex, AFSDPlayerState* Player, UPlayerCharacterID* characterID);
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static bool IsTierUnLocked(UObject* WorldContextObject, TSubclassOf<AActor> itemClass, int32 tierIndex, UPlayerCharacterID* characterID);
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
-    static bool IsOverclockingEnabled(UObject* WorldContextObject, AFSDPlayerState* Player, UPlayerCharacterID* characterID, TSubclassOf<AActor> itemClass);
+    static bool IsOverclockingEnabled(UObject* WorldContextObject, UPlayerCharacterID* characterID, TSubclassOf<AActor> itemClass);
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static bool IsItemUnlocked(UObject* WorldContextObject, UItemID* Item);
@@ -147,7 +156,7 @@ public:
     static EItemUpgradeStatus GetItemUpgradeStatus(UObject* WorldContextObject, TSubclassOf<AActor> itemClass, UItemUpgrade* ItemUpgrade, UPlayerCharacterID* characterID);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    static TArray<UItemUpgrade*> GetItemUpgrades(TSubclassOf<AActor> itemClass, TSubclassOf<UItemUpgrade> upgradeClass, AFSDPlayerState* Player, uint8 upgradeIndex);
+    static TArray<UItemUpgrade*> GetItemUpgradesFromSave(TSubclassOf<AActor> itemClass, TSubclassOf<UItemUpgrade> upgradeClass, AFSDPlayerState* Player, uint8 upgradeIndex);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static TSubclassOf<AActor> GetItemPreviewClassFromActor(TSubclassOf<AActor> Actor);
@@ -159,6 +168,9 @@ public:
     static bool GetItemMasteryForLevel(UItemID* ItemID, int32 Level, FMasteryItem& outLevel);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    static bool GetIsItemUpgradeEquipped(AFSDPlayerState* Player, TSubclassOf<AActor> itemClass, UItemUpgrade* ItemUpgrade, UPlayerCharacterID* characterID);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     UTexture2D* GetIconLine() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -168,10 +180,10 @@ public:
     UTexture2D* GetIconBG();
     
     UFUNCTION(BlueprintCallable)
-    static FText GetGearStatValue(UPARAM(Ref) FGearStatEntry& Entry);
+    static FText GetGearStatValue(UPARAM(Ref) FGearStatEntry& entry);
     
     UFUNCTION(BlueprintCallable)
-    static TArray<FGearStatEntry> GetGearStats(AFSDPlayerState* PlayerState, TSubclassOf<AActor> ActorClass);
+    static TArray<FGearStatEntry> GetGearStats(AFSDPlayerState* PlayerState, TSubclassOf<AActor> actorClass);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static FString GetGearSourceName(UItemID* ItemID);

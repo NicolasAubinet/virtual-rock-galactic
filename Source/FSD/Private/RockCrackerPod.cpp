@@ -1,9 +1,20 @@
 #include "RockCrackerPod.h"
-#include "Net/UnrealNetwork.h"
-#include "FriendlyHealthComponent.h"
 #include "ContinuousUsableComponent.h"
+#include "FriendlyHealthComponent.h"
+#include "Net/UnrealNetwork.h"
 
-class APlayerCharacter;
+ARockCrackerPod::ARockCrackerPod(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->Health = CreateDefaultSubobject<UFriendlyHealthComponent>(TEXT("PodHealth"));
+    this->RepairUsable = CreateDefaultSubobject<UContinuousUsableComponent>(TEXT("RepairUsable"));
+    this->DrainPerSecond = 0.00f;
+    this->PodState = ERockCrackerstate::Init;
+    this->EndPointDrill = NULL;
+    this->InDangerDialogue = NULL;
+    this->LightsAreGreen = true;
+    this->DrainImmunityTime = 3.00f;
+    this->YellowLightsThreshold = 0.80f;
+    this->HealPerTick = 25.00f;
+}
 
 
 void ARockCrackerPod::SetPodState(ERockCrackerstate NewPodState) {
@@ -43,16 +54,4 @@ void ARockCrackerPod::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutL
     DOREPLIFETIME(ARockCrackerPod, LightsAreGreen);
 }
 
-ARockCrackerPod::ARockCrackerPod() {
-    this->Health = CreateDefaultSubobject<UFriendlyHealthComponent>(TEXT("PodHealth"));
-    this->RepairUsable = CreateDefaultSubobject<UContinuousUsableComponent>(TEXT("RepairUsable"));
-    this->DrainPerSecond = 0.00f;
-    this->PodState = ERockCrackerstate::Init;
-    this->EndPointDrill = NULL;
-    this->InDangerDialogue = NULL;
-    this->LightsAreGreen = true;
-    this->DrainImmunityTime = 3.00f;
-    this->YellowLightsThreshold = 0.80f;
-    this->HealPerTick = 25.00f;
-}
 

@@ -1,19 +1,19 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "AnimatedItem.h"
-#include "UpgradableGear.h"
+#include "Templates/SubclassOf.h"
 #include "Upgradable.h"
+#include "UpgradableGear.h"
 #include "DetPackItem.generated.h"
 
-class USkeletalMeshComponent;
+class ADetPack;
 class AItem;
+class UAnimMontage;
 class UCapacityHoldingItemAggregator;
 class UDialogDataAsset;
-class ADetPack;
-class UItemUpgrade;
-class UAnimMontage;
 class UForceFeedbackEffect;
+class UItemUpgrade;
+class USkeletalMeshComponent;
 
 UCLASS(Blueprintable)
 class ADetPackItem : public AAnimatedItem, public IUpgradable, public IUpgradableGear {
@@ -102,9 +102,10 @@ protected:
     bool HasThrownPack;
     
 public:
-    ADetPackItem();
+    ADetPackItem(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
     void Simulate_ThrowGrenade();
@@ -131,7 +132,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetCurrentGrenades() const;
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

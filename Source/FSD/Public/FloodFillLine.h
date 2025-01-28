@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "RoomLinePoint.h"
 #include "RoomFeature.h"
+#include "RoomLinePoint.h"
 #include "FloodFillLine.generated.h"
 
 class UFloodFillSettings;
@@ -28,5 +28,6 @@ protected:
     
 public:
     UFloodFillLine();
+
 };
 

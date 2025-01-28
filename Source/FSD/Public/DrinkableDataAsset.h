@@ -4,16 +4,16 @@
 #include "SavableDataAsset.h"
 #include "DrinkableDataAsset.generated.h"
 
-class UObject;
-class UResourceData;
-class UDialogDataAsset;
+class ADrinkableActor;
 class ADrinkableItem;
+class APlayerCharacter;
+class UDLCBase;
+class UDialogDataAsset;
 class UDrinkEffectComponent;
 class UDrinkableDataAsset;
-class ADrinkableActor;
-class APlayerController;
 class UMissionStat;
-class APlayerCharacter;
+class UObject;
+class UResourceData;
 class UTemporaryBuff;
 class UTexture2D;
 
@@ -31,6 +31,9 @@ public:
     int32 DrinkablePrice;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool IsSpecialBeer;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftObjectPtr<UTexture2D> DrinkableIcon;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -43,7 +46,10 @@ public:
     EDrinkableAlcoholStrength AlcoholStrength;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    UDrinkableDataAsset* SupporterEdition;
+    UDrinkableDataAsset* SpecialEdition;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UDLCBase* RequiredDLC;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bPlayFireworks;
@@ -76,12 +82,16 @@ public:
     TSoftClassPtr<UDrinkEffectComponent> DrinkEffect;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool OneEffectComponentPerCharacter;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<UResourceData*, int32> UnlockCost;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<UResourceData*, int32> PurchaseCost;
     
     UDrinkableDataAsset();
+
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
     static bool TryUnlockSpecialDrinks(UObject* WorldContext);
     
@@ -104,13 +114,13 @@ public:
     bool IsDrinkFree(UObject* WorldContext);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    bool HasSupporterEdition() const;
+    bool HasSpecialEdition() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContext"))
+    UDrinkableDataAsset* GetSpecialEdition(UObject* WorldContext);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UTexture2D* GetDrinkableIcon() const;
-    
-    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContext"))
-    UDrinkableDataAsset* GetDrinkableEdition(UObject* WorldContext, APlayerController* Player);
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContext"))
     static bool AreSpecialDrinksUnlocked(UObject* WorldContext);

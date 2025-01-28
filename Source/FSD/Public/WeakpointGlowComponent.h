@@ -1,16 +1,17 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "DamageData.h"
-#include "Curves/CurveFloat.h"
-#include "WeakpointChannel.h"
 #include "Components/ActorComponent.h"
+#include "Curves/CurveFloat.h"
+#include "DamageData.h"
+#include "EWeakpointGlowMode.h"
+#include "WeakpointChannel.h"
 #include "WeakpointGlowComponent.generated.h"
 
+class UCurveFloat;
+class UFSDPhysicalMaterial;
+class UHealthComponentBase;
 class UMeshComponent;
 class USkeletalMeshComponent;
-class UHealthComponentBase;
-class UFSDPhysicalMaterial;
-class UCurveFloat;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UWeakpointGlowComponent : public UActorComponent {
@@ -30,6 +31,9 @@ protected:
     float CurveMultiplier;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    EWeakpointGlowMode Mode;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UFSDPhysicalMaterial* WeakPointMaterial;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -39,13 +43,14 @@ protected:
     int32 ReplaceMatIndex;
     
 public:
-    UWeakpointGlowComponent();
+    UWeakpointGlowComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     bool StopLoopingGlow(int32 aGlowID, bool aFade);
     
 protected:
     UFUNCTION(BlueprintCallable)
-    void ShowBodypartHit(float Amount, float BaseAmount, const FDamageData& DamageData);
+    void ShowBodypartHit(float amount, float BaseAmount, const FDamageData& DamageData);
     
 public:
     UFUNCTION(BlueprintCallable)

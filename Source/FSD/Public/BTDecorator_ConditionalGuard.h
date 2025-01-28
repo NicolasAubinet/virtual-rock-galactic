@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "BehaviorTree/BehaviorTreeTypes.h"
 #include "BehaviorTree/BTDecorator.h"
+#include "BehaviorTree/BehaviorTreeTypes.h"
 #include "BTDecorator_ConditionalGuard.generated.h"
 
 UCLASS(Blueprintable)
@@ -17,5 +17,6 @@ protected:
     
 public:
     UBTDecorator_ConditionalGuard();
+
 };
 

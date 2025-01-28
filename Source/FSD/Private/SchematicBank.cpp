@@ -1,10 +1,9 @@
 #include "SchematicBank.h"
 
-class USchematic;
+USchematicBank::USchematicBank() {
+}
 
 void USchematicBank::AddSchematic(USchematic* Schematic) {
 }
 
-USchematicBank::USchematicBank() {
-}
 

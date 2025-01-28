@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "CrosshairCreatedDelegate.h"
 #include "ItemAggregator.h"
+#include "Templates/SubclassOf.h"
 #include "Upgradable.h"
 #include "CrosshairAggregator.generated.h"
 
+class APlayerController;
+class UCustomAmmoCountWidget;
 class UObject;
 class UUserWidget;
-class UCustomAmmoCountWidget;
-class APlayerController;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UCrosshairAggregator : public UItemAggregator, public IUpgradable {
@@ -28,11 +28,18 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     UCustomAmmoCountWidget* CustomAmmoCounterWidget;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
+    UCustomAmmoCountWidget* AdditionalAmmoCounterWidget;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UCustomAmmoCountWidget> CustomAmmoCounterType;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<UCustomAmmoCountWidget> AdditionalAmmoCounterType;
+    
 public:
-    UCrosshairAggregator();
+    UCrosshairAggregator(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void SetCrosshair(UUserWidget* Widget);
     
@@ -40,9 +47,12 @@ public:
     UUserWidget* GetOrCreateCrosshair();
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContext"))
-    UCustomAmmoCountWidget* GetCustomAmmoCounterWidget(UObject* WorldContext, APlayerController* InOwner);
+    UCustomAmmoCountWidget* GetCustomAmmoCounterWidget(UObject* WorldContext, const APlayerController* InOwner);
     
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContext"))
+    UCustomAmmoCountWidget* GetAdditionalAmmoCounterWidget(UObject* WorldContext, const APlayerController* InOwner);
     
+
     // Fix for true pure virtual functions not being implemented
 };
 

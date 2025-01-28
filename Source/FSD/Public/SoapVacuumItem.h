@@ -6,11 +6,10 @@
 #include "SoapVacuumItem.generated.h"
 
 class AActor;
-class USceneComponent;
-class UPrimitiveComponent;
-class UNiagaraComponent;
 class UCapsuleComponent;
-class AFoamPuddle;
+class UNiagaraComponent;
+class UPrimitiveComponent;
+class USceneComponent;
 
 UCLASS(Blueprintable)
 class ASoapVacuumItem : public APlagueCleanupItem {
@@ -51,9 +50,10 @@ protected:
     float LastPuddleSuckTime;
     
 public:
-    ASoapVacuumItem();
+    ASoapVacuumItem(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable, Reliable, Server)
-    void Server_StartVacuumingPuddle(AFoamPuddle* puddle);
+    void Server_StartVacuumingPuddle(AActor* Target);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnFoamPuddleCollected_Unreliable();

@@ -1,11 +1,11 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "CSGBase.h"
-#include "DeepCSGNode.h"
-#include "DeepCSGFloatTree.h"
-#include "MeshCellNoiseProperties.h"
-#include "BinaryTerrainMaterialCombiner.h"
 #include "UObject/NoExportTypes.h"
+#include "BinaryTerrainMaterialCombiner.h"
+#include "CSGBase.h"
+#include "DeepCSGFloatTree.h"
+#include "DeepCSGNode.h"
+#include "MeshCellNoiseProperties.h"
 #include "CSGCellNoise.generated.h"
 
 UCLASS(Blueprintable)
@@ -31,5 +31,6 @@ public:
     TArray<FDeepCSGNode> CellLeaves;
     
     UCSGCellNoise();
+
 };
 

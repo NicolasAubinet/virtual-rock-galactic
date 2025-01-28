@@ -1,6 +1,7 @@
 #include "BakeConfig.h"
 
-class UBuilderBase;
+UBakeConfig::UBakeConfig() {
+}
 
 FVector UBakeConfig::GetVectorSetting(FName Name, FVector defaultVal) {
     return FVector{};
@@ -26,6 +27,4 @@ bool UBakeConfig::GetBoolSetting(FName Name, bool defaultVal) {
     return false;
 }
 
-UBakeConfig::UBakeConfig() {
-}
 

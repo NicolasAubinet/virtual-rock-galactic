@@ -1,7 +1,9 @@
 #include "TutorialLevelWidget.h"
 #include "Templates/SubclassOf.h"
 
-class UTutorialContentWidget;
+UTutorialLevelWidget::UTutorialLevelWidget() {
+    this->DelayBetweenTutorials = 2.00f;
+}
 
 void UTutorialLevelWidget::ShowTutorialWidget(TSubclassOf<UTutorialContentWidget> TutorialWidget, bool ignoreQueue) {
 }
@@ -16,7 +18,4 @@ void UTutorialLevelWidget::OnTutorialFinished(UTutorialContentWidget* TutorialWi
 }
 
 
-UTutorialLevelWidget::UTutorialLevelWidget() {
-    this->DelayBetweenTutorials = 2.00f;
-}
 

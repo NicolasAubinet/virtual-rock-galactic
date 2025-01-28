@@ -10,6 +10,7 @@ class FSD_API UDLCBase : public UDataAsset {
     GENERATED_BODY()
 public:
     UDLCBase();
+
     UFUNCTION(BlueprintCallable)
     static void QueryAllDLC();
     
@@ -17,7 +18,7 @@ public:
     bool IsUnlocked() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    static bool IsDLCUnLocked(UDLCBase* dlc);
+    static bool IsDLCUnLocked(UDLCBase* DLC);
     
 };
 

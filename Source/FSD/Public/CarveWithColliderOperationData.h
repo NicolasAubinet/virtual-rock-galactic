@@ -1,13 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "CarveOptionsCellSize.h"
 #include "ECarveFilterType.h"
 #include "EPreciousMaterialOptions.h"
-#include "CarveOptionsCellSize.h"
 #include "MatrixWithExactSync.h"
 #include "CarveWithColliderOperationData.generated.h"
 
-class UTerrainMaterial;
+class ULevelGenerationCarverComponent;
 class UStaticMesh;
+class UTerrainMaterial;
 
 USTRUCT(BlueprintType)
 struct FCarveWithColliderOperationData {
@@ -27,6 +28,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FMatrixWithExactSync Transform;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
+    ULevelGenerationCarverComponent* LevelGenerationComponent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ExpensiveNoise;

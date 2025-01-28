@@ -1,9 +1,7 @@
 #include "DeepDiveFunctionLibrary.h"
 
-class UObject;
-class UDeepDiveTemplate;
-class UDeepDive;
-class UGeneratedMission;
+UDeepDiveFunctionLibrary::UDeepDiveFunctionLibrary() {
+}
 
 bool UDeepDiveFunctionLibrary::IsEliteDeepDiveMission(UObject* WorldContextObject, UGeneratedMission* mission) {
     return false;
@@ -21,6 +19,4 @@ UDeepDive* UDeepDiveFunctionLibrary::GetDeepDiveFromMission(UObject* WorldContex
     return NULL;
 }
 
-UDeepDiveFunctionLibrary::UDeepDiveFunctionLibrary() {
-}
 

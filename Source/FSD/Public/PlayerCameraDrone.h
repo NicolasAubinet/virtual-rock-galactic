@@ -1,22 +1,26 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
 #include "Engine/EngineTypes.h"
 #include "GameFramework/Pawn.h"
+#include "Templates/SubclassOf.h"
+#include "VectorDelegateDelegate.h"
 #include "PlayerCameraDrone.generated.h"
 
 class AActor;
-class UPrimitiveComponent;
-class UPawnMovementComponent;
 class ALaserPointerMarker;
 class AVanityCharacter;
 class UAnimationAsset;
+class UPawnMovementComponent;
+class UPrimitiveComponent;
 
 UCLASS(Abstract, Blueprintable)
 class APlayerCameraDrone : public APawn {
     GENERATED_BODY()
 public:
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FVectorDelegate OnMarkerPlaced;
+    
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UPawnMovementComponent* Movement;
@@ -110,7 +114,8 @@ private:
     AActor* WeaponTrackActor;
     
 public:
-    APlayerCameraDrone();
+    APlayerCameraDrone(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     bool ToggleSplineMeshVisibility();
@@ -158,6 +163,7 @@ protected:
     UFUNCTION(BlueprintCallable)
     void ClearFocusPoint();
     
+public:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void All_BeginCountdown();
     

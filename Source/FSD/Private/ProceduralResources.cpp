@@ -1,11 +1,18 @@
 #include "ProceduralResources.h"
 
-class AProceduralSetup;
+UProceduralResources::UProceduralResources(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+}
 
 void UProceduralResources::GenerateResources() {
 }
 
-void UProceduralResources::GenerateCarvedResources_Async(AProceduralSetup*& setup, FLatentActionInfo LatentInfo) {
+void UProceduralResources::GenerateMissingCarvedResources_Async(AProceduralSetup*& Setup, FLatentActionInfo LatentInfo) {
+}
+
+void UProceduralResources::GenerateMissingCarvedResources() {
+}
+
+void UProceduralResources::GenerateCarvedResources_Async(AProceduralSetup*& Setup, FLatentActionInfo LatentInfo) {
 }
 
 void UProceduralResources::GenerateCarvedResources() {
@@ -14,6 +21,10 @@ void UProceduralResources::GenerateCarvedResources() {
 void UProceduralResources::CreateResourcesFromObjectives() {
 }
 
-UProceduralResources::UProceduralResources() {
+void UProceduralResources::CountGeneratedCarvedResources() {
 }
+
+void UProceduralResources::CountFinalGeneratedCarvedResources() {
+}
+
 

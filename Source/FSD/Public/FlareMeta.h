@@ -9,8 +9,8 @@ USTRUCT(BlueprintType)
 struct FFlareMeta {
     GENERATED_BODY()
 public:
-    UPROPERTY(BlueprintReadOnly, Transient, meta=(AllowPrivateAccess=true))
-    AActor* Actor;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TWeakObjectPtr<AActor> Actor;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float Inhibit;

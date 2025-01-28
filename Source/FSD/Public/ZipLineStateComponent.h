@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
+#include "CharacterStateComponent.h"
 #include "DamageData.h"
 #include "ZipLine.h"
 #include "ZipLineConnectorHandler.h"
-#include "CharacterStateComponent.h"
 #include "ZipLineStateComponent.generated.h"
 
+class AZipLineProjectile;
 class UAudioComponent;
 class UDialogDataAsset;
-class AZipLineProjectile;
 class USoundBase;
 
 UCLASS(Abstract, Blueprintable, MinimalAPI, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -111,9 +111,10 @@ protected:
     UAudioComponent* AudioComponent;
     
 public:
-    UZipLineStateComponent();
+    UZipLineStateComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void ServerSetSpeedBoostActivated(bool InBoostActivated);

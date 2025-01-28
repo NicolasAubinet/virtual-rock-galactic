@@ -1,13 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
-#include "CraftingCost.h"
 #include "Engine/DataAsset.h"
+#include "CraftingCost.h"
+#include "Templates/SubclassOf.h"
 #include "ItemData.generated.h"
 
 class AActor;
-class UResourceData;
 class UItemID;
+class UObject;
+class UResourceData;
 class UTexture2D;
 
 UCLASS(Blueprintable)
@@ -51,8 +52,9 @@ public:
     int32 RequiredCharacterLevel;
     
     UItemData();
-    UFUNCTION(BlueprintCallable, BlueprintPure)
-    UTexture2D* GetPreviewImage() const;
+
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContext"))
+    UTexture2D* GetPreviewImage(UObject* WorldContext) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TSubclassOf<AActor> GetPreviewActorClass() const;

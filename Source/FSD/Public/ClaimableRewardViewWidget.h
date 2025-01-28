@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "ClaimableRewardView.h"
 #include "Blueprint/UserWidget.h"
+#include "ClaimableRewardView.h"
 #include "ClaimableRewardViewWidget.generated.h"
 
 UCLASS(Blueprintable, EditInlineNew)
@@ -14,6 +14,7 @@ protected:
     
 public:
     UClaimableRewardViewWidget();
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ReceiveEndFlow();

@@ -4,8 +4,8 @@
 #include "Net/OnlineBlueprintCallProxyBase.h"
 #include "AcceptInviteBlueprintCallProxy.generated.h"
 
-class UObject;
 class UAcceptInviteBlueprintCallProxy;
+class UObject;
 
 UCLASS(Blueprintable)
 class UAcceptInviteBlueprintCallProxy : public UOnlineBlueprintCallProxyBase {
@@ -21,6 +21,7 @@ public:
     UObject* WorldContextObject;
     
     UAcceptInviteBlueprintCallProxy();
+
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static UAcceptInviteBlueprintCallProxy* AcceptInvite(UObject* NewWorldContextObject, const FString& ListName, const FString& UserId);
     

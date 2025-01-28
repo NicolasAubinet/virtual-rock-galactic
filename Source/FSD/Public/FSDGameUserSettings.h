@@ -2,45 +2,50 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
-#include "ControllerSettings.h"
-#include "HUDElements.h"
-#include "CharacterOptions.h"
-#include "CustomKeyBinding.h"
-#include "ColorVisionDeficiencySettings.h"
 #include "UDLSSMode.h"
-#include "ETurn180Mode.h"
-#include "EConsoleGraphicsMode.h"
+#include "GameFramework/GameUserSettings.h"
+#include "GameFramework/GameUserSettings.h"
 #include "Rendering/RenderingCommon.h"
+#include "BoolConfigChangedDelegate.h"
+#include "CharacterOptions.h"
+#include "ChatFontSizeChangedDelegate.h"
+#include "ColorVisionDeficiencyDelegateDelegate.h"
+#include "ColorVisionDeficiencySettings.h"
+#include "ControllerSettings.h"
+#include "CustomKeyBinding.h"
+#include "CustomKeyBindingsChangedDelegate.h"
+#include "DelegateDelegate.h"
+#include "EConsoleGraphicsMode.h"
 #include "EFSDInputSource.h"
-#include "ESteamSearchRegion.h"
-#include "EVolumeType.h"
 #include "ENVidiaReflexMode.h"
 #include "ESaveSlotChangeProcedure.h"
-#include "ColorVisionDeficiencyDelegateDelegate.h"
-#include "CustomKeyBindingsChangedDelegate.h"
-#include "ChatFontSizeChangedDelegate.h"
-#include "InputSourceChangedSignatureDelegate.h"
-#include "LanguageChangedDelegate.h"
-#include "StringConfigChangedDelegate.h"
+#include "ESteamSearchRegion.h"
+#include "ETurn180Mode.h"
+#include "EVolumeType.h"
 #include "FloatConfigChangedDelegate.h"
+#include "HUDElements.h"
+#include "InputSourceChangedSignatureDelegate.h"
 #include "Int32ConfigChangedDelegate.h"
-#include "BoolConfigChangedDelegate.h"
+#include "LanguageChangedDelegate.h"
 #include "ModdingSettingsChangedDelegate.h"
-#include "GameFramework/GameUserSettings.h"
 #include "ModdingUISettings.h"
-#include "GameFramework/GameUserSettings.h"
+#include "StringConfigChangedDelegate.h"
+#include "UFSDStreamlineDLSSGMode.h"
 #include "FSDGameUserSettings.generated.h"
 
-class UObject;
-class UDifficultySetting;
 class APlayerController;
+class UDifficultySetting;
 class UFSDGameUserSettings;
+class UObject;
 class USoundClass;
 
-UCLASS(Blueprintable)
+UCLASS(Blueprintable, Config=Engine)
 class UFSDGameUserSettings : public UGameUserSettings {
     GENERATED_BODY()
 public:
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FDelegate OnSettingsChanged;
+    
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FBoolConfigChanged OnUseHoldToRunChanged;
     
@@ -152,6 +157,15 @@ public:
     UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
     ENVidiaReflexMode ReflexMode;
     
+    UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float WeaponSpwayScale;
+    
+    UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 RagdollQuality;
+    
+    UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UFSDStreamlineDLSSGMode FrameGenerationMode;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     USoundClass* soundClassCharacterVoices;
     
@@ -235,6 +249,12 @@ public:
     
     UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool PhotosensitiveMode;
+    
+    UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool TinnitusProtection;
+    
+    UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float OverlayIntensityScale;
     
     UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ShowUIAnimations;
@@ -394,6 +414,7 @@ protected:
     
 public:
     UFSDGameUserSettings();
+
     UFUNCTION(BlueprintCallable)
     void UpdateVolumeSettings(USoundClass* CharacterVoices, USoundClass* MissionControl, USoundClass* Master, USoundClass* Music, USoundClass* SFX, USoundClass* UI, USoundClass* Voice);
     
@@ -407,10 +428,13 @@ public:
     bool ToggleShowUpgradeExtraDetails();
     
     UFUNCTION(BlueprintCallable)
-    void ToggleModdingServerFilter(uint8 ServerFilter, bool Enable);
+    void ToggleModdingServerFilter(uint8 ServerFilter, bool enable);
     
     UFUNCTION(BlueprintCallable)
     void SetZiplineGunAutoSwitch(bool shouldAutoSwitch);
+    
+    UFUNCTION(BlueprintCallable)
+    void SetWeaponSwayScale(float Scale);
     
     UFUNCTION(BlueprintCallable)
     void SetVSyncEnabledToBeApplied(bool bEnable);
@@ -461,6 +485,9 @@ public:
     void SetTurn180Mode(ETurn180Mode InMode);
     
     UFUNCTION(BlueprintCallable)
+    void SetTinnitusProtection(bool enable);
+    
+    UFUNCTION(BlueprintCallable)
     void SetTemporalAAUpscalingEnabled(bool bEnable);
     
     UFUNCTION(BlueprintCallable)
@@ -500,6 +527,9 @@ public:
     void SetReflexMode(ENVidiaReflexMode NewReflexMode);
     
     UFUNCTION(BlueprintCallable)
+    void SetRagdollQuality(int32 Value);
+    
+    UFUNCTION(BlueprintCallable)
     void SetPushToTalk(bool bEnable);
     
     UFUNCTION(BlueprintCallable)
@@ -513,6 +543,9 @@ public:
     
     UFUNCTION(BlueprintCallable)
     void SetPhotosensitiveMode(bool modeOn);
+    
+    UFUNCTION(BlueprintCallable)
+    void SetOverlayIntensityScale(float Scale);
     
     UFUNCTION(BlueprintCallable)
     void SetNvidiaDlssSharpness(float Sharpness);
@@ -530,6 +563,9 @@ public:
     void SetModdingSortBy(uint8 SortField, bool SortAscending);
     
     UFUNCTION(BlueprintCallable)
+    void SetLensFlaresEnabled(bool Enabled);
+    
+    UFUNCTION(BlueprintCallable)
     void SetJukeboxStreamerMode(bool InStreamerMode);
     
     UFUNCTION(BlueprintCallable)
@@ -543,6 +579,12 @@ public:
     
     UFUNCTION(BlueprintCallable)
     void SetInputSource(EFSDInputSource NewSource);
+    
+    UFUNCTION(BlueprintCallable)
+    void SetHoldToFire(bool HoldToFire);
+    
+    UFUNCTION(BlueprintCallable)
+    void SetHoldToBreakImmobilization(bool holdToBreak);
     
     UFUNCTION(BlueprintCallable)
     void SetHeadBobbingScale(float NewHeadbobbingScale);
@@ -561,6 +603,9 @@ public:
     
     UFUNCTION(BlueprintCallable)
     void SetFullscreenModeToBeApplied(TEnumAsByte<EWindowMode::Type> InFullscreenMode);
+    
+    UFUNCTION(BlueprintCallable)
+    void SetFrameGenerationMode(UFSDStreamlineDLSSGMode NewMode);
     
     UFUNCTION(BlueprintCallable)
     void SetFOV(float NewFOV);
@@ -613,6 +658,9 @@ public:
     void SetCameraShakeScale(float NewCameraShakeScale);
     
     UFUNCTION(BlueprintCallable)
+    void SetBloomEnabled(bool Enabled);
+    
+    UFUNCTION(BlueprintCallable)
     void SetAutoRefreshServerlist(bool Value);
     
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
@@ -658,6 +706,9 @@ public:
     void PostInitFSDUserSettings(UObject* WorldContextObject);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsVSyncSupported() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsVoiceChatEnabled() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -668,6 +719,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsManaulGraphicsModeAvailable();
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsFrameGenerationSupported() const;
     
 protected:
     UFUNCTION(BlueprintCallable)
@@ -690,6 +744,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetZiplineGunAutoSwitch() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    float GetWeaponSwayScale() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetVSyncEnabledToBeApplied();
@@ -737,6 +794,9 @@ public:
     ETurn180Mode GetTurn180Mode() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool GetTinnitusProtection() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetTemporalAAUpscalingEnabled() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -770,6 +830,12 @@ public:
     ENVidiaReflexMode GetReflexMode() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    float GetRagdollQualityDurationFactor() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    int32 GetRagdollQuality() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetPushToTalk() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -785,6 +851,9 @@ public:
     bool GetPhotosensitiveMode() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    float GetOverlayIntensityScale() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetNvidiaDlssSharpness() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -798,6 +867,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetModdingServerFilterEnabled(uint8 ServerFilter);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool GetLensFlaresEnabled() const;
     
 protected:
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -817,6 +889,12 @@ public:
     static EFSDInputSource GetInputSource();
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool GetHoldToFire() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool GetHoldToBreakImmobilization() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetHeadBobbingScale() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -833,6 +911,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static UFSDGameUserSettings* GetFSDGameUserSettings();
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UFSDStreamlineDLSSGMode GetFrameGenerationMode() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetFOV() const;
@@ -881,6 +962,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetCameraShakeScale() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool GetBloomEnabled() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     bool GetAvaliableAudioOutputDevices(UObject* WorldContextObject, TArray<FString>& AudioDevices);

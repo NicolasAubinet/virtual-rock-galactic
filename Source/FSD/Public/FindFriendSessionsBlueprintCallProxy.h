@@ -1,11 +1,11 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "BlueprintFindFriendSessionsResultDelegateDelegate.h"
 #include "Net/OnlineBlueprintCallProxyBase.h"
+#include "BlueprintFindFriendSessionsResultDelegateDelegate.h"
 #include "FindFriendSessionsBlueprintCallProxy.generated.h"
 
-class UObject;
 class UFindFriendSessionsBlueprintCallProxy;
+class UObject;
 
 UCLASS(Blueprintable)
 class UFindFriendSessionsBlueprintCallProxy : public UOnlineBlueprintCallProxyBase {
@@ -21,6 +21,7 @@ public:
     UObject* WorldContextObject;
     
     UFindFriendSessionsBlueprintCallProxy();
+
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static UFindFriendSessionsBlueprintCallProxy* FindFriendSessions(UObject* NewWorldContextObject, const FString& FriendId);
     

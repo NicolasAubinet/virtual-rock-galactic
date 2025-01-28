@@ -1,23 +1,23 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "Engine/NetSerialization.h"
+#include "GameFramework/Actor.h"
 #include "Engine/EngineTypes.h"
+#include "Engine/NetSerialization.h"
 #include "Engine/NetSerialization.h"
 #include "EOnProjectileImpactBehaviourEnum.h"
 #include "ProjectileImpact.h"
-#include "GameFramework/Actor.h"
 #include "ProjectileBase.generated.h"
 
-class UPrimitiveComponent;
 class AProjectileBase;
 class UDamageComponent;
-class USphereComponent;
 class UFSDPhysicalMaterial;
 class UItemUpgrade;
+class UPrimitiveComponent;
 class UProjectileUpgradeElement;
-class UTerrainMaterial;
 class USoundCue;
+class USphereComponent;
+class UTerrainMaterial;
 
 UCLASS(Abstract, Blueprintable)
 class AProjectileBase : public AActor {
@@ -25,6 +25,9 @@ class AProjectileBase : public AActor {
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_ProjectileImpact, meta=(AllowPrivateAccess=true))
     FProjectileImpact ProjectileImpact;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool ApplyShotPower;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     bool IsSpawnedFromWeapon;
@@ -82,9 +85,10 @@ protected:
     EOnProjectileImpactBehaviourEnum EOnImpactBehaviour;
     
 public:
-    AProjectileBase();
+    AProjectileBase(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UTerrainMaterial* TryGetTerrainMaterial() const;
     
@@ -137,6 +141,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetGameTimeSinceActivation() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    UDamageComponent* GetDamageComponent();
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetBoneIndex() const;

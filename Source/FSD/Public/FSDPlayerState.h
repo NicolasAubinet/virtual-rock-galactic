@@ -1,30 +1,30 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
+#include "GameFramework/PlayerState.h"
+#include "CharacterProgress.h"
+#include "CreditsReward.h"
 #include "EChatSenderType.h"
 #include "EGameOwnerStatus.h"
-#include "PlayerVoiceSignatureDelegate.h"
-#include "PlayerSpawnedSignatureDelegate.h"
-#include "SelectedCharacterChangedDelegateDelegate.h"
-#include "SupplyStatusChangedDelegateDelegate.h"
+#include "EnemyKilledSignatureDelegate.h"
+#include "EquippedVanity.h"
 #include "FractionLevelGeneratedDelegateDelegate.h"
 #include "LevelGenerationStateSignatureDelegate.h"
 #include "PlayerNameChangedSignatureDelegate.h"
-#include "EnemyKilledSignatureDelegate.h"
-#include "CharacterProgress.h"
-#include "CreditsReward.h"
-#include "XPReward.h"
+#include "PlayerSpawnedSignatureDelegate.h"
+#include "PlayerVoiceSignatureDelegate.h"
 #include "RewardTexts.h"
-#include "GameFramework/PlayerState.h"
+#include "SelectedCharacterChangedDelegateDelegate.h"
+#include "SupplyStatusChangedDelegateDelegate.h"
+#include "Templates/SubclassOf.h"
+#include "XPReward.h"
 #include "FSDPlayerState.generated.h"
 
-class UVanityItem;
 class AFSDPlayerController;
-class UPlayerCharacterID;
 class APlayerCharacter;
-class UPlayerStatsComponent;
-class UPlayerResourceComponent;
+class UPlayerCharacterID;
 class UPlayerRejoinState;
+class UPlayerResourceComponent;
+class UPlayerStatsComponent;
 class USaveGameStateComponent;
 
 UCLASS(Blueprintable)
@@ -53,9 +53,9 @@ public:
     FEnemyKilledSignature OnEnemyKilledEvent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
-    TArray<UVanityItem*> LatestEquipedVanity;
+    FEquippedVanity LatestEquipedVanity;
     
-public:
+protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_SelectedCharacter, meta=(AllowPrivateAccess=true))
     TSubclassOf<APlayerCharacter> SelectedCharacter;
     
@@ -120,9 +120,10 @@ public:
     FRewardTexts RewardTexts;
     
 public:
-    AFSDPlayerState();
+    AFSDPlayerState(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void SetSelectedCharacterID(UPlayerCharacterID* characterID);
     

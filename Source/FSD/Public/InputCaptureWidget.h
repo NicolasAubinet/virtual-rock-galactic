@@ -1,9 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "InputCoreTypes.h"
-#include "EKeyBindingSlot.h"
-#include "CustomKeySetting.h"
 #include "Blueprint/UserWidget.h"
+#include "CustomKeySetting.h"
+#include "EKeyBindingSlot.h"
 #include "InputCaptureWidget.generated.h"
 
 UCLASS(Blueprintable, EditInlineNew)
@@ -25,6 +25,7 @@ protected:
     
 public:
     UInputCaptureWidget();
+
     UFUNCTION(BlueprintCallable)
     void SetData(const FCustomKeySetting InSettings, EKeyBindingSlot InInputSlot, bool InIsGamepadKey);
     

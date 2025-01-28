@@ -1,13 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "CharacterStateComponent.h"
 #include "EExitTrackMode.h"
 #include "PipelineMovementData.h"
-#include "CharacterStateComponent.h"
 #include "TrackMovementStateComponent.generated.h"
 
+class AZipLineConnector;
 class UAudioComponent;
 class UDialogDataAsset;
-class AZipLineConnector;
 class USoundBase;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -25,13 +25,13 @@ protected:
     UAudioComponent* AudioStopComponent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    USoundBase* AudioOnStart;
+    TSoftObjectPtr<USoundBase> AudioOnStart;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    USoundBase* AudioOnDuring;
+    TSoftObjectPtr<USoundBase> AudioOnDuring;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    USoundBase* AudioOnStop;
+    TSoftObjectPtr<USoundBase> AudioOnStop;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float AudioOnFadeOut;
@@ -91,9 +91,10 @@ protected:
     FPipelineMovementData TrackMovementData;
     
 public:
-    UTrackMovementStateComponent();
+    UTrackMovementStateComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void ServerExitMode(EExitTrackMode eMode);

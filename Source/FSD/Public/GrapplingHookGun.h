@@ -1,14 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
-#include "GraplingGunState.h"
 #include "AnimatedItem.h"
+#include "GraplingGunState.h"
+#include "Templates/SubclassOf.h"
 #include "Upgradable.h"
 #include "GrapplingHookGun.generated.h"
 
-class UCoolDownItemAggregator;
 class AGrapplingHookGun;
 class UAnimMontage;
+class UCoolDownItemAggregator;
 
 UCLASS(Abstract, Blueprintable)
 class AGrapplingHookGun : public AAnimatedItem, public IUpgradable {
@@ -52,9 +52,10 @@ protected:
     float GrapleStartTime;
     
 public:
-    AGrapplingHookGun();
+    AGrapplingHookGun(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void StopGrapple();
@@ -92,7 +93,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static float GetCooldownDuration(TSubclassOf<AGrapplingHookGun> GrapplingHookGun);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

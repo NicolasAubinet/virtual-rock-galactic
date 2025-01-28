@@ -1,9 +1,11 @@
 #include "InventoryList.h"
 #include "Templates/SubclassOf.h"
 
-class UObject;
-class AActor;
-class UItemID;
+UInventoryList::UInventoryList() {
+    this->LaserPointerItem = NULL;
+    this->TerrainScannerItem = NULL;
+    this->ResupplyItem = NULL;
+}
 
 UItemID* UInventoryList::GetPreviousUnlockedItem(UObject* WorldContextObject, EItemCategory Category, UItemID* currentItem) const {
     return NULL;
@@ -48,9 +50,4 @@ TArray<UItemID*> UInventoryList::GetAllItemsList() const {
 void UInventoryList::CheckForInventoryAchievements(UObject* WorldContextObject) {
 }
 
-UInventoryList::UInventoryList() {
-    this->LaserPointerItem = NULL;
-    this->TerrainScannerItem = NULL;
-    this->ResupplyItem = NULL;
-}
 

@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "CarveDoneDelegateDelegate.h"
-#include "ECarveFilterType.h"
 #include "Components/StaticMeshComponent.h"
+#include "ECarveFilterType.h"
+#include "CarveDoneDelegateDelegate.h"
 #include "AutoCarverComponent.generated.h"
 
 class UTerrainMaterialBase;
@@ -29,7 +29,8 @@ public:
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FCarveDoneDelegate OnCarveDoneEvent;
     
-    UAutoCarverComponent();
+    UAutoCarverComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void ForceCarve();
     

@@ -2,6 +2,7 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "Components/SceneComponent.h"
+#include "EmitterConnection.h"
 #include "InstancedNiagaraComponent.generated.h"
 
 class UNiagaraComponent;
@@ -11,11 +12,15 @@ class UInstancedNiagaraComponent : public USceneComponent {
     GENERATED_BODY()
 public:
 protected:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FEmitterConnection> Emitters;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UNiagaraComponent* NiagaraComponent;
     
 public:
-    UInstancedNiagaraComponent();
+    UInstancedNiagaraComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void SpawnParticlesFromName(const FVector Location, const FName EmitterName);
     

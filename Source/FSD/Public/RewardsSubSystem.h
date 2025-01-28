@@ -1,13 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "ClaimableRewardEntry.h"
-#include "PendingRewardsStats.h"
-#include "PendingRewards.h"
 #include "Subsystems/GameInstanceSubsystem.h"
+#include "ClaimableRewardEntry.h"
+#include "PendingRewards.h"
+#include "PendingRewardsStats.h"
 #include "RewardsSubSystem.generated.h"
 
-class UObject;
 class AFSDPlayerController;
+class UObject;
 
 UCLASS(Blueprintable)
 class URewardsSubSystem : public UGameInstanceSubsystem {
@@ -20,6 +20,7 @@ public:
     TArray<FClaimableRewardEntry> PendingPromotionRewards;
     
     URewardsSubSystem();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool ShouldPendingRewardsBeShown() const;
     

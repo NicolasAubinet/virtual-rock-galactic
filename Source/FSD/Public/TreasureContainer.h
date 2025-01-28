@@ -1,18 +1,19 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "GameFramework/Actor.h"
+#include "ActorTrackingCheatInterface.h"
 #include "EInputKeys.h"
 #include "TreasureWeight.h"
-#include "GameFramework/Actor.h"
 #include "TreasureContainer.generated.h"
 
-class USceneComponent;
-class UItemAquisitionSource;
 class APlayerCharacter;
-class UTreasureRewarder;
+class UItemAquisitionSource;
 class UOncePerPlayerUsableComponent;
+class USceneComponent;
+class UTreasureRewarder;
 
 UCLASS(Blueprintable)
-class FSD_API ATreasureContainer : public AActor {
+class FSD_API ATreasureContainer : public AActor, public IActorTrackingCheatInterface {
     GENERATED_BODY()
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
@@ -42,9 +43,10 @@ private:
     bool PreventLatejoiners;
     
 public:
-    ATreasureContainer();
+    ATreasureContainer(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void TestAwardTreasure();
     
@@ -82,5 +84,7 @@ public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, BlueprintPure)
     bool GetPreventFurtherLatejoiners() const;
     
+
+    // Fix for true pure virtual functions not being implemented
 };
 

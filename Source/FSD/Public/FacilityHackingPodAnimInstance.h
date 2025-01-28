@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "EHackingPodState.h"
 #include "Animation/AnimInstance.h"
+#include "EHackingPodState.h"
 #include "FacilityHackingPodAnimInstance.generated.h"
 
 class AActor;
@@ -32,6 +32,7 @@ protected:
     
 public:
     UFacilityHackingPodAnimInstance();
+
     UFUNCTION(BlueprintCallable)
     void SetSaluter(AActor* salutingTarget);
     

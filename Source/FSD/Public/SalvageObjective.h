@@ -1,21 +1,21 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "DelegateDelegate.h"
 #include "Objective.h"
+#include "Templates/SubclassOf.h"
 #include "SalvageObjective.generated.h"
 
 class AActor;
+class ADropPod;
+class AMiniMule;
+class AProceduralSetup;
+class UCurveFloat;
 class UDebrisBase;
 class UDebrisPositioning;
 class UGemResourceData;
-class AMiningPod;
-class AMiniMule;
-class AProceduralSetup;
 class URepairableComponent;
-class UCurveFloat;
 
 UCLASS(Abstract, Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class FSD_API USalvageObjective : public UObjective {
@@ -47,7 +47,7 @@ protected:
     TSoftClassPtr<AMiniMule> SalvageActor;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TSoftClassPtr<AMiningPod> DamagedPodClass;
+    TSoftClassPtr<ADropPod> DamagedPodClass;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UDebrisPositioning* DamagedPodPositioning;
@@ -56,7 +56,7 @@ protected:
     float DamagedPodMinDistanceToDropZone;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    AMiningPod* DamagedPod;
+    ADropPod* DamagedPod;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_ActorsToSalvage, meta=(AllowPrivateAccess=true))
     int32 ActorsToSalvage;
@@ -83,9 +83,10 @@ protected:
     TArray<AMiniMule*> SalvagedActors;
     
 public:
-    USalvageObjective();
+    USalvageObjective(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void PointRepaired();
     
@@ -104,7 +105,7 @@ protected:
     
 public:
     UFUNCTION(BlueprintCallable)
-    static FTransform FindRepairPointLocation(AProceduralSetup* setup, const FVector& podLocation, float Radius, float maxVerticalDistance, UDebrisPositioning* DebrisPositioning, TSubclassOf<AActor> terrainPlacement, const TArray<FVector>& locationsToAvoid, UCurveFloat* AvoidCostCurve);
+    static FTransform FindRepairPointLocation(AProceduralSetup* Setup, const FVector& podLocation, float Radius, float maxVerticalDistance, UDebrisPositioning* DebrisPositioning, TSubclassOf<AActor> terrainPlacement, const TArray<FVector>& locationsToAvoid, UCurveFloat* AvoidCostCurve);
     
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)

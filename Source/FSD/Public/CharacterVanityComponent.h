@@ -1,21 +1,21 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EVanitySlot.h"
+#include "Components/ActorComponent.h"
 #include "EHeadVanityType.h"
+#include "EVanitySlot.h"
 #include "EquippedVanity.h"
 #include "TattooArmorItem.h"
-#include "Components/ActorComponent.h"
 #include "CharacterVanityComponent.generated.h"
 
-class UObject;
-class USkeletalMeshComponent;
-class UVanityItem;
 class UArmorMaterialVanityItem;
 class UBeardColorVanityItem;
 class UCharacterVanityItems;
-class UPlayerCharacterID;
-class UMaterialInterface;
 class UMaterialInstanceDynamic;
+class UMaterialInterface;
+class UObject;
+class UPlayerCharacterID;
+class USkeletalMeshComponent;
+class UVanityItem;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UCharacterVanityComponent : public UActorComponent {
@@ -62,9 +62,10 @@ protected:
     TMap<EVanitySlot, USkeletalMeshComponent*> VanityMeshes;
     
 public:
-    UCharacterVanityComponent();
+    UCharacterVanityComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void UpdateMeshes();
@@ -74,7 +75,10 @@ public:
     void UpdateEquippedVanity(bool applyItems);
     
     UFUNCTION(BlueprintCallable)
-    void SetEquippedVanityInViewer(const TArray<UVanityItem*>& Vanity);
+    void SetEquippedVanityInViewer(const FEquippedVanity& equippedVanityItems);
+    
+    UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
+    static void SetDesireSleevelessArmor(UObject* WorldContextObject, UPlayerCharacterID* Character, bool inDesireSleeveless);
     
 protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
@@ -87,6 +91,9 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static UVanityItem* Receive_GetEquippedVanityItem(UObject* WorldContextObject, UPlayerCharacterID* Character, EVanitySlot Slot);
     
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static bool Receive_GetDesireSleevelessArmor(UObject* WorldContextObject, UPlayerCharacterID* Character);
+    
 protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_EquippedVanity();
@@ -97,6 +104,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UVanityItem* GetEquippedVanityItem(EVanitySlot Slot, bool ignorePreviewItems) const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool GetDesireSleevelessArmor() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UCharacterVanityItems* GetAvailableVanityItems() const;

@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "CoolDownProgressStyle.h"
-#include "ThrowableItem.h"
 #include "RejoinListener.h"
+#include "ThrowableItem.h"
 #include "UpgradableGear.h"
 #include "ShieldGeneratorItem.generated.h"
 
@@ -39,9 +39,10 @@ protected:
     FCoolDownProgressStyle RechargeProgressUI;
     
 public:
-    AShieldGeneratorItem();
+    AShieldGeneratorItem(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ReceiveGeneratorReturned();
@@ -61,7 +62,7 @@ protected:
     UFUNCTION(BlueprintCallable)
     void GeneratorReturned();
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

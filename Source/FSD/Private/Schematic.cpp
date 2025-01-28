@@ -1,10 +1,13 @@
 #include "Schematic.h"
 
-class UObject;
-class UResourceData;
-class UFSDSaveGame;
-class USchematicItem;
-class UTexture;
+USchematic::USchematic() {
+    this->Category = NULL;
+    this->PricingTier = NULL;
+    this->Rarity = NULL;
+    this->UsedByCharacter = NULL;
+    this->Item = NULL;
+    this->CostIsLocked = false;
+}
 
 void USchematic::SetCraftingMaterialCost() {
 }
@@ -59,12 +62,4 @@ void USchematic::BuildSchematic(UObject* WorldContext) {
 void USchematic::AddSchematicToPlayerInventory(UObject* WorldContext) {
 }
 
-USchematic::USchematic() {
-    this->Category = NULL;
-    this->PricingTier = NULL;
-    this->Rarity = NULL;
-    this->UsedByCharacter = NULL;
-    this->Item = NULL;
-    this->CostIsLocked = false;
-}
 

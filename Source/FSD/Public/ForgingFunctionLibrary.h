@@ -1,9 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "ForgingPendingReward.h"
-#include "ESchematicType.h"
-#include "ForgingResult.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "ESchematicType.h"
+#include "ForgingPendingReward.h"
+#include "ForgingResult.h"
 #include "ForgingFunctionLibrary.generated.h"
 
 class UObject;
@@ -14,6 +14,7 @@ class UForgingFunctionLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
     UForgingFunctionLibrary();
+
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static USchematic* PickForgingMasteryDefaultReward(UObject* WorldContextObject, ESchematicType InType);
     

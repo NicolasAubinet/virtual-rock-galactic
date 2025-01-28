@@ -1,28 +1,28 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "DamageData.h"
 #include "Engine/EngineTypes.h"
 #include "Engine/NetSerialization.h"
+#include "DamageData.h"
 #include "ESharkEnemyState.h"
 #include "EnemyDeepPathfinderCharacter.h"
 #include "SharkEnemy.generated.h"
 
 class AActor;
-class UPrimitiveComponent;
 class APawn;
 class UDamageComponent;
 class UDamageTag;
 class UEnemyComponent;
-class UHealthComponentBase;
-class UHealthComponent;
-class UParticleSystemComponent;
 class UFakeMoverSettings;
-class USphereComponent;
 class UFakePhysGrabberComponent;
+class UHealthComponent;
+class UHealthComponentBase;
 class UInDangerComponent;
 class UParticleSystem;
-class USoundCue;
+class UParticleSystemComponent;
 class UPawnSensingComponent;
+class UPrimitiveComponent;
+class USoundCue;
+class USphereComponent;
 
 UCLASS(Abstract, Blueprintable)
 class ASharkEnemy : public AEnemyDeepPathfinderCharacter {
@@ -58,9 +58,6 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UFakePhysGrabberComponent* RestrictedGrabberComponent;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    float RagdollSpeedFactor;
-    
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundCue* ImpactCue;
@@ -78,16 +75,10 @@ protected:
     float GrabTime;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    float StopSpeedThreshold;
+    float RagdollSpeedFactor;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float UpsideDownTime;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    float RaiseSpeed;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    float TiltInSpeed;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float TiltOutSpeed;
@@ -100,9 +91,6 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float AttackDuration;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    float HitLaunchPower;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ChanceToGrab;
@@ -123,7 +111,10 @@ protected:
     float JumpForce;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    float TimeBeforeGroundCheck;
+    float NormalHeight;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float DiveHeight;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MinCirclingTime;
@@ -144,7 +135,7 @@ protected:
     UFakeMoverSettings* JumpSettings;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    UFakeMoverSettings* VounerableSettings;
+    UFakeMoverSettings* VulnerableSettings;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxInGroundTime;
@@ -165,9 +156,10 @@ protected:
     ESharkEnemyState State;
     
 public:
-    ASharkEnemy();
+    ASharkEnemy(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void SetVulnerable();
     
@@ -202,9 +194,11 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnJumpEvent();
     
-    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-    void OnGrabbedEvent();
+protected:
+    UFUNCTION(BlueprintCallable)
+    void OnHit(float HitDamage, const FDamageData& DamageData, bool anyHealthLost);
     
+public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnExitState(ESharkEnemyState NewState);
     
@@ -219,9 +213,6 @@ private:
     void OnDeath(UHealthComponentBase* aHealthComponent);
     
 protected:
-    UFUNCTION(BlueprintCallable)
-    void OnDamaged(float aAmount);
-    
     UFUNCTION(BlueprintCallable)
     void OnCollided(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
     

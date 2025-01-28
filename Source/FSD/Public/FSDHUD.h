@@ -1,13 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EHUDVisibilityReason.h"
 #include "GameFramework/HUD.h"
+#include "EHUDVisibilityReason.h"
 #include "FSDHUD.generated.h"
 
-class APlayerController;
 class AFSDHUD;
-class APlayerCharacter;
 class APlayerCameraDrone;
+class APlayerCharacter;
+class APlayerController;
+class UFSDMainHUDWidget;
 class URadarPointComponent;
 
 UCLASS(Blueprintable, NonTransient)
@@ -28,7 +29,8 @@ protected:
     uint8 IsVisibleFlags;
     
 public:
-    AFSDHUD();
+    AFSDHUD(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     bool ToggleHUDVisibility(EHUDVisibilityReason reason);
     
@@ -54,6 +56,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void HandleSeamlessTravel();
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, BlueprintPure)
+    UFSDMainHUDWidget* GetHUDWidget() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetHUDVisible() const;

@@ -1,25 +1,60 @@
 #include "FSDGameState.h"
-#include "Net/UnrealNetwork.h"
 #include "AttackerManagerComponent.h"
 #include "DifficultyManager.h"
-#include "SpawnEffectsComponent.h"
 #include "GemProximityTracker.h"
+#include "Net/UnrealNetwork.h"
 #include "PlayerProximityTracker.h"
 #include "SeasonReplicatorComponent.h"
 #include "ShowroomManager.h"
 #include "SoundMixManagerComponent.h"
+#include "SpawnEffectsComponent.h"
 #include "TeamResourcesComponent.h"
+#include "Templates/SubclassOf.h"
 
-class UObjective;
-class UResourceData;
-class UDifficultySetting;
-class AFSDGameState;
-class UFSDEvent;
-class AFSDPlayerState;
-class UGeneratedMission;
-class AGameStats;
-class AProceduralSetup;
-class USoundCue;
+AFSDGameState::AFSDGameState(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->CurrentLevel = -1;
+    this->EscapePod = NULL;
+    this->bTeamDown = false;
+    this->CSGWorld = NULL;
+    this->LastSupplyPodTimeStamp = 0;
+    this->LastCleaningPodTimeStamp = -9999;
+    this->ProceduralSetup = NULL;
+    this->DelayLateJoin = false;
+    this->FakeMovementBase = NULL;
+    this->PlayerSurvivalCreditBonus = 100;
+    this->ResourceAmountPenalty = 0.25f;
+    this->ObjectivesCreditPenalty = 0.25f;
+    this->ObjectivesXPPenaltyNormal = 0.25f;
+    this->ObjectivesXPPenaltyDeepDives = 0.20f;
+    this->BoscoReviveCounter = -1;
+    this->SpawnEffects = CreateDefaultSubobject<USpawnEffectsComponent>(TEXT("SpawnEffects"));
+    this->MeshScaler = NULL;
+    this->GemProximityTracker = CreateDefaultSubobject<UGemProximityTracker>(TEXT("GemProximityTracker"));
+    this->AttackerManager = CreateDefaultSubobject<UAttackerManagerComponent>(TEXT("AttackerManager"));
+    this->DifficultyManagerComponent = CreateDefaultSubobject<UDifficultyManager>(TEXT("DifficultyManager"));
+    this->SoundMixManager = CreateDefaultSubobject<USoundMixManagerComponent>(TEXT("SoundMixManager"));
+    this->SeasonReplicatorComponent = CreateDefaultSubobject<USeasonReplicatorComponent>(TEXT("SeasonReplicator"));
+    this->TeamResources = CreateDefaultSubobject<UTeamResourcesComponent>(TEXT("TeamResources"));
+    this->IsOnSpaceRig = false;
+    this->PlayerMadeItToDropPod = true;
+    this->objectivesCompleted = false;
+    this->RememberDifficulty = true;
+    this->ProximityTracker = CreateDefaultSubobject<UPlayerProximityTracker>(TEXT("ProximityTracker"));
+    this->ShowroomManager = CreateDefaultSubobject<UShowroomManager>(TEXT("ShowroomManager"));
+    this->GameStats = NULL;
+    this->MissionTime = 0;
+    this->MissionStartTime = 0;
+    this->MissionHaz = 0;
+    this->PreventLatejoinCharacterDuplication = true;
+    this->StartPressed = false;
+    this->ContinuePressed = false;
+    this->ContinuesCountdown = 0;
+    this->AllDwarvesDown = false;
+    this->missionAborted = false;
+    this->CountdownRemaining = -1;
+    this->CanCarryOverResources = true;
+    this->CurrentPlayerSessionLeader = NULL;
+}
 
 void AFSDGameState::WaitForInitialGenerationDone(AFSDGameState* GameState, FLatentActionInfo LatentInfo) {
 }
@@ -164,10 +199,6 @@ TArray<FCreditsReward> AFSDGameState::GetMissionRewardCredits() const {
     return TArray<FCreditsReward>();
 }
 
-bool AFSDGameState::GetMissionCompletedCreditReward(bool primary, int32& OutReward) const {
-    return false;
-}
-
 int32 AFSDGameState::GetGlobalMissionSeed() const {
     return 0;
 }
@@ -184,12 +215,24 @@ UDifficultyManager* AFSDGameState::GetDifficultyManager() const {
     return NULL;
 }
 
+FGameDifficulty AFSDGameState::GetCurrentGameDifficulty() const {
+    return FGameDifficulty{};
+}
+
+UDifficultySetting* AFSDGameState::GetCurrentDifficultySetting() const {
+    return NULL;
+}
+
 TMap<UResourceData*, float> AFSDGameState::GetCollectedResources() const {
     return TMap<UResourceData*, float>();
 }
 
 TArray<UFSDEvent*> AFSDGameState::GetActiveEventsFromMission() const {
     return TArray<UFSDEvent*>();
+}
+
+UObjective* AFSDGameState::FindObjective(TSubclassOf<UObjective> SubClass) const {
+    return NULL;
 }
 
 void AFSDGameState::ClientNewMessage_Implementation(const FFSDChatMessage& Msg) {
@@ -208,7 +251,7 @@ bool AFSDGameState::AllMissionEndResultsReceived() const {
 void AFSDGameState::All_SpawnScaledEffectAt_Implementation(FScaledEffect Effect, FVector_NetQuantize Location) {
 }
 
-void AFSDGameState::All_SpawnScaledEffectAndCueAt_Implementation(FScaledEffect Effect, USoundCue* audio, FVector_NetQuantize Location) {
+void AFSDGameState::All_SpawnScaledEffectAndCueAt_Implementation(FScaledEffect Effect, USoundCue* Audio, FVector_NetQuantize Location) {
 }
 
 void AFSDGameState::All_ServerQuit_Implementation() {
@@ -236,51 +279,7 @@ void AFSDGameState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLif
     DOREPLIFETIME(AFSDGameState, missionAborted);
     DOREPLIFETIME(AFSDGameState, CountdownRemaining);
     DOREPLIFETIME(AFSDGameState, countdownText);
+    DOREPLIFETIME(AFSDGameState, HostGlobalSeed);
 }
 
-AFSDGameState::AFSDGameState() {
-    this->CurrentLevel = -1;
-    this->EscapePod = NULL;
-    this->bTeamDown = false;
-    this->CSGWorld = NULL;
-    this->LastSupplyPodTimeStamp = 0;
-    this->LastCleaningPodTimeStamp = -9999;
-    this->ProceduralSetup = NULL;
-    this->DelayLateJoin = false;
-    this->FakeMovementBase = NULL;
-    this->PlayerSurvivalCreditBonus = 100;
-    this->ResourceAmountPenalty = 0.25f;
-    this->ObjectivesCreditPenalty = 0.25f;
-    this->ObjectivesXPPenaltyNormal = 0.25f;
-    this->ObjectivesXPPenaltyDeepDives = 0.20f;
-    this->BoscoReviveCounter = -1;
-    this->SpawnEffects = CreateDefaultSubobject<USpawnEffectsComponent>(TEXT("SpawnEffects"));
-    this->MeshScaler = NULL;
-    this->GemProximityTracker = CreateDefaultSubobject<UGemProximityTracker>(TEXT("GemProximityTracker"));
-    this->AttackerManager = CreateDefaultSubobject<UAttackerManagerComponent>(TEXT("AttackerManager"));
-    this->DifficultyManagerComponent = CreateDefaultSubobject<UDifficultyManager>(TEXT("DifficultyManager"));
-    this->SoundMixManager = CreateDefaultSubobject<USoundMixManagerComponent>(TEXT("SoundMixManager"));
-    this->SeasonReplicatorComponent = CreateDefaultSubobject<USeasonReplicatorComponent>(TEXT("SeasonReplicator"));
-    this->TeamResources = CreateDefaultSubobject<UTeamResourcesComponent>(TEXT("TeamResources"));
-    this->IsOnSpaceRig = false;
-    this->PlayerMadeItToDropPod = true;
-    this->objectivesCompleted = false;
-    this->CurrentDifficultySetting = NULL;
-    this->RememberDifficulty = true;
-    this->ProximityTracker = CreateDefaultSubobject<UPlayerProximityTracker>(TEXT("ProximityTracker"));
-    this->ShowroomManager = CreateDefaultSubobject<UShowroomManager>(TEXT("ShowroomManager"));
-    this->GameStats = NULL;
-    this->MissionTime = 0;
-    this->MissionStartTime = 0;
-    this->MissionHaz = 0;
-    this->PreventLatejoinCharacterDuplication = true;
-    this->StartPressed = false;
-    this->ContinuePressed = false;
-    this->ContinuesCountdown = 0;
-    this->AllDwarvesDown = false;
-    this->missionAborted = false;
-    this->CountdownRemaining = -1;
-    this->CanCarryOverResources = true;
-    this->CurrentPlayerSessionLeader = NULL;
-}
 

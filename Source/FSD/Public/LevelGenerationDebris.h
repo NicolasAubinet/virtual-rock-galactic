@@ -3,8 +3,8 @@
 #include "Components/ActorComponent.h"
 #include "LevelGenerationDebris.generated.h"
 
-class UObject;
 class UDebrisBase;
+class UObject;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class ULevelGenerationDebris : public UActorComponent {
@@ -24,6 +24,7 @@ protected:
     bool SelfActivate;
     
 public:
-    ULevelGenerationDebris();
+    ULevelGenerationDebris(const FObjectInitializer& ObjectInitializer);
+
 };
 

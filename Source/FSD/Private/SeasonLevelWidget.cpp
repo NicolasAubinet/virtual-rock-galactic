@@ -1,14 +1,5 @@
 #include "SeasonLevelWidget.h"
 
-bool USeasonLevelWidget::TryClaimReward(bool isNormalReward) {
-    return false;
-}
-
-void USeasonLevelWidget::SetData(int32 inLevel, bool inLastInRow) {
-}
-
-
-
 USeasonLevelWidget::USeasonLevelWidget() : UUserWidget(FObjectInitializer::Get()) {
     this->Level = 0;
     this->SeasonLevel = 0;
@@ -17,4 +8,14 @@ USeasonLevelWidget::USeasonLevelWidget() : UUserWidget(FObjectInitializer::Get()
     this->IsUnlocked = false;
     this->IsLastInRow = false;
 }
+
+bool USeasonLevelWidget::TryClaimReward(bool isNormalReward) {
+    return false;
+}
+
+void USeasonLevelWidget::SetData(int32 InLevel, bool inLastInRow) {
+}
+
+
+
 

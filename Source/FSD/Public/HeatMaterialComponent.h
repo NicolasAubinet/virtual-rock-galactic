@@ -20,10 +20,11 @@ protected:
     TArray<UMaterialInstanceDynamic*> MaterialIntances;
     
 public:
-    UHeatMaterialComponent();
+    UHeatMaterialComponent(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
-    void OnTemperatureChanged(float Temperature, bool Overheated);
+    void OnTemperatureChanged(float temperature, bool overheated);
     
 public:
     UFUNCTION(BlueprintCallable)

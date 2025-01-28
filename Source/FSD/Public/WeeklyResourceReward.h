@@ -4,8 +4,8 @@
 #include "Reward.h"
 #include "WeeklyResourceReward.generated.h"
 
-class UResourceData;
 class AFSDPlayerController;
+class UResourceData;
 
 UCLASS(Blueprintable, EditInlineNew)
 class UWeeklyResourceReward : public UReward {
@@ -16,10 +16,11 @@ protected:
     int32 ResourceCount;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FIRandRange Amount;
+    FIRandRange amount;
     
 public:
     UWeeklyResourceReward();
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TMap<UResourceData*, float> GetRewards(AFSDPlayerController* Player) const;

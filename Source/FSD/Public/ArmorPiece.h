@@ -1,14 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "GameFramework/Actor.h"
-#include "LoadoutItem.h"
 #include "ItemIDInterface.h"
+#include "LoadoutItem.h"
 #include "SaveGameIDInterface.h"
+#include "Templates/SubclassOf.h"
 #include "ArmorPiece.generated.h"
 
-class AItem;
 class AArmorPiece;
+class AItem;
 class ALoadoutItemProxy;
 class UItemID;
 class UPawnStat;
@@ -35,14 +35,15 @@ protected:
     TSubclassOf<AActor> WeaponPreviewClass;
     
 public:
-    AArmorPiece();
+    AArmorPiece(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TSubclassOf<AActor> GetWeaponViewClass() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static AArmorPiece* GetArmorPieceDefaultObject(TSubclassOf<AArmorPiece> armorPieceClass);
     
-    
+
     // Fix for true pure virtual functions not being implemented
     UFUNCTION(BlueprintCallable)
     TSubclassOf<AItem> GetLoadoutItemClass() const override PURE_VIRTUAL(GetLoadoutItemClass, return NULL;);

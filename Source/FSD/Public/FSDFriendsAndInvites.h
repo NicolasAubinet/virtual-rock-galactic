@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "UObject/Object.h"
 #include "BlueprintFriend.h"
 #include "EmptyFriendDelegateDelegate.h"
-#include "UObject/Object.h"
 #include "FSDFriendsAndInvites.generated.h"
 
 UCLASS(Blueprintable)
@@ -25,6 +25,7 @@ public:
     TArray<FBlueprintFriend> FriendInvites;
     
     UFSDFriendsAndInvites();
+
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void Init();
     

@@ -1,6 +1,9 @@
 #include "PlayerProximityTracker.h"
 
-class UObject;
+UPlayerProximityTracker::UPlayerProximityTracker(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->MaxDistanceBetweenPlayers = 2000.00f;
+    this->PlayerSpheresUpdateRatePerSecond = 2.00f;
+}
 
 void UPlayerProximityTracker::Receive_RegisterForLocalPlayerProximity(UObject* WorldContextObject, const FVector& Location, float Distance, const FPlayerProximityDelegate& proximityCallback, bool triggerOnlyOnce) {
 }
@@ -16,8 +19,4 @@ TArray<FPlayerSphere> UPlayerProximityTracker::GetPlayerSpheres() const {
     return TArray<FPlayerSphere>();
 }
 
-UPlayerProximityTracker::UPlayerProximityTracker() {
-    this->MaxDistanceBetweenPlayers = 2000.00f;
-    this->PlayerSpheresUpdateRatePerSecond = 2.00f;
-}
 

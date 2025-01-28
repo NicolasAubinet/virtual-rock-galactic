@@ -1,9 +1,12 @@
 #include "LookingAtWidget.h"
 
-class AActor;
-class UHealthComponentBase;
-class UHealth;
-class IHealth;
+ULookingAtWidget::ULookingAtWidget() : UUserWidget(FObjectInitializer::Get()) {
+    this->TargetSelectDuration = 1.00f;
+    this->TargetLostDuration = 2.00f;
+    this->CanCurrentTargetTakeDamage = true;
+    this->TargetLostTime = 0.00f;
+    this->bTargetSet = false;
+}
 
 void ULookingAtWidget::SetCurrentTarget(AActor* NewActor, const TScriptInterface<IHealth>& HealthComponent, float OverrideTargetLostTime) {
 }
@@ -34,11 +37,4 @@ bool ULookingAtWidget::GetCharacterTemperatureEffect(float& TemperatureEffect) c
     return false;
 }
 
-ULookingAtWidget::ULookingAtWidget() : UUserWidget(FObjectInitializer::Get()) {
-    this->TargetSelectDuration = 1.00f;
-    this->TargetLostDuration = 2.00f;
-    this->CanCurrentTargetTakeDamage = true;
-    this->TargetLostTime = 0.00f;
-    this->bTargetSet = false;
-}
 

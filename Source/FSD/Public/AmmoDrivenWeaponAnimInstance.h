@@ -20,13 +20,14 @@ protected:
     float ClipFullPercentage;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    bool Overheated;
+    bool overheated;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    float Temperature;
+    float temperature;
     
 public:
     UAmmoDrivenWeaponAnimInstance();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsFull() const;
     

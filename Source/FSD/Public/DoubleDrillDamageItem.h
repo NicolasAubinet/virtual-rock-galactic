@@ -4,15 +4,15 @@
 #include "Engine/NetSerialization.h"
 #include "DoubleDrillDamageItem.generated.h"
 
-class UPrimitiveComponent;
 class UFSDPhysicalMaterial;
+class UPrimitiveComponent;
 
 USTRUCT(BlueprintType)
 struct FDoubleDrillDamageItem {
     GENERATED_BODY()
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
-    UPrimitiveComponent* Target;
+    TWeakObjectPtr<UPrimitiveComponent> Target;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FVector_NetQuantize Location;

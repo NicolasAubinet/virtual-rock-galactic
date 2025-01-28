@@ -3,29 +3,30 @@
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
-#include "Engine/EngineTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
-#include "Engine/EngineTypes.h"
-#include "Blueprint/UserWidget.h"
+#include "Kismet/BlueprintFunctionLibrary.h"
 #include "Components/SplineComponent.h"
+#include "Engine/EngineTypes.h"
+#include "Engine/EngineTypes.h"
 #include "ECarveFilterType.h"
 #include "EPreciousMaterialOptions.h"
+#include "Blueprint/UserWidget.h"
 #include "Curve2DAppearance.h"
-#include "Kismet/BlueprintFunctionLibrary.h"
 #include "FSDSplineLibrary.generated.h"
 
-class UObject;
 class AActor;
+class UObject;
+class USplineComponent;
 class USplineMeshComponent;
 class UTerrainMaterial;
-class USplineComponent;
 
 UCLASS(Blueprintable)
 class UFSDSplineLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
     UFSDSplineLibrary();
+
     UFUNCTION(BlueprintCallable)
     static bool SplineComponentSphereTrace(USplineComponent*& SplineComponent, float Radius, TEnumAsByte<ETraceTypeQuery> TraceType, float StepSize, TArray<AActor*> IgnoreActors, FHitResult& OutHitResult, FVector Offset);
     

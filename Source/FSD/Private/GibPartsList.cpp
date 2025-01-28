@@ -1,11 +1,9 @@
 #include "GibPartsList.h"
 
-class UNiagaraComponent;
-class UMaterialInstance;
+UGibPartsList::UGibPartsList() {
+}
 
 void UGibPartsList::SetGibMeshesAndMaterialsOnFX(UNiagaraComponent* ns, UMaterialInstance* Material, float Scale) const {
 }
 
-UGibPartsList::UGibPartsList() {
-}
 

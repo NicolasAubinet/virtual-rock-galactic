@@ -1,14 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EInputKeys.h"
 #include "GameFramework/Actor.h"
+#include "EInputKeys.h"
 #include "DetPack.generated.h"
 
 class ADetPackItem;
-class UHealthComponentBase;
-class UProjectileMovementComponent;
 class APlayerCharacter;
 class UExplosionComponent;
+class UHealthComponentBase;
+class UProjectileMovementComponent;
 class USimpleHealthComponent;
 class USingleUsableComponent;
 
@@ -66,9 +66,10 @@ protected:
     bool HasExtraFearRadius;
     
 public:
-    ADetPack();
+    ADetPack(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void UseFearStaggerUpgrades();

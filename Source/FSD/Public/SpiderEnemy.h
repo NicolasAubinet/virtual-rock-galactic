@@ -1,14 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EnemyDeepPathfinderCharacter.h"
 #include "EnemyAttacker.h"
+#include "EnemyDeepPathfinderCharacter.h"
 #include "SpiderEnemy.generated.h"
 
 class AActor;
-class UStaticMeshComponent;
 class UHitReactionComponent;
 class UPawnStatsComponent;
 class UStaticMesh;
+class UStaticMeshComponent;
 
 UCLASS(Blueprintable)
 class ASpiderEnemy : public AEnemyDeepPathfinderCharacter, public IEnemyAttacker {
@@ -40,9 +40,10 @@ protected:
     AActor* LookAtTarget;
     
 public:
-    ASpiderEnemy();
+    ASpiderEnemy(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void SetLookAtTarget(AActor* Target);
     
@@ -56,7 +57,7 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void AlertNearbyEnemies();
     
-    
+
     // Fix for true pure virtual functions not being implemented
 public:
     UFUNCTION(BlueprintCallable)

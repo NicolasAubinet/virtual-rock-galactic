@@ -1,22 +1,21 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
-#include "LaserPointerTarget.h"
-#include "EInputKeys.h"
 #include "GameplayTagContainer.h"
-#include "FollowTargetChangedDelegate.h"
+#include "EInputKeys.h"
 #include "FSDAIController.h"
+#include "FollowTargetChangedDelegate.h"
+#include "LaserPointerTarget.h"
+#include "Templates/SubclassOf.h"
 #include "BoscoController.generated.h"
 
 class AActor;
+class AFSDPlayerState;
+class APlayerCharacter;
+class UBehaviorTree;
 class UDroneUseComponent;
 class UHealthComponentBase;
-class AFSDPlayerState;
-class UMissionWarning;
-class APlayerCharacter;
 class UTerrainMaterial;
-class UBehaviorTree;
 
 UCLASS(Blueprintable)
 class ABoscoController : public AFSDAIController {
@@ -40,10 +39,10 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UTerrainMaterial*> PlagueMaterials;
     
-protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    UMissionWarning* PlagueWarning;
+    UTerrainMaterial* RiftCrystalMaterial;
     
+protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSubclassOf<AActor>> VacuumableTypes;
     
@@ -87,6 +86,12 @@ protected:
     FGameplayTagQuery DefendTageQuery;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FGameplayTagQuery VacuumTagQuery;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FGameplayTagQuery MeleeTagQuery;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ReviveHealthPercentage;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
@@ -96,7 +101,8 @@ protected:
     AActor* TryingToPickItem;
     
 public:
-    ABoscoController();
+    ABoscoController(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void ReviveTarget();
     

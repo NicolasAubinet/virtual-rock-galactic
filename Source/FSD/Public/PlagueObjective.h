@@ -3,10 +3,10 @@
 #include "Objective.h"
 #include "PlagueObjective.generated.h"
 
+class APlagueControlActor;
+class APlagueInfectionNode;
 class UDialogDataAsset;
 class UEnemyWaveController;
-class APlagueInfectionNode;
-class APlagueControlActor;
 
 UCLASS(Abstract, Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UPlagueObjective : public UObjective {
@@ -59,9 +59,10 @@ protected:
     float ScriptedPlagueWaveWeight;
     
 public:
-    UPlagueObjective();
+    UPlagueObjective(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_CurrentPlagueAmount(int32 OldAmount);

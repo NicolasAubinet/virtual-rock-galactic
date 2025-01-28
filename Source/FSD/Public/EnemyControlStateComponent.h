@@ -1,9 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "EEnemyControlState.h"
-#include "ControlEnemyState.h"
 #include "CharacterStateComponent.h"
+#include "ControlEnemyState.h"
+#include "EEnemyControlState.h"
 #include "EnemyControlStateComponent.generated.h"
 
 class UAIPlayerControlComponent;
@@ -30,9 +30,10 @@ protected:
     FQuat ControlRotation;
     
 public:
-    UEnemyControlStateComponent();
+    UEnemyControlStateComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void ServerExit();

@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "BinaryTerrainMaterialCombiner.h"
 #include "CSGBaseComponent.h"
 #include "CSGSDFModulatedInstanceProperties.h"
-#include "BinaryTerrainMaterialCombiner.h"
 #include "CSGModulatedSDFInstanceComponent.generated.h"
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -15,6 +15,7 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FBinaryTerrainMaterialCombiner Materials;
     
-    UCSGModulatedSDFInstanceComponent();
+    UCSGModulatedSDFInstanceComponent(const FObjectInitializer& ObjectInitializer);
+
 };
 

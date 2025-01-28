@@ -1,11 +1,21 @@
 #include "GeneratedMission.h"
 #include "Templates/SubclassOf.h"
 
-class UMissionDNA;
-class AFSDPlayerController;
-class UGeneratedMission;
-class UMutator;
-class AProceduralSetup;
+UGeneratedMission::UGeneratedMission() {
+    this->Biome = NULL;
+    this->Seed = 0;
+    this->Template = NULL;
+    this->PrimaryObjective = NULL;
+    this->MissionMutator = NULL;
+    this->MissionChallenge = NULL;
+    this->ComplexityLimit = NULL;
+    this->DurationLimit = NULL;
+    this->MissionDNA = NULL;
+    this->MissionStructure = EMissionStructure::SingleMission;
+    this->IsInSeasonEventZone = false;
+    this->WouldBeInSeasonEventZone = false;
+    this->CanHaveMutators = false;
+}
 
 
 bool UGeneratedMission::IsSingleMission() const {
@@ -52,17 +62,4 @@ bool UGeneratedMission::AreMissionsEqual(UGeneratedMission* Other) const {
     return false;
 }
 
-UGeneratedMission::UGeneratedMission() {
-    this->Biome = NULL;
-    this->Seed = 0;
-    this->GlobalSeed = 0;
-    this->Template = NULL;
-    this->PrimaryObjective = NULL;
-    this->MissionMutator = NULL;
-    this->ComplexityLimit = NULL;
-    this->DurationLimit = NULL;
-    this->MissionDNA = NULL;
-    this->MissionStructure = EMissionStructure::SingleMission;
-    this->IsInSeasonEventZone = false;
-}
 

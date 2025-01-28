@@ -1,6 +1,23 @@
 #include "ThrownGrenadeItem.h"
 #include "Net/UnrealNetwork.h"
 
+AThrownGrenadeItem::AThrownGrenadeItem(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->FPAnimInstance = NULL;
+    this->TPAnimInstance = NULL;
+    this->CharacterAnimationSet = NULL;
+    this->ThrowAngle = 0.00f;
+    this->MaxGrenades = 0;
+    this->Grenades = 0;
+    this->GrenadeCooldownRemaining = 0.00f;
+    this->State = EThrownGrenadeItemState::NotEquipped;
+    this->GrenadeClass = NULL;
+    this->DefaultGrenadeAnimationSet = NULL;
+    this->GrenadeMeshInstance = NULL;
+    this->CookSound = NULL;
+    this->CooldownIsDone = true;
+    this->HasRejoinedInitialized = false;
+}
+
 
 void AThrownGrenadeItem::SetRemainingCooldown(float CoolDown) {
 }
@@ -14,7 +31,7 @@ void AThrownGrenadeItem::Server_SetState_Implementation(EThrownGrenadeItemState 
 void AThrownGrenadeItem::Server_Resupply_Implementation(float percentage) {
 }
 
-void AThrownGrenadeItem::ResupplyGrenadesAmount(const int32& Amount) {
+void AThrownGrenadeItem::ResupplyGrenadesAmount(const int32& amount) {
 }
 
 void AThrownGrenadeItem::ResupplyGrenades(float percentage) {
@@ -65,20 +82,4 @@ void AThrownGrenadeItem::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& O
     DOREPLIFETIME(AThrownGrenadeItem, HasRejoinedInitialized);
 }
 
-AThrownGrenadeItem::AThrownGrenadeItem() {
-    this->FPAnimInstance = NULL;
-    this->TPAnimInstance = NULL;
-    this->CharacterAnimationSet = NULL;
-    this->ThrowAngle = 0.00f;
-    this->MaxGrenades = 0;
-    this->Grenades = 0;
-    this->GrenadeCooldownRemaining = 0.00f;
-    this->State = EThrownGrenadeItemState::NotEquipped;
-    this->GrenadeClass = NULL;
-    this->DefaultGrenadeAnimationSet = NULL;
-    this->GrenadeMeshInstance = NULL;
-    this->CookSound = NULL;
-    this->CooldownIsDone = true;
-    this->HasRejoinedInitialized = false;
-}
 

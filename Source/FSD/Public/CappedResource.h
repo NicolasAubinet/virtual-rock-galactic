@@ -1,14 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
+#include "UObject/Object.h"
 #include "ResourceAddedSignatureDelegate.h"
 #include "ResourceChangedSignatureDelegate.h"
 #include "ResourceFullSignatureDelegate.h"
-#include "UObject/Object.h"
 #include "CappedResource.generated.h"
 
-class UResourceData;
 class UCappedResource;
+class UResourceData;
 
 UCLASS(Blueprintable)
 class UCappedResource : public UObject {
@@ -41,13 +41,14 @@ protected:
     
 public:
     UCappedResource();
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     float TransferAll(UCappedResource* Receiver);
     
     UFUNCTION(BlueprintCallable)
-    float Transfer(float Amount, UCappedResource* Receiver);
+    float Transfer(float amount, UCappedResource* Receiver);
     
 protected:
     UFUNCTION(BlueprintCallable)
@@ -79,10 +80,10 @@ public:
     float GetCapacityPct() const;
     
     UFUNCTION(BlueprintCallable)
-    float Deduct(float Amount);
+    float Deduct(float amount);
     
     UFUNCTION(BlueprintCallable)
-    float Add(float Amount);
+    float Add(float amount);
     
 };
 

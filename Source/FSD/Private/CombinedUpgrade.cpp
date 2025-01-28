@@ -1,11 +1,10 @@
 #include "CombinedUpgrade.h"
 
-class UItemUpgrade;
+UCombinedUpgrade::UCombinedUpgrade() {
+}
 
 TArray<UItemUpgrade*> UCombinedUpgrade::GetUpgrades() const {
     return TArray<UItemUpgrade*>();
 }
 
-UCombinedUpgrade::UCombinedUpgrade() {
-}
 

@@ -1,9 +1,17 @@
 #include "FSDEvent.h"
 
-class UObject;
-class UFSDEvent;
-class APlayerController;
-class UTexture2D;
+UFSDEvent::UFSDEvent() {
+    this->EnableDangerousSaveGameIDEditing = false;
+    this->EventThumbnail = NULL;
+    this->EventType = EHolidayType::None;
+    this->bFreeBeerEvent = false;
+    this->bFreeBeerConfettiVisible = true;
+    this->SpecialEventBeer = NULL;
+    this->SeasonEndScreenImage = NULL;
+    this->UseDifferentBarLightColor = false;
+    this->bIsEventDebrisInDeepDives = true;
+    this->bHasClaimableRewards = false;
+}
 
 void UFSDEvent::MarkClaimableRewardsSeen(UObject* WorldContext) {
 }
@@ -28,14 +36,8 @@ bool UFSDEvent::GetIsActive(UObject* WorldContext) const {
     return false;
 }
 
-UFSDEvent::UFSDEvent() {
-    this->EventType = EHolidayType::None;
-    this->bHasClaimableRewards = false;
-    this->bFreeBeerEvent = false;
-    this->bFreeBeerConfettiVisible = true;
-    this->SpecialEventBeer = NULL;
-    this->SeasonEndScreenImage = NULL;
-    this->UseDifferentBarLightColor = false;
-    this->bIsEventDebrisInDeepDives = true;
+UFSDEventPopupWidget* UFSDEvent::CreatePopupWindow(APlayerController* InPlayerController) {
+    return NULL;
 }
+
 

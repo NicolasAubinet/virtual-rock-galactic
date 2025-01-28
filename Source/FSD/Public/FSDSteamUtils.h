@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "ESteamBranch.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "ESteamBranch.h"
 #include "FSDSteamUtils.generated.h"
 
 class APlayerState;
@@ -11,11 +11,15 @@ class UFSDSteamUtils : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
     UFSDSteamUtils();
+
     UFUNCTION(BlueprintCallable)
     static bool PlayerIsFollowingUsOnSteam();
     
     UFUNCTION(BlueprintCallable)
     static void OpenURLInSteamBrowser(const FString& URL);
+    
+    UFUNCTION(BlueprintCallable)
+    static void OpenSteamSettings();
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static bool IsTextFilteringInitialized();

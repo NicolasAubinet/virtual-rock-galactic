@@ -3,8 +3,8 @@
 #include "Objective.h"
 #include "DefenseObjective.generated.h"
 
-class UDebrisPositioning;
 class ADefensePointActor;
+class UDebrisPositioning;
 
 UCLASS(Abstract, Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UDefenseObjective : public UObjective {
@@ -27,9 +27,10 @@ protected:
     UDebrisPositioning* DebrisPositioning;
     
 public:
-    UDefenseObjective();
+    UDefenseObjective(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void PointDefended();
     

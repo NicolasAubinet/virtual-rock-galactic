@@ -1,17 +1,17 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "ERedeployableSentryGunState.h"
 #include "SentryGun.h"
+#include "Templates/SubclassOf.h"
 #include "RedeployableSentryGun.generated.h"
 
 class AActor;
-class USkeletalMeshComponent;
-class UActorTrackingComponent;
-class ASentryElectroBeam;
-class UOutlineComponent;
 class APlayerCharacter;
 class ARedeployableSentryGun;
+class ASentryElectroBeam;
+class UActorTrackingComponent;
+class UOutlineComponent;
+class USkeletalMeshComponent;
 
 UCLASS(Abstract, Blueprintable)
 class ARedeployableSentryGun : public ASentryGun {
@@ -41,7 +41,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UOutlineComponent* outline;
     
-    UPROPERTY(EditAnywhere, Transient, ReplicatedUsing=OnRep_SentryGunOwner, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_SentryGunOwner, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<APlayerCharacter> SentryGunOwner;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -72,14 +72,18 @@ protected:
     float EMPDiscargeCooldown;
     
 public:
-    ARedeployableSentryGun();
+    ARedeployableSentryGun(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void ToggleOutlineAndIcon(bool Visible);
     
     UFUNCTION(BlueprintCallable)
     void SetSentryGunOwner(APlayerCharacter* Character);
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void SetArcIndicatorActive(bool Active);
     
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)

@@ -1,7 +1,10 @@
 #include "CompositeArmorComponent.h"
 #include "Net/UnrealNetwork.h"
 
-class UPrimitiveComponent;
+UCompositeArmorComponent::UCompositeArmorComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->BreakParticle = NULL;
+    this->AffectedByAmorBreak = true;
+}
 
 void UCompositeArmorComponent::OnRep_ArmorDamageInfo(FArmorDamageInfo OldValue) {
 }
@@ -15,8 +18,4 @@ void UCompositeArmorComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProper
     DOREPLIFETIME(UCompositeArmorComponent, ArmorDamageInfo);
 }
 
-UCompositeArmorComponent::UCompositeArmorComponent() {
-    this->BreakParticle = NULL;
-    this->AffectedByAmorBreak = true;
-}
 

@@ -6,8 +6,8 @@
 #include "BEEMissionTemplate.generated.h"
 
 class UDifficultySetting;
-class UMissionDuration;
 class UMissionComplexity;
+class UMissionDuration;
 class UMissionTemplate;
 
 UCLASS(Blueprintable)
@@ -45,6 +45,7 @@ public:
     FRandInterval WarningCount;
     
     UBEEMissionTemplate();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsDurationAllowed(UMissionTemplate* mission, UMissionDuration* Duration) const;
     

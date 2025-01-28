@@ -2,29 +2,29 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
-#include "IntDelegateDelegate.h"
-#include "FloatDelegateDelegate.h"
 #include "DelegateDelegate.h"
-#include "EEscortMissionState.h"
 #include "EEscortExtractorState.h"
-#include "GaragePathSignatureDelegate.h"
-#include "SpeedChangedSignatureDelegate.h"
-#include "MuleActivatedSignatureDelegate.h"
+#include "EEscortMissionState.h"
 #include "EscortMuleExtractorSlot.h"
 #include "EscortMuleMovementState.h"
 #include "FSDPawn.h"
+#include "FloatDelegateDelegate.h"
+#include "GaragePathSignatureDelegate.h"
+#include "IntDelegateDelegate.h"
+#include "MuleActivatedSignatureDelegate.h"
+#include "SpeedChangedSignatureDelegate.h"
 #include "TriggerAI.h"
 #include "EscortMule.generated.h"
 
-class USkeletalMeshComponent;
-class UInstantUsable;
-class USimpleObjectInfoComponent;
 class AExtractorItem;
+class APlayerCharacter;
 class UEscortObjective;
 class UFriendlyHealthComponent;
+class UInstantUsable;
 class UOutlineComponent;
-class APlayerCharacter;
 class URestrictedResourceBank;
+class USimpleObjectInfoComponent;
+class USkeletalMeshComponent;
 
 UCLASS(Blueprintable)
 class FSD_API AEscortMule : public AFSDPawn, public ITriggerAI {
@@ -63,6 +63,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FTransform PreviousTransform;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool IsPathReady;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnObjectiveStateChanged, meta=(AllowPrivateAccess=true))
     EEscortMissionState State;
@@ -107,12 +110,13 @@ protected:
     TArray<FEscortMuleExtractorSlot> ExtractorSlots;
     
 public:
-    AEscortMule();
+    AEscortMule(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
-    bool TryHeal(APlayerCharacter* User, float Amount);
+    bool TryHeal(APlayerCharacter* User, float amount);
     
 public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
@@ -165,13 +169,19 @@ public:
     void ObjectiveStateChange(EEscortMissionState NewState);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool GetIsPathReady() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     EEscortExtractorState GetExtractorState(UInstantUsable* Usable) const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, BlueprintPure)
+    float GetDistanceToDoretta(FVector Location) const;
     
 protected:
     UFUNCTION(BlueprintCallable)
     void ActivateMule();
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

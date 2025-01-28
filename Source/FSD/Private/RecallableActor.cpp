@@ -1,12 +1,20 @@
 #include "RecallableActor.h"
 #include "Net/UnrealNetwork.h"
 
-class AActor;
+ARecallableActor::ARecallableActor(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->AcceptanceRadius = 50.00f;
+    this->AutoRecallDistance = 0.00f;
+    this->RelocateLandingHeight = 300.00f;
+    this->RelocationMarkerType = NULL;
+    this->State = ERecallableActorState::Idle;
+    this->RelocateLanding = false;
+    this->bInitialized = false;
+}
 
 void ARecallableActor::SetRecallTarget_Implementation(AActor* NewTarget) {
 }
 
-void ARecallableActor::Relocate_Implementation(FVector NewLocation, FRotator NewRotation) {
+void ARecallableActor::Relocate_Implementation(FVector NewLocation, FRotator NewRotation, AActor* NewAttachToActor, UPrimitiveComponent* NewAttachToComponent, FName NewAttachToBone) {
 }
 
 
@@ -55,13 +63,4 @@ void ARecallableActor::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
     DOREPLIFETIME(ARecallableActor, State);
 }
 
-ARecallableActor::ARecallableActor() {
-    this->AcceptanceRadius = 50.00f;
-    this->AutoRecallDistance = 0.00f;
-    this->RelocateLandingHeight = 300.00f;
-    this->RelocationMarkerType = NULL;
-    this->State = ERecallableActorState::Idle;
-    this->RelocateLanded = false;
-    this->bInitialized = false;
-}
 

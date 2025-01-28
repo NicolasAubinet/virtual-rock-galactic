@@ -1,9 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "Animation/AnimNotifies/AnimNotifyState.h"
+#include "Templates/SubclassOf.h"
 #include "AnimNotifyState_SpawnAndReleaseActor.generated.h"
 
 class AActor;
@@ -30,5 +30,6 @@ private:
     
 public:
     UAnimNotifyState_SpawnAndReleaseActor();
+
 };
 

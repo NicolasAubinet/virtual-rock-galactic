@@ -1,7 +1,13 @@
 #include "FSDPlayerControllerBase.h"
+#include "FSDPlayerCameraManager.h"
 #include "WindowManager.h"
 
-class UPlayerCharacterID;
+AFSDPlayerControllerBase::AFSDPlayerControllerBase(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->PlayerCameraManagerClass = AFSDPlayerCameraManager::StaticClass();
+    this->ClickEventKeys.AddDefaulted(1);
+    this->bStartWithBlackScreen = true;
+    this->WindowManager = CreateDefaultSubobject<UWindowManager>(TEXT("WindowManager"));
+}
 
 void AFSDPlayerControllerBase::ToggleAnalogCursor(bool Visible) {
 }
@@ -35,8 +41,4 @@ bool AFSDPlayerControllerBase::IsHUDVisibleFlagSet(EHUDVisibilityReason reason) 
 void AFSDPlayerControllerBase::Client_WasKicked_Implementation(EDisconnectReason reason) {
 }
 
-AFSDPlayerControllerBase::AFSDPlayerControllerBase() {
-    this->bStartWithBlackScreen = true;
-    this->WindowManager = CreateDefaultSubobject<UWindowManager>(TEXT("WindowManager"));
-}
 

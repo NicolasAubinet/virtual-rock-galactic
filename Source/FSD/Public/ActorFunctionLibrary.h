@@ -1,46 +1,47 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
-#include "HeroInfo.h"
 #include "UObject/NoExportTypes.h"
-#include "ECharacterState.h"
+#include "Kismet/BlueprintFunctionLibrary.h"
 #include "Curves/CurveFloat.h"
 #include "GameplayTagContainer.h"
-#include "Kismet/BlueprintFunctionLibrary.h"
+#include "ECharacterState.h"
+#include "HeroInfo.h"
+#include "Templates/SubclassOf.h"
 #include "ActorFunctionLibrary.generated.h"
 
-class UObject;
 class AActor;
-class UActorComponent;
-class USceneComponent;
-class UFXSystemAsset;
-class UMeshComponent;
-class UUserWidget;
-class UWindowWidget;
-class UEnemyComponent;
-class AFSDGameState;
 class AFSDGameMode;
+class AFSDGameState;
+class APlayerCharacter;
 class APlayerController;
+class IBlendableInterface;
+class UBlendableInterface;
+class UActorComponent;
+class UEnemyComponent;
 class UFSDPhysicalMaterial;
+class UFXSystemAsset;
 class UInventoryList;
 class UItemID;
-class UPlayerCharacterID;
-class UPathfinderCollisionComponent;
-class APlayerCharacter;
-class UBlendableInterface;
-class IBlendableInterface;
-class UTexture2D;
 class UMaterialInstanceDynamic;
+class UMeshComponent;
+class UObject;
+class UPathfinderCollisionComponent;
+class UPlayerCharacterID;
 class UPostProcessComponent;
+class USceneComponent;
 class USoundCue;
+class UTexture2D;
+class UUserWidget;
+class UWindowWidget;
 
 UCLASS(Blueprintable)
 class FSD_API UActorFunctionLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
     UActorFunctionLibrary();
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     static void UnlockSpecificCharacters(TArray<APlayerCharacter*> Characters, ECharacterState UnlockIf, ECharacterState UnlockTo);
     
@@ -94,6 +95,9 @@ public:
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static bool IsSingleplayer(UObject* WorldContextObject);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    static bool IsMovingPlatform(AActor* Actor);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static bool IsInRangeOfLocalPlayer(AActor* toActor, float MinDistance, float MaxDistance);
@@ -186,7 +190,7 @@ public:
     static FVector FindLatejoinDroppodLocation(AFSDGameMode* GameMode);
     
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
-    static AActor* FindClosestEnemyFromLocation(const FVector& fromLocation, float range, bool LineOfSightCheck, UObject* WorldContextObject, const TArray<AActor*>& IgnoredActors, const FVector& Offset);
+    static AActor* FindClosestEnemyFromLocation(const FVector& fromLocation, float range, bool LineOfSightCheck, UObject* WorldContextObject, const TArray<AActor*>& IgnoredActors, const FVector& Offset, bool onlyTargetable);
     
     UFUNCTION(BlueprintCallable)
     static AActor* FindClosestEnemyFromActorWithSkipChance(AActor* FromActor, float range, float SkipChance, bool LineOfSightCheck, const FGameplayTagQuery& tagQuery, FVector Offset);
@@ -210,7 +214,7 @@ public:
     static TArray<UMaterialInstanceDynamic*> CreateDynamicMaterialInstances(UMeshComponent* Mesh);
     
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
-    static float AddHeroXP(UObject* WorldContextObject, UPlayerCharacterID* characterID, float Amount);
+    static float AddHeroXP(UObject* WorldContextObject, UPlayerCharacterID* characterID, float amount);
     
     UFUNCTION(BlueprintCallable)
     static void AddEnemyKill(APlayerCharacter* Instigator, UEnemyComponent* EnemyComponent, AFSDGameState* GameState);

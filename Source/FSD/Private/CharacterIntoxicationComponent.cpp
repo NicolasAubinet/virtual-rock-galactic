@@ -1,8 +1,13 @@
 #include "CharacterIntoxicationComponent.h"
 #include "Net/UnrealNetwork.h"
 
-class UDrinkableDataAsset;
-class UCurveFloat;
+UCharacterIntoxicationComponent::UCharacterIntoxicationComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->Character = NULL;
+    this->CurrentState = EIntoxicationState::NotIntoxicated;
+    this->IntoxicationLerpSpeed = 100.00f;
+    this->TimeDrunk = 0.00f;
+    this->SoberingPercent = 1;
+}
 
 
 
@@ -57,11 +62,4 @@ void UCharacterIntoxicationComponent::GetLifetimeReplicatedProps(TArray<FLifetim
     DOREPLIFETIME(UCharacterIntoxicationComponent, IntoxicationPercent);
 }
 
-UCharacterIntoxicationComponent::UCharacterIntoxicationComponent() {
-    this->Character = NULL;
-    this->CurrentState = EIntoxicationState::NotIntoxicated;
-    this->IntoxicationLerpSpeed = 100.00f;
-    this->TimeDrunk = 0.00f;
-    this->SoberingPercent = 1;
-}
 

@@ -1,23 +1,23 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
-#include "GameplayTagContainer.h"
-#include "GameplayTagContainer.h"
 #include "UObject/NoExportTypes.h"
+#include "GameFramework/Actor.h"
+#include "GameplayTagContainer.h"
+#include "GameplayTagAssetInterface.h"
+#include "GameplayTagContainer.h"
 #include "DelegateEventDelegate.h"
 #include "ProgressChangedSigDelegate.h"
 #include "StageCompleteSigDelegate.h"
-#include "GameFramework/Actor.h"
-#include "GameplayTagAssetInterface.h"
+#include "Templates/SubclassOf.h"
 #include "GameEvent.generated.h"
 
-class ARessuplyPod;
-class UDebrisPositioning;
-class UDialogDataAsset;
 class AEventStarterButton;
 class AProceduralSetup;
+class ARessuplyPod;
 class UChildActorComponent;
+class UDebrisPositioning;
+class UDialogDataAsset;
 
 UCLASS(Blueprintable)
 class FSD_API AGameEvent : public AActor, public IGameplayTagAssetInterface {
@@ -128,9 +128,10 @@ private:
     TArray<AActor*> EventParticipants;
     
 public:
-    AGameEvent();
+    AGameEvent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void TrySetupGameEvent();
@@ -246,7 +247,7 @@ protected:
     
 public:
     UFUNCTION(BlueprintCallable)
-    FTransform DebreePositionPoint(AProceduralSetup* setup, const FVector& fromLocation, float MinDistance, float desiredDistance, UDebrisPositioning* DebrisPositioning, TSubclassOf<AActor> terrainPlacement, float maxPathLength);
+    FTransform DebreePositionPoint(AProceduralSetup* Setup, const FVector& fromLocation, float MinDistance, float desiredDistance, UDebrisPositioning* DebrisPositioning, TSubclassOf<AActor> terrainPlacement, float maxPathLength);
     
     UFUNCTION(BlueprintCallable)
     void BootUpEvent();
@@ -254,7 +255,7 @@ public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void AddStageProgress(float progressToAdd);
     
-    
+
     // Fix for true pure virtual functions not being implemented
     UFUNCTION(BlueprintCallable)
     bool HasMatchingGameplayTag(FGameplayTag TagToCheck) const override PURE_VIRTUAL(HasMatchingGameplayTag, return false;);

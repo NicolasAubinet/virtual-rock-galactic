@@ -1,10 +1,10 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
 #include "AnimatedItem.h"
-#include "Upgradable.h"
 #include "PlaceableInterface.h"
+#include "Templates/SubclassOf.h"
+#include "Upgradable.h"
 #include "PlaceableItem.generated.h"
 
 class AActor;
@@ -26,7 +26,8 @@ protected:
     TSubclassOf<AActor> PlacableClass;
     
 public:
-    APlaceableItem();
+    APlaceableItem(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SpawnItem(FVector Location);
@@ -37,7 +38,7 @@ protected:
     UFUNCTION(BlueprintCallable)
     void OnCarriedAmountChanged(int32 newAmount);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

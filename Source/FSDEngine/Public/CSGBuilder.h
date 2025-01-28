@@ -3,11 +3,11 @@
 #include "CSGBuilderBase.h"
 #include "CSGBuilder.generated.h"
 
-class UTerrainMaterialCore;
-class UCSGGroupComponent;
 class UBakeConfig;
 class UCSGBase;
+class UCSGGroupComponent;
 class UCSGPreviewScene;
+class UTerrainMaterialCore;
 
 UCLASS(Blueprintable)
 class FSDENGINE_API ACSGBuilder : public ACSGBuilderBase {
@@ -20,9 +20,6 @@ public:
     TArray<UTerrainMaterialCore*> UsedMaterials;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    UCSGBase* CurrentRoot;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     UCSGBase* CurrentPreviewRoot;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -31,6 +28,7 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UCSGPreviewScene* PreviewScene;
     
-    ACSGBuilder();
+    ACSGBuilder(const FObjectInitializer& ObjectInitializer);
+
 };
 

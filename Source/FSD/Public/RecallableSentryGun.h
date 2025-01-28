@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "RecallableActor.h"
+#include "Templates/SubclassOf.h"
 #include "RecallableSentryGun.generated.h"
 
 class APlayerCharacter;
@@ -21,9 +21,10 @@ protected:
     int32 SentryIndex;
     
 public:
-    ARecallableSentryGun();
+    ARecallableSentryGun(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ReceiveOnSentryReady(ASentryGun* SentryGun, APlayerCharacter* PlayerCharacter);

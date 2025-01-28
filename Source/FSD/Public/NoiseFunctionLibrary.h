@@ -5,8 +5,8 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "NoiseFunctionLibrary.generated.h"
 
-class UObject;
 class AActor;
+class UObject;
 class USceneComponent;
 
 UCLASS(Blueprintable)
@@ -14,6 +14,7 @@ class UNoiseFunctionLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
     UNoiseFunctionLibrary();
+
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static void SphericalNoiseMovementComponent(UObject* WorldContextObject, USceneComponent* Component, FVector Center, float Radius, float Speed, float TimeOffset);
     

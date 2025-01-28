@@ -5,8 +5,8 @@
 #include "FacilityTurretController.generated.h"
 
 class AActor;
-class UHealthComponentBase;
 class UAIPerceptionComponent;
+class UHealthComponentBase;
 
 UCLASS(Blueprintable)
 class AFacilityTurretController : public AFSDAIController {
@@ -26,7 +26,8 @@ private:
     bool RespectAttack;
     
 public:
-    AFacilityTurretController();
+    AFacilityTurretController(const FObjectInitializer& ObjectInitializer);
+
 private:
     UFUNCTION(BlueprintCallable)
     void OnTurretsAttackingChanged(bool IsAttacking);

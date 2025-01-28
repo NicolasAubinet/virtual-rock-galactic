@@ -3,8 +3,8 @@
 #include "SpecialEventSpawner.h"
 #include "TimedSpecialEventSpawner.generated.h"
 
-class UObject;
 class AActor;
+class UObject;
 
 UCLASS(Blueprintable, EditInlineNew)
 class UTimedSpecialEventSpawner : public USpecialEventSpawner {
@@ -25,6 +25,7 @@ protected:
     
 public:
     UTimedSpecialEventSpawner();
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     static void UnblockEventSpawn(UObject* blocker);
     

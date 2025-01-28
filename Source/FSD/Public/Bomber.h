@@ -1,18 +1,19 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
 #include "Engine/EngineTypes.h"
 #include "AFlyingBug.h"
+#include "Templates/SubclassOf.h"
 #include "Bomber.generated.h"
 
 class AActor;
-class UPrimitiveComponent;
-class UAudioComponent;
 class AProjectile;
-class UParticleSystemComponent;
-class USoundBase;
+class UAudioComponent;
+class UFXSystemAsset;
 class UParticleSystem;
+class UParticleSystemComponent;
+class UPrimitiveComponent;
+class USoundBase;
 
 UCLASS(Blueprintable)
 class ABomber : public AAFlyingBug {
@@ -32,7 +33,7 @@ protected:
     TSubclassOf<AProjectile> AcidProjectile;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    UParticleSystem* deathParticles;
+    UFXSystemAsset* deathParticles;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundBase* deathSound;
@@ -46,10 +47,10 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundBase* BladderDestroyedNoise;
     
-    UPROPERTY(EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UParticleSystemComponent> BleedParticlesComponent;
     
-    UPROPERTY(EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UAudioComponent> PanicAudioComponent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -94,10 +95,14 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_DropAcid, meta=(AllowPrivateAccess=true))
     bool dropAcid;
     
-public:
-    ABomber();
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool NoDeathSpiral;
     
+public:
+    ABomber(const FObjectInitializer& ObjectInitializer);
+
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
 protected:
     UFUNCTION(BlueprintCallable)
     void StopSpinAndDie();
@@ -122,7 +127,7 @@ public:
     
 protected:
     UFUNCTION(BlueprintCallable)
-    void OnBladderDamage(float Amount);
+    void OnBladderDamage(float amount);
     
     UFUNCTION(BlueprintCallable)
     void OnArmorDestroyed(FName Name);

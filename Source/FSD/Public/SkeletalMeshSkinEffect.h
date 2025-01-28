@@ -1,5 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "AttachMesh.h"
 #include "SkinEffect.h"
 #include "SkeletalMeshSkinEffect.generated.h"
 
@@ -13,7 +14,11 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftObjectPtr<USkeletalMesh> Mesh;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FAttachMesh> AttachMeshes;
+    
 public:
     USkeletalMeshSkinEffect();
+
 };
 

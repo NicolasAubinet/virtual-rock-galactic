@@ -2,10 +2,17 @@
 #include "Net/UnrealNetwork.h"
 #include "Templates/SubclassOf.h"
 
-class AFSDRefinery;
-class AProceduralSetup;
+URefineryObjective::URefineryObjective(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->RefineryState = ERefineryState::Landing;
+    this->RefineryPlacement = NULL;
+    this->RawMaterialPlacement = NULL;
+    this->RawMaterialCount = 3;
+    this->bMissionCompleted = false;
+    this->bIsFinalBattle = false;
+    this->OptionalTunnelRoomID = -1;
+}
 
-void URefineryObjective::SpawnWells(AProceduralSetup* setup, const FVector& rigLocation, float minDistanceBetween, const TArray<FVector2D>& minMaxDistancesToRig) {
+void URefineryObjective::SpawnWells(AProceduralSetup* Setup, const FVector& rigLocation, float minDistanceBetween, const TArray<FVector2D>& minMaxDistancesToRig) {
 }
 
 
@@ -26,13 +33,4 @@ void URefineryObjective::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& O
     DOREPLIFETIME(URefineryObjective, Refinery);
 }
 
-URefineryObjective::URefineryObjective() {
-    this->RefineryState = ERefineryState::Landing;
-    this->RefineryPlacement = NULL;
-    this->RawMaterialPlacement = NULL;
-    this->RawMaterialCount = 3;
-    this->bMissionCompleted = false;
-    this->bIsFinalBattle = false;
-    this->OptionalTunnelRoomID = -1;
-}
 

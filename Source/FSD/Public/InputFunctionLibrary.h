@@ -1,14 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "InputCoreTypes.h"
-#include "EFSDInputSource.h"
-#include "EKeyBindingAxis.h"
-#include "Input/Events.h"
-#include "Input/Events.h"
-#include "InputDisplay.h"
-#include "GameFramework/PlayerInput.h"
-#include "GameFramework/PlayerInput.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "GameFramework/PlayerInput.h"
+#include "GameFramework/PlayerInput.h"
+#include "InputCoreTypes.h"
+#include "Input/Events.h"
+#include "Input/Events.h"
+#include "EFSDInputSource.h"
+#include "InputDisplay.h"
 #include "InputFunctionLibrary.generated.h"
 
 class APlayerController;
@@ -19,6 +18,7 @@ class UInputFunctionLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
     UInputFunctionLibrary();
+
     UFUNCTION(BlueprintCallable)
     static void SetMouseSmoothingOn(bool smoothingOn);
     
@@ -35,13 +35,16 @@ public:
     static bool IsKeyEventAction(const FKeyEvent& KeyEvent, FName ActionName, bool IgnoreCustomBindings);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    static bool IsInputActionDown(const APlayerController* InPlayerController, FName InActionName);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     static bool IsAxisMappedToDirectional(FName InActionName, FKey Key, int32 Direction, bool IgnoreCustomBindings);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    static bool IsActionMappedTo(FName InActionName, FKey Key, bool IgnoreCustomBindings);
+    static bool IsAnyInputActionDown(const APlayerController* InPlayerController, const TArray<FName>& InActionNames);
     
-    UFUNCTION(BlueprintCallable)
-    static TArray<FKey> GetInputKeysBoundToAction(const FName& ActionName, EKeyBindingAxis Axis, bool IsGamePadKey);
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    static bool IsActionMappedTo(FName InActionName, FKey Key, bool IgnoreCustomBindings);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static bool GetAxisMapping(FName InActionName, int32 Axis, bool InGamepadKeys, FInputAxisKeyMapping& OutResult);

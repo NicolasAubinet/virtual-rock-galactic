@@ -3,8 +3,8 @@
 #include "SchematicItem.h"
 #include "SkinSchematicItem.generated.h"
 
-class UItemSkin;
 class UItemID;
+class UItemSkin;
 
 UCLASS(Blueprintable, EditInlineNew)
 class FSD_API USkinSchematicItem : public USchematicItem {
@@ -19,5 +19,6 @@ protected:
     
 public:
     USkinSchematicItem();
+
 };
 

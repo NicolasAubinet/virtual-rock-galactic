@@ -1,9 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
+#include "UObject/Object.h"
 #include "UObject/NoExportTypes.h"
 #include "DeepCSGFloatTree.h"
-#include "UObject/Object.h"
 #include "STLMeshCarver.generated.h"
 
 UCLASS(Blueprintable)
@@ -20,5 +20,6 @@ public:
     TArray<FVector> Vertices;
     
     USTLMeshCarver();
+
 };
 

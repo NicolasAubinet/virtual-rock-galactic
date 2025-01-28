@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "GameFramework/PlayerStart.h"
 #include "ESpacerigStartType.h"
 #include "PlayerSpawnInHubDelegate.h"
-#include "GameFramework/PlayerStart.h"
 #include "SpacerigStart.generated.h"
 
 class AFSDPlayerController;
@@ -23,6 +23,7 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     ESpacerigStartType StartType;
     
-    ASpacerigStart();
+    ASpacerigStart(const FObjectInitializer& ObjectInitializer);
+
 };
 

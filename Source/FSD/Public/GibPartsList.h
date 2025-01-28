@@ -3,8 +3,8 @@
 #include "Engine/DataAsset.h"
 #include "GibPartsList.generated.h"
 
-class UNiagaraComponent;
 class UMaterialInstance;
+class UNiagaraComponent;
 class UStaticMesh;
 
 UCLASS(Blueprintable)
@@ -15,6 +15,7 @@ public:
     TArray<UStaticMesh*> GibMeshes;
     
     UGibPartsList();
+
     UFUNCTION(BlueprintCallable, BlueprintPure=false)
     void SetGibMeshesAndMaterialsOnFX(UNiagaraComponent* ns, UMaterialInstance* Material, float Scale) const;
     

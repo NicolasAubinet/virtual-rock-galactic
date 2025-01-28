@@ -1,10 +1,13 @@
 #include "VanityItem.h"
 
-class UObject;
-class AFSDPlayerState;
-class UPlayerCharacterID;
-class APlayerCharacter;
-class UTexture;
+UVanityItem::UVanityItem() {
+    this->Aquisition = NULL;
+    this->EventSourceAsset = NULL;
+    this->IconGenerationCameraKey = NULL;
+    this->SeasonalEventTag = NULL;
+    this->bIsFestiveItem = false;
+    this->bIsSeriousItem = false;
+}
 
 bool UVanityItem::RemoveFromOwned(UObject* WorldContext) {
     return false;
@@ -28,8 +31,16 @@ bool UVanityItem::HasEventSource() const {
 void UVanityItem::GiftItem(UObject* WorldContextObject, UPlayerCharacterID* characterID) {
 }
 
+FDetailedTagSet UVanityItem::GetVanityTags() const {
+    return FDetailedTagSet{};
+}
+
 EVanitySlot UVanityItem::GetVanitySlot() const {
     return EVanitySlot::Head;
+}
+
+TSet<UPlayerCharacterID*> UVanityItem::GetRestrictedCharacters() const {
+    return TSet<UPlayerCharacterID*>();
 }
 
 TArray<FCraftingCost> UVanityItem::GetResourceCost() const {
@@ -74,6 +85,9 @@ void UVanityItem::CraftItemWithFashionite(UObject* WorldContextObject, UPlayerCh
 void UVanityItem::CraftItem(UObject* WorldContextObject, UPlayerCharacterID* characterID) const {
 }
 
+void UVanityItem::ChangeToItem(UCharacterVanityComponent* Gear) const {
+}
+
 bool UVanityItem::CanCraftWithFashionite(UObject* WorldContextObject) const {
     return false;
 }
@@ -88,10 +102,4 @@ void UVanityItem::ApplyItemPermanently(UObject* WorldContextObject, UPlayerChara
 void UVanityItem::ApplyItem(APlayerCharacter* Player, bool isPermanent) const {
 }
 
-UVanityItem::UVanityItem() {
-    this->IsPartOfRandomization = true;
-    this->Aquisition = NULL;
-    this->EventSourceAsset = NULL;
-    this->IconGenerationCameraKey = NULL;
-}
 

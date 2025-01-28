@@ -6,10 +6,10 @@
 #include "FlyingEnemyDeepPathfinderCharacter.generated.h"
 
 class AActor;
-class UPrimitiveComponent;
-class UPhysicalMaterial;
 class UParticleSystem;
+class UPhysicalMaterial;
 class UPhysicsAsset;
+class UPrimitiveComponent;
 class USoundCue;
 
 UCLASS(Blueprintable)
@@ -27,10 +27,11 @@ protected:
     USoundCue* FrozenDeathSound;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    UParticleSystem* FrozenDeathparticles;
+    UParticleSystem* FrozenDeathParticles;
     
 public:
-    AFlyingEnemyDeepPathfinderCharacter();
+    AFlyingEnemyDeepPathfinderCharacter(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void TriggerFrozenRagdoll();

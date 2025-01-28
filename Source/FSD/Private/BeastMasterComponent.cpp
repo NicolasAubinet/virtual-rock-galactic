@@ -1,10 +1,9 @@
 #include "BeastMasterComponent.h"
 #include "Templates/SubclassOf.h"
 
-class UActorComponent;
-class AFSDPawn;
-class UDamageComponent;
-class APlayerCharacter;
+UBeastMasterComponent::UBeastMasterComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->ShowCanCharmIcon = false;
+}
 
 void UBeastMasterComponent::SetDamage(UDamageComponent* cmp, float dmg) {
 }
@@ -13,7 +12,4 @@ UActorComponent* UBeastMasterComponent::AddPetComponent(TSubclassOf<UActorCompon
     return NULL;
 }
 
-UBeastMasterComponent::UBeastMasterComponent() {
-    this->ShowCanCharmIcon = false;
-}
 

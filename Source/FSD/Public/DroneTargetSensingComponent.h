@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "GameplayTagContainer.h"
 #include "Components/ActorComponent.h"
+#include "GameplayTagContainer.h"
 #include "DroneTargetSensingComponent.generated.h"
 
 class AActor;
@@ -27,6 +27,7 @@ protected:
     bool NeedsLineOfSight;
     
 public:
-    UDroneTargetSensingComponent();
+    UDroneTargetSensingComponent(const FObjectInitializer& ObjectInitializer);
+
 };
 

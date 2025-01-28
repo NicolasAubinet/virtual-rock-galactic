@@ -1,6 +1,10 @@
 #include "CrossbowStuckProjectileEffectExploding.h"
 
-class UHealthComponentBase;
+UCrossbowStuckProjectileEffectExploding::UCrossbowStuckProjectileEffectExploding(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->ChemicalSoundCue = NULL;
+    this->ChemicalAudioComponent = NULL;
+    this->ChemicalReactionDelay = 5.00f;
+}
 
 void UCrossbowStuckProjectileEffectExploding::StartTimeoutTimer(UHealthComponentBase* destroyed) {
 }
@@ -8,9 +12,4 @@ void UCrossbowStuckProjectileEffectExploding::StartTimeoutTimer(UHealthComponent
 void UCrossbowStuckProjectileEffectExploding::EnableTimeOut() {
 }
 
-UCrossbowStuckProjectileEffectExploding::UCrossbowStuckProjectileEffectExploding() {
-    this->ChemicalSoundCue = NULL;
-    this->ChemicalAudioComponent = NULL;
-    this->ChemicalReactionDelay = 5.00f;
-}
 

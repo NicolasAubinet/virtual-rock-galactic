@@ -11,9 +11,10 @@ class UTrailUpgradeElement : public UItemUpgradeElement {
 public:
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    UFXSystemAsset* Trail;
+    TSoftObjectPtr<UFXSystemAsset> Trail;
     
 public:
     UTrailUpgradeElement();
+
 };
 

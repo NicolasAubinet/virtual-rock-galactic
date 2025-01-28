@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "Components/ActorComponent.h"
 #include "DamageData.h"
 #include "DelegateDelegate.h"
-#include "Components/ActorComponent.h"
 #include "PawnAlertComponent.generated.h"
 
 class APawn;
@@ -23,7 +23,8 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float AlertRadius;
     
-    UPawnAlertComponent();
+    UPawnAlertComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void StopAutoAlerting();
     

@@ -1,11 +1,15 @@
 #include "TrackBuilderItem.h"
+#include "CrosshairAggregator.h"
 #include "Net/UnrealNetwork.h"
 #include "Templates/SubclassOf.h"
-#include "CrosshairAggregator.h"
 
-class ATrackBuilderSegment;
-class UTrackBuilderConnectPoint;
-class UTrackBuilderUsable;
+ATrackBuilderItem::ATrackBuilderItem(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->CrosshairAggregator = CreateDefaultSubobject<UCrosshairAggregator>(TEXT("CrosshairAggregator"));
+    this->ObstructionType = EPlaceableObstructionType::Valid;
+    this->DefaultSegmentType = NULL;
+    this->NextSegment = NULL;
+    this->bIsPlacingSegment = false;
+}
 
 void ATrackBuilderItem::UpdatePlacement(const FTransform& InTransform, UTrackBuilderConnectPoint* InConnectPoint, bool bPlacementValid, bool InUpdateServer) {
 }
@@ -47,11 +51,4 @@ void ATrackBuilderItem::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Ou
     DOREPLIFETIME(ATrackBuilderItem, bIsPlacingSegment);
 }
 
-ATrackBuilderItem::ATrackBuilderItem() {
-    this->CrosshairAggregator = CreateDefaultSubobject<UCrosshairAggregator>(TEXT("CrosshairAggregator"));
-    this->ObstructionType = EPlaceableObstructionType::Valid;
-    this->DefaultSegmentType = NULL;
-    this->NextSegment = NULL;
-    this->bIsPlacingSegment = false;
-}
 

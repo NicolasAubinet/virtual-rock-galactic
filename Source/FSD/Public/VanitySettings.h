@@ -1,18 +1,19 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
+#include "Engine/DataAsset.h"
 #include "EVanitySlot.h"
 #include "ResourceSpawner.h"
-#include "VanitySlotCharacter.h"
 #include "VanityMasterySettings.h"
-#include "Engine/DataAsset.h"
+#include "VanitySlotCharacter.h"
+#include "VanityTagSettings.h"
 #include "VanitySettings.generated.h"
 
-class UObject;
-class UVanityItem;
 class UDLCBase;
+class UObject;
 class UPlayerCharacterID;
 class UTexture2D;
+class UVanityItem;
 
 UCLASS(Blueprintable)
 class FSD_API UVanitySettings : public UDataAsset {
@@ -26,6 +27,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDLCBase* AlwaysLockedDLC;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FVanityTagSettings VanityTagSettings;
     
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -54,6 +58,7 @@ protected:
     
 public:
     UVanitySettings();
+
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static bool HasNewVanityNotification(UObject* WorldContextObject, EVanitySlot Slot, UPlayerCharacterID* characterID);
     

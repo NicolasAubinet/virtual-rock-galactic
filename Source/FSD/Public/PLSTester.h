@@ -1,15 +1,20 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "GlobalMissionSeed.h"
+#include "Templates/SubclassOf.h"
 #include "PLSTester.generated.h"
 
 class UBiome;
+class UDifficultyMutatorSetupItem;
 class UDifficultySetting;
-class UMissionDuration;
+class UMissionChallenge;
 class UMissionComplexity;
-class UMissionWarning;
-class UMissionTemplate;
+class UMissionDuration;
 class UMissionMutator;
+class UMissionTemplate;
+class UMissionWarning;
+class UObjective;
 class USpecialEvent;
 
 UCLASS(Blueprintable)
@@ -27,7 +32,7 @@ protected:
     int32 MissionSeed;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    int32 GlobalSeed;
+    FGlobalMissionSeed GlobalSeed;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 GlobalMissionIndex;
@@ -45,6 +50,12 @@ protected:
     TArray<UMissionWarning*> Warnings;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UMissionChallenge* Challenge;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<TSubclassOf<UObjective>> SecondaryObjectives;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USpecialEvent* SpecialEvent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -60,12 +71,16 @@ protected:
     UDifficultySetting* OverrideDifficulty;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TMap<UDifficultyMutatorSetupItem*, int32> Haz5Mutators;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 SimulatePlayerCount;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText CustomMissionName;
     
 public:
-    APLSTester();
+    APLSTester(const FObjectInitializer& ObjectInitializer);
+
 };
 

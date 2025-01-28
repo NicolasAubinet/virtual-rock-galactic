@@ -1,27 +1,27 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
-#include "GameplayTagContainer.h"
+#include "Components/ActorComponent.h"
 #include "Engine/EngineTypes.h"
-#include "EDamageComponentType.h"
+#include "GameplayTagContainer.h"
 #include "EArmorDamageType.h"
+#include "EDamageComponentType.h"
 #include "OnAsyncAoE_CompleteDelegate.h"
-#include "OnNoTargetHitDelegate.h"
 #include "OnEnemyDamagedDelegateDelegate.h"
 #include "OnEnemyKilledDelegateDelegate.h"
-#include "Components/ActorComponent.h"
+#include "OnNoTargetHitDelegate.h"
+#include "Templates/SubclassOf.h"
 #include "DamageComponent.generated.h"
 
 class AActor;
-class UPrimitiveComponent;
-class UDamageComponent;
-class UDamageClass;
 class UDamageBonusBase;
-class UDamageTag;
-class UDamageModifier;
+class UDamageClass;
+class UDamageComponent;
 class UDamageImpulse;
+class UDamageModifier;
+class UDamageTag;
 class UFSDPhysicalMaterial;
+class UPrimitiveComponent;
 
 UCLASS(Blueprintable, EditInlineNew, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UDamageComponent : public UActorComponent {
@@ -53,7 +53,7 @@ protected:
     float Damage;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    float ArmorDamageMultiplier;
+    float armorDamageMultiplier;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ArmorPenetration;
@@ -81,6 +81,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTag FriendlyFireTag;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool CanHitSameTypeAsOwner;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool StaggerOnlyOnWeakpointHit;
@@ -125,7 +128,8 @@ protected:
     float MaxDamageRadius;
     
 public:
-    UDamageComponent();
+    UDamageComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void PreTestDamageConditions();
     

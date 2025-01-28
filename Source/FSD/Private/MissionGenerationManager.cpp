@@ -1,12 +1,13 @@
 #include "MissionGenerationManager.h"
 
-class UGeneratedMission;
+UMissionGenerationManager::UMissionGenerationManager() {
+}
 
-TArray<UGeneratedMission*> UMissionGenerationManager::GetMissions(int32 Seed) {
+TArray<UGeneratedMission*> UMissionGenerationManager::GetMissions(const FGlobalMissionSeed& Seed) {
     return TArray<UGeneratedMission*>();
 }
 
-UGeneratedMission* UMissionGenerationManager::GetMissionFromSeeds(int32 GlobalSeed, int32 MissionSeed) {
+UGeneratedMission* UMissionGenerationManager::GetMissionFromSeeds(const FGlobalMissionSeed& GlobalSeed, int32 MissionSeed) {
     return NULL;
 }
 
@@ -14,7 +15,4 @@ TArray<UGeneratedMission*> UMissionGenerationManager::GetAvailableMissions() {
     return TArray<UGeneratedMission*>();
 }
 
-UMissionGenerationManager::UMissionGenerationManager() {
-    this->ResetSelectedMission = false;
-}
 

@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "RDGExplodeDelegateDelegate.h"
 #include "Components/ActorComponent.h"
+#include "RDGExplodeDelegateDelegate.h"
 #include "RDGComponent.generated.h"
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -11,6 +11,7 @@ public:
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FRDGExplodeDelegate OnDetonated;
     
-    URDGComponent();
+    URDGComponent(const FObjectInitializer& ObjectInitializer);
+
 };
 

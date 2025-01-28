@@ -1,10 +1,11 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "GameplayTagContainer.h"
 #include "ThrowableActor.generated.h"
 
-class UProjectileMovementComponent;
 class APlayerCharacter;
+class UProjectileMovementComponent;
 
 UCLASS(Blueprintable)
 class AThrowableActor : public AActor {
@@ -18,15 +19,19 @@ protected:
     bool IsMoving;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FGameplayTagContainer AttachToTags;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool IgnoreFellOutOfWorld;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool IgnoreOwnersCollision;
     
 public:
-    AThrowableActor();
+    AThrowableActor(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ReceiveIgnoreCharacter(APlayerCharacter* Character);
     

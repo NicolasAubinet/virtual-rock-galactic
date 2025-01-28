@@ -1,31 +1,8 @@
 #include "FSDWidgetBlueprintLibrary.h"
 #include "Templates/SubclassOf.h"
 
-class UObject;
-class UWidget;
-class UUserWidget;
-class UWindowWidget;
-class APlayerController;
-class UFSDCheatManager;
-class AFSDPlayerState;
-class UTextBlock;
-class UCanvasPanelSlot;
-class UCanvasPanel;
-class UPanelWidget;
-class UProgressBar;
-class UOverlaySlot;
-class UOverlay;
-class UImage;
-class UHorizontalBoxSlot;
-class UHorizontalBox;
-class USizeBox;
-class UWidgetAnimation;
-class UVerticalBoxSlot;
-class UVerticalBox;
-class UUniformGridSlot;
-class UUniformGridPanel;
-class USpacer;
-class UTexture2D;
+UFSDWidgetBlueprintLibrary::UFSDWidgetBlueprintLibrary() {
+}
 
 void UFSDWidgetBlueprintLibrary::ToggleAnimationLooping(UObject* WorldContext, UWidgetAnimation* InAnimation, FWidgetAnimationSettings InSettings, bool InLoop, bool& OutPlayingChanged, bool& OutIsPlaying) {
 }
@@ -164,6 +141,9 @@ UFSDCheatManager* UFSDWidgetBlueprintLibrary::GetCheatManager(UObject* WorldCont
     return NULL;
 }
 
+void UFSDWidgetBlueprintLibrary::FixupRetainerWidgetUpdateInEditor(const URetainerBox* InWidget) {
+}
+
 UWidget* UFSDWidgetBlueprintLibrary::FindChildWidget(UPanelWidget*& ParentWidget, TSubclassOf<UUserWidget> WidgetClass, bool SearchChildren) {
     return NULL;
 }
@@ -215,6 +195,10 @@ FText UFSDWidgetBlueprintLibrary::ClampTextLength(const FText& Text, int32 MaxLe
 void UFSDWidgetBlueprintLibrary::Box(FPaintContext& Context, FVector2D Position, FVector2D Size, const FSlateBrush& Brush, FLinearColor Tint) {
 }
 
+bool UFSDWidgetBlueprintLibrary::AreWidgetsIntersecting(const UWidget* InWidget1, const UWidget* InWidget2) {
+    return false;
+}
+
 UWidget* UFSDWidgetBlueprintLibrary::AddWidgetToRow(UVerticalBox* VerticalBox, UWidget* Widget, int32 MaxWidgetsPerRow, float WidgetSpacing, float RowSpacing, UHorizontalBoxSlot*& OutSlot, UHorizontalBox*& OutRow) {
     return NULL;
 }
@@ -239,6 +223,8 @@ UWidget* UFSDWidgetBlueprintLibrary::AddChildToCanvasEx(UCanvasPanel* CanvasPane
     return NULL;
 }
 
-UFSDWidgetBlueprintLibrary::UFSDWidgetBlueprintLibrary() {
+UHorizontalBox* UFSDWidgetBlueprintLibrary::AddChildrenToHorizontalBox(UObject* WorldContext, UHorizontalBox* HorizontalBox, TArray<UWidget*> Children, bool ClearHorizontalBox, FMargin Padding, TEnumAsByte<EHorizontalAlignment> HorizontalAlignment, TEnumAsByte<EVerticalAlignment> VerticalAlignment, float FillFirst, float FillMiddle, float FillLast) {
+    return NULL;
 }
+
 

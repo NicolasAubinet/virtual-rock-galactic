@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "DualWieldWeapon.h"
+#include "Templates/SubclassOf.h"
 #include "DualMachinePistols.generated.h"
 
 class UStatusEffect;
@@ -15,7 +15,8 @@ protected:
     TSubclassOf<UStatusEffect> EmptyClipStatusEffect;
     
 public:
-    ADualMachinePistols();
+    ADualMachinePistols(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_TriggerStatusEffect();

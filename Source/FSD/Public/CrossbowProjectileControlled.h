@@ -4,8 +4,8 @@
 #include "Components/ActorComponent.h"
 #include "CrossbowProjectileControlled.generated.h"
 
-class USceneComponent;
 class ACrossbowProjectileBase;
+class USceneComponent;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class FSD_API UCrossbowProjectileControlled : public UActorComponent {
@@ -19,7 +19,8 @@ private:
     ACrossbowProjectileBase* CastedOwner;
     
 public:
-    UCrossbowProjectileControlled();
+    UCrossbowProjectileControlled(const FObjectInitializer& ObjectInitializer);
+
 private:
     UFUNCTION(BlueprintCallable)
     void UpdateHomingTarget();

@@ -2,17 +2,17 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "EGuntowerModuleState.h"
-#include "FSDPawn.h"
 #include "EventParticipant.h"
+#include "FSDPawn.h"
 #include "TowerModuleBase.generated.h"
 
-class USceneComponent;
-class USkeletalMeshComponent;
-class UStaticMeshComponent;
 class UEnemyHealthComponent;
 class UParticleSystem;
-class USoundCue;
+class USceneComponent;
 class USkeletalMesh;
+class USkeletalMeshComponent;
+class USoundCue;
+class UStaticMeshComponent;
 
 UCLASS(Blueprintable)
 class ATowerModuleBase : public AFSDPawn, public IEventParticipant {
@@ -59,9 +59,10 @@ protected:
     EGuntowerModuleState State;
     
 public:
-    ATowerModuleBase();
+    ATowerModuleBase(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetState(EGuntowerModuleState NewState);
     
@@ -77,7 +78,7 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void DoAttack();
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

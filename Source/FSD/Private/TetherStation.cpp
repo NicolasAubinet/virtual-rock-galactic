@@ -1,9 +1,17 @@
 #include "TetherStation.h"
-#include "Net/UnrealNetwork.h"
 #include "Components/SceneComponent.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "Net/UnrealNetwork.h"
 
-class AFacilityGeneratorLine;
+ATetherStation::ATetherStation(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("SceneRoot"));
+    this->SceneRoot = (USceneComponent*)RootComponent;
+    this->BaseMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("BaseMesh"));
+    this->FacilityGeneratorLineType = NULL;
+    this->AreGeneratorsReady = false;
+    this->FacilityActive = false;
+    this->BaseMesh->SetupAttachment(RootComponent);
+}
 
 void ATetherStation::SpawnGeneratorLines(const FTransform& startL, const FTransform& startR, const TArray<FTransform>& endL, const TArray<FTransform>& endR, AFacilityGeneratorLine*& outLineL, AFacilityGeneratorLine*& outLineR) {
 }
@@ -30,11 +38,4 @@ void ATetherStation::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLi
     DOREPLIFETIME(ATetherStation, FacilityActive);
 }
 
-ATetherStation::ATetherStation() {
-    this->SceneRoot = CreateDefaultSubobject<USceneComponent>(TEXT("SceneRoot"));
-    this->BaseMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("BaseMesh"));
-    this->FacilityGeneratorLineType = NULL;
-    this->AreGeneratorsReady = false;
-    this->FacilityActive = false;
-}
 

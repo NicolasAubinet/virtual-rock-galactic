@@ -1,30 +1,30 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
-#include "LaserPointerTarget.h"
-#include "GameplayTagContainer.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
-#include "SentryGunMuzzleSetup.h"
-#include "Engine/EngineTypes.h"
-#include "TracerData.h"
-#include "AmmoCountChangedEventDelegate.h"
 #include "GameFramework/Actor.h"
+#include "Engine/EngineTypes.h"
+#include "GameplayTagContainer.h"
+#include "AmmoCountChangedEventDelegate.h"
+#include "LaserPointerTarget.h"
+#include "SentryGunMuzzleSetup.h"
+#include "Templates/SubclassOf.h"
+#include "TracerData.h"
 #include "Upgradable.h"
 #include "WeaponFireOwner.h"
 #include "SentryGun.generated.h"
 
-class USkeletalMeshComponent;
-class UAudioComponent;
-class UWeaponFireComponent;
-class AProjectile;
-class UHealthComponentBase;
 class APlayerCharacter;
-class USoundBase;
+class AProjectile;
+class UAudioComponent;
+class UHealthComponentBase;
 class UParticleSystem;
+class USkeletalMeshComponent;
+class USoundBase;
 class USoundCue;
+class UWeaponFireComponent;
 
 UCLASS(Abstract, Blueprintable)
 class FSD_API ASentryGun : public AActor, public IWeaponFireOwner, public IUpgradable {
@@ -59,6 +59,12 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FTracerData TracerData;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool UsePriorityTargetTracerData;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FTracerData PriorityTargetTracerData;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UParticleSystem* Tracer;
@@ -129,10 +135,10 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     float TargetPitch;
     
-    UPROPERTY(EditAnywhere, Export, Transient, ReplicatedUsing=OnRep_LastTarget, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, ReplicatedUsing=OnRep_LastTarget, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UHealthComponentBase> LastTarget;
     
-    UPROPERTY(EditAnywhere, Export, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Replicated, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UHealthComponentBase> PrioritizedTarget;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
@@ -143,11 +149,12 @@ private:
     UAudioComponent* ShootingAudioComponent;
     
 public:
-    ASentryGun();
+    ASentryGun(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
-    void UseAmmo(int32 Amount);
+    void UseAmmo(int32 amount);
     
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
@@ -194,7 +201,7 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void AmmoSpent();
     
-    
+
     // Fix for true pure virtual functions not being implemented
 public:
     UFUNCTION(BlueprintCallable)

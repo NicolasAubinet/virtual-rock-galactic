@@ -1,9 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
-#include "EnableDownedBombUIDelegateDelegate.h"
-#include "DeathIntroSettings.h"
 #include "CharacterStateComponent.h"
+#include "DeathIntroSettings.h"
+#include "EnableDownedBombUIDelegateDelegate.h"
+#include "Templates/SubclassOf.h"
 #include "DownedStateComponent.generated.h"
 
 class UDamageComponent;
@@ -32,7 +32,8 @@ protected:
     FEnableDownedBombUIDelegate OnEnableDownedBombUIEvent;
     
 public:
-    UDownedStateComponent();
+    UDownedStateComponent(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void TriggerDownedBombDamage();

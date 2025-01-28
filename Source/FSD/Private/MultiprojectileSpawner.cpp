@@ -1,8 +1,8 @@
 #include "MultiprojectileSpawner.h"
 
-class AActor;
-class UDataAsset;
-class UMultiprojectileSpawner;
+UMultiprojectileSpawner::UMultiprojectileSpawner(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->ProjectilesIgnoreEachOther = false;
+}
 
 bool UMultiprojectileSpawner::GetIsFiring() const {
     return false;
@@ -15,7 +15,4 @@ UMultiprojectileSpawner* UMultiprojectileSpawner::FindMultiProjectileSpawner(AAc
     return NULL;
 }
 
-UMultiprojectileSpawner::UMultiprojectileSpawner() {
-    this->ProjectilesIgnoreEachOther = false;
-}
 

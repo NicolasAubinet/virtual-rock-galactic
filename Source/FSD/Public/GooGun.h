@@ -1,12 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EGooGunFireMode.h"
 #include "AmmoDrivenWeapon.h"
+#include "EGooGunFireMode.h"
 #include "GooGun.generated.h"
 
-class UFXSystemComponent;
-class UFXSystemAsset;
 class UAnimMontage;
+class UFXSystemAsset;
+class UFXSystemComponent;
 class USoundCue;
 
 UCLASS(Abstract, Blueprintable)
@@ -78,7 +78,8 @@ protected:
     UAnimMontage* TP_ChargeupMontage;
     
 public:
-    AGooGun();
+    AGooGun(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnPuddleSuckedIn();
     

@@ -1,22 +1,22 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
+#include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "Engine/EngineTypes.h"
-#include "UObject/NoExportTypes.h"
 #include "FSDPhysicsActor.h"
-#include "LoadoutItem.h"
-#include "UpgradableGear.h"
 #include "ItemIDInterface.h"
+#include "LoadoutItem.h"
 #include "SaveGameIDInterface.h"
+#include "Templates/SubclassOf.h"
+#include "UpgradableGear.h"
 #include "Flare.generated.h"
 
 class AActor;
-class AItem;
 class AFlare;
-class ULightComponent;
-class UItemID;
+class AItem;
 class UCurveFloat;
+class UItemID;
+class ULightComponent;
 class USoundCue;
 
 UCLASS(Abstract, Blueprintable)
@@ -64,9 +64,10 @@ protected:
     USoundCue* ImpactGroundSound;
     
 public:
-    AFlare();
+    AFlare(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void StartLightFunction(ULightComponent* mainLight, TArray<ULightComponent*> spotLights, UCurveFloat* flutterCurve, UCurveFloat* fadeInCurve);
     
@@ -109,7 +110,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ActivateFlare();
     
-    
+
     // Fix for true pure virtual functions not being implemented
     UFUNCTION(BlueprintCallable)
     TSubclassOf<AItem> GetLoadoutItemClass() const override PURE_VIRTUAL(GetLoadoutItemClass, return NULL;);

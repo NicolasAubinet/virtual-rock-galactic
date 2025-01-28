@@ -1,36 +1,10 @@
 #include "BouncyBoomerang.h"
-#include "Net/UnrealNetwork.h"
 #include "Components/SceneComponent.h"
+#include "Net/UnrealNetwork.h"
 
-class AFSDPawn;
-
-void ABouncyBoomerang::OnRep_TargetEnemy(AFSDPawn* lastEnemy) {
-}
-
-void ABouncyBoomerang::OnRep_State() {
-}
-
-void ABouncyBoomerang::OnRep_RandomSeed() {
-}
-
-void ABouncyBoomerang::OnRep_PosVel() {
-}
-
-void ABouncyBoomerang::CheckIfCollidingWithTerrain() {
-}
-
-void ABouncyBoomerang::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
-    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-    
-    DOREPLIFETIME(ABouncyBoomerang, TargetEnemy);
-    DOREPLIFETIME(ABouncyBoomerang, PredictedNextEnemy);
-    DOREPLIFETIME(ABouncyBoomerang, RandomSeed);
-    DOREPLIFETIME(ABouncyBoomerang, State);
-    DOREPLIFETIME(ABouncyBoomerang, PosVel);
-}
-
-ABouncyBoomerang::ABouncyBoomerang() {
-    this->Root = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
+ABouncyBoomerang::ABouncyBoomerang(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
+    this->Root = (USceneComponent*)RootComponent;
     this->DamageComponent = NULL;
     this->BouncesLeft = 9;
     this->ConeRange = 2000.00f;
@@ -61,4 +35,30 @@ ABouncyBoomerang::ABouncyBoomerang() {
     this->RandomSeed = 0;
     this->State = EBoomerangState::None;
 }
+
+void ABouncyBoomerang::OnRep_TargetEnemy(AFSDPawn* lastEnemy) {
+}
+
+void ABouncyBoomerang::OnRep_State() {
+}
+
+void ABouncyBoomerang::OnRep_RandomSeed() {
+}
+
+void ABouncyBoomerang::OnRep_PosVel() {
+}
+
+void ABouncyBoomerang::CheckIfCollidingWithTerrain() {
+}
+
+void ABouncyBoomerang::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
+    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+    
+    DOREPLIFETIME(ABouncyBoomerang, TargetEnemy);
+    DOREPLIFETIME(ABouncyBoomerang, PredictedNextEnemy);
+    DOREPLIFETIME(ABouncyBoomerang, RandomSeed);
+    DOREPLIFETIME(ABouncyBoomerang, State);
+    DOREPLIFETIME(ABouncyBoomerang, PosVel);
+}
+
 

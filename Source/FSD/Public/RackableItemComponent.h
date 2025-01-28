@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "DelegateDelegate.h"
 #include "Components/ActorComponent.h"
+#include "DelegateDelegate.h"
 #include "RackableItemComponent.generated.h"
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -28,6 +28,7 @@ protected:
     int32 RackKey;
     
 public:
-    URackableItemComponent();
+    URackableItemComponent(const FObjectInitializer& ObjectInitializer);
+
 };
 

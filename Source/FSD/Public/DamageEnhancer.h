@@ -1,23 +1,23 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "EnhancedTrace.h"
 #include "Engine/EngineTypes.h"
+#include "EnhancedTrace.h"
 #include "Grenade.h"
 #include "Targetable.h"
 #include "DamageEnhancer.generated.h"
 
 class AActor;
-class UPrimitiveComponent;
-class UStaticMeshComponent;
-class UHitscanBaseComponent;
+class UBoxComponent;
 class UCapsuleHitscanComponent;
 class UDamageComponent;
 class UHealthComponent;
-class USphereComponent;
+class UHitscanBaseComponent;
 class UHitscanComponent;
+class UPrimitiveComponent;
 class UReflectionHitscanComponent;
-class UBoxComponent;
+class USphereComponent;
+class UStaticMeshComponent;
 
 UCLASS(Abstract, Blueprintable)
 class ADamageEnhancer : public AGrenade, public ITargetable {
@@ -64,7 +64,8 @@ protected:
     float TraceStepTime;
     
 public:
-    ADamageEnhancer();
+    ADamageEnhancer(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void HitByHitScan(UHitscanBaseComponent* Component, const FVector& HitPoint, const FVector& Origin);
@@ -84,7 +85,7 @@ private:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void All_PasteDamageComponent(UDamageComponent* Damage);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

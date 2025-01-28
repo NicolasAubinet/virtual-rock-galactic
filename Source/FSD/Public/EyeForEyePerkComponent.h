@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "DamageData.h"
 #include "FloatPerkComponent.h"
+#include "Templates/SubclassOf.h"
 #include "EyeForEyePerkComponent.generated.h"
 
 class UStatusEffect;
@@ -22,7 +22,8 @@ protected:
     TSubclassOf<UStatusEffect> LoadedSTE;
     
 public:
-    UEyeForEyePerkComponent();
+    UEyeForEyePerkComponent(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnHit(float Damage, const FDamageData& DamageData, bool anyHealthLost);

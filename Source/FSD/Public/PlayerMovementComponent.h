@@ -4,8 +4,8 @@
 #include "PlayerMovementComponent.generated.h"
 
 class AActor;
-class UCharacterStateComponent;
 class APlayerCharacter;
+class UCharacterStateComponent;
 class USoundBase;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -28,11 +28,12 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     APlayerCharacter* Character;
     
-    UPROPERTY(EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UCharacterStateComponent> CurrentPhysUpdateState;
     
 public:
-    UPlayerMovementComponent();
+    UPlayerMovementComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void RemoveGravityModifier(AActor* SourceActor);
     

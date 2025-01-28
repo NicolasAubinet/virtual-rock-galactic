@@ -1,21 +1,21 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
+#include "AmmoDrivenWeapon.h"
 #include "ECrossbowSwitchState.h"
 #include "ProjectileSwitch.h"
-#include "AmmoDrivenWeapon.h"
+#include "Templates/SubclassOf.h"
 #include "Crossbow.generated.h"
 
 class AActor;
-class UStaticMeshComponent;
-class AProjectileBase;
-class UCrossbowProjectileRecallable;
 class ACrossbowProjectileStuck;
-class UProjectileLauncherBaseComponent;
-class UStatusEffect;
+class AProjectileBase;
 class UAnimMontage;
+class UCrossbowProjectileRecallable;
+class UProjectileLauncherBaseComponent;
 class USoundCue;
 class UStaticMesh;
+class UStaticMeshComponent;
+class UStatusEffect;
 
 UCLASS(Blueprintable)
 class ACrossbow : public AAmmoDrivenWeapon {
@@ -119,9 +119,10 @@ private:
     TArray<USoundCue*> ReloadSoundCues;
     
 public:
-    ACrossbow();
+    ACrossbow(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void UpdateRecallProgress();
@@ -181,10 +182,10 @@ private:
     void Client_RefillSpecialAmmo(float percentage);
     
     UFUNCTION(BlueprintCallable, Client, Reliable)
-    void Client_CallAddSpecialAmmo(const int32& Amount);
+    void Client_CallAddSpecialAmmo(const int32& amount);
     
     UFUNCTION(BlueprintCallable, Client, Reliable)
-    void Client_CallAddDefaultAmmo(const int32& Amount);
+    void Client_CallAddDefaultAmmo(const int32& amount);
     
 };
 

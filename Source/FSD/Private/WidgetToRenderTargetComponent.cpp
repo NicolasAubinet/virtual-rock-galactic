@@ -1,9 +1,23 @@
 #include "WidgetToRenderTargetComponent.h"
 
-class UUserWidget;
-class UTextureRenderTarget2D;
-class ULocalPlayer;
-class UMaterialInstanceDynamic;
+UWidgetToRenderTargetComponent::UWidgetToRenderTargetComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->WidgetClass = NULL;
+    this->bManuallyRedraw = false;
+    this->bRedrawRequested = true;
+    this->RedrawTime = 0.00f;
+    this->LastWidgetRenderTime = 0.00f;
+    this->bWindowFocusable = true;
+    this->bDrawAtDesiredSize = false;
+    this->BaseMaterial = NULL;
+    this->OwnerPlayer = NULL;
+    this->OpacityFromTexture = 1.00f;
+    this->bIsTwoSided = false;
+    this->TickWhenOffscreen = false;
+    this->Widget = NULL;
+    this->RenderTarget = NULL;
+    this->MaterialInstance = NULL;
+    this->bEditTimeUsable = false;
+}
 
 void UWidgetToRenderTargetComponent::SetWidget(UUserWidget* NewWidget) {
 }
@@ -33,22 +47,4 @@ UMaterialInstanceDynamic* UWidgetToRenderTargetComponent::GetMaterialInstance() 
     return NULL;
 }
 
-UWidgetToRenderTargetComponent::UWidgetToRenderTargetComponent() {
-    this->WidgetClass = NULL;
-    this->bManuallyRedraw = false;
-    this->bRedrawRequested = true;
-    this->RedrawTime = 0.00f;
-    this->LastWidgetRenderTime = 0.00f;
-    this->bWindowFocusable = true;
-    this->bDrawAtDesiredSize = false;
-    this->BaseMaterial = NULL;
-    this->OwnerPlayer = NULL;
-    this->OpacityFromTexture = 1.00f;
-    this->bIsTwoSided = false;
-    this->TickWhenOffscreen = false;
-    this->Widget = NULL;
-    this->RenderTarget = NULL;
-    this->MaterialInstance = NULL;
-    this->bEditTimeUsable = false;
-}
 

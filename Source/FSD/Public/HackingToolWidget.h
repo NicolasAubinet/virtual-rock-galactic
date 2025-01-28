@@ -3,9 +3,9 @@
 #include "Blueprint/UserWidget.h"
 #include "HackingToolWidget.generated.h"
 
+class AHackingToolItem;
 class UDialogDataAsset;
 class UHackingUsableComponent;
-class AHackingToolItem;
 class USoundCue;
 
 UCLASS(Abstract, Blueprintable, EditInlineNew)
@@ -30,14 +30,15 @@ public:
     FHackingUnequipDelegate OnRequestUnequipHackingTool;
     
 protected:
-    UPROPERTY(EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UHackingUsableComponent> HackingUsable;
     
-    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<AHackingToolItem> HackingTool;
     
 public:
     UHackingToolWidget();
+
     UFUNCTION(BlueprintCallable)
     void StartHacking(UHackingUsableComponent* InHackingUsable, AHackingToolItem* InHackingTool);
     
@@ -52,7 +53,13 @@ protected:
     void ReceiveHackingStarted();
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-    void ReceiveClick();
+    void ReceiveActionReleased();
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void ReceiveActionPressed();
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void ReceiveActionClick();
     
     UFUNCTION(BlueprintCallable)
     void HackingStageComplete(int32 InNextStage, int32 InTotalStages);

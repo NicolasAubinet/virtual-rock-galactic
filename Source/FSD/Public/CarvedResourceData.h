@@ -3,6 +3,7 @@
 #include "ResourceData.h"
 #include "CarvedResourceData.generated.h"
 
+class AProceduralSetup;
 class UCarvedResourceCreator;
 
 UCLASS(Blueprintable)
@@ -18,8 +19,15 @@ protected:
     
 public:
     UCarvedResourceData();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UCarvedResourceCreator* LoadResourceCreator() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    float GetUnitsPerCarver() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    float GetTargetAmount(AProceduralSetup* pls) const;
     
 };
 

@@ -1,21 +1,21 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "PlatformComponent.h"
-#include "EMinersManualSection.h"
-#include "EHUDVisibilityReason.h"
-#include "EMinersManualSinglePage.h"
-#include "EDisconnectReason.h"
-#include "LocalVoiceStatusDelegate.h"
 #include "GameFramework/PlayerController.h"
+#include "EDisconnectReason.h"
+#include "EHUDVisibilityReason.h"
+#include "EMinersManualSection.h"
+#include "EMinersManualSinglePage.h"
+#include "LocalVoiceStatusDelegate.h"
+#include "PlatformComponent.h"
 #include "FSDPlayerControllerBase.generated.h"
 
 class UEscapeMenuWindow;
+class UMaterialParameterCollection;
 class UPlayerCharacterID;
 class UWindowManager;
-class UMaterialParameterCollection;
 
-UCLASS(Blueprintable)
+UCLASS(Blueprintable, Config=Engine)
 class AFSDPlayerControllerBase : public APlayerController {
     GENERATED_BODY()
 public:
@@ -36,7 +36,8 @@ protected:
     TArray<FPlatformComponent> PlatformComponentClasses;
     
 public:
-    AFSDPlayerControllerBase();
+    AFSDPlayerControllerBase(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void ToggleAnalogCursor(bool Visible);

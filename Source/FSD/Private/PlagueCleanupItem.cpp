@@ -1,11 +1,28 @@
 #include "PlagueCleanupItem.h"
-#include "InstantUsable.h"
-#include "CrosshairAggregator.h"
-#include "Components/SphereComponent.h"
-#include "KeepInsideWorld.h"
 #include "Components/BoxComponent.h"
+#include "Components/SphereComponent.h"
+#include "CrosshairAggregator.h"
+#include "InstantUsable.h"
+#include "KeepInsideWorld.h"
 
-class APlayerCharacter;
+APlagueCleanupItem::APlagueCleanupItem(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer.SetDefaultSubobjectClass<UBoxComponent>(TEXT("Root"))) {
+    this->DroppedCollider = (UBoxComponent*)RootComponent;
+    this->PickupUsable = CreateDefaultSubobject<UInstantUsable>(TEXT("PickupUsable"));
+    this->UseSphere = CreateDefaultSubobject<USphereComponent>(TEXT("UseSphere"));
+    this->CrosshairAggregator = CreateDefaultSubobject<UCrosshairAggregator>(TEXT("Crosshair"));
+    this->FP_FireAnimation = NULL;
+    this->TP_FireAnimation = NULL;
+    this->FP_Gunsling = NULL;
+    this->TP_Gunsling = NULL;
+    this->Item_Gunsling = NULL;
+    this->UsingSound = NULL;
+    this->UsingSoundFadeout = 0.30f;
+    this->UsingSoundTail = NULL;
+    this->KeepInsideWorld = CreateDefaultSubobject<UKeepInsideWorld>(TEXT("KeepInWorld"));
+    this->UsingSoundInstance = NULL;
+    this->FireRate = 1.00f;
+    this->UseSphere->SetupAttachment(RootComponent);
+}
 
 void APlagueCleanupItem::Server_Gunsling_Implementation() {
 }
@@ -24,21 +41,4 @@ void APlagueCleanupItem::All_Gunsling_Implementation() {
 void APlagueCleanupItem::All_EnablePhysics_Implementation(const FVector_NetQuantize& Direction) {
 }
 
-APlagueCleanupItem::APlagueCleanupItem() {
-    this->DroppedCollider = CreateDefaultSubobject<UBoxComponent>(TEXT("Root"));
-    this->PickupUsable = CreateDefaultSubobject<UInstantUsable>(TEXT("PickupUsable"));
-    this->UseSphere = CreateDefaultSubobject<USphereComponent>(TEXT("UseSphere"));
-    this->CrosshairAggregator = CreateDefaultSubobject<UCrosshairAggregator>(TEXT("Crosshair"));
-    this->FP_FireAnimation = NULL;
-    this->TP_FireAnimation = NULL;
-    this->FP_Gunsling = NULL;
-    this->TP_Gunsling = NULL;
-    this->Item_Gunsling = NULL;
-    this->UsingSound = NULL;
-    this->UsingSoundFadeout = 0.30f;
-    this->UsingSoundTail = NULL;
-    this->KeepInsideWorld = CreateDefaultSubobject<UKeepInsideWorld>(TEXT("KeepInWorld"));
-    this->UsingSoundInstance = NULL;
-    this->FireRate = 1.00f;
-}
 

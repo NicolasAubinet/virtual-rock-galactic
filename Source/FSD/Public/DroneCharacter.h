@@ -3,9 +3,9 @@
 #include "DeepPathfinderCharacter.h"
 #include "DroneCharacter.generated.h"
 
-class USimpleObjectInfoComponent;
 class UHealthComponent;
 class UOutlineComponent;
+class USimpleObjectInfoComponent;
 
 UCLASS(Abstract, Blueprintable)
 class ADroneCharacter : public ADeepPathfinderCharacter {
@@ -22,6 +22,7 @@ protected:
     USimpleObjectInfoComponent* ObjectInfo;
     
 public:
-    ADroneCharacter();
+    ADroneCharacter(const FObjectInitializer& ObjectInitializer);
+
 };
 

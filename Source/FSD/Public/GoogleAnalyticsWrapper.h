@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "UObject/Object.h"
+#include "DeepDiveAnalyticsInformation.h"
 #include "EFSDGoogleAnalyticsProperties.h"
 #include "PartyAnalyticsInformation.h"
-#include "DeepDiveAnalyticsInformation.h"
-#include "UObject/Object.h"
 #include "GoogleAnalyticsWrapper.generated.h"
 
 class AActor;
 class AFSDGameState;
-class APlayerController;
 class AFSDPlayerState;
+class APlayerController;
 class USeasonChallenge;
 
 UCLASS(Blueprintable)
@@ -67,6 +67,7 @@ protected:
     
 public:
     UGoogleAnalyticsWrapper();
+
     UFUNCTION(BlueprintCallable)
     void StartMissionPartyInfo(AFSDGameState* GameState);
     
@@ -116,7 +117,7 @@ public:
     void RecordExtraFailInfo(const FString& MissionName, const FString& Stage, const FString& ExtraText);
     
     UFUNCTION(BlueprintCallable)
-    void RecordCustomGAEvent(const FString& EventCategory, const FString& EventAction, const FString& EventLabel, const int32 EventValue, const FString& TrackingId);
+    void RecordCustomGAEvent(const FString& EventCategory, const FString& EventAction, const FString& EventLabel, const int32 EventValue, const FString& TrackingID);
     
     UFUNCTION(BlueprintCallable)
     void RecordContinuousDamage(AActor* DamageCauser);

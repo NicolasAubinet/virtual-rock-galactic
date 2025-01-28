@@ -5,10 +5,10 @@
 #include "MULE.h"
 #include "Molly.generated.h"
 
-class UNiagaraSystem;
-class UDialogDataAsset;
-class UOutlineComponent;
 class APlayerCharacter;
+class UDialogDataAsset;
+class UNiagaraSystem;
+class UOutlineComponent;
 class UResourceBank;
 
 UCLASS(Abstract, Blueprintable)
@@ -27,16 +27,20 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UOutlineComponent* OutlineComponent;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float ShowButtonDelay;
+    
     UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FDelegate OnReachedDropShip;
     
-    UPROPERTY(EditAnywhere, Transient, ReplicatedUsing=OnRep_CalledBy, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_CalledBy, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<APlayerCharacter> CalledBy;
     
 public:
-    AMolly();
+    AMolly(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void SetOpenForDeposit(bool Open);
     

@@ -1,12 +1,11 @@
 #include "BurrowComponent.h"
 
-class UAnimMontage;
+UBurrowComponent::UBurrowComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+}
 
 
 void UBurrowComponent::CallBurrow(bool isBurrowing, UAnimMontage* customMontage) {
 }
 
 
-UBurrowComponent::UBurrowComponent() {
-}
 

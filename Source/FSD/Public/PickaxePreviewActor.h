@@ -1,18 +1,18 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "EPickaxePartLocation.h"
-#include "PickaxeMeshInstance.h"
 #include "GameFramework/Actor.h"
-#include "SpawnReleasedActor.h"
-#include "PickaxePartEquip.h"
+#include "EPickaxePartLocation.h"
 #include "ItemIDInterface.h"
+#include "PickaxeMeshInstance.h"
+#include "PickaxePartEquip.h"
+#include "SpawnReleasedActor.h"
 #include "PickaxePreviewActor.generated.h"
 
-class USceneComponent;
 class UItemID;
-class UPickaxePart;
 class UMaterialInterface;
+class UPickaxePart;
+class USceneComponent;
 
 UCLASS(Blueprintable)
 class APickaxePreviewActor : public AActor, public IPickaxePartEquip, public IItemIDInterface, public ISpawnReleasedActor {
@@ -35,14 +35,15 @@ protected:
     UMaterialInterface* EquippedMaterial;
     
 public:
-    APickaxePreviewActor();
+    APickaxePreviewActor(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void PreviewParts(EPickaxePartLocation PreviewLocation, UPickaxePart* PreviewPart);
     
     UFUNCTION(BlueprintCallable)
     void EquipParts();
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

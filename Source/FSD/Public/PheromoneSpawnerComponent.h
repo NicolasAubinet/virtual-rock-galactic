@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "RandRange.h"
 #include "Components/ActorComponent.h"
+#include "RandRange.h"
 #include "PheromoneSpawnerComponent.generated.h"
 
 class AActor;
@@ -25,6 +25,7 @@ protected:
     TMap<AActor*, float> InfectedActors;
     
 public:
-    UPheromoneSpawnerComponent();
+    UPheromoneSpawnerComponent(const FObjectInitializer& ObjectInitializer);
+
 };
 

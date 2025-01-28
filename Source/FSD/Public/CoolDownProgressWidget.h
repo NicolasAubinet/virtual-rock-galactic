@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "CoolDownProgressStyle.h"
 #include "Blueprint/UserWidget.h"
+#include "CoolDownProgressStyle.h"
 #include "CoolDownProgressWidget.generated.h"
 
 class UObject;
@@ -14,7 +14,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FCoolDownProgressStyle Style;
     
-    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UObject> CoolDownObject;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -22,6 +22,7 @@ protected:
     
 public:
     UCoolDownProgressWidget();
+
 protected:
     UFUNCTION(BlueprintCallable)
     void UpdateProgress(float Progress);

@@ -1,26 +1,26 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
+#include "Engine/DataAsset.h"
+#include "DeepPathFinderType.h"
+#include "GameplayTagContainer.h"
 #include "ECreatureSize.h"
 #include "EEnemyDescriptorCheatClass.h"
 #include "EEnemySignificance.h"
 #include "EVeteranScaling.h"
-#include "GameplayTagContainer.h"
-#include "DeepPathFinderType.h"
-#include "SpawnRarityItem.h"
 #include "EnemyDebris.h"
-#include "Engine/DataAsset.h"
+#include "SpawnRarityItem.h"
+#include "Templates/SubclassOf.h"
 #include "EnemyDescriptor.generated.h"
 
 class AActor;
 class APawn;
 class UBiome;
+class UCaveInfluencer;
 class UDebrisPositioning;
 class UEnemyDescriptor;
-class UMissionTemplate;
 class UEnemyID;
-class UCaveInfluencer;
+class UMissionTemplate;
 
 UCLASS(Blueprintable)
 class FSD_API UEnemyDescriptor : public UDataAsset {
@@ -62,9 +62,6 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UDebrisPositioning* Positioning;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    int32 PlacementCategories;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UCaveInfluencer* CaveInfluencer;
@@ -125,6 +122,7 @@ protected:
     
 public:
     UEnemyDescriptor();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TSubclassOf<APawn> GetEnemyClass(UBiome* Biome, bool IsElite) const;
     

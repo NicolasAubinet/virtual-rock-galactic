@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
 #include "Components/ActorComponent.h"
+#include "Templates/SubclassOf.h"
 #include "AttackBaseComponent.generated.h"
 
 class AActor;
@@ -29,7 +29,8 @@ protected:
     float MaxRange;
     
 public:
-    UAttackBaseComponent();
+    UAttackBaseComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     UAttackBaseComponent* ReplaceAttackComponent(UAttackBaseComponent* componentToReplace, TSubclassOf<UAttackBaseComponent> newComponentClass);
     

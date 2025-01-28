@@ -1,24 +1,25 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
-#include "RoomNode.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "RoomNode.h"
+#include "Templates/SubclassOf.h"
 #include "ProceduralFunctionLibrary.generated.h"
 
-class UObject;
-class UFXSystemAsset;
-class UObjective;
+class AProceduralSetup;
 class UBiome;
 class UDebrisPositioning;
-class AProceduralSetup;
+class UFXSystemAsset;
+class UObject;
+class UObjective;
 
 UCLASS(Blueprintable)
 class UProceduralFunctionLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
     UProceduralFunctionLibrary();
+
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static void SpawnTerrainImpact(UObject* WorldContextObject, UFXSystemAsset* particle, const FVector& Location, FRotator Rotation);
     

@@ -1,6 +1,7 @@
 #include "CleanupPodItem.h"
 
-class APlagueInfectionNode;
+ACleanupPodItem::ACleanupPodItem(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+}
 
 
 void ACleanupPodItem::Server_Call_CleaningPod_Implementation(const FVector& Location, APlagueInfectionNode* plagueNode) {
@@ -9,6 +10,4 @@ void ACleanupPodItem::Server_Call_CleaningPod_Implementation(const FVector& Loca
 void ACleanupPodItem::CallUpdateWidget() {
 }
 
-ACleanupPodItem::ACleanupPodItem() {
-}
 

@@ -1,12 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "Engine/EngineTypes.h"
 #include "GameFramework/Actor.h"
+#include "Engine/EngineTypes.h"
 #include "CaveVine.generated.h"
 
-class USceneComponent;
 class UHealthComponent;
+class USceneComponent;
 class USplineMeshComponent;
 
 UCLASS(Abstract, Blueprintable)
@@ -50,11 +50,12 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FVector VineStartLocation;
     
-    UPROPERTY(EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UHealthComponent> Target;
     
 public:
-    ACaveVine();
+    ACaveVine(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void BP_OnTargetChanged(UHealthComponent* NewTarget);

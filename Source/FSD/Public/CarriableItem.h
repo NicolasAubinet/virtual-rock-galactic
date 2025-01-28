@@ -2,8 +2,8 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "AttachChangeSigDelegate.h"
-#include "OnCarriableDepositedDelegate.h"
 #include "FSDPhysicsActor.h"
+#include "OnCarriableDepositedDelegate.h"
 #include "Throwable.h"
 #include "CarriableItem.generated.h"
 
@@ -28,7 +28,8 @@ protected:
     bool IsDopositable;
     
 public:
-    ACarriableItem();
+    ACarriableItem(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void Throw(FVector force);
     
@@ -40,7 +41,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnAttachChanged(bool Attached);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

@@ -1,17 +1,18 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
+#include "UObject/Object.h"
 #include "DeepDiveBank.h"
 #include "DeepDiveTesterItem.h"
-#include "UObject/Object.h"
 #include "MissionModeManager.h"
 #include "DeepDiveManager.generated.h"
 
-class UUserWidget;
 class UBiome;
 class UDeepDive;
 class UFSDEventsHandler;
 class UGeneratedMission;
+class UUserWidget;
+class UWidget;
 
 UCLASS(Blueprintable)
 class UDeepDiveManager : public UObject, public IMissionModeManager {
@@ -61,6 +62,7 @@ protected:
     
 public:
     UDeepDiveManager();
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetDeepDive(UDeepDive* DeepDive);
     
@@ -94,7 +96,7 @@ public:
     UFUNCTION(BlueprintCallable)
     bool CompleteCurrentSingleMission();
     
-    
+
     // Fix for true pure virtual functions not being implemented
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void StartDive() override PURE_VIRTUAL(StartDive,);
@@ -113,6 +115,9 @@ public:
     
     UFUNCTION(BlueprintCallable)
     int32 GetNumberOfStages() const override PURE_VIRTUAL(GetNumberOfStages, return 0;);
+    
+    UFUNCTION(BlueprintCallable)
+    TSoftClassPtr<UWidget> GetMissionModeCheatUI() override PURE_VIRTUAL(GetMissionModeCheatUI, return NULL;);
     
     UFUNCTION(BlueprintCallable)
     TSoftClassPtr<UUserWidget> GetMissionCompleteScreen(bool missionSuccessful) const override PURE_VIRTUAL(GetMissionCompleteScreen, return NULL;);

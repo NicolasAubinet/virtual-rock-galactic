@@ -1,13 +1,11 @@
 #include "GetFriendsListBlueprintCallProxy.h"
 
-class UObject;
-class UGetFriendsListBlueprintCallProxy;
+UGetFriendsListBlueprintCallProxy::UGetFriendsListBlueprintCallProxy() {
+    this->WorldContextObject = NULL;
+}
 
 UGetFriendsListBlueprintCallProxy* UGetFriendsListBlueprintCallProxy::GetFriendsList(UObject* NewWorldContextObject, const FString& ListName) {
     return NULL;
 }
 
-UGetFriendsListBlueprintCallProxy::UGetFriendsListBlueprintCallProxy() {
-    this->WorldContextObject = NULL;
-}
 

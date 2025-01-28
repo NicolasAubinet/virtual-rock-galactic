@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "GameEvent.h"
+#include "Templates/SubclassOf.h"
 #include "DefenseEvent.generated.h"
 
 class UWidget;
@@ -21,9 +21,10 @@ protected:
     float Progress;
     
 public:
-    ADefenseEvent();
+    ADefenseEvent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_Progress(float OldValue);

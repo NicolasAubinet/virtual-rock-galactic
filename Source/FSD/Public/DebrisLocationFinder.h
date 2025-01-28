@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "DelegateDelegate.h"
 #include "GameFramework/Actor.h"
+#include "DelegateDelegate.h"
 #include "DebrisLocationFinder.generated.h"
 
 class UDebrisPositioning;
@@ -49,6 +49,7 @@ protected:
     bool StopAtEnoughMatches;
     
 public:
-    ADebrisLocationFinder();
+    ADebrisLocationFinder(const FObjectInitializer& ObjectInitializer);
+
 };
 

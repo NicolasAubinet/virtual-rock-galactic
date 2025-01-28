@@ -1,6 +1,7 @@
 #include "PlayerAfflictionComponent.h"
 
-class UPlayerAfflictionOverlay;
+UPlayerAfflictionComponent::UPlayerAfflictionComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+}
 
 void UPlayerAfflictionComponent::ShowPlayerOverlay(UPlayerAfflictionOverlay* Overlay) {
 }
@@ -8,6 +9,4 @@ void UPlayerAfflictionComponent::ShowPlayerOverlay(UPlayerAfflictionOverlay* Ove
 void UPlayerAfflictionComponent::HidePlayerOverlay(UPlayerAfflictionOverlay* Overlay) {
 }
 
-UPlayerAfflictionComponent::UPlayerAfflictionComponent() {
-}
 

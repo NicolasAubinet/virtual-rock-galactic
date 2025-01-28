@@ -11,9 +11,16 @@ class UFireWeaponSoundUpgradeElement : public UItemUpgradeElement {
 public:
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    USoundCue* FireSound;
+    TSoftObjectPtr<USoundCue> FireSound;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool OverrideTailSound;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSoftObjectPtr<USoundCue> TailSound;
     
 public:
     UFireWeaponSoundUpgradeElement();
+
 };
 

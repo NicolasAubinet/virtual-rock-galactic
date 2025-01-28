@@ -1,14 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "ArmorDamageInfo.h"
 #include "ArmorPrimitiveDamagedDelegateDelegate.h"
 #include "ArmorPrimitiveDestroyedDelegate.h"
-#include "ArmorDamageInfo.h"
-#include "CompositeArmorItem.h"
 #include "BaseArmorDamageComponent.h"
+#include "CompositeArmorItem.h"
 #include "CompositeArmorComponent.generated.h"
 
-class UPrimitiveComponent;
 class UFXSystemAsset;
+class UPrimitiveComponent;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UCompositeArmorComponent : public UBaseArmorDamageComponent {
@@ -34,9 +34,10 @@ protected:
     FArmorDamageInfo ArmorDamageInfo;
     
 public:
-    UCompositeArmorComponent();
+    UCompositeArmorComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_ArmorDamageInfo(FArmorDamageInfo OldValue);

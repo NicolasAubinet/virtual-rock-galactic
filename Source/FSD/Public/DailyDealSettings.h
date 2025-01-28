@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "DailyDealSetup.h"
-#include "DailyDeal.h"
 #include "Engine/DataAsset.h"
+#include "DailyDeal.h"
+#include "DailyDealSetup.h"
 #include "DailyDealSettings.generated.h"
 
 class UObject;
@@ -15,6 +15,7 @@ public:
     TArray<FDailyDealSetup> DailyDeals;
     
     UDailyDealSettings();
+
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static bool IsDailyDealBought(UObject* WorldContextObject);
     

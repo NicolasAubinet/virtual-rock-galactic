@@ -1,8 +1,58 @@
 #include "DeepPathfinderMovement.h"
 #include "Net/UnrealNetwork.h"
 
-class AActor;
-class UFakeMoverSettings;
+UDeepPathfinderMovement::UDeepPathfinderMovement(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->bUseAccelerationForPaths = true;
+    this->UseDormancy = false;
+    this->MaxPawnSpeed = 300.00f;
+    this->StrafeSpeed = 150.00f;
+    this->MinSlowdownAngle = 20.00f;
+    this->MaxSlowdownAngle = 90.00f;
+    this->MaxStrafeDistance = 200.00f;
+    this->AlignDirectionSpeed = 4.00f;
+    this->FleeSpeedBoostMultiplier = 1.50f;
+    this->MaxAcceleration = 500.00f;
+    this->MaxBrakingDeceleration = 200.00f;
+    this->AngleSpeedFilterFactor = 2.00f;
+    this->AIAvoidanceWeight = 10;
+    this->PathfinderType = DeepPathFinderType::Walk;
+    this->PathfinderSize = DeepPathFinderSize::Medium;
+    this->MovementPhysicsType = ETeleportType::TeleportPhysics;
+    this->PathfinderPreference = DeepPathFinderPreference::None;
+    this->AlignTowardsTargetIfStationary = false;
+    this->AlignToTargetMinRequiredAngle = 0.00f;
+    this->AllowSlowTickRateWhenNotVisible = true;
+    this->ForceAPathIfNoneFound = false;
+    this->DrawServerPath = false;
+    this->IsStrafingOverride = false;
+    this->CSGWorld = NULL;
+    this->PathMovedDist = 0;
+    this->LocalPathMovedDist = 0;
+    this->MoveSettings = NULL;
+    this->TargetActor = NULL;
+    this->CurrentPathIndex = 0;
+    this->CurrentPathFraction = 0.00f;
+    this->DestinationActor = NULL;
+    this->AcceptanceRadius = 0.00f;
+    this->OnlyPartPath = false;
+    this->PauseMovementTime = 0.00f;
+    this->MoveMode = EDeepMovementMode::Normal;
+    this->PawnStats = NULL;
+    this->VerticalAngleSpeed = 0.00f;
+    this->HorizontalAngleSpeed = 0.00f;
+    this->IsStrafing = false;
+    this->HasOustandingPathRequest = false;
+    this->LastPathReachedPreciseDestination = true;
+    this->PostponedTickTime = 0.00f;
+    this->LastMoveSuccessful = false;
+    this->HandleRotation = true;
+    this->TickAfterOwnerDeath = false;
+    this->DampOmega = 2.00f;
+    this->UseMovementSpring = false;
+    this->SnapToPathfinderOnFirstMove = true;
+    this->DisablePathfinderErrors = false;
+    this->FakeSyncTime = 0.00f;
+}
 
 void UDeepPathfinderMovement::UpdateTargetActor(AActor* NewTarget) {
 }
@@ -71,11 +121,8 @@ bool UDeepPathfinderMovement::PathExistTo(const FVector& Dest) {
     return false;
 }
 
-bool UDeepPathfinderMovement::PathExistsBetween(const FVector& From, const FVector& To) {
+bool UDeepPathfinderMovement::PathExistsBetween(const FVector& from, const FVector& to) {
     return false;
-}
-
-void UDeepPathfinderMovement::OnRep_PathMovedDist(uint32 lastPathMovedDist) {
 }
 
 void UDeepPathfinderMovement::OnRep_Path(const FDeepRepPath& oldPath) {
@@ -138,11 +185,19 @@ UFakeMoverSettings* UDeepPathfinderMovement::GetCurrentFakePhysicsMoveSet() {
     return NULL;
 }
 
+float UDeepPathfinderMovement::GetApproximatePathLength(FVector Start, FVector End) const {
+    return 0.0f;
+}
+
 bool UDeepPathfinderMovement::FlyToConnectedPosition(const FVector& destPos) {
     return false;
 }
 
 bool UDeepPathfinderMovement::FindPointKeepingDistance(const FVector& Origin, float MinDistance, float MaxDistance, const FVector& Target, float idealTargetDistance, FVector& outPos) {
+    return false;
+}
+
+bool UDeepPathfinderMovement::FindPointDiagonalTowardsTarget(const FVector& Origin, const FVector& Target, float dodgeAngle, float maxSampleDistance, float moveDistance, float RandomDeviation, FVector& outPos) {
     return false;
 }
 
@@ -187,60 +242,11 @@ void UDeepPathfinderMovement::AddFakeMoverImpulse(const FVector& Impulse) {
 void UDeepPathfinderMovement::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
     Super::GetLifetimeReplicatedProps(OutLifetimeProps);
     
-    DOREPLIFETIME(UDeepPathfinderMovement, PathMovedDist);
+    DOREPLIFETIME(UDeepPathfinderMovement, IsStrafingOverride);
     DOREPLIFETIME(UDeepPathfinderMovement, Path);
     DOREPLIFETIME(UDeepPathfinderMovement, MoveSettings);
     DOREPLIFETIME(UDeepPathfinderMovement, TargetActor);
     DOREPLIFETIME(UDeepPathfinderMovement, MoveMode);
 }
 
-UDeepPathfinderMovement::UDeepPathfinderMovement() {
-    this->UseDormancy = false;
-    this->MaxPawnSpeed = 300.00f;
-    this->StrafeSpeed = 150.00f;
-    this->MinSlowdownAngle = 20.00f;
-    this->MaxSlowdownAngle = 90.00f;
-    this->MaxStrafeDistance = 200.00f;
-    this->AlignDirectionSpeed = 4.00f;
-    this->FleeSpeedBoostMultiplier = 1.50f;
-    this->MaxAcceleration = 500.00f;
-    this->MaxBrakingDeceleration = 200.00f;
-    this->AngleSpeedFilterFactor = 2.00f;
-    this->AIAvoidanceWeight = 10;
-    this->PathfinderType = DeepPathFinderType::Walk;
-    this->PathfinderSize = DeepPathFinderSize::Medium;
-    this->MovementPhysicsType = ETeleportType::TeleportPhysics;
-    this->PathfinderPreference = DeepPathFinderPreference::None;
-    this->AlignTowardsTargetIfStationary = false;
-    this->AlignToTargetMinRequiredAngle = 0.00f;
-    this->AllowSlowTickRateWhenNotVisible = true;
-    this->ForceAPathIfNoneFound = false;
-    this->DrawServerPath = false;
-    this->CSGWorld = NULL;
-    this->PathMovedDist = 0;
-    this->LocalPathMovedDist = 0;
-    this->MoveSettings = NULL;
-    this->TargetActor = NULL;
-    this->CurrentPathIndex = 0;
-    this->CurrentPathFraction = 0.00f;
-    this->DestinationActor = NULL;
-    this->AcceptanceRadius = 0.00f;
-    this->OnlyPartPath = false;
-    this->PauseMovementTime = 0.00f;
-    this->MoveMode = EDeepMovementMode::Normal;
-    this->PawnStats = NULL;
-    this->VerticalAngleSpeed = 0.00f;
-    this->HorizontalAngleSpeed = 0.00f;
-    this->IsStrafing = false;
-    this->HasOustandingPathRequest = false;
-    this->LastPathReachedPreciseDestination = true;
-    this->PostponedTickTime = 0.00f;
-    this->LastMoveSuccessful = false;
-    this->HandleRotation = true;
-    this->TickAfterOwnerDeath = false;
-    this->DampOmega = 2.00f;
-    this->UseMovementSpring = false;
-    this->SnapToPathfinderOnFirstMove = true;
-    this->FakeSyncTime = 0.00f;
-}
 

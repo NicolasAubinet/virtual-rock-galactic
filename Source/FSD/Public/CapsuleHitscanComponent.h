@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "HitscanBaseComponent.h"
 #include "MultiHitScanHits.h"
 #include "OnHitDelegateDelegate.h"
-#include "HitscanBaseComponent.h"
 #include "CapsuleHitscanComponent.generated.h"
 
 class AActor;
@@ -50,7 +50,8 @@ protected:
     FMultiHitScanHits Hits;
     
 public:
-    UCapsuleHitscanComponent();
+    UCapsuleHitscanComponent(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_RegisterHit(const FMultiHitScanHits& hitResults);

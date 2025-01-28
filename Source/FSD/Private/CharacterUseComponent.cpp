@@ -1,8 +1,11 @@
 #include "CharacterUseComponent.h"
 #include "Net/UnrealNetwork.h"
 
-class AActor;
-class UUsableComponentBase;
+UCharacterUseComponent::UCharacterUseComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->UseDistance = 150.00f;
+    this->LastBeginUseUsable = NULL;
+    this->HoveringUsable = NULL;
+}
 
 void UCharacterUseComponent::Server_SetState_Implementation(const FCharacterUseState& NewState) {
 }
@@ -57,9 +60,4 @@ void UCharacterUseComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty
     DOREPLIFETIME(UCharacterUseComponent, State);
 }
 
-UCharacterUseComponent::UCharacterUseComponent() {
-    this->UseDistance = 150.00f;
-    this->LastBeginUseUsable = NULL;
-    this->HoveringUsable = NULL;
-}
 

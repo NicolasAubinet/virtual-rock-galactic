@@ -3,8 +3,8 @@
 #include "CarriableItem.h"
 #include "Gem.generated.h"
 
-class UResourceData;
 class UCarriableInstantUsable;
+class UResourceData;
 
 UCLASS(Abstract, Blueprintable)
 class FSD_API AGem : public ACarriableItem {
@@ -24,7 +24,8 @@ protected:
     bool hasBeenReleased;
     
 public:
-    AGem();
+    AGem(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void SetHasBeenReleased(bool NewHasBeenReleased);
     

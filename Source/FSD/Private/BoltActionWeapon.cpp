@@ -1,47 +1,7 @@
 #include "BoltActionWeapon.h"
 #include "Net/UnrealNetwork.h"
 
-class AActor;
-class UPrimitiveComponent;
-class UHealthComponentBase;
-class UFSDPhysicalMaterial;
-
-void ABoltActionWeapon::SetOverheated(bool isOverheated) {
-}
-
-void ABoltActionWeapon::Server_SetIsMovementSlowed_Implementation(bool bisMovementSlowed) {
-}
-
-void ABoltActionWeapon::Server_SetIsLatestShotFocused_Implementation(bool bisShotFocused) {
-}
-
-void ABoltActionWeapon::Server_SetIsChargingShot_Implementation(bool bisCharging) {
-}
-
-void ABoltActionWeapon::OnTimerElapsed() {
-}
-
-void ABoltActionWeapon::OnTargetKilled(AActor* Target, UFSDPhysicalMaterial* PhysicalMaterial, bool wasDirectHit) {
-}
-
-void ABoltActionWeapon::OnTargetDamaged(UHealthComponentBase* Health, float Amount, UPrimitiveComponent* HitComponent, UFSDPhysicalMaterial* PhysicalMaterial) {
-}
-
-void ABoltActionWeapon::OnShotPowerSet() {
-}
-
-
-void ABoltActionWeapon::Client_OnTargetKilled_Implementation(bool BoostReloadTime) {
-}
-
-void ABoltActionWeapon::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
-    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-    
-    DOREPLIFETIME(ABoltActionWeapon, LastShotWasAimed);
-    DOREPLIFETIME(ABoltActionWeapon, IsMovementSlowed);
-}
-
-ABoltActionWeapon::ABoltActionWeapon() {
+ABoltActionWeapon::ABoltActionWeapon(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
     this->DamageComponent = NULL;
     this->HitscanComponent = NULL;
     this->FocusedHitSTE = NULL;
@@ -74,5 +34,48 @@ ABoltActionWeapon::ABoltActionWeapon() {
     this->ChargeAffectsDamage = false;
     this->Charging = false;
     this->ChargeProgress = 0.00f;
+    this->RateOfFireHipFireModifier = 1.00f;
+    this->ChargeSpeedModifier = 1.00f;
+    this->SuccesfullHipFireStackDuration = 2.00f;
+    this->SuccesfullAimedStackDuration = 2.00f;
 }
+
+void ABoltActionWeapon::SetOverheated(bool isOverheated) {
+}
+
+void ABoltActionWeapon::Server_SetIsMovementSlowed_Implementation(bool bisMovementSlowed) {
+}
+
+void ABoltActionWeapon::Server_SetIsLatestShotFocused_Implementation(bool bisShotFocused) {
+}
+
+void ABoltActionWeapon::Server_SetIsChargingShot_Implementation(bool bisCharging) {
+}
+
+void ABoltActionWeapon::OnTimerElapsed() {
+}
+
+void ABoltActionWeapon::OnTargetKilled(AActor* Target, UFSDPhysicalMaterial* PhysicalMaterial, bool wasDirectHit) {
+}
+
+void ABoltActionWeapon::OnTargetDamaged(UHealthComponentBase* Health, float amount, UPrimitiveComponent* HitComponent, UFSDPhysicalMaterial* PhysicalMaterial) {
+}
+
+void ABoltActionWeapon::OnShotPowerSet() {
+}
+
+
+void ABoltActionWeapon::Client_OnTargetKilled_Implementation(bool BoostReloadTime) {
+}
+
+void ABoltActionWeapon::Client_OnTargetDamaged_Implementation(float amount) {
+}
+
+void ABoltActionWeapon::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
+    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+    
+    DOREPLIFETIME(ABoltActionWeapon, LastShotWasAimed);
+    DOREPLIFETIME(ABoltActionWeapon, IsMovementSlowed);
+}
+
 

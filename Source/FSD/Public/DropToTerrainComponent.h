@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "OnIsFallingToTerrainChangedDelegate.h"
 #include "Components/ActorComponent.h"
+#include "OnIsFallingToTerrainChangedDelegate.h"
 #include "DropToTerrainComponent.generated.h"
 
 class USceneComponent;
@@ -38,9 +38,10 @@ protected:
     bool IsDetecting;
     
 public:
-    UDropToTerrainComponent();
+    UDropToTerrainComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void StopDropDetection(bool stopFalling);
     

@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "FSDUserWidget.h"
+#include "Templates/SubclassOf.h"
 #include "ItemsBar.generated.h"
 
 class AItem;
@@ -29,6 +29,7 @@ protected:
     
 public:
     UItemsBar();
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnSupplyItemUnequipped(UItemsBarIcon* ItemIcon);

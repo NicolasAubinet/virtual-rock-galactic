@@ -1,10 +1,9 @@
 #include "CommnuityRewardBundle.h"
 
-class UObject;
+UCommnuityRewardBundle::UCommnuityRewardBundle() {
+}
 
 void UCommnuityRewardBundle::AwardRewards(UObject* WorldContext) {
 }
 
-UCommnuityRewardBundle::UCommnuityRewardBundle() {
-}
 

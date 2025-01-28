@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "AttackCooldown.h"
 #include "Components/ActorComponent.h"
+#include "AttackCooldown.h"
 #include "AttackCooldownComponent.generated.h"
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -13,7 +13,8 @@ private:
     TArray<FAttackCooldown> AttackCooldowns;
     
 public:
-    UAttackCooldownComponent();
+    UAttackCooldownComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void SetCooldown(const FName& AttackName, float cooldownSeconds);
     

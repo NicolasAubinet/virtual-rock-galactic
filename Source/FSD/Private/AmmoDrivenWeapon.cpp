@@ -1,73 +1,8 @@
 #include "AmmoDrivenWeapon.h"
-#include "Net/UnrealNetwork.h"
 #include "AmmoDriveWeaponAggregator.h"
+#include "Net/UnrealNetwork.h"
 
-
-void AAmmoDrivenWeapon::Server_StopReload_Implementation(float BlendOutTime) {
-}
-
-void AAmmoDrivenWeapon::Server_ReloadWeapon_Implementation() {
-}
-
-void AAmmoDrivenWeapon::Server_PlayBurstFire_Implementation(uint8 shotCount) {
-}
-
-void AAmmoDrivenWeapon::Server_Gunsling_Implementation(uint8 Index) {
-}
-
-void AAmmoDrivenWeapon::ResupplyAmmo(int32 Amount) {
-}
-
-
-
-
-
-void AAmmoDrivenWeapon::OnWeaponFireEnded() {
-}
-
-void AAmmoDrivenWeapon::OnWeaponFired(const FVector& Location) {
-}
-
-void AAmmoDrivenWeapon::OnRicochet(const FVector& Origin, const FVector& Location, const FVector& Normal) {
-}
-
-void AAmmoDrivenWeapon::OnRep_IsFiring() {
-}
-
-bool AAmmoDrivenWeapon::IsClipFull() const {
-    return false;
-}
-
-void AAmmoDrivenWeapon::InstantlyReload() {
-}
-
-
-void AAmmoDrivenWeapon::Client_RefillAmmo_Implementation(float percentage) {
-}
-
-void AAmmoDrivenWeapon::All_StopReload_Implementation(float BlendOutTime) {
-}
-
-void AAmmoDrivenWeapon::All_StartReload_Implementation() {
-}
-
-void AAmmoDrivenWeapon::All_PlayBurstFire_Implementation(uint8 shotCount) {
-}
-
-void AAmmoDrivenWeapon::All_Gunsling_Implementation(uint8 Index) {
-}
-
-void AAmmoDrivenWeapon::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
-    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-    
-    DOREPLIFETIME(AAmmoDrivenWeapon, FP_ReloadAnimation);
-    DOREPLIFETIME(AAmmoDrivenWeapon, TP_ReloadAnimation);
-    DOREPLIFETIME(AAmmoDrivenWeapon, WPN_Reload);
-    DOREPLIFETIME(AAmmoDrivenWeapon, ClipCount);
-    DOREPLIFETIME(AAmmoDrivenWeapon, IsFiring);
-}
-
-AAmmoDrivenWeapon::AAmmoDrivenWeapon() {
+AAmmoDrivenWeapon::AAmmoDrivenWeapon(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
     this->WeaponFire = NULL;
     this->Aggregator = CreateDefaultSubobject<UAmmoDriveWeaponAggregator>(TEXT("Aggregator"));
     this->LoopFireAnimation = false;
@@ -111,15 +46,102 @@ AAmmoDrivenWeapon::AAmmoDrivenWeapon() {
     this->ReloadDuration = 0.00f;
     this->AmmoCount = 0;
     this->ClipCount = 0;
+    this->ManualHeatReductionAmmo = 0;
+    this->FireInputBufferTime = 0.00f;
     this->AutoReloadDuration = 0.00f;
     this->AutoReloadCompleteCue = NULL;
     this->SupplyStatusWeight = 1.00f;
     this->CycleTimeLeft = 0.00f;
+    this->UseCustomReloadDelay = false;
+    this->CustomReloadDelay = 0.00f;
     this->ReloadTimeLeft = 0.00f;
     this->AutomaticReload = false;
     this->CanReload = false;
+    this->HoldToFirePercentOfFireRatePenalty = -1.00f;
+    this->ApplyRecoilAtEndOfBurst = false;
+    this->EndOfBurstRecoilMultiplier = 1.00f;
     this->HasAutomaticFire = false;
     this->IsFiring = false;
+    this->EjectCasingOnFire = true;
+    this->ManualHeatReductionOnReload = false;
+    this->MaxManualHeatReductionCharges = 0;
+    this->ManualHeatReductionValue = 0.00f;
     this->WeaponState = EAmmoWeaponState::Equipping;
 }
+
+
+void AAmmoDrivenWeapon::UpdateHoldToFire() {
+}
+
+void AAmmoDrivenWeapon::Server_StopReload_Implementation(float BlendOutTime) {
+}
+
+void AAmmoDrivenWeapon::Server_ReloadWeapon_Implementation(float CurrentReloadDuration) {
+}
+
+void AAmmoDrivenWeapon::Server_PlayBurstFire_Implementation(uint8 shotCount) {
+}
+
+void AAmmoDrivenWeapon::Server_Gunsling_Implementation(uint8 Index) {
+}
+
+void AAmmoDrivenWeapon::ResupplyAmmo(int32 amount) {
+}
+
+
+
+
+
+void AAmmoDrivenWeapon::OnWeaponFireEnded() {
+}
+
+void AAmmoDrivenWeapon::OnWeaponFired(const FVector& Location) {
+}
+
+void AAmmoDrivenWeapon::OnRicochet(const FVector& Origin, const FVector& Location, const FVector& Normal) {
+}
+
+void AAmmoDrivenWeapon::OnRep_ManualHeatReductionAmmo() const {
+}
+
+void AAmmoDrivenWeapon::OnRep_IsFiring() {
+}
+
+bool AAmmoDrivenWeapon::IsClipFull() const {
+    return false;
+}
+
+void AAmmoDrivenWeapon::InstantlyReload() {
+}
+
+void AAmmoDrivenWeapon::EjectCasing() {
+}
+
+
+void AAmmoDrivenWeapon::Client_RefillAmmo_Implementation(float percentage) {
+}
+
+void AAmmoDrivenWeapon::All_StopReload_Implementation(float BlendOutTime) {
+}
+
+void AAmmoDrivenWeapon::All_StartReload_Implementation(float CurrentReloadDuration) {
+}
+
+void AAmmoDrivenWeapon::All_PlayBurstFire_Implementation(uint8 shotCount) {
+}
+
+void AAmmoDrivenWeapon::All_Gunsling_Implementation(uint8 Index) {
+}
+
+void AAmmoDrivenWeapon::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
+    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+    
+    DOREPLIFETIME(AAmmoDrivenWeapon, FP_ReloadAnimation);
+    DOREPLIFETIME(AAmmoDrivenWeapon, TP_ReloadAnimation);
+    DOREPLIFETIME(AAmmoDrivenWeapon, WPN_Reload);
+    DOREPLIFETIME(AAmmoDrivenWeapon, ClipCount);
+    DOREPLIFETIME(AAmmoDrivenWeapon, ManualHeatReductionAmmo);
+    DOREPLIFETIME(AAmmoDrivenWeapon, IsFiring);
+}
+
 

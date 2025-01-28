@@ -3,8 +3,8 @@
 #include "SubHealthComponent.h"
 #include "DestructibleSubHealthComponent.generated.h"
 
-class USceneComponent;
 class UDestructibleSubHealthComponent;
+class USceneComponent;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UDestructibleSubHealthComponent : public USubHealthComponent {
@@ -22,9 +22,6 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool AllowInderectDamage;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    bool PassthroughDamageWhenDisabled;
-    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_Damage, meta=(AllowPrivateAccess=true))
     float Damage;
     
@@ -35,9 +32,10 @@ protected:
     FSubHealthDestroyed OnDestroyed;
     
 public:
-    UDestructibleSubHealthComponent();
+    UDestructibleSubHealthComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void ResetHealth();
     

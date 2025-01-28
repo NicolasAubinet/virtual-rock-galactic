@@ -1,27 +1,27 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "Engine/NetSerialization.h"
 #include "UObject/NoExportTypes.h"
-#include "FloatDelegateDelegate.h"
-#include "EExtractorState.h"
-#include "CharacterChangedDelegateDelegate.h"
+#include "Engine/NetSerialization.h"
 #include "AnimatedItem.h"
+#include "CharacterChangedDelegateDelegate.h"
+#include "EExtractorState.h"
+#include "FloatDelegateDelegate.h"
 #include "Throwable.h"
 #include "ExtractorItem.generated.h"
 
-class USkeletalMeshComponent;
-class UResourceData;
-class UDialogDataAsset;
-class UPointLightComponent;
-class UParticleSystemComponent;
-class UFirstPersonParticleSystemComponent;
-class UFSDAudioComponent;
 class AResourceChunk;
-class UBoxComponent;
 class UAnimMontage;
+class UBoxComponent;
+class UDialogDataAsset;
+class UFSDAudioComponent;
+class UFirstPersonParticleSystemComponent;
 class UForceFeedbackEffect;
 class UParticleSystem;
+class UParticleSystemComponent;
+class UPointLightComponent;
+class UResourceData;
+class USkeletalMeshComponent;
 class USoundCue;
 
 UCLASS(Blueprintable)
@@ -186,9 +186,10 @@ protected:
     float CurrentLoad;
     
 public:
-    AExtractorItem();
+    AExtractorItem(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, BlueprintImplementableEvent)
     void SetCanPickup(bool canPickup);
     
@@ -256,9 +257,9 @@ public:
     void All_ChunkSplat(AResourceChunk* chunk);
     
     UFUNCTION(BlueprintCallable)
-    void AddResource(float Amount);
+    void AddResource(float amount);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

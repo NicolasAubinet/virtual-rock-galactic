@@ -1,18 +1,11 @@
 #include "RandomFiringGuntowerModule.h"
-#include "Net/UnrealNetwork.h"
 #include "Components/AudioComponent.h"
+#include "Particles/ParticleSystemComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "DamageComponent.h"
-#include "Particles/ParticleSystemComponent.h"
+#include "Net/UnrealNetwork.h"
 
-void ARandomFiringGuntowerModule::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
-    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-    
-    DOREPLIFETIME(ARandomFiringGuntowerModule, OtherCurrentRotation);
-    DOREPLIFETIME(ARandomFiringGuntowerModule, IsAttacking);
-}
-
-ARandomFiringGuntowerModule::ARandomFiringGuntowerModule() {
+ARandomFiringGuntowerModule::ARandomFiringGuntowerModule(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
     this->LaserFrontTop = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("LaserFrontTop"));
     this->LaserFrontBottom = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("LaserFrontBottom"));
     this->LaserBackTop = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("LaserBackTop"));
@@ -36,5 +29,22 @@ ARandomFiringGuntowerModule::ARandomFiringGuntowerModule() {
     this->PlatformDissolveRadius = 100.00f;
     this->PlatformDissolveSqueeze = 3.00f;
     this->IsAttacking = false;
+    this->FrontBottomLaserMuzzle->SetupAttachment(ModuleMesh);
+    this->BackTopLaserMuzzle->SetupAttachment(ModuleMesh);
+    this->BackBottomLaserMuzzle->SetupAttachment(ModuleMesh);
+    this->LaserSound->SetupAttachment(ModuleMesh);
+    this->LaserFrontTop->SetupAttachment(ModuleMesh);
+    this->LaserFrontBottom->SetupAttachment(ModuleMesh);
+    this->LaserBackTop->SetupAttachment(ModuleMesh);
+    this->LaserBackBottom->SetupAttachment(ModuleMesh);
+    this->FrontTopLaserMuzzle->SetupAttachment(ModuleMesh);
 }
+
+void ARandomFiringGuntowerModule::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
+    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+    
+    DOREPLIFETIME(ARandomFiringGuntowerModule, OtherCurrentRotation);
+    DOREPLIFETIME(ARandomFiringGuntowerModule, IsAttacking);
+}
+
 

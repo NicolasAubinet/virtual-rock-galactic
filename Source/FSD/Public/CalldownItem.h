@@ -1,14 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
 #include "AnimatedItem.h"
+#include "Templates/SubclassOf.h"
 #include "CalldownItem.generated.h"
 
 class AActor;
-class UResourceData;
 class ARessuplyPod;
 class UItemPlacerAggregator;
+class UResourceData;
 
 UCLASS(Blueprintable)
 class ACalldownItem : public AAnimatedItem {
@@ -43,7 +43,8 @@ protected:
     float CooldownRemaining;
     
 public:
-    ACalldownItem();
+    ACalldownItem(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_Call_Resupply(const FVector& Location);

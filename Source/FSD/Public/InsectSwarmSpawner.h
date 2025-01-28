@@ -1,12 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "EnemyPawn.h"
+#include "Templates/SubclassOf.h"
 #include "InsectSwarmSpawner.generated.h"
 
 class AActor;
-class UStaticMeshComponent;
 class AInsectSwarmEnemy;
+class UStaticMeshComponent;
 
 UCLASS(Abstract, Blueprintable)
 class AInsectSwarmSpawner : public AEnemyPawn {
@@ -25,11 +25,12 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float respawnDelay;
     
-    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<AInsectSwarmEnemy> SwarmInstance;
     
 public:
-    AInsectSwarmSpawner();
+    AInsectSwarmSpawner(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     UStaticMeshComponent* Receive_GetStaticMesh() const;

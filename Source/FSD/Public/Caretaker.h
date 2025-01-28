@@ -4,14 +4,14 @@
 #include "FSDPawn.h"
 #include "Caretaker.generated.h"
 
-class USceneComponent;
-class USkeletalMeshComponent;
+class UAnimSequenceBase;
 class UCaretakerActionComponent;
 class UEnemyHealthComponent;
 class UHealthDamageTracker;
-class UPawnStatsComponent;
 class UPassthroughSubHealthComponent;
-class UAnimSequenceBase;
+class UPawnStatsComponent;
+class USceneComponent;
+class USkeletalMeshComponent;
 
 UCLASS(Blueprintable)
 class FSD_API ACaretaker : public AFSDPawn {
@@ -86,9 +86,10 @@ private:
     int8 OpenEye;
     
 public:
-    ACaretaker();
+    ACaretaker(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void WakeUp();
     
@@ -127,7 +128,7 @@ public:
     
 protected:
     UFUNCTION(BlueprintCallable)
-    void OnDamageTaken(float Amount);
+    void OnDamageTaken(float amount);
     
 public:
     UFUNCTION(BlueprintCallable, BlueprintPure)

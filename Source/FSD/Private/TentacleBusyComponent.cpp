@@ -1,6 +1,7 @@
 #include "TentacleBusyComponent.h"
 
-class AActor;
+UTentacleBusyComponent::UTentacleBusyComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+}
 
 void UTentacleBusyComponent::ReleasedActor(AActor* Escape, bool fullGrab) {
 }
@@ -12,6 +13,4 @@ bool UTentacleBusyComponent::GetIsBusy() const {
     return false;
 }
 
-UTentacleBusyComponent::UTentacleBusyComponent() {
-}
 

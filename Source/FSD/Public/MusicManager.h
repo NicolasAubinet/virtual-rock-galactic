@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "MusicHandle.h"
-#include "ActiveAudioItem.h"
 #include "Subsystems/WorldSubsystem.h"
+#include "ActiveAudioItem.h"
+#include "MusicHandle.h"
 #include "MusicManager.generated.h"
 
 class UMusicCategory;
@@ -19,6 +19,7 @@ protected:
     
 public:
     UMusicManager();
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void StopHandle(FMusicHandle Handle);
     
@@ -29,7 +30,7 @@ public:
     void SetIsPaused(bool IsPaused);
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
-    FMusicHandle PlayLibrary(UMusicLibrary* library);
+    FMusicHandle PlayLibrary(UMusicLibrary* library, int32 musicIndex);
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     FMusicHandle Play(USoundBase* Music, UMusicCategory* Category);

@@ -1,55 +1,55 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "GameFramework/Actor.h"
 #include "Engine/LatentActionManager.h"
-#include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
-#include "ELandscapeCellFilter.h"
-#include "ESpecialDebrisType.h"
-#include "TerrainBaseDoneDelegate.h"
+#include "VisualLogger/VisualLoggerDebugSnapshotInterface.h"
+#include "CarveOptionsCellSize.h"
+#include "CarveSplineSegment.h"
 #include "ECarveFilterType.h"
 #include "EPreciousMaterialOptions.h"
-#include "CarveOptionsCellSize.h"
+#include "EncodedChunkId.h"
+#include "CSGBuildOperationData.h"
 #include "CSGRaycastHitInfo.h"
-#include "DebrisWhenCarving.h"
-#include "RuntimeSpawnedDebris.h"
-#include "GrenadeExplodeOperationData.h"
 #include "CarveWithColliderOperationData.h"
 #include "CarveWithSTLMeshOperationData.h"
+#include "DebrisWhenCarving.h"
+#include "DrillOperationData.h"
+#include "ELandscapeCellFilter.h"
+#include "ESpecialDebrisType.h"
+#include "GrenadeExplodeOperationData.h"
+#include "MeltOperationData.h"
 #include "PickaxeDigOperationData.h"
 #include "RemoveFloatingIslandOperationData.h"
-#include "DrillOperationData.h"
-#include "MeltOperationData.h"
-#include "CarveSplineSegment.h"
+#include "RuntimeSpawnedDebris.h"
 #include "SplineSegmentCarveOperationData.h"
-#include "CSGBuildOperationData.h"
-#include "TerrainSpawnDebrisOperationData.h"
+#include "Templates/SubclassOf.h"
+#include "TerrainBaseDoneDelegate.h"
 #include "TerrainLateJoinData.h"
-#include "EncodedChunkId.h"
-#include "GameFramework/Actor.h"
-#include "VisualLogger/VisualLoggerDebugSnapshotInterface.h"
+#include "TerrainSpawnDebrisOperationData.h"
 #include "DeepCSGWorld.generated.h"
 
+class ACSGBuilder;
+class ADebrisDataActor;
+class ADeepCSGWorld;
+class AProceduralSetup;
+class UAsyncPathRequests;
+class UDebrisBase;
+class UDebrisInstances;
+class UDebrisMesh;
+class UDebrisSet;
+class UMaterialInterface;
 class UObject;
 class UPrimitiveComponent;
-class UDebrisBase;
-class UAsyncPathRequests;
-class ADeepCSGWorld;
-class UDebrisSet;
-class UDebrisMesh;
-class UDebrisInstances;
-class ADebrisDataActor;
-class AProceduralSetup;
 class USTLMeshCarver;
+class UStaticMesh;
+class UStaticMeshCarver;
+class UTerrainMaterial;
 class UTerrainMaterialsCollection;
 class UTerrainType;
-class UTerrainMaterial;
-class UMaterialInterface;
-class UStaticMesh;
-class ACSGBuilder;
-class UStaticMeshCarver;
 
 UCLASS(Blueprintable)
 class FSD_API ADeepCSGWorld : public AActor, public IVisualLoggerDebugSnapshotInterface {
@@ -184,13 +184,17 @@ private:
     TArray<UDebrisBase*> DebrisHandles;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TArray<FVector> PointsToIncludeInBoudingSphere;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FTerrainLateJoinData LateJoinData;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<FEncodedChunkId> VisibleChunks;
     
 public:
-    ADeepCSGWorld();
+    ADeepCSGWorld(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void UnRegisterScannerComponent(UPrimitiveComponent* Component);
     
@@ -352,7 +356,7 @@ public:
     UFUNCTION(BlueprintCallable)
     void ApplyBaseDebrisCarvers(const TArray<UDebrisBase*>& Carvers);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

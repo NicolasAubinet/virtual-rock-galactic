@@ -3,8 +3,8 @@
 #include "Components/ActorComponent.h"
 #include "MissionStatsCollector.generated.h"
 
-class UCappedResource;
 class APlayerCharacter;
+class UCappedResource;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UMissionStatsCollector : public UActorComponent {
@@ -15,10 +15,11 @@ protected:
     APlayerCharacter* Character;
     
 public:
-    UMissionStatsCollector();
+    UMissionStatsCollector(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
-    void OnResourceIncremented(UCappedResource* Resource, float Amount);
+    void OnResourceIncremented(UCappedResource* Resource, float amount);
     
 };
 

@@ -14,12 +14,13 @@ protected:
     bool StartTickOnUse;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_IsUsing, meta=(AllowPrivateAccess=true))
-    bool IsUsing;
+    bool isUsing;
     
 public:
-    UCaretakerActionComponent();
+    UCaretakerActionComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void UseAction();
     

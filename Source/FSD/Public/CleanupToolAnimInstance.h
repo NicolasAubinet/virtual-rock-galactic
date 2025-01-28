@@ -11,7 +11,7 @@ class UCleanupToolAnimInstance : public UAnimInstance {
 public:
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    bool IsUsing;
+    bool isUsing;
     
 private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -19,5 +19,6 @@ private:
     
 public:
     UCleanupToolAnimInstance();
+
 };
 

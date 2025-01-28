@@ -1,8 +1,9 @@
 #include "FSDAchievement.h"
 
-class UObject;
-class UFSDAchievement;
-class AFSDPlayerController;
+UFSDAchievement::UFSDAchievement() {
+    this->AchievementTargetValue = 0.00f;
+    this->AchievementType = EFSDAchievementType::NoStatUsed;
+}
 
 void UFSDAchievement::SetAchievementProgressForEntireServer(float Progress, UObject* WorldContext) {
 }
@@ -20,8 +21,4 @@ float UFSDAchievement::GetAchievementTargetValue() {
     return 0.0f;
 }
 
-UFSDAchievement::UFSDAchievement() {
-    this->AchievementTargetValue = 0.00f;
-    this->AchievementType = EFSDAchievementType::NoStatUsed;
-}
 

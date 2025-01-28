@@ -1,19 +1,19 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
-#include "MissionShouts.h"
+#include "Components/ActorComponent.h"
 #include "CreditsReward.h"
+#include "MissionShouts.h"
 #include "ObjectiveMissionIcon.h"
 #include "ObjectiveUpdatedSignatureDelegate.h"
-#include "Components/ActorComponent.h"
+#include "Templates/SubclassOf.h"
 #include "Objective.generated.h"
 
-class UObjective;
 class UBiome;
-class UResourceData;
 class UMissionStat;
-class UOptionalObjectiveWidget;
+class UObjective;
 class UObjectiveWidget;
+class UOptionalObjectiveWidget;
+class UResourceData;
 class UTexture2D;
 
 UCLASS(Abstract, Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -49,6 +49,9 @@ protected:
     bool RequiredReturnObjectiveCompleted;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool ShowObjectiveInHUD;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UMissionStat* ObjectiveCompletedStat;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -67,9 +70,10 @@ protected:
     TArray<UBiome*> BannedInBiomes;
     
 public:
-    UObjective();
+    UObjective(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void SignalObjectiveUpdated();

@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "CSGDuplicateSingleChildBase.h"
 #include "CSGCircleDuplicatorProperties.h"
+#include "CSGDuplicateSingleChildBase.h"
 #include "CSGCircleDuplicator.generated.h"
 
 UCLASS(Blueprintable)
@@ -12,5 +12,6 @@ public:
     FCSGCircleDuplicatorProperties Properties;
     
     UCSGCircleDuplicator();
+
 };
 

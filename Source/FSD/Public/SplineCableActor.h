@@ -2,19 +2,24 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
-#include "CablePathSettings.h"
 #include "GameFramework/Actor.h"
+#include "Components/SplineMeshComponent.h"
+#include "BoolDelegateDelegate.h"
+#include "CablePathSettings.h"
 #include "SplineCableActor.generated.h"
 
-class USplineMeshComponent;
 class UMaterialInterface;
-class UStaticMesh;
 class USplineComponent;
+class USplineMeshComponent;
+class UStaticMesh;
 
 UCLASS(Abstract, Blueprintable)
 class FSD_API ASplineCableActor : public AActor {
     GENERATED_BODY()
 public:
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FBoolDelegate OnPathCompleted;
+    
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USplineComponent* PathSplineComponent;
@@ -26,10 +31,19 @@ protected:
     TSoftObjectPtr<UStaticMesh> CableMesh;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TEnumAsByte<ESplineMeshAxis::Type> MeshForwardAxis;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float CableThickness;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 CarveRadius;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float CarveSurfaceOffset;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float MaxAllowedPathDistance;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftObjectPtr<UMaterialInterface> MaterialConnected;
@@ -55,13 +69,17 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_Connected, meta=(AllowPrivateAccess=true))
     bool bConnected;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool ClearPointsWhenDone;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     TArray<USplineMeshComponent*> MeshComponents;
     
 public:
-    ASplineCableActor();
+    ASplineCableActor(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SpawnBetweenTransforms(FTransform InStart, FTransform InEnd);
     

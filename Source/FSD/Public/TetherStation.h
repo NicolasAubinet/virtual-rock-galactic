@@ -1,13 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
 #include "GameFramework/Actor.h"
+#include "Templates/SubclassOf.h"
 #include "TetherStation.generated.h"
 
+class AFacilityGeneratorLine;
 class USceneComponent;
 class USkeletalMeshComponent;
-class AFacilityGeneratorLine;
 
 UCLASS(Blueprintable)
 class FSD_API ATetherStation : public AActor {
@@ -30,9 +30,10 @@ protected:
     bool FacilityActive;
     
 public:
-    ATetherStation();
+    ATetherStation(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SpawnGeneratorLines(const FTransform& startL, const FTransform& startR, const TArray<FTransform>& endL, const TArray<FTransform>& endR, AFacilityGeneratorLine*& outLineL, AFacilityGeneratorLine*& outLineR);
     

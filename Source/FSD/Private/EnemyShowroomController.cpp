@@ -1,9 +1,8 @@
 #include "EnemyShowroomController.h"
 
-class UObject;
-class UEnemyShowroomController;
-class AEnemyShowroomItem;
-class UAnimSequenceBase;
+UEnemyShowroomController::UEnemyShowroomController(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->EnemyInstance = NULL;
+}
 
 
 void UEnemyShowroomController::PlayAttack(UAnimSequenceBase* Animation) {
@@ -13,7 +12,4 @@ UEnemyShowroomController* UEnemyShowroomController::DisplayEnemy(UObject* WorldC
     return NULL;
 }
 
-UEnemyShowroomController::UEnemyShowroomController() {
-    this->EnemyInstance = NULL;
-}
 

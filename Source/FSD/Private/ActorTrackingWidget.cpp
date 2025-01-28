@@ -1,10 +1,15 @@
 #include "ActorTrackingWidget.h"
 #include "Templates/SubclassOf.h"
 
-class AActor;
-class USceneComponent;
-class UActorTrackingWidget;
-class APlayerController;
+UActorTrackingWidget::UActorTrackingWidget() {
+    this->WorldHeightOffset = 0.00f;
+    this->ScaleBy = 2000.00f;
+    this->WidgetZOrder = -10;
+    this->bTrackCenterOfMass = false;
+    this->bHideWhenPlayerNearby = true;
+    this->bHideWhenPlayerFarAway = false;
+    this->LastTargetDistanceUpdate = -100.00f;
+}
 
 void UActorTrackingWidget::SetTargetComponent(USceneComponent* Component) {
 }
@@ -32,13 +37,4 @@ UActorTrackingWidget* UActorTrackingWidget::CreateTrackingWidget(APlayerControll
     return NULL;
 }
 
-UActorTrackingWidget::UActorTrackingWidget() {
-    this->WorldHeightOffset = 0.00f;
-    this->ScaleBy = 2000.00f;
-    this->WidgetZOrder = -10;
-    this->bTrackCenterOfMass = false;
-    this->bHideWhenPlayerNearby = true;
-    this->bHideWhenPlayerFarAway = false;
-    this->LastTargetDistanceUpdate = -100.00f;
-}
 

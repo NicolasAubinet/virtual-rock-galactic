@@ -1,6 +1,11 @@
 #include "FSDEventCollection.h"
 
-class UFSDEvent;
+UFSDEventCollection::UFSDEventCollection() {
+}
+
+TArray<UFSDEvent*> UFSDEventCollection::GetEventsSorted() const {
+    return TArray<UFSDEvent*>();
+}
 
 UFSDEvent* UFSDEventCollection::FindEventHandler(const FName& EventName) const {
     return NULL;
@@ -10,6 +15,4 @@ TArray<UFSDEvent*> UFSDEventCollection::FindAllEventHandlers(const FName& EventN
     return TArray<UFSDEvent*>();
 }
 
-UFSDEventCollection::UFSDEventCollection() {
-}
 

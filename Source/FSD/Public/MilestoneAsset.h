@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "OnMilestoneReachedDelegate.h"
-#include "OnMilestoneClaimedDelegate.h"
-#include "MilestoneTier.h"
 #include "Engine/DataAsset.h"
+#include "MilestoneTier.h"
+#include "OnMilestoneClaimedDelegate.h"
+#include "OnMilestoneReachedDelegate.h"
 #include "MilestoneAsset.generated.h"
 
-class UObject;
 class UMilestoneAsset;
 class UMissionStat;
+class UObject;
 class UPlayerCharacterID;
 class UTexture2D;
 
@@ -28,7 +28,7 @@ protected:
     FGuid SavegameID;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    UTexture2D* LargeImage;
+    TSoftObjectPtr<UTexture2D> LargeImage;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FText FormattedTitle;
@@ -56,6 +56,7 @@ protected:
     
 public:
     UMilestoneAsset();
+
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
     static TArray<UMilestoneAsset*> SortMilestonesByProgress(UObject* WorldContext, UPARAM(Ref) TArray<UMilestoneAsset*>& Milestones);
     

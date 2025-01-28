@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EDroneActions.h"
 #include "Components/SceneComponent.h"
+#include "EDroneActions.h"
 #include "DroneDisplayActionComponent.generated.h"
 
 class UTextRenderComponent;
@@ -15,7 +15,8 @@ protected:
     UTextRenderComponent* DisplayText;
     
 public:
-    UDroneDisplayActionComponent();
+    UDroneDisplayActionComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void SetMode(EDroneActions droneAction);
     

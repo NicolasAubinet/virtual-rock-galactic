@@ -1,7 +1,8 @@
 #include "FSDUserWidget.h"
 
-class AItem;
-class AFSDPlayerState;
+UFSDUserWidget::UFSDUserWidget() : UUserWidget(FObjectInitializer::Get()) {
+    this->Character = NULL;
+}
 
 void UFSDUserWidget::SetOpacity(float alpha) {
 }
@@ -36,7 +37,4 @@ float UFSDUserWidget::GetBaseResolutionScale() const {
 }
 
 
-UFSDUserWidget::UFSDUserWidget() : UUserWidget(FObjectInitializer::Get()) {
-    this->Character = NULL;
-}
 

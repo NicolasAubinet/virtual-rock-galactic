@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "FSDEventActivateChangedDelegate.h"
 #include "Engine/DataAsset.h"
+#include "FSDEventActivateChangedDelegate.h"
 #include "FSDEventCollection.generated.h"
 
 class UFSDEvent;
@@ -17,6 +17,10 @@ public:
     FFSDEventActivateChanged OnEventActiveChanged;
     
     UFSDEventCollection();
+
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    TArray<UFSDEvent*> GetEventsSorted() const;
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UFSDEvent* FindEventHandler(const FName& EventName) const;
     

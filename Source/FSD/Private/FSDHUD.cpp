@@ -1,7 +1,9 @@
 #include "FSDHUD.h"
 
-class APlayerController;
-class AFSDHUD;
+AFSDHUD::AFSDHUD(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->DebugDisplay.AddDefaulted(1);
+    this->IsVisibleFlags = 0;
+}
 
 bool AFSDHUD::ToggleHUDVisibility(EHUDVisibilityReason reason) {
     return false;
@@ -19,6 +21,7 @@ bool AFSDHUD::IsHUDVisibleFlagSet(EHUDVisibilityReason reason) const {
 }
 
 
+
 bool AFSDHUD::GetHUDVisible() const {
     return false;
 }
@@ -28,7 +31,4 @@ AFSDHUD* AFSDHUD::GetFSDHUD(APlayerController* InPlayerController) {
 }
 
 
-AFSDHUD::AFSDHUD() {
-    this->IsVisibleFlags = 0;
-}
 

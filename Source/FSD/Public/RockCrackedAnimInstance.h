@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "ERockCrackerstate.h"
 #include "Animation/AnimInstance.h"
+#include "ERockCrackerstate.h"
 #include "RockCrackedAnimInstance.generated.h"
 
 class ARockCrackerPod;
@@ -11,7 +11,7 @@ class URockCrackedAnimInstance : public UAnimInstance {
     GENERATED_BODY()
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    ARockCrackerPod* Pod;
+    ARockCrackerPod* pod;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     ERockCrackerstate PodState;
@@ -23,5 +23,6 @@ public:
     bool IsBroken;
     
     URockCrackedAnimInstance();
+
 };
 

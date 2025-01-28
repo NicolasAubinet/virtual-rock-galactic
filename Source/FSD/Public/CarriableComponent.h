@@ -1,14 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "CarriableEventDelegate.h"
 #include "Components/ActorComponent.h"
+#include "CarriableEventDelegate.h"
 #include "Throwable.h"
 #include "CarriableComponent.generated.h"
 
+class APlayerCharacter;
 class UDialogDataAsset;
 class UItemCharacterAnimationSet;
-class APlayerCharacter;
 class UUseAnimationSetting;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -38,7 +38,8 @@ protected:
     FVector Offset;
     
 public:
-    UCarriableComponent();
+    UCarriableComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     bool PickupItem(APlayerCharacter* byCharacter);
     
@@ -48,7 +49,7 @@ public:
     UFUNCTION(BlueprintCallable)
     void AttachChanged(bool Attached, const FVector PrevScale);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

@@ -1,16 +1,16 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "Engine/NetSerialization.h"
-#include "WeaponFireEndedDelegateDelegate.h"
-#include "WeaponRicochetDelegateDelegate.h"
-#include "WeaponFiredDelegateDelegate.h"
 #include "Components/ActorComponent.h"
+#include "Engine/NetSerialization.h"
 #include "Upgradable.h"
+#include "WeaponFireEndedDelegateDelegate.h"
+#include "WeaponFiredDelegateDelegate.h"
+#include "WeaponRicochetDelegateDelegate.h"
 #include "WeaponFireComponent.generated.h"
 
-class UWeaponFireOwner;
 class IWeaponFireOwner;
+class UWeaponFireOwner;
 
 UCLASS(Abstract, Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UWeaponFireComponent : public UActorComponent, public IUpgradable {
@@ -29,8 +29,14 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TScriptInterface<IWeaponFireOwner> Weapon;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
+    bool SetAsWeaponFireComponent;
+    
 public:
-    UWeaponFireComponent();
+    UWeaponFireComponent(const FObjectInitializer& ObjectInitializer);
+
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
     UFUNCTION(BlueprintCallable)
     void StopFire();
     
@@ -42,7 +48,7 @@ public:
     UFUNCTION(BlueprintCallable)
     void Fire(const FVector& Origin, const FVector_NetQuantizeNormal& Direction, bool playFireFX);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

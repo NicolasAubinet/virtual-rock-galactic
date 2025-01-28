@@ -1,14 +1,12 @@
 #include "AutoShotgunUpgrade.h"
 #include "Templates/SubclassOf.h"
 
-class AItem;
-class AFSDPlayerState;
+UAutoShotgunUpgrade::UAutoShotgunUpgrade() {
+    this->upgradeType = EAutoShotgunUpgrades::TurretSpecialAttackEnabled;
+}
 
 FUpgradeValues UAutoShotgunUpgrade::GetUpgradedValue(TSubclassOf<AItem> Item, AFSDPlayerState* Player, EAutoShotgunUpgrades NewUpgradeType) {
     return FUpgradeValues{};
 }
 
-UAutoShotgunUpgrade::UAutoShotgunUpgrade() {
-    this->upgradeType = EAutoShotgunUpgrades::TurretSpecialAttackEnabled;
-}
 

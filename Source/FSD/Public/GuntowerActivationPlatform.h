@@ -1,29 +1,29 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "GameFramework/Actor.h"
 #include "Engine/EngineTypes.h"
+#include "OnFinishedDelegate.h"
 #include "PlayersInsideChangedDelegate.h"
 #include "ProgressUpdatedDelegate.h"
-#include "OnFinishedDelegate.h"
-#include "GameFramework/Actor.h"
 #include "GuntowerActivationPlatform.generated.h"
 
-class USceneComponent;
-class UPrimitiveComponent;
-class USkeletalMeshComponent;
-class UCapsuleComponent;
-class UHealthComponentBase;
 class AFSDPlayerState;
 class AGuntowerModule;
+class UCapsuleComponent;
+class UHealthComponentBase;
+class UPrimitiveComponent;
+class USceneComponent;
+class UStaticMeshComponent;
 
 UCLASS(Blueprintable)
-class FSD_API AGuntowerActivationPlatform : public AActor {
+class AGuntowerActivationPlatform : public AActor {
     GENERATED_BODY()
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USceneComponent* Root;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
-    USkeletalMeshComponent* SKMesh;
+    UStaticMeshComponent* STMesh;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UCapsuleComponent* Trigger;
@@ -57,9 +57,10 @@ protected:
     bool IsShutDown;
     
 public:
-    AGuntowerActivationPlatform();
+    AGuntowerActivationPlatform(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void ShutDown();
     
@@ -115,6 +116,9 @@ protected:
     void ModuleDestroyed(UHealthComponentBase* Health);
     
 public:
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    int32 GetPlayerCount() const;
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     AGuntowerModule* GetAssignedModule() const;
     

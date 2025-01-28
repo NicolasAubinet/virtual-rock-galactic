@@ -1,7 +1,15 @@
 #include "PlayerBufferComponent.h"
 #include "Net/UnrealNetwork.h"
 
-class UHealthComponentBase;
+UPlayerBufferComponent::UPlayerBufferComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->StatusEffect = NULL;
+    this->ManualMeshReference = NULL;
+    this->Particles = NULL;
+    this->ParticleTangentSize = 60.00f;
+    this->BuffRadius = 500.00f;
+    this->MaxBuffedTargets = 5;
+    this->PushAmount = 1;
+}
 
 void UPlayerBufferComponent::SetBuffingEnabled(bool Enabled) {
 }
@@ -21,13 +29,4 @@ void UPlayerBufferComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty
     DOREPLIFETIME(UPlayerBufferComponent, BuffTargets);
 }
 
-UPlayerBufferComponent::UPlayerBufferComponent() {
-    this->StatusEffect = NULL;
-    this->ManualMeshReference = NULL;
-    this->Particles = NULL;
-    this->ParticleTangentSize = 60.00f;
-    this->BuffRadius = 500.00f;
-    this->MaxBuffedTargets = 5;
-    this->PushAmount = 1;
-}
 

@@ -3,8 +3,8 @@
 #include "GameFramework/Actor.h"
 #include "NiagaraSpawnerAndCacheGenerator.generated.h"
 
-class UFXSystemComponent;
 class UFXSystemAsset;
+class UFXSystemComponent;
 
 UCLASS(Blueprintable)
 class ANiagaraSpawnerAndCacheGenerator : public AActor {
@@ -16,6 +16,7 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     TArray<UFXSystemComponent*> Generating;
     
-    ANiagaraSpawnerAndCacheGenerator();
+    ANiagaraSpawnerAndCacheGenerator(const FObjectInitializer& ObjectInitializer);
+
 };
 

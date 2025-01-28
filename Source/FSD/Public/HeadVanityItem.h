@@ -6,10 +6,11 @@
 #include "HeadVanityItem.generated.h"
 
 class UArmorVanityItem;
-class UPlayerCharacterID;
-class UVanityAnimInstance;
 class UMaterialInterface;
+class UPlayerCharacterID;
 class USkeletalMesh;
+class UTagVanityHeadwear;
+class UVanityAnimInstance;
 
 UCLASS(Blueprintable, EditInlineNew)
 class UHeadVanityItem : public UVanityItem {
@@ -58,7 +59,11 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<UPlayerCharacterID*, TSoftObjectPtr<UMaterialInterface>> ClassMaterials;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSet<UTagVanityHeadwear*> VanityTags;
+    
 public:
     UHeadVanityItem();
+
 };
 

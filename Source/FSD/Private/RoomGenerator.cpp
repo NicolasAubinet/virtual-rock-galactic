@@ -1,11 +1,10 @@
 #include "RoomGenerator.h"
 
-class URoomFeature;
+URoomGenerator::URoomGenerator() {
+}
 
 TArray<URoomFeature*> URoomGenerator::GetAllRoomFeatures() const {
     return TArray<URoomFeature*>();
 }
 
-URoomGenerator::URoomGenerator() {
-}
 

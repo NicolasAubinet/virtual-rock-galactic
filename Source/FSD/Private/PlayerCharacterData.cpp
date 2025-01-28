@@ -1,6 +1,8 @@
 #include "PlayerCharacterData.h"
 
-class UTexture2D;
+UPlayerCharacterData::UPlayerCharacterData() {
+    this->characterID = NULL;
+}
 
 FText UPlayerCharacterData::GetSwitchToMessage() const {
     return FText::GetEmpty();
@@ -34,7 +36,4 @@ FLinearColor UPlayerCharacterData::GetColor() const {
     return FLinearColor{};
 }
 
-UPlayerCharacterData::UPlayerCharacterData() {
-    this->characterID = NULL;
-}
 

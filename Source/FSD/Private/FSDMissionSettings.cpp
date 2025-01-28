@@ -1,13 +1,14 @@
 #include "FSDMissionSettings.h"
 
-class UObject;
-class UDifficultySetting;
-class UGeneratedMission;
+UFSDMissionSettings::UFSDMissionSettings() {
+}
 
-float UFSDMissionSettings::GetTotalHazardBonus(UObject* WorldContextObject, UGeneratedMission* mission, UDifficultySetting* DifficultySetting) {
+float UFSDMissionSettings::GetTotalHazPlusBonus(const FGameDifficulty& Difficulty) {
     return 0.0f;
 }
 
-UFSDMissionSettings::UFSDMissionSettings() {
+float UFSDMissionSettings::GetTotalHazardBonus(UObject* WorldContextObject, UGeneratedMission* mission, const FGameDifficulty& Difficulty) {
+    return 0.0f;
 }
+
 

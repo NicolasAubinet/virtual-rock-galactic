@@ -2,22 +2,23 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "Engine/NetSerialization.h"
-#include "DecalData.h"
 #include "AmmoDrivenWeapon.h"
+#include "DecalData.h"
 #include "CryosprayItem.generated.h"
 
-class UPrimitiveComponent;
+class AActor;
 class AProjectileBase;
 class UDamageComponent;
-class UHealthComponentBase;
-class UParticleSystemComponent;
 class UFSDAudioComponent;
 class UFSDPhysicalMaterial;
+class UHealthComponentBase;
 class UItemUpgrade;
 class UMotionAudioController;
+class UParticleSystem;
+class UParticleSystemComponent;
+class UPrimitiveComponent;
 class UProjectileLauncherComponent;
 class UStickyFlameSpawner;
-class UParticleSystem;
 
 UCLASS(Abstract, Blueprintable)
 class ACryosprayItem : public AAmmoDrivenWeapon {
@@ -127,7 +128,7 @@ protected:
     float RePressureProgress;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    TArray<UItemUpgrade*> upgrades;
+    TArray<UItemUpgrade*> Upgrades;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool LongReachEnabled;
@@ -135,10 +136,14 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool AoEColdEnabled;
     
-public:
-    ACryosprayItem();
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSet<AActor*> HitActorCache;
     
+public:
+    ACryosprayItem(const FObjectInitializer& ObjectInitializer);
+
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
 protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void ServerDoDamage(FVector_NetQuantize Start, FVector_NetQuantize End, uint8 Power);
@@ -153,7 +158,7 @@ protected:
     void ReceiveRepressurisingChanged(bool Value);
     
     UFUNCTION(BlueprintCallable)
-    void OnTargetDamaged(UHealthComponentBase* Health, float Amount, UPrimitiveComponent* HitComponent, UFSDPhysicalMaterial* PhysicalMaterial);
+    void OnTargetDamaged(UHealthComponentBase* Health, float amount, UPrimitiveComponent* HitComponent, UFSDPhysicalMaterial* PhysicalMaterial);
     
     UFUNCTION(BlueprintCallable)
     void OnRep_IsCharging(bool OldValue);

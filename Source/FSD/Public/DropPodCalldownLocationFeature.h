@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
 #include "RoomFeature.h"
+#include "Templates/SubclassOf.h"
 #include "DropPodCalldownLocationFeature.generated.h"
 
 class AActor;
@@ -20,5 +20,6 @@ protected:
     
 public:
     UDropPodCalldownLocationFeature();
+
 };
 

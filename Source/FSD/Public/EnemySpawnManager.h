@@ -1,22 +1,24 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
-#include "GameplayTagContainer.h"
 #include "UObject/NoExportTypes.h"
+#include "Components/ActorComponent.h"
+#include "GameplayTagContainer.h"
+#include "EnemyDestroyedSignatureDelegate.h"
 #include "EnemySpawnedDelegateDelegate.h"
 #include "EnemySpawnedSignatureDelegate.h"
-#include "EnemyDestroyedSignatureDelegate.h"
-#include "SpawnRarityModifierItem.h"
 #include "SpawnQueueItem.h"
-#include "Components/ActorComponent.h"
+#include "SpawnRarityModifierItem.h"
+#include "Templates/SubclassOf.h"
 #include "EnemySpawnManager.generated.h"
 
 class AActor;
 class APawn;
-class UEnemyDescriptor;
-class USpawnEffectsComponent;
-class UHealthComponentBase;
 class AProceduralSetup;
+class UDifficultyManager;
+class UEliteEnemiesMutator;
+class UEnemyDescriptor;
+class UHealthComponentBase;
+class USpawnEffectsComponent;
 class UStatusEffect;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -84,8 +86,16 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool bDestroyingAllEnemies;
     
+private:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    UEliteEnemiesMutator* EliteMutator;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
+    UDifficultyManager* DifficultyManager;
+    
 public:
-    UEnemySpawnManager();
+    UEnemySpawnManager(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SpawnerDestroyed(APawn* Actor);
     

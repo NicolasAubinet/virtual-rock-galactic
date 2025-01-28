@@ -1,6 +1,18 @@
 #include "DifficultyManager.h"
 
-class UDifficultySetting;
+UDifficultyManager::UDifficultyManager(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->CurrentVeteranCompositionSource = NULL;
+    this->MinModifierEnemyCount = 0.30f;
+    this->MinModifierAttackCooldown = 0.95f;
+    this->MinModifierSpeed = 0.95f;
+    this->ForcedPlayerCount = -1;
+    this->GameMode = NULL;
+    this->GameState = NULL;
+}
+
+FGameDifficulty UDifficultyManager::SelectGameDifficulty(int32 Index, TArray<FDifficultyMutatorItem> Mutators) {
+    return FGameDifficulty{};
+}
 
 UDifficultySetting* UDifficultyManager::SelectDifficulty(int32 Index) {
     return NULL;
@@ -46,6 +58,10 @@ float UDifficultyManager::GetEnemyCountModifier() const {
     return 0.0f;
 }
 
+FGameDifficulty UDifficultyManager::GetCurrentGameDifficulty() const {
+    return FGameDifficulty{};
+}
+
 UDifficultySetting* UDifficultyManager::GetCurrentDifficulty() const {
     return NULL;
 }
@@ -54,12 +70,4 @@ float UDifficultyManager::GetBossDifficultyScaler() const {
     return 0.0f;
 }
 
-UDifficultyManager::UDifficultyManager() {
-    this->MinModifierEnemyCount = 0.30f;
-    this->MinModifierAttackCooldown = 0.95f;
-    this->MinModifierSpeed = 0.95f;
-    this->ForcedPlayerCount = -1;
-    this->GameMode = NULL;
-    this->GameState = NULL;
-}
 

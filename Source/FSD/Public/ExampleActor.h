@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "ExampleUpdatedDelegateDelegate.h"
 #include "GameFramework/Actor.h"
+#include "ExampleUpdatedDelegateDelegate.h"
 #include "ExampleActor.generated.h"
 
 UCLASS(Blueprintable)
@@ -16,7 +16,8 @@ protected:
     float Field;
     
 public:
-    AExampleActor();
+    AExampleActor(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_ExampleFunction();
     

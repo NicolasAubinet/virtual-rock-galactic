@@ -1,13 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "FloatPerkComponent.h"
+#include "Templates/SubclassOf.h"
 #include "BeastMasterComponent.generated.h"
 
-class UActorComponent;
 class AFSDPawn;
-class UDamageComponent;
 class APlayerCharacter;
+class UActorComponent;
+class UDamageComponent;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UBeastMasterComponent : public UFloatPerkComponent {
@@ -16,7 +16,8 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ShowCanCharmIcon;
     
-    UBeastMasterComponent();
+    UBeastMasterComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void SetDamage(UDamageComponent* cmp, float dmg);
     

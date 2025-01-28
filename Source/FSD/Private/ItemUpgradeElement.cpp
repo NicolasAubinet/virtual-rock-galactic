@@ -1,11 +1,10 @@
 #include "ItemUpgradeElement.h"
 
-class UItemUpgrade;
+UItemUpgradeElement::UItemUpgradeElement() {
+}
 
 bool UItemUpgradeElement::ElementOf(UItemUpgrade* upg) const {
     return false;
 }
 
-UItemUpgradeElement::UItemUpgradeElement() {
-}
 

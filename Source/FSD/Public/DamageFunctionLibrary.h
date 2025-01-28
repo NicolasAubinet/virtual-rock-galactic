@@ -1,26 +1,27 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "DamageData.h"
-#include "Engine/EngineTypes.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "Engine/EngineTypes.h"
+#include "DamageData.h"
 #include "DamageFunctionLibrary.generated.h"
 
-class UObject;
 class AActor;
-class USkeletalMeshComponent;
 class UDamageClass;
-class UDamageTag;
 class UDamageImpulse;
+class UDamageTag;
 class UFSDPhysicalMaterial;
 class ULimbDismembermentList;
+class UObject;
 class UPawnStatsComponent;
+class USkeletalMeshComponent;
 
 UCLASS(Blueprintable)
 class UDamageFunctionLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
     UDamageFunctionLibrary();
+
     UFUNCTION(BlueprintCallable)
     static void SetPhysicalMaterialOnHit(UFSDPhysicalMaterial* PhysMat, UPARAM(Ref) FHitResult& Hit);
     

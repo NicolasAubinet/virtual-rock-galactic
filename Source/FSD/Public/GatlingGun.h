@@ -4,9 +4,9 @@
 #include "GatlingGun.generated.h"
 
 class AActor;
-class UFXSystemAsset;
 class UDamageComponent;
 class UFSDPhysicalMaterial;
+class UFXSystemAsset;
 
 UCLASS(Blueprintable)
 class AGatlingGun : public ABeltDrivenWeapon {
@@ -53,9 +53,10 @@ protected:
     UDamageComponent* BarrelProximityDamageComponent;
     
 public:
-    AGatlingGun();
+    AGatlingGun(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetHotShellsOn(bool hotShellsIsOn);
@@ -64,7 +65,7 @@ protected:
     void OnRep_HotShellsTracerOn();
     
     UFUNCTION(BlueprintCallable)
-    void OnGatlingTemperatureChanged(float Temperature, bool isOverheated);
+    void OnGatlingTemperatureChanged(float temperature, bool isOverheated);
     
     UFUNCTION(BlueprintCallable)
     void OnEnemyKilled(AActor* Target, UFSDPhysicalMaterial* PhysMat, bool wasDirectHit);

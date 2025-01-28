@@ -1,11 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "ControllerSettings.h"
-#include "HUDElements.h"
-#include "CharacterOptions.h"
-#include "CustomKeyBinding.h"
 #include "UDLSSMode.h"
+#include "CharacterOptions.h"
+#include "ControllerSettings.h"
+#include "CustomKeyBinding.h"
 #include "EConsoleGraphicsMode.h"
+#include "HUDElements.h"
+#include "UFSDStreamlineDLSSGMode.h"
 #include "ConsoleOptionsInSaveGame.generated.h"
 
 USTRUCT(BlueprintType)
@@ -65,6 +66,12 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool PhotosensitiveMode;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool TinnitusProtection;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float OverlayIntensityScale;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bHoldToSprint;
@@ -158,6 +165,15 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float NvidiaDlssSharpness;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 RagdollQuality;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool PreventLatejoinCharacterDuplication;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UFSDStreamlineDLSSGMode FrameGenerationMode;
     
     FSD_API FConsoleOptionsInSaveGame();
 };

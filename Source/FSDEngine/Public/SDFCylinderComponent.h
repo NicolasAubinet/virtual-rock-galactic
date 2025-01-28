@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "SDFCylinderProperties.h"
 #include "SDFBaseWithTransformComponent.h"
+#include "SDFCylinderProperties.h"
 #include "SDFCylinderComponent.generated.h"
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -11,6 +11,7 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSDFCylinderProperties Properties;
     
-    USDFCylinderComponent();
+    USDFCylinderComponent(const FObjectInitializer& ObjectInitializer);
+
 };
 

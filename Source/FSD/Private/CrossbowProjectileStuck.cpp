@@ -1,10 +1,24 @@
 #include "CrossbowProjectileStuck.h"
-#include "Net/UnrealNetwork.h"
 #include "Components/SphereComponent.h"
+#include "Net/UnrealNetwork.h"
 
-class USceneComponent;
-class UHealthComponentBase;
-class APlayerCharacter;
+ACrossbowProjectileStuck::ACrossbowProjectileStuck(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->RootComponent = CreateDefaultSubobject<USphereComponent>(TEXT("Root"));
+    this->StuckProjectileEffect = ECrossbowStuckType::Default;
+    this->BansheePulseEnabled = false;
+    this->IsPlayingElectricRangeEffect = true;
+    this->AppliedEffect = NULL;
+    this->StatusEffectTime = 0.00f;
+    this->AttachmentRoot = (USphereComponent*)RootComponent;
+    this->RecallComponent = NULL;
+    this->BansheeComponent = NULL;
+    this->BansheePulseComponent = NULL;
+    this->LaserCollider = NULL;
+    this->BaseProjectile = NULL;
+}
+
+void ACrossbowProjectileStuck::UsableChanged(bool CanUse) {
+}
 
 void ACrossbowProjectileStuck::OnUsedBy(APlayerCharacter* Player, EInputKeys Key) {
 }
@@ -34,17 +48,4 @@ void ACrossbowProjectileStuck::GetLifetimeReplicatedProps(TArray<FLifetimeProper
     DOREPLIFETIME(ACrossbowProjectileStuck, BaseProjectile);
 }
 
-ACrossbowProjectileStuck::ACrossbowProjectileStuck() {
-    this->BansheePulseEnabled = false;
-    this->RecallComponent = NULL;
-    this->BansheeComponent = NULL;
-    this->StuckProjectileEffect = ECrossbowStuckType::Default;
-    this->IsPlayingElectricRangeEffect = true;
-    this->AppliedEffect = NULL;
-    this->StatusEffectTime = 0.00f;
-    this->AttachmentRoot = CreateDefaultSubobject<USphereComponent>(TEXT("Root"));
-    this->BansheePulseComponent = NULL;
-    this->LaserCollider = NULL;
-    this->BaseProjectile = NULL;
-}
 

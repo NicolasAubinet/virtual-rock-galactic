@@ -1,6 +1,12 @@
 #include "CapacityHoldingItemAggregator.h"
 #include "Net/UnrealNetwork.h"
 
+UCapacityHoldingItemAggregator::UCapacityHoldingItemAggregator(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->MaxAmmo = 10;
+    this->AmmoCount = 0;
+    this->UseRejoin = true;
+}
+
 void UCapacityHoldingItemAggregator::UseAmmo(int32 Count) {
 }
 
@@ -16,7 +22,7 @@ void UCapacityHoldingItemAggregator::OnRep_MaxAmmo() {
 void UCapacityHoldingItemAggregator::OnRep_AmmoCount() {
 }
 
-void UCapacityHoldingItemAggregator::AddAmmo(int32 Amount) {
+void UCapacityHoldingItemAggregator::AddAmmo(int32 amount) {
 }
 
 void UCapacityHoldingItemAggregator::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
@@ -26,9 +32,4 @@ void UCapacityHoldingItemAggregator::GetLifetimeReplicatedProps(TArray<FLifetime
     DOREPLIFETIME(UCapacityHoldingItemAggregator, AmmoCount);
 }
 
-UCapacityHoldingItemAggregator::UCapacityHoldingItemAggregator() {
-    this->MaxAmmo = 10;
-    this->AmmoCount = 0;
-    this->UseRejoin = true;
-}
 

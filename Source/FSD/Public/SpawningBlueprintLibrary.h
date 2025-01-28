@@ -1,20 +1,24 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "EnemySpawnedDelegateDelegate.h"
-#include "DeepPathFinderSize.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "DeepPathFinderSize.h"
+#include "EnemySpawnedDelegateDelegate.h"
 #include "SpawningBlueprintLibrary.generated.h"
 
-class UObject;
-class UEnemyGroupDescriptor;
 class UEnemyDescriptor;
+class UEnemyGroupDescriptor;
+class UObject;
 
 UCLASS(Blueprintable)
 class FSD_API USpawningBlueprintLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
     USpawningBlueprintLibrary();
+
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, meta=(WorldContext="WorldContextObject"))
+    static void SpawnEnemyGroupDescriptorWithCallbackSpreadOut(UObject* WorldContextObject, UEnemyGroupDescriptor* descriptor, float Difficulty, TArray<FVector> Locations, bool Alert, DeepPathFinderSize pfSize, const FEnemySpawnedDelegate& Callback);
+    
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static void SpawnEnemyGroupDescriptorSpreadOut(UObject* WorldContextObject, UEnemyGroupDescriptor* descriptor, float Difficulty, const TArray<FVector>& Locations, bool Alert, DeepPathFinderSize pfSize);
     
@@ -22,7 +26,7 @@ public:
     static void SpawnEnemyGroupDescriptor(UObject* WorldContextObject, UEnemyGroupDescriptor* descriptor, float Difficulty, FVector Location, bool Alert, DeepPathFinderSize pfSize);
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, meta=(WorldContext="WorldContextObject"))
-    static void SpawnEnemiesFromPool(UObject* WorldContextObject, float Difficulty, const TArray<FVector>& Locations, bool Alert, bool isConstantPreassure);
+    static void SpawnEnemiesFromPool(UObject* WorldContextObject, float Difficulty, const TArray<FVector>& Locations, TArray<UEnemyDescriptor*> BannedEnemies, bool Alert, bool isConstantPreassure);
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static void SpawnEnemiesAtLocationWithCallback(UObject* WorldContextObject, UEnemyDescriptor* EnemyDescriptor, int32 Count, FVector Location, const FEnemySpawnedDelegate& Callback, bool Alert, bool scaleToDifficulty, DeepPathFinderSize pfSize);

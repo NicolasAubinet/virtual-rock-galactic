@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "GameFramework/OnlineReplStructs.h"
-#include "UserAddedDelegate.h"
 #include "InstantUsable.h"
+#include "UserAddedDelegate.h"
 #include "OncePerPlayerUsableComponent.generated.h"
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -17,9 +17,10 @@ protected:
     TArray<FUniqueNetIdRepl> Users;
     
 public:
-    UOncePerPlayerUsableComponent();
+    UOncePerPlayerUsableComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnUsersChanged(const TArray<FUniqueNetIdRepl>& userList);

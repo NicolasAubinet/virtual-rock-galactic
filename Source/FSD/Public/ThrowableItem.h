@@ -1,16 +1,16 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
 #include "AnimatedItem.h"
+#include "Templates/SubclassOf.h"
 #include "Upgradable.h"
 #include "ThrowableItem.generated.h"
 
 class AActor;
 class AItem;
-class UItemUpgrade;
 class AThrowableActor;
 class UAnimMontage;
+class UItemUpgrade;
 
 UCLASS(Blueprintable)
 class AThrowableItem : public AAnimatedItem, public IUpgradable {
@@ -45,9 +45,6 @@ protected:
     float CooldownAfterEquip;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    bool AddPlayerVelocityToThrow;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ThrowDelay;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -57,7 +54,7 @@ protected:
     float CooldownLeft;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    TArray<UItemUpgrade*> upgrades;
+    TArray<UItemUpgrade*> Upgrades;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<AItem> LoadoutItem;
@@ -66,15 +63,16 @@ protected:
     TArray<TWeakObjectPtr<AThrowableActor>> ThrownActors;
     
 public:
-    AThrowableItem();
+    AThrowableItem(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
-    void Simulate_Throw(TSubclassOf<AThrowableActor> ActorClass);
+    void Simulate_Throw(TSubclassOf<AThrowableActor> actorClass);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
-    void Server_Throw(TSubclassOf<AThrowableActor> ActorClass, const FVector& Location);
+    void Server_Throw(TSubclassOf<AThrowableActor> actorClass, const FVector& Location);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ReceiveItemThrown(AThrowableActor* thrownActor);
@@ -85,7 +83,7 @@ protected:
     UFUNCTION(BlueprintCallable)
     void OnThrownActorDestroyed(AActor* Actor);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

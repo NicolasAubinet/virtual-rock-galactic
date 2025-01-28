@@ -2,9 +2,9 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
+#include "Animation/AnimInstance.h"
 #include "EVanitySlot.h"
 #include "VanityAnimEffect.h"
-#include "Animation/AnimInstance.h"
 #include "VanityAnimInstance.generated.h"
 
 UCLASS(Blueprintable, NonTransient)
@@ -34,10 +34,14 @@ protected:
     float MaxForce;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool AlwaysShowAnimEffects;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FVanityAnimEffect> VanityAnimEffects;
     
 public:
     UVanityAnimInstance();
+
 protected:
     UFUNCTION(BlueprintCallable)
     void UpdateMeshes();

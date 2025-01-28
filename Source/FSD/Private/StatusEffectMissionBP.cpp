@@ -1,12 +1,10 @@
 #include "StatusEffectMissionBP.h"
 
-class APawn;
-class UEnemyDescriptor;
+UStatusEffectMissionBP::UStatusEffectMissionBP() {
+    this->StatusEffect = NULL;
+}
 
 void UStatusEffectMissionBP::OnEnemySpawned(APawn* Pawn, UEnemyDescriptor* descriptor) {
 }
 
-UStatusEffectMissionBP::UStatusEffectMissionBP() {
-    this->StatusEffect = NULL;
-}
 

@@ -1,21 +1,21 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
+#include "GameFramework/Actor.h"
 #include "Curves/CurveFloat.h"
 #include "DropInfo.h"
-#include "GameFramework/Actor.h"
+#include "Templates/SubclassOf.h"
 #include "PlagueMeteor.generated.h"
 
-class USceneComponent;
-class UStaticMeshComponent;
-class UDamageComponent;
-class UDebrisPositioning;
 class AImpactIndicator;
 class AProceduralSetup;
 class ARockCrackerPod;
-class UTerrainPlacementComponent;
+class UDamageComponent;
+class UDebrisPositioning;
+class USceneComponent;
 class UStaticMesh;
+class UStaticMeshComponent;
+class UTerrainPlacementComponent;
 
 UCLASS(Blueprintable)
 class FSD_API APlagueMeteor : public AActor {
@@ -88,10 +88,14 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
     TArray<ARockCrackerPod*> SpawnedPods;
     
-public:
-    APlagueMeteor();
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
+    float SpawnedTime;
     
+public:
+    APlagueMeteor(const FObjectInitializer& ObjectInitializer);
+
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
 protected:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SignalEventStarted();
@@ -155,7 +159,7 @@ public:
     
 protected:
     UFUNCTION(BlueprintCallable)
-    void DropRockCrackerPods(int32 Amount, float MinRadius, float maRadius, AProceduralSetup* setup);
+    void DropRockCrackerPods(int32 amount, float MinRadius, float maRadius, AProceduralSetup* Setup);
     
 public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)

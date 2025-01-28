@@ -1,20 +1,20 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "Engine/EngineTypes.h"
-#include "ProjectileState.h"
 #include "ProjectileBase.h"
+#include "ProjectileState.h"
+#include "Templates/SubclassOf.h"
 #include "Projectile.generated.h"
 
-class UObject;
 class AActor;
-class USceneComponent;
 class APawn;
 class AProjectile;
-class UFSDProjectileMovementComponent;
 class UFSDPhysicalMaterial;
+class UFSDProjectileMovementComponent;
+class UObject;
+class USceneComponent;
 
 UCLASS(Abstract, Blueprintable)
 class AProjectile : public AProjectileBase {
@@ -34,9 +34,10 @@ protected:
     UFSDProjectileMovementComponent* MovementComponent;
     
 public:
-    AProjectile();
+    AProjectile(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     AProjectileBase* SpawnProjectileFromSelf(UObject* WorldContextObject, TSubclassOf<AProjectileBase> ProjectileClass, FVector Origin, FRotator velocityDirection);
     
@@ -68,6 +69,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UFSDPhysicalMaterial* FindBoneIndexFromArmor(const FHitResult& HitResult, int32& outBoneIndex) const;
+    
+    UFUNCTION(BlueprintCallable)
+    void DisableHoming();
     
 };
 

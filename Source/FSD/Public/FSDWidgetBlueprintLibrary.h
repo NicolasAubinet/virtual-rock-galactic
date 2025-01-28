@@ -1,51 +1,52 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "Kismet/BlueprintFunctionLibrary.h"
+#include "Engine/EngineTypes.h"
 #include "Engine/EngineTypes.h"
 #include "InputCoreTypes.h"
-#include "UObject/NoExportTypes.h"
-#include "Engine/EngineTypes.h"
-#include "Framework/Text/TextLayout.h"
-#include "Components/SlateWrapperTypes.h"
-#include "Types/SlateEnums.h"
-#include "Types/SlateEnums.h"
+#include "Widgets/Layout/Anchors.h"
 #include "Widgets/Notifications/SProgressBar.h"
-#include "Fonts/SlateFontInfo.h"
-#include "Blueprint/UserWidget.h"
+#include "Framework/Text/TextLayout.h"
+#include "Types/SlateEnums.h"
+#include "Types/SlateEnums.h"
 #include "Layout/Margin.h"
 #include "Styling/SlateBrush.h"
-#include "Widgets/Layout/Anchors.h"
-#include "WidgetAnimationSettings.h"
+#include "Fonts/SlateFontInfo.h"
+#include "Components/SlateWrapperTypes.h"
+#include "Blueprint/UserWidget.h"
 #include "SizeBoxSettings.h"
-#include "Kismet/BlueprintFunctionLibrary.h"
+#include "Templates/SubclassOf.h"
+#include "WidgetAnimationSettings.h"
 #include "FSDWidgetBlueprintLibrary.generated.h"
 
-class UObject;
-class UWidget;
-class UUserWidget;
-class UWindowWidget;
-class APlayerController;
-class UFSDCheatManager;
 class AFSDPlayerState;
-class UTextBlock;
-class UCanvasPanelSlot;
+class APlayerController;
 class UCanvasPanel;
+class UCanvasPanelSlot;
+class UFSDCheatManager;
+class UHorizontalBox;
+class UHorizontalBoxSlot;
+class UImage;
+class UObject;
+class UOverlay;
+class UOverlaySlot;
 class UPanelWidget;
 class UProgressBar;
-class UOverlaySlot;
-class UOverlay;
-class UImage;
-class UHorizontalBoxSlot;
-class UHorizontalBox;
+class URetainerBox;
 class USizeBox;
-class UWidgetAnimation;
-class UVerticalBoxSlot;
-class UVerticalBox;
-class UUniformGridSlot;
-class UUniformGridPanel;
 class USpacer;
+class UTextBlock;
 class UTexture2D;
+class UUniformGridPanel;
+class UUniformGridSlot;
+class UUserWidget;
+class UVerticalBox;
+class UVerticalBoxSlot;
+class UWidget;
+class UWidgetAnimation;
+class UWindowWidget;
 
 UCLASS(Blueprintable)
 class UFSDWidgetBlueprintLibrary : public UBlueprintFunctionLibrary {
@@ -56,6 +57,7 @@ public:
     DECLARE_DYNAMIC_DELEGATE_RetVal_TwoParams(bool, FCompareWidgetsDelegate, const UWidget*, InFirstWidget, const UWidget*, InSecondWidget);
     
     UFSDWidgetBlueprintLibrary();
+
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
     static void ToggleAnimationLooping(UObject* WorldContext, UWidgetAnimation* InAnimation, FWidgetAnimationSettings InSettings, bool InLoop, bool& OutPlayingChanged, bool& OutIsPlaying);
     
@@ -167,6 +169,9 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static UFSDCheatManager* GetCheatManager(UObject* WorldContextObject);
     
+    UFUNCTION(BlueprintCallable)
+    static void FixupRetainerWidgetUpdateInEditor(const URetainerBox* InWidget);
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static UWidget* FindChildWidget(UPARAM(Ref) UPanelWidget*& ParentWidget, TSubclassOf<UUserWidget> WidgetClass, bool SearchChildren);
     
@@ -206,6 +211,9 @@ public:
     UFUNCTION(BlueprintCallable)
     static void Box(UPARAM(Ref) FPaintContext& Context, FVector2D Position, FVector2D Size, const FSlateBrush& Brush, FLinearColor Tint);
     
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    static bool AreWidgetsIntersecting(const UWidget* InWidget1, const UWidget* InWidget2);
+    
     UFUNCTION(BlueprintCallable)
     static UWidget* AddWidgetToRow(UVerticalBox* VerticalBox, UWidget* Widget, int32 MaxWidgetsPerRow, float WidgetSpacing, float RowSpacing, UHorizontalBoxSlot*& OutSlot, UHorizontalBox*& OutRow);
     
@@ -223,6 +231,9 @@ public:
     
     UFUNCTION(BlueprintCallable)
     static UWidget* AddChildToCanvasEx(UCanvasPanel* CanvasPanel, UWidget* Widget, FAnchors Anchors, FMargin Offsets, bool AutoSize, int32 Z_Order, UCanvasPanelSlot*& OutSlot, UCanvasPanel*& OutCanvasPanel);
+    
+    UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
+    static UHorizontalBox* AddChildrenToHorizontalBox(UObject* WorldContext, UHorizontalBox* HorizontalBox, TArray<UWidget*> Children, bool ClearHorizontalBox, FMargin Padding, TEnumAsByte<EHorizontalAlignment> HorizontalAlignment, TEnumAsByte<EVerticalAlignment> VerticalAlignment, float FillFirst, float FillMiddle, float FillLast);
     
 };
 

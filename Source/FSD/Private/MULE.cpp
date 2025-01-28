@@ -1,7 +1,13 @@
 #include "MULE.h"
+#include "HealthComponent.h"
 #include "Net/UnrealNetwork.h"
 #include "SimpleObjectInfoComponent.h"
-#include "HealthComponent.h"
+
+AMULE::AMULE(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"));
+    this->ObjectInfo = CreateDefaultSubobject<USimpleObjectInfoComponent>(TEXT("ObjectInfo"));
+    this->IsDown = false;
+}
 
 void AMULE::SetIsDown(bool NewIsDown) {
 }
@@ -14,9 +20,4 @@ void AMULE::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimePro
     DOREPLIFETIME(AMULE, IsDown);
 }
 
-AMULE::AMULE() {
-    this->HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"));
-    this->ObjectInfo = CreateDefaultSubobject<USimpleObjectInfoComponent>(TEXT("ObjectInfo"));
-    this->IsDown = false;
-}
 

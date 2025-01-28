@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "Engine/DataAsset.h"
 #include "GameplayTagContainer.h"
 #include "FormationDataItem.h"
-#include "Engine/DataAsset.h"
 #include "FormationData.generated.h"
 
 UCLASS(Abstract, Blueprintable)
@@ -21,5 +21,6 @@ protected:
     
 public:
     UFormationData();
+
 };
 

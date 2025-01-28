@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "UObject/NoExportTypes.h"
-#include "BehaviorTree/BehaviorTreeTypes.h"
 #include "BehaviorTree/BTDecorator.h"
+#include "BehaviorTree/BehaviorTreeTypes.h"
+#include "UObject/NoExportTypes.h"
 #include "BTDecorator_CheckObstruction.generated.h"
 
 UCLASS(Blueprintable)
@@ -25,5 +25,6 @@ public:
     FBlackboardKeySelector TargetKey;
     
     UBTDecorator_CheckObstruction();
+
 };
 

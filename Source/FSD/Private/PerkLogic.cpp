@@ -1,6 +1,7 @@
 #include "PerkLogic.h"
 
-class APlayerCharacter;
+UPerkLogic::UPerkLogic(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+}
 
 
 APlayerCharacter* UPerkLogic::GetCharacter() const {
@@ -11,6 +12,4 @@ FText UPerkLogic::GetAdditionalText_Implementation(int32 Rank) const {
     return FText::GetEmpty();
 }
 
-UPerkLogic::UPerkLogic() {
-}
 

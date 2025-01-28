@@ -1,10 +1,17 @@
 #include "TremorAttackComponent.h"
 #include "Net/UnrealNetwork.h"
 
-class AActor;
-class UPrimitiveComponent;
-class UParticleSystemComponent;
-class UBoxComponent;
+UTremorAttackComponent::UTremorAttackComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->IsAttackActive = false;
+    this->CollisionComponent = NULL;
+    this->ParticlesComponent = NULL;
+    this->InitialParticlesDelay = 0.38f;
+    this->PostParticleDelay = 0.00f;
+    this->TargetMaxDistanceFromGround = 100.00f;
+    this->TimeBetweenDamageTicks = 0.50f;
+    this->LaunchForce = 200.00f;
+    this->Duration = 3.00f;
+}
 
 void UTremorAttackComponent::StopParticles() {
 }
@@ -34,15 +41,4 @@ void UTremorAttackComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty
     DOREPLIFETIME(UTremorAttackComponent, IsAttackActive);
 }
 
-UTremorAttackComponent::UTremorAttackComponent() {
-    this->IsAttackActive = false;
-    this->CollisionComponent = NULL;
-    this->ParticlesComponent = NULL;
-    this->InitialParticlesDelay = 0.38f;
-    this->PostParticleDelay = 0.00f;
-    this->TargetMaxDistanceFromGround = 100.00f;
-    this->TimeBetweenDamageTicks = 0.50f;
-    this->LaunchForce = 200.00f;
-    this->Duration = 3.00f;
-}
 

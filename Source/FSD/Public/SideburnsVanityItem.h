@@ -3,8 +3,9 @@
 #include "VanityItem.h"
 #include "SideburnsVanityItem.generated.h"
 
-class UVanityAnimInstance;
 class USkeletalMesh;
+class UTagVanitySideburns;
+class UVanityAnimInstance;
 
 UCLASS(Blueprintable, EditInlineNew)
 class USideburnsVanityItem : public UVanityItem {
@@ -20,7 +21,11 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool RequiresSlimArmor;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSet<UTagVanitySideburns*> VanityTags;
+    
 public:
     USideburnsVanityItem();
+
 };
 

@@ -1,19 +1,19 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
+#include "GameFramework/Actor.h"
 #include "GameplayTagContainer.h"
+#include "GameplayTagAssetInterface.h"
 #include "GameplayTagContainer.h"
 #include "ERessuplyPodState.h"
-#include "GameFramework/Actor.h"
-#include "GameplayTagAssetInterface.h"
+#include "Templates/SubclassOf.h"
 #include "RessuplyPod.generated.h"
 
-class UObject;
 class ARessuplyPod;
+class UCurveFloat;
 class UDamageComponent;
 class UDialogDataAsset;
-class UCurveFloat;
+class UObject;
 
 UCLASS(Blueprintable)
 class ARessuplyPod : public AActor, public IGameplayTagAssetInterface {
@@ -80,9 +80,10 @@ protected:
     float CloseToImpactDistance;
     
 public:
-    ARessuplyPod();
+    ARessuplyPod(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetIdling();
     
@@ -109,7 +110,7 @@ public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static AActor* DropToTarget(UObject* WorldContextObject, TSubclassOf<ARessuplyPod> podClass, const FVector& Location, AActor* requester);
     
-    
+
     // Fix for true pure virtual functions not being implemented
     UFUNCTION(BlueprintCallable)
     bool HasMatchingGameplayTag(FGameplayTag TagToCheck) const override PURE_VIRTUAL(HasMatchingGameplayTag, return false;);

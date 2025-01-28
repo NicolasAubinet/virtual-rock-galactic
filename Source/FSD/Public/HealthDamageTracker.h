@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "DamageSigDelegate.h"
 #include "Components/ActorComponent.h"
+#include "DamageSigDelegate.h"
 #include "HealthDamageTracker.generated.h"
 
 class UHealthComponentBase;
@@ -21,13 +21,14 @@ protected:
     UHealthComponentBase* Health;
     
 public:
-    UHealthDamageTracker();
+    UHealthDamageTracker(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void ResetTrackedDamage();
     
 protected:
     UFUNCTION(BlueprintCallable)
-    void OnDamageTaken(float Amount);
+    void OnDamageTaken(float amount);
     
 };
 

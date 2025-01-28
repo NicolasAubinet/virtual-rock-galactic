@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "Components/ActorComponent.h"
 #include "Components/AudioComponent.h"
 #include "DelegateDelegate.h"
 #include "ETerminatorShoutState.h"
 #include "TerminatorShoutState.h"
 #include "TerminatorTalkMaterial.h"
-#include "Components/ActorComponent.h"
 #include "TerminatorShoutComponent.generated.h"
 
-class UMeshComponent;
 class UAudioComponent;
+class UMeshComponent;
 class UPointLightComponent;
 class USoundCue;
 
@@ -49,7 +49,8 @@ protected:
     UAudioComponent* ShoutInstance;
     
 public:
-    UTerminatorShoutComponent();
+    UTerminatorShoutComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetShoutState(ETerminatorShoutState State, float delayShout);
     

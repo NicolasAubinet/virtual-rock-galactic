@@ -1,21 +1,21 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Engine/NetSerialization.h"
-#include "EInputKeys.h"
 #include "AnimatedItem.h"
+#include "EInputKeys.h"
 #include "Throwable.h"
 #include "PlagueCleanupItem.generated.h"
 
-class UAudioComponent;
-class UObjective;
-class UInstantUsable;
-class UCrosshairAggregator;
-class USphereComponent;
-class UKeepInsideWorld;
 class APlayerCharacter;
-class UBoxComponent;
 class UAnimMontage;
+class UAudioComponent;
+class UBoxComponent;
+class UCrosshairAggregator;
+class UInstantUsable;
+class UKeepInsideWorld;
+class UObjective;
 class USoundCue;
+class USphereComponent;
 
 UCLASS(Blueprintable)
 class FSD_API APlagueCleanupItem : public AAnimatedItem, public IThrowable {
@@ -68,7 +68,8 @@ protected:
     float FireRate;
     
 public:
-    APlagueCleanupItem();
+    APlagueCleanupItem(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable, Server, Unreliable)
     void Server_Gunsling();
@@ -96,7 +97,7 @@ public:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void All_EnablePhysics(const FVector_NetQuantize& Direction);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

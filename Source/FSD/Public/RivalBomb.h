@@ -1,14 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
 #include "GameEvent.h"
+#include "Templates/SubclassOf.h"
 #include "RivalBomb.generated.h"
 
-class UDebrisPositioning;
 class AGem;
 class ARivalBombNode;
 class UCurveFloat;
+class UDebrisPositioning;
 
 UCLASS(Blueprintable)
 class ARivalBomb : public AGameEvent {
@@ -41,9 +41,10 @@ private:
     UCurveFloat* NodeCostCurve;
     
 public:
-    ARivalBomb();
+    ARivalBomb(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void UpdateNodesOnStart();

@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
-#include "Components/TimelineComponent.h"
 #include "GameFramework/Actor.h"
+#include "Components/TimelineComponent.h"
+#include "Templates/SubclassOf.h"
 #include "ZipLineProjectile.generated.h"
 
-class UPointLightComponent;
-class UStatusEffect;
 class UCurveFloat;
 class UMaterialInstanceDynamic;
+class UPointLightComponent;
+class UStatusEffect;
 class UTimelineComponent;
 
 UCLASS(Abstract, Blueprintable)
@@ -45,7 +45,8 @@ protected:
     TSubclassOf<UStatusEffect> OnReleaseStatusEffect;
     
 public:
-    AZipLineProjectile();
+    AZipLineProjectile(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnTimelineTick(float NewValue);

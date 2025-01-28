@@ -1,8 +1,10 @@
 #include "EncounterManager.h"
 
-class UEnemyGroupDescriptor;
-class UCritterDescriptor;
-class UEnemyDescriptor;
+UEncounterManager::UEncounterManager(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->SpawnDistanceFromRoomBounds = 0.00f;
+    this->ProceduralSetup = NULL;
+    this->SpawnManager = NULL;
+}
 
 void UEncounterManager::ShowSpawnLocations() {
 }
@@ -22,9 +24,4 @@ TArray<UCritterDescriptor*> UEncounterManager::GetCritterPool() const {
 void UEncounterManager::AddEncounterFromGroup(UEnemyGroupDescriptor* Group, float Difficulty, FVector Location, float Radius) {
 }
 
-UEncounterManager::UEncounterManager() {
-    this->SpawnDistanceFromRoomBounds = 0.00f;
-    this->ProceduralSetup = NULL;
-    this->SpawnManager = NULL;
-}
 

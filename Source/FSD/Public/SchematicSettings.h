@@ -1,21 +1,20 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
+#include "Engine/DataAsset.h"
 #include "ESchematicType.h"
 #include "SchematicType.h"
-#include "Engine/DataAsset.h"
 #include "SchematicSettings.generated.h"
 
-class USchematicPricingTier;
-class UItemSkinSchematicCollection;
-class UOverclockBank;
+class UDataTable;
 class UItemID;
-class USchematicCategory;
+class UOverclockBank;
+class USchematic;
 class USchematicBank;
 class USchematicBankBase;
-class USchematic;
+class USchematicCategory;
+class USchematicPricingTier;
 class USchematicRarity;
-class UDataTable;
 
 UCLASS(Blueprintable)
 class USchematicSettings : public UDataAsset {
@@ -32,9 +31,6 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSet<UOverclockBank*> OverclockBanks;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TSet<UItemSkinSchematicCollection*> SkinSchematicCollections;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSet<USchematicBankBase*> VanitySchematicBanks;
@@ -105,6 +101,9 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDataTable* SchematicGATable;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSet<FGuid> VanitySchematicIDsFromOldSeasons;
+    
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TMap<FGuid, USchematic*> AllSchematicsMap;
@@ -114,6 +113,7 @@ protected:
     
 public:
     USchematicSettings();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool ValidateVanitySchematics() const;
     

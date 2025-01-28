@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "RandRange.h"
 #include "FacilityTurret.h"
+#include "RandRange.h"
 #include "SpinningFacilityturret.generated.h"
 
 UCLASS(Blueprintable)
@@ -29,8 +29,9 @@ protected:
     float TurnSpeed;
     
 public:
-    ASpinningFacilityturret();
+    ASpinningFacilityturret(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 };
 

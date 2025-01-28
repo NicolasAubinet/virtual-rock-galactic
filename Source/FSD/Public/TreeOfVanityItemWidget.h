@@ -13,6 +13,9 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UReward* Reward;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
+    UReward* actualReward;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bIsPrimaryReward;
     
@@ -40,6 +43,7 @@ protected:
     
 public:
     UTreeOfVanityItemWidget();
+
     UFUNCTION(BlueprintCallable)
     void SetIsBought(bool inIsBought);
     

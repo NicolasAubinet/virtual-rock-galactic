@@ -1,12 +1,12 @@
 #include "DroneVacuumStream.h"
 #include "Components/SceneComponent.h"
 
-class AFoamPuddle;
+ADroneVacuumStream::ADroneVacuumStream(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->VacuumPoint = CreateDefaultSubobject<USceneComponent>(TEXT("VacuumSource"));
+    this->VacuumPoint->SetupAttachment(RootComponent);
+}
 
 void ADroneVacuumStream::Server_StartVacuumingPuddle_Implementation(AFoamPuddle* puddle) {
 }
 
-ADroneVacuumStream::ADroneVacuumStream() {
-    this->VacuumPoint = CreateDefaultSubobject<USceneComponent>(TEXT("VacuumSource"));
-}
 

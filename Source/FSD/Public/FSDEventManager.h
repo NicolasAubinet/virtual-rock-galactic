@@ -1,10 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "EHolidayType.h"
-#include "BackendNotificationEvent.h"
-#include "FSDEventActivateChangedDelegate.h"
 #include "Subsystems/GameInstanceSubsystem.h"
+#include "BackendNotificationEvent.h"
+#include "EHolidayType.h"
+#include "FSDEventActivateChangedDelegate.h"
+#include "FSDEventWithEnd.h"
+#include "JettyBootEventSettings.h"
+#include "OnRequestSeasonEndTimeCompleteDelegate.h"
 #include "FSDEventManager.generated.h"
 
 class UFSDEvent;
@@ -23,10 +26,10 @@ public:
     
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    TSet<FName> PendingActiveEvents;
+    TArray<FFSDEventWithEnd> PendingActiveEvents;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    TSet<FName> ActiveEvents;
+    TArray<FFSDEventWithEnd> ActiveEvents;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     int32 NumFailedRequests;
@@ -51,6 +54,15 @@ protected:
     
 public:
     UFSDEventManager();
+
+    UFUNCTION(BlueprintCallable)
+    void TryGetJettyBootSettings(bool& OutHasSettings, FJettyBootEventSettings& OutSettings);
+    
+protected:
+    UFUNCTION(BlueprintCallable)
+    void RequestSeasonEndTime(FOnRequestSeasonEndTimeComplete OnComplete);
+    
+public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsEventTypeActive(const EHolidayType FSDEvent) const;
     

@@ -3,11 +3,11 @@
 #include "Components/ActorComponent.h"
 #include "TutorialComponent.generated.h"
 
-class AFSDPlayerState;
 class AFSDPlayerController;
-class UFSDSaveGame;
+class AFSDPlayerState;
 class APlayerCharacter;
 class ATutorialManager;
+class UFSDSaveGame;
 
 UCLASS(Abstract, Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UTutorialComponent : public UActorComponent {
@@ -38,19 +38,19 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ManuallyMarkViews;
     
-    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<APlayerCharacter> PlayerCharacter;
     
-    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<AFSDPlayerState> PlayerState;
     
-    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<AFSDPlayerController> PlayerController;
     
-    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UFSDSaveGame> SaveGame;
     
-    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<ATutorialManager> TutorialManager;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -66,7 +66,8 @@ protected:
     bool bTutorialActive;
     
 public:
-    UTutorialComponent();
+    UTutorialComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void RegisterTutorial();
     
@@ -84,7 +85,7 @@ protected:
     void OnTutorialsReset();
     
     UFUNCTION(BlueprintCallable)
-    void OnManagerReady(ATutorialManager* manager);
+    void OnManagerReady(ATutorialManager* Manager);
     
     UFUNCTION(BlueprintCallable)
     void MarkTutorialWatched();

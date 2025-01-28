@@ -1,10 +1,7 @@
 #include "MinersManual.h"
 
-class UObject;
-class UBiome;
-class UEnemyMinersManualData;
-class UMinersManualData;
-class UMissionTemplate;
+UMinersManual::UMinersManual() {
+}
 
 bool UMinersManual::IsObjectInMinersManual(UObject* WorldContext, UObject* Object) {
     return false;
@@ -59,6 +56,4 @@ TArray<FDamageTypeDescription> UMinersManual::GetAllDamageTypeDescriptions() {
     return TArray<FDamageTypeDescription>();
 }
 
-UMinersManual::UMinersManual() {
-}
 

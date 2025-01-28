@@ -1,16 +1,16 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "AFlyingBug.h"
+#include "Templates/SubclassOf.h"
 #include "JellyBreeder.generated.h"
 
 class AActor;
 class AProjectile;
+class UAnimSequenceBase;
 class UEnemyDescriptor;
+class UParticleSystem;
 class UPhysicalMaterial;
 class USoundBase;
-class UAnimSequenceBase;
-class UParticleSystem;
 
 UCLASS(Blueprintable)
 class AJellyBreeder : public AAFlyingBug {
@@ -60,9 +60,10 @@ protected:
     bool IsInBreedMode;
     
 public:
-    AJellyBreeder();
+    AJellyBreeder(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void SpawnEnemies(AProjectile* Egg, int32 AmountToSpawn);
     

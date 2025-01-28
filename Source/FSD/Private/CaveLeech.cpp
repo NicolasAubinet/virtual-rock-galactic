@@ -1,46 +1,12 @@
 #include "CaveLeech.h"
-#include "Net/UnrealNetwork.h"
 #include "Components/SceneComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "GrabberComponent.h"
+#include "Net/UnrealNetwork.h"
 
-class AActor;
-class UHealthComponentBase;
-
-void ACaveLeech::OnRep_State() {
-}
-
-FVector ACaveLeech::GetTentacleTargetLocation() const {
-    return FVector{};
-}
-
-FVector ACaveLeech::GetMouthLocation_Implementation() const {
-    return FVector{};
-}
-
-AActor* ACaveLeech::GetCurrentTarget() {
-    return NULL;
-}
-
-void ACaveLeech::Died(UHealthComponentBase* HealthComponent) {
-}
-
-void ACaveLeech::Damaged(float Amount) {
-}
-
-
-
-void ACaveLeech::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
-    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-    
-    DOREPLIFETIME(ACaveLeech, State);
-    DOREPLIFETIME(ACaveLeech, TentacleLocation);
-    DOREPLIFETIME(ACaveLeech, TentacleVelocity);
-    DOREPLIFETIME(ACaveLeech, Target);
-}
-
-ACaveLeech::ACaveLeech() {
-    this->SkeletalMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("NewMesh"));
+ACaveLeech::ACaveLeech(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->RootComponent = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("NewMesh"));
+    this->SkeletalMesh = (USkeletalMeshComponent*)RootComponent;
     this->GrabberComponent = CreateDefaultSubobject<UGrabberComponent>(TEXT("Grabber"));
     this->BiteDamage = 10.00f;
     this->BitesPerSecond = 1.00f;
@@ -64,4 +30,37 @@ ACaveLeech::ACaveLeech() {
     this->HealthTarget = NULL;
     this->TentacleHead = CreateDefaultSubobject<USceneComponent>(TEXT("TentacleHead"));
 }
+
+void ACaveLeech::OnRep_State() {
+}
+
+FVector ACaveLeech::GetTentacleTargetLocation() const {
+    return FVector{};
+}
+
+FVector ACaveLeech::GetMouthLocation_Implementation() const {
+    return FVector{};
+}
+
+AActor* ACaveLeech::GetCurrentTarget() {
+    return NULL;
+}
+
+void ACaveLeech::Died(UHealthComponentBase* HealthComponent) {
+}
+
+void ACaveLeech::Damaged(float amount) {
+}
+
+
+
+void ACaveLeech::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
+    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+    
+    DOREPLIFETIME(ACaveLeech, State);
+    DOREPLIFETIME(ACaveLeech, TentacleLocation);
+    DOREPLIFETIME(ACaveLeech, TentacleVelocity);
+    DOREPLIFETIME(ACaveLeech, Target);
+}
+
 

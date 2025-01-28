@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "HeroInfo.h"
 #include "UObject/NoExportTypes.h"
 #include "Engine/DataAsset.h"
+#include "HeroInfo.h"
 #include "PlayerCharacterData.generated.h"
 
 class UPlayerCharacterID;
@@ -19,6 +19,7 @@ public:
     FHeroInfo HeroInfo;
     
     UPlayerCharacterData();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FText GetSwitchToMessage() const;
     

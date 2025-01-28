@@ -1,15 +1,48 @@
 #include "FSDSaveGame.h"
 #include "Templates/SubclassOf.h"
 
-class UObject;
-class AActor;
-class UResourceData;
-class UFSDGameInstance;
-class UFSDSaveGame;
-class UItemID;
-class UPlayerCharacterID;
+UFSDSaveGame::UFSDSaveGame() {
+    this->VersionNumber = 0;
+    this->bMilestoneResetShown = false;
+    this->bYearTwoGiftClaimed = false;
+    this->SaveCreatedInPatch = 1;
+    this->PerkPoints = 0;
+    this->HasRecievedDiscordReward = false;
+    this->Faction = EFSDFaction::NoFaction;
+    this->Credits = 0;
+    this->LastBoughtDailyDealSeed = 0;
+    this->bIgnoreRandomLoadout = false;
+    this->LastCollectedCommunityRewardPeriodID = 0;
+    this->FirstRejoinAttempt = false;
+    this->HaveItemUpgradesBeenFixed = false;
+    this->bHasOpenedDeepDiveTerminal = false;
+    this->FirstSession = true;
+    this->HasCompletedTutorial = false;
+    this->HasPlayedTutorial = false;
+    this->ShowHowToRestartTutorialPrompt = false;
+    this->HasPlayedIntroMessage = false;
+    this->HasSentSteamInfo = false;
+    this->HasClaimedSteamGroupLoot = false;
+    this->IsBoscoAllowed = true;
+    this->HasJoinedXboxClub = false;
+    this->HasSeenAnalyticsPopUp = false;
+    this->AllowAnalyticsTracking = true;
+    this->AllowPersonalAnalyticsTracking = true;
+    this->IsModded = false;
+    this->Index = -1;
+    this->TotalPlayTimeSeconds = 0.00f;
+    this->userIdx = 0;
+    this->CurrLoadoutIdx = 0;
+    this->SaveToDiskCounter = 0;
+    this->BackupSaveIndex = 0;
+    this->ExternalBackupSaveIndex = 0;
+    this->NumberOfGamesPlayed = 0;
+    this->LastPlayedCharacter = NULL;
+    this->ShowInfoScreen = true;
+    this->FSDGameInstance = NULL;
+}
 
-bool UFSDSaveGame::TrySellResource(UResourceData* Resource, int32 Amount, int32& Price) {
+bool UFSDSaveGame::TrySellResource(UResourceData* Resource, int32 amount, int32& Price) {
     return false;
 }
 
@@ -17,11 +50,11 @@ bool UFSDSaveGame::TryDeductResources(const TMap<UResourceData*, int32>& NewReso
     return false;
 }
 
-bool UFSDSaveGame::TryDeductCredits(int32 Amount) {
+bool UFSDSaveGame::TryDeductCredits(int32 amount) {
     return false;
 }
 
-bool UFSDSaveGame::TryBuyResource(UResourceData* Resource, int32 Amount, int32& Price) {
+bool UFSDSaveGame::TryBuyResource(UResourceData* Resource, int32 amount, int32& Price) {
     return false;
 }
 
@@ -49,6 +82,9 @@ void UFSDSaveGame::SetIsModded(bool modded) {
 }
 
 void UFSDSaveGame::SetIndexAndName(int32 NewIndex, const FString& NewName) {
+}
+
+void UFSDSaveGame::SetIgnoreRandomLoadout(bool inIgnoreRandomLoadout) {
 }
 
 void UFSDSaveGame::SetHasSentSteamInfo() {
@@ -147,7 +183,7 @@ bool UFSDSaveGame::HasSeenRetirementRewardScreen() const {
     return false;
 }
 
-bool UFSDSaveGame::HasCredits(int32 Amount) const {
+bool UFSDSaveGame::HasCredits(int32 amount) const {
     return false;
 }
 
@@ -207,11 +243,11 @@ FString UFSDSaveGame::GetSaveSlotName(int32 NewUserIdx) {
     return TEXT("");
 }
 
-int32 UFSDSaveGame::GetResourceSellingPrice(UResourceData* Resource, int32 Amount) const {
+int32 UFSDSaveGame::GetResourceSellingPrice(UResourceData* Resource, int32 amount) const {
     return 0;
 }
 
-int32 UFSDSaveGame::GetResourceBuyingPrice(UResourceData* Resource, int32 Amount) const {
+int32 UFSDSaveGame::GetResourceBuyingPrice(UResourceData* Resource, int32 amount) const {
     return 0;
 }
 
@@ -321,7 +357,7 @@ bool UFSDSaveGame::DeleteFromDisk(UFSDGameInstance* GameInstance, const FString&
     return false;
 }
 
-bool UFSDSaveGame::DeductPerkPoints(int32 Amount) {
+bool UFSDSaveGame::DeductPerkPoints(int32 amount) {
     return false;
 }
 
@@ -332,13 +368,13 @@ bool UFSDSaveGame::CanAfford(const TMap<UResourceData*, int32>& NewResources) co
     return false;
 }
 
-void UFSDSaveGame::AddPerkPoints(int32 Amount) {
+void UFSDSaveGame::AddPerkPoints(int32 amount) {
 }
 
 void UFSDSaveGame::AddGamePlayed() {
 }
 
-int32 UFSDSaveGame::AddCredits(int32 Amount) {
+int32 UFSDSaveGame::AddCredits(int32 amount) {
     return 0;
 }
 
@@ -346,43 +382,4 @@ int32 UFSDSaveGame::AddClassXP(UObject* WorldContext, UPlayerCharacterID* charac
     return 0;
 }
 
-UFSDSaveGame::UFSDSaveGame() {
-    this->VersionNumber = 0;
-    this->bMilestoneResetShown = false;
-    this->bYearTwoGiftClaimed = false;
-    this->SaveCreatedInPatch = 1;
-    this->PerkPoints = 0;
-    this->HasRecievedDiscordReward = false;
-    this->Faction = EFSDFaction::NoFaction;
-    this->Credits = 0;
-    this->LastBoughtDailyDealSeed = 0;
-    this->LastCollectedCommunityRewardPeriodID = 0;
-    this->FirstRejoinAttempt = false;
-    this->HaveSkinsBeenReset = false;
-    this->bHasOpenedDeepDiveTerminal = false;
-    this->FirstSession = true;
-    this->HasCompletedTutorial = false;
-    this->HasPlayedTutorial = false;
-    this->ShowHowToRestartTutorialPrompt = false;
-    this->HasPlayedIntroMessage = false;
-    this->HasSentSteamInfo = false;
-    this->HasClaimedSteamGroupLoot = false;
-    this->IsBoscoAllowed = true;
-    this->HasJoinedXboxClub = false;
-    this->HasSeenAnalyticsPopUp = false;
-    this->AllowAnalyticsTracking = true;
-    this->AllowPersonalAnalyticsTracking = true;
-    this->IsModded = false;
-    this->Index = -1;
-    this->TotalPlayTimeSeconds = 0.00f;
-    this->userIdx = 0;
-    this->CurrLoadoutIdx = 0;
-    this->SaveToDiskCounter = 0;
-    this->BackupSaveIndex = 0;
-    this->ExternalBackupSaveIndex = 0;
-    this->NumberOfGamesPlayed = 0;
-    this->LastPlayedCharacter = NULL;
-    this->ShowInfoScreen = true;
-    this->FSDGameInstance = NULL;
-}
 

@@ -1,17 +1,18 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "GameFramework/Actor.h"
+#include "ActorTrackingCheatInterface.h"
+#include "Templates/SubclassOf.h"
 #include "TreasureBeacon.generated.h"
 
-class USceneComponent;
-class UDebrisPositioning;
 class ATreasureContainer;
-class UTerrainPlacementComponent;
 class UCurveFloat;
+class UDebrisPositioning;
+class USceneComponent;
+class UTerrainPlacementComponent;
 
 UCLASS(Blueprintable)
-class FSD_API ATreasureBeacon : public AActor {
+class FSD_API ATreasureBeacon : public AActor, public IActorTrackingCheatInterface {
     GENERATED_BODY()
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
@@ -58,9 +59,10 @@ protected:
     ATreasureContainer* TreasureInstance;
     
 public:
-    ATreasureBeacon();
+    ATreasureBeacon(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintPure=false)
     void SpawnDebreeParts() const;
@@ -69,5 +71,7 @@ public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void ActivateTreasure();
     
+
+    // Fix for true pure virtual functions not being implemented
 };
 

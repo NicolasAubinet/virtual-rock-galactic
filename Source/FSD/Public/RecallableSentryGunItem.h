@@ -1,15 +1,16 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "RecallableItem.h"
+#include "Templates/SubclassOf.h"
 #include "RecallableSentryGunItem.generated.h"
 
 class AItem;
-class UCapacityHoldingItemAggregator;
-class UItemUpgrade;
-class UItemPlacerAggregator;
 class ARecallableSentryGun;
 class ARecallableSentryGunItem;
+class ARedeployableSentryGun;
+class UCapacityHoldingItemAggregator;
+class UItemPlacerAggregator;
+class UItemUpgrade;
 
 UCLASS(Blueprintable)
 class ARecallableSentryGunItem : public ARecallableItem {
@@ -25,6 +26,9 @@ public:
     FRecallableSentryGunSignature OnSelectedItemChanged;
     
 protected:
+    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TArray<TWeakObjectPtr<ARedeployableSentryGun>> SentriesWithActiveIndicators;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 MaxSentryCount;
     
@@ -44,10 +48,13 @@ protected:
     UItemPlacerAggregator* ItemPlacer;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    TArray<UItemUpgrade*> upgrades;
+    TArray<UItemUpgrade*> Upgrades;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<AItem> LoadoutClass;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<ARedeployableSentryGun> SentryGunObjectClass;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float SupplyStatusWeight;
@@ -59,8 +66,12 @@ protected:
     bool bIsUpgraded;
     
 public:
-    ARecallableSentryGunItem();
+    ARecallableSentryGunItem(const FObjectInitializer& ObjectInitializer);
+
 protected:
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void SetArcIndicatorActive(bool Active);
+    
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ReceiveItemUpgraded();
     

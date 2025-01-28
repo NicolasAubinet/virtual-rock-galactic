@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "TunnelSettingItem.h"
 #include "Engine/DataAsset.h"
+#include "TunnelSettingItem.h"
 #include "TunnelSetting.generated.h"
 
 class UFloodFillSettings;
@@ -33,5 +33,6 @@ public:
     float Weight;
     
     UTunnelSetting();
+
 };
 

@@ -1,14 +1,23 @@
 #include "GuntowerActivationPlatform.h"
-#include "Net/UnrealNetwork.h"
-#include "Components/SceneComponent.h"
-#include "Components/SkeletalMeshComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "Components/SceneComponent.h"
+#include "Components/StaticMeshComponent.h"
+#include "Net/UnrealNetwork.h"
 
-class AActor;
-class UPrimitiveComponent;
-class UHealthComponentBase;
-class AFSDPlayerState;
-class AGuntowerModule;
+AGuntowerActivationPlatform::AGuntowerActivationPlatform(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
+    this->Root = (USceneComponent*)RootComponent;
+    this->STMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("STMesh"));
+    this->Trigger = CreateDefaultSubobject<UCapsuleComponent>(TEXT("Trigger"));
+    this->AssignedModule = NULL;
+    this->DoneAt = 5.00f;
+    this->DisabledTime = 12.00f;
+    this->playersInside = 0;
+    this->Disabled = true;
+    this->IsShutDown = false;
+    this->STMesh->SetupAttachment(RootComponent);
+    this->Trigger->SetupAttachment(STMesh);
+}
 
 void AGuntowerActivationPlatform::ShutDown() {
 }
@@ -49,6 +58,10 @@ void AGuntowerActivationPlatform::OnOverlap(UPrimitiveComponent* OverlappedCompo
 void AGuntowerActivationPlatform::ModuleDestroyed(UHealthComponentBase* Health) {
 }
 
+int32 AGuntowerActivationPlatform::GetPlayerCount() const {
+    return 0;
+}
+
 AGuntowerModule* AGuntowerActivationPlatform::GetAssignedModule() const {
     return NULL;
 }
@@ -72,15 +85,4 @@ void AGuntowerActivationPlatform::GetLifetimeReplicatedProps(TArray<FLifetimePro
     DOREPLIFETIME(AGuntowerActivationPlatform, IsShutDown);
 }
 
-AGuntowerActivationPlatform::AGuntowerActivationPlatform() {
-    this->Root = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
-    this->SKMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("SKMesh"));
-    this->Trigger = CreateDefaultSubobject<UCapsuleComponent>(TEXT("Trigger"));
-    this->AssignedModule = NULL;
-    this->DoneAt = 5.00f;
-    this->DisabledTime = 12.00f;
-    this->playersInside = 0;
-    this->Disabled = true;
-    this->IsShutDown = false;
-}
 

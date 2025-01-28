@@ -1,13 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "ItemLoadoutAnimations.h"
 #include "Engine/DataAsset.h"
+#include "ItemLoadoutAnimations.h"
 #include "ItemCharacterAnimationSet.generated.h"
 
-class UItemCharacterAnimationSet;
-class UBlendSpace1D;
-class UAnimSequence;
 class UAnimMontage;
+class UAnimSequence;
+class UBlendSpace1D;
+class UItemCharacterAnimationSet;
 
 UCLASS(Blueprintable)
 class UItemCharacterAnimationSet : public UDataAsset {
@@ -137,6 +137,12 @@ public:
     UAnimSequence* TP_Downed_Loop;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UAnimMontage* FP_Salute;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UAnimMontage* TP_Salute;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FItemLoadoutAnimations LoadoutAnimations;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -146,5 +152,6 @@ public:
     UItemCharacterAnimationSet* ParentSet;
     
     UItemCharacterAnimationSet();
+
 };
 

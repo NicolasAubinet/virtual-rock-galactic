@@ -1,11 +1,18 @@
 #include "CommunicationComponent.h"
 #include "Templates/SubclassOf.h"
 
-class UObject;
-class UAudioComponent;
-class UDialogDataAsset;
-class APlayerCharacter;
-class USoundBase;
+UCommunicationComponent::UCommunicationComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->ShoutingEnabled = true;
+    this->ShoutWidgetType = NULL;
+    this->CharacterShouts = NULL;
+    this->PitchMultiplier = 1.00f;
+    this->MinShoutDelay = 1.00f;
+    this->CloseRangeShoutDistance = 1500.00f;
+    this->bMissionControlPaused = false;
+    this->MissionControlAudioComponent = NULL;
+    this->Character = NULL;
+    this->LastShout = NULL;
+}
 
 void UCommunicationComponent::ShoutCustomOrDefault(UDialogDataAsset* CustomShout, EShoutType DefaultShout) {
 }
@@ -59,16 +66,4 @@ void UCommunicationComponent::ClientShout_Implementation(APlayerCharacter* Sende
 void UCommunicationComponent::ClientMissionShout_Implementation(UDialogDataAsset* NewShout, int32 Index, bool bPriority) {
 }
 
-UCommunicationComponent::UCommunicationComponent() {
-    this->ShoutingEnabled = true;
-    this->ShoutWidgetType = NULL;
-    this->CharacterShouts = NULL;
-    this->PitchMultiplier = 1.00f;
-    this->MinShoutDelay = 1.00f;
-    this->CloseRangeShoutDistance = 1500.00f;
-    this->bMissionControlPaused = false;
-    this->MissionControlAudioComponent = NULL;
-    this->Character = NULL;
-    this->LastShout = NULL;
-}
 

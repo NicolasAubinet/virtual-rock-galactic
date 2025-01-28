@@ -1,9 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EDebrisItemPass.h"
-#include "DebrisItemActorItem.h"
-#include "IRandRange.h"
 #include "DebrisActorComponent.h"
+#include "DebrisItemActorItem.h"
+#include "EDebrisItemPass.h"
+#include "IRandRange.h"
 #include "DebrisItemComponent.generated.h"
 
 class UDebrisPositioning;
@@ -31,11 +31,12 @@ public:
     bool UseAmount;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FIRandRange Amount;
+    FIRandRange amount;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 AmountSearchMultiplier;
     
-    UDebrisItemComponent();
+    UDebrisItemComponent(const FObjectInitializer& ObjectInitializer);
+
 };
 

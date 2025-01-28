@@ -1,10 +1,10 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "IntDelegateDelegate.h"
-#include "FloatDelegateDelegate.h"
-#include "EInfectionState.h"
-#include "OnInfectionStateChangedDelegateDelegate.h"
 #include "Components/ActorComponent.h"
+#include "EInfectionState.h"
+#include "FloatDelegateDelegate.h"
+#include "IntDelegateDelegate.h"
+#include "OnInfectionStateChangedDelegateDelegate.h"
 #include "PlayerInfectionComponent.generated.h"
 
 class AActor;
@@ -42,9 +42,10 @@ protected:
     float InfectionDecreaseOverTimer;
     
 public:
-    UPlayerInfectionComponent();
+    UPlayerInfectionComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_ClearInfection();
     
@@ -54,7 +55,7 @@ protected:
     
 public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
-    void IncreaseInfection(float Amount, AActor* Source);
+    void IncreaseInfection(float amount, AActor* Source);
     
 };
 

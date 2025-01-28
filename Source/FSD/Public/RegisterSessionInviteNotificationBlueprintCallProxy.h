@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "BlueprintRegisterSessionInviteNotificationDelegateDelegate.h"
 #include "Net/OnlineBlueprintCallProxyBase.h"
+#include "BlueprintRegisterSessionInviteNotificationDelegateDelegate.h"
 #include "RegisterSessionInviteNotificationBlueprintCallProxy.generated.h"
 
 class UObject;
@@ -18,6 +18,7 @@ public:
     UObject* WorldContextObject;
     
     URegisterSessionInviteNotificationBlueprintCallProxy();
+
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static URegisterSessionInviteNotificationBlueprintCallProxy* RegisterSessionInviteNotification(UObject* NewWorldContextObject);
     

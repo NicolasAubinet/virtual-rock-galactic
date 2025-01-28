@@ -3,8 +3,8 @@
 #include "Components/ActorComponent.h"
 #include "HitReactionComponent.generated.h"
 
-class USkeletalMeshComponent;
 class UAnimSequenceBase;
+class USkeletalMeshComponent;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UHitReactionComponent : public UActorComponent {
@@ -19,18 +19,22 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float OverrideHitReactBlendIn;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool AllowHitReactions;
+    
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* SkeletalMesh;
     
 public:
-    UHitReactionComponent();
+    UHitReactionComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void PlayHitReaction();
     
 protected:
     UFUNCTION(BlueprintCallable)
-    void OnDamageTaken(float Amount);
+    void OnDamageTaken(float amount);
     
 };
 

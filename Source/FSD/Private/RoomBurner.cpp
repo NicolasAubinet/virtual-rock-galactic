@@ -1,16 +1,6 @@
 #include "RoomBurner.h"
 
-class AProceduralSetup;
-class URoomGenerator;
-
-void ARoomBurner::SpawnEncounter(AProceduralSetup* setup) {
-}
-
-URoomGenerator* ARoomBurner::GetRoomGenerator() const {
-    return NULL;
-}
-
-ARoomBurner::ARoomBurner() {
+ARoomBurner::ARoomBurner(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
     this->LiveUpdateEditor = false;
     this->MirrorTest = ERoomMirror::None;
     this->RoomGenerator = NULL;
@@ -25,15 +15,23 @@ ARoomBurner::ARoomBurner() {
     this->GenerateItems = true;
     this->GenerateResources = true;
     this->SpawnEncounters = true;
-    this->TestEnemy = NULL;
-    this->TestEnemyCount = 0;
     this->TestMutator = NULL;
+    this->TestChallenge = NULL;
     this->TestSpecialEvent = NULL;
     this->TestTreasure = NULL;
     this->MissionTemplate = NULL;
     this->CustomMissionTemplate = NULL;
+    this->TestObjective = NULL;
     this->CSGWorld = NULL;
     this->PLSLiveEditor = NULL;
     this->LiveEditRoomGenerator = NULL;
 }
+
+void ARoomBurner::SpawnEncounter(AProceduralSetup* Setup) {
+}
+
+URoomGenerator* ARoomBurner::GetRoomGenerator() const {
+    return NULL;
+}
+
 

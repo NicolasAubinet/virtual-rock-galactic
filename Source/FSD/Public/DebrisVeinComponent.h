@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EDebrisCarvedType.h"
 #include "DebrisActorComponent.h"
+#include "EDebrisCarvedType.h"
 #include "DebrisVeinComponent.generated.h"
 
 class UTerrainMaterial;
@@ -20,6 +20,7 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UVeinResourceCreator* VeinCreator;
     
-    UDebrisVeinComponent();
+    UDebrisVeinComponent(const FObjectInitializer& ObjectInitializer);
+
 };
 

@@ -3,8 +3,8 @@
 #include "UObject/Object.h"
 #include "CampaignNotification.generated.h"
 
-class UCampaignMission;
 class UCampaign;
+class UCampaignMission;
 
 UCLASS(Blueprintable)
 class UCampaignNotification : public UObject {
@@ -23,5 +23,6 @@ public:
     bool bIsCampaignCompleted;
     
     UCampaignNotification();
+
 };
 

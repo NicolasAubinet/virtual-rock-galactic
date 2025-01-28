@@ -1,31 +1,34 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
-#include "FindSessionsCallbackProxy.h"
 #include "UObject/NoExportTypes.h"
+#include "Kismet/BlueprintFunctionLibrary.h"
+#include "FindSessionsCallbackProxy.h"
+#include "DifficultyMutatorItem.h"
 #include "EDisconnectReason.h"
-#include "EMissionStructure.h"
 #include "EFSDMissionStatus.h"
 #include "EFSDNATType.h"
+#include "EMissionStructure.h"
 #include "EServerDistance.h"
 #include "EServerSortOrder.h"
 #include "FriendInfo.h"
-#include "Kismet/BlueprintFunctionLibrary.h"
+#include "GlobalMissionSeed.h"
+#include "Templates/SubclassOf.h"
 #include "SessionHandling.generated.h"
 
-class UObject;
+class APlayerCharacter;
 class UBiome;
 class UDifficultySetting;
 class UFSDGameInstance;
 class UMissionTemplate;
+class UObject;
 class UPlayerCharacterID;
-class APlayerCharacter;
 
 UCLASS(Blueprintable)
 class USessionHandling : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
     USessionHandling();
+
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static void StopVoice(UObject* WorldContextObject);
     
@@ -150,6 +153,9 @@ public:
     static FString FSDGetServerID(const FBlueprintSessionResult& Result);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    static int32 FSDGetSeason(const FBlueprintSessionResult& Result);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     static TArray<FString> FSDGetRequiredModsToDownload(const FBlueprintSessionResult& Result);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -180,13 +186,16 @@ public:
     static FString FSDGetHostUserID(const FBlueprintSessionResult& Result);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    static int32 FSDGetGlobalMissionSeed(const FBlueprintSessionResult& Result);
+    static FGlobalMissionSeed FSDGetGlobalMissionSeed(const FBlueprintSessionResult& Result);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static float FSDGetDistanceFloat(const FBlueprintSessionResult& Result);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static EServerDistance FSDGetDistance(const FBlueprintSessionResult& Result);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    static TArray<FDifficultyMutatorItem> FSDGetDifficultyModifiers(const FBlueprintSessionResult& Result);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static UDifficultySetting* FSDGetDifficulty(const FBlueprintSessionResult& Result);

@@ -11,12 +11,13 @@ class UReplaceMaterialUpgradeElement : public UItemUpgradeElement {
 public:
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    UMaterialInterface* TargetMaterial;
+    TSoftObjectPtr<UMaterialInterface> TargetMaterial;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    UMaterialInterface* ReplaceWithMaterial;
+    TSoftObjectPtr<UMaterialInterface> ReplaceWithMaterial;
     
 public:
     UReplaceMaterialUpgradeElement();
+
 };
 

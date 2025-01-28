@@ -1,15 +1,17 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "IRandRange.h"
-#include "RequiredMissionItem.h"
-#include "MissionTemplateItem.h"
-#include "MissionBiomeItem.h"
 #include "Engine/DataAsset.h"
+#include "IRandRange.h"
+#include "MissionBiomeItem.h"
+#include "MissionTemplateItem.h"
+#include "RequiredMissionItem.h"
 #include "GlobalMissionSetup.generated.h"
 
-class UMissionWarning;
-class UMissionNameBank;
+class UMissionChallenge;
 class UMissionMutator;
+class UMissionNameBank;
+class UMissionStat;
+class UMissionWarning;
 class UPlanetZone;
 
 UCLASS(Blueprintable)
@@ -47,6 +49,9 @@ public:
     float DoubleWarningChance;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UMissionStat* DoubleWarningStat;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UMissionMutator*> Mutators;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -56,12 +61,16 @@ public:
     TMap<UMissionWarning*, UMissionWarning*> IncompatibleWarnings;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<UMissionChallenge*> Challenges;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UPlanetZone*> PlanetZones;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FRequiredMissionItem> GlobalRequiredMissions;
     
     UGlobalMissionSetup();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<FMissionTemplateItem> GetAllPossibleMissions() const;
     

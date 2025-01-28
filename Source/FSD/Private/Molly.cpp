@@ -3,8 +3,11 @@
 #include "OutlineComponent.h"
 #include "ResourceBank.h"
 
-class UDialogDataAsset;
-class APlayerCharacter;
+AMolly::AMolly(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->ResourceBank = CreateDefaultSubobject<UResourceBank>(TEXT("ResourceBank"));
+    this->OutlineComponent = CreateDefaultSubobject<UOutlineComponent>(TEXT("OutlineComponent"));
+    this->ShowButtonDelay = 0.00f;
+}
 
 void AMolly::SetOpenForDeposit(bool Open) {
 }
@@ -28,8 +31,4 @@ void AMolly::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimePr
     DOREPLIFETIME(AMolly, CalledBy);
 }
 
-AMolly::AMolly() {
-    this->ResourceBank = CreateDefaultSubobject<UResourceBank>(TEXT("ResourceBank"));
-    this->OutlineComponent = CreateDefaultSubobject<UOutlineComponent>(TEXT("OutlineComponent"));
-}
 

@@ -1,7 +1,8 @@
 #include "SimpleArmorDamageComponent.h"
 #include "Net/UnrealNetwork.h"
 
-void USimpleArmorDamageComponent::Server_SetArmorIndexDestroyed_Implementation(int32 Index, EArmorDamageType DamageType) {
+USimpleArmorDamageComponent::USimpleArmorDamageComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->ArmorStrength = 10.00f;
 }
 
 void USimpleArmorDamageComponent::OnRep_ArmorDamageInfo(FArmorDamageInfo OldArmorDamageInfo) {
@@ -13,7 +14,4 @@ void USimpleArmorDamageComponent::GetLifetimeReplicatedProps(TArray<FLifetimePro
     DOREPLIFETIME(USimpleArmorDamageComponent, ArmorDamageInfo);
 }
 
-USimpleArmorDamageComponent::USimpleArmorDamageComponent() {
-    this->ArmorStrength = 10.00f;
-}
 

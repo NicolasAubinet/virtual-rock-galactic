@@ -3,14 +3,14 @@
 #include "UObject/NoExportTypes.h"
 #include "EMoveDirection.h"
 #include "ESpiderDeathAnimationCategory.h"
-#include "RandomWalkCycleEntry.h"
 #include "EnemyAnimInstance.h"
 #include "FootStepNotifyTarget.h"
+#include "RandomWalkCycleEntry.h"
 #include "SpiderAnimInstance.generated.h"
 
-class UEnemySpawnEffectsKey;
-class UEnemyPlaySoundKey;
 class UAnimSequenceBase;
+class UEnemyPlaySoundKey;
+class UEnemySpawnEffectsKey;
 class UParticleSystem;
 class USoundCue;
 
@@ -89,10 +89,10 @@ protected:
     bool IsAirborne;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    UParticleSystem* FootstepParticle;
+    UParticleSystem* FootStepParticle;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    USoundCue* FootstepSound;
+    USoundCue* FootStepSound;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FName FootStepLeftBoneName;
@@ -134,6 +134,9 @@ protected:
     bool WalkToTurnLeft;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    bool ExclusiveTurnStateMode;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool IsInFakePhysics;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -141,6 +144,7 @@ protected:
     
 public:
     USpiderAnimInstance();
+
     UFUNCTION(BlueprintCallable)
     void SetMeshScale(float NewScale);
     
@@ -168,7 +172,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsNotAirborne() const;
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

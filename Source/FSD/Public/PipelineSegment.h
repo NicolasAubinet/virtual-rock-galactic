@@ -7,21 +7,21 @@
 #include "TrackBuilderSegment.h"
 #include "PipelineSegment.generated.h"
 
-class USkeletalMeshComponent;
-class UStaticMeshComponent;
+class APipelineSegment;
+class APipelineStart;
+class APlayerCharacter;
 class UDroneUseComponent;
 class UHealthComponentBase;
-class UTrackBuilderUsable;
-class UPathfinderSplineSegmentCollisionComponent;
-class APipelineStart;
-class APipelineSegment;
-class APlayerCharacter;
-class USimpleHealthComponent;
-class USplineMeshComponent;
-class USingleUsableComponent;
 class UMaterialInterface;
-class UStaticMesh;
+class UPathfinderSplineSegmentCollisionComponent;
+class USimpleHealthComponent;
+class USingleUsableComponent;
+class USkeletalMeshComponent;
 class USplineComponent;
+class USplineMeshComponent;
+class UStaticMesh;
+class UStaticMeshComponent;
+class UTrackBuilderUsable;
 
 UCLASS(Abstract, Blueprintable)
 class APipelineSegment : public ATrackBuilderSegment {
@@ -109,7 +109,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     EPipelineBuildState PipelineState;
     
-    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<APipelineStart> PipelineStart;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -140,9 +140,10 @@ protected:
     float BlockedRayTraceSuccesses;
     
 public:
-    APipelineSegment();
+    APipelineSegment(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void UpdateSplineMesh(USplineMeshComponent* InMesh, float InProgress, bool InMoveEndCap);

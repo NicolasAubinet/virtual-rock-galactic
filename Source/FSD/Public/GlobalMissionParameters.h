@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "ResourceSpawner.h"
 #include "Engine/DataAsset.h"
+#include "ResourceSpawner.h"
 #include "GlobalMissionParameters.generated.h"
 
 UCLASS(Blueprintable)
@@ -14,5 +14,6 @@ protected:
     
 public:
     UGlobalMissionParameters();
+
 };
 

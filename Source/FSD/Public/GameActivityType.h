@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "Engine/DataAsset.h"
 #include "EActivityType.h"
 #include "GameActivitySubTask.h"
-#include "Engine/DataAsset.h"
 #include "GameActivityType.generated.h"
 
 UCLASS(Blueprintable)
@@ -19,5 +19,6 @@ public:
     TArray<FGameActivitySubTask> SubTasks;
     
     UGameActivityType();
+
 };
 

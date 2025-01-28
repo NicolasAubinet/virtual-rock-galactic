@@ -1,7 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "DelegateEventDelegate.h"
 #include "Components/ActorComponent.h"
+#include "DelegateEventDelegate.h"
+#include "Templates/SubclassOf.h"
 #include "ObjectivesManager.generated.h"
 
 class UObjective;
@@ -36,7 +37,8 @@ protected:
     bool bCheatObjectivesCompleted;
     
 public:
-    UObjectivesManager();
+    UObjectivesManager(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnObjectiveChanged(UObjective* obj);
@@ -46,10 +48,16 @@ public:
     bool HasRequiredSecondaryObjective() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    TArray<UObjective*> GetSecondaryObjectives() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     UObjective* GetSecondaryObjective() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UObjective* GetPrimaryObjective() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UObjective* FindSecondaryObjective(TSubclassOf<UObjective> objectiveClass) const;
     
     UFUNCTION(BlueprintCallable)
     void ExitPodDescending();

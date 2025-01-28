@@ -5,11 +5,11 @@
 #include "GameFramework/Actor.h"
 #include "FacilityGeneratorLine.generated.h"
 
-class USplineDecoratorComponent;
 class ATetherStation;
 class UMaterialInterface;
-class UStaticMesh;
 class USplineComponent;
+class USplineDecoratorComponent;
+class UStaticMesh;
 
 UCLASS(Blueprintable)
 class FSD_API AFacilityGeneratorLine : public AActor {
@@ -62,9 +62,10 @@ protected:
     bool Connected;
     
 public:
-    AFacilityGeneratorLine();
+    AFacilityGeneratorLine(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetConnected(bool InConnected);
     

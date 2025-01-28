@@ -1,10 +1,10 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "VanityMasterySave.h"
-#include "VanityMasteryResult.h"
-#include "CraftingCost.h"
-#include "VanityMasterySettings.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "CraftingCost.h"
+#include "VanityMasteryResult.h"
+#include "VanityMasterySave.h"
+#include "VanityMasterySettings.h"
 #include "VanityMasteryLibrary.generated.h"
 
 class UObject;
@@ -15,6 +15,7 @@ class UVanityMasteryLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
     UVanityMasteryLibrary();
+
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
     static void ResetVanityMasteryXP(UObject* WorldContext);
     

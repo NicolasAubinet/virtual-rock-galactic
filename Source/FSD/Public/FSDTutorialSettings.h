@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "NewPlayerMutator.h"
 #include "Engine/DataAsset.h"
+#include "NewPlayerMutator.h"
 #include "FSDTutorialSettings.generated.h"
 
 UCLASS(Blueprintable)
@@ -21,5 +21,6 @@ public:
     TArray<FNewPlayerMutator> FirstMissionsMutators;
     
     UFSDTutorialSettings();
+
 };
 

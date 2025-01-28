@@ -1,12 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "DecalData.h"
 #include "GameFramework/Actor.h"
+#include "DecalData.h"
 #include "StickyFlame.generated.h"
 
 class UAudioComponent;
 class UParticleSystemComponent;
+class USceneComponent;
 class UStatusEffectTriggerComponent;
 
 UCLASS(Blueprintable)
@@ -15,10 +16,13 @@ class AStickyFlame : public AActor {
 public:
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
+    USceneComponent* Root;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UParticleSystemComponent* FlameParticles;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
-    UAudioComponent* audio;
+    UAudioComponent* Audio;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UStatusEffectTriggerComponent* StatusTriggerComponent;
@@ -42,9 +46,10 @@ protected:
     bool IsActive;
     
 public:
-    AStickyFlame();
+    AStickyFlame(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_IsActive();

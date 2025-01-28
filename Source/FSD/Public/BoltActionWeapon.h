@@ -1,20 +1,20 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "AmmoDrivenWeapon.h"
+#include "BoltActionWeaponFullyFocusedDelegateDelegate.h"
 #include "Templates/SubclassOf.h"
 #include "TracerData.h"
-#include "BoltActionWeaponFullyFocusedDelegateDelegate.h"
-#include "AmmoDrivenWeapon.h"
 #include "BoltActionWeapon.generated.h"
 
 class AActor;
-class UPrimitiveComponent;
-class UHitscanBaseComponent;
 class UDamageComponent;
-class UHealthComponentBase;
 class UFSDPhysicalMaterial;
-class UStatusEffect;
+class UHealthComponentBase;
+class UHitscanBaseComponent;
 class UParticleSystem;
+class UPrimitiveComponent;
 class USoundCue;
+class UStatusEffect;
 
 UCLASS(Abstract, Blueprintable)
 class ABoltActionWeapon : public AAmmoDrivenWeapon {
@@ -126,10 +126,23 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float ChargeProgress;
     
-public:
-    ABoltActionWeapon();
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float RateOfFireHipFireModifier;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float ChargeSpeedModifier;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float SuccesfullHipFireStackDuration;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float SuccesfullAimedStackDuration;
+    
+public:
+    ABoltActionWeapon(const FObjectInitializer& ObjectInitializer);
+
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
 protected:
     UFUNCTION(BlueprintCallable)
     void SetOverheated(bool isOverheated);
@@ -150,7 +163,7 @@ protected:
     void OnTargetKilled(AActor* Target, UFSDPhysicalMaterial* PhysicalMaterial, bool wasDirectHit);
     
     UFUNCTION(BlueprintCallable)
-    void OnTargetDamaged(UHealthComponentBase* Health, float Amount, UPrimitiveComponent* HitComponent, UFSDPhysicalMaterial* PhysicalMaterial);
+    void OnTargetDamaged(UHealthComponentBase* Health, float amount, UPrimitiveComponent* HitComponent, UFSDPhysicalMaterial* PhysicalMaterial);
     
     UFUNCTION(BlueprintCallable)
     void OnShotPowerSet();
@@ -160,6 +173,9 @@ protected:
     
     UFUNCTION(BlueprintCallable, Client, Reliable)
     void Client_OnTargetKilled(bool BoostReloadTime);
+    
+    UFUNCTION(BlueprintCallable, Client, Reliable)
+    void Client_OnTargetDamaged(float amount);
     
 };
 

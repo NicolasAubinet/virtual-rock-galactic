@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "AmmoDrivenWeapon.h"
+#include "Templates/SubclassOf.h"
 #include "AssaultRifle.generated.h"
 
 class AActor;
@@ -23,7 +23,8 @@ protected:
     TSubclassOf<UStatusEffect> KillTriggeredStatusEffect;
     
 public:
-    AAssaultRifle();
+    AAssaultRifle(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnTimerElapsed();

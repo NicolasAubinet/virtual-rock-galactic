@@ -1,9 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
-#include "EInputKeys.h"
-#include "EDefendPointState.h"
 #include "GameFramework/Actor.h"
+#include "EDefendPointState.h"
+#include "EInputKeys.h"
+#include "Templates/SubclassOf.h"
 #include "DefensePointActor.generated.h"
 
 class AGameEvent;
@@ -28,9 +28,10 @@ protected:
     USingleUsableComponent* DefendPointUsable;
     
 public:
-    ADefensePointActor();
+    ADefensePointActor(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void SetState(EDefendPointState State);
     

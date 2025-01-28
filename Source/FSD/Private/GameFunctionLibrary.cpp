@@ -1,28 +1,12 @@
 #include "GameFunctionLibrary.h"
 
-class UObject;
-class UAudioComponent;
-class UAsyncManager;
-class UWindowWidget;
-class UCampaignManager;
-class ADeepCSGWorld;
-class AFSDGameState;
-class AFSDGameModeSpaceRig;
-class AFSDGameMode;
-class UFSDGameInstance;
-class UFSDSaveGame;
-class UGameData;
-class UGoogleAnalyticsWrapper;
-class UMissionModeManager;
-class IMissionModeManager;
-class APlayerCharacter;
-class UWindowManager;
-class USoundBase;
+UGameFunctionLibrary::UGameFunctionLibrary() {
+}
 
 void UGameFunctionLibrary::SpawnOrUpdateAudio2D(UObject* WorldContext, UAudioComponent*& AudioComponent, USoundBase* Sound, float VolumeMultiplier, float PitchMultiplier, FName FloatParamName, float FloatParam) {
 }
 
-void UGameFunctionLibrary::SetUsePushToTalk(bool Enable) {
+void UGameFunctionLibrary::SetUsePushToTalk(bool enable) {
 }
 
 void UGameFunctionLibrary::SetGlobalGravityZ(UObject* WorldContextObject, float GravityZ) {
@@ -39,7 +23,7 @@ void UGameFunctionLibrary::IsTearingDown(UObject* caller, bool& NewIsTearingDown
 }
 
 bool UGameFunctionLibrary::IsPlayingOffline(UObject* WorldContextObject) {
-    return false;
+	return true;
 }
 
 bool UGameFunctionLibrary::IsPlayInEditor(UObject* WorldContextObject) {
@@ -62,7 +46,7 @@ FString UGameFunctionLibrary::GetProjectVersion() {
     return TEXT("");
 }
 
-int32 UGameFunctionLibrary::GetNumPlayers(UObject* WorldContext) {
+int32 UGameFunctionLibrary::GetNumPlayers(UObject* WorldContext, bool onlyAlive) {
     return 0;
 }
 
@@ -110,6 +94,10 @@ UGameData* UGameFunctionLibrary::GetFSDGameData() {
     return NULL;
 }
 
+float UGameFunctionLibrary::GetFrameRateInHz(UObject* WorldContextObject) {
+    return 0.0f;
+}
+
 TScriptInterface<IMissionModeManager> UGameFunctionLibrary::GetDeepDiveManager(UObject* WorldContextObject) {
     return NULL;
 }
@@ -130,6 +118,4 @@ UAsyncManager* UGameFunctionLibrary::GetAsyncManager(UObject* WorldContextObject
     return NULL;
 }
 
-UGameFunctionLibrary::UGameFunctionLibrary() {
-}
 

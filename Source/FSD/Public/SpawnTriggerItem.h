@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "GenerationItem.h"
+#include "Templates/SubclassOf.h"
 #include "SpawnTriggerItem.generated.h"
 
 class AActor;
@@ -18,6 +18,7 @@ protected:
     FName Message;
     
 public:
-    ASpawnTriggerItem();
+    ASpawnTriggerItem(const FObjectInitializer& ObjectInitializer);
+
 };
 

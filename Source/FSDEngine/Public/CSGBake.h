@@ -1,9 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "UObject/NoExportTypes.h"
 #include "Engine/DataAsset.h"
 #include "BakeEntry.h"
 #include "BakeSettings.h"
-#include "UObject/NoExportTypes.h"
 #include "CSGBake.generated.h"
 
 class ACSGBuilder;
@@ -44,6 +44,7 @@ public:
     ACSGBuilder* CDO;
     
     UCSGBake();
+
     UFUNCTION(BlueprintCallable)
     void BakeCSG();
     

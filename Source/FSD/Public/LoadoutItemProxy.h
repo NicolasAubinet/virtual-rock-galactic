@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
-#include "ItemLoadoutAnimations.h"
 #include "Item.h"
+#include "ItemLoadoutAnimations.h"
+#include "Templates/SubclassOf.h"
 #include "LoadoutItemProxy.generated.h"
 
 class AActor;
@@ -20,9 +20,10 @@ protected:
     FItemLoadoutAnimations LoadoutAnimations;
     
 public:
-    ALoadoutItemProxy();
+    ALoadoutItemProxy(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
-    static TSubclassOf<AItem> GetLoadoutItemFromClass(TSubclassOf<AActor> ActorClass);
+    static TSubclassOf<AItem> GetLoadoutItemFromClass(TSubclassOf<AActor> actorClass);
     
 };
 

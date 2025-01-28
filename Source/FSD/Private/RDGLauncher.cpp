@@ -1,6 +1,7 @@
 #include "RDGLauncher.h"
 
-class URDGComponent;
+ARDGLauncher::ARDGLauncher(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+}
 
 void ARDGLauncher::Server_DetonateAll_Implementation() {
 }
@@ -8,6 +9,4 @@ void ARDGLauncher::Server_DetonateAll_Implementation() {
 void ARDGLauncher::RegisterGrenade(URDGComponent* Grenade) {
 }
 
-ARDGLauncher::ARDGLauncher() {
-}
 

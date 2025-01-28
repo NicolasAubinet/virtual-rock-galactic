@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EBoltActionWeaponConditions.h"
 #include "DamageCondition.h"
+#include "EBoltActionWeaponConditions.h"
 #include "BoltActionWeaponDamageCondition.generated.h"
 
 UCLASS(Blueprintable, EditInlineNew)
@@ -14,5 +14,6 @@ protected:
     
 public:
     UBoltActionWeaponDamageCondition();
+
 };
 

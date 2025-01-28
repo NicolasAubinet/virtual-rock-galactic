@@ -1,8 +1,10 @@
 #include "WindowManager.h"
 #include "Templates/SubclassOf.h"
 
-class UUserWidget;
-class UWindowWidget;
+UWindowManager::UWindowManager(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->AudioWindowOpen = NULL;
+    this->ResolutionDownscaleActive = false;
+}
 
 void UWindowManager::SetSingletonWidgetVisibility(TSubclassOf<UUserWidget> WidgetClass, ESlateVisibility Visibility) {
 }
@@ -53,8 +55,4 @@ bool UWindowManager::AnyWindowsOpen() const {
     return false;
 }
 
-UWindowManager::UWindowManager() {
-    this->AudioWindowOpen = NULL;
-    this->ResolutionDownscaleActive = false;
-}
 

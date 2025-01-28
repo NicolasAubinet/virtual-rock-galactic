@@ -1,10 +1,10 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
+#include "Components/ActorComponent.h"
 #include "Engine/EngineTypes.h"
 #include "Engine/NetSerialization.h"
-#include "Components/ActorComponent.h"
+#include "Templates/SubclassOf.h"
 #include "WeaponHitEffectComponent.generated.h"
 
 class AActor;
@@ -21,7 +21,8 @@ protected:
     TSubclassOf<AActor> ActorToSpawn;
     
 public:
-    UWeaponHitEffectComponent();
+    UWeaponHitEffectComponent(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SpawnEffect(const FVector_NetQuantize& Location, const FRotator& Rotation);

@@ -1,6 +1,8 @@
 #include "ShowroomController.h"
 
-class AActor;
+UShowroomController::UShowroomController(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->Stage = NULL;
+}
 
 void UShowroomController::SetLightChannels(AActor* Actor) {
 }
@@ -15,7 +17,4 @@ FRotator UShowroomController::GetShowroomRotation() {
     return FRotator{};
 }
 
-UShowroomController::UShowroomController() {
-    this->Stage = NULL;
-}
 

@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "Components/ActorComponent.h"
+#include "Templates/SubclassOf.h"
 #include "CoilgunTrailSpawner.generated.h"
 
 class AActor;
@@ -27,7 +27,8 @@ protected:
     float TrailSpawnRange;
     
 public:
-    UCoilgunTrailSpawner();
+    UCoilgunTrailSpawner(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void SpawnSegment();

@@ -1,11 +1,10 @@
 #include "VanitySchematicBank.h"
 
-class UVanityItem;
+UVanitySchematicBank::UVanitySchematicBank() {
+    this->SchematicCategory = NULL;
+}
 
 void UVanitySchematicBank::AppendItems(TArray<UVanityItem*>& toArray) const {
 }
 
-UVanitySchematicBank::UVanitySchematicBank() {
-    this->SchematicCategory = NULL;
-}
 

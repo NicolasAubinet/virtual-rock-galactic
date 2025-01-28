@@ -14,9 +14,10 @@ protected:
     UResourceData* Resource;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    int32 Amount;
+    int32 amount;
     
 public:
     UResourceReward();
+
 };
 

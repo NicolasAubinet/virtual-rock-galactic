@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "Kismet/BlueprintAsyncActionBase.h"
 #include "YesNoPromptSettings.h"
 #include "YesNoPromptWidget.h"
-#include "Kismet/BlueprintAsyncActionBase.h"
 #include "YesNoPromptAction.generated.h"
 
 class UObject;
@@ -26,11 +26,15 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UYesNoPromptWidget::FOnYesNoClickedDelegate YesNoDelegate;
     
-    UPROPERTY(EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UYesNoPromptWidget> ActivePrompt;
     
 public:
     UYesNoPromptAction();
+
+    UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
+    static UYesNoPromptAction* PromptYesNoWidget(UObject* WorldContext, UYesNoPromptWidget* InPromptWidget, FText InTitle, FText InMessage);
+    
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
     static UYesNoPromptAction* PromptYesNo(UObject* WorldContext, FYesNoPromptSettings Prompt);
     

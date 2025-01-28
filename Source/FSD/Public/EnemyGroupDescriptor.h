@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "Engine/DataAsset.h"
 #include "EnemyGroupDescriptorItem.h"
 #include "RandInterval.h"
-#include "Engine/DataAsset.h"
 #include "EnemyGroupDescriptor.generated.h"
 
 UCLASS(Blueprintable)
@@ -21,5 +21,6 @@ protected:
     
 public:
     UEnemyGroupDescriptor();
+
 };
 

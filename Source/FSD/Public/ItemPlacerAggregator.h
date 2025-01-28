@@ -1,15 +1,17 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
+#include "Engine/EngineTypes.h"
 #include "GameplayTagContainer.h"
 #include "ItemAggregator.h"
+#include "Templates/SubclassOf.h"
 #include "ItemPlacerAggregator.generated.h"
 
 class AActor;
 class AItem;
-class UDialogDataAsset;
 class AItemMarker;
+class UDialogDataAsset;
+class UTerrainMaterial;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UItemPlacerAggregator : public UItemAggregator {
@@ -53,7 +55,13 @@ protected:
     FGameplayTagQuery ExcludeTags;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TArray<TSubclassOf<AActor>> InvalidAroundActors;
+    FGameplayTagQuery IncludeTags;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<TSoftClassPtr<AActor>> InvalidAroundActors;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<UTerrainMaterial*> InvalidMaterials;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float InvalidAroundSize;
@@ -79,8 +87,12 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FTransform LastPlacement;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    FHitResult LastHit;
+    
 public:
-    UItemPlacerAggregator();
+    UItemPlacerAggregator(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void ToggleValid(bool Valid);
     
@@ -95,6 +107,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetPlacement(FTransform& Placement) const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    FHitResult GetLastHit() const;
     
     UFUNCTION(BlueprintCallable)
     void ClearIgnoredActors();

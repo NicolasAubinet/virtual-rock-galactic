@@ -5,8 +5,10 @@ UBoscoAnimInstance::UBoscoAnimInstance() {
     this->CurrentState = EDroneAIState::Follow;
     this->IsReadyToMine = false;
     this->IsMining = false;
+    this->IsMelee = false;
     this->IsFiring = false;
     this->IsReviving = false;
     this->IsCarryingGem = false;
 }
+
 

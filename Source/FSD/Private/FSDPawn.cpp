@@ -1,14 +1,26 @@
 #include "FSDPawn.h"
-#include "Net/UnrealNetwork.h"
+#include "Engine/EngineTypes.h"
 #include "EnemyTemperatureComponent.h"
+#include "Net/UnrealNetwork.h"
 #include "StatusEffectsComponent.h"
 
-class AActor;
-class USkeletalMeshComponent;
-class AFSDAIController;
-class UHealthComponentBase;
+AFSDPawn::AFSDPawn(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->AutoPossessAI = EAutoPossessAI::PlacedInWorldOrSpawned;
+    this->StatusEffects = CreateDefaultSubobject<UStatusEffectsComponent>(TEXT("StatusEffects"));
+    this->temperature = CreateDefaultSubobject<UEnemyTemperatureComponent>(TEXT("temperature"));
+    this->SpawnedFromDescriptor = NULL;
+    this->IsFrozen = false;
+    this->CanFlee = true;
+    this->IsInRagdoll = false;
+    this->FleeInsteadOfBackingOff = false;
+    this->IsFleeing = false;
+    this->PawnStatsInstance = NULL;
+}
 
 void AFSDPawn::UnFreeze() {
+}
+
+void AFSDPawn::TriggerFadeRagdoll_Implementation() {
 }
 
 void AFSDPawn::StopFleeing() {
@@ -23,6 +35,7 @@ void AFSDPawn::SetAlerted(bool isAlerted) {
 
 void AFSDPawn::OnUnFrozen_Implementation() {
 }
+
 
 
 
@@ -79,14 +92,4 @@ void AFSDPawn::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetime
     DOREPLIFETIME(AFSDPawn, IsFrozen);
 }
 
-AFSDPawn::AFSDPawn() {
-    this->StatusEffects = CreateDefaultSubobject<UStatusEffectsComponent>(TEXT("StatusEffects"));
-    this->Temperature = CreateDefaultSubobject<UEnemyTemperatureComponent>(TEXT("Temperature"));
-    this->SpawnedFromDescriptor = NULL;
-    this->IsFrozen = false;
-    this->CanFlee = true;
-    this->FleeInsteadOfBackingOff = false;
-    this->IsFleeing = false;
-    this->PawnStatsInstance = NULL;
-}
 

@@ -1,86 +1,102 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
-#include "GameplayTagContainer.h"
-#include "GDAudio.h"
-#include "GDTerrainTypes.h"
-#include "GDGameStatsTracking.h"
-#include "GDMilestones.h"
-#include "GDPlayerAndCharacterProgression.h"
-#include "GVisibilityGroups.h"
-#include "GDStats.h"
-#include "GDResources.h"
-#include "GDPerks.h"
-#include "GDItemCategoryIDs.h"
-#include "GDDifficulty.h"
-#include "GDDamageClasses.h"
-#include "RetirementCostItem.h"
-#include "GDCharacterRetirement.h"
-#include "GDMissionStats.h"
 #include "UObject/Object.h"
+#include "GameplayTagContainer.h"
+#include "AssetsToLoadSettings.h"
+#include "GDAudio.h"
+#include "GDCharacterRetirement.h"
+#include "GDDamageClasses.h"
+#include "GDDifficulty.h"
+#include "GDGameStatsTracking.h"
+#include "GDItemCategoryIDs.h"
+#include "GDMilestones.h"
+#include "GDMissionStats.h"
+#include "GDPerks.h"
+#include "GDPlayerAndCharacterProgression.h"
+#include "GDResources.h"
+#include "GDStats.h"
+#include "GDTerrainTypes.h"
+#include "GVisibilityGroups.h"
+#include "RetirementCostItem.h"
+#include "Templates/SubclassOf.h"
 #include "GameData.generated.h"
 
-class UGameActivitySettings;
+class APlayerCharacter;
+class UAchievementList;
 class UAfflictionSettings;
 class UAsyncManager;
 class UBEESettings;
 class UCharacterSettings;
 class UCommunityGoalSettings;
-class UKeyBindingSettings;
 class UDailyDealSettings;
-class UDanceSettings;
 class UDamageSettings;
+class UDanceSettings;
 class UDeepDiveSettings;
 class UDifficultySetting;
 class UDrinkSettings;
-class UEncounterSettings;
-class UEffectSettings;
 class UDynamicIconSettings;
+class UEffectSettings;
+class UEncounterSettings;
 class UEnemySettings;
-class UAchievementList;
-class UFSDTagSettings;
 class UFSDEventCollection;
+class UFSDTagSettings;
 class UFSDTutorialSettings;
+class UForginSettings;
+class UGameActivitySettings;
 class UGameAnimationSettings;
 class UGlobalMissionSetup;
 class UHUDVisibilityGroup;
-class UItemSkinSettings;
-class UItemSettings;
 class UInventoryList;
+class UItemSettings;
+class UItemSkinSettings;
+class UKPISettings;
+class UKeyBindingSettings;
 class ULegacySettings;
+class UMilestoneAsset;
 class UMinersManual;
 class UMissionStat;
-class UPlayerCharacterID;
-class UPlanetZoneSetup;
 class UPickaxeSettings;
-class APlayerCharacter;
+class UPlanetZoneSetup;
+class UPlayerCharacterID;
 class UProceduralSettings;
 class UPromotionRewardsSettings;
+class UPropHuntSettings;
 class USaveGameSettings;
-class USeasonSettings;
-class UForginSettings;
 class USchematicSettings;
+class USeasonSettings;
 class UShowroomSettings;
 class USpawnSettings;
 class USpecialEventSettings;
 class UStatusEffectSettings;
 class UTerrainMaterialSettings;
+class UTexture2D;
 class UTreasureSettings;
 class UUpgradeSettings;
-class UVictoryPoseSettings;
 class UVanitySettings;
-class UTexture2D;
+class UVictoryPoseSettings;
+class UWeaponMaintenanceSettings;
 
 UCLASS(Blueprintable)
 class FSD_API UGameData : public UObject {
     GENERATED_BODY()
+public:
+protected:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UKPISettings* KPI_Settings;
+    
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGVisibilityGroups VisibilityGroups;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UPromotionRewardsSettings* PromotionRewardsSettings;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UWeaponMaintenanceSettings* WeaponMaintenanceSettings;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPropHuntSettings* PropHuntSettings;
     
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -189,15 +205,6 @@ protected:
     USaveGameSettings* SaveGameSettings;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FGDMissionStats MissionStats;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FGDMilestones Milestones;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FGDPerks perks;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGDItemCategoryIDs ItemCategoryIDs;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -222,7 +229,7 @@ protected:
     FGDGameStatsTracking GameStatsTracking;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FGDAudio audio;
+    FGDAudio Audio;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGDDifficulty Difficulty;
@@ -257,8 +264,12 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTag XBoxExcludeRoomTag;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FAssetsToLoadSettings AssetsToLoad;
+    
 public:
     UGameData();
+
     UFUNCTION(BlueprintCallable)
     void UnloadPreloadedAssets();
     
@@ -278,7 +289,19 @@ public:
     UPlayerCharacterID* GetPlayerCharacterID(const FGuid& ID) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    FGDPerks GetPerkData() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    FGDMissionStats GetMissionStats() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    FGDMilestones GetMileStonesData() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     UInventoryList* GetInventoryList(UPlayerCharacterID* characterID) const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    int32 GetDifficultySettingIndex(const UDifficultySetting* InDifficulty) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UDifficultySetting* GetDifficultySetting(int32 Index) const;
@@ -300,6 +323,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<UMissionStat*> GetAllMissionStats() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    TArray<UMilestoneAsset*> GetAllMilestones() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<UMissionStat*> GetAllInfirmaryStats() const;

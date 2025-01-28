@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
-#include "Engine/NetSerialization.h"
 #include "Engine/EngineTypes.h"
+#include "Engine/NetSerialization.h"
+#include "Templates/SubclassOf.h"
 #include "WeaponFireComponent.h"
 #include "ZiplineLauncherComponent.generated.h"
 
@@ -23,7 +23,8 @@ protected:
     TSubclassOf<AZipLineProjectile> ProjectileClass;
     
 public:
-    UZiplineLauncherComponent();
+    UZiplineLauncherComponent(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_Fire(FVector_NetQuantize Origin, FVector_NetQuantize Destination);

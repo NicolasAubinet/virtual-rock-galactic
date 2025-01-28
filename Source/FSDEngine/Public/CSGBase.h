@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "UObject/NoExportTypes.h"
 #include "BuilderBase.h"
 #include "MeshBaseProperties.h"
-#include "UObject/NoExportTypes.h"
 #include "CSGBase.generated.h"
 
 UCLASS(Abstract, Blueprintable)
@@ -16,5 +16,6 @@ public:
     FTransform RelativeTransform;
     
     UCSGBase();
+
 };
 

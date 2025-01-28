@@ -1,12 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "ClaimableRewardEntry.h"
 #include "Blueprint/UserWidget.h"
+#include "ClaimableRewardEntry.h"
 #include "ClaimableRewardEntryWidget.generated.h"
 
 class UClaimableRewardEntryWidget;
 
-UCLASS(Blueprintable, EditInlineNew)
+UCLASS(Abstract, Blueprintable, EditInlineNew)
 class UClaimableRewardEntryWidget : public UUserWidget {
     GENERATED_BODY()
 public:
@@ -24,6 +24,7 @@ protected:
     
 public:
     UClaimableRewardEntryWidget();
+
 protected:
     UFUNCTION(BlueprintCallable)
     void SignalRewardClaimed();
@@ -34,7 +35,14 @@ public:
     
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void ReceiveMoveIn(float InStartDelay);
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ReceiveDataChanged();
+    
+public:
+    UFUNCTION(BlueprintCallable)
+    void MoveIn(float InStartDelay);
     
 };
 

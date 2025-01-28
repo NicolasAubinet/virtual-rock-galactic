@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "RandRange.h"
-#include "LineSegmentFillerPoint.h"
 #include "GenerationComponent.h"
+#include "LineSegmentFillerPoint.h"
+#include "RandRange.h"
 #include "LineSegmentFillerComponent.generated.h"
 
 class UFloodFillSettings;
@@ -26,6 +26,7 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FRandRange NoiseRangeScale;
     
-    ULineSegmentFillerComponent();
+    ULineSegmentFillerComponent(const FObjectInitializer& ObjectInitializer);
+
 };
 

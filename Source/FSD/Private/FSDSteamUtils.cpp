@@ -1,12 +1,16 @@
 #include "FSDSteamUtils.h"
 
-class APlayerState;
+UFSDSteamUtils::UFSDSteamUtils() {
+}
 
 bool UFSDSteamUtils::PlayerIsFollowingUsOnSteam() {
     return false;
 }
 
 void UFSDSteamUtils::OpenURLInSteamBrowser(const FString& URL) {
+}
+
+void UFSDSteamUtils::OpenSteamSettings() {
 }
 
 bool UFSDSteamUtils::IsTextFilteringInitialized() {
@@ -65,6 +69,4 @@ FString UFSDSteamUtils::FilterProfanityText(const FString& inputMessage) {
     return TEXT("");
 }
 
-UFSDSteamUtils::UFSDSteamUtils() {
-}
 

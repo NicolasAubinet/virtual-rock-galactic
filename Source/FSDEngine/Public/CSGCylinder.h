@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "ConvexMeshWithCachedTree.h"
 #include "CSGCylinderProperties.h"
+#include "ConvexMeshWithCachedTree.h"
 #include "CSGCylinder.generated.h"
 
 UCLASS(Blueprintable)
@@ -12,5 +12,6 @@ public:
     FCSGCylinderProperties Properties;
     
     UCSGCylinder();
+
 };
 

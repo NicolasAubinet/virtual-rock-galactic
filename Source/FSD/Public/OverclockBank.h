@@ -4,8 +4,8 @@
 #include "SchematicBankInterface.h"
 #include "OverclockBank.generated.h"
 
-class UOverclockUpgrade;
 class UItemID;
+class UOverclockUpgrade;
 class USchematic;
 
 UCLASS(Blueprintable)
@@ -19,7 +19,8 @@ public:
     UItemID* OwningItem;
     
     UOverclockBank();
-    
+
+
     // Fix for true pure virtual functions not being implemented
 };
 

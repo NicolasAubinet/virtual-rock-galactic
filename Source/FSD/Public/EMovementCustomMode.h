@@ -8,6 +8,6 @@ enum EMovementCustomMode {
     MOVE_Custom_Track,
     MOVE_Custom_CharacterStateControlled,
     MOVE_Custom_TraversalTool,
-    MOVE_Custom_MAX UMETA(Hidden),
+    MOVE_Custom_JetBoots,
 };
 

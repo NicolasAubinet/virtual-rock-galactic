@@ -1,27 +1,27 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
-#include "Engine/EngineTypes.h"
 #include "GameFramework/Actor.h"
-#include "LoadoutItem.h"
+#include "Engine/EngineTypes.h"
 #include "ItemIDInterface.h"
+#include "LoadoutItem.h"
 #include "SaveGameIDInterface.h"
+#include "Templates/SubclassOf.h"
 #include "Grenade.generated.h"
 
-class UUserWidget;
-class AItem;
 class AGrenade;
-class UProjectileMovementComponent;
-class UGrenadeProjectionSettings;
-class UGrenadeAnimationSet;
+class AItem;
 class ALoadoutItemProxy;
+class UGrenadeAnimationSet;
+class UGrenadeProjectionSettings;
 class UItemID;
 class UParticleSystem;
+class UProjectileMovementComponent;
 class USoundCue;
 class UStaticMesh;
+class UUserWidget;
 
 UCLASS(Blueprintable)
 class AGrenade : public AActor, public ISaveGameIDInterface, public IItemIDInterface, public ILoadoutItem {
@@ -92,9 +92,10 @@ protected:
     UGrenadeAnimationSet* GrenadeAnimationSetOverride;
     
 public:
-    AGrenade();
+    AGrenade(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_HasExploded();
@@ -119,7 +120,7 @@ protected:
     UFUNCTION(BlueprintCallable)
     void ActorWasHit(AActor* SelfActor, AActor* OtherActor, FVector NormalImpulse, const FHitResult& Hit);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 public:
     UFUNCTION(BlueprintCallable)

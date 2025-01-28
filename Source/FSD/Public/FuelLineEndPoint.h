@@ -1,14 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "GameFramework/Actor.h"
+#include "Templates/SubclassOf.h"
 #include "FuelLineEndPoint.generated.h"
 
-class UStaticMeshComponent;
-class ATrackBuilderSegment;
 class AFuelLineSegment;
-class UTrackBuilderConnectPoint;
+class ATrackBuilderSegment;
 class UFuelLineConnectPoint;
+class UStaticMeshComponent;
+class UTrackBuilderConnectPoint;
 
 UCLASS(Abstract, Blueprintable)
 class FSD_API AFuelLineEndPoint : public AActor {
@@ -28,9 +28,10 @@ protected:
     bool OpenForConnection;
     
 public:
-    AFuelLineEndPoint();
+    AFuelLineEndPoint(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetOpenForConnection(bool Open);
     

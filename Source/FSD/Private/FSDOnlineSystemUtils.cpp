@@ -1,8 +1,7 @@
 #include "FSDOnlineSystemUtils.h"
 
-class UObject;
-class UFSDGameInstance;
-class APlayerState;
+UFSDOnlineSystemUtils::UFSDOnlineSystemUtils() {
+}
 
 void UFSDOnlineSystemUtils::TryToResolvePrivilege(const APlayerState* PlayerState, EBlueprintableUserPrivileges Privilege, EBlueprintablePrivilegeResults reason) {
 }
@@ -32,6 +31,9 @@ FText UFSDOnlineSystemUtils::OnlinePlayBlockReasonToString(EBlueprintablePrivile
 void UFSDOnlineSystemUtils::GetOnlinePlayBlockReasons(TArray<EBlueprintablePrivilegeResults>& reasons) {
 }
 
+void UFSDOnlineSystemUtils::GetIsUpdatePending(const FOnGetIsUpdatePendingBP& Delegate) {
+}
+
 void UFSDOnlineSystemUtils::GetIsPrivilegeAllowed(const APlayerState* PlayerState, EBlueprintableUserPrivileges Privilege, const FOnGetUserPrivilegeCompleteBPDelegate& Delegate) {
 }
 
@@ -43,6 +45,4 @@ EInviteBlockReason UFSDOnlineSystemUtils::CanPlayerInvite(UObject* WorldContextO
     return EInviteBlockReason::SoloSession;
 }
 
-UFSDOnlineSystemUtils::UFSDOnlineSystemUtils() {
-}
 

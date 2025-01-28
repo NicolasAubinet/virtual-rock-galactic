@@ -7,6 +7,7 @@
 
 class AActor;
 class UCarriableInstantUsable;
+class UResourcesComponent;
 class USoundCue;
 
 UCLASS(Blueprintable)
@@ -21,7 +22,11 @@ protected:
     USoundCue* ImpactGroundSound;
     
 public:
-    AResourcePouch();
+    AResourcePouch(const FObjectInitializer& ObjectInitializer);
+
+    UFUNCTION(BlueprintCallable)
+    void SetResources(UResourcesComponent* Resources);
+    
 protected:
     UFUNCTION(BlueprintCallable)
     void ActorWasHit(AActor* SelfActor, AActor* OtherActor, FVector NormalImpulse, const FHitResult& Hit);

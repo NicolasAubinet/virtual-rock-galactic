@@ -1,9 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "Engine/DeveloperSettings.h"
 #include "InputCoreTypes.h"
 #include "ActionIconMapping.h"
 #include "InputTranslationTable.h"
-#include "Engine/DeveloperSettings.h"
 #include "ControllerIconSettings.generated.h"
 
 UCLASS(Blueprintable, DefaultConfig, Config=Game)
@@ -28,6 +28,7 @@ protected:
     
 public:
     UControllerIconSettings();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static bool FindMouseKeyboardKeyIcon(FKey Key, FActionIconMapping& KeyIcon);
     

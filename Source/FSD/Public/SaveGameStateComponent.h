@@ -1,17 +1,17 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
+#include "Components/ActorComponent.h"
+#include "ActiveCampaingMission.h"
+#include "CharacterProgress.h"
+#include "CharacterProgressChangedSignatureDelegate.h"
 #include "ItemLoadout.h"
 #include "ItemUpgradeSelection.h"
-#include "CharacterProgressChangedSignatureDelegate.h"
-#include "PlayerProgressChangedSignatureDelegate.h"
-#include "LoadoutChangedDelegateDelegate.h"
 #include "ItemUpgradesChangedDelegateDelegate.h"
-#include "SaveGameStatePerkItem.h"
-#include "ActiveCampaingMission.h"
+#include "LoadoutChangedDelegateDelegate.h"
 #include "PlayerProgress.h"
-#include "CharacterProgress.h"
-#include "Components/ActorComponent.h"
+#include "PlayerProgressChangedSignatureDelegate.h"
+#include "SaveGameStatePerkItem.h"
+#include "Templates/SubclassOf.h"
 #include "SaveGameStateComponent.generated.h"
 
 class AActor;
@@ -33,9 +33,6 @@ public:
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FItemUpgradeCraftSignature OnItemUpgradeCrafted;
-    
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FItemUpgradeEquipSignature OnItemUpgradeEquipped;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FItemUpgradeEquipSignature OnItemUpgradeUnequipped;
@@ -78,9 +75,10 @@ protected:
     TArray<FCharacterProgress> CharacterStats;
     
 public:
-    USaveGameStateComponent();
+    USaveGameStateComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void SetCampaign();
     
@@ -98,7 +96,7 @@ protected:
     void Server_SetEquippedPerks(const TArray<FSaveGameStatePerkItem>& perks);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
-    void Server_SetCredits(const int32 Amount);
+    void Server_SetCredits(const int32 amount);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetCharacterStats(const TArray<FCharacterProgress>& Stats);
@@ -127,11 +125,11 @@ protected:
     void OnRep_ActiveCampaignMission();
     
 public:
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsActiveCampaignMission(UGeneratedMission* mission) const;
+    
     UFUNCTION(BlueprintCallable)
     FCharacterProgress GetCharacterStat(UPlayerCharacterID* characterID);
-    
-    UFUNCTION(BlueprintCallable, BlueprintPure)
-    UGeneratedMission* GetActiveCampaignMission() const;
     
 };
 

@@ -3,14 +3,15 @@
 #include "Engine/NetSerialization.h"
 #include "Engine/NetSerialization.h"
 #include "HitDelegateDelegate.h"
-#include "IRandRange.h"
 #include "HitscanBaseComponent.h"
+#include "HitscanDelayedImpact.h"
+#include "IRandRange.h"
 #include "HitscanComponent.generated.h"
 
 class AActor;
-class UPrimitiveComponent;
-class UFXSystemAsset;
 class UFSDPhysicalMaterial;
+class UFXSystemAsset;
+class UPrimitiveComponent;
 class USoundCue;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -60,8 +61,12 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<AActor*> DamagedActorCache;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FHitscanDelayedImpact> DelayedImpacts;
+    
 public:
-    UHitscanComponent();
+    UHitscanComponent(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_RegisterRicochetHit_Terrain(FVector_NetQuantize Origin, FVector_NetQuantize Location, FVector_NetQuantizeNormal Normal, UFSDPhysicalMaterial* PhysMaterial);

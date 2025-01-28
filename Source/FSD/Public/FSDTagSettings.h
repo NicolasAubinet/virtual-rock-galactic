@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "Engine/DataAsset.h"
 #include "GameplayTagContainer.h"
 #include "FSDTagsRoot.h"
-#include "Engine/DataAsset.h"
 #include "FSDTagSettings.generated.h"
 
 UCLASS(Blueprintable)
@@ -22,5 +22,6 @@ public:
     FFSDTagsRoot Root;
     
     UFSDTagSettings();
+
 };
 

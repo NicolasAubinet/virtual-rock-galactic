@@ -1,10 +1,10 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "GameplayTagContainer.h"
-#include "GameplayTagContainer.h"
 #include "GameFramework/Actor.h"
-#include "Targetable.h"
+#include "GameplayTagContainer.h"
 #include "GameplayTagAssetInterface.h"
+#include "GameplayTagContainer.h"
+#include "Targetable.h"
 #include "TargetDummyPawn.generated.h"
 
 UCLASS(Abstract, Blueprintable)
@@ -16,8 +16,9 @@ protected:
     FGameplayTagContainer GameplayTags;
     
 public:
-    ATargetDummyPawn();
-    
+    ATargetDummyPawn(const FObjectInitializer& ObjectInitializer);
+
+
     // Fix for true pure virtual functions not being implemented
     UFUNCTION(BlueprintCallable)
     bool HasMatchingGameplayTag(FGameplayTag TagToCheck) const override PURE_VIRTUAL(HasMatchingGameplayTag, return false;);

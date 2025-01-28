@@ -3,9 +3,9 @@
 #include "GameFramework/Actor.h"
 #include "GlowPlant.generated.h"
 
+class UPointLightComponent;
 class UPrimitiveComponent;
 class UStaticMeshComponent;
-class UPointLightComponent;
 
 UCLASS(Abstract, Blueprintable)
 class AGlowPlant : public AActor {
@@ -64,7 +64,8 @@ protected:
     float EmissiveFadeOutTime;
     
 public:
-    AGlowPlant();
+    AGlowPlant(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void OnDeath();
     

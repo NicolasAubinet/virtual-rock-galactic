@@ -2,15 +2,15 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
-#include "SawFakeMoveState.h"
-#include "FakeSawMover.h"
 #include "GameFramework/Actor.h"
+#include "FakeSawMover.h"
+#include "SawFakeMoveState.h"
 #include "WallSaw.generated.h"
 
-class UPrimitiveComponent;
 class UCapsuleComponent;
-class UParticleSystemComponent;
 class UCurveFloat;
+class UParticleSystemComponent;
+class UPrimitiveComponent;
 
 UCLASS(Blueprintable)
 class AWallSaw : public AActor {
@@ -42,9 +42,10 @@ protected:
     float PlayerHitRangeFromCenter;
     
 public:
-    AWallSaw();
+    AWallSaw(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void UpdateCheckForWeakpoints();

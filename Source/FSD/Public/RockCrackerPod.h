@@ -3,15 +3,15 @@
 #include "DamageData.h"
 #include "EInputKeys.h"
 #include "ERockCrackerstate.h"
-#include "RockCrackerStateDelegateDelegate.h"
 #include "RessuplyPod.h"
+#include "RockCrackerStateDelegateDelegate.h"
 #include "RockCrackerPod.generated.h"
 
-class UDialogDataAsset;
-class UFriendlyHealthComponent;
 class APlayerCharacter;
 class ARockCrackerPod;
 class UContinuousUsableComponent;
+class UDialogDataAsset;
+class UFriendlyHealthComponent;
 
 UCLASS(Blueprintable)
 class ARockCrackerPod : public ARessuplyPod {
@@ -53,9 +53,10 @@ private:
     float HealPerTick;
     
 public:
-    ARockCrackerPod();
+    ARockCrackerPod(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void SwitchYellowLights(bool isGreen);

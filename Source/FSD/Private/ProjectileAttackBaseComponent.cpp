@@ -1,7 +1,11 @@
 #include "ProjectileAttackBaseComponent.h"
 
-class AActor;
-class UAnimMontage;
+UProjectileAttackBaseComponent::UProjectileAttackBaseComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->SocketName = TEXT("RangedAttack");
+    this->RotationHandling = EProjectileAttackRotationType::NoTarget_ActorForward;
+    this->FinalValidationCheck = NULL;
+    this->ProjectilesIgnoreEachOther = false;
+}
 
 bool UProjectileAttackBaseComponent::TriggerMontage(AActor* Target) {
     return false;
@@ -23,10 +27,4 @@ void UProjectileAttackBaseComponent::MulticastProjectileFired_Implementation() {
 void UProjectileAttackBaseComponent::CancelMontage() {
 }
 
-UProjectileAttackBaseComponent::UProjectileAttackBaseComponent() {
-    this->SocketName = TEXT("RangedAttack");
-    this->RotationHandling = EProjectileAttackRotationType::NoTarget_ActorForward;
-    this->FinalValidationCheck = NULL;
-    this->ProjectilesIgnoreEachOther = false;
-}
 

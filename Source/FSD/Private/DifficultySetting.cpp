@@ -1,19 +1,5 @@
 #include "DifficultySetting.h"
 
-class UObject;
-
-bool UDifficultySetting::IsUnlocked(UObject* WorldContext) const {
-    return false;
-}
-
-int32 UDifficultySetting::GetDifficultyIndex() const {
-    return 0;
-}
-
-float UDifficultySetting::AddHazardBonus(float BaseValue) const {
-    return 0.0f;
-}
-
 UDifficultySetting::UDifficultySetting() {
     this->CampaignRequirement = NULL;
     this->SelectedByDefaultCampaignRequirement = NULL;
@@ -26,6 +12,7 @@ UDifficultySetting::UDifficultySetting() {
     this->SmallEnemyDamageResistance.AddDefaulted(4);
     this->EnemyDamageModifier.AddDefaulted(4);
     this->EnemyToEnemyDamageModifier = 1.00f;
+    this->SupportsHazardPlus = false;
     this->EnemyCountModifier.AddDefaulted(4);
     this->BossDifficultyScaler = 1.00f;
     this->PointExtractionScaler = 1.00f;
@@ -45,4 +32,17 @@ UDifficultySetting::UDifficultySetting() {
     this->EliteCooldown = 60.00f;
     this->MaxActiveElites = 1;
 }
+
+bool UDifficultySetting::IsUnlocked(UObject* WorldContext) const {
+    return false;
+}
+
+int32 UDifficultySetting::GetDifficultyIndex() const {
+    return 0;
+}
+
+float UDifficultySetting::AddHazardBonus(float BaseValue) const {
+    return 0.0f;
+}
+
 

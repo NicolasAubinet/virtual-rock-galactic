@@ -2,20 +2,20 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
-#include "Engine/EngineTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "GameFramework/Actor.h"
+#include "Engine/EngineTypes.h"
 #include "WeaponFireOwner.h"
 #include "NeedleSprayer.generated.h"
 
-class USceneComponent;
-class UNiagaraComponent;
-class USkeletalMeshComponent;
-class UPointLightComponent;
-class UFSDAudioComponent;
-class UHitscanComponent;
 class APlayerCharacter;
 class UAnimMontage;
+class UFSDAudioComponent;
+class UHitscanComponent;
+class UNiagaraComponent;
+class UPointLightComponent;
+class USceneComponent;
+class USkeletalMeshComponent;
 
 UCLASS(Blueprintable)
 class ANeedleSprayer : public AActor, public IWeaponFireOwner {
@@ -98,7 +98,8 @@ protected:
     float DebugLinesDuration;
     
 public:
-    ANeedleSprayer();
+    ANeedleSprayer(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnSpinningChanged(bool isSpinning);
@@ -107,7 +108,7 @@ public:
     UFUNCTION(BlueprintCallable)
     void OnHit(const FHitResult& Result, bool IsPenetrating);
     
-    
+
     // Fix for true pure virtual functions not being implemented
     UFUNCTION(BlueprintCallable)
     APlayerCharacter* GetPlayerCharacter() const override PURE_VIRTUAL(GetPlayerCharacter, return NULL;);

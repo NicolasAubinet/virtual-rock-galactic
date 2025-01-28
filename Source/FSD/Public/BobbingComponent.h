@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "MovedIntoSomethingDelegate.h"
 #include "Components/SceneComponent.h"
+#include "MovedIntoSomethingDelegate.h"
 #include "BobbingComponent.generated.h"
 
 class AActor;
@@ -30,7 +30,8 @@ protected:
     float OrentationChecksPerSecond;
     
 public:
-    UBobbingComponent();
+    UBobbingComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void SetOwner(AActor* AActor);
     

@@ -1,7 +1,13 @@
 #include "DroneUseComponent.h"
 #include "Net/UnrealNetwork.h"
 
-class APlayerCharacter;
+UDroneUseComponent::UDroneUseComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->BoscoLaserpointerShout = NULL;
+    this->Progress = 0.00f;
+    this->useDuration = 0.00f;
+    this->ResetOnFail = false;
+    this->CanUse = false;
+}
 
 void UDroneUseComponent::SyncedUsableUserCountChangedResponse(int32 userCount) {
 }
@@ -34,11 +40,4 @@ void UDroneUseComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& O
     DOREPLIFETIME(UDroneUseComponent, Progress);
 }
 
-UDroneUseComponent::UDroneUseComponent() {
-    this->BoscoLaserpointerShout = NULL;
-    this->Progress = 0.00f;
-    this->useDuration = 0.00f;
-    this->ResetOnFail = false;
-    this->CanUse = false;
-}
 

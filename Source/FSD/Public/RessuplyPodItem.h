@@ -1,14 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
 #include "AnimatedItem.h"
+#include "Templates/SubclassOf.h"
 #include "RessuplyPodItem.generated.h"
 
-class UObject;
 class AActor;
 class ARessuplyPod;
 class UItemPlacerAggregator;
+class UObject;
 
 UCLASS(Blueprintable)
 class ARessuplyPodItem : public AAnimatedItem {
@@ -43,9 +43,10 @@ protected:
     bool Used;
     
 public:
-    ARessuplyPodItem();
+    ARessuplyPodItem(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_Call_Resupply(const FVector& Location);

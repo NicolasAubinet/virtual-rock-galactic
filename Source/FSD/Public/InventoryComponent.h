@@ -1,31 +1,31 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
+#include "CarriableChangedDelegateDelegate.h"
 #include "EItemCategory.h"
-#include "ResupplyDelegateDelegate.h"
-#include "InventoryItemsLoadedDelegate.h"
 #include "FlareProductionDelegateDelegate.h"
 #include "FlaresDelegateDelegate.h"
 #include "GrenadesDelegateDelegate.h"
-#include "ItemDelegateDelegate.h"
-#include "CarriableChangedDelegateDelegate.h"
 #include "InventoryBase.h"
+#include "InventoryItemsLoadedDelegate.h"
+#include "ItemDelegateDelegate.h"
+#include "ResupplyDelegateDelegate.h"
+#include "Templates/SubclassOf.h"
 #include "InventoryComponent.generated.h"
 
 class AActor;
-class AItem;
-class ARessuplyPodItem;
-class UDialogDataAsset;
 class AFlare;
-class UItemUpgrade;
-class UInventoryList;
+class AItem;
 class ALaserPointerItem;
 class APickaxeItem;
 class ARecallableSentryGunItem;
-class AThrownGrenadeItem;
+class ARessuplyPodItem;
 class ATerrainScannerItem;
+class AThrownGrenadeItem;
+class UDialogDataAsset;
+class UInventoryList;
+class UItemUpgrade;
 class USoundCue;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -130,9 +130,10 @@ protected:
     ARecallableSentryGunItem* RecallableSentryGunItem;
     
 public:
-    UInventoryComponent();
+    UInventoryComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void UpdateFromSaveGameInSlot(EItemCategory Category);
     
@@ -178,6 +179,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     ARecallableSentryGunItem* GetRecallableSentryGunItem() const;
+    
+    UFUNCTION(BlueprintCallable)
+    AItem* GetOrCreateUnlistedItem(TSubclassOf<AItem> ItemType);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     AItem* GetItem(EItemCategory Category) const;

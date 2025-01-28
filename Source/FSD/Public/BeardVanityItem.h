@@ -1,11 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "EMaterialChoice.h"
 #include "VanityItem.h"
 #include "BeardVanityItem.generated.h"
 
-class UVanityAnimInstance;
 class UMaterialInterface;
 class USkeletalMesh;
+class UTagVanityBeards;
+class UVanityAnimInstance;
 
 UCLASS(Blueprintable, EditInlineNew)
 class UBeardVanityItem : public UVanityItem {
@@ -22,10 +24,7 @@ protected:
     bool RequiresSlimArmor;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    bool UseHairColor;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    bool UseArmorColor;
+    EMaterialChoice MaterialType;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool HideEyebrows;
@@ -40,6 +39,9 @@ protected:
     bool HideAll;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSet<UTagVanityBeards*> VanityTags;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<UVanityAnimInstance> AnimInstance;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -47,5 +49,6 @@ protected:
     
 public:
     UBeardVanityItem();
+
 };
 

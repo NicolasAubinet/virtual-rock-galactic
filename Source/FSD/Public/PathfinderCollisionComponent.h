@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "PFCollisionType.h"
 #include "Components/StaticMeshComponent.h"
+#include "PFCollisionType.h"
 #include "PathfinderCollisionComponent.generated.h"
 
 UCLASS(Blueprintable, EditInlineNew, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -14,11 +14,12 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     PFCollisionType PFColiType;
     
-    UPathfinderCollisionComponent();
-    UFUNCTION(BlueprintCallable)
+    UPathfinderCollisionComponent(const FObjectInitializer& ObjectInitializer);
+
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void DisablePFCollision();
     
-    UFUNCTION(BlueprintCallable)
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void ActivatePFCollision();
     
 };

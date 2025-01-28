@@ -5,10 +5,10 @@
 #include "RandomFiringGuntowerModule.generated.h"
 
 class UAudioComponent;
-class UStaticMeshComponent;
 class UDamageComponent;
-class UParticleSystemComponent;
 class UParticleSystem;
+class UParticleSystemComponent;
+class UStaticMeshComponent;
 
 UCLASS(Blueprintable)
 class ARandomFiringGuntowerModule : public AHostileGuntowerModule {
@@ -88,8 +88,9 @@ protected:
     bool IsAttacking;
     
 public:
-    ARandomFiringGuntowerModule();
+    ARandomFiringGuntowerModule(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 };
 

@@ -1,9 +1,7 @@
 #include "FSDWidgetEffectsComponent.h"
 
-class UObject;
-class UWidget;
-class UUserWidget;
-class UTextBlock;
+UFSDWidgetEffectsComponent::UFSDWidgetEffectsComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+}
 
 void UFSDWidgetEffectsComponent::StartTextCounter(UObject* WorldContext, UTextBlock*& Widget, float Start, float End, float Duration, int32 MaxDigits, float StartDelay) {
 }
@@ -11,7 +9,7 @@ void UFSDWidgetEffectsComponent::StartTextCounter(UObject* WorldContext, UTextBl
 void UFSDWidgetEffectsComponent::StartCounter(UObject* WorldContext, UObject* Owner, float Start, float End, float Duration, const FCustomCounterDelegate& OnCount, float StartDelay) {
 }
 
-void UFSDWidgetEffectsComponent::PingWidget(UObject* WorldContext, UWidget* Widget, float Amount, float Duration, EPingType PingType, float StartDelay) {
+void UFSDWidgetEffectsComponent::PingWidget(UObject* WorldContext, UWidget* Widget, float amount, float Duration, EPingType PingType, float StartDelay) {
 }
 
 void UFSDWidgetEffectsComponent::MoveWidget(UObject* WorldContext, UUserWidget* Widget, FVector2D Start, FVector2D End, float Duration, EMoveType MoveType, float StartDelay) {
@@ -32,6 +30,4 @@ void UFSDWidgetEffectsComponent::FadeOutWidget(UObject* WorldContext, UUserWidge
 void UFSDWidgetEffectsComponent::FadeInWidget(UObject* WorldContext, UUserWidget* Widget, float Duration, float StartDelay) {
 }
 
-UFSDWidgetEffectsComponent::UFSDWidgetEffectsComponent() {
-}
 

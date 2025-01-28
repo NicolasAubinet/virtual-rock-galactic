@@ -1,14 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "EFSDInputSource.h"
 #include "Styling/SlateTypes.h"
-#include "InputDisplay.h"
 #include "Blueprint/UserWidget.h"
+#include "EFSDInputSource.h"
+#include "InputDisplay.h"
 #include "RichTextInputWidget.generated.h"
 
-class UTextBlock;
 class URichTextBlock;
+class UTextBlock;
 
 UCLASS(Abstract, Blueprintable, EditInlineNew, HideDropdown)
 class URichTextInputWidget : public UUserWidget {
@@ -35,6 +35,7 @@ protected:
     
 public:
     URichTextInputWidget();
+
 protected:
     UFUNCTION(BlueprintCallable)
     void ScaleTextBlockToHeight(UTextBlock* InTextBlock, float LineHeight);

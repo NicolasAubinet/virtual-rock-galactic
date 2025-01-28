@@ -1,18 +1,18 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
-#include "ABillityChargeProgressDelegate.h"
-#include "AbillityChargeUsedSigDelegate.h"
-#include "AbilityDataUpdatedDelegate.h"
-#include "BoscoAbilityTarget.h"
 #include "Components/ActorComponent.h"
+#include "ABillityChargeProgressDelegate.h"
+#include "AbilityDataUpdatedDelegate.h"
+#include "AbillityChargeUsedSigDelegate.h"
+#include "BoscoAbilityTarget.h"
+#include "Templates/SubclassOf.h"
 #include "Upgradable.h"
 #include "BoscoAbillityComponent.generated.h"
 
-class UBoscoProjectileAbillity;
 class ABosco;
-class AProjectileBase;
 class ADroneStream;
+class AProjectileBase;
+class UBoscoProjectileAbillity;
 class UItemUpgrade;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -33,7 +33,7 @@ protected:
     FBoscoAbilityTarget Target;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    TArray<UItemUpgrade*> upgrades;
+    TArray<UItemUpgrade*> Upgrades;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TSubclassOf<AProjectileBase> ProjectileClass;
@@ -41,7 +41,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<ADroneStream> StreamClass;
     
-    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<ABosco> AbillityOwner;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -54,7 +54,8 @@ protected:
     bool InitializeAtBeginPlay;
     
 public:
-    UBoscoAbillityComponent();
+    UBoscoAbillityComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetMaxCharges(bool Total) const;
     
@@ -64,7 +65,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetCharges() const;
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

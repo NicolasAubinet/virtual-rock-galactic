@@ -1,20 +1,20 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "Curves/CurveFloat.h"
+#include "TaggedActor.h"
+#include "Targetable.h"
 #include "Templates/SubclassOf.h"
 #include "WormSpawnDelegateDelegate.h"
-#include "Curves/CurveFloat.h"
-#include "Targetable.h"
-#include "TaggedActor.h"
 #include "WormPod.generated.h"
 
 class AActor;
-class USceneComponent;
-class UFXSystemAsset;
-class USkeletalMeshComponent;
-class UEnemyDescriptor;
-class UHealthComponentBase;
-class USimpleHealthComponent;
 class UAnimMontage;
+class UEnemyDescriptor;
+class UFXSystemAsset;
+class UHealthComponentBase;
+class USceneComponent;
+class USimpleHealthComponent;
+class USkeletalMeshComponent;
 class USoundCue;
 
 UCLASS(Blueprintable)
@@ -77,9 +77,10 @@ protected:
     int32 WormCount;
     
 public:
-    AWormPod();
+    AWormPod(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void SpawnWorms();
     
@@ -105,7 +106,7 @@ public:
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
     void All_ShowDeath(bool success);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "CommunityReward.h"
 #include "Engine/DataAsset.h"
+#include "CommunityReward.h"
 #include "CommnuityRewardBundle.generated.h"
 
 class UObject;
@@ -16,6 +16,7 @@ protected:
     
 public:
     UCommnuityRewardBundle();
+
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
     void AwardRewards(UObject* WorldContext);
     

@@ -1,9 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/Object.h"
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
 #include "BakeSettings.h"
-#include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
 #include "BakeConfig.generated.h"
 
 class UBuilderBase;
@@ -22,6 +22,7 @@ public:
     TArray<FString> Warnings;
     
     UBakeConfig();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FVector GetVectorSetting(FName Name, FVector defaultVal);
     

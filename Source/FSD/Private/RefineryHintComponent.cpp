@@ -1,6 +1,7 @@
 #include "RefineryHintComponent.h"
 
-class AFSDRefinery;
+URefineryHintComponent::URefineryHintComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+}
 
 
 
@@ -8,6 +9,4 @@ class AFSDRefinery;
 void URefineryHintComponent::OnRefinerySpawned(AFSDRefinery* InRefinery) {
 }
 
-URefineryHintComponent::URefineryHintComponent() {
-}
 

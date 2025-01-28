@@ -1,33 +1,38 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
-#include "ESpacerigStartType.h"
-#include "EChatSenderType.h"
+#include "UObject/NoExportTypes.h"
 #include "ChatOpenedDelegateDelegate.h"
-#include "OnPlayerCharacterPossesedDelegate.h"
+#include "EArmorDamageType.h"
+#include "EChatSenderType.h"
+#include "ESpacerigStartType.h"
 #include "FSDPlayerControllerBase.h"
+#include "OnPlayerCharacterPossesedDelegate.h"
+#include "Templates/SubclassOf.h"
 #include "FSDPlayerController.generated.h"
 
 class AActor;
-class UVanityItem;
-class UFSDAchievement;
+class ADeepPathfinderCharacter;
 class AFSDPlayerState;
 class AHUD;
-class UFSDWidgetEffectsComponent;
-class UItemSkin;
-class UItemID;
-class UPlayerCharacterID;
-class UPickaxePart;
-class UPerkUsageComponent;
 class APlayerCharacter;
-class UTemporaryBuff;
-class UTerrainLatejoinComponent;
-class UTreasureRewarder;
-class UTutorialContentWidget;
-class UVictoryPose;
-class UTexture2D;
+class UDamageComponent;
+class UFSDAchievement;
+class UFSDWidgetEffectsComponent;
+class UItemID;
+class UItemSkin;
+class UPerkUsageComponent;
+class UPickaxePart;
+class UPlayerCharacterID;
+class USimpleArmorDamageComponent;
+class USkinTreasureRewarder;
 class USoundCue;
 class USoundMix;
+class UTerrainLatejoinComponent;
+class UTexture2D;
+class UTreasureRewarder;
+class UTutorialContentWidget;
+class UVanityItem;
+class UVictoryPose;
 
 UCLASS(Blueprintable)
 class FSD_API AFSDPlayerController : public AFSDPlayerControllerBase {
@@ -71,6 +76,21 @@ public:
     UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FChatOpenedDelegate OnChatOpened;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
+    ADeepPathfinderCharacter* DebugEnemy;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_DebugEnemyLocation, meta=(AllowPrivateAccess=true))
+    FVector DebugEnemyLocation;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
+    float DebugEnemySpeed;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
+    float DebugEnemySpeedMod;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    ADeepPathfinderCharacter* DebugEnemyLast;
+    
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UPerkUsageComponent* PerkUsageComponent;
@@ -100,7 +120,10 @@ protected:
     bool bDetectGravityChanges;
     
 public:
-    AFSDPlayerController();
+    AFSDPlayerController(const FObjectInitializer& ObjectInitializer);
+
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
     UFUNCTION(BlueprintCallable)
     void ToggleVoiceOn(bool Enabled);
     
@@ -129,6 +152,9 @@ public:
     void Server_TravelDone();
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_TakeDamageFrom(UDamageComponent* Damage, FVector Location);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetLateJoinDone();
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
@@ -144,10 +170,16 @@ public:
     void Server_SetExtraEndScreenTime(float extraTime);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_SetDebugEnemy(ADeepPathfinderCharacter* NewDebugEnemy);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetControllerReady();
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_ResetHUD();
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_Relay_SetArmorIndexDestroyed(USimpleArmorDamageComponent* ArmorComponent, int32 Index, EArmorDamageType DamageType);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_NewMessage(const FString& Sender, const FString& Text, EChatSenderType SenderType);
@@ -156,11 +188,6 @@ protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_DrawProjectileDebugPath(bool bDraw);
     
-public:
-    UFUNCTION(BlueprintCallable, Reliable, Server)
-    void Server_ActivateTemporaryBuff(UTemporaryBuff* buff);
-    
-protected:
     UFUNCTION(BlueprintCallable)
     void SendLevelUpStatistics(const int32 currentRank);
     
@@ -189,6 +216,9 @@ protected:
     
     UFUNCTION(BlueprintCallable)
     void OnSaveGameCharacterProgressChanged(TSubclassOf<APlayerCharacter> CharacterClass, int32 Level, float Progress);
+    
+    UFUNCTION(BlueprintCallable)
+    void OnRep_DebugEnemyLocation();
     
     UFUNCTION(BlueprintCallable)
     void OnPlayerStateSelectedCharacterChanged(TSubclassOf<APlayerCharacter> CharacterClass);
@@ -244,7 +274,7 @@ public:
     void Client_CollectTreasureVictoryPose(UTreasureRewarder* rewarder, UVictoryPose* targetPose, UPlayerCharacterID* targetCharacter);
     
     UFUNCTION(BlueprintCallable, Client, Reliable)
-    void Client_CollectTreasureSkin(UTreasureRewarder* rewarder, UItemSkin* targetSkin, UItemID* targetItem);
+    void Client_CollectTreasureSkin(USkinTreasureRewarder* rewarder, UItemSkin* targetSkin, UItemID* targetItem);
     
     UFUNCTION(BlueprintCallable, Client, Reliable)
     void Client_CollectPickaxePart(const UTreasureRewarder* rewarder, UPickaxePart* targetPart);

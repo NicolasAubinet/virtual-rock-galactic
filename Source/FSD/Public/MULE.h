@@ -3,8 +3,8 @@
 #include "DeepPathfinderCharacter.h"
 #include "MULE.generated.h"
 
-class USimpleObjectInfoComponent;
 class UHealthComponent;
+class USimpleObjectInfoComponent;
 
 UCLASS(Abstract, Blueprintable)
 class FSD_API AMULE : public ADeepPathfinderCharacter {
@@ -21,9 +21,10 @@ protected:
     bool IsDown;
     
 public:
-    AMULE();
+    AMULE(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void SetIsDown(bool NewIsDown);
     

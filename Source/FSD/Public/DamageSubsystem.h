@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "DamageSubsystemItem.h"
 #include "Subsystems/GameInstanceSubsystem.h"
+#include "DamageSubsystemItem.h"
 #include "DamageSubsystem.generated.h"
 
 UCLASS(Blueprintable)
@@ -14,5 +14,6 @@ protected:
     
 public:
     UDamageSubsystem();
+
 };
 

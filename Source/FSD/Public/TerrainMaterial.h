@@ -2,20 +2,20 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
-#include "TestTerrainMaterialItem.h"
-#include "TestTerrainMaterialDecalItem.h"
 #include "TerrainMaterialCore.h"
+#include "TestTerrainMaterialDecalItem.h"
+#include "TestTerrainMaterialItem.h"
 #include "TerrainMaterial.generated.h"
 
-class UObject;
-class UFXSystemComponent;
-class UFXSystemAsset;
-class UResourceData;
 class UDialogDataAsset;
-class UTerrainType;
-class UTerrainMaterial;
+class UFXSystemAsset;
+class UFXSystemComponent;
 class UMaterialInstance;
+class UObject;
+class UResourceData;
 class USoundCue;
+class UTerrainMaterial;
+class UTerrainType;
 
 UCLASS(Blueprintable)
 class FSD_API UTerrainMaterial : public UTerrainMaterialCore {
@@ -38,6 +38,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     uint8 PlatformDissolvable: 1;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    uint8 Ephemeral: 1;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UResourceData* ResourceData;
@@ -87,6 +90,7 @@ protected:
     
 public:
     UTerrainMaterial();
+
     UFUNCTION(BlueprintCallable)
     static void TestMaterialEffects(UTerrainMaterial* Material, UPARAM(Ref) TArray<FTestTerrainMaterialItem>& Items);
     

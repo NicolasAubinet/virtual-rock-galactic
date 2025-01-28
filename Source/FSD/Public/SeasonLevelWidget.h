@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "Blueprint/UserWidget.h"
 #include "RewardClaimedDelegate.h"
 #include "SeasonLevel.h"
-#include "Blueprint/UserWidget.h"
 #include "SeasonLevelWidget.generated.h"
 
 UCLASS(Blueprintable, EditInlineNew)
@@ -36,11 +36,12 @@ protected:
     
 public:
     USeasonLevelWidget();
+
     UFUNCTION(BlueprintCallable)
     bool TryClaimReward(bool isNormalReward);
     
     UFUNCTION(BlueprintCallable)
-    void SetData(int32 inLevel, bool inLastInRow);
+    void SetData(int32 InLevel, bool inLastInRow);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void RefreshState();

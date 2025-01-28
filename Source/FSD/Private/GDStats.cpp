@@ -10,6 +10,7 @@ FGDStats::FGDStats() {
     this->ColdResistance = NULL;
     this->MeleeAttackDamage = NULL;
     this->MovementSpeed = NULL;
+    this->AirControl = NULL;
     this->SprintSpeed = NULL;
     this->CarryingSpeedModifier = NULL;
     this->ReviveSpeed = NULL;
@@ -39,5 +40,7 @@ FGDStats::FGDStats() {
     this->CarriableThrowing = NULL;
     this->HoverBootsDuration = NULL;
     this->ExplodeOnDeath = NULL;
+    this->CritChance = NULL;
+    this->CritDamageBonus = NULL;
 }
 

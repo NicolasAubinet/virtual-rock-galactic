@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "ERivalBombNodeState.h"
 #include "Animation/AnimInstance.h"
+#include "ERivalBombNodeState.h"
 #include "RivalBombNodeAniminstance.generated.h"
 
 UCLASS(Blueprintable, NonTransient)
@@ -27,6 +27,7 @@ protected:
     
 public:
     URivalBombNodeAniminstance();
+
     UFUNCTION(BlueprintCallable)
     void SetRivalBombNodeState(ERivalBombNodeState NewState);
     

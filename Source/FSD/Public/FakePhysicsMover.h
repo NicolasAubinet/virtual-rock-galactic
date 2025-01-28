@@ -1,13 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "FakeMoverState.h"
-#include "FakeMoveState.h"
 #include "GameFramework/Actor.h"
+#include "FakeMoveState.h"
+#include "FakeMoverState.h"
 #include "FakePhysicsMover.generated.h"
 
-class USceneComponent;
 class UFakeMoverSettings;
+class USceneComponent;
 
 UCLASS(Blueprintable)
 class AFakePhysicsMover : public AActor {
@@ -28,9 +28,10 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float SyncTime;
     
-    AFakePhysicsMover();
+    AFakePhysicsMover(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void Teleport(const FVector& Pos, const FVector& Vel);
     

@@ -1,8 +1,13 @@
 #include "PawnAfflictionComponent.h"
 #include "Net/UnrealNetwork.h"
 
-class UHealthComponentBase;
-class UPawnAffliction;
+UPawnAfflictionComponent::UPawnAfflictionComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->FrozenEffect = NULL;
+    this->BurningEffect = NULL;
+    this->EffectSize = EFrozenBitsSize::Medium;
+    this->BaseEffectScale = 1.00f;
+    this->UseDormancy = false;
+}
 
 void UPawnAfflictionComponent::PushAffliction(UPawnAffliction* Affliction, bool onlyIfNotActive) {
 }
@@ -27,11 +32,4 @@ void UPawnAfflictionComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProper
     DOREPLIFETIME(UPawnAfflictionComponent, NetworkedAfflictions);
 }
 
-UPawnAfflictionComponent::UPawnAfflictionComponent() {
-    this->FrozenEffect = NULL;
-    this->BurningEffect = NULL;
-    this->EffectSize = EFrozenBitsSize::Medium;
-    this->BaseEffectScale = 1.00f;
-    this->UseDormancy = false;
-}
 

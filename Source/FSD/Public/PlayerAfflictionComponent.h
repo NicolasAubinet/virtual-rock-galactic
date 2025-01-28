@@ -22,11 +22,12 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TMap<UPlayerAfflictionOverlay*, int32> ActiveOverlays;
     
-    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<APlayerCharacter> Character;
     
 public:
-    UPlayerAfflictionComponent();
+    UPlayerAfflictionComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void ShowPlayerOverlay(UPlayerAfflictionOverlay* Overlay);
     

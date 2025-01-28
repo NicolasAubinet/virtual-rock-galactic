@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "SDFSingleChildBase.h"
 #include "SDFRandomDisableProperties.h"
+#include "SDFSingleChildBase.h"
 #include "SDFRandomDisable.generated.h"
 
 UCLASS(Blueprintable)
@@ -12,5 +12,6 @@ public:
     FSDFRandomDisableProperties Properties;
     
     USDFRandomDisable();
+
 };
 

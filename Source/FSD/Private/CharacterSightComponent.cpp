@@ -1,8 +1,12 @@
 #include "CharacterSightComponent.h"
 #include "Net/UnrealNetwork.h"
 
-class AActor;
-class UPrimitiveComponent;
+UCharacterSightComponent::UCharacterSightComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->TargetMaxDistance = 10000.00f;
+    this->TraceChannel = ECC_GameTraceChannel3;
+    this->Character = NULL;
+    this->TargetTime = 0.00f;
+}
 
 void UCharacterSightComponent::Server_UpdateTarget_Implementation(AActor* NewActor, UPrimitiveComponent* NewPrimitive) {
 }
@@ -22,10 +26,4 @@ void UCharacterSightComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProper
     DOREPLIFETIME(UCharacterSightComponent, ReplicatedData);
 }
 
-UCharacterSightComponent::UCharacterSightComponent() {
-    this->TargetMaxDistance = 10000.00f;
-    this->TraceChannel = ECC_GameTraceChannel3;
-    this->Character = NULL;
-    this->TargetTime = 0.00f;
-}
 

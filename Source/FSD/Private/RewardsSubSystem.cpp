@@ -1,7 +1,7 @@
 #include "RewardsSubSystem.h"
 
-class UObject;
-class AFSDPlayerController;
+URewardsSubSystem::URewardsSubSystem() {
+}
 
 bool URewardsSubSystem::ShouldPendingRewardsBeShown() const {
     return false;
@@ -29,6 +29,4 @@ void URewardsSubSystem::ClearPendingRewards() {
 void URewardsSubSystem::ApplyPendingRewards(AFSDPlayerController* Controller) {
 }
 
-URewardsSubSystem::URewardsSubSystem() {
-}
 

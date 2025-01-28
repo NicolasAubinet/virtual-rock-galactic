@@ -1,8 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "BoolDelegateDelegate.h"
-#include "DelegateDelegate.h"
 #include "Subsystems/WorldSubsystem.h"
+#include "BoolDelegateDelegate.h"
 #include "HUDActorTrackingSubsystem.generated.h"
 
 UCLASS(Blueprintable)
@@ -13,8 +12,9 @@ public:
     FBoolDelegate OnToggleTrackingEvent;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FDelegate OnShowAlwaysTrackedEvent;
+    FBoolDelegate OnShowAlwaysTrackedEvent;
     
     UHUDActorTrackingSubsystem();
+
 };
 

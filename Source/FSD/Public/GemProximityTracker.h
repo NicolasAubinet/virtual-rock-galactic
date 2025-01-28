@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "TrackPositionList.h"
 #include "Components/ActorComponent.h"
+#include "TrackPositionList.h"
 #include "GemProximityTracker.generated.h"
 
 class UGemTracker;
@@ -16,6 +16,7 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<FTrackPositionList> TrackerLists;
     
-    UGemProximityTracker();
+    UGemProximityTracker(const FObjectInitializer& ObjectInitializer);
+
 };
 

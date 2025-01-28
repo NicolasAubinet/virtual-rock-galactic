@@ -1,16 +1,16 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "ERefineryState.h"
 #include "Objective.h"
+#include "Templates/SubclassOf.h"
 #include "RefineryObjective.generated.h"
 
 class AActor;
-class UDebrisPositioning;
 class AFSDRefinery;
 class AProceduralSetup;
+class UDebrisPositioning;
 
 UCLASS(Abstract, Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class FSD_API URefineryObjective : public UObjective {
@@ -25,7 +25,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<AFSDRefinery> refineryClass;
     
-    UPROPERTY(EditAnywhere, Transient, ReplicatedUsing=OnRep_Refinery, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_Refinery, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<AFSDRefinery> Refinery;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -53,11 +53,12 @@ protected:
     int32 OptionalTunnelRoomID;
     
 public:
-    URefineryObjective();
+    URefineryObjective(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
-    void SpawnWells(AProceduralSetup* setup, const FVector& rigLocation, float minDistanceBetween, const TArray<FVector2D>& minMaxDistancesToRig);
+    void SpawnWells(AProceduralSetup* Setup, const FVector& rigLocation, float minDistanceBetween, const TArray<FVector2D>& minMaxDistancesToRig);
     
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
@@ -75,7 +76,7 @@ public:
     
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-    void AddMissionCriticalItems(AProceduralSetup* setup);
+    void AddMissionCriticalItems(AProceduralSetup* Setup);
     
 };
 

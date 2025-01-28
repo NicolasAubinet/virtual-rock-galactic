@@ -25,6 +25,9 @@ public:
     float MissionHazBonus;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float HazPlusBonus;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ComplexityBonus;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -55,6 +58,7 @@ public:
     bool wasSuccess;
     
     UMissionResultInfo();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetWarningBonusSum();
     

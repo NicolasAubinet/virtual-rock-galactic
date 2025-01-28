@@ -3,8 +3,8 @@
 #include "TickableActionBase.h"
 #include "MiniTimerAction.generated.h"
 
-class UObject;
 class UMiniTimerAction;
+class UObject;
 
 UCLASS(Blueprintable)
 class UMiniTimerAction : public UTickableActionBase {
@@ -21,6 +21,7 @@ protected:
     
 public:
     UMiniTimerAction();
+
 protected:
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
     static UMiniTimerAction* MiniTimer(UObject* WorldContext, float InDuration);

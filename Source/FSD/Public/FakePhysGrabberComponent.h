@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "GrabAvoidClassEntry.h"
 #include "AvoidActorEntry.h"
+#include "GrabAvoidClassEntry.h"
 #include "GrabberComponent.h"
 #include "FakePhysGrabberComponent.generated.h"
 
@@ -18,6 +18,7 @@ private:
     TArray<FAvoidActorEntry> ActorsToAvoid;
     
 public:
-    UFakePhysGrabberComponent();
+    UFakePhysGrabberComponent(const FObjectInitializer& ObjectInitializer);
+
 };
 

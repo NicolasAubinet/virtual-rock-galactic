@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "EncounterManagerItem.h"
 #include "Components/ActorComponent.h"
+#include "EncounterManagerItem.h"
 #include "EncounterManager.generated.h"
 
-class UEnemyGroupDescriptor;
+class AProceduralSetup;
 class UCritterDescriptor;
 class UEnemyDescriptor;
+class UEnemyGroupDescriptor;
 class UEnemySpawnManager;
-class AProceduralSetup;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class FSD_API UEncounterManager : public UActorComponent {
@@ -38,7 +38,8 @@ protected:
     TArray<UCritterDescriptor*> CritterPool;
     
 public:
-    UEncounterManager();
+    UEncounterManager(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable, Exec)
     void ShowSpawnLocations();
     

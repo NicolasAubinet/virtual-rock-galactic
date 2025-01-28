@@ -1,9 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
+#include "Engine/DataAsset.h"
 #include "GameplayTagContainer.h"
 #include "RoomGeneratorGroupInstance.h"
-#include "Engine/DataAsset.h"
 #include "RoomGeneratorGroup.generated.h"
 
 class URoomGenerator;
@@ -16,6 +16,7 @@ public:
     TArray<URoomGenerator*> Rooms;
     
     URoomGeneratorGroup();
+
     UFUNCTION(BlueprintCallable)
     static URoomGenerator* GetRandomRoomWithTags(UPARAM(Ref) FRoomGeneratorGroupInstance& groupInstance, const FGameplayTagQuery& queury, UPARAM(Ref) FRandomStream& RandomStream);
     

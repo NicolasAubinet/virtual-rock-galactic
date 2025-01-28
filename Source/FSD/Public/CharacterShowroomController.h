@@ -4,10 +4,10 @@
 #include "ShowroomController.h"
 #include "CharacterShowroomController.generated.h"
 
-class UObject;
-class UPlayerCharacterID;
 class APlayerCharacter;
 class UCharacterShowroomController;
+class UObject;
+class UPlayerCharacterID;
 class UShowroomCameraKey;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -19,7 +19,8 @@ protected:
     APlayerCharacter* CharacterInstance;
     
 public:
-    UCharacterShowroomController();
+    UCharacterShowroomController(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void Receive_CharacterShown();

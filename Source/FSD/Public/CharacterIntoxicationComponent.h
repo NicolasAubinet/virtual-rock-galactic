@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "Components/ActorComponent.h"
 #include "CountDownFloat.h"
-#include "LerpingPercent.h"
 #include "EDrinkableAlcoholStrength.h"
 #include "EIntoxicationState.h"
-#include "Components/ActorComponent.h"
+#include "LerpingPercent.h"
 #include "CharacterIntoxicationComponent.generated.h"
 
-class UDrinkableDataAsset;
 class APlayerCharacter;
 class UCurveFloat;
+class UDrinkableDataAsset;
 
 UCLASS(Blueprintable, MinimalAPI, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UCharacterIntoxicationComponent : public UActorComponent {
@@ -47,9 +47,10 @@ protected:
     uint8 SoberingPercent;
     
 public:
-    UCharacterIntoxicationComponent();
+    UCharacterIntoxicationComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ReceiveStateChange(EIntoxicationState NewState);

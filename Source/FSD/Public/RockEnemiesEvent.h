@@ -1,16 +1,16 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
 #include "GameEvent.h"
+#include "Templates/SubclassOf.h"
 #include "RockEnemiesEvent.generated.h"
 
-class USkeletalMeshComponent;
-class UEnemyGroupDescriptor;
 class APawn;
 class AProjectile;
+class UEnemyGroupDescriptor;
 class UHealthComponentBase;
 class UParticleSystem;
+class USkeletalMeshComponent;
 
 UCLASS(Blueprintable)
 class ARockEnemiesEvent : public AGameEvent {
@@ -51,7 +51,8 @@ protected:
     UEnemyGroupDescriptor* RockEnemies;
     
 public:
-    ARockEnemiesEvent();
+    ARockEnemiesEvent(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void StopPowerupGeneration();

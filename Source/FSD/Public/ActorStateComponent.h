@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "StateTickDelegateDelegate.h"
-#include "StateDelegateDelegate.h"
 #include "Components/ActorComponent.h"
+#include "StateDelegateDelegate.h"
+#include "StateTickDelegateDelegate.h"
 #include "ActorStateComponent.generated.h"
 
 class UActorStateComponent;
@@ -34,9 +34,10 @@ protected:
     float StateActiveTime;
     
 public:
-    UActorStateComponent();
+    UActorStateComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_CurrentState(UActorStateComponent* previousState);

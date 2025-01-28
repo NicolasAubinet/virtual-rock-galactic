@@ -1,14 +1,12 @@
 #include "LoadoutItemProxy.h"
 #include "Templates/SubclassOf.h"
 
-class AActor;
-class AItem;
+ALoadoutItemProxy::ALoadoutItemProxy(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->AnimationSet = NULL;
+}
 
-TSubclassOf<AItem> ALoadoutItemProxy::GetLoadoutItemFromClass(TSubclassOf<AActor> ActorClass) {
+TSubclassOf<AItem> ALoadoutItemProxy::GetLoadoutItemFromClass(TSubclassOf<AActor> actorClass) {
     return NULL;
 }
 
-ALoadoutItemProxy::ALoadoutItemProxy() {
-    this->AnimationSet = NULL;
-}
 

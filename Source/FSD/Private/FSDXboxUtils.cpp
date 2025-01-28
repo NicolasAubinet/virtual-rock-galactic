@@ -1,6 +1,7 @@
 #include "FSDXboxUtils.h"
 
-class UObject;
+UFSDXboxUtils::UFSDXboxUtils() {
+}
 
 void UFSDXboxUtils::ShowStoreUIForStoreItem(UObject* WorldContextObject, const FString& storeItemName) {
 }
@@ -16,6 +17,4 @@ bool UFSDXboxUtils::IsDCLCheckComplete(UObject* WorldContextObject) {
     return false;
 }
 
-UFSDXboxUtils::UFSDXboxUtils() {
-}
 

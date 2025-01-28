@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "WeightedRoomSelector.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "WeightedRoomSelector.h"
 #include "WeightRoomSelectorLibrary.generated.h"
 
 class URoomGenerator;
@@ -12,6 +12,7 @@ class UWeightRoomSelectorLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
     UWeightRoomSelectorLibrary();
+
     UFUNCTION(BlueprintCallable)
     static void SetupWeightedRoomSelector(UPARAM(Ref) FWeightedRoomSelector& Target, UPARAM(Ref) TArray<URoomGenerator*>& Rooms);
     

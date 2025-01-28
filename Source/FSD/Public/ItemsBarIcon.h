@@ -4,8 +4,8 @@
 #include "ItemsBarIcon.generated.h"
 
 class AItem;
-class UItemsBar;
 class APlayerCharacter;
+class UItemsBar;
 
 UCLASS(Abstract, Blueprintable, EditInlineNew)
 class UItemsBarIcon : public UUserWidget {
@@ -29,6 +29,7 @@ protected:
     
 public:
     UItemsBarIcon();
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnUnselect();

@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
-#include "ERivalBombNodeState.h"
 #include "GameFramework/Actor.h"
+#include "ERivalBombNodeState.h"
+#include "Templates/SubclassOf.h"
 #include "RivalBombNode.generated.h"
 
-class UHackingUsableComponent;
 class APlayerCharacter;
-class ARivalBombNode;
 class ARivalBomb;
+class ARivalBombNode;
 class ASplineCableActor;
+class UHackingUsableComponent;
 
 UCLASS(Blueprintable)
 class ARivalBombNode : public AActor {
@@ -46,9 +46,10 @@ protected:
     int32 BombIndex;
     
 public:
-    ARivalBombNode();
+    ARivalBombNode(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ReceiveStateUpdated();

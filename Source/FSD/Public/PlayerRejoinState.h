@@ -1,16 +1,17 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "RejoinInt.h"
-#include "RejoinFloat.h"
 #include "Components/ActorComponent.h"
+#include "RejoinFloat.h"
+#include "RejoinInt.h"
 #include "PlayerRejoinState.generated.h"
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UPlayerRejoinState : public UActorComponent {
     GENERATED_BODY()
 public:
-    UPlayerRejoinState();
+    UPlayerRejoinState(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable, Reliable, Server, WithValidation)
     void Server_Reset();
     

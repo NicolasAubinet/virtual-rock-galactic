@@ -2,14 +2,14 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "EFacilityTentacleState.h"
-#include "TentacleTarget.h"
 #include "TentacleBase.h"
+#include "TentacleTarget.h"
 #include "TriggerAI.h"
 #include "FacilityTentacle.generated.h"
 
-class USkeletalMeshComponent;
-class UDebrisPositioning;
 class UAnimMontage;
+class UDebrisPositioning;
+class USkeletalMeshComponent;
 
 UCLASS(Blueprintable)
 class FSD_API AFacilityTentacle : public ATentacleBase, public ITriggerAI {
@@ -35,12 +35,13 @@ protected:
     FTentacleTarget DesiredTarget;
     
 public:
-    AFacilityTentacle();
+    AFacilityTentacle(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
-    void PlayHitReaction(float Amount);
+    void PlayHitReaction(float amount);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnStateChanged(EFacilityTentacleState NewState);
@@ -55,7 +56,7 @@ public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     bool FindBurrowLocation(UDebrisPositioning* Debris, const FVector& Origin, float Radius, FVector& OutLocation);
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

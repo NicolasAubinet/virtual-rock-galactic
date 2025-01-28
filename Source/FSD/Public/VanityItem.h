@@ -1,22 +1,25 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EVanitySlot.h"
-#include "CraftingCost.h"
-#include "VanityEventSource.h"
-#include "SavablePrimaryDataAsset.h"
-#include "Craftable.h"
 #include "Aquisitionable.h"
+#include "Craftable.h"
+#include "CraftingCost.h"
+#include "DetailedTagSet.h"
+#include "EVanitySlot.h"
 #include "RefundableInterface.h"
+#include "SavablePrimaryDataAsset.h"
+#include "VanityEventSource.h"
 #include "VanityItem.generated.h"
 
-class UObject;
-class UItemAquisitionBase;
 class AFSDPlayerState;
-class UPlayerCharacterID;
 class APlayerCharacter;
+class UCharacterVanityComponent;
 class UIconGenerationCameraKey;
-class UVanityEventSourceDataAsset;
+class UItemAquisitionBase;
+class UObject;
+class UPlayerCharacterID;
+class UTagVanitySeasonalEvent;
 class UTexture;
+class UVanityEventSourceDataAsset;
 
 UCLASS(Blueprintable, EditInlineNew)
 class FSD_API UVanityItem : public USavablePrimaryDataAsset, public ICraftable, public IRefundableInterface, public IAquisitionable {
@@ -32,9 +35,6 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FString NotesInternal;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    bool IsPartOfRandomization;
-    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UItemAquisitionBase* Aquisition;
     
@@ -45,10 +45,20 @@ protected:
     UIconGenerationCameraKey* IconGenerationCameraKey;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UTagVanitySeasonalEvent* SeasonalEventTag;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bIsFestiveItem;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bIsSeriousItem;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSet<UPlayerCharacterID*> RestrictToCharacters;
     
 public:
     UVanityItem();
+
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
     bool RemoveFromOwned(UObject* WorldContext);
     
@@ -68,7 +78,13 @@ public:
     void GiftItem(UObject* WorldContextObject, UPlayerCharacterID* characterID);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    FDetailedTagSet GetVanityTags() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     EVanitySlot GetVanitySlot() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    TSet<UPlayerCharacterID*> GetRestrictedCharacters() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<FCraftingCost> GetResourceCost() const;
@@ -103,6 +119,11 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure=false, meta=(WorldContext="WorldContextObject"))
     void CraftItem(UObject* WorldContextObject, UPlayerCharacterID* characterID) const;
     
+protected:
+    UFUNCTION(BlueprintCallable)
+    void ChangeToItem(UCharacterVanityComponent* Gear) const;
+    
+public:
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     bool CanCraftWithFashionite(UObject* WorldContextObject) const;
     
@@ -115,7 +136,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure=false)
     void ApplyItem(APlayerCharacter* Player, bool isPermanent) const;
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

@@ -1,30 +1,33 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
+#include "GlobalMissionSeed.h"
 #include "ObjectiveMissionIcon.h"
 #include "ResourceSpawner.h"
 #include "SavableDataAsset.h"
+#include "Templates/SubclassOf.h"
 #include "MissionTemplate.generated.h"
 
-class UObject;
-class UObjective;
+class AFSDGameMode;
+class AProceduralSetup;
 class UBiome;
 class UDebrisActorComponent;
-class UMissionDNA;
-class AFSDGameMode;
 class UFSDSaveGame;
+class UGemResourceData;
 class UGeneratedMission;
-class UMissionDuration;
+class UMissionChallenge;
 class UMissionComplexity;
-class UMissionWarning;
-class UMissionTemplate;
-class UMutator;
+class UMissionDNA;
+class UMissionDuration;
 class UMissionMutator;
-class AProceduralSetup;
-class UTutorialComponent;
+class UMissionTemplate;
+class UMissionWarning;
+class UMutator;
+class UObject;
+class UObjective;
 class UTexture2D;
+class UTutorialComponent;
 class UWorld;
 
 UCLASS(Blueprintable, EditInlineNew)
@@ -106,6 +109,7 @@ protected:
     
 public:
     UMissionTemplate();
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void Receive_SetMissionParameters(UGeneratedMission* mission, FRandomStream& Random);
@@ -145,7 +149,7 @@ public:
     UTexture2D* GetMissionButtonImage() const;
     
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
-    UGeneratedMission* GenerateMission(const UObject* WorldContextObject, UBiome* Biome, int32 Seed, int32 GlobalSeed, int32 missionIndex, UMissionComplexity* limitComplexity, UMissionDuration* limitDuration, UMissionMutator* Mutator, TArray<UMissionWarning*> Warnings, TSubclassOf<UObjective> forceSecondary);
+    UGeneratedMission* GenerateMission(const UObject* WorldContextObject, UBiome* Biome, int32 Seed, const FGlobalMissionSeed& GlobalSeed, UMissionComplexity* limitComplexity, UMissionDuration* limitDuration, UMissionMutator* Mutator, TArray<UMissionWarning*> Warnings, UMissionChallenge* Challenge, TArray<TSubclassOf<UObjective>> forceSecondary, UGemResourceData* forcedGem);
     
 };
 

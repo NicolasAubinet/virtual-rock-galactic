@@ -5,12 +5,12 @@
 #include "PlasmaBoomerang.generated.h"
 
 class AActor;
-class USceneComponent;
-class UPrimitiveComponent;
-class UStaticMeshComponent;
-class UDamageComponent;
 class UBoxComponent;
 class UCurveVector;
+class UDamageComponent;
+class UPrimitiveComponent;
+class USceneComponent;
+class UStaticMeshComponent;
 
 UCLASS(Abstract, Blueprintable)
 class APlasmaBoomerang : public AGrenade {
@@ -51,7 +51,8 @@ protected:
     bool IsHoming;
     
 public:
-    APlasmaBoomerang();
+    APlasmaBoomerang(const FObjectInitializer& ObjectInitializer);
+
 private:
     UFUNCTION(BlueprintCallable)
     void BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);

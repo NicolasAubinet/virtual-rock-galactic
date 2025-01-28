@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EInputKeys.h"
 #include "GameFramework/Actor.h"
+#include "EInputKeys.h"
 #include "ActivationObject.generated.h"
 
 class APlayerCharacter;
@@ -19,7 +19,8 @@ protected:
     bool HasBeenUsed;
     
 public:
-    AActivationObject();
+    AActivationObject(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnUsedBy(APlayerCharacter* User, EInputKeys Key);

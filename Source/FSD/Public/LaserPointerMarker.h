@@ -1,11 +1,11 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "LaserPointerData.h"
 #include "GameFramework/Actor.h"
+#include "LaserPointerData.h"
 #include "LaserPointerMarker.generated.h"
 
-class UPrimitiveComponent;
 class APlayerCharacter;
+class UPrimitiveComponent;
 class UTerrainMaterial;
 
 UCLASS(Abstract, Blueprintable)
@@ -24,9 +24,10 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     UTerrainMaterial* LookAtTerrainMaterial;
     
-    ALaserPointerMarker();
+    ALaserPointerMarker(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     APlayerCharacter* GetCharacter() const;
     

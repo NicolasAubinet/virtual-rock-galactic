@@ -6,9 +6,9 @@
 #include "SaveGameIDInterface.h"
 #include "ResourceData.generated.h"
 
-class UObject;
 class AFSDPhysicsActor;
 class UMissionStat;
+class UObject;
 class UTexture2D;
 
 UCLASS(Blueprintable)
@@ -55,6 +55,9 @@ public:
     bool ScaleToMissionLength;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool AutoDepositOnDisconnect;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ScaleToHazardLevel;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -81,13 +84,14 @@ protected:
     
 public:
     UResourceData();
+
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     float GetOwnedAmount(UObject* WorldContextObject) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetIsTradableCraftingMaterial() const;
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

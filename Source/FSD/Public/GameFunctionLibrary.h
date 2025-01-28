@@ -3,35 +3,36 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "GameFunctionLibrary.generated.h"
 
-class UObject;
-class UAudioComponent;
-class UAsyncManager;
-class UWindowWidget;
-class UCampaignManager;
 class ADeepCSGWorld;
-class AFSDGameState;
-class AFSDGameModeSpaceRig;
 class AFSDGameMode;
+class AFSDGameModeSpaceRig;
+class AFSDGameState;
+class APlayerCharacter;
+class IMissionModeManager;
+class UMissionModeManager;
+class UAsyncManager;
+class UAudioComponent;
+class UCampaignManager;
 class UFSDGameInstance;
 class UFSDSaveGame;
 class UGameData;
 class UGoogleAnalyticsWrapper;
-class UMissionModeManager;
-class IMissionModeManager;
-class APlayerCharacter;
-class UWindowManager;
+class UObject;
 class USoundBase;
+class UWindowManager;
+class UWindowWidget;
 
 UCLASS(Blueprintable)
 class FSD_API UGameFunctionLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
     UGameFunctionLibrary();
+
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
     static void SpawnOrUpdateAudio2D(UObject* WorldContext, UPARAM(Ref) UAudioComponent*& AudioComponent, USoundBase* Sound, float VolumeMultiplier, float PitchMultiplier, FName FloatParamName, float FloatParam);
     
     UFUNCTION(BlueprintCallable)
-    static void SetUsePushToTalk(bool Enable);
+    static void SetUsePushToTalk(bool enable);
     
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static void SetGlobalGravityZ(UObject* WorldContextObject, float GravityZ);
@@ -64,7 +65,7 @@ public:
     static FString GetProjectVersion();
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContext"))
-    static int32 GetNumPlayers(UObject* WorldContext);
+    static int32 GetNumPlayers(UObject* WorldContext, bool onlyAlive);
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContext"))
     static int32 GetNumAdditionalPlayers(UObject* WorldContext);
@@ -98,6 +99,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static UGameData* GetFSDGameData();
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static float GetFrameRateInHz(UObject* WorldContextObject);
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static TScriptInterface<IMissionModeManager> GetDeepDiveManager(UObject* WorldContextObject);

@@ -1,9 +1,10 @@
 #include "FSDFindSessionsCallbackProxy.h"
 #include "FSDFindSteamSessions.h"
 
-class UObject;
-class UFSDFindSessionsCallbackProxy;
-class APlayerController;
+UFSDFindSessionsCallbackProxy::UFSDFindSessionsCallbackProxy() {
+    this->WorldContextObject = NULL;
+    this->FSDFindSteamSessions = CreateDefaultSubobject<UFSDFindSteamSessions>(TEXT("FSDFindSteamSessions"));
+}
 
 void UFSDFindSessionsCallbackProxy::OnFSDCompleted(bool bSuccess, const TArray<FBlueprintSessionResult>& Results) {
 }
@@ -19,8 +20,4 @@ UFSDFindSessionsCallbackProxy* UFSDFindSessionsCallbackProxy::FSDFindFullSession
     return NULL;
 }
 
-UFSDFindSessionsCallbackProxy::UFSDFindSessionsCallbackProxy() {
-    this->WorldContextObject = NULL;
-    this->FSDFindSteamSessions = CreateDefaultSubobject<UFSDFindSteamSessions>(TEXT("FSDFindSteamSessions"));
-}
 

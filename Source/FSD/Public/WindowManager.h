@@ -1,14 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
-#include "Components/SlateWrapperTypes.h"
-#include "WindowManagerDelegateDelegate.h"
 #include "Components/ActorComponent.h"
+#include "Components/SlateWrapperTypes.h"
+#include "Templates/SubclassOf.h"
+#include "WindowManagerDelegateDelegate.h"
 #include "WindowManager.generated.h"
 
+class USoundCue;
 class UUserWidget;
 class UWindowWidget;
-class USoundCue;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class FSD_API UWindowManager : public UActorComponent {
@@ -37,7 +37,8 @@ protected:
     bool ResolutionDownscaleActive;
     
 public:
-    UWindowManager();
+    UWindowManager(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void SetSingletonWidgetVisibility(TSubclassOf<UUserWidget> WidgetClass, ESlateVisibility Visibility);
     

@@ -1,9 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "ItemUpgrade.h"
+#include "ProjectileSwitch.h"
 #include "Templates/SubclassOf.h"
 #include "UpgradeValues.h"
-#include "ProjectileSwitch.h"
-#include "ItemUpgrade.h"
 #include "WeaponSwitchProjectileUpgrade.generated.h"
 
 class AActor;
@@ -20,6 +20,7 @@ protected:
     
 public:
     UWeaponSwitchProjectileUpgrade();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static FUpgradeValues GetUpgradedValue(AFSDPlayerState* Player, TSubclassOf<AActor> Item, TSubclassOf<UWeaponHitCounterComponent> ComponentClass);
     

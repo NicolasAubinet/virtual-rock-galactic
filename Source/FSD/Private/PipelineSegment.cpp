@@ -1,21 +1,54 @@
 #include "PipelineSegment.h"
-#include "Net/UnrealNetwork.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "Components/SplineComponent.h"
+#include "Components/SplineMeshComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "DroneUseComponent.h"
+#include "Net/UnrealNetwork.h"
 #include "PathfinderSplineSegmentCollisionComponent.h"
 #include "SimpleHealthComponent.h"
-#include "Components/SplineMeshComponent.h"
 #include "SingleUsableComponent.h"
-#include "Components/SplineComponent.h"
 
-class UHealthComponentBase;
-class ATrackBuilderSegment;
-class UTrackBuilderUsable;
-class APipelineStart;
-class APipelineSegment;
-class APlayerCharacter;
-class UMaterialInterface;
+APipelineSegment::APipelineSegment(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->StaticMeshUnassembled = NULL;
+    this->StaticMeshAssembled = NULL;
+    this->StaticMeshFinal = NULL;
+    this->CarvingTraceType = TraceTypeQuery1;
+    this->NumberMaterial = NULL;
+    this->RepairSegmentUsable = CreateDefaultSubobject<USingleUsableComponent>(TEXT("RepairSegmentUsable"));
+    this->ActivateSegmentUsable = CreateDefaultSubobject<USingleUsableComponent>(TEXT("ActivateSegmentUsable"));
+    this->DroneUsable = CreateDefaultSubobject<UDroneUseComponent>(TEXT("DroneUseComponent"));
+    this->SegmentHealthComponent = CreateDefaultSubobject<USimpleHealthComponent>(TEXT("SegmentHealthComponent"));
+    this->MovementSpline = CreateDefaultSubobject<USplineComponent>(TEXT("MovementSpline"));
+    this->MovementSplineRight = CreateDefaultSubobject<USplineComponent>(TEXT("MovementSplineRight"));
+    this->MovementSplineLeft = CreateDefaultSubobject<USplineComponent>(TEXT("MovementSplineLeft"));
+    this->PipelineMesh = CreateDefaultSubobject<USplineMeshComponent>(TEXT("PipelineMesh"));
+    this->PipelineOuterMesh = CreateDefaultSubobject<USplineMeshComponent>(TEXT("PipelineOuterMesh"));
+    this->PipelineCapMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("PipelineCapMesh"));
+    this->EndPostMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("EndPostMesh"));
+    this->EndPostMeshStatic = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("EndPostMeshStatic"));
+    this->PathfinderComponent = CreateDefaultSubobject<UPathfinderSplineSegmentCollisionComponent>(TEXT("PathfinderComponent"));
+    this->bSegmentBroken = false;
+    this->SegmentActivatedProgress = 0.00f;
+    this->PipelineState = EPipelineBuildState::BeginBuilt;
+    this->MinValidLength = 100.00f;
+    this->MaxValidLength = 900.00f;
+    this->TooSharpExtraLength = 100.00f;
+    this->TooSteepExtraLength = 400.00f;
+    this->BlockedSphereSize = 10.00f;
+    this->BlockedExtraRaytraceRotationOffset = 45;
+    this->BlockedExtraRaytraces = 4.00f;
+    this->BlockedExtraRaytraceDist = 30.00f;
+    this->BlockedRayTraceSuccesses = 2.00f;
+    this->MovementSpline->SetupAttachment(RootComponent);
+    this->MovementSplineRight->SetupAttachment(RootComponent);
+    this->MovementSplineLeft->SetupAttachment(RootComponent);
+    this->PipelineMesh->SetupAttachment(RootComponent);
+    this->PipelineOuterMesh->SetupAttachment(PipelineMesh);
+    this->PipelineCapMesh->SetupAttachment(PipelineOuterMesh);
+    this->EndPostMesh->SetupAttachment(RootComponent);
+    this->EndPostMeshStatic->SetupAttachment(EndPostMesh);
+}
 
 void APipelineSegment::UpdateSplineMesh(USplineMeshComponent* InMesh, float InProgress, bool InMoveEndCap) {
 }
@@ -81,36 +114,4 @@ void APipelineSegment::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
     DOREPLIFETIME(APipelineSegment, SegmentActivatedProgress);
 }
 
-APipelineSegment::APipelineSegment() {
-    this->StaticMeshUnassembled = NULL;
-    this->StaticMeshAssembled = NULL;
-    this->StaticMeshFinal = NULL;
-    this->CarvingTraceType = TraceTypeQuery1;
-    this->NumberMaterial = NULL;
-    this->RepairSegmentUsable = CreateDefaultSubobject<USingleUsableComponent>(TEXT("RepairSegmentUsable"));
-    this->ActivateSegmentUsable = CreateDefaultSubobject<USingleUsableComponent>(TEXT("ActivateSegmentUsable"));
-    this->DroneUsable = CreateDefaultSubobject<UDroneUseComponent>(TEXT("DroneUseComponent"));
-    this->SegmentHealthComponent = CreateDefaultSubobject<USimpleHealthComponent>(TEXT("SegmentHealthComponent"));
-    this->MovementSpline = CreateDefaultSubobject<USplineComponent>(TEXT("MovementSpline"));
-    this->MovementSplineRight = CreateDefaultSubobject<USplineComponent>(TEXT("MovementSplineRight"));
-    this->MovementSplineLeft = CreateDefaultSubobject<USplineComponent>(TEXT("MovementSplineLeft"));
-    this->PipelineMesh = CreateDefaultSubobject<USplineMeshComponent>(TEXT("PipelineMesh"));
-    this->PipelineOuterMesh = CreateDefaultSubobject<USplineMeshComponent>(TEXT("PipelineOuterMesh"));
-    this->PipelineCapMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("PipelineCapMesh"));
-    this->EndPostMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("EndPostMesh"));
-    this->EndPostMeshStatic = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("EndPostMeshStatic"));
-    this->PathfinderComponent = CreateDefaultSubobject<UPathfinderSplineSegmentCollisionComponent>(TEXT("PathfinderComponent"));
-    this->bSegmentBroken = false;
-    this->SegmentActivatedProgress = 0.00f;
-    this->PipelineState = EPipelineBuildState::BeginBuilt;
-    this->MinValidLength = 100.00f;
-    this->MaxValidLength = 900.00f;
-    this->TooSharpExtraLength = 100.00f;
-    this->TooSteepExtraLength = 400.00f;
-    this->BlockedSphereSize = 10.00f;
-    this->BlockedExtraRaytraceRotationOffset = 45;
-    this->BlockedExtraRaytraces = 4.00f;
-    this->BlockedExtraRaytraceDist = 30.00f;
-    this->BlockedRayTraceSuccesses = 2.00f;
-}
 

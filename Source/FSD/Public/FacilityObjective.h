@@ -1,27 +1,27 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "EnemySpawnedDelegateDelegate.h"
 #include "IRandRange.h"
-#include "SubObjective.h"
+#include "Objective.h"
 #include "RandInterval.h"
 #include "RoomNode.h"
-#include "Objective.h"
+#include "SubObjective.h"
+#include "Templates/SubclassOf.h"
 #include "FacilityObjective.generated.h"
 
 class AActor;
 class APawn;
-class UResourceData;
-class UCappedResource;
-class ARessuplyPod;
-class UDebrisPositioning;
-class UEnemyDescriptor;
-class UEncounterManager;
 class AProceduralSetup;
+class ARessuplyPod;
 class ATetherStation;
+class UCappedResource;
+class UDebrisPositioning;
+class UEncounterManager;
+class UEnemyDescriptor;
+class UResourceData;
 
 UCLASS(Abstract, Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class FSD_API UFacilityObjective : public UObjective {
@@ -107,14 +107,15 @@ protected:
     int32 GeneratorsActivated;
     
 public:
-    UFacilityObjective();
+    UFacilityObjective(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
+    UFUNCTION(BlueprintCallable)
+    void SpawnFacilityEncounters(AProceduralSetup* Setup, UEncounterManager* Encounters, UDebrisPositioning* Positioning);
     
     UFUNCTION(BlueprintCallable)
-    void SpawnFacilityEncounters(AProceduralSetup* setup, UEncounterManager* Encounters, UDebrisPositioning* Positioning);
-    
-    UFUNCTION(BlueprintCallable)
-    TArray<FTransform> SpawnEndBattleTurrets(int32 amountOfTurrets, AProceduralSetup* setup, UDebrisPositioning* DebrisPositioning, TSubclassOf<AActor> terrainPlacement, const TArray<AActor*>& existingTurrets, bool& success);
+    TArray<FTransform> SpawnEndBattleTurrets(int32 amountOfTurrets, AProceduralSetup* Setup, UDebrisPositioning* DebrisPositioning, TSubclassOf<AActor> terrainPlacement, const TArray<AActor*>& existingTurrets, bool& success);
     
 protected:
     UFUNCTION(BlueprintCallable)
@@ -130,16 +131,16 @@ protected:
     
 public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-    void Receive_AddEnemies(AProceduralSetup* setup);
+    void Receive_AddEnemies(AProceduralSetup* Setup);
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void ProgressCurrentObjective();
     
     UFUNCTION(BlueprintCallable)
-    AActor* PlaceObjectInRoom(AProceduralSetup* setup, const FRoomNode& RoomNode, UDebrisPositioning* Positioning, TSubclassOf<AActor> placementActor, FRandomStream RandomStream, const bool checkImportantLocations);
+    AActor* PlaceObjectInRoom(AProceduralSetup* Setup, const FRoomNode& RoomNode, UDebrisPositioning* Positioning, TSubclassOf<AActor> placementActor, FRandomStream RandomStream, const bool checkImportantLocations);
     
     UFUNCTION(BlueprintCallable)
-    void OnResourceChanged(UCappedResource* Resource, float Amount);
+    void OnResourceChanged(UCappedResource* Resource, float amount);
     
 protected:
     UFUNCTION(BlueprintCallable)
@@ -162,7 +163,7 @@ public:
     void InitGeneratorCount(int32 generators);
     
     UFUNCTION(BlueprintCallable)
-    FTransform GetTurretGoal(AProceduralSetup* setup, const FVector& Origin, float idealRange, UDebrisPositioning* DebrisPositioning, TSubclassOf<AActor> terrainPlacement, bool& success);
+    FTransform GetTurretGoal(AProceduralSetup* Setup, const FVector& Origin, float idealRange, UDebrisPositioning* DebrisPositioning, TSubclassOf<AActor> terrainPlacement, bool& success);
     
     UFUNCTION(BlueprintCallable)
     TArray<AActor*> GetShieldGenerators();
@@ -171,7 +172,7 @@ public:
     int32 GetShieldGeneratorCount() const;
     
     UFUNCTION(BlueprintCallable)
-    void GetObjectTransformInRoom(FTransform& Transform, AProceduralSetup* setup, const FRoomNode& RoomNode, UDebrisPositioning* Positioning, TSubclassOf<AActor> placementActor, FRandomStream RandomStream, const bool checkImportantLocations);
+    void GetObjectTransformInRoom(FTransform& Transform, AProceduralSetup* Setup, const FRoomNode& RoomNode, UDebrisPositioning* Positioning, TSubclassOf<AActor> placementActor, FRandomStream RandomStream, const bool checkImportantLocations);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetFacilityRoomIndex() const;
@@ -191,7 +192,7 @@ protected:
     
 public:
     UFUNCTION(BlueprintCallable)
-    void DropOverCharger(AProceduralSetup* setup, int32 roomIndex, const FVector& facilityLocation, float idealRange, float idealZDistance, UDebrisPositioning* DebrisPositioning, TSubclassOf<ARessuplyPod> NewGeneratorClass);
+    void DropOverCharger(AProceduralSetup* Setup, int32 roomIndex, const FVector& facilityLocation, float idealRange, float idealZDistance, UDebrisPositioning* DebrisPositioning, TSubclassOf<ARessuplyPod> NewGeneratorClass, bool AddImportantLocation);
     
     UFUNCTION(BlueprintCallable)
     void ChangeObjective();

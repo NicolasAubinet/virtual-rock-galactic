@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "ECarveFilterType.h"
-#include "CarveOptionsCellSize.h"
 #include "Components/StaticMeshComponent.h"
+#include "CarveOptionsCellSize.h"
+#include "ECarveFilterType.h"
 #include "MeshCarverComponent.generated.h"
 
 class UTerrainMaterialBase;
@@ -23,7 +23,8 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     CarveOptionsCellSize CarverSize;
     
-    UMeshCarverComponent();
+    UMeshCarverComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void Carve();
     

@@ -1,14 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "Components/ActorComponent.h"
 #include "DelegateEventDelegate.h"
-#include "EInputKeys.h"
 #include "DroneFinishedUsingDelegate.h"
 #include "DroneUseProgressDelegate.h"
-#include "Components/ActorComponent.h"
+#include "EInputKeys.h"
 #include "DroneUseComponent.generated.h"
 
-class UDialogDataAsset;
 class APlayerCharacter;
+class UDialogDataAsset;
 class USingleUsableComponent;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -31,7 +31,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDialogDataAsset* BoscoLaserpointerShout;
     
-    UPROPERTY(EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<USingleUsableComponent> SyncToUsable;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
@@ -47,9 +47,10 @@ protected:
     bool CanUse;
     
 public:
-    UDroneUseComponent();
+    UDroneUseComponent(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void SyncedUsableUserCountChangedResponse(int32 userCount);

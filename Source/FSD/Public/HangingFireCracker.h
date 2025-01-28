@@ -3,13 +3,13 @@
 #include "GameFramework/Actor.h"
 #include "HangingFireCracker.generated.h"
 
+class UFSDAudioComponent;
+class UInstantUsable;
 class UNiagaraComponent;
 class UNiagaraSystem;
 class USkeletalMeshComponent;
-class UStaticMeshComponent;
-class UInstantUsable;
-class UFSDAudioComponent;
 class USoundCue;
+class UStaticMeshComponent;
 
 UCLASS(Blueprintable)
 class AHangingFireCracker : public AActor {
@@ -47,7 +47,8 @@ protected:
     float ExplodeImpulse;
     
 public:
-    AHangingFireCracker();
+    AHangingFireCracker(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void StartFire();

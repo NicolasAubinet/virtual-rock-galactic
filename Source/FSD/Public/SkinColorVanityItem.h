@@ -10,8 +10,9 @@ class USkinColorVanityItem : public UVanityItem {
     GENERATED_BODY()
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    UMaterialInterface* Material;
+    TSoftObjectPtr<UMaterialInterface> Material;
     
     USkinColorVanityItem();
+
 };
 

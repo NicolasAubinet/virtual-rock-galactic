@@ -1,55 +1,58 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "GameFramework/GameState.h"
 #include "Engine/LatentActionManager.h"
 #include "Engine/NetSerialization.h"
-#include "FSDChatMessage.h"
-#include "Int32DelegateEventDelegate.h"
-#include "DelegateEventDelegate.h"
 #include "BoolDelegateDelegate.h"
-#include "CountdownDelegate.h"
-#include "CountDownStartedDelegate.h"
-#include "GameEventCompletedDelegateDelegate.h"
-#include "ObjectivesDelegateDelegate.h"
-#include "DifficultyDelegateDelegate.h"
-#include "PlayerDelegateDelegate.h"
-#include "PlayerCharacterDelegateDelegate.h"
-#include "EnemyKilledDelegateDelegate.h"
-#include "CurrentLeaderChangedDelegate.h"
 #include "BoscoReviveCounterChangedDelegate.h"
+#include "CountDownStartedDelegate.h"
+#include "CountdownDelegate.h"
 #include "CreditsReward.h"
-#include "ScaledEffect.h"
-#include "ReplicatedObjectives.h"
-#include "GeneratedMissionSeed.h"
+#include "CurrentLeaderChangedDelegate.h"
+#include "DelegateEventDelegate.h"
+#include "DifficultyDelegateDelegate.h"
+#include "EnemyKilledDelegateDelegate.h"
+#include "FSDChatMessage.h"
 #include "FSDLocalizedChatMessage.h"
-#include "GameFramework/GameState.h"
+#include "GameDifficulty.h"
+#include "GameEventCompletedDelegateDelegate.h"
+#include "GeneratedMissionSeed.h"
+#include "GlobalMissionSeed.h"
+#include "Int32DelegateEventDelegate.h"
+#include "ObjectivesDelegateDelegate.h"
+#include "PlayerCharacterDelegateDelegate.h"
+#include "PlayerDelegateDelegate.h"
+#include "ReplicatedObjectives.h"
+#include "ScaledEffect.h"
+#include "Templates/SubclassOf.h"
 #include "FSDGameState.generated.h"
 
-class UPrimitiveComponent;
-class UObjective;
-class UAttackerManagerComponent;
-class UResourceData;
 class ADeepCSGWorld;
-class UDifficultySetting;
-class UDifficultyManager;
-class USpawnEffectsComponent;
-class UDynamicMeshScaler;
 class AFSDGameState;
-class UFSDEvent;
-class APlayerState;
 class AFSDPlayerState;
-class UGeneratedMission;
-class UGemProximityTracker;
 class AGameStats;
-class AMiningPod;
-class UPlayerCharacterID;
 class APlayerCharacter;
+class APlayerState;
 class AProceduralSetup;
+class ATeamTransport;
+class UAttackerManagerComponent;
+class UDifficultyManager;
+class UDifficultySetting;
+class UDynamicMeshScaler;
+class UFSDEvent;
+class UGemProximityTracker;
+class UGeneratedMission;
+class UObjective;
+class UPlayerCharacterID;
 class UPlayerProximityTracker;
+class UPrimitiveComponent;
+class UResourceData;
 class USeasonReplicatorComponent;
 class UShowroomManager;
-class USoundMixManagerComponent;
-class UTeamResourcesComponent;
 class USoundCue;
+class USoundMixManagerComponent;
+class USpawnEffectsComponent;
+class UTeamResourcesComponent;
 
 UCLASS(Blueprintable)
 class FSD_API AFSDGameState : public AGameState {
@@ -101,7 +104,7 @@ public:
     int32 CurrentLevel;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
-    AMiningPod* EscapePod;
+    ATeamTransport* EscapePod;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_FSDSessionID, meta=(AllowPrivateAccess=true))
     FString FSDSessionID;
@@ -234,7 +237,7 @@ protected:
     bool objectivesCompleted;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_CurrentDifficultySetting, meta=(AllowPrivateAccess=true))
-    UDifficultySetting* CurrentDifficultySetting;
+    FGameDifficulty CurrentDifficultySetting;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool RememberDifficulty;
@@ -281,6 +284,9 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_CountdownText, meta=(AllowPrivateAccess=true))
     FText countdownText;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    FGlobalMissionSeed HostGlobalSeed;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool CanCarryOverResources;
     
@@ -291,9 +297,10 @@ protected:
     APlayerState* CurrentPlayerSessionLeader;
     
 public:
-    AFSDGameState();
+    AFSDGameState(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable, meta=(Latent, LatentInfo="LatentInfo"))
     static void WaitForInitialGenerationDone(AFSDGameState* GameState, FLatentActionInfo LatentInfo);
     
@@ -433,9 +440,6 @@ public:
     TArray<FCreditsReward> GetMissionRewardCredits() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    bool GetMissionCompletedCreditReward(bool primary, int32& OutReward) const;
-    
-    UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetGlobalMissionSeed() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -448,10 +452,19 @@ public:
     UDifficultyManager* GetDifficultyManager() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    FGameDifficulty GetCurrentGameDifficulty() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UDifficultySetting* GetCurrentDifficultySetting() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     TMap<UResourceData*, float> GetCollectedResources() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<UFSDEvent*> GetActiveEventsFromMission() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure=false)
+    UObjective* FindObjective(TSubclassOf<UObjective> SubClass) const;
     
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void ClientNewMessage(const FFSDChatMessage& Msg);
@@ -469,7 +482,7 @@ public:
     void All_SpawnScaledEffectAt(FScaledEffect Effect, FVector_NetQuantize Location);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
-    void All_SpawnScaledEffectAndCueAt(FScaledEffect Effect, USoundCue* audio, FVector_NetQuantize Location);
+    void All_SpawnScaledEffectAndCueAt(FScaledEffect Effect, USoundCue* Audio, FVector_NetQuantize Location);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void All_ServerQuit();

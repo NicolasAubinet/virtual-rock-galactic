@@ -1,10 +1,9 @@
 #include "ShieldBoostUsable.h"
 
-class APlayerCharacter;
+UShieldBoostUsable::UShieldBoostUsable(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+}
 
 void UShieldBoostUsable::OnCharacterBoosted(APlayerCharacter* User, EInputKeys Key) {
 }
 
-UShieldBoostUsable::UShieldBoostUsable() {
-}
 

@@ -1,15 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
-#include "PlacementObstruction.h"
 #include "GameFramework/Actor.h"
+#include "PlacementObstruction.h"
+#include "Templates/SubclassOf.h"
 #include "PlagueControlActor.generated.h"
 
-class UNiagaraComponent;
 class ACleanupPodItem;
-class UPlagueUsable;
 class APlagueInfectionNode;
 class APlayerCharacter;
+class UNiagaraComponent;
+class UPlagueUsable;
 class UTerrainMaterial;
 
 UCLASS(Blueprintable)
@@ -57,12 +57,13 @@ protected:
     bool DebugDrawDebrisLight;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    APlagueInfectionNode* TargetedPlagueNode;
+    TWeakObjectPtr<APlagueInfectionNode> TargetedPlagueNode;
     
 public:
-    APlagueControlActor();
+    APlagueControlActor(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable, BlueprintPure=false)
     void SpawnPodHack(APlayerCharacter* Player) const;
@@ -77,7 +78,7 @@ protected:
     void EquipPlaguePod(APlayerCharacter* Player);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    bool CanDropWeaponPod(float& timeLeft);
+    bool CanDropWeaponPod(float& TimeLeft);
     
 };
 

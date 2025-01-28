@@ -1,9 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
-#include "DeepPathFinderSize.h"
 #include "Components/ActorComponent.h"
+#include "DeepPathFinderSize.h"
+#include "Templates/SubclassOf.h"
 #include "AreaSpawnerComponent.generated.h"
 
 class AActor;
@@ -24,7 +24,8 @@ protected:
     float ChanceToSpawn;
     
 public:
-    UAreaSpawnerComponent();
+    UAreaSpawnerComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SpawnInArea(const FVector& Origin, float Radius, float maxVerticalDistance, APawn* Instigator);
     

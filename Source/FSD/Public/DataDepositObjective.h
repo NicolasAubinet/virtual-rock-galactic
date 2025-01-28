@@ -3,8 +3,8 @@
 #include "Objective.h"
 #include "DataDepositObjective.generated.h"
 
-class UDebrisPositioning;
 class AFacilityPowerStation;
+class UDebrisPositioning;
 
 UCLASS(Abstract, Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UDataDepositObjective : public UObjective {
@@ -21,9 +21,10 @@ protected:
     bool Complete;
     
 public:
-    UDataDepositObjective();
+    UDataDepositObjective(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
 protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_Complete();

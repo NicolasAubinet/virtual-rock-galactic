@@ -1,6 +1,11 @@
 #include "DrinkEffectComponent.h"
 
-class APlayerCharacter;
+UDrinkEffectComponent::UDrinkEffectComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->BeerEffectDurationSeconds = 15.00f;
+    this->AutoDestroy = true;
+    this->EffectIsActive = false;
+    this->ActivatesOnlyOnceWhenDrinking = false;
+}
 
 void UDrinkEffectComponent::StopEffect() {
 }
@@ -10,9 +15,8 @@ void UDrinkEffectComponent::StopEffect() {
 void UDrinkEffectComponent::OnChangedCharacter(APlayerCharacter* changedToCharacter, UClass* DrinkEffectClass) {
 }
 
-UDrinkEffectComponent::UDrinkEffectComponent() {
-    this->BeerEffectDurationSeconds = 15.00f;
-    this->AutoDestroy = true;
-    this->EffectIsActive = false;
+bool UDrinkEffectComponent::GetActivateOnlyWhenDrinking() const {
+    return false;
 }
+
 

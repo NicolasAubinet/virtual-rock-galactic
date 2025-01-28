@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "TestAnimInstanceProxy.h"
 #include "Animation/AnimInstance.h"
+#include "TestAnimInstanceProxy.h"
 #include "TestAnimInstance.generated.h"
 
 UCLASS(Blueprintable, NonTransient)
@@ -27,5 +27,6 @@ public:
     float MeshScale;
     
     UTestAnimInstance();
+
 };
 

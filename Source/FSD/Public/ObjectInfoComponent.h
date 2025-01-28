@@ -4,17 +4,18 @@
 #include "Components/ActorComponent.h"
 #include "ObjectInfoComponent.generated.h"
 
-class UPrimitiveComponent;
-class UDialogDataAsset;
 class APlayerController;
 class UActorContextWidget;
+class UDialogDataAsset;
+class UPrimitiveComponent;
 class UTexture2D;
 
 UCLASS(Abstract, Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UObjectInfoComponent : public UActorComponent {
     GENERATED_BODY()
 public:
-    UObjectInfoComponent();
+    UObjectInfoComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     bool HasMissionControlLookAtShout(const UPrimitiveComponent* TargetComponent) const;
     

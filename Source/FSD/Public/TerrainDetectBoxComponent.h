@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "Components/BoxComponent.h"
 #include "PointRemovedEventDelegate.h"
 #include "TerrainDetectInterface.h"
-#include "Components/BoxComponent.h"
 #include "TerrainDetectBoxComponent.generated.h"
 
 UCLASS(Blueprintable, EditInlineNew, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -27,11 +27,12 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool KillActorOnPointRemoved;
     
-    UTerrainDetectBoxComponent();
+    UTerrainDetectBoxComponent(const FObjectInitializer& ObjectInitializer);
+
     UFUNCTION(BlueprintCallable)
     void StartDetect();
     
-    
+
     // Fix for true pure virtual functions not being implemented
 };
 

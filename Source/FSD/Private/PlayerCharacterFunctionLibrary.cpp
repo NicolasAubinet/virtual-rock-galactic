@@ -1,9 +1,7 @@
 #include "PlayerCharacterFunctionLibrary.h"
 
-class UObject;
-class AActor;
-class AFSDPlayerState;
-class APlayerCharacter;
+UPlayerCharacterFunctionLibrary::UPlayerCharacterFunctionLibrary() {
+}
 
 bool UPlayerCharacterFunctionLibrary::SetPlayerVoiceMuted(UObject* WorldContextObject, AFSDPlayerState* PlayerState, bool Mute, bool TrySystemWide, int32 localUserNum) {
     return false;
@@ -17,7 +15,7 @@ APlayerCharacter* UPlayerCharacterFunctionLibrary::GetRandomPlayer(UObject* Worl
     return NULL;
 }
 
-APlayerCharacter* UPlayerCharacterFunctionLibrary::GetNearestVisiblePlayer(AActor* From, float MaxDistance, bool MustBeAlive, bool MustNotBeParalyzed) {
+APlayerCharacter* UPlayerCharacterFunctionLibrary::GetNearestVisiblePlayer(AActor* from, float MaxDistance, bool MustBeAlive, bool MustNotBeParalyzed) {
     return NULL;
 }
 
@@ -25,14 +23,12 @@ APlayerCharacter* UPlayerCharacterFunctionLibrary::GetNearestPlayerToPosition(UO
     return NULL;
 }
 
-APlayerCharacter* UPlayerCharacterFunctionLibrary::GetNearestPlayerFrom(UObject* WorldContext, FVector From, float MaxDistance, bool MustBeAlive, bool MustBeUnparalyzed, bool XYOnly) {
+APlayerCharacter* UPlayerCharacterFunctionLibrary::GetNearestPlayerFrom(UObject* WorldContext, FVector from, float MaxDistance, bool MustBeAlive, bool MustBeUnparalyzed, bool XYOnly) {
     return NULL;
 }
 
-APlayerCharacter* UPlayerCharacterFunctionLibrary::GetNearestPlayer(AActor* From, float MaxDistance, bool MustBeAlive, bool MustBeUnparalyzed, bool XYOnly) {
+APlayerCharacter* UPlayerCharacterFunctionLibrary::GetNearestPlayer(AActor* from, float MaxDistance, bool MustBeAlive, bool MustBeUnparalyzed, bool XYOnly) {
     return NULL;
 }
 
-UPlayerCharacterFunctionLibrary::UPlayerCharacterFunctionLibrary() {
-}
 

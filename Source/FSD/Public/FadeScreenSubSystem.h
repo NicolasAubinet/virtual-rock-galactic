@@ -1,8 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "FadingDoneDelegate.h"
-#include "FadeData.h"
 #include "Subsystems/GameInstanceSubsystem.h"
+#include "FadeData.h"
+#include "FadingDoneDelegate.h"
 #include "FadeScreenSubSystem.generated.h"
 
 class UObject;
@@ -21,6 +21,7 @@ protected:
     
 public:
     UFadeScreenSubSystem();
+
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContext"))
     static bool IsScreenFadingToBlack(UObject* WorldContext);
     

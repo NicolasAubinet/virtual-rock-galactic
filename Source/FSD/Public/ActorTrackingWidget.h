@@ -1,24 +1,24 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "Layout/Margin.h"
 #include "FSDUserWidget.h"
+#include "Templates/SubclassOf.h"
 #include "ActorTrackingWidget.generated.h"
 
 class AActor;
-class USceneComponent;
-class UActorTrackingWidget;
 class APlayerController;
+class UActorTrackingWidget;
+class USceneComponent;
 
 UCLASS(Abstract, Blueprintable, EditInlineNew)
 class UActorTrackingWidget : public UFSDUserWidget {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient)
-    USceneComponent* TargetComponent;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    TWeakObjectPtr<USceneComponent> TargetComponent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float WorldHeightOffset;
@@ -46,6 +46,7 @@ protected:
     
 public:
     UActorTrackingWidget();
+
     UFUNCTION(BlueprintCallable)
     void SetTargetComponent(USceneComponent* Component);
     

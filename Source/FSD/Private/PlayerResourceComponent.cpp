@@ -1,12 +1,10 @@
 #include "PlayerResourceComponent.h"
 
-class APlayerCharacter;
-class UPlayerResourceComponent;
+UPlayerResourceComponent::UPlayerResourceComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+}
 
 UPlayerResourceComponent* UPlayerResourceComponent::GetFromPlayer(APlayerCharacter* PlayerCharacter) {
     return NULL;
 }
 
-UPlayerResourceComponent::UPlayerResourceComponent() {
-}
 

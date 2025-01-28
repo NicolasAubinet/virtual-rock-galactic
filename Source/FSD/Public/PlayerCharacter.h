@@ -1,142 +1,146 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
-#include "EnhancedTrace.h"
-#include "HeroInfo.h"
-#include "CameraSpringSettings.h"
-#include "Engine/NetSerialization.h"
-#include "AnalogAimSettings.h"
-#include "HoldButton.h"
-#include "DownCameraSettings.h"
-#include "PlatformComponent.h"
-#include "GameplayTagContainer.h"
-#include "GameplayTagContainer.h"
-#include "Engine/NetSerialization.h"
 #include "UObject/NoExportTypes.h"
-#include "BoolDelegateDelegate.h"
-#include "DelegateDelegate.h"
-#include "EInputKeys.h"
+#include "GameFramework/Character.h"
 #include "Engine/EngineTypes.h"
-#include "ECharacterCameraMode.h"
-#include "ECharacterState.h"
-#include "OnCallDonkeySignatureDelegate.h"
-#include "OnFlareThrownDelegate.h"
-#include "IgnoreInviteSignatureDelegate.h"
-#include "RejectInviteSignatureDelegate.h"
+#include "Engine/NetSerialization.h"
+#include "Engine/NetSerialization.h"
+#include "GameplayTagContainer.h"
+#include "GameplayTagAssetInterface.h"
+#include "GameplayTagContainer.h"
 #include "AcceptInviteSignatureDelegate.h"
-#include "OpenChatSignatureDelegate.h"
-#include "UpdateMeshesSignatureDelegate.h"
-#include "OnLaserPointerPressedSignatureDelegate.h"
-#include "OnMinePressedSignatureDelegate.h"
-#include "OnJumpReleasedSignatureDelegate.h"
-#include "OnJumpPressedSignatureDelegate.h"
-#include "SaluteEventDelegate.h"
-#include "CharacterDelegateDelegate.h"
-#include "CoolDownProgressDelegateDelegate.h"
-#include "OnPerkActivationTimerFinishedDelegate.h"
-#include "DownCameraTargetChangedDelegate.h"
-#include "CameraModeChangedDelegate.h"
 #include "ActionHoldEventDelegate.h"
-#include "DamagedEnemyEventDelegate.h"
-#include "ThrowCarriableDelegateDelegate.h"
-#include "OnCharacterDeathChangeSignatureDelegate.h"
-#include "OnCharacterStateChangedSignatureDelegate.h"
-#include "DepthSignatureDelegate.h"
-#include "ToggleMapToolSignatureDelegate.h"
-#include "OnPlayerShoutEventDelegate.h"
+#include "AnalogAimSettings.h"
+#include "BoolDelegateDelegate.h"
+#include "CameraModeChangedDelegate.h"
+#include "CameraSpringSettings.h"
+#include "CharacterDelegateDelegate.h"
+#include "CollectedDrinkDelegateDelegate.h"
+#include "CollectedEverythingEventDelegate.h"
+#include "CollectedPickaxePartDelegateDelegate.h"
 #include "CollectedVanityItemDeledateDelegate.h"
 #include "CollectedVictoryPoseEventDelegate.h"
-#include "CollectedPickaxePartDelegateDelegate.h"
-#include "CollectedDrinkDelegateDelegate.h"
+#include "CoolDownProgressDelegateDelegate.h"
+#include "DamagedEnemyEventDelegate.h"
+#include "DelegateDelegate.h"
+#include "DepthSignatureDelegate.h"
+#include "DownCameraSettings.h"
+#include "DownCameraTargetChangedDelegate.h"
+#include "ECharacterCameraMode.h"
+#include "ECharacterState.h"
+#include "EInputKeys.h"
+#include "EnhancedTrace.h"
+#include "HeadlightOnChangedEventDelegate.h"
+#include "HeroInfo.h"
+#include "HoldButton.h"
+#include "IgnoreInviteSignatureDelegate.h"
+#include "LaserPointerEventDelegate.h"
+#include "OnCallDonkeySignatureDelegate.h"
+#include "OnCharacterDeathChangeSignatureDelegate.h"
+#include "OnCharacterStateChangedSignatureDelegate.h"
+#include "OnFlareThrownDelegate.h"
+#include "OnJumpPressedSignatureDelegate.h"
+#include "OnJumpReleasedSignatureDelegate.h"
+#include "OnLaserPointerPressedSignatureDelegate.h"
+#include "OnMinePressedSignatureDelegate.h"
+#include "OnPerkActivationTimerFinishedDelegate.h"
+#include "OnPlayerShoutEventDelegate.h"
+#include "OpenChatSignatureDelegate.h"
+#include "PlatformComponent.h"
+#include "PlaySoundInterface.h"
+#include "PlayerCharacterEventDelegate.h"
+#include "RejectInviteSignatureDelegate.h"
+#include "RejoinListener.h"
+#include "ReviveCallEventDelegate.h"
+#include "SaluteEventDelegate.h"
 #include "SchematicEventDelegate.h"
 #include "SkinEventDelegate.h"
-#include "LaserPointerEventDelegate.h"
-#include "HeadlightOnChangedEventDelegate.h"
-#include "ReviveCallEventDelegate.h"
-#include "CollectedEverythingEventDelegate.h"
-#include "PlayerCharacterEventDelegate.h"
 #include "Targetable.h"
-#include "RejoinListener.h"
-#include "PlaySoundInterface.h"
-#include "GameFramework/Character.h"
-#include "GameplayTagAssetInterface.h"
+#include "Templates/SubclassOf.h"
+#include "ThrowCarriableDelegateDelegate.h"
+#include "ToggleMapToolSignatureDelegate.h"
+#include "UpdateMeshesSignatureDelegate.h"
 #include "PlayerCharacter.generated.h"
 
-class UObject;
 class AActor;
-class USceneComponent;
-class USkeletalMeshComponent;
-class UAudioComponent;
-class UActorTrackingComponent;
-class AItem;
-class UPlayerAttackPositionComponent;
-class AFSDPhysicsActor;
-class UUsableComponent;
-class UInstantUsable;
-class UCappedResource;
-class UCharacterVanityComponent;
-class UCharacterUseComponent;
-class UCharacterStateComponent;
-class UCharacterSightComponent;
-class UCharacterRecoilComponent;
-class UCharacterIntoxicationComponent;
-class UCharacterCameraController;
-class UCommunicationComponent;
 class ADamageEnhancer;
-class UEnemyDescriptor;
-class ULightComponent;
-class UPointLightComponent;
-class UFSDAchievement;
-class APlayerController;
-class AFSDPlayerState;
-class AFSDPlayerController;
-class UFSDPhysicalMaterial;
 class AEventRewardDispenser;
-class UInventoryList;
-class UInventoryComponent;
-class UMissionStatsCollector;
-class UOutlineComponent;
-class UPlayerInfoComponent;
-class UPlayerCharacterID;
-class UPerkHUDActivationWidget;
-class UPawnStatsComponent;
-class UPawnAffliction;
+class AFSDPhysicsActor;
+class AFSDPlayerController;
+class AFSDPlayerState;
+class AItem;
 class APlayerCharacter;
-class UPlayerTPAnimInstance;
-class UPlayerFPAnimInstance;
-class UPlayerAnimInstance;
-class UPlayerAfflictionComponent;
-class UPlayerTemperatureComponent;
-class UPlayerInfectionComponent;
-class UPlayerHealthComponent;
-class UPlayerReactiveTerrainTrackerComponent;
-class USchematic;
+class APlayerController;
 class AShieldGeneratorActor;
+class ATutorialManager;
+class AZipLineProjectile;
+class UActorTrackingComponent;
+class UAnimMontage;
+class UAudioComponent;
+class UBaseCritterDescriptor;
+class UCameraComponent;
+class UCappedResource;
+class UCharacterCameraController;
+class UCharacterIntoxicationComponent;
+class UCharacterRecoilComponent;
+class UCharacterSightComponent;
+class UCharacterStateComponent;
+class UCharacterUseComponent;
+class UCharacterVanityComponent;
+class UCommunicationComponent;
+class UDialogDataAsset;
+class UEnemyDescriptor;
+class UFSDAchievement;
+class UFSDPhysicalMaterial;
+class UHeightenedSenseComponent;
+class UInstantUsable;
+class UInventoryComponent;
+class UInventoryList;
+class UJetBootsMovementComponent;
+class ULightComponent;
+class UMaterialInstanceDynamic;
+class UMaterialInterface;
+class UMissionStatsCollector;
+class UObject;
+class UOutlineComponent;
+class UParticleSystem;
+class UPawnAffliction;
+class UPawnStatsComponent;
+class UPerkHUDActivationWidget;
+class UPhysicsAsset;
+class UPlayerAfflictionComponent;
+class UPlayerAnimInstance;
+class UPlayerAttackPositionComponent;
+class UPlayerCharacterID;
+class UPlayerFPAnimInstance;
+class UPlayerHealthComponent;
+class UPlayerInfectionComponent;
+class UPlayerInfoComponent;
+class UPlayerReactiveTerrainTrackerComponent;
+class UPlayerTPAnimInstance;
+class UPlayerTemperatureComponent;
+class UPointLightComponent;
+class USceneComponent;
+class USchematic;
+class USingleUsableComponent;
+class USkeletalMeshComponent;
+class USoundAttenuation;
+class USoundBase;
+class USoundConcurrency;
+class USoundCue;
+class USpringArmComponent;
 class UStatusEffect;
 class UStatusEffectsComponent;
-class USingleUsableComponent;
-class UHeightenedSenseComponent;
-class ATutorialManager;
-class UZipLineStateComponent;
-class AZipLineProjectile;
-class UMaterialInterface;
-class UWidgetInteractionComponent;
-class USoundBase;
-class UCameraComponent;
-class UAnimMontage;
+class UTemporaryBuff;
 class UTexture2D;
-class UMaterialInstanceDynamic;
-class UParticleSystem;
-class UPhysicsAsset;
-class USoundCue;
-class USoundConcurrency;
-class USoundAttenuation;
-class USpringArmComponent;
+class UUsableComponent;
+class UWidgetInteractionComponent;
+class UZipLineStateComponent;
 
-UCLASS(Abstract, Blueprintable)
+UCLASS(Abstract, Blueprintable, Config=Engine)
 class FSD_API APlayerCharacter : public ACharacter, public IGameplayTagAssetInterface, public ITargetable, public IRejoinListener, public IPlaySoundInterface {
     GENERATED_BODY()
 public:
@@ -304,6 +308,15 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagContainer GameplayTags;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UDialogDataAsset* AttentionShoutOverride;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSoftClassPtr<UJetBootsMovementComponent> JetBootsComponentSpawnable;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSoftClassPtr<UJetBootsMovementComponent> JetBootsComponentMK2Spawnable;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     UZipLineStateComponent* ZipLineStateComponent;
@@ -535,6 +548,9 @@ protected:
     float CarryingThrowMaxForce;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float PlayerVelocityToThrowFactor;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UStatusEffect> CarryingThrowingStatusEffect;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -543,7 +559,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     TMap<uint8, UCharacterStateComponent*> CharacterStates;
     
-    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<ATutorialManager> TutorialManager;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, ReplicatedUsing=OnRep_CharacterState, meta=(AllowPrivateAccess=true))
@@ -613,7 +629,7 @@ protected:
     bool HeadLightOn;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
-    bool IsUsing;
+    bool isUsing;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float JumpPressedTime;
@@ -628,10 +644,16 @@ protected:
     bool CanUseItem;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    bool CanUseLaserpointer;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool CanChangeItems;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool CanMine;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    bool CanSalute;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_IsStandingDown, meta=(AllowPrivateAccess=true))
     bool IsStandingDown;
@@ -640,7 +662,7 @@ protected:
     bool InDanceRange;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_IsDancing, meta=(AllowPrivateAccess=true))
-    bool IsDancing;
+    bool isDancing;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float DanceStartTime;
@@ -649,7 +671,7 @@ protected:
     UFSDAchievement* HappyFeetAchievement;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_DanceMove, meta=(AllowPrivateAccess=true))
-    int32 DanceMove;
+    int32 danceMove;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     ECharacterCameraMode CameraMode;
@@ -718,9 +740,10 @@ protected:
     FCameraSpringSettings CameraSpringSettings;
     
 public:
-    APlayerCharacter();
+    APlayerCharacter(const FObjectInitializer& ObjectInitializer);
+
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    
+
     UFUNCTION(BlueprintCallable)
     void UseZipLine(AZipLineProjectile* ZipLine, const FVector& Start, const FVector& End);
     
@@ -798,7 +821,7 @@ public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void SetInCharacterSelectionWorld();
     
-    UFUNCTION(BlueprintCallable, Reliable, Server)
+    UFUNCTION(BlueprintCallable)
     void SetHeadLight(bool On);
     
     UFUNCTION(BlueprintCallable)
@@ -814,6 +837,14 @@ protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_TriggerDash();
     
+public:
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_TeleportToPlayer(APlayerCharacter* InPlayerToTeleport, int32 InTarget);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_TeleportPlayerTo(int32 InPlayerIndexToTeleport, APlayerCharacter* InTarget);
+    
+protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_StartSalute(UAnimMontage* startSalute);
     
@@ -822,12 +853,20 @@ public:
     void Server_SpawnEnemies(UEnemyDescriptor* descriptor, int32 Count);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_SpawnCritters(UBaseCritterDescriptor* descriptor, int32 Count);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_Shouted();
     
 protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetUsing(bool characterIsUsing);
     
+public:
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_SetStandingDown(bool standingDown);
+    
+protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetRunning(bool characterIsRunning);
     
@@ -847,6 +886,12 @@ protected:
     
 public:
     UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_SetIsDancing(bool NewIsDancing, int32 NewDanceMove);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_SetHeadLight(bool On);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetDispenserReward(AEventRewardDispenser* Dispenser, USchematic* Reward);
     
 protected:
@@ -863,7 +908,22 @@ protected:
     
 public:
     UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_ClearBiomeEffects();
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_CheatStartCountDown();
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_CheatSpawnDropPodOnSelf(float Delay);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_CheatRevive();
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_CheatPreventMeteors();
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_CheatKillAllNeutral();
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_CheatKillAllFriendly();
@@ -872,13 +932,37 @@ public:
     void Server_CheatKillAll();
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_CheatJetBoots_MK2();
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_CheatJetBoots();
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_CheatGodMode();
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_CheatFlyMode(bool Active);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_CheatFlareInfiniteDuration(bool Enabled);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_CheatDestroyAllVanityCharacters();
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_CheatDebugFastMode(bool fast);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_CheatDancingCharacterOnSelf(int32 InDanceIndex);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_CheatClearAllDecalsAll();
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_CheatBreakAllEnemyArmor();
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_CheatAddAllResourcesToInventory(float amount);
     
 protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
@@ -896,6 +980,9 @@ public:
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_AddImpulse(const FVector_NetQuantizeNormal& Direction, float force);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_ActivateTemporaryBuff(UTemporaryBuff* buff);
     
     UFUNCTION(BlueprintCallable)
     void SendLevelUpStatistics(const int32 currentRank);
@@ -989,6 +1076,12 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsWalking() const;
     
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsUsingPressed() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsUsingItemPressed() const;
+    
 protected:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsStateActive(ECharacterState State) const;
@@ -1049,6 +1142,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetTimeSinceLastRevival() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool GetSuperRapidFireActive() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     ECharacterState GetPreviousState() const;
@@ -1171,11 +1267,17 @@ public:
     UFUNCTION(BlueprintCallable, Client, Reliable)
     void Client_AddImpulse(const FVector_NetQuantizeNormal& Direction, float force);
     
+    UFUNCTION(BlueprintCallable, Client, Reliable)
+    void Client_ActivateTemporaryBuff(UTemporaryBuff* buff);
+    
 protected:
     UFUNCTION(BlueprintCallable, Client, Reliable)
     void CheckWithoutAPaddleAchievement();
     
 public:
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void Cheat_CreateCountdownHUD();
+    
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void ChangeState(ECharacterState NewState);
     
@@ -1213,6 +1315,18 @@ public:
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
     void All_ShowFieldMedicInstantReviveEffects();
     
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void All_CheatStartCountDown();
+    
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void All_CheatSetDanceForVanityCharacter(int32 InDanceIndex);
+    
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void All_CheatDestroyAllVanityCharacters();
+    
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void All_CheatClearAllDecalsAll();
+    
     UFUNCTION(BlueprintCallable)
     void AddImpulseToActor(AFSDPhysicsActor* Target, FVector_NetQuantize Impulse, FVector_NetQuantize Location, FVector_NetQuantize AngularImpulse);
     
@@ -1229,7 +1343,7 @@ protected:
     UFUNCTION(BlueprintCallable)
     void AcceptInvite();
     
-    
+
     // Fix for true pure virtual functions not being implemented
 public:
     UFUNCTION(BlueprintCallable)

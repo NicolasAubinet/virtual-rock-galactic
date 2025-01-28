@@ -4,11 +4,11 @@
 #include "TickableActionBase.h"
 #include "MultiTextCounterAction.generated.h"
 
-class UObject;
 class UAudioComponent;
-class UTextBlock;
 class UMultiTextCounterAction;
+class UObject;
 class USoundCue;
+class UTextBlock;
 
 UCLASS(Blueprintable)
 class UMultiTextCounterAction : public UTickableActionBase {
@@ -46,6 +46,7 @@ protected:
     
 public:
     UMultiTextCounterAction();
+
     UFUNCTION(BlueprintCallable, meta=(WorldContext="InWorldContext"))
     static UMultiTextCounterAction* StartMultiTextCounter(UObject* InWorldContext, UTextBlock* InTotalBlock, const FText InTotalFormat, float InCountSpeed, USoundCue* InCountingSound, const TArray<FTextCounterEntry> InEntries);
     

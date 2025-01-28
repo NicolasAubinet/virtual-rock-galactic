@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "Templates/SubclassOf.h"
 #include "StatusEffectsFunctionLibrary.generated.h"
 
 class AActor;
@@ -13,6 +13,7 @@ class UStatusEffectsFunctionLibrary : public UBlueprintFunctionLibrary {
     GENERATED_BODY()
 public:
     UStatusEffectsFunctionLibrary();
+
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static float GetMaxResistance(TSubclassOf<UStatusEffect> StatusEffect);
     

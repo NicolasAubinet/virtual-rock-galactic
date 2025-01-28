@@ -1,16 +1,13 @@
 #include "NeedleSprayer.h"
-#include "Components/SceneComponent.h"
-#include "NiagaraComponent.h"
-#include "Components/SkeletalMeshComponent.h"
 #include "Components/PointLightComponent.h"
+#include "Components/SceneComponent.h"
+#include "Components/SkeletalMeshComponent.h"
+#include "NiagaraComponent.h"
 #include "HitscanComponent.h"
 
-
-void ANeedleSprayer::OnHit(const FHitResult& Result, bool IsPenetrating) {
-}
-
-ANeedleSprayer::ANeedleSprayer() {
-    this->Root = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
+ANeedleSprayer::ANeedleSprayer(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
+    this->Root = (USceneComponent*)RootComponent;
     this->SKMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Mesh"));
     this->FireComponent = CreateDefaultSubobject<UHitscanComponent>(TEXT("HitscanComponent"));
     this->OnSpawnedEffectComponent = CreateDefaultSubobject<UHitscanComponent>(TEXT("OnSpawnedEffect"));
@@ -34,5 +31,15 @@ ANeedleSprayer::ANeedleSprayer() {
     this->PlayAnimationOnReload = false;
     this->DrawDebugLines = false;
     this->DebugLinesDuration = 0.40f;
+    this->SKMesh->SetupAttachment(RootComponent);
+    this->MuzzleFlashLight->SetupAttachment(SKMesh);
+    this->MuzzleFlashParticleSys->SetupAttachment(MuzzleFlashLight);
+    this->ImpactParticleComponent->SetupAttachment(RootComponent);
+    this->ShotOriginPivot->SetupAttachment(SKMesh);
 }
+
+
+void ANeedleSprayer::OnHit(const FHitResult& Result, bool IsPenetrating) {
+}
+
 

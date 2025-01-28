@@ -1,9 +1,10 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
 #include "CharacterVanitySave.h"
 #include "ItemLoadout.h"
+#include "Templates/SubclassOf.h"
+#include "UpgradeLoadout.h"
 #include "VictoryPoseSave.h"
 #include "CharacterSave.generated.h"
 
@@ -46,6 +47,15 @@ private:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FItemLoadout> Loadouts;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FUpgradeLoadout> ItemUpgradeLoadouts;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FItemLoadout RandomWeaponLoadout;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FUpgradeLoadout RandomItemUpgradeLoadouts;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FVictoryPoseSave VictoryPose;

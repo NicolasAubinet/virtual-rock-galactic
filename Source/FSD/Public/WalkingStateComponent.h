@@ -1,13 +1,13 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EInputKeys.h"
 #include "CharacterStateComponent.h"
+#include "EInputKeys.h"
 #include "WalkingStateComponent.generated.h"
 
-class UAudioComponent;
 class APlayerCharacter;
-class UTrackBuilderMovement;
+class UAudioComponent;
 class USoundBase;
+class UTrackBuilderMovement;
 
 UCLASS(Blueprintable, MinimalAPI, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UWalkingStateComponent : public UCharacterStateComponent {
@@ -45,7 +45,8 @@ protected:
     UAudioComponent* AudioComponentIceSliding;
     
 public:
-    UWalkingStateComponent();
+    UWalkingStateComponent(const FObjectInitializer& ObjectInitializer);
+
 protected:
     UFUNCTION(BlueprintCallable)
     void TrackGrindCallback(APlayerCharacter* User, EInputKeys Key);

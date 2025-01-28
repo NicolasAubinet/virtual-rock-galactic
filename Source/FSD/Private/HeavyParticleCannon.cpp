@@ -1,49 +1,12 @@
 #include "HeavyParticleCannon.h"
-#include "Net/UnrealNetwork.h"
 #include "NiagaraComponent.h"
 #include "DamageComponent.h"
 #include "FirstPersonNiagaraComponent.h"
+#include "Net/UnrealNetwork.h"
 #include "ReflectionHitscanComponent.h"
 #include "StickyFlameSpawner.h"
 
-class AActor;
-class UFSDPhysicalMaterial;
-
-void AHeavyParticleCannon::UpdateBeamsVisibility_Implementation(bool isBeamVisible) {
-}
-
-void AHeavyParticleCannon::UpdateBeam(const FReflectionTraceResult& Path) {
-}
-
-void AHeavyParticleCannon::ServerSetBoostActive_Implementation(bool newActive) {
-}
-
-void AHeavyParticleCannon::Server_SetBeamActive_Implementation(bool inIsBeamActive) {
-}
-
-
-void AHeavyParticleCannon::OnTargetKilled(AActor* Target, UFSDPhysicalMaterial* PhysMat, bool wasDirectHit) {
-}
-
-void AHeavyParticleCannon::OnRep_BoostActive() {
-}
-
-void AHeavyParticleCannon::OnRep_bIsBeamActive() {
-}
-
-
-void AHeavyParticleCannon::ChargeUpComplete() {
-}
-
-
-void AHeavyParticleCannon::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
-    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-    
-    DOREPLIFETIME(AHeavyParticleCannon, BoostActive);
-    DOREPLIFETIME(AHeavyParticleCannon, bIsBeamActive);
-}
-
-AHeavyParticleCannon::AHeavyParticleCannon() {
+AHeavyParticleCannon::AHeavyParticleCannon(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
     this->Damage = CreateDefaultSubobject<UDamageComponent>(TEXT("Damage"));
     this->HitscanComponent = CreateDefaultSubobject<UReflectionHitscanComponent>(TEXT("ReflectionHitscanComponent"));
     this->StickyFlamesSpawner = CreateDefaultSubobject<UStickyFlameSpawner>(TEXT("StickyFlames"));
@@ -82,5 +45,46 @@ AHeavyParticleCannon::AHeavyParticleCannon() {
     this->BoostExtraAmmoCost = 2.00f;
     this->BeamDependentReloadDuration = 0.00f;
     this->bIsBeamActive = false;
+    this->FirstPersonBeam->SetupAttachment(FPMesh);
+    this->FirstPersonLaserSight->SetupAttachment(FPMesh);
+    this->ThirdPersonBeam->SetupAttachment(TPMesh);
 }
+
+void AHeavyParticleCannon::UpdateBeamsVisibility_Implementation(bool isBeamVisible) {
+}
+
+void AHeavyParticleCannon::UpdateBeam(const FReflectionTraceResult& Path) {
+}
+
+void AHeavyParticleCannon::ServerSetBoostActive_Implementation(bool newActive) {
+}
+
+void AHeavyParticleCannon::Server_SetBeamActive_Implementation(bool inIsBeamActive) {
+}
+
+
+void AHeavyParticleCannon::OnTargetKilled(AActor* Target, UFSDPhysicalMaterial* PhysMat, bool wasDirectHit) {
+}
+
+void AHeavyParticleCannon::OnRep_BoostActive() {
+}
+
+void AHeavyParticleCannon::OnRep_bIsBeamActive() {
+}
+
+
+void AHeavyParticleCannon::Client_AddAmmoOnKill_Implementation() {
+}
+
+void AHeavyParticleCannon::ChargeUpComplete() {
+}
+
+
+void AHeavyParticleCannon::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
+    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+    
+    DOREPLIFETIME(AHeavyParticleCannon, BoostActive);
+    DOREPLIFETIME(AHeavyParticleCannon, bIsBeamActive);
+}
+
 

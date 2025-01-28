@@ -1,19 +1,19 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Templates/SubclassOf.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "Engine/EngineTypes.h"
-#include "LockCounter.h"
-#include "TracerData.h"
 #include "AmmoDrivenWeapon.h"
+#include "LockCounter.h"
+#include "Templates/SubclassOf.h"
+#include "TracerData.h"
 #include "LockOnWeapon.generated.h"
 
 class AActor;
+class ALockOnBeam;
 class UActorTrackingWidget;
 class UDamageComponent;
 class UHitscanComponent;
-class ALockOnBeam;
 class UStatusEffect;
 
 UCLASS(Abstract, Blueprintable)
@@ -79,6 +79,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MaxLockOnDuration;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float RateOfFireLockedOnModifier;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bLockOnControlsSentryGun;
@@ -155,10 +158,14 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float LockOnRecoilMult;
     
-public:
-    ALockOnWeapon();
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool FireOnRelease;
     
+public:
+    ALockOnWeapon(const FObjectInitializer& ObjectInitializer);
+
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
 protected:
     UFUNCTION(BlueprintCallable)
     void UpdateRifleEye();
@@ -213,6 +220,9 @@ protected:
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void MuzzleLerpToTarget(FVector TargetLocation);
+    
+    UFUNCTION(BlueprintCallable)
+    void FireWeapon(bool ResetUsing, bool Fire);
     
 };
 

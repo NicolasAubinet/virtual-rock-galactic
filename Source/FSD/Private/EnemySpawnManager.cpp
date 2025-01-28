@@ -1,11 +1,17 @@
 #include "EnemySpawnManager.h"
 #include "Templates/SubclassOf.h"
 
-class AActor;
-class APawn;
-class UEnemyDescriptor;
-class UHealthComponentBase;
-class UStatusEffect;
+UEnemySpawnManager::UEnemySpawnManager(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->SpawnEffects = NULL;
+    this->MaxActiveEnemies = 0;
+    this->MaxActiveSwarmers = 80;
+    this->MaxActiveCritters = 40;
+    this->MaxDistanceBeforeCleanup = 0.00f;
+    this->ProceduralSetup = NULL;
+    this->bDestroyingAllEnemies = false;
+    this->EliteMutator = NULL;
+    this->DifficultyManager = NULL;
+}
 
 void UEnemySpawnManager::SpawnerDestroyed(APawn* Actor) {
 }
@@ -63,13 +69,4 @@ bool UEnemySpawnManager::CanSpawn(UEnemyDescriptor* EnemyDescriptor) const {
 void UEnemySpawnManager::AddGlobalStatusEffect(TSubclassOf<UStatusEffect> StatusEffect) {
 }
 
-UEnemySpawnManager::UEnemySpawnManager() {
-    this->SpawnEffects = NULL;
-    this->MaxActiveEnemies = 0;
-    this->MaxActiveSwarmers = 80;
-    this->MaxActiveCritters = 40;
-    this->MaxDistanceBeforeCleanup = 0.00f;
-    this->ProceduralSetup = NULL;
-    this->bDestroyingAllEnemies = false;
-}
 
