@@ -14,7 +14,6 @@ public class FSD : ModuleRules {
             "Core",
             "CoreUObject",
             "DLSSBlueprint",
-            "DSTelemetry",
             "DeveloperSettings",
             "Engine",
             "FSDEngine",

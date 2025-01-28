@@ -8,6 +8,7 @@ class UAnimMontage;
 class UItemCharacterAnimationSet;
 class UPlayerAnimInstance;
 class USkeletalMeshComponent;
+class UFirstPersonSkeletalMeshComponent;
 class USkinnableComponent;
 
 UCLASS(Abstract, Blueprintable)
@@ -25,7 +26,7 @@ protected:
     UPlayerAnimInstance* TPAnimInstance;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
-    USkeletalMeshComponent* FPMesh;
+    UFirstPersonSkeletalMeshComponent* FPMesh;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* TPMesh;

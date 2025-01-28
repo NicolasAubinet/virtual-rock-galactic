@@ -58,7 +58,6 @@ class ATutorialManager;
 class IMissionModeManager;
 class UMissionModeManager;
 class UCampaignManager;
-class UDSTelemetryWrapper;
 class UDifficultySetting;
 class UFSDCloudLoadSave;
 class UFSDFriendsAndInvites;
@@ -172,7 +171,7 @@ public:
     bool ShowingReconnectScreen;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
-    TWeakObjectPtr<UMouseCursorWidget> MouseCursorWidget;
+    UMouseCursorWidget* MouseCursorWidget;
     
     UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FShowCharacterSelectorSignature OnShowCharacterSelector;
@@ -292,9 +291,6 @@ public:
     UGoogleAnalyticsWrapper* GoogleAnalyticsWI;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    UDSTelemetryWrapper* DSTelemetryWrapper;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     USpecialEvent* ForcedMachineEvent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -309,7 +305,7 @@ public:
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FNewHUDWarningDelegate OnNewHUDWarning;
     
-protected:
+public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float LastDreadnaughtKillTime;
     

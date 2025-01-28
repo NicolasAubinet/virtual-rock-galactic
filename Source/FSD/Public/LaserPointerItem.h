@@ -72,10 +72,10 @@ protected:
     FHitResult LookAtHit;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
-    TWeakObjectPtr<UObjectInfoComponent> LookAtInfo;
+    UObjectInfoComponent* LookAtInfo;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    TWeakObjectPtr<UTerrainMaterial> LookAtTerrainMaterial;
+    UTerrainMaterial* LookAtTerrainMaterial;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FLaserPointerData LookAtData;
