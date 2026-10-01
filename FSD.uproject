@@ -25,6 +25,11 @@
 			"Name": "Modio",
 			"Enabled": true,
 			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/1ab22ed2961a4cc19b9151bd072df998"
+		},
+		{
+			"Name": "NodeGraphAssistant",
+			"Enabled": true,
+			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/d9baaaeadeaf41dcb52b3f6e134e9514"
 		}
 	]
 }
