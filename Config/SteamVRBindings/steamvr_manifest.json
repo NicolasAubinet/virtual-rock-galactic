@@ -208,78 +208,6 @@
 			"type": "boolean"
 		},
 		{
-			"name": "/actions/main/in/VREditor_Left_WorldMovement",
-			"type": "boolean"
-		},
-		{
-			"name": "/actions/main/in/VREditor_Left_Modifier",
-			"type": "boolean"
-		},
-		{
-			"name": "/actions/main/in/VREditor_Left_TrackpadDown",
-			"type": "boolean"
-		},
-		{
-			"name": "/actions/main/in/VREditor_Left_TrackpadLeft",
-			"type": "boolean"
-		},
-		{
-			"name": "/actions/main/in/VREditor_Left_TrackpadRight",
-			"type": "boolean"
-		},
-		{
-			"name": "/actions/main/in/VREditor_Left_TrackpadUp",
-			"type": "boolean"
-		},
-		{
-			"name": "/actions/main/in/VREditor_Left_ConfirmRadialSelection",
-			"type": "boolean"
-		},
-		{
-			"name": "/actions/main/in/VREditor_Left_Touch",
-			"type": "boolean"
-		},
-		{
-			"name": "/actions/main/in/VREditor_Left_Modifier2",
-			"type": "boolean"
-		},
-		{
-			"name": "/actions/main/in/VREditor_Right_WorldMovement",
-			"type": "boolean"
-		},
-		{
-			"name": "/actions/main/in/VREditor_Right_Modifier",
-			"type": "boolean"
-		},
-		{
-			"name": "/actions/main/in/VREditor_Right_TrackpadDown",
-			"type": "boolean"
-		},
-		{
-			"name": "/actions/main/in/VREditor_Right_TrackpadLeft",
-			"type": "boolean"
-		},
-		{
-			"name": "/actions/main/in/VREditor_Right_TrackpadRight",
-			"type": "boolean"
-		},
-		{
-			"name": "/actions/main/in/VREditor_Right_TrackpadUp",
-			"type": "boolean"
-		},
-		{
-			"name": "/actions/main/in/VREditor_Right_ConfirmRadialSelection",
-			"type": "boolean"
-		},
-		{
-			"name": "/actions/main/in/VREditor_Right_Touch",
-			"type": "boolean"
-		},
-		{
-			"name": "/actions/main/in/VREditor_Right_Modifier2",
-			"type": "boolean"
-		},
-		{
 			"name": "/actions/main/in/LeftTriggerPull axis",
 			"type": "vector1"
 		},
@@ -294,18 +222,6 @@
 		{
 			"name": "/actions/main/in/MotionControllerThumbRight_X,MotionControllerThumbRight_Y X Y_axis2d",
 			"type": "vector2"
-		},
-		{
-			"name": "/actions/main/in/VREditor_Left_TriggerAxis axis",
-			"type": "vector1"
-		},
-		{
-			"name": "/actions/main/in/VREditor_Left_WorldMovement axis",
-			"type": "vector1"
-		},
-		{
-			"name": "/actions/main/in/VREditor_Right_TriggerAxis axis",
-			"type": "vector1"
 		}
 	],
 	"action_sets": [
@@ -563,31 +479,10 @@
 			"/actions/main/in/Run": "Run",
 			"/actions/main/in/Mine": "Mine",
 			"/actions/main/in/Use": "Use",
-			"/actions/main/in/VREditor_Left_WorldMovement": "VREditor_Left_WorldMovement",
-			"/actions/main/in/VREditor_Left_Modifier": "VREditor_Left_Modifier",
-			"/actions/main/in/VREditor_Left_TrackpadDown": "VREditor_Left_TrackpadDown",
-			"/actions/main/in/VREditor_Left_TrackpadLeft": "VREditor_Left_TrackpadLeft",
-			"/actions/main/in/VREditor_Left_TrackpadRight": "VREditor_Left_TrackpadRight",
-			"/actions/main/in/VREditor_Left_TrackpadUp": "VREditor_Left_TrackpadUp",
-			"/actions/main/in/VREditor_Left_ConfirmRadialSelection": "VREditor_Left_ConfirmRadialSelection",
-			"/actions/main/in/VREditor_Left_Touch": "VREditor_Left_Touch",
-			"/actions/main/in/VREditor_Left_Modifier2": "VREditor_Left_Modifier2",
-			"/actions/main/in/VREditor_Right_WorldMovement": "VREditor_Right_WorldMovement",
-			"/actions/main/in/VREditor_Right_Modifier": "VREditor_Right_Modifier",
-			"/actions/main/in/VREditor_Right_TrackpadDown": "VREditor_Right_TrackpadDown",
-			"/actions/main/in/VREditor_Right_TrackpadLeft": "VREditor_Right_TrackpadLeft",
-			"/actions/main/in/VREditor_Right_TrackpadRight": "VREditor_Right_TrackpadRight",
-			"/actions/main/in/VREditor_Right_TrackpadUp": "VREditor_Right_TrackpadUp",
-			"/actions/main/in/VREditor_Right_ConfirmRadialSelection": "VREditor_Right_ConfirmRadialSelection",
-			"/actions/main/in/VREditor_Right_Touch": "VREditor_Right_Touch",
-			"/actions/main/in/VREditor_Right_Modifier2": "VREditor_Right_Modifier2",
 			"/actions/main/in/LeftTriggerPull axis": "LeftTriggerPull",
 			"/actions/main/in/RightTriggerPull axis": "RightTriggerPull",
 			"/actions/main/in/MotionControllerThumbLeft_X,MotionControllerThumbLeft_Y X Y_axis2d": "MotionControllerThumbLeft",
 			"/actions/main/in/MotionControllerThumbRight_X,MotionControllerThumbRight_Y X Y_axis2d": "MotionControllerThumbRight",
-			"/actions/main/in/VREditor_Left_TriggerAxis axis": "VREditor_Left_TriggerAxis",
-			"/actions/main/in/VREditor_Left_WorldMovement axis": "VREditor_Left_WorldMovement",
-			"/actions/main/in/VREditor_Right_TriggerAxis axis": "VREditor_Right_TriggerAxis",
 			"/actions/main": "Main Game Actions"
 		}
 	]
