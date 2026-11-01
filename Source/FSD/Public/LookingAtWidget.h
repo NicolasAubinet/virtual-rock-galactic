@@ -15,7 +15,7 @@ UCLASS(Blueprintable, EditInlineNew)
 class ULookingAtWidget : public UUserWidget {
     GENERATED_BODY()
 public:
-protected:
+public: // VRG: was protected (Blueprints read CurrentTarget, CurrentTargetHealth)
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float TargetSelectDuration;
     
@@ -29,7 +29,7 @@ protected:
     TWeakObjectPtr<UCharacterSightComponent> CharacterSight;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    TWeakObjectPtr<AActor> CurrentTarget;
+    AActor* CurrentTarget; // VRG: was TWeakObjectPtr<AActor>
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UPawnAfflictionComponent> CurrentTargetAfflictions;
@@ -49,7 +49,7 @@ protected:
 public:
     ULookingAtWidget();
 
-protected:
+public: // VRG: was protected (Blueprints call SetCurrentTarget, ResetCurrentTarget, ReceiveUpdateTarget, IsValidTarget)
     UFUNCTION(BlueprintCallable)
     void SetCurrentTarget(AActor* NewActor, const TScriptInterface<IHealth>& HealthComponent, float OverrideTargetLostTime);
     

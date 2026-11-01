@@ -27,7 +27,7 @@ public:
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FTargetChangedSignature OnTargetChanged;
     
-protected:
+public: // VRG: was protected (Blueprints read TargetActor, TargetHealth, TargetTime)
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float TargetMaxDistance;
     
@@ -41,7 +41,7 @@ protected:
     APlayerCharacter* Character;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    TWeakObjectPtr<AActor> TargetActor;
+    AActor* TargetActor; // VRG: was TWeakObjectPtr<AActor>
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UPrimitiveComponent> TargetPrimitive;
