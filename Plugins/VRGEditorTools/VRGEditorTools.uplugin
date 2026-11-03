@@ -1,0 +1,18 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "VRG Editor Tools",
+	"Description": "Editor-only helpers that let scripts read and edit Blueprint graphs (export, paste, wire, compile). Never shipped.",
+	"Category": "Editor",
+	"CreatedBy": "VRG",
+	"CanContainContent": false,
+	"EnabledByDefault": true,
+	"Modules": [
+		{
+			"Name": "VRGEditorTools",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
+		}
+	]
+}
