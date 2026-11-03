@@ -1,8 +1,8 @@
 """Drive the running UE 4.27 editor (FSD project) through Python remote execution.
 
 Needs the editor open with the VRGEditorTools plugin and "Enable Remote Execution" on
-(both set in the project). Nothing is ever saved: the user reviews and saves in the editor.
-Each command is one undo step (Ctrl+Z in the editor).
+(both set in the project). Only `save` writes to disk; the user reviews the saved change
+with the editor's git diff. Each edit command is one undo step (Ctrl+Z in the editor).
 
 Usage (BP = "VRUIManager" or "/Game/VRG/UI/VRUIManager"; PIN = Node.Pin):
   ue.py ping
@@ -19,6 +19,7 @@ Usage (BP = "VRUIManager" or "/Game/VRG/UI/VRUIManager"; PIN = Node.Pin):
   ue.py remove BP GRAPH NODE [NODE ...]
   ue.py move BP GRAPH NODE X Y
   ue.py compile BP
+  ue.py save BP [BP ...]                      compile first; refuses a Blueprint with errors
   ue.py focus BP [GRAPH [NODE]]               open the Blueprint editor there
   ue.py exec FILE.py [--undo-name TEXT]       run a script in the editor (one undo step);
                                               `L` = unreal.VRGEditorToolsLibrary, print() is returned
@@ -67,6 +68,18 @@ except Exception:
 finally:
     sys.stdout = _old
     open(r"{out}", "w", encoding="utf-8", newline="").write(_buf.getvalue())
+'''
+
+
+SAVE_CODE = r'''
+for name in %s:
+    r = L.compile(name)
+    if r.startswith("ERROR") or not r.startswith("Compiled") or " 0 error(s)" not in r:
+        print("NOT SAVED " + name + ": " + r)
+        continue
+    bp = unreal.load_asset(L.describe_blueprint(name).splitlines()[0].split(" ", 1)[1])
+    ok = unreal.EditorAssetLibrary.save_loaded_asset(bp, False)
+    print(("Saved " if ok else "ERROR: save failed for ") + bp.get_path_name())
 '''
 
 
@@ -149,6 +162,7 @@ def main():
     s = sub.add_parser("remove"); s.add_argument("bp"); s.add_argument("graph"); s.add_argument("nodes", nargs="+")
     s = sub.add_parser("move"); s.add_argument("bp"); s.add_argument("graph"); s.add_argument("node"); s.add_argument("x", type=int); s.add_argument("y", type=int)
     s = sub.add_parser("compile"); s.add_argument("bp")
+    s = sub.add_parser("save"); s.add_argument("bps", nargs="+")
     s = sub.add_parser("focus"); s.add_argument("bp"); s.add_argument("graph", nargs="?", default=""); s.add_argument("node", nargs="?", default="")
     s = sub.add_parser("exec"); s.add_argument("file"); s.add_argument("--undo-name", default="VRG: script")
     a = ap.parse_args()
@@ -185,6 +199,9 @@ def main():
         out = call("move_node", a.bp, a.graph, a.node, a.x, a.y)
     elif c == "compile":
         out = call("compile", a.bp)
+    elif c == "save":
+        code = SAVE_CODE % json.dumps(a.bps)
+        out = run_job({"kind": "exec", "code": code, "name": "save", "undo": "VRG: save"})
     elif c == "focus":
         out = call("focus", a.bp, a.graph, a.node)
     elif c == "exec":
@@ -197,7 +214,7 @@ def main():
     else:
         sys.stdout.reconfigure(encoding="utf-8")
         print(out)
-    if out.startswith("ERROR") or "Traceback (most recent call last)" in out:
+    if out.startswith("ERROR") or "NOT SAVED" in out or "ERROR: save" in out or "Traceback (most recent call last)" in out:
         sys.exit(1)
 
 

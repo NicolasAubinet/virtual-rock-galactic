@@ -10,7 +10,7 @@ Editor-only plugin that lets Claude read and edit Blueprint graphs in the **open
 
 ## Rules
 
-- **Nothing is saved by the tools.** The user reviews the result in the editor, formats it with Blueprint Assist, and saves. Each command is one undo step (Ctrl+Z).
+- **Only `ue.py save` writes to disk** (it compiles first and refuses a Blueprint with errors). The user reviews the saved change with the editor's git diff. Each edit command is one undo step (Ctrl+Z).
 - **Never edit through a commandlet** (`UE4Editor-Cmd -run=pythonscript`): on exit it saves every modified package silently. The library refuses edits and compiles when `IsRunningCommandlet()`; read-only calls are fine there.
 - After a paste, `describe` the new nodes: node names in the pasted text are kept when they don't collide, and links to nodes outside the pasted text are dropped (re-create them with `link`).
 - Recompile the plugin after editing its C++: the editor must be closed, then run `Build.bat FSDEditor Win64 Development -Project=...` (see the VRG `CLAUDE.md`).
