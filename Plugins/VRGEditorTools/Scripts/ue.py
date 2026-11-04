@@ -13,6 +13,9 @@ Usage (BP = "VRUIManager" or "/Game/VRG/UI/VRUIManager"; PIN = Node.Pin):
   ue.py add-function BP NAME [--in N:type ...] [--out N:type ...] [--pure] [--category C]
   ue.py add-var BP NAME TYPE [--default V] [--category C]
   ue.py add-local BP FUNCTION NAME TYPE [--default V]
+  ue.py remove-local BP FUNCTION NAME          deletes the local and its Get/Set nodes
+  ue.py add-param BP FUNCTION NAME TYPE [--output]   new input (or output) on an existing function
+  ue.py remove-function BP FUNCTION
   ue.py link BP GRAPH PIN PIN
   ue.py unlink BP GRAPH PIN [PIN]             one PIN = break all its links
   ue.py set BP GRAPH PIN VALUE                pin default value
@@ -156,6 +159,9 @@ def main():
     s.add_argument("--pure", action="store_true"); s.add_argument("--category", default="")
     s = sub.add_parser("add-var"); s.add_argument("bp"); s.add_argument("name"); s.add_argument("type"); s.add_argument("--default", default=""); s.add_argument("--category", default="")
     s = sub.add_parser("add-local"); s.add_argument("bp"); s.add_argument("function"); s.add_argument("name"); s.add_argument("type"); s.add_argument("--default", default="")
+    s = sub.add_parser("remove-local"); s.add_argument("bp"); s.add_argument("function"); s.add_argument("name")
+    s = sub.add_parser("add-param"); s.add_argument("bp"); s.add_argument("function"); s.add_argument("name"); s.add_argument("type"); s.add_argument("--output", action="store_true")
+    s = sub.add_parser("remove-function"); s.add_argument("bp"); s.add_argument("function")
     s = sub.add_parser("link"); s.add_argument("bp"); s.add_argument("graph"); s.add_argument("a"); s.add_argument("b")
     s = sub.add_parser("unlink"); s.add_argument("bp"); s.add_argument("graph"); s.add_argument("a"); s.add_argument("b", nargs="?")
     s = sub.add_parser("set"); s.add_argument("bp"); s.add_argument("graph"); s.add_argument("pin"); s.add_argument("value")
@@ -186,6 +192,12 @@ def main():
         out = call("add_member_variable", a.bp, a.name, a.type, a.default, a.category)
     elif c == "add-local":
         out = call("add_local_variable", a.bp, a.function, a.name, a.type, a.default)
+    elif c == "remove-local":
+        out = call("remove_local_variable", a.bp, a.function, a.name)
+    elif c == "add-param":
+        out = call("add_function_param", a.bp, a.function, a.name, a.type, a.output)
+    elif c == "remove-function":
+        out = call("remove_function", a.bp, a.function)
     elif c == "link":
         out = call("link", a.bp, a.graph, *pin(a.a), *pin(a.b))
     elif c == "unlink":

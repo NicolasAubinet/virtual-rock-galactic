@@ -863,6 +863,64 @@ FString UVRGEditorToolsLibrary::Focus(const FString& Blueprint, const FString& G
 	return FString::Printf(TEXT("Opened %s on %s"), *C.BP->GetName(), *Target->GetName());
 }
 
+FString UVRGEditorToolsLibrary::RemoveFunction(const FString& Blueprint, const FString& Function)
+{
+	FCtx C;
+	if (!Resolve(C, Blueprint, Function, true)) return Err(C.Error);
+	if (GraphKind(C.BP, C.Graph) != TEXT("function")) return Err(TEXT("not a function graph"));
+	const FScopedTransaction Transaction(LOCTEXT("RemoveFunction", "VRG: remove function"));
+	C.BP->Modify();
+	FBlueprintEditorUtils::RemoveGraph(C.BP, C.Graph, EGraphRemoveFlags::Recompile);
+	return FString::Printf(TEXT("Removed function %s from %s"), *Function, *C.BP->GetName());
+}
+
+FString UVRGEditorToolsLibrary::RemoveLocalVariable(const FString& Blueprint, const FString& Function, const FString& Name)
+{
+	FCtx C;
+	if (!Resolve(C, Blueprint, Function, true)) return Err(C.Error);
+	if (GraphKind(C.BP, C.Graph) != TEXT("function")) return Err(TEXT("local variables need a function graph"));
+	UStruct* Scope = C.BP->SkeletonGeneratedClass ? FindUField<UFunction>(C.BP->SkeletonGeneratedClass, C.Graph->GetFName()) : nullptr;
+	if (!Scope) return Err(TEXT("function not found in the skeleton class (compile first)"));
+	if (!FBlueprintEditorUtils::FindLocalVariable(C.BP, Scope, FName(*Name))) return Err(FString::Printf(TEXT("no local '%s' in %s"), *Name, *Function));
+	const FScopedTransaction Transaction(LOCTEXT("RemoveLocalVariable", "VRG: remove local variable"));
+	C.BP->Modify();
+	FBlueprintEditorUtils::RemoveLocalVariable(C.BP, Scope, FName(*Name));
+	return FString::Printf(TEXT("Removed local %s from %s.%s"), *Name, *C.BP->GetName(), *Function);
+}
+
+FString UVRGEditorToolsLibrary::AddFunctionParam(const FString& Blueprint, const FString& Function, const FString& Name, const FString& Type, bool bOutput)
+{
+	FCtx C;
+	if (!Resolve(C, Blueprint, Function, true)) return Err(C.Error);
+	if (GraphKind(C.BP, C.Graph) != TEXT("function")) return Err(TEXT("not a function graph"));
+	FEdGraphPinType T;
+	if (!ParseType(Type, T, C.Error)) return Err(C.Error);
+	UK2Node_FunctionEntry* Entry = nullptr;
+	for (UEdGraphNode* N : C.Graph->Nodes)
+	{
+		if (!Entry) Entry = Cast<UK2Node_FunctionEntry>(N);
+	}
+	if (!Entry) return Err(TEXT("function entry node not found"));
+	const FScopedTransaction Transaction(LOCTEXT("AddFunctionParam", "VRG: add function parameter"));
+	C.BP->Modify();
+	if (bOutput)
+	{
+		UK2Node_FunctionResult* Result = FBlueprintEditorUtils::FindOrCreateFunctionResultNode(Entry);
+		Result->Modify();
+		Result->CreateUserDefinedPin(FName(*Name), T, EGPD_Input, false);
+		Result->ReconstructNode();
+	}
+	else
+	{
+		Entry->Modify();
+		Entry->CreateUserDefinedPin(FName(*Name), T, EGPD_Output, false);
+		Entry->ReconstructNode();
+	}
+	FBlueprintEditorUtils::MarkBlueprintAsStructurallyModified(C.BP);
+	FBlueprintEditorUtils::RefreshAllNodes(C.BP);
+	return FString::Printf(TEXT("Added %s %s (%s) to %s.%s"), bOutput ? TEXT("output") : TEXT("input"), *Name, *TypeStr(T), *C.BP->GetName(), *Function);
+}
+
 FString UVRGEditorToolsLibrary::CreatePoseAnimation(const FString& SkeletalMesh, const FString& AssetPath, const TArray<FString>& BoneLines, bool bRotationsOnly)
 {
 	USkeletalMesh* Mesh = LoadObject<USkeletalMesh>(nullptr, *SkeletalMesh);

@@ -77,6 +77,18 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "VRG Editor Tools")
 	static FString Focus(const FString& Blueprint, const FString& Graph, const FString& Node);
 
+	/** Deletes a function graph (callers become broken nodes: check with Compile). */
+	UFUNCTION(BlueprintCallable, Category = "VRG Editor Tools")
+	static FString RemoveFunction(const FString& Blueprint, const FString& Function);
+
+	/** Deletes a local variable of a function (its Get/Set nodes are removed too). */
+	UFUNCTION(BlueprintCallable, Category = "VRG Editor Tools")
+	static FString RemoveLocalVariable(const FString& Blueprint, const FString& Function, const FString& Name);
+
+	/** Adds an input (bOutput false) or output parameter to an existing function, then refreshes every node of the Blueprint so call sites get the new pin. */
+	UFUNCTION(BlueprintCallable, Category = "VRG Editor Tools")
+	static FString AddFunctionParam(const FString& Blueprint, const FString& Function, const FString& Name, const FString& Type, bool bOutput);
+
 	/**
 	 * Creates (or rebuilds) a one-frame AnimSequence at AssetPath ("/Game/VRG/Hands/VR_Hand_R_GripPose") on the
 	 * skeleton of SkeletalMesh, starting from the mesh's reference pose. Each BoneLine is
