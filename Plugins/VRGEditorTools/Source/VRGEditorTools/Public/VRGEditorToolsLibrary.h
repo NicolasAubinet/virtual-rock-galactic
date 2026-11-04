@@ -76,4 +76,14 @@ public:
 	/** Opens the Blueprint editor on a graph, and on a node if given. */
 	UFUNCTION(BlueprintCallable, Category = "VRG Editor Tools")
 	static FString Focus(const FString& Blueprint, const FString& Graph, const FString& Node);
+
+	/**
+	 * Creates (or rebuilds) a one-frame AnimSequence at AssetPath ("/Game/VRG/Hands/VR_Hand_R_GripPose") on the
+	 * skeleton of SkeletalMesh, starting from the mesh's reference pose. Each BoneLine is
+	 * "bone tx ty tz qx qy qz qw sx sy sz" in parent bone space and replaces that bone's key; with bRotationsOnly
+	 * only the rotation is taken (translation and scale stay the reference pose's). Returns, per given bone, its
+	 * difference to the reference pose. Not saved.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "VRG Editor Tools")
+	static FString CreatePoseAnimation(const FString& SkeletalMesh, const FString& AssetPath, const TArray<FString>& BoneLines, bool bRotationsOnly);
 };

@@ -1,6 +1,9 @@
 #include "VRGEditorToolsLibrary.h"
 
 #include "AssetRegistry/AssetRegistryModule.h"
+#include "Animation/AnimSequence.h"
+#include "Animation/Skeleton.h"
+#include "Engine/SkeletalMesh.h"
 #include "EdGraphSchema_K2.h"
 #include "EdGraphUtilities.h"
 #include "Editor.h"
@@ -858,6 +861,91 @@ FString UVRGEditorToolsLibrary::Focus(const FString& Blueprint, const FString& G
 		FKismetEditorUtilities::BringKismetToFocusAttentionOnObject(Target);
 	}
 	return FString::Printf(TEXT("Opened %s on %s"), *C.BP->GetName(), *Target->GetName());
+}
+
+FString UVRGEditorToolsLibrary::CreatePoseAnimation(const FString& SkeletalMesh, const FString& AssetPath, const TArray<FString>& BoneLines, bool bRotationsOnly)
+{
+	USkeletalMesh* Mesh = LoadObject<USkeletalMesh>(nullptr, *SkeletalMesh);
+	if (!Mesh || !Mesh->GetSkeleton())
+	{
+		return VRGTools::Err(FString::Printf(TEXT("no skeletal mesh (with a skeleton) at %s"), *SkeletalMesh));
+	}
+	const FString PackageName = AssetPath.TrimStartAndEnd();
+	const FString AssetName = FPackageName::GetLongPackageAssetName(PackageName);
+	if (!PackageName.StartsWith(TEXT("/Game/")) || AssetName.IsEmpty())
+	{
+		return VRGTools::Err(TEXT("AssetPath must look like /Game/Folder/AssetName"));
+	}
+
+	UPackage* Package = CreatePackage(*PackageName);
+	Package->FullyLoad();
+	UAnimSequence* Seq = FindObject<UAnimSequence>(Package, *AssetName);
+	const bool bNew = Seq == nullptr;
+	if (bNew)
+	{
+		if (FindObject<UObject>(Package, *AssetName))
+		{
+			return VRGTools::Err(FString::Printf(TEXT("%s exists and is not an AnimSequence"), *PackageName));
+		}
+		Seq = NewObject<UAnimSequence>(Package, *AssetName, RF_Public | RF_Standalone | RF_Transactional);
+	}
+	Seq->Modify();
+	Seq->SetSkeleton(Mesh->GetSkeleton());
+	Seq->CreateAnimation(Mesh); // one frame, reference pose
+
+	const FReferenceSkeleton& Ref = Mesh->GetRefSkeleton();
+	const TArray<FName>& Tracks = Seq->GetAnimationTrackNames();
+	FString Report;
+	int32 Applied = 0;
+	for (const FString& Line : BoneLines)
+	{
+		TArray<FString> P;
+		Line.TrimStartAndEnd().ParseIntoArrayWS(P);
+		if (P.Num() == 0)
+		{
+			continue;
+		}
+		if (P.Num() != 11)
+		{
+			return VRGTools::Err(FString::Printf(TEXT("bad line (want bone + 10 numbers): %s"), *Line));
+		}
+		const FName Bone(*P[0]);
+		const int32 Track = Tracks.IndexOfByKey(Bone);
+		const int32 RefIndex = Ref.FindRawBoneIndex(Bone);
+		if (Track == INDEX_NONE || RefIndex == INDEX_NONE)
+		{
+			Report += FString::Printf(TEXT("%s: not in the mesh, skipped\n"), *P[0]);
+			continue;
+		}
+		auto F = [&P](int32 i) { return FCString::Atof(*P[i]); };
+		const FVector Pos(F(1), F(2), F(3));
+		FQuat Rot(F(4), F(5), F(6), F(7));
+		Rot.Normalize();
+		const FVector Scale(F(8), F(9), F(10));
+		const FTransform& RefPose = Ref.GetRawRefBonePose()[RefIndex];
+
+		FRawAnimSequenceTrack& Raw = Seq->GetRawAnimationTrack(Track);
+		Raw.RotKeys[0] = Rot;
+		if (!bRotationsOnly)
+		{
+			Raw.PosKeys[0] = Pos;
+			Raw.ScaleKeys[0] = Scale;
+		}
+		++Applied;
+		Report += FString::Printf(TEXT("%s: rot %.1f deg, pos %.4f, scale %.4f (ref pos %s)\n"), *P[0],
+			FMath::RadiansToDegrees(RefPose.GetRotation().AngularDistance(Rot)),
+			FVector::Dist(RefPose.GetTranslation(), Pos), FVector::Dist(RefPose.GetScale3D(), Scale),
+			*RefPose.GetTranslation().ToString());
+	}
+
+	Seq->PostProcessSequence();
+	Package->MarkPackageDirty();
+	if (bNew)
+	{
+		FAssetRegistryModule::AssetCreated(Seq);
+	}
+	return FString::Printf(TEXT("%s %s on %s: %d bones set%s (not saved)\n"), bNew ? TEXT("Created") : TEXT("Rebuilt"),
+		*Seq->GetPathName(), *Mesh->GetSkeleton()->GetPathName(), Applied, bRotationsOnly ? TEXT(", rotations only") : TEXT("")) + Report;
 }
 
 #undef LOCTEXT_NAMESPACE
