@@ -888,6 +888,17 @@ FString UVRGEditorToolsLibrary::RemoveLocalVariable(const FString& Blueprint, co
 	return FString::Printf(TEXT("Removed local %s from %s.%s"), *Name, *C.BP->GetName(), *Function);
 }
 
+FString UVRGEditorToolsLibrary::RemoveMemberVariable(const FString& Blueprint, const FString& Name)
+{
+	FCtx C;
+	if (!Resolve(C, Blueprint, FString(), true)) return Err(C.Error);
+	if (FBlueprintEditorUtils::FindNewVariableIndex(C.BP, FName(*Name)) == INDEX_NONE) return Err(FString::Printf(TEXT("no variable '%s' in %s"), *Name, *C.BP->GetName()));
+	const FScopedTransaction Transaction(LOCTEXT("RemoveMemberVariable", "VRG: remove variable"));
+	C.BP->Modify();
+	FBlueprintEditorUtils::RemoveMemberVariable(C.BP, FName(*Name));
+	return FString::Printf(TEXT("Removed variable %s from %s"), *Name, *C.BP->GetName());
+}
+
 FString UVRGEditorToolsLibrary::AddFunctionParam(const FString& Blueprint, const FString& Function, const FString& Name, const FString& Type, bool bOutput)
 {
 	FCtx C;

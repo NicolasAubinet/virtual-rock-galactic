@@ -85,6 +85,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "VRG Editor Tools")
 	static FString RemoveLocalVariable(const FString& Blueprint, const FString& Function, const FString& Name);
 
+	/** Deletes a member variable (its Get/Set nodes in this Blueprint are removed too; other Blueprints using it break: check with Compile). */
+	UFUNCTION(BlueprintCallable, Category = "VRG Editor Tools")
+	static FString RemoveMemberVariable(const FString& Blueprint, const FString& Name);
+
 	/** Adds an input (bOutput false) or output parameter to an existing function, then refreshes every node of the Blueprint so call sites get the new pin. */
 	UFUNCTION(BlueprintCallable, Category = "VRG Editor Tools")
 	static FString AddFunctionParam(const FString& Blueprint, const FString& Function, const FString& Name, const FString& Type, bool bOutput);
