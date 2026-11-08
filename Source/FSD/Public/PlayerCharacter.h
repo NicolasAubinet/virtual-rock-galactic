@@ -868,10 +868,11 @@ public:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetStandingDown(bool standingDown);
     
-protected:
+public:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetRunning(bool characterIsRunning);
     
+protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetRunBoostActive(bool IsActive);
     
