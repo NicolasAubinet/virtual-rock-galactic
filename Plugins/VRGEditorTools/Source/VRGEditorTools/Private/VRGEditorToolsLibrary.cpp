@@ -20,6 +20,13 @@
 #include "Misc/UObjectToken.h"
 #include "ScopedTransaction.h"
 #include "Subsystems/AssetEditorSubsystem.h"
+#include "Engine/UserDefinedStruct.h"
+#include "Kismet2/StructureEditorUtils.h"
+#include "UserDefinedStructure/UserDefinedStructEditorData.h"
+#include "WidgetBlueprint.h"
+#include "Blueprint/WidgetTree.h"
+#include "Components/PanelWidget.h"
+#include "Components/PanelSlot.h"
 
 #define LOCTEXT_NAMESPACE "VRGEditorTools"
 
@@ -1015,6 +1022,221 @@ FString UVRGEditorToolsLibrary::CreatePoseAnimation(const FString& SkeletalMesh,
 	}
 	return FString::Printf(TEXT("%s %s on %s: %d bones set%s (not saved)\n"), bNew ? TEXT("Created") : TEXT("Rebuilt"),
 		*Seq->GetPathName(), *Mesh->GetSkeleton()->GetPathName(), Applied, bRotationsOnly ? TEXT(", rotations only") : TEXT("")) + Report;
+}
+
+namespace VRGTools
+{
+	// Finds an asset of the given class by short name (preferring /Game/VRG) or loads it by path.
+	template <typename T>
+	static T* LoadAssetOf(const FString& In, FString& OutErr)
+	{
+		FString Path = In.TrimStartAndEnd();
+		if (!Path.StartsWith(TEXT("/")))
+		{
+			IAssetRegistry& AR = FModuleManager::LoadModuleChecked<FAssetRegistryModule>("AssetRegistry").Get();
+			FARFilter Filter;
+			Filter.PackagePaths.Add(TEXT("/Game"));
+			Filter.bRecursivePaths = true;
+			Filter.ClassNames.Add(T::StaticClass()->GetFName());
+			Filter.bRecursiveClasses = true;
+			TArray<FAssetData> Assets;
+			AR.GetAssets(Filter, Assets);
+			const FAssetData* Pick = nullptr;
+			int32 Count = 0;
+			for (const FAssetData& A : Assets)
+			{
+				if (!A.AssetName.ToString().Equals(Path, ESearchCase::IgnoreCase)) continue;
+				++Count;
+				if (!Pick || A.PackagePath.ToString().StartsWith(TEXT("/Game/VRG"))) Pick = &A;
+			}
+			if (!Pick)
+			{
+				OutErr = FString::Printf(TEXT("no %s named '%s'"), *T::StaticClass()->GetName(), *Path);
+				return nullptr;
+			}
+			Path = Pick->ObjectPath.ToString();
+		}
+		else if (!Path.Contains(TEXT(".")))
+		{
+			Path += TEXT(".") + FPackageName::GetShortName(Path);
+		}
+		T* Asset = LoadObject<T>(nullptr, *Path);
+		if (!Asset) OutErr = FString::Printf(TEXT("could not load '%s'"), *Path);
+		return Asset;
+	}
+
+	// Copies every property of Src into Dst, except the slot links (Slot, Slots, Parent, Content) and other
+	// instanced subobjects (e.g. Navigation), which would otherwise point at Src's objects.
+	static void CopyWidgetProperties(UObject* Dst, UObject* Src)
+	{
+		for (TFieldIterator<FProperty> It(Src->GetClass()); It; ++It)
+		{
+			FProperty* P = *It;
+			if (P->HasAnyPropertyFlags(CPF_Transient | CPF_InstancedReference | CPF_ContainsInstancedReference)) continue;
+			P->CopyCompleteValue_InContainer(Dst, Src);
+		}
+	}
+
+	// Deep copy of a widget and its children into Tree. Names maps old widget names to new ones; the others get
+	// a unique name based on the old one.
+	static UWidget* CloneWidget(UWidgetTree* Tree, UWidget* Src, const TMap<FString, FString>& Names, FString& Log, FString& OutErr)
+	{
+		const FString* Wanted = Names.Find(Src->GetName());
+		FName NewName = Wanted ? FName(**Wanted) : MakeUniqueObjectName(Tree, Src->GetClass(), Src->GetFName());
+		if (Wanted && StaticFindObjectFast(nullptr, Tree, NewName))
+		{
+			OutErr = FString::Printf(TEXT("a widget named '%s' already exists"), **Wanted);
+			return nullptr;
+		}
+		UWidget* Dst = NewObject<UWidget>(Tree, Src->GetClass(), NewName, RF_Transactional);
+		CopyWidgetProperties(Dst, Src);
+		Log += FString::Printf(TEXT("  %s -> %s (%s)\n"), *Src->GetName(), *Dst->GetName(), *Src->GetClass()->GetName());
+		if (UPanelWidget* SrcPanel = Cast<UPanelWidget>(Src))
+		{
+			UPanelWidget* DstPanel = CastChecked<UPanelWidget>(Dst);
+			for (UPanelSlot* SrcSlot : SrcPanel->GetSlots())
+			{
+				if (!SrcSlot || !SrcSlot->Content) continue;
+				UWidget* Child = CloneWidget(Tree, SrcSlot->Content, Names, Log, OutErr);
+				if (!Child) return nullptr;
+				UPanelSlot* NewSlot = DstPanel->AddChild(Child);
+				if (NewSlot)
+				{
+					NewSlot->SetFlags(RF_Transactional);
+					CopyWidgetProperties(NewSlot, SrcSlot);
+					NewSlot->SynchronizeProperties();
+				}
+			}
+		}
+		return Dst;
+	}
+}
+
+FString UVRGEditorToolsLibrary::AddStructMember(const FString& Struct, const FString& Name, const FString& Type, const FString& DefaultValue)
+{
+	if (IsRunningCommandlet()) return VRGTools::Err(TEXT("edits are refused in a commandlet"));
+	FString Error;
+	UUserDefinedStruct* S = VRGTools::LoadAssetOf<UUserDefinedStruct>(Struct, Error);
+	if (!S) return VRGTools::Err(Error);
+	for (const FStructVariableDescription& D : FStructureEditorUtils::GetVarDesc(S))
+	{
+		if (D.FriendlyName.Equals(Name, ESearchCase::IgnoreCase) || D.VarName.ToString().StartsWith(Name + TEXT("_")))
+		{
+			return VRGTools::Err(FString::Printf(TEXT("%s already has a member '%s'"), *S->GetName(), *Name));
+		}
+	}
+	FEdGraphPinType T;
+	if (!VRGTools::ParseType(Type, T, Error)) return VRGTools::Err(Error);
+
+	TSet<FGuid> Before;
+	for (const FStructVariableDescription& D : FStructureEditorUtils::GetVarDesc(S)) Before.Add(D.VarGuid);
+	const FScopedTransaction Transaction(LOCTEXT("AddStructMember", "VRG: add struct member"));
+	if (!FStructureEditorUtils::AddVariable(S, T))
+	{
+		return VRGTools::Err(TEXT("FStructureEditorUtils::AddVariable failed"));
+	}
+	FGuid Guid;
+	for (const FStructVariableDescription& D : FStructureEditorUtils::GetVarDesc(S))
+	{
+		if (!Before.Contains(D.VarGuid)) Guid = D.VarGuid;
+	}
+	if (!Guid.IsValid()) return VRGTools::Err(TEXT("member added but not found afterwards"));
+	if (!FStructureEditorUtils::RenameVariable(S, Guid, Name))
+	{
+		return VRGTools::Err(FString::Printf(TEXT("member added but could not be renamed to '%s'"), *Name));
+	}
+	if (!DefaultValue.IsEmpty() && !FStructureEditorUtils::ChangeVariableDefaultValue(S, Guid, DefaultValue))
+	{
+		return VRGTools::Err(FString::Printf(TEXT("member '%s' added but the default '%s' was refused"), *Name, *DefaultValue));
+	}
+	FString Members;
+	for (const FStructVariableDescription& D : FStructureEditorUtils::GetVarDesc(S))
+	{
+		Members += FString::Printf(TEXT("  %s (%s) = %s\n"), *D.FriendlyName, *VRGTools::TypeStr(D.ToPinType()), *D.DefaultValue);
+	}
+	return FString::Printf(TEXT("Added %s to %s (not saved). Members:\n"), *Name, *S->GetName()) + Members;
+}
+
+FString UVRGEditorToolsLibrary::DuplicateWidget(const FString& WidgetBlueprint, const FString& Template, const TArray<FString>& Renames)
+{
+	if (IsRunningCommandlet()) return VRGTools::Err(TEXT("edits are refused in a commandlet"));
+	FString Error;
+	UBlueprint* BP = VRGTools::LoadBP(WidgetBlueprint, Error);
+	if (!BP) return VRGTools::Err(Error);
+	UWidgetBlueprint* WBP = Cast<UWidgetBlueprint>(BP);
+	if (!WBP || !WBP->WidgetTree) return VRGTools::Err(FString::Printf(TEXT("%s is not a Widget Blueprint"), *BP->GetName()));
+	UWidget* Src = WBP->WidgetTree->FindWidget(FName(*Template));
+	if (!Src) return VRGTools::Err(FString::Printf(TEXT("no widget '%s' in %s"), *Template, *WBP->GetName()));
+	UPanelWidget* Parent = Src->GetParent();
+	if (!Parent) return VRGTools::Err(TEXT("the template has no parent panel (root widget?)"));
+
+	TMap<FString, FString> Names;
+	for (const FString& R : Renames)
+	{
+		FString Old, New;
+		if (!R.Split(TEXT("="), &Old, &New) || Old.IsEmpty() || New.IsEmpty())
+		{
+			return VRGTools::Err(FString::Printf(TEXT("bad rename '%s' (want Old=New)"), *R));
+		}
+		Names.Add(Old.TrimStartAndEnd(), New.TrimStartAndEnd());
+	}
+
+	const FScopedTransaction Transaction(LOCTEXT("DuplicateWidget", "VRG: duplicate widget"));
+	WBP->Modify();
+	WBP->WidgetTree->SetFlags(RF_Transactional);
+	WBP->WidgetTree->Modify();
+	Parent->Modify();
+	FString Log;
+	UWidget* Copy = VRGTools::CloneWidget(WBP->WidgetTree, Src, Names, Log, Error);
+	if (!Copy)
+	{
+		return VRGTools::Err(Error + TEXT(" (nothing inserted; Ctrl+Z removes any partial copy)"));
+	}
+	const int32 Index = Parent->GetChildIndex(Src) + 1;
+	UPanelSlot* NewSlot = Parent->InsertChildAt(Index, Copy);
+	if (NewSlot && Src->Slot)
+	{
+		NewSlot->SetFlags(RF_Transactional);
+		VRGTools::CopyWidgetProperties(NewSlot, Src->Slot);
+		NewSlot->SynchronizeProperties();
+	}
+	FBlueprintEditorUtils::MarkBlueprintAsStructurallyModified(WBP);
+	return FString::Printf(TEXT("Duplicated %s into %s at index %d of %s (not saved):\n"), *Template, *Copy->GetName(), Index, *Parent->GetName()) + Log;
+}
+
+FString UVRGEditorToolsLibrary::SetWidgetProperty(const FString& WidgetBlueprint, const FString& Widget, const FString& Property, const FString& Value)
+{
+	if (IsRunningCommandlet()) return VRGTools::Err(TEXT("edits are refused in a commandlet"));
+	FString Error;
+	UBlueprint* BP = VRGTools::LoadBP(WidgetBlueprint, Error);
+	if (!BP) return VRGTools::Err(Error);
+	UWidgetBlueprint* WBP = Cast<UWidgetBlueprint>(BP);
+	if (!WBP || !WBP->WidgetTree) return VRGTools::Err(FString::Printf(TEXT("%s is not a Widget Blueprint"), *BP->GetName()));
+	UWidget* W = WBP->WidgetTree->FindWidget(FName(*Widget));
+	if (!W) return VRGTools::Err(FString::Printf(TEXT("no widget '%s' in %s"), *Widget, *WBP->GetName()));
+	UObject* Target = W;
+	FString PropName = Property;
+	if (Property.StartsWith(TEXT("Slot.")))
+	{
+		Target = W->Slot;
+		PropName = Property.RightChop(5);
+		if (!Target) return VRGTools::Err(TEXT("the widget has no slot"));
+	}
+	FProperty* P = FindFProperty<FProperty>(Target->GetClass(), FName(*PropName));
+	if (!P) return VRGTools::Err(FString::Printf(TEXT("no property '%s' on %s"), *PropName, *Target->GetClass()->GetName()));
+	const FScopedTransaction Transaction(LOCTEXT("SetWidgetProperty", "VRG: set widget property"));
+	WBP->Modify();
+	Target->SetFlags(RF_Transactional);
+	Target->Modify();
+	if (!P->ImportText(*Value, P->ContainerPtrToValuePtr<void>(Target), PPF_None, Target))
+	{
+		return VRGTools::Err(FString::Printf(TEXT("could not parse '%s' for %s"), *Value, *PropName));
+	}
+	if (UPanelSlot* S = Cast<UPanelSlot>(Target)) S->SynchronizeProperties(); else W->SynchronizeProperties();
+	FBlueprintEditorUtils::MarkBlueprintAsModified(WBP);
+	FString Now;
+	P->ExportTextItem(Now, P->ContainerPtrToValuePtr<void>(Target), nullptr, Target, PPF_None);
+	return FString::Printf(TEXT("%s.%s = %s (not saved)"), *Widget, *Property, *Now);
 }
 
 #undef LOCTEXT_NAMESPACE

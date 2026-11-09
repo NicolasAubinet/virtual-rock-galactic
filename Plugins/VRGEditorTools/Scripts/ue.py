@@ -17,6 +17,9 @@ Usage (BP = "VRUIManager" or "/Game/VRG/UI/VRUIManager"; PIN = Node.Pin):
   ue.py add-param BP FUNCTION NAME TYPE [--as-output]   new input (or output) on an existing function
   ue.py remove-function BP FUNCTION
   ue.py remove-var BP NAME                     deletes a member variable and its Get/Set nodes
+  ue.py add-struct-member STRUCT NAME TYPE [--default V]   new member of a User Defined Struct
+  ue.py duplicate-widget WBP WIDGET [OLD=NEW ...]  designer copy-paste of WIDGET (with children), inserted after it
+  ue.py set-widget WBP WIDGET PROPERTY VALUE   designer property from text ("Slot.X" = slot property)
   ue.py link BP GRAPH PIN PIN
   ue.py unlink BP GRAPH PIN [PIN]             one PIN = break all its links
   ue.py set BP GRAPH PIN VALUE                pin default value
@@ -164,6 +167,9 @@ def main():
     s = sub.add_parser("add-param"); s.add_argument("bp"); s.add_argument("function"); s.add_argument("name"); s.add_argument("type"); s.add_argument("--as-output", dest="as_output", action="store_true")
     s = sub.add_parser("remove-function"); s.add_argument("bp"); s.add_argument("function")
     s = sub.add_parser("remove-var"); s.add_argument("bp"); s.add_argument("name")
+    s = sub.add_parser("add-struct-member"); s.add_argument("struct"); s.add_argument("name"); s.add_argument("type"); s.add_argument("--default", default="")
+    s = sub.add_parser("duplicate-widget"); s.add_argument("bp"); s.add_argument("widget"); s.add_argument("renames", nargs="*")
+    s = sub.add_parser("set-widget"); s.add_argument("bp"); s.add_argument("widget"); s.add_argument("prop"); s.add_argument("value")
     s = sub.add_parser("link"); s.add_argument("bp"); s.add_argument("graph"); s.add_argument("a"); s.add_argument("b")
     s = sub.add_parser("unlink"); s.add_argument("bp"); s.add_argument("graph"); s.add_argument("a"); s.add_argument("b", nargs="?")
     s = sub.add_parser("set"); s.add_argument("bp"); s.add_argument("graph"); s.add_argument("pin"); s.add_argument("value")
@@ -202,6 +208,12 @@ def main():
         out = call("remove_function", a.bp, a.function)
     elif c == "remove-var":
         out = call("remove_member_variable", a.bp, a.name)
+    elif c == "add-struct-member":
+        out = call("add_struct_member", a.struct, a.name, a.type, a.default)
+    elif c == "duplicate-widget":
+        out = call("duplicate_widget", a.bp, a.widget, a.renames)
+    elif c == "set-widget":
+        out = call("set_widget_property", a.bp, a.widget, a.prop, a.value)
     elif c == "link":
         out = call("link", a.bp, a.graph, *pin(a.a), *pin(a.b))
     elif c == "unlink":

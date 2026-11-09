@@ -102,4 +102,20 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, Category = "VRG Editor Tools")
 	static FString CreatePoseAnimation(const FString& SkeletalMesh, const FString& AssetPath, const TArray<FString>& BoneLines, bool bRotationsOnly);
+
+	/** Adds a member to a User Defined Struct ("VROptions" or a path), with an optional default value (struct editor text, e.g. "true"). */
+	UFUNCTION(BlueprintCallable, Category = "VRG Editor Tools")
+	static FString AddStructMember(const FString& Struct, const FString& Name, const FString& Type, const FString& DefaultValue);
+
+	/**
+	 * Designer copy-paste: deep-copies widget Template (with its children and slot layout) and inserts the copy
+	 * right after it in the same panel. Renames entries are "OldName=NewName" for widgets of the copied tree;
+	 * the others get a unique name. Variables (bIsVariable) stay variables under their new names.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "VRG Editor Tools")
+	static FString DuplicateWidget(const FString& WidgetBlueprint, const FString& Template, const TArray<FString>& Renames);
+
+	/** Sets a designer property of a widget from text (UE export format, e.g. Text: NSLOCTEXT(...) or a plain string, Visibility: Collapsed). "Slot.X" targets the widget's slot. */
+	UFUNCTION(BlueprintCallable, Category = "VRG Editor Tools")
+	static FString SetWidgetProperty(const FString& WidgetBlueprint, const FString& Widget, const FString& Property, const FString& Value);
 };
