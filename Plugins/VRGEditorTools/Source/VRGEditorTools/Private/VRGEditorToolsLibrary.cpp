@@ -19,6 +19,8 @@
 #include "Kismet2/KismetEditorUtilities.h"
 #include "Misc/UObjectToken.h"
 #include "ScopedTransaction.h"
+#include "BlueprintAssistTabHandler.h"
+#include "BlueprintAssistGraphHandler.h"
 #include "Subsystems/AssetEditorSubsystem.h"
 #include "Engine/UserDefinedStruct.h"
 #include "Kismet2/StructureEditorUtils.h"
@@ -868,6 +870,36 @@ FString UVRGEditorToolsLibrary::Focus(const FString& Blueprint, const FString& G
 		FKismetEditorUtilities::BringKismetToFocusAttentionOnObject(Target);
 	}
 	return FString::Printf(TEXT("Opened %s on %s"), *C.BP->GetName(), *Target->GetName());
+}
+
+FString UVRGEditorToolsLibrary::FormatGraph(const FString& Blueprint, const FString& Graph)
+{
+	FCtx C;
+	if (!Resolve(C, Blueprint, Graph)) return Err(C.Error);
+	if (!C.Graph) return Err(TEXT("no graph given"));
+	if (!FModuleManager::Get().IsModuleLoaded("BlueprintAssist")) return Err(TEXT("Blueprint Assist is not loaded"));
+
+	TSharedPtr<FBAGraphHandler> Handler = FBATabHandler::Get().GetActiveGraphHandler();
+	if (!Handler.IsValid() || Handler->GetFocusedEdGraph() != C.Graph)
+	{
+		GEditor->GetEditorSubsystem<UAssetEditorSubsystem>()->OpenEditorForAsset(C.BP);
+		FKismetEditorUtilities::BringKismetToFocusAttentionOnObject(C.Graph);
+		return TEXT("PENDING: graph opened, waiting for Blueprint Assist");
+	}
+	if (Handler->IsCalculatingNodeSize() || Handler->HasActiveTransaction()) return TEXT("PENDING: Blueprint Assist busy");
+
+	// Same as Blueprint Assist's "Format All Events": every root (function entry, events) and its linked nodes.
+	// (Its per-node "Format Nodes" entry point can't be linked: FBANodeArray isn't exported.)
+	Handler->FormatAllEvents();
+	return FString::Printf(TEXT("FORMATTING %s"), *C.Graph->GetName());
+}
+
+FString UVRGEditorToolsLibrary::GetFormatStatus()
+{
+	if (!FModuleManager::Get().IsModuleLoaded("BlueprintAssist")) return Err(TEXT("Blueprint Assist is not loaded"));
+	TSharedPtr<FBAGraphHandler> Handler = FBATabHandler::Get().GetActiveGraphHandler();
+	if (!Handler.IsValid()) return TEXT("IDLE");
+	return (Handler->IsCalculatingNodeSize() || Handler->HasActiveTransaction()) ? TEXT("BUSY") : TEXT("IDLE");
 }
 
 FString UVRGEditorToolsLibrary::RemoveFunction(const FString& Blueprint, const FString& Function)

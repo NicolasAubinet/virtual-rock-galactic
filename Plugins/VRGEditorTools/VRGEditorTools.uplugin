@@ -8,10 +8,13 @@
 	"CreatedBy": "VRG",
 	"CanContainContent": false,
 	"EnabledByDefault": true,
+	"Plugins": [
+		{ "Name": "BlueprintAssist", "Enabled": true }
+	],
 	"Modules": [
 		{
 			"Name": "VRGEditorTools",
-			"Type": "Editor",
+			"Type": "EditorNoCommandlet",
 			"LoadingPhase": "Default"
 		}
 	]

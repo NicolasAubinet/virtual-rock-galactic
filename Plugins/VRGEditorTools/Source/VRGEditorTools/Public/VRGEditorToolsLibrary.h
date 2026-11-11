@@ -77,6 +77,18 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "VRG Editor Tools")
 	static FString Focus(const FString& Blueprint, const FString& Graph, const FString& Node);
 
+	/**
+	 * Blueprint Assist "Format All Events" on a graph: every root (function entry, events) and the nodes linked to it.
+	 * Opens the graph first; returns "PENDING: ..." until Blueprint Assist has picked the graph up (call again),
+	 * then "FORMATTING ...". Formatting runs over the next editor ticks: poll GetFormatStatus.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "VRG Editor Tools")
+	static FString FormatGraph(const FString& Blueprint, const FString& Graph);
+
+	/** "BUSY" while Blueprint Assist is sizing or formatting nodes in the active graph, else "IDLE". */
+	UFUNCTION(BlueprintCallable, Category = "VRG Editor Tools")
+	static FString GetFormatStatus();
+
 	/** Deletes a function graph (callers become broken nodes: check with Compile). */
 	UFUNCTION(BlueprintCallable, Category = "VRG Editor Tools")
 	static FString RemoveFunction(const FString& Blueprint, const FString& Function);

@@ -28,6 +28,8 @@ Usage (BP = "VRUIManager" or "/Game/VRG/UI/VRUIManager"; PIN = Node.Pin):
   ue.py compile BP
   ue.py save BP [BP ...]                      compile first; refuses a Blueprint with errors
   ue.py focus BP [GRAPH [NODE]]               open the Blueprint editor there
+  ue.py format BP GRAPH                       Blueprint Assist "Format All Events" on the graph;
+                                              only for new graphs (it moves every linked node)
   ue.py exec FILE.py [--undo-name TEXT]       run a script in the editor (one undo step);
                                               `L` = unreal.VRGEditorToolsLibrary, print() is returned
 Put -o FILE before the command to write the result to a file instead of stdout.
@@ -177,6 +179,7 @@ def main():
     s = sub.add_parser("move"); s.add_argument("bp"); s.add_argument("graph"); s.add_argument("node"); s.add_argument("x", type=int); s.add_argument("y", type=int)
     s = sub.add_parser("compile"); s.add_argument("bp")
     s = sub.add_parser("save"); s.add_argument("bps", nargs="+")
+    s = sub.add_parser("format"); s.add_argument("bp"); s.add_argument("graph")
     s = sub.add_parser("focus"); s.add_argument("bp"); s.add_argument("graph", nargs="?", default=""); s.add_argument("node", nargs="?", default="")
     s = sub.add_parser("exec"); s.add_argument("file"); s.add_argument("--undo-name", default="VRG: script")
     a = ap.parse_args()
@@ -230,6 +233,21 @@ def main():
     elif c == "save":
         code = SAVE_CODE % json.dumps(a.bps)
         out = run_job({"kind": "exec", "code": code, "name": "save", "undo": "VRG: save"})
+    elif c == "format":
+        out = "ERROR: Blueprint Assist never picked the graph up"
+        for _ in range(20):
+            out = call("format_graph", a.bp, a.graph, undo="VRG: format nodes")
+            if not out.startswith("PENDING"):
+                break
+            time.sleep(0.5)
+        if out.startswith("FORMATTING"):
+            time.sleep(0.5)
+            for _ in range(60):
+                st = call("get_format_status")
+                if st != "BUSY":
+                    break
+                time.sleep(0.5)
+            out += " -> " + ("done" if st == "IDLE" else "still busy: " + st)
     elif c == "focus":
         out = call("focus", a.bp, a.graph, a.node)
     elif c == "exec":
