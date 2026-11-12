@@ -15,10 +15,11 @@ public:
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FWindowDelegate OnWindowClosed;
     
-protected:
+public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bHandleCloseCommand;
     
+protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bResolutionDownscaleWhenOpen;
     
@@ -38,12 +39,14 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ReceiveOkCommand();
     
+public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void ReceiveCloseCommand();
     
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     bool ReceiveCanCloseWindow(FName InActionName, FKey InKey, bool InIsMouseEvent);
     
+protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnShown();
     
