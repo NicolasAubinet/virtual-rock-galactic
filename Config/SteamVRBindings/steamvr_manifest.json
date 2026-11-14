@@ -208,6 +208,16 @@
 			"type": "boolean"
 		},
 		{
+			"name": "/actions/main/in/CallMolly",
+			"type": "boolean",
+			"requirement": "optional"
+		},
+		{
+			"name": "/actions/main/in/CallResupplyPod",
+			"type": "boolean",
+			"requirement": "optional"
+		},
+		{
 			"name": "/actions/main/in/LeftTriggerPull axis",
 			"type": "vector1"
 		},
@@ -479,6 +489,8 @@
 			"/actions/main/in/Run": "Run",
 			"/actions/main/in/Mine": "Mine",
 			"/actions/main/in/Use": "Use",
+			"/actions/main/in/CallMolly": "Call Molly",
+			"/actions/main/in/CallResupplyPod": "Call Resupply Pod",
 			"/actions/main/in/LeftTriggerPull axis": "LeftTriggerPull",
 			"/actions/main/in/RightTriggerPull axis": "RightTriggerPull",
 			"/actions/main/in/MotionControllerThumbLeft_X,MotionControllerThumbLeft_Y X Y_axis2d": "MotionControllerThumbLeft",
