@@ -2,18 +2,14 @@
 	"name": "Default bindings for MixedReality",
 	"controller_type": "holographic_controller",
 	"last_edited_by": "UnrealEngine",
-	"bindings":
-	{
-		"/actions/main":
-		{
+	"bindings": {
+		"/actions/main": {
 			"sources": [
 				{
 					"mode": "button",
 					"path": "/user/hand/left/input/grip",
-					"inputs":
-					{
-						"click":
-						{
+					"inputs": {
+						"click": {
 							"output": "/actions/main/in/LeftGrip"
 						}
 					}
@@ -21,10 +17,8 @@
 				{
 					"mode": "button",
 					"path": "/user/hand/right/input/grip",
-					"inputs":
-					{
-						"click":
-						{
+					"inputs": {
+						"click": {
 							"output": "/actions/main/in/RightGrip"
 						}
 					}
@@ -32,10 +26,8 @@
 				{
 					"mode": "trigger",
 					"path": "/user/hand/left/input/trigger",
-					"inputs":
-					{
-						"click":
-						{
+					"inputs": {
+						"click": {
 							"output": "/actions/main/in/LeftTriggerClick"
 						}
 					}
@@ -43,10 +35,8 @@
 				{
 					"mode": "trigger",
 					"path": "/user/hand/right/input/trigger",
-					"inputs":
-					{
-						"click":
-						{
+					"inputs": {
+						"click": {
 							"output": "/actions/main/in/RightTriggerClick"
 						}
 					}
@@ -54,14 +44,11 @@
 				{
 					"mode": "dpad",
 					"path": "/user/hand/left/input/trackpad",
-					"parameters":
-					{
+					"parameters": {
 						"sub_mode": "click"
 					},
-					"inputs":
-					{
-						"east":
-						{
+					"inputs": {
+						"east": {
 							"output": "/actions/main/in/LeftButtonA"
 						}
 					}
@@ -69,14 +56,11 @@
 				{
 					"mode": "dpad",
 					"path": "/user/hand/right/input/trackpad",
-					"parameters":
-					{
+					"parameters": {
 						"sub_mode": "click"
 					},
-					"inputs":
-					{
-						"west":
-						{
+					"inputs": {
+						"west": {
 							"output": "/actions/main/in/RightButtonA"
 						}
 					}
@@ -84,14 +68,11 @@
 				{
 					"mode": "dpad",
 					"path": "/user/hand/left/input/trackpad",
-					"parameters":
-					{
+					"parameters": {
 						"sub_mode": "click"
 					},
-					"inputs":
-					{
-						"north":
-						{
+					"inputs": {
+						"north": {
 							"output": "/actions/main/in/LeftButtonB"
 						}
 					}
@@ -99,36 +80,20 @@
 				{
 					"mode": "dpad",
 					"path": "/user/hand/right/input/trackpad",
-					"parameters":
-					{
+					"parameters": {
 						"sub_mode": "click"
 					},
-					"inputs":
-					{
-						"north":
-						{
+					"inputs": {
+						"north": {
 							"output": "/actions/main/in/RightButtonB"
 						}
 					}
 				},
 				{
 					"mode": "joystick",
-					"path": "/user/hand/left/input/joystick",
-					"inputs":
-					{
-						"click":
-						{
-							"output": "/actions/main/in/Sprint"
-						}
-					}
-				},
-				{
-					"mode": "joystick",
 					"path": "/user/hand/right/input/joystick",
-					"inputs":
-					{
-						"click":
-						{
+					"inputs": {
+						"click": {
 							"output": "/actions/main/in/RightThumbStick"
 						}
 					}
@@ -136,77 +101,17 @@
 				{
 					"mode": "joystick",
 					"path": "/user/hand/left/input/joystick",
-					"inputs":
-					{
-						"click":
-						{
+					"inputs": {
+						"click": {
 							"output": "/actions/main/in/LeftThumbStick"
-						}
-					}
-				},
-				{
-					"mode": "dpad",
-					"path": "/user/hand/left/input/trackpad",
-					"parameters":
-					{
-						"sub_mode": "click"
-					},
-					"inputs":
-					{
-						"east":
-						{
-							"output": "/actions/main/in/MapTool"
-						}
-					}
-				},
-				{
-					"mode": "joystick",
-					"path": "/user/hand/left/input/joystick",
-					"inputs":
-					{
-						"click":
-						{
-							"output": "/actions/main/in/Run"
-						}
-					}
-				},
-				{
-					"mode": "dpad",
-					"path": "/user/hand/right/input/trackpad",
-					"parameters":
-					{
-						"sub_mode": "click"
-					},
-					"inputs":
-					{
-						"north":
-						{
-							"output": "/actions/main/in/Mine"
-						}
-					}
-				},
-				{
-					"mode": "dpad",
-					"path": "/user/hand/left/input/trackpad",
-					"parameters":
-					{
-						"sub_mode": "click"
-					},
-					"inputs":
-					{
-						"north":
-						{
-							"output": "/actions/main/in/Use"
 						}
 					}
 				},
 				{
 					"mode": "trigger",
 					"path": "/user/hand/left/input/trigger",
-					"inputs":
-					{
-						"pull":
-						{
+					"inputs": {
+						"pull": {
 							"output": "/actions/main/in/LeftTriggerPull axis"
 						}
 					}
@@ -214,10 +119,8 @@
 				{
 					"mode": "trigger",
 					"path": "/user/hand/right/input/trigger",
-					"inputs":
-					{
-						"pull":
-						{
+					"inputs": {
+						"pull": {
 							"output": "/actions/main/in/RightTriggerPull axis"
 						}
 					}
@@ -225,10 +128,8 @@
 				{
 					"mode": "joystick",
 					"path": "/user/hand/left/input/joystick",
-					"inputs":
-					{
-						"position":
-						{
+					"inputs": {
+						"position": {
 							"output": "/actions/main/in/MotionControllerThumbLeft_X,MotionControllerThumbLeft_Y X Y_axis2d"
 						}
 					}
@@ -236,10 +137,8 @@
 				{
 					"mode": "joystick",
 					"path": "/user/hand/right/input/joystick",
-					"inputs":
-					{
-						"position":
-						{
+					"inputs": {
+						"position": {
 							"output": "/actions/main/in/MotionControllerThumbRight_X,MotionControllerThumbRight_Y X Y_axis2d"
 						}
 					}

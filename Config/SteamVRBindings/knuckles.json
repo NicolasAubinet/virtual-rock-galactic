@@ -2,18 +2,14 @@
 	"name": "Default bindings for ValveIndex",
 	"controller_type": "knuckles",
 	"last_edited_by": "UnrealEngine",
-	"bindings":
-	{
-		"/actions/main":
-		{
+	"bindings": {
+		"/actions/main": {
 			"sources": [
 				{
 					"mode": "trigger",
 					"path": "/user/hand/left/input/grip",
-					"inputs":
-					{
-						"click":
-						{
+					"inputs": {
+						"click": {
 							"output": "/actions/main/in/LeftGrip"
 						}
 					}
@@ -21,10 +17,8 @@
 				{
 					"mode": "trigger",
 					"path": "/user/hand/right/input/grip",
-					"inputs":
-					{
-						"click":
-						{
+					"inputs": {
+						"click": {
 							"output": "/actions/main/in/RightGrip"
 						}
 					}
@@ -32,10 +26,8 @@
 				{
 					"mode": "trigger",
 					"path": "/user/hand/left/input/trigger",
-					"inputs":
-					{
-						"click":
-						{
+					"inputs": {
+						"click": {
 							"output": "/actions/main/in/LeftTriggerClick"
 						}
 					}
@@ -43,10 +35,8 @@
 				{
 					"mode": "trigger",
 					"path": "/user/hand/right/input/trigger",
-					"inputs":
-					{
-						"click":
-						{
+					"inputs": {
+						"click": {
 							"output": "/actions/main/in/RightTriggerClick"
 						}
 					}
@@ -54,10 +44,8 @@
 				{
 					"mode": "button",
 					"path": "/user/hand/left/input/a",
-					"inputs":
-					{
-						"click":
-						{
+					"inputs": {
+						"click": {
 							"output": "/actions/main/in/LeftButtonA"
 						}
 					}
@@ -65,10 +53,8 @@
 				{
 					"mode": "button",
 					"path": "/user/hand/right/input/a",
-					"inputs":
-					{
-						"click":
-						{
+					"inputs": {
+						"click": {
 							"output": "/actions/main/in/RightButtonA"
 						}
 					}
@@ -76,10 +62,8 @@
 				{
 					"mode": "button",
 					"path": "/user/hand/left/input/b",
-					"inputs":
-					{
-						"click":
-						{
+					"inputs": {
+						"click": {
 							"output": "/actions/main/in/LeftButtonB"
 						}
 					}
@@ -87,32 +71,17 @@
 				{
 					"mode": "button",
 					"path": "/user/hand/right/input/b",
-					"inputs":
-					{
-						"click":
-						{
+					"inputs": {
+						"click": {
 							"output": "/actions/main/in/RightButtonB"
 						}
 					}
 				},
 				{
 					"mode": "joystick",
-					"path": "/user/hand/left/input/thumbstick",
-					"inputs":
-					{
-						"click":
-						{
-							"output": "/actions/main/in/Sprint"
-						}
-					}
-				},
-				{
-					"mode": "joystick",
 					"path": "/user/hand/right/input/thumbstick",
-					"inputs":
-					{
-						"click":
-						{
+					"inputs": {
+						"click": {
 							"output": "/actions/main/in/RightThumbStick"
 						}
 					}
@@ -120,65 +89,17 @@
 				{
 					"mode": "joystick",
 					"path": "/user/hand/left/input/thumbstick",
-					"inputs":
-					{
-						"click":
-						{
+					"inputs": {
+						"click": {
 							"output": "/actions/main/in/LeftThumbStick"
-						}
-					}
-				},
-				{
-					"mode": "button",
-					"path": "/user/hand/left/input/a",
-					"inputs":
-					{
-						"click":
-						{
-							"output": "/actions/main/in/MapTool"
-						}
-					}
-				},
-				{
-					"mode": "joystick",
-					"path": "/user/hand/left/input/thumbstick",
-					"inputs":
-					{
-						"click":
-						{
-							"output": "/actions/main/in/Run"
-						}
-					}
-				},
-				{
-					"mode": "button",
-					"path": "/user/hand/right/input/b",
-					"inputs":
-					{
-						"click":
-						{
-							"output": "/actions/main/in/Mine"
-						}
-					}
-				},
-				{
-					"mode": "button",
-					"path": "/user/hand/left/input/b",
-					"inputs":
-					{
-						"click":
-						{
-							"output": "/actions/main/in/Use"
 						}
 					}
 				},
 				{
 					"mode": "trigger",
 					"path": "/user/hand/left/input/trigger",
-					"inputs":
-					{
-						"pull":
-						{
+					"inputs": {
+						"pull": {
 							"output": "/actions/main/in/LeftTriggerPull axis"
 						}
 					}
@@ -186,10 +107,8 @@
 				{
 					"mode": "trigger",
 					"path": "/user/hand/right/input/trigger",
-					"inputs":
-					{
-						"pull":
-						{
+					"inputs": {
+						"pull": {
 							"output": "/actions/main/in/RightTriggerPull axis"
 						}
 					}
@@ -197,10 +116,8 @@
 				{
 					"mode": "joystick",
 					"path": "/user/hand/left/input/thumbstick",
-					"inputs":
-					{
-						"position":
-						{
+					"inputs": {
+						"position": {
 							"output": "/actions/main/in/MotionControllerThumbLeft_X,MotionControllerThumbLeft_Y X Y_axis2d"
 						}
 					}
@@ -208,10 +125,8 @@
 				{
 					"mode": "joystick",
 					"path": "/user/hand/right/input/thumbstick",
-					"inputs":
-					{
-						"position":
-						{
+					"inputs": {
+						"position": {
 							"output": "/actions/main/in/MotionControllerThumbRight_X,MotionControllerThumbRight_Y X Y_axis2d"
 						}
 					}

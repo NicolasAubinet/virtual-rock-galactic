@@ -180,31 +180,11 @@
 			"type": "boolean"
 		},
 		{
-			"name": "/actions/main/in/Sprint",
-			"type": "boolean"
-		},
-		{
 			"name": "/actions/main/in/RightThumbStick",
 			"type": "boolean"
 		},
 		{
 			"name": "/actions/main/in/LeftThumbStick",
-			"type": "boolean"
-		},
-		{
-			"name": "/actions/main/in/MapTool",
-			"type": "boolean"
-		},
-		{
-			"name": "/actions/main/in/Run",
-			"type": "boolean"
-		},
-		{
-			"name": "/actions/main/in/Mine",
-			"type": "boolean"
-		},
-		{
-			"name": "/actions/main/in/Use",
 			"type": "boolean"
 		},
 		{
@@ -482,13 +462,8 @@
 			"/actions/main/in/RightButtonA": "RightButtonA",
 			"/actions/main/in/LeftButtonB": "LeftButtonB",
 			"/actions/main/in/RightButtonB": "RightButtonB",
-			"/actions/main/in/Sprint": "Sprint",
 			"/actions/main/in/RightThumbStick": "RightThumbStick",
 			"/actions/main/in/LeftThumbStick": "LeftThumbStick",
-			"/actions/main/in/MapTool": "MapTool",
-			"/actions/main/in/Run": "Run",
-			"/actions/main/in/Mine": "Mine",
-			"/actions/main/in/Use": "Use",
 			"/actions/main/in/CallMolly": "Call Molly",
 			"/actions/main/in/CallResupplyPod": "Call Resupply Pod",
 			"/actions/main/in/LeftTriggerPull axis": "LeftTriggerPull",
