@@ -184,7 +184,7 @@
 			"type": "boolean"
 		},
 		{
-			"name": "/actions/main/in/LeftThumbStick",
+			"name": "/actions/main/in/Sprint",
 			"type": "boolean"
 		},
 		{
@@ -320,106 +320,6 @@
 		{
 			"controller_type": "vive_tracker_waist",
 			"binding_url": "vive_tracker_waist.json"
-		},
-		{
-			"controller_type": "knuckles",
-			"binding_url": "knuckles.json"
-		},
-		{
-			"controller_type": "vive_controller",
-			"binding_url": "vive_controller.json"
-		},
-		{
-			"controller_type": "vive_cosmos_controller",
-			"binding_url": "vive_cosmos_controller.json"
-		},
-		{
-			"controller_type": "oculus_touch",
-			"binding_url": "oculus_touch.json"
-		},
-		{
-			"controller_type": "holographic_controller",
-			"binding_url": "holographic_controller.json"
-		},
-		{
-			"controller_type": "hpmotioncontroller",
-			"binding_url": "hpmotioncontroller.json"
-		},
-		{
-			"controller_type": "indexhmd",
-			"binding_url": "indexhmd.json"
-		},
-		{
-			"controller_type": "vive",
-			"binding_url": "vive.json"
-		},
-		{
-			"controller_type": "vive_pro",
-			"binding_url": "vive_pro.json"
-		},
-		{
-			"controller_type": "rift",
-			"binding_url": "rift.json"
-		},
-		{
-			"controller_type": "vive_tracker",
-			"binding_url": "vive_tracker.json"
-		},
-		{
-			"controller_type": "vive_tracker_camera",
-			"binding_url": "vive_tracker_camera.json"
-		},
-		{
-			"controller_type": "vive_tracker_waist",
-			"binding_url": "vive_tracker_waist.json"
-		},
-		{
-			"controller_type": "vive_tracker_left_foot",
-			"binding_url": "vive_tracker_left_foot.json"
-		},
-		{
-			"controller_type": "vive_tracker_right_foot",
-			"binding_url": "vive_tracker_right_foot.json"
-		},
-		{
-			"controller_type": "vive_tracker_left_shoulder",
-			"binding_url": "vive_tracker_left_shoulder.json"
-		},
-		{
-			"controller_type": "vive_tracker_right_shoulder",
-			"binding_url": "vive_tracker_right_shoulder.json"
-		},
-		{
-			"controller_type": "vive_tracker_left_elbow",
-			"binding_url": "vive_tracker_left_elbow.json"
-		},
-		{
-			"controller_type": "vive_tracker_right_elbow",
-			"binding_url": "vive_tracker_right_elbow.json"
-		},
-		{
-			"controller_type": "vive_tracker_left_knee",
-			"binding_url": "vive_tracker_left_knee.json"
-		},
-		{
-			"controller_type": "vive_tracker_right_knee",
-			"binding_url": "vive_tracker_right_knee.json"
-		},
-		{
-			"controller_type": "vive_tracker_chest",
-			"binding_url": "vive_tracker_chest.json"
-		},
-		{
-			"controller_type": "vive_tracker_keyboard",
-			"binding_url": "vive_tracker_keyboard.json"
-		},
-		{
-			"controller_type": "vive_tracker_handed",
-			"binding_url": "vive_tracker_handed.json"
-		},
-		{
-			"controller_type": "gamepad",
-			"binding_url": "gamepad.json"
 		}
 	],
 	"localization": [
@@ -454,22 +354,22 @@
 			"/actions/main/out/vibrateleft": "Haptic (Left)",
 			"/actions/main/out/vibrateright": "Haptic (Right)",
 			"/actions/main/in/open_console": "Open Console",
-			"/actions/main/in/LeftGrip": "LeftGrip",
-			"/actions/main/in/RightGrip": "RightGrip",
-			"/actions/main/in/LeftTriggerClick": "LeftTriggerClick",
-			"/actions/main/in/RightTriggerClick": "RightTriggerClick",
-			"/actions/main/in/LeftButtonA": "LeftButtonA",
-			"/actions/main/in/RightButtonA": "RightButtonA",
-			"/actions/main/in/LeftButtonB": "LeftButtonB",
-			"/actions/main/in/RightButtonB": "RightButtonB",
-			"/actions/main/in/RightThumbStick": "RightThumbStick",
-			"/actions/main/in/LeftThumbStick": "LeftThumbStick",
+			"/actions/main/in/LeftGrip": "Left grip: grab",
+			"/actions/main/in/RightGrip": "Right grip: grab",
+			"/actions/main/in/LeftTriggerClick": "Left trigger: fire, select",
+			"/actions/main/in/RightTriggerClick": "Right trigger: fire, select",
+			"/actions/main/in/LeftButtonA": "Left lower button (X): terrain scanner",
+			"/actions/main/in/RightButtonA": "Right lower button (A): jump",
+			"/actions/main/in/LeftButtonB": "Left upper button (Y): use, reload weapon",
+			"/actions/main/in/RightButtonB": "Right upper button (B): auto-mine",
+			"/actions/main/in/RightThumbStick": "Right stick click: hold 2 s to toggle VR",
+			"/actions/main/in/Sprint": "Left stick click: sprint",
 			"/actions/main/in/CallMolly": "Call Molly",
 			"/actions/main/in/CallResupplyPod": "Call Resupply Pod",
-			"/actions/main/in/LeftTriggerPull axis": "LeftTriggerPull",
-			"/actions/main/in/RightTriggerPull axis": "RightTriggerPull",
-			"/actions/main/in/MotionControllerThumbLeft_X,MotionControllerThumbLeft_Y X Y_axis2d": "MotionControllerThumbLeft",
-			"/actions/main/in/MotionControllerThumbRight_X,MotionControllerThumbRight_Y X Y_axis2d": "MotionControllerThumbRight",
+			"/actions/main/in/LeftTriggerPull axis": "Left trigger (analog)",
+			"/actions/main/in/RightTriggerPull axis": "Right trigger (analog)",
+			"/actions/main/in/MotionControllerThumbLeft_X,MotionControllerThumbLeft_Y X Y_axis2d": "Left stick: move",
+			"/actions/main/in/MotionControllerThumbRight_X,MotionControllerThumbRight_Y X Y_axis2d": "Right stick: turn",
 			"/actions/main": "Main Game Actions"
 		}
 	]

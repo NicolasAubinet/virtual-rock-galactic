@@ -2,11 +2,136 @@
 	"name": "Default bindings for Cosmos",
 	"controller_type": "vive_cosmos_controller",
 	"last_edited_by": "UnrealEngine",
-	"bindings":
-	{
-		"/actions/main":
-		{
-			"sources": [],
+	"bindings": {
+		"/actions/main": {
+			"sources": [
+				{
+					"mode": "button",
+					"path": "/user/hand/left/input/grip",
+					"inputs": {
+						"click": {
+							"output": "/actions/main/in/LeftGrip"
+						}
+					}
+				},
+				{
+					"mode": "button",
+					"path": "/user/hand/right/input/grip",
+					"inputs": {
+						"click": {
+							"output": "/actions/main/in/RightGrip"
+						}
+					}
+				},
+				{
+					"mode": "trigger",
+					"path": "/user/hand/left/input/trigger",
+					"inputs": {
+						"click": {
+							"output": "/actions/main/in/LeftTriggerClick"
+						}
+					}
+				},
+				{
+					"mode": "trigger",
+					"path": "/user/hand/right/input/trigger",
+					"inputs": {
+						"click": {
+							"output": "/actions/main/in/RightTriggerClick"
+						}
+					}
+				},
+				{
+					"mode": "button",
+					"path": "/user/hand/left/input/x",
+					"inputs": {
+						"click": {
+							"output": "/actions/main/in/LeftButtonA"
+						}
+					}
+				},
+				{
+					"mode": "button",
+					"path": "/user/hand/right/input/a",
+					"inputs": {
+						"click": {
+							"output": "/actions/main/in/RightButtonA"
+						}
+					}
+				},
+				{
+					"mode": "button",
+					"path": "/user/hand/left/input/y",
+					"inputs": {
+						"click": {
+							"output": "/actions/main/in/LeftButtonB"
+						}
+					}
+				},
+				{
+					"mode": "button",
+					"path": "/user/hand/right/input/b",
+					"inputs": {
+						"click": {
+							"output": "/actions/main/in/RightButtonB"
+						}
+					}
+				},
+				{
+					"mode": "joystick",
+					"path": "/user/hand/right/input/joystick",
+					"inputs": {
+						"click": {
+							"output": "/actions/main/in/RightThumbStick"
+						}
+					}
+				},
+				{
+					"mode": "joystick",
+					"path": "/user/hand/left/input/joystick",
+					"inputs": {
+						"click": {
+							"output": "/actions/main/in/Sprint"
+						}
+					}
+				},
+				{
+					"mode": "trigger",
+					"path": "/user/hand/left/input/trigger",
+					"inputs": {
+						"pull": {
+							"output": "/actions/main/in/LeftTriggerPull axis"
+						}
+					}
+				},
+				{
+					"mode": "trigger",
+					"path": "/user/hand/right/input/trigger",
+					"inputs": {
+						"pull": {
+							"output": "/actions/main/in/RightTriggerPull axis"
+						}
+					}
+				},
+				{
+					"mode": "joystick",
+					"path": "/user/hand/left/input/joystick",
+					"inputs": {
+						"position": {
+							"output": "/actions/main/in/MotionControllerThumbLeft_X,MotionControllerThumbLeft_Y X Y_axis2d"
+						}
+					}
+				},
+				{
+					"mode": "joystick",
+					"path": "/user/hand/right/input/joystick",
+					"inputs": {
+						"position": {
+							"output": "/actions/main/in/MotionControllerThumbRight_X,MotionControllerThumbRight_Y X Y_axis2d"
+						}
+					}
+				}
+			],
 			"poses": [
 				{
 					"output": "/actions/main/in/controllerleft",

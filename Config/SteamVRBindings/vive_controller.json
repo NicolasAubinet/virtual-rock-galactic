@@ -45,11 +45,19 @@
 					"mode": "dpad",
 					"path": "/user/hand/left/input/trackpad",
 					"parameters": {
-						"sub_mode": "click"
+						"sub_mode": "click",
+						"deadzone_pct": "50",
+						"overlap_pct": "0"
 					},
 					"inputs": {
 						"east": {
 							"output": "/actions/main/in/LeftButtonA"
+						},
+						"north": {
+							"output": "/actions/main/in/LeftButtonB"
+						},
+						"center": {
+							"output": "/actions/main/in/Sprint"
 						}
 					}
 				},
@@ -57,53 +65,19 @@
 					"mode": "dpad",
 					"path": "/user/hand/right/input/trackpad",
 					"parameters": {
-						"sub_mode": "click"
+						"sub_mode": "click",
+						"deadzone_pct": "50",
+						"overlap_pct": "0"
 					},
 					"inputs": {
 						"west": {
 							"output": "/actions/main/in/RightButtonA"
-						}
-					}
-				},
-				{
-					"mode": "dpad",
-					"path": "/user/hand/left/input/trackpad",
-					"parameters": {
-						"sub_mode": "click"
-					},
-					"inputs": {
-						"north": {
-							"output": "/actions/main/in/LeftButtonB"
-						}
-					}
-				},
-				{
-					"mode": "dpad",
-					"path": "/user/hand/right/input/trackpad",
-					"parameters": {
-						"sub_mode": "click"
-					},
-					"inputs": {
+						},
 						"north": {
 							"output": "/actions/main/in/RightButtonB"
-						}
-					}
-				},
-				{
-					"mode": "trackpad",
-					"path": "/user/hand/right/input/trackpad",
-					"inputs": {
-						"click": {
+						},
+						"center": {
 							"output": "/actions/main/in/RightThumbStick"
-						}
-					}
-				},
-				{
-					"mode": "trackpad",
-					"path": "/user/hand/left/input/trackpad",
-					"inputs": {
-						"click": {
-							"output": "/actions/main/in/LeftThumbStick"
 						}
 					}
 				},
