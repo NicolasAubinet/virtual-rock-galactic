@@ -18,6 +18,7 @@ Editor-only plugin that lets Claude read and edit Blueprint graphs in the **open
 - Linking a pin of an `Equal (Enum)` node resets its other pin's default (to the first enum value). Run `set` on enum defaults after the links, then `describe` to check.
 - In `exec` scripts, never `+` two `unreal.Array` results (e.g. the two `get_dirty_*_packages()` lists): with an empty one it trips an engine assertion and crashes the editor (2026-11-09). Convert with `list()` first.
 - Recompile the plugin after editing its C++: the editor must be closed, then run `Build.bat FSDEditor Win64 Development -Project=...` (see the VRG `CLAUDE.md`).
+- **`set-widget` on a CheckBox crashed the editor** (2026-11-15, `Assertion failed: IsValid()` in `SharedPointer.h`): `SetWidgetProperty` called `SynchronizeProperties` on a designer template that has no Slate widget, and `UCheckBox` dereferences it. Fixed: it only syncs when `GetCachedWidget()` is valid. The designer value is still set; the preview refreshes on the next compile.
 
 ## Examples
 

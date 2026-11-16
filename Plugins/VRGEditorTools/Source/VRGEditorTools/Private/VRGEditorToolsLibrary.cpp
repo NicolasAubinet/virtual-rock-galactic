@@ -1264,7 +1264,12 @@ FString UVRGEditorToolsLibrary::SetWidgetProperty(const FString& WidgetBlueprint
 	{
 		return VRGTools::Err(FString::Printf(TEXT("could not parse '%s' for %s"), *Value, *PropName));
 	}
-	if (UPanelSlot* S = Cast<UPanelSlot>(Target)) S->SynchronizeProperties(); else W->SynchronizeProperties();
+	// Designer templates often have no Slate widget, and some widgets (CheckBox) assert in
+	// SynchronizeProperties without one (editor crash 2026-11-15): only sync a built widget.
+	if (W->GetCachedWidget().IsValid())
+	{
+		if (UPanelSlot* S = Cast<UPanelSlot>(Target)) S->SynchronizeProperties(); else W->SynchronizeProperties();
+	}
 	FBlueprintEditorUtils::MarkBlueprintAsModified(WBP);
 	FString Now;
 	P->ExportTextItem(Now, P->ContainerPtrToValuePtr<void>(Target), nullptr, Target, PPF_None);
