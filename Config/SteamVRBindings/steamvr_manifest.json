@@ -362,7 +362,7 @@
 			"/actions/main/in/RightButtonA": "Right lower button (A): jump",
 			"/actions/main/in/LeftButtonB": "Left upper button (Y): use, reload weapon",
 			"/actions/main/in/RightButtonB": "Right upper button (B): auto-mine",
-			"/actions/main/in/RightThumbStick": "Right stick click: hold 2 s to toggle VR",
+			"/actions/main/in/RightThumbStick": "Right stick click: VR options menu",
 			"/actions/main/in/Sprint": "Left stick click: sprint",
 			"/actions/main/in/CallMolly": "Call Molly",
 			"/actions/main/in/CallResupplyPod": "Call Resupply Pod",
