@@ -24,8 +24,13 @@
 					}
 				},
 				{
-					"mode": "trigger",
+					"mode": "button",
 					"path": "/user/hand/left/input/trigger",
+					"parameters": {
+						"click_activate_threshold": "0.7",
+						"click_deactivate_threshold": "0.6",
+						"haptic_amplitude": "0"
+					},
 					"inputs": {
 						"click": {
 							"output": "/actions/main/in/LeftTriggerClick"
@@ -33,8 +38,13 @@
 					}
 				},
 				{
-					"mode": "trigger",
+					"mode": "button",
 					"path": "/user/hand/right/input/trigger",
+					"parameters": {
+						"click_activate_threshold": "0.7",
+						"click_deactivate_threshold": "0.6",
+						"haptic_amplitude": "0"
+					},
 					"inputs": {
 						"click": {
 							"output": "/actions/main/in/RightTriggerClick"
