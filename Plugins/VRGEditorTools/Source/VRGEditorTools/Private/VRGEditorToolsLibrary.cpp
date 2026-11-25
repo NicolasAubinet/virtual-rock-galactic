@@ -29,6 +29,7 @@
 #include "Blueprint/WidgetTree.h"
 #include "Components/PanelWidget.h"
 #include "Components/PanelSlot.h"
+#include "Components/SceneComponent.h"
 
 #define LOCTEXT_NAMESPACE "VRGEditorTools"
 
@@ -420,9 +421,28 @@ FString UVRGEditorToolsLibrary::DescribeBlueprint(const FString& Blueprint)
 	if (BP->SimpleConstructionScript)
 	{
 		Out += TEXT("\nComponents:\n");
-		for (USCS_Node* N : BP->SimpleConstructionScript->GetAllNodes())
+		USimpleConstructionScript* SCS = BP->SimpleConstructionScript;
+		for (USCS_Node* N : SCS->GetAllNodes())
 		{
-			Out += FString::Printf(TEXT("  %s (%s)\n"), *N->GetVariableName().ToString(), N->ComponentClass ? *N->ComponentClass->GetName() : TEXT("?"));
+			Out += FString::Printf(TEXT("  %s (%s)"), *N->GetVariableName().ToString(), N->ComponentClass ? *N->ComponentClass->GetName() : TEXT("?"));
+			if (USCS_Node* P = SCS->FindParentNode(N))
+			{
+				Out += TEXT(" under ") + P->GetVariableName().ToString();
+			}
+			else if (N->ParentComponentOrVariableName != NAME_None)
+			{
+				Out += TEXT(" under ") + N->ParentComponentOrVariableName.ToString() + TEXT(" (inherited)");
+			}
+			if (const USceneComponent* T = Cast<USceneComponent>(N->ComponentTemplate))
+			{
+				const FVector L = T->GetRelativeLocation();
+				const FRotator R = T->GetRelativeRotation();
+				const FVector S = T->GetRelativeScale3D();
+				if (!L.IsNearlyZero()) Out += FString::Printf(TEXT(" loc=(%g, %g, %g)"), L.X, L.Y, L.Z);
+				if (!R.IsNearlyZero()) Out += FString::Printf(TEXT(" rot=(P %g, Y %g, R %g)"), R.Pitch, R.Yaw, R.Roll);
+				if (!S.Equals(FVector::OneVector)) Out += FString::Printf(TEXT(" scale=(%g, %g, %g)"), S.X, S.Y, S.Z);
+			}
+			Out += TEXT("\n");
 		}
 	}
 
@@ -1274,6 +1294,63 @@ FString UVRGEditorToolsLibrary::SetWidgetProperty(const FString& WidgetBlueprint
 	FString Now;
 	P->ExportTextItem(Now, P->ContainerPtrToValuePtr<void>(Target), nullptr, Target, PPF_None);
 	return FString::Printf(TEXT("%s.%s = %s (not saved)"), *Widget, *Property, *Now);
+}
+
+FString UVRGEditorToolsLibrary::AddComponent(const FString& Blueprint, const FString& Name, const FString& ComponentClass, const FString& Parent, FVector Location, FRotator Rotation)
+{
+	if (IsRunningCommandlet()) return VRGTools::Err(TEXT("edits are refused in a commandlet"));
+	FString Error;
+	UBlueprint* BP = VRGTools::LoadBP(Blueprint, Error);
+	if (!BP) return VRGTools::Err(Error);
+	USimpleConstructionScript* SCS = BP->SimpleConstructionScript;
+	if (!SCS) return VRGTools::Err(FString::Printf(TEXT("%s has no construction script (not an actor Blueprint?)"), *BP->GetName()));
+	const FName CompName(*Name.TrimStartAndEnd());
+	if (CompName == NAME_None) return VRGTools::Err(TEXT("empty component name"));
+	if (SCS->FindSCSNode(CompName)) return VRGTools::Err(FString::Printf(TEXT("%s already has a component '%s'"), *BP->GetName(), *Name));
+	if (BP->NewVariables.ContainsByPredicate([&](const FBPVariableDescription& V) { return V.VarName == CompName; }))
+	{
+		return VRGTools::Err(FString::Printf(TEXT("%s already has a variable '%s'"), *BP->GetName(), *Name));
+	}
+
+	FString ClassName = ComponentClass.TrimStartAndEnd();
+	if (ClassName.IsEmpty()) ClassName = TEXT("SceneComponent");
+	UClass* Cls = ClassName.Contains(TEXT("/")) ? LoadObject<UClass>(nullptr, *ClassName) : FindObject<UClass>(ANY_PACKAGE, *ClassName);
+	if (!Cls) return VRGTools::Err(FString::Printf(TEXT("class '%s' not found"), *ClassName));
+	if (!Cls->IsChildOf(UActorComponent::StaticClass())) return VRGTools::Err(FString::Printf(TEXT("%s is not a component class"), *Cls->GetName()));
+
+	USCS_Node* ParentNode = nullptr;
+	if (!Parent.TrimStartAndEnd().IsEmpty())
+	{
+		ParentNode = SCS->FindSCSNode(FName(*Parent.TrimStartAndEnd()));
+		if (!ParentNode) return VRGTools::Err(FString::Printf(TEXT("no component '%s' among %s's own components (inherited parents are not supported)"), *Parent, *BP->GetName()));
+		if (!ParentNode->ComponentClass || !ParentNode->ComponentClass->IsChildOf(USceneComponent::StaticClass()))
+		{
+			return VRGTools::Err(FString::Printf(TEXT("parent '%s' is not a scene component"), *Parent));
+		}
+	}
+
+	const FScopedTransaction Transaction(LOCTEXT("AddComponent", "VRG: add component"));
+	BP->Modify();
+	SCS->Modify();
+	USCS_Node* NewNode = SCS->CreateNode(Cls, CompName);
+	if (!NewNode) return VRGTools::Err(TEXT("CreateNode failed"));
+	if (USceneComponent* T = Cast<USceneComponent>(NewNode->ComponentTemplate))
+	{
+		T->SetRelativeLocation_Direct(Location);
+		T->SetRelativeRotation_Direct(Rotation);
+	}
+	if (ParentNode)
+	{
+		ParentNode->Modify();
+		ParentNode->AddChildNode(NewNode);
+	}
+	else
+	{
+		SCS->AddNode(NewNode);
+	}
+	FBlueprintEditorUtils::MarkBlueprintAsStructurallyModified(BP);
+	const FString Where = ParentNode ? TEXT(" under ") + ParentNode->GetVariableName().ToString() : FString(TEXT(" at root level"));
+	return FString::Printf(TEXT("Added %s (%s) to %s%s (not saved)"), *NewNode->GetVariableName().ToString(), *Cls->GetName(), *BP->GetName(), *Where);
 }
 
 #undef LOCTEXT_NAMESPACE

@@ -127,6 +127,14 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "VRG Editor Tools")
 	static FString DuplicateWidget(const FString& WidgetBlueprint, const FString& Template, const TArray<FString>& Renames);
 
+	/**
+	 * Adds a component to the Blueprint's construction script (Components panel), as a child of Parent (a component
+	 * of this Blueprint; empty = root level). ComponentClass is a class name or path ("SceneComponent",
+	 * "/Script/Engine.StaticMeshComponent"). Scene components get the relative Location/Rotation. Not saved.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "VRG Editor Tools")
+	static FString AddComponent(const FString& Blueprint, const FString& Name, const FString& ComponentClass, const FString& Parent, FVector Location, FRotator Rotation);
+
 	/** Sets a designer property of a widget from text (UE export format, e.g. Text: NSLOCTEXT(...) or a plain string, Visibility: Collapsed). "Slot.X" targets the widget's slot. */
 	UFUNCTION(BlueprintCallable, Category = "VRG Editor Tools")
 	static FString SetWidgetProperty(const FString& WidgetBlueprint, const FString& Widget, const FString& Property, const FString& Value);

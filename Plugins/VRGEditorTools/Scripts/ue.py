@@ -19,6 +19,7 @@ Usage (BP = "VRUIManager" or "/Game/VRG/UI/VRUIManager"; PIN = Node.Pin):
   ue.py remove-var BP NAME                     deletes a member variable and its Get/Set nodes
   ue.py add-struct-member STRUCT NAME TYPE [--default V]   new member of a User Defined Struct
   ue.py duplicate-widget WBP WIDGET [OLD=NEW ...]  designer copy-paste of WIDGET (with children), inserted after it
+  ue.py add-component BP NAME [--class C] [--parent COMP] [--loc X,Y,Z] [--rot P,Y,R]   new component (Components panel), not saved
   ue.py set-widget WBP WIDGET PROPERTY VALUE   designer property from text ("Slot.X" = slot property)
   ue.py link BP GRAPH PIN PIN
   ue.py unlink BP GRAPH PIN [PIN]             one PIN = break all its links
@@ -171,6 +172,7 @@ def main():
     s = sub.add_parser("remove-var"); s.add_argument("bp"); s.add_argument("name")
     s = sub.add_parser("add-struct-member"); s.add_argument("struct"); s.add_argument("name"); s.add_argument("type"); s.add_argument("--default", default="")
     s = sub.add_parser("duplicate-widget"); s.add_argument("bp"); s.add_argument("widget"); s.add_argument("renames", nargs="*")
+    s = sub.add_parser("add-component"); s.add_argument("bp"); s.add_argument("name"); s.add_argument("--class", dest="cls", default="SceneComponent"); s.add_argument("--parent", default=""); s.add_argument("--loc", default="0,0,0"); s.add_argument("--rot", default="0,0,0")
     s = sub.add_parser("set-widget"); s.add_argument("bp"); s.add_argument("widget"); s.add_argument("prop"); s.add_argument("value")
     s = sub.add_parser("link"); s.add_argument("bp"); s.add_argument("graph"); s.add_argument("a"); s.add_argument("b")
     s = sub.add_parser("unlink"); s.add_argument("bp"); s.add_argument("graph"); s.add_argument("a"); s.add_argument("b", nargs="?")
@@ -215,6 +217,12 @@ def main():
         out = call("add_struct_member", a.struct, a.name, a.type, a.default)
     elif c == "duplicate-widget":
         out = call("duplicate_widget", a.bp, a.widget, a.renames)
+    elif c == "add-component":
+        lx, ly, lz = (float(v) for v in a.loc.split(","))
+        rp, ry, rr = (float(v) for v in a.rot.split(","))
+        code = ("import unreal\nprint(unreal.VRGEditorToolsLibrary.add_component(%r, %r, %r, %r, unreal.Vector(%r, %r, %r), unreal.Rotator(roll=%r, pitch=%r, yaw=%r)))"
+                % (a.bp, a.name, a.cls, a.parent, lx, ly, lz, rr, rp, ry))
+        out = run_job({"kind": "exec", "code": code, "name": "add-component", "undo": "VRG: add component"}).rstrip("\n")
     elif c == "set-widget":
         out = call("set_widget_property", a.bp, a.widget, a.prop, a.value)
     elif c == "link":
