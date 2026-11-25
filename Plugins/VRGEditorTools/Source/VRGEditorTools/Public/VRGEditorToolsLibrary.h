@@ -138,4 +138,11 @@ public:
 	/** Sets a designer property of a widget from text (UE export format, e.g. Text: NSLOCTEXT(...) or a plain string, Visibility: Collapsed). "Slot.X" targets the widget's slot. */
 	UFUNCTION(BlueprintCallable, Category = "VRG Editor Tools")
 	static FString SetWidgetProperty(const FString& WidgetBlueprint, const FString& Widget, const FString& Property, const FString& Value);
+
+	/**
+	 * Reads or sets a property of any asset (e.g. a Font's CompositeFont) from text in UE export format. Empty Value only
+	 * returns the current value. Property can be a dotted path into structs ("CompositeFont.FallbackTypeface"). Not saved.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "VRG Editor Tools")
+	static FString SetAssetProperty(const FString& Asset, const FString& Property, const FString& Value);
 };

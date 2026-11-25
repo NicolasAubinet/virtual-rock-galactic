@@ -20,6 +20,8 @@ Editor-only plugin that lets Claude read and edit Blueprint graphs in the **open
 - Recompile the plugin after editing its C++: the editor must be closed, then run `Build.bat FSDEditor Win64 Development -Project=...` (see the VRG `CLAUDE.md`).
 - **`set-widget` on a CheckBox crashed the editor** (2026-11-15, `Assertion failed: IsValid()` in `SharedPointer.h`): `SetWidgetProperty` called `SynchronizeProperties` on a designer template that has no Slate widget, and `UCheckBox` dereferences it. Fixed: it only syncs when `GetCachedWidget()` is valid. The designer value is still set; the preview refreshes on the next compile.
 
+- **`set-asset ASSET PROPERTY [VALUE]`** (2026-11-25) reads or sets any asset property from UE export text, including properties Python can't reach (e.g. a Font's `CompositeFont`; dotted paths go into structs: `CompositeFont.FallbackTypeface`). It also reads widget designer templates by full path (`/Game/…/WBP.WBP:WidgetTree.Name`), handy to read a value before `set-widget`. It doesn't save: use `save_asset` from `exec`. Pin defaults of type Text: `ue.py set` stores `NSLOCTEXT(...)` as a plain English string, not a localized one; paste the node with `DefaultTextValue=NSLOCTEXT(...)` instead.
+
 ## Examples
 
 ```bash

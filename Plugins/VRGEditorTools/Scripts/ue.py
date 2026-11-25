@@ -21,6 +21,7 @@ Usage (BP = "VRUIManager" or "/Game/VRG/UI/VRUIManager"; PIN = Node.Pin):
   ue.py duplicate-widget WBP WIDGET [OLD=NEW ...]  designer copy-paste of WIDGET (with children), inserted after it
   ue.py add-component BP NAME [--class C] [--parent COMP] [--loc X,Y,Z] [--rot P,Y,R]   new component (Components panel), not saved
   ue.py set-widget WBP WIDGET PROPERTY VALUE   designer property from text ("Slot.X" = slot property)
+  ue.py set-asset ASSET PROPERTY [VALUE]       any asset's property from text (dotted path into structs); no VALUE = read
   ue.py link BP GRAPH PIN PIN
   ue.py unlink BP GRAPH PIN [PIN]             one PIN = break all its links
   ue.py set BP GRAPH PIN VALUE                pin default value
@@ -174,6 +175,7 @@ def main():
     s = sub.add_parser("duplicate-widget"); s.add_argument("bp"); s.add_argument("widget"); s.add_argument("renames", nargs="*")
     s = sub.add_parser("add-component"); s.add_argument("bp"); s.add_argument("name"); s.add_argument("--class", dest="cls", default="SceneComponent"); s.add_argument("--parent", default=""); s.add_argument("--loc", default="0,0,0"); s.add_argument("--rot", default="0,0,0")
     s = sub.add_parser("set-widget"); s.add_argument("bp"); s.add_argument("widget"); s.add_argument("prop"); s.add_argument("value")
+    s = sub.add_parser("set-asset"); s.add_argument("asset"); s.add_argument("prop"); s.add_argument("value", nargs="?", default="")
     s = sub.add_parser("link"); s.add_argument("bp"); s.add_argument("graph"); s.add_argument("a"); s.add_argument("b")
     s = sub.add_parser("unlink"); s.add_argument("bp"); s.add_argument("graph"); s.add_argument("a"); s.add_argument("b", nargs="?")
     s = sub.add_parser("set"); s.add_argument("bp"); s.add_argument("graph"); s.add_argument("pin"); s.add_argument("value")
@@ -225,6 +227,8 @@ def main():
         out = run_job({"kind": "exec", "code": code, "name": "add-component", "undo": "VRG: add component"}).rstrip("\n")
     elif c == "set-widget":
         out = call("set_widget_property", a.bp, a.widget, a.prop, a.value)
+    elif c == "set-asset":
+        out = call("set_asset_property", a.asset, a.prop, a.value)
     elif c == "link":
         out = call("link", a.bp, a.graph, *pin(a.a), *pin(a.b))
     elif c == "unlink":

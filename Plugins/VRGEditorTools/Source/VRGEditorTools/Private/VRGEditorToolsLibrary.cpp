@@ -1296,6 +1296,53 @@ FString UVRGEditorToolsLibrary::SetWidgetProperty(const FString& WidgetBlueprint
 	return FString::Printf(TEXT("%s.%s = %s (not saved)"), *Widget, *Property, *Now);
 }
 
+FString UVRGEditorToolsLibrary::SetAssetProperty(const FString& Asset, const FString& Property, const FString& Value)
+{
+	if (IsRunningCommandlet()) return VRGTools::Err(TEXT("edits are refused in a commandlet"));
+	FString Path = Asset.TrimStartAndEnd();
+	if (!Path.Contains(TEXT("."))) Path += TEXT(".") + FPackageName::GetShortName(Path);
+	UObject* Obj = LoadObject<UObject>(nullptr, *Path);
+	if (!Obj) return VRGTools::Err(FString::Printf(TEXT("asset '%s' not found"), *Asset));
+
+	// Walk a dotted path through struct properties down to the leaf property.
+	TArray<FString> Parts;
+	Property.ParseIntoArray(Parts, TEXT("."));
+	if (Parts.Num() == 0) return VRGTools::Err(TEXT("empty property"));
+	UStruct* Owner = Obj->GetClass();
+	void* Container = Obj;
+	FProperty* P = nullptr;
+	for (int32 i = 0; i < Parts.Num(); ++i)
+	{
+		P = FindFProperty<FProperty>(Owner, FName(*Parts[i]));
+		if (!P) return VRGTools::Err(FString::Printf(TEXT("no property '%s' on %s"), *Parts[i], *Owner->GetName()));
+		if (i < Parts.Num() - 1)
+		{
+			FStructProperty* SP = CastField<FStructProperty>(P);
+			if (!SP) return VRGTools::Err(FString::Printf(TEXT("'%s' is not a struct"), *Parts[i]));
+			Container = SP->ContainerPtrToValuePtr<void>(Container);
+			Owner = SP->Struct;
+		}
+	}
+	void* ValuePtr = P->ContainerPtrToValuePtr<void>(Container);
+	if (!Value.IsEmpty())
+	{
+		const FScopedTransaction Transaction(LOCTEXT("SetAssetProperty", "VRG: set asset property"));
+		Obj->SetFlags(RF_Transactional);
+		Obj->Modify();
+		Obj->PreEditChange(nullptr);
+		if (!P->ImportText(*Value, ValuePtr, PPF_None, Obj))
+		{
+			return VRGTools::Err(FString::Printf(TEXT("could not parse '%s' for %s"), *Value, *Property));
+		}
+		FPropertyChangedEvent Ev(FindFProperty<FProperty>(Obj->GetClass(), FName(*Parts[0])), EPropertyChangeType::ValueSet);
+		Obj->PostEditChangeProperty(Ev);
+		Obj->MarkPackageDirty();
+	}
+	FString Now;
+	P->ExportTextItem(Now, ValuePtr, nullptr, Obj, PPF_None);
+	return FString::Printf(TEXT("%s.%s = %s%s"), *Obj->GetName(), *Property, *Now, Value.IsEmpty() ? TEXT("") : TEXT(" (not saved)"));
+}
+
 FString UVRGEditorToolsLibrary::AddComponent(const FString& Blueprint, const FString& Name, const FString& ComponentClass, const FString& Parent, FVector Location, FRotator Rotation)
 {
 	if (IsRunningCommandlet()) return VRGTools::Err(TEXT("edits are refused in a commandlet"));
