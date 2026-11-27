@@ -188,9 +188,12 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void RecieveUnequipped();
     
+public:
+    // VRG: public so VRG can run the game's trigger-release code of weapons it fires itself (Grenade Launcher manual detonation, Line Cutter homing)
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void RecieveStopUsing();
-    
+
+protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void RecieveStartUsing();
     
