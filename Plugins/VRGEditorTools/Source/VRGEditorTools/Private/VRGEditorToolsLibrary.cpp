@@ -382,6 +382,12 @@ namespace VRGTools
 
 	static bool CollectNodes(UEdGraph* G, const TArray<FString>& Names, TArray<UEdGraphNode*>& Out, FString& OutErr)
 	{
+		if (!G)
+		{
+			// An empty graph name leaves the graph unresolved (crashed the editor on 2026-11-27).
+			OutErr = TEXT("no graph given");
+			return false;
+		}
 		if (Names.Num() == 0)
 		{
 			for (UEdGraphNode* N : G->Nodes)

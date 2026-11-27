@@ -187,6 +187,9 @@ def main():
     s = sub.add_parser("focus"); s.add_argument("bp"); s.add_argument("graph", nargs="?", default=""); s.add_argument("node", nargs="?", default="")
     s = sub.add_parser("exec"); s.add_argument("file"); s.add_argument("--undo-name", default="VRG: script")
     a = ap.parse_args()
+    if a.cmd != "focus" and getattr(a, "graph", None) == "":
+        # an empty graph name reached the C++ side unresolved and crashed the editor (2026-11-27)
+        ap.error("empty graph name")
 
     c = a.cmd
     if c == "ping":
