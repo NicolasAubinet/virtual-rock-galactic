@@ -11,10 +11,10 @@ UCLASS(Blueprintable)
 class ADrillevator : public ATaggedActor {
     GENERATED_BODY()
 public:
-protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_State, meta=(AllowPrivateAccess=true))
     EDrillevatorState State;
     
+protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_MovementEnabled, meta=(AllowPrivateAccess=true))
     bool MovementEnabled;
     
