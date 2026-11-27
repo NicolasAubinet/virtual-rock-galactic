@@ -10,6 +10,7 @@ class UCritterDescriptor;
 class UEnemyDescriptor;
 class UEnemyGroupDescriptor;
 class UEnemySpawnManager;
+class UExplosiveSpoilsMutator;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class FSD_API UEncounterManager : public UActorComponent {
@@ -36,6 +37,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<UCritterDescriptor*> CritterPool;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    UExplosiveSpoilsMutator* ExplosiveSpoilsMutator;
     
 public:
     UEncounterManager(const FObjectInitializer& ObjectInitializer);

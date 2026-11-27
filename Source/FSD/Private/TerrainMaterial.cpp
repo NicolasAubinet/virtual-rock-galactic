@@ -37,11 +37,19 @@ bool UTerrainMaterial::IsPrecious() const {
     return false;
 }
 
+UFSDPhysicalMaterial* UTerrainMaterial::GetPhysicalMaterial() const {
+    return NULL;
+}
+
 FText UTerrainMaterial::GetInGameName() const {
     return FText::GetEmpty();
 }
 
 UMaterialInstance* UTerrainMaterial::GetDigParticlesMaterialOverride() const {
+    return NULL;
+}
+
+USoundCue* UTerrainMaterial::GetCrumbleSound() const {
     return NULL;
 }
 

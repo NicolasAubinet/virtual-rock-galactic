@@ -36,5 +36,8 @@ public:
     UFUNCTION(BlueprintCallable)
     void SpawnEffects(FVector Location, FVector Normal);
     
+    UFUNCTION(BlueprintCallable)
+    void ScaleProjectileExplosion(const float Scale);
+    
 };
 

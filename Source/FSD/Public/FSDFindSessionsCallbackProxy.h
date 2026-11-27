@@ -6,8 +6,8 @@
 #include "FSDFindSessionsCallbackProxy.generated.h"
 
 class APlayerController;
+class UFSDFindSessions;
 class UFSDFindSessionsCallbackProxy;
-class UFSDFindSteamSessions;
 class UObject;
 
 UCLASS(Blueprintable, MinimalAPI)
@@ -28,7 +28,7 @@ private:
     UObject* WorldContextObject;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    UFSDFindSteamSessions* FSDFindSteamSessions;
+    UFSDFindSessions* FSDFindSteamSessions;
     
 public:
     UFSDFindSessionsCallbackProxy();

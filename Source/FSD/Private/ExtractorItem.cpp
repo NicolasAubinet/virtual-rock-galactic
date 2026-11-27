@@ -54,12 +54,12 @@ AExtractorItem::AExtractorItem(const FObjectInitializer& ObjectInitializer) : Su
     this->SurfaceLightMinIntensity = 100.00f;
     this->SurfaceLightMaxIntensity = 1000.00f;
     this->CurrentLoad = 0.00f;
-    this->DroppedMesh->SetupAttachment(RootComponent);
     this->AudioComponent->SetupAttachment(RootComponent);
-    this->FPMuzzleParticles->SetupAttachment(FPMesh);
+    this->DroppedMesh->SetupAttachment(RootComponent);
     this->FPMuzzleInvalidParticles->SetupAttachment(FPMesh);
-    this->TPMuzzleParticles->SetupAttachment(TPMesh);
+    this->FPMuzzleParticles->SetupAttachment(FPMesh);
     this->TPMuzzleInvalidParticles->SetupAttachment(TPMesh);
+    this->TPMuzzleParticles->SetupAttachment(TPMesh);
 }
 
 
@@ -106,7 +106,7 @@ UBoxComponent* AExtractorItem::GetRootCollider() const {
     return NULL;
 }
 
-void AExtractorItem::All_SimulateDigBlock_Implementation(FVector_NetQuantize Position, bool SpawnParticles, int32 Material) {
+void AExtractorItem::All_SimulateDigBlock_Implementation(FVector_NetQuantize Position, bool spawnParticles, int32 Material) {
 }
 
 void AExtractorItem::All_ChunkSplat_Implementation(AResourceChunk* chunk) {

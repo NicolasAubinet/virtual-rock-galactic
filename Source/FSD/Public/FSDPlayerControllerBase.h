@@ -58,6 +58,9 @@ public:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_Cheat_SwitchCharacter(UPlayerCharacterID* NewCharacter);
     
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_Cheat_RefreshCharacterStats();
+    
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void RecievePreClientTravel();

@@ -4,6 +4,7 @@ UEncounterManager::UEncounterManager(const FObjectInitializer& ObjectInitializer
     this->SpawnDistanceFromRoomBounds = 0.00f;
     this->ProceduralSetup = NULL;
     this->SpawnManager = NULL;
+    this->ExplosiveSpoilsMutator = NULL;
 }
 
 void UEncounterManager::ShowSpawnLocations() {

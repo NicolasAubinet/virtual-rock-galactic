@@ -25,6 +25,7 @@ UDamageSettings::UDamageSettings() {
     this->MeltTarget = NULL;
     this->CookTarget = NULL;
     this->GibTarget = NULL;
+    this->NukeTarget = NULL;
     this->ExplodeOnDeath = NULL;
     this->IgnoreBodypartDamageReduction = NULL;
     this->DefaultDamageImpulse = NULL;

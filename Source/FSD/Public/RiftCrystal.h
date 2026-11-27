@@ -321,7 +321,7 @@ public:
     void All_ShowRiftSpawnEffects(FVector_NetQuantize riftLocation);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
-    void All_AddKnockBack(FVector_NetQuantize Direction, float force);
+    void All_AddKnockback(FVector_NetQuantize Direction, float force);
     
 
     // Fix for true pure virtual functions not being implemented

@@ -2,6 +2,7 @@
 
 UDebrisActorComponent::UDebrisActorComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
     this->Enabled = true;
+    this->Solo = false;
 }
 
 

@@ -55,6 +55,7 @@ void AProjectileBase::OnRep_IsDorment(const bool wasDorment) {
 
 
 
+
 void AProjectileBase::InitState(const FVector& ShootDirection, const FVector& initialBonusVelocity) {
 }
 
@@ -66,6 +67,10 @@ void AProjectileBase::IgnoreCollision(UPrimitiveComponent* otherCollider) {
 
 bool AProjectileBase::HasImpactAuthority() const {
     return false;
+}
+
+float AProjectileBase::GetImpactTimeSinceActivation() const {
+    return 0.0f;
 }
 
 float AProjectileBase::GetGameTimeSinceActivation() const {

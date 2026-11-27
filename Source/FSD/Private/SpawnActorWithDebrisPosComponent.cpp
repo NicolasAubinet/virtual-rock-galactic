@@ -2,8 +2,10 @@
 #include "Templates/SubclassOf.h"
 
 USpawnActorWithDebrisPosComponent::USpawnActorWithDebrisPosComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->ClearDeadBlockersOnFailedSpawn = false;
     this->MinDistanceBetweenSpwans = 100.00f;
     this->AddTerrainPlacementBlockers = true;
+    this->SkipSearchedAreaWhenExpanding = false;
     this->AvoidImportantLocations = false;
     this->MinDistanceToImportantLocations = 100.00f;
 }

@@ -5,6 +5,7 @@ UInventoryList::UInventoryList() {
     this->LaserPointerItem = NULL;
     this->TerrainScannerItem = NULL;
     this->ResupplyItem = NULL;
+    this->PerkItem = NULL;
 }
 
 UItemID* UInventoryList::GetPreviousUnlockedItem(UObject* WorldContextObject, EItemCategory Category, UItemID* currentItem) const {

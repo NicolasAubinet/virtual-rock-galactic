@@ -54,7 +54,19 @@ bool UCharacterVanityComponent::GetDesireSleevelessArmor() const {
     return false;
 }
 
+UMaterialInterface* UCharacterVanityComponent::GetClothMaterial() const {
+    return NULL;
+}
+
 UCharacterVanityItems* UCharacterVanityComponent::GetAvailableVanityItems() const {
+    return NULL;
+}
+
+USkeletalMeshComponent* UCharacterVanityComponent::GetArmorMeshComponent() const {
+    return NULL;
+}
+
+UMaterialInterface* UCharacterVanityComponent::GetArmorMaterial() const {
     return NULL;
 }
 

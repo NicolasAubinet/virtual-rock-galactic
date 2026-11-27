@@ -44,6 +44,9 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UStatusEffect> OnReleaseStatusEffect;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bRemoveDropEffectWhenGrounded;
+    
 public:
     AZipLineProjectile(const FObjectInitializer& ObjectInitializer);
 

@@ -72,6 +72,9 @@ public:
     void TakeDamageSimple(float damageAmount, AActor* DamageCauser, UDamageClass* DamageClass);
     
     UFUNCTION(BlueprintCallable)
+    void SetMaxHealth(float NewMaxHealth);
+    
+    UFUNCTION(BlueprintCallable)
     void SetHealthDirectly(float newHealthValue);
     
     UFUNCTION(BlueprintCallable)

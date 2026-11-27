@@ -26,8 +26,8 @@ AFoamPuddle::AFoamPuddle(const FObjectInitializer& ObjectInitializer) : Super(Ob
     this->VacuumSource = NULL;
     this->MaxSoapPiles = 100;
     this->UsesLocalSpace = false;
-    this->PuddleRoot->SetupAttachment(RootComponent);
     this->NS_Foam->SetupAttachment(PuddleRoot);
+    this->PuddleRoot->SetupAttachment(RootComponent);
 }
 
 void AFoamPuddle::SetState(EVacuumState NewState) {

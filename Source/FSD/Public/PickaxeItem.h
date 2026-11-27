@@ -21,6 +21,7 @@ class UFXSystemAsset;
 class UForceFeedbackEffect;
 class UItemCharacterAnimationSet;
 class UMaterialInterface;
+class UPawnStat;
 class UPlayerAnimInstance;
 class UPrimitiveComponent;
 class USceneComponent;
@@ -97,6 +98,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UStatusEffect> OnDamageEnemySlowdownEffect;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPawnStat* PickKillsPerkAsset;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagContainer WideDamageTrackingTags;
@@ -217,6 +221,9 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetSpecialCooldownProgress() const;
     
+    UFUNCTION(BlueprintCallable)
+    void DecreaseCooldown(float NewDecreaseCooldown);
+    
 protected:
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
     void All_SimulateHitBlock(FVector_NetQuantize Position, int32 materia, bool removeDebris, bool isSpecial);
@@ -225,7 +232,7 @@ protected:
     void All_SimulateDigDebris(FVector_NetQuantize Position, UFXSystemAsset* Particles, USoundCue* cue);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
-    void All_SimulateDigBlock(FVector_NetQuantize Position, bool SpawnParticles, int32 Material, float Density, bool isSpecial);
+    void All_SimulateDigBlock(FVector_NetQuantize Position, bool spawnParticles, int32 Material, float Density, bool isSpecial);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
     void All_SimulateDamageTarget(UPrimitiveComponent* TargetComponent, bool isSpecial, const FVector_NetQuantize& ImpactPoint, const FVector_NetQuantizeNormal& ImpactNormal, UFSDPhysicalMaterial* PhysMaterial, uint8 BoneIndex);

@@ -344,6 +344,9 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void CustomEvent1(const UItemUpgrade* Event);
     
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void CrosshairUpgradedEvent(const UItemUpgrade* Event);
+    
 protected:
     UFUNCTION(BlueprintCallable, Client, Reliable)
     void Client_RefillAmmo(float percentage);

@@ -6,6 +6,10 @@ UDamageFunctionLibrary::UDamageFunctionLibrary() {
 void UDamageFunctionLibrary::SetPhysicalMaterialOnHit(UFSDPhysicalMaterial* PhysMat, FHitResult& Hit) {
 }
 
+bool UDamageFunctionLibrary::IsNukeDeath(const TArray<UDamageTag*>& Tags) {
+    return false;
+}
+
 bool UDamageFunctionLibrary::IsGibbedDeath(const TArray<UDamageTag*>& Tags) {
     return false;
 }

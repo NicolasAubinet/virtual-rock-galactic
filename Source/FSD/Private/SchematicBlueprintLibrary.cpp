@@ -16,6 +16,10 @@ bool USchematicBlueprintLibrary::HasAnyUnlockableSchematics(UObject* WorldContex
     return false;
 }
 
+TMap<UPlayerCharacterID*, FOverclockUpgradeArray> USchematicBlueprintLibrary::GetOverclocksGroupedByCharacter() {
+    return TMap<UPlayerCharacterID*, FOverclockUpgradeArray>();
+}
+
 USchematicCategory* USchematicBlueprintLibrary::FindItemUpgradeSchematicCategory(UItemUpgrade* Upgrade) {
     return NULL;
 }

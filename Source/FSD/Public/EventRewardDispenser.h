@@ -15,7 +15,7 @@ class AEventRewardDispenser : public AActor {
 public:
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_PlayerId, meta=(AllowPrivateAccess=true))
-    FUniqueNetIdRepl PlayerId;
+    FUniqueNetIdRepl playerID;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     AEventRewardFrame* DispenserFrame;

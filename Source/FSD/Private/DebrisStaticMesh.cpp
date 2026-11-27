@@ -7,6 +7,7 @@ FDebrisStaticMesh::FDebrisStaticMesh() {
     this->Probablity = 0.00f;
     this->DestroyedSound = NULL;
     this->DestroyedParticles = NULL;
+    this->ChangesFootsteps = false;
     this->Fragile = false;
     this->CastShadows = EDebrisMeshShadows::Never;
     this->Durable = false;

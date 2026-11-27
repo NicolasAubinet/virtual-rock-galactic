@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "DamageModifierItem.h"
+#include "EDamageComponentType.h"
 #include "ItemUpgrade.h"
 #include "Templates/SubclassOf.h"
 #include "UpgradeValues.h"
@@ -17,6 +18,9 @@ public:
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UDamageCondition* Condition;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    EDamageComponentType DamageComponentType;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FDamageModifierItem> Modifiers;

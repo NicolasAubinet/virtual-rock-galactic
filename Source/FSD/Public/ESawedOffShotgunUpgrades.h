@@ -7,5 +7,9 @@ enum class ESawedOffShotgunUpgrades : uint8 {
     FearOnShoot,
     ShockWave = 2,
     ShotgunJump,
+    IncendiaryDispersersEvent,
+    IncendiaryDispersersRadius,
+    IncendiaryDispersersLifetime,
+    IncendiaryDispersersDistance,
 };
 

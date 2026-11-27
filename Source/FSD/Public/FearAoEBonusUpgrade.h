@@ -7,6 +7,7 @@
 
 class AActor;
 class AFSDPlayerState;
+class UDamageCondition;
 
 UCLASS(Blueprintable, EditInlineNew, MinimalAPI)
 class UFearAoEBonusUpgrade : public UItemUpgrade {
@@ -18,6 +19,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float range;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
+    UDamageCondition* Condition;
     
 public:
     UFearAoEBonusUpgrade();

@@ -19,6 +19,9 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float BobbingSize;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_PhaseStartTime, meta=(AllowPrivateAccess=true))
+    float PhaseStartTime;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool Sweep;
     
@@ -31,11 +34,17 @@ protected:
 public:
     URotatingSceneComponent(const FObjectInitializer& ObjectInitializer);
 
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
     UFUNCTION(BlueprintCallable)
     void Stop();
     
     UFUNCTION(BlueprintCallable)
     void Start();
+    
+protected:
+    UFUNCTION(BlueprintCallable)
+    void OnRep_PhaseStartTime();
     
 };
 

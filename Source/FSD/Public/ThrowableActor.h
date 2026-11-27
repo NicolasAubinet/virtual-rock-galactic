@@ -5,7 +5,7 @@
 #include "ThrowableActor.generated.h"
 
 class APlayerCharacter;
-class UProjectileMovementComponent;
+class UGravityZoneAwareProjectileMovementComponent;
 
 UCLASS(Blueprintable)
 class AThrowableActor : public AActor {
@@ -13,7 +13,7 @@ class AThrowableActor : public AActor {
 public:
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
-    UProjectileMovementComponent* Movement;
+    UGravityZoneAwareProjectileMovementComponent* Movement;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_IsMoving, meta=(AllowPrivateAccess=true))
     bool IsMoving;

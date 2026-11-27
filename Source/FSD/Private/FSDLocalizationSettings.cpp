@@ -1,7 +1,7 @@
 #include "FSDLocalizationSettings.h"
 
 UFSDLocalizationSettings::UFSDLocalizationSettings() {
-    this->CommunityTranslationProgress.AddDefaulted(22);
+    this->CommunityTranslationProgress.AddDefaulted(24);
 }
 
 

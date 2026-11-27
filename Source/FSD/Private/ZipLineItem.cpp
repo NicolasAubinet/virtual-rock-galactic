@@ -7,5 +7,9 @@ AZipLineItem::AZipLineItem(const FObjectInitializer& ObjectInitializer) : Super(
     this->MaxAngle = 35.00f;
 }
 
+void AZipLineItem::SkinAdditionalMeshes(USkinEffect* Skin, UMeshComponent* Mesh) {
+}
+
+
 
 

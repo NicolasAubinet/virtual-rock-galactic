@@ -23,6 +23,12 @@ public:
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FAfflictionChangeDelegate OnAfflictionDeactivatedEvent;
     
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FAfflictionChangeDelegate OnAfflictionDecrementedEvent;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FAfflictionChangeDelegate OnStartFlashingEvent;
+    
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TMap<UPawnAffliction*, FPawnAfflictionItem> ActiveAfflictions;
@@ -45,6 +51,9 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool UseDormancy;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float TimeToFlash;
+    
 public:
     UPawnAfflictionComponent(const FObjectInitializer& ObjectInitializer);
 
@@ -61,6 +70,9 @@ protected:
     void OnDeath(UHealthComponentBase* HealthComponent);
     
 public:
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void Multicast_OnStartFlashing(UPawnAffliction* Affliction);
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsAfflictedBy(UPawnAffliction* Affliction) const;
     

@@ -37,6 +37,9 @@ protected:
     bool bIsEquippable;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bMaintenancePerk;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDialogDataAsset* ShoutOnUseCharge;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -53,6 +56,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float CoolDownBetweenUse;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float CoolDownAfterDropPodLanding;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool bIsHighlighted;
@@ -74,6 +80,9 @@ public:
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
     static void SetCharacterPerks(UObject* WorldContext, UPlayerCharacterID* characterID, const TArray<UPerkAsset*>& perks);
     
+    UFUNCTION(BlueprintCallable)
+    bool RestoreCharge(APlayerController* PlayerController);
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsUsageType(EPerkUsageType InType) const;
     
@@ -85,6 +94,9 @@ protected:
     bool IsEquippedBy(UObject* WorldContext, UPlayerCharacterID* characterID) const;
     
 public:
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool HasForcePassiveEffect() const;
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetUseCoolDownTimeLeft(APlayerController* PlayerController) const;
     
@@ -107,7 +119,7 @@ public:
     int32 GetRankTier(int32 Rank) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    FText GetRankDescription(int32 Rank) const;
+    FText GetRankDescription(int32 Rank, bool bPreviewNextRank) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetRankCost(int32 Rank) const;
@@ -127,6 +139,9 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<TSubclassOf<UPerkHUDActivationWidget>> GetHudActivationWidgets(EPerkHUDActivationLocation Location) const;
     
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    TArray<FText> GetEffectDescriptions(int32 Rank, bool bPreviewNextRank) const;
+    
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContext"))
     UPerkDelegateItem* GetDelegates(UObject* WorldContext) const;
     
@@ -145,13 +160,22 @@ protected:
     
 public:
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
+    bool DeductPerkPoints(UObject* WorldContext, int32 Tier, bool ManualSave);
+    
+    UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
     void CheatSetCurrentRank(UObject* WorldContext, int32 InRank);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool CanUseCharge(APlayerController* PlayerController) const;
     
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
+    bool BuyPerkAtTierFree(UObject* WorldContext, int32 Tier);
+    
+    UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
     bool BuyPerkAtTier(UObject* WorldContext, int32 Tier);
+    
+    UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
+    bool AddPerkPoints(UObject* WorldContext, int32 Tier, bool ManualSave);
     
 };
 

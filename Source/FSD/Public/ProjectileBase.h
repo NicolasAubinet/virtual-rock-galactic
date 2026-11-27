@@ -118,6 +118,11 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnPenetrated(bool PredictedPenetration, const FHitResult& HitResult);
     
+protected:
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void OnManualDetonationUpgrade(float DamagePerStage, float TimeBetweenStages, float RadiusPerStage);
+    
+public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnInitialized();
     
@@ -138,6 +143,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool HasImpactAuthority() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    float GetImpactTimeSinceActivation() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetGameTimeSinceActivation() const;

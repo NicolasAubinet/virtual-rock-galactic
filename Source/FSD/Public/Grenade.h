@@ -14,11 +14,11 @@
 class AGrenade;
 class AItem;
 class ALoadoutItemProxy;
+class UGravityZoneAwareProjectileMovementComponent;
 class UGrenadeAnimationSet;
 class UGrenadeProjectionSettings;
 class UItemID;
 class UParticleSystem;
-class UProjectileMovementComponent;
 class USoundCue;
 class UStaticMesh;
 class UUserWidget;
@@ -32,7 +32,7 @@ public:
     
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
-    UProjectileMovementComponent* Movement;
+    UGravityZoneAwareProjectileMovementComponent* Movement;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float CoolDown;

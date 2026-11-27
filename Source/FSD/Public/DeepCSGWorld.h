@@ -12,24 +12,14 @@
 #include "ECarveFilterType.h"
 #include "EPreciousMaterialOptions.h"
 #include "EncodedChunkId.h"
-#include "CSGBuildOperationData.h"
 #include "CSGRaycastHitInfo.h"
-#include "CarveWithColliderOperationData.h"
-#include "CarveWithSTLMeshOperationData.h"
 #include "DebrisWhenCarving.h"
-#include "DrillOperationData.h"
 #include "ELandscapeCellFilter.h"
 #include "ESpecialDebrisType.h"
-#include "GrenadeExplodeOperationData.h"
-#include "MeltOperationData.h"
-#include "PickaxeDigOperationData.h"
-#include "RemoveFloatingIslandOperationData.h"
 #include "RuntimeSpawnedDebris.h"
-#include "SplineSegmentCarveOperationData.h"
 #include "Templates/SubclassOf.h"
 #include "TerrainBaseDoneDelegate.h"
 #include "TerrainLateJoinData.h"
-#include "TerrainSpawnDebrisOperationData.h"
 #include "DeepCSGWorld.generated.h"
 
 class ACSGBuilder;
@@ -198,36 +188,6 @@ public:
     UFUNCTION(BlueprintCallable)
     void UnRegisterScannerComponent(UPrimitiveComponent* Component);
     
-    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
-    void TerrainOp_SpawnDebris(const FTerrainSpawnDebrisOperationData& Data);
-    
-    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
-    void TerrainOp_RemoveFloating(const FRemoveFloatingIslandOperationData& Data);
-    
-    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
-    void TerrainOp_PickAxe(const FPickaxeDigOperationData& Data);
-    
-    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
-    void TerrainOp_Melt(const FMeltOperationData& Data);
-    
-    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
-    void TerrainOp_Explode(const FGrenadeExplodeOperationData& Data);
-    
-    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
-    void TerrainOp_Drill(const FDrillOperationData& Data);
-    
-    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
-    void TerrainOp_CarveSTLMesh(const FCarveWithSTLMeshOperationData& Data);
-    
-    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
-    void TerrainOp_CarveSplineSegment(const FSplineSegmentCarveOperationData& Data);
-    
-    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
-    void TerrainOp_CarveCSG(const FCSGBuildOperationData& Data);
-    
-    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
-    void TerrainOp_CarveCollider(const FCarveWithColliderOperationData& Data);
-    
 protected:
     UFUNCTION(BlueprintCallable)
     void TerrainMaterialDataLoaded();
@@ -247,9 +207,6 @@ public:
     
     UFUNCTION(BlueprintCallable)
     void ResetEntireWorld();
-    
-    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
-    void RemoveDebrisInstance_TerrainOp2(int32 instance, int32 Component);
     
     UFUNCTION(BlueprintCallable)
     void RemoveDebrisInSphere(const FVector& Position, float Radius, bool onlyFragile, bool alsoDurable, ESpecialDebrisType onlyType);

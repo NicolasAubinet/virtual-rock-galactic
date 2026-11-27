@@ -5,6 +5,7 @@
 #include "EArmorDamageType.h"
 #include "EChatSenderType.h"
 #include "ESpacerigStartType.h"
+#include "ESprintMode.h"
 #include "FSDPlayerControllerBase.h"
 #include "OnPlayerCharacterPossesedDelegate.h"
 #include "Templates/SubclassOf.h"
@@ -125,6 +126,9 @@ public:
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
     UFUNCTION(BlueprintCallable)
+    void TriggerUserTraceBookmark();
+    
+    UFUNCTION(BlueprintCallable)
     void ToggleVoiceOn(bool Enabled);
     
     UFUNCTION(BlueprintCallable)
@@ -145,6 +149,10 @@ public:
     UFUNCTION(BlueprintCallable, Client, Reliable)
     void SetAchievementProgressFromServer(UFSDAchievement* AchievementToSet, float Progress);
     
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void ServerSetSprintMode(ESprintMode Value);
+    
+    // Removed in Season 7; kept so disconnected pre-Season-7 nodes still compile
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void ServerSetUserHoldToRun(bool Value);
     
@@ -225,7 +233,7 @@ protected:
     
 public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-    void OnPlayerSpawnBegin(int32 PlayerId);
+    void OnPlayerSpawnBegin(int32 playerID);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnGenerationDone();
@@ -239,6 +247,10 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetUseToggleLaserpointer();
     
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    ESprintMode GetSprintMode();
+    
+    // Removed in Season 7; kept so disconnected pre-Season-7 nodes still compile
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetUseHoldToRun();
     

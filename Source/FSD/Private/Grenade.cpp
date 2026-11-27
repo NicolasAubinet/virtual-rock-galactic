@@ -1,5 +1,5 @@
 #include "Grenade.h"
-#include "GameFramework/ProjectileMovementComponent.h"
+#include "GravityZoneAwareProjectileMovementComponent.h"
 #include "Net/UnrealNetwork.h"
 #include "Templates/SubclassOf.h"
 
@@ -8,7 +8,7 @@ AGrenade::AGrenade(const FObjectInitializer& ObjectInitializer) : Super(ObjectIn
     const FProperty* p_RemoteRole = GetClass()->FindPropertyByName("RemoteRole");
     (*p_RemoteRole->ContainerPtrToValuePtr<TEnumAsByte<ENetRole>>(this)) = ROLE_SimulatedProxy;
     this->CrossHairType = NULL;
-    this->Movement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovement"));
+    this->Movement = CreateDefaultSubobject<UGravityZoneAwareProjectileMovementComponent>(TEXT("ProjectileMovement"));
     this->CoolDown = -1.00f;
     this->Duration = 0.00f;
     this->CanCook = false;

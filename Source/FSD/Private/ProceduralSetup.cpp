@@ -169,6 +169,9 @@ int32 AProceduralSetup::AddRoom(FVector Location, bool CanHaveEnemies, URoomGene
 void AProceduralSetup::AddInfluenceToTunnelEntrances(UCaveInfluencer* Influencer, float range) {
 }
 
+void AProceduralSetup::AddImportantLocationWithVerticalCheck(const FVector& Location, float Radius, EImportantLocationVerticalCheck verticalCheck) {
+}
+
 void AProceduralSetup::AddImportantLocation(const FVector& Location, float Radius) {
 }
 

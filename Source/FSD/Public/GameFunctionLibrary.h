@@ -3,6 +3,7 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "GameFunctionLibrary.generated.h"
 
+class AActor;
 class ADeepCSGWorld;
 class AFSDGameMode;
 class AFSDGameModeSpaceRig;
@@ -75,6 +76,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContext"))
     static APlayerCharacter* GetLocalPlayerCharacter(UObject* WorldContext);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    static float GetGravityZ(const AActor* Actor);
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static UGoogleAnalyticsWrapper* GetGoogleAnalyticsWrapper(UObject* WorldContextObject);

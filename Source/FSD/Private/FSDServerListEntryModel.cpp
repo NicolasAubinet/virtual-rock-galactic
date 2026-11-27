@@ -12,6 +12,7 @@ FFSDServerListEntryModel::FFSDServerListEntryModel() {
     this->DRG_CLASSLOCK = 0;
     this->DRG_FULL = 0;
     this->DRG_VERSION = 0;
+    this->CrossplayEnabled = false;
     this->P2PPORT = 0;
     this->Distance = 0.00f;
 }

@@ -1,7 +1,9 @@
 #include "HitscanBaseComponent.h"
+#include "Net/UnrealNetwork.h"
 
 UHitscanBaseComponent::UHitscanBaseComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
     this->SpreadPerShot = 2.00f;
+    this->SpawnGroundHitParticles = true;
     this->DamageComponent = NULL;
     this->UseDamageComponent = true;
     this->Damage = 0.00f;
@@ -25,6 +27,9 @@ UHitscanBaseComponent::UHitscanBaseComponent(const FObjectInitializer& ObjectIni
     this->RicochetChance = 0.00f;
     this->RicochetOnWeakspotOnly = false;
     this->RicochetMaxRange = 1500.00f;
+    this->ImpactSpawnActorClass = NULL;
+    this->ImpactSpawnDistance = 0.00f;
+    this->ImpactSpawnShotSound = NULL;
 }
 
 void UHitscanBaseComponent::Server_StopFire_Implementation() {
@@ -39,6 +44,13 @@ float UHitscanBaseComponent::GetCurrentVerticalSpread() const {
 
 float UHitscanBaseComponent::GetCurrentHorizontalSpread() const {
     return 0.0f;
+}
+
+void UHitscanBaseComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
+    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+    
+    DOREPLIFETIME(UHitscanBaseComponent, CustomImpactDecal);
+    DOREPLIFETIME(UHitscanBaseComponent, SpawnGroundHitParticles);
 }
 
 

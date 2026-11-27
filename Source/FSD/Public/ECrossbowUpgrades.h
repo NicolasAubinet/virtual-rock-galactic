@@ -26,5 +26,6 @@ enum class ECrossbowUpgrades : uint8 {
     FireArrow,
     ReloadTimeDefaultArrow,
     RateOfFireDefaultArrow,
+    QuickFireMechanism,
 };
 

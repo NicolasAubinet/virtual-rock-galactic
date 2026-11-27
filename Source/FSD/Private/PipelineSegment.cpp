@@ -40,14 +40,14 @@ APipelineSegment::APipelineSegment(const FObjectInitializer& ObjectInitializer) 
     this->BlockedExtraRaytraces = 4.00f;
     this->BlockedExtraRaytraceDist = 30.00f;
     this->BlockedRayTraceSuccesses = 2.00f;
-    this->MovementSpline->SetupAttachment(RootComponent);
-    this->MovementSplineRight->SetupAttachment(RootComponent);
-    this->MovementSplineLeft->SetupAttachment(RootComponent);
-    this->PipelineMesh->SetupAttachment(RootComponent);
-    this->PipelineOuterMesh->SetupAttachment(PipelineMesh);
-    this->PipelineCapMesh->SetupAttachment(PipelineOuterMesh);
     this->EndPostMesh->SetupAttachment(RootComponent);
     this->EndPostMeshStatic->SetupAttachment(EndPostMesh);
+    this->MovementSpline->SetupAttachment(RootComponent);
+    this->MovementSplineLeft->SetupAttachment(RootComponent);
+    this->MovementSplineRight->SetupAttachment(RootComponent);
+    this->PipelineCapMesh->SetupAttachment(PipelineOuterMesh);
+    this->PipelineMesh->SetupAttachment(RootComponent);
+    this->PipelineOuterMesh->SetupAttachment(PipelineMesh);
 }
 
 void APipelineSegment::UpdateSplineMesh(USplineMeshComponent* InMesh, float InProgress, bool InMoveEndCap) {

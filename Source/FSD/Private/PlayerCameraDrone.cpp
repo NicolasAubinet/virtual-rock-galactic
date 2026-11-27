@@ -7,6 +7,7 @@ APlayerCameraDrone::APlayerCameraDrone(const FObjectInitializer& ObjectInitializ
     this->SplineMeshIsVisible = true;
     this->SplineSpeed = 1000.00f;
     this->MouseSensitivity = 1.00f;
+    this->StickTurnRate = 120.00f;
     this->CameraRoll = 0.00f;
     this->CameraDoesShake = false;
     this->IsFollowingPlayerRotation = false;
@@ -25,6 +26,7 @@ APlayerCameraDrone::APlayerCameraDrone(const FObjectInitializer& ObjectInitializ
     this->SplineMesh = NULL;
     this->PlayerFollowed = NULL;
     this->WeaponTrackActor = NULL;
+    this->FocusTarget = NULL;
 }
 
 bool APlayerCameraDrone::ToggleSplineMeshVisibility() {
@@ -32,6 +34,9 @@ bool APlayerCameraDrone::ToggleSplineMeshVisibility() {
 }
 
 void APlayerCameraDrone::SetRotationalPivotToPlayer() {
+}
+
+void APlayerCameraDrone::SetFocusOffset(float NewOffset) {
 }
 
 void APlayerCameraDrone::SetFlareLightSettings(float Intensity, float range, float Color) {

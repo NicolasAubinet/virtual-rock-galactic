@@ -153,10 +153,13 @@ protected:
     void Server_ToggleCharingBonuses(bool Enabled);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
-    void Server_SpawnTrail(const FVector_NetQuantize& Location, const FRotator& Rotation, float HalfHeight, bool fireTrailEnabled);
+    void Server_SpawnTrail(const FVector_NetQuantize& Location, const FRotator& Rotation, float HalfHeight, bool fireTrailEnabled, float ShotModifier);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SpawnGroundTrail(const FVector_NetQuantize& Location, const FVector& Direction, float chargeMultiplier);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_ShowHitEffect(const FVector_NetQuantize& Location, const FVector_NetQuantize& Direction);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetShotPower(const float& Power);

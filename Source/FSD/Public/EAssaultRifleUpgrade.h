@@ -6,5 +6,6 @@ UENUM(BlueprintType)
 enum class EAssaultRifleUpgrade : uint8 {
     KillResetsSpread,
     KillTriggerStatusEffect,
+    BurstFinalShotBonusDamage,
 };
 

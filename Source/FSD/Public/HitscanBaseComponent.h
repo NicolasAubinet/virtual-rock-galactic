@@ -1,16 +1,19 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Curves/CurveFloat.h"
+#include "DecalData.h"
 #include "DelegateDelegate.h"
 #include "EImpactDecalSize.h"
 #include "ERicochetBehavior.h"
 #include "SpreadChangedDelegateDelegate.h"
+#include "Templates/SubclassOf.h"
 #include "WeaponFireComponent.h"
 #include "HitscanBaseComponent.generated.h"
 
 class AActor;
 class UDamageClass;
 class UDamageComponent;
+class USoundBase;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UHitscanBaseComponent : public UWeaponFireComponent {
@@ -24,6 +27,12 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float SpreadPerShot;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
+    FDecalData CustomImpactDecal;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
+    bool SpawnGroundHitParticles;
     
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
@@ -101,8 +110,19 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float RicochetMaxRange;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<AActor> ImpactSpawnActorClass;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float ImpactSpawnDistance;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    USoundBase* ImpactSpawnShotSound;
+    
 public:
     UHitscanBaseComponent(const FObjectInitializer& ObjectInitializer);
+
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)

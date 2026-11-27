@@ -12,7 +12,7 @@ bool UGameDLC::ShouldBeAnnounced(UObject* WorldContext) const {
     return false;
 }
 
-bool UGameDLC::OpenStorePage(UObject* WorldContext) {
+bool UGameDLC::OpenStorePage(UObject* WorldContext, const FString& UTMTrackingLocationId) {
     return false;
 }
 

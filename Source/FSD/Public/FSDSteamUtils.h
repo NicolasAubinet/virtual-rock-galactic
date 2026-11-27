@@ -34,7 +34,13 @@ public:
     static bool InitializeFilterText();
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    static bool HasTranslatorRewardDLC();
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     static bool HasSupporterUpgrade();
+    
+    UFUNCTION(BlueprintCallable)
+    static bool HasDLC(int32 dlcID);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static bool HasDeluxeEdition();

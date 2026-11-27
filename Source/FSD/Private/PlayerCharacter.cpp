@@ -37,6 +37,7 @@ APlayerCharacter::APlayerCharacter(const FObjectInitializer& ObjectInitializer) 
     this->PerkActivationTimer = -1.00f;
     this->GrabbedByClass = NULL;
     this->bIsBeingBittenByCaveLeech = false;
+    this->bIsBeingBittenByPitJaw = false;
     this->WidgetInteraction = CreateDefaultSubobject<UWidgetInteractionComponent>(TEXT("WidgetInteraction"));
     this->EquipLaserpointerHoldDuration = 0.33f;
     this->IsPressingMovementInputKey = false;
@@ -74,6 +75,7 @@ APlayerCharacter::APlayerCharacter(const FObjectInitializer& ObjectInitializer) 
     this->RunningSpeed = 0.00f;
     this->RunBoost = 0.00f;
     this->RunBoostChargeTime = 0.00f;
+    this->RunBoostGracePeriod = 1.50f;
     this->RunBoostActivationSound = NULL;
     this->RunBoostParticles = NULL;
     this->RunBoostAffliction = NULL;
@@ -95,10 +97,14 @@ APlayerCharacter::APlayerCharacter(const FObjectInitializer& ObjectInitializer) 
     this->PlayerVelocityToThrowFactor = 0.00f;
     this->CarryingThrowingStatusEffect = NULL;
     this->ThrowCarriableProgress = 0.00f;
+    this->ShieldAffliction = NULL;
+    this->ShieldDischargeActor = NULL;
+    this->ShieldActorClass = NULL;
     this->ActiveCharacterState = NULL;
     this->IsInDropPod = false;
     this->IsInEscapePod = false;
     this->ButtonMemoryDuration = 0.25f;
+    this->AutoSprintResumeDelay = 0.30f;
     this->IsRunning = false;
     this->CanDash = false;
     this->DashInputWindow = 0.30f;
@@ -121,6 +127,7 @@ APlayerCharacter::APlayerCharacter(const FObjectInitializer& ObjectInitializer) 
     this->JumpPressedTime = 0.00f;
     this->CanMove = true;
     this->CanAim = true;
+    this->CanUseJump = true;
     this->CanUseItem = true;
     this->CanUseLaserpointer = true;
     this->CanChangeItems = true;
@@ -149,16 +156,16 @@ APlayerCharacter::APlayerCharacter(const FObjectInitializer& ObjectInitializer) 
     this->CanInstantRevive = false;
     this->HasInitializedPerks = false;
     this->CharacterVanity = CreateDefaultSubobject<UCharacterVanityComponent>(TEXT("CharacterVanity"));
+    this->ActorTracking->SetupAttachment(RootComponent);
+    this->DownCamera->SetupAttachment(RootComponent);
     this->FPMesh->SetupAttachment(FirstPersonRoot);
     this->FirstPersonCamera->SetupAttachment(FPMesh);
     this->FirstPersonRoot->SetupAttachment(RootComponent);
-    this->ActorTracking->SetupAttachment(RootComponent);
-    this->ThirdPersonSpringArm->SetupAttachment(RootComponent);
+    this->FollowCamera->SetupAttachment(FollowSpringArm);
+    this->FollowSpringArm->SetupAttachment(RootComponent);
     this->ThirdPersonCamera->SetupAttachment(ThirdPersonSpringArm);
     this->ThirdPersonLight->SetupAttachment(RootComponent);
-    this->FollowSpringArm->SetupAttachment(RootComponent);
-    this->FollowCamera->SetupAttachment(FollowSpringArm);
-    this->DownCamera->SetupAttachment(RootComponent);
+    this->ThirdPersonSpringArm->SetupAttachment(RootComponent);
     this->WidgetInteraction->SetupAttachment(FirstPersonCamera);
 }
 
@@ -246,6 +253,12 @@ void APlayerCharacter::SetCameraMode(ECharacterCameraMode NewCameraMode) {
 void APlayerCharacter::SetAttached(USceneComponent* AttachTo, bool DelayUntilLanded) {
 }
 
+void APlayerCharacter::Server_TryUseTaunt_Implementation() {
+}
+
+void APlayerCharacter::Server_TryUseFearTheBeard_Implementation() {
+}
+
 void APlayerCharacter::Server_TriggerDash_Implementation() {
 }
 
@@ -303,7 +316,10 @@ void APlayerCharacter::Server_SetClientReady_Implementation() {
 void APlayerCharacter::Server_InstantRevive_Implementation(APlayerCharacter* ReviveTarget, EInputKeys Key) {
 }
 
-void APlayerCharacter::Server_EscapeFromGrabber_Implementation() {
+void APlayerCharacter::Server_FindInkBugEncounter_Implementation() {
+}
+
+void APlayerCharacter::Server_EscapeFromGrabber_Implementation(bool ShouldKillGrabber) {
 }
 
 void APlayerCharacter::Server_ClearBiomeEffects_Implementation() {
@@ -390,6 +406,9 @@ void APlayerCharacter::ReviveProgress(float Progress) {
 void APlayerCharacter::RequestChangeInGravityScale_Implementation(float newGravityScale) {
 }
 
+void APlayerCharacter::RemoveShieldAffliction(AActor* DischargeActor) {
+}
+
 void APlayerCharacter::RejectInvite() {
 }
 
@@ -471,6 +490,10 @@ bool APlayerCharacter::IsStateActive(ECharacterState State) const {
 }
 
 bool APlayerCharacter::IsSaluting() const {
+    return false;
+}
+
+bool APlayerCharacter::IsPerkSelectionActive() const {
     return false;
 }
 
@@ -584,6 +607,10 @@ FLinearColor APlayerCharacter::GetHeroColor() const {
     return FLinearColor{};
 }
 
+USkeletalMeshComponent* APlayerCharacter::GetFPMesh() const {
+    return NULL;
+}
+
 UPlayerFPAnimInstance* APlayerCharacter::GetFPAnimInstance() const {
     return NULL;
 }
@@ -669,6 +696,9 @@ void APlayerCharacter::CycleItemDown() {
 void APlayerCharacter::ConsumeCycleItemButton() {
 }
 
+void APlayerCharacter::Client_UseDashCharge_Implementation() {
+}
+
 void APlayerCharacter::Client_TargetDamaged_Implementation(UObject* Health, float Damage, float DamageModifier, bool IsWeakPoint, bool IsRadial) {
 }
 
@@ -719,6 +749,9 @@ void APlayerCharacter::All_CheatStartCountDown_Implementation() {
 }
 
 void APlayerCharacter::All_CheatSetDanceForVanityCharacter_Implementation(int32 InDanceIndex) {
+}
+
+void APlayerCharacter::All_CheatFlareInfiniteDuration_Implementation(bool Enabled) {
 }
 
 void APlayerCharacter::All_CheatDestroyAllVanityCharacters_Implementation() {

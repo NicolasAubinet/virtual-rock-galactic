@@ -49,6 +49,9 @@ protected:
     float BarrelSpawnChancePercent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bForceNeverPlayReactAnim;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float TimeMultiplier;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -83,7 +86,7 @@ public:
     void InitializeCase();
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    bool GetCurrentContent(FDisplayContent& currentContent) const;
+    bool GetCurrentContent(FDisplayContent& CurrentContent) const;
     
     UFUNCTION(BlueprintCallable)
     void ChangeContent();

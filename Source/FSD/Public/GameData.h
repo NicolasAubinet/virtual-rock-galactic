@@ -45,8 +45,10 @@ class UFSDTutorialSettings;
 class UForginSettings;
 class UGameActivitySettings;
 class UGameAnimationSettings;
+class UGameDLCSettings;
 class UGlobalMissionSetup;
 class UHUDVisibilityGroup;
+class UInstancedNiagaraSettings;
 class UInventoryList;
 class UItemSettings;
 class UItemSkinSettings;
@@ -56,6 +58,7 @@ class ULegacySettings;
 class UMilestoneAsset;
 class UMinersManual;
 class UMissionStat;
+class UPerkMaintenanceSettings;
 class UPickaxeSettings;
 class UPlanetZoneSetup;
 class UPlayerCharacterID;
@@ -96,11 +99,17 @@ public:
     UWeaponMaintenanceSettings* WeaponMaintenanceSettings;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPerkMaintenanceSettings* PerkMaintenanceSettings;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UPropHuntSettings* PropHuntSettings;
     
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UFSDEventCollection* FsdEventsSettings;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UGameDLCSettings* DLCSettings;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UGameActivitySettings* GameActivitySettings;
@@ -254,6 +263,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USeasonSettings* SeasonSettings;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UInstancedNiagaraSettings* InstancedNiagaraSettings;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UPlayerCharacterID* DefaultCharacterID;

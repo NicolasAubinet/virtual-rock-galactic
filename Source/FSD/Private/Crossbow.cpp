@@ -28,9 +28,15 @@ ACrossbow::ACrossbow(const FObjectInitializer& ObjectInitializer) : Super(Object
     this->SwitchMontage = NULL;
     this->SwitchMontage_TP = NULL;
     this->CharacterSwitchMontage = NULL;
+    this->WPN_Reload_QuickFire = NULL;
+    this->WPN_Reload_TP_QuickFire = NULL;
+    this->CharacterReloadMontage_QuickFire = NULL;
     this->ReloadMontage = NULL;
     this->ReloadMontage_TP = NULL;
     this->CharacterReloadMontage = NULL;
+    this->SpecialArrowReloadMontage = NULL;
+    this->SpecialArrowReloadMontage_TP = NULL;
+    this->SpecialArrowCharacterReloadMontage = NULL;
 }
 
 
@@ -90,6 +96,7 @@ void ACrossbow::Client_CallAddDefaultAmmo_Implementation(const int32& amount) {
 void ACrossbow::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
     Super::GetLifetimeReplicatedProps(OutLifetimeProps);
     
+    DOREPLIFETIME(ACrossbow, DefaultArrow);
     DOREPLIFETIME(ACrossbow, SpecialArrow);
     DOREPLIFETIME(ACrossbow, SpecialStatusEffectBonusTimeScale);
     DOREPLIFETIME(ACrossbow, IsDefaultArrowEquipped);

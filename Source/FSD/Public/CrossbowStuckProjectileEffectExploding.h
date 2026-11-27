@@ -26,7 +26,7 @@ public:
 
 private:
     UFUNCTION(BlueprintCallable)
-    void StartTimeoutTimer(UHealthComponentBase* destroyed);
+    void StartTimeoutTimer(UHealthComponentBase* Destroyed);
     
     UFUNCTION(BlueprintCallable)
     void EnableTimeOut();

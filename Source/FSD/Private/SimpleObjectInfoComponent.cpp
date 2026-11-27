@@ -12,6 +12,9 @@ USimpleObjectInfoComponent::USimpleObjectInfoComponent(const FObjectInitializer&
     this->ContextWidget = NULL;
 }
 
+void USimpleObjectInfoComponent::SetInGameNameText_Implementation(const FText& GameName) {
+}
+
 void USimpleObjectInfoComponent::SetInGameName_Implementation(const FString& GameName) {
 }
 

@@ -9,7 +9,7 @@ void UVanityFunctionLibrary::RandomizeVanityLoadout(UObject* WorldContextObject,
 void UVanityFunctionLibrary::RandomizeAllRandomVanityLoadout(APlayerCharacter* currentCharacter) {
 }
 
-void UVanityFunctionLibrary::CopyPasteVanityLoadout(UObject* WorldContextObject, UPlayerCharacterID* PlayerId, int32 fromIndex, int32 toIndex) {
+void UVanityFunctionLibrary::CopyPasteVanityLoadout(UObject* WorldContextObject, UPlayerCharacterID* playerID, int32 fromIndex, int32 toIndex) {
 }
 
 

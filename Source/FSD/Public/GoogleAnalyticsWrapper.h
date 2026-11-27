@@ -117,7 +117,7 @@ public:
     void RecordExtraFailInfo(const FString& MissionName, const FString& Stage, const FString& ExtraText);
     
     UFUNCTION(BlueprintCallable)
-    void RecordCustomGAEvent(const FString& EventCategory, const FString& EventAction, const FString& EventLabel, const int32 EventValue, const FString& TrackingID);
+    void RecordCustomGAEvent(const FString& EventCategory, const FString& EventAction, const FString& EventLabel, const int32 EventValue, const FString& trackingID);
     
     UFUNCTION(BlueprintCallable)
     void RecordContinuousDamage(AActor* DamageCauser);

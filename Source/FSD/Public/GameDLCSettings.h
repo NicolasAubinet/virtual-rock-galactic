@@ -14,6 +14,9 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSet<UGameDLC*> StoreDLCs;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UGameDLC* CurrentAdvertisedDLC;
+    
 public:
     UGameDLCSettings();
 

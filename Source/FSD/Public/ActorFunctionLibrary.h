@@ -184,6 +184,9 @@ public:
     static void FSDDumpCallStack(const FString& Msg);
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static APlayerCharacter* FindNearestPlayerCharacterInCone(UObject* WorldContextObject, FVector fromLocation, FVector ConeForward, float MaxConeHalfAngle, float MaxRadius, bool MustBeAlive, bool MustBeUnparalyzed, bool MustHaveLineOfSight);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static APlayerCharacter* FindNearestPlayerCharacter(UObject* WorldContextObject, FVector fromLocation, float MaxRadius, bool MustBeAlive, bool MustBeUnparalyzed, bool MustHaveLineOfSight);
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)

@@ -3,6 +3,7 @@
 USeasonSettings::USeasonSettings() {
     this->CurrentSeasonIndex = -1;
     this->MaxActiveChallenges = 0;
+    this->DefaultSeasonNumber = 7;
     this->XPPerLevel = 0;
     this->XPToPerforcemancePointsCurve = NULL;
     this->TreeOfVanitySnapSize = 0;

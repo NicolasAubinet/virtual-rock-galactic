@@ -68,10 +68,19 @@ protected:
     TArray<FDecalData> ImpactDecals;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool UseMeleeImpactDecalOverrides;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, EditFixedSize, meta=(AllowPrivateAccess=true))
+    TArray<FDecalData> MeleeImpactDecals;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundCue* FirstPersonDamageIndicatorSound;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool IsWeakPoint;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool IsArmor;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool AllowFrozenBonus;
@@ -123,6 +132,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static UFSDPhysicalMaterial* GetPhysicalMaterialFromPrimitive(UPrimitiveComponent* Component);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UMaterialInstance* GetImpactMaterialOverride() const;
     
 };
 

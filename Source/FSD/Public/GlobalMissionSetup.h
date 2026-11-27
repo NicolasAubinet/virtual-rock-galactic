@@ -12,6 +12,7 @@ class UMissionMutator;
 class UMissionNameBank;
 class UMissionStat;
 class UMissionWarning;
+class UMysteryMissionWarning;
 class UPlanetZone;
 
 UCLASS(Blueprintable)
@@ -50,6 +51,15 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UMissionStat* DoubleWarningStat;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UMysteryMissionWarning* MysteryMissionWarning;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float MysteryMissionChance;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float MysteryMissionMutatorChance;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UMissionMutator*> Mutators;

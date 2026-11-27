@@ -185,6 +185,9 @@ protected:
     void OnCameraModeChanged(ECharacterCameraMode NewCameraMode, ECharacterCameraMode OldCameraMode);
     
 public:
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool GetIsUsing() const;
+    
     UFUNCTION(BlueprintCallable, Client, Reliable)
     void Client_SetIsUsing(bool NewIsUsing);
     

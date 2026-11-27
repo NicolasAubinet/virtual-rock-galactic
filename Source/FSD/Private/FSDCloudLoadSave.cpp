@@ -5,7 +5,10 @@ UFSDCloudLoadSave::UFSDCloudLoadSave() {
     this->CloudSaveHandler = CreateDefaultSubobject<UFSDCloudSaveHandler>(TEXT("CloudSaveHandler"));
 }
 
-void UFSDCloudLoadSave::StartCloudLoadAll(UObject* WorldContextObject, int32 Index, int32 Offset) {
+void UFSDCloudLoadSave::StartCloudLoadForSlot(UObject* WorldContextObject, int32 Slot, int32 Offset) {
+}
+
+void UFSDCloudLoadSave::StartCloudLoadAll(UObject* WorldContextObject, int32 Offset) {
 }
 
 

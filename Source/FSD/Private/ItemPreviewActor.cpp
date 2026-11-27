@@ -27,4 +27,7 @@ void AItemPreviewActor::OnSkinChanged() {
 void AItemPreviewActor::ChangeSkin(UItemSkin* skinMesh, UItemSkin* skinColor, bool isPreview) {
 }
 
+void AItemPreviewActor::ApplyUpgradeMaterials() {
+}
+
 

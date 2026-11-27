@@ -11,7 +11,7 @@ class URockCrackedAnimInstance : public UAnimInstance {
     GENERATED_BODY()
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    ARockCrackerPod* pod;
+    ARockCrackerPod* Pod;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     ERockCrackerstate PodState;

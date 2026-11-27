@@ -5,6 +5,8 @@ UFSDSaveGame::UFSDSaveGame() {
     this->VersionNumber = 0;
     this->bMilestoneResetShown = false;
     this->bYearTwoGiftClaimed = false;
+    this->UnlockedProficienciesBits = 0;
+    this->RelockedProficienciesBits = 0;
     this->SaveCreatedInPatch = 1;
     this->PerkPoints = 0;
     this->HasRecievedDiscordReward = false;
@@ -58,6 +60,10 @@ bool UFSDSaveGame::TryBuyResource(UResourceData* Resource, int32 amount, int32& 
     return false;
 }
 
+bool UFSDSaveGame::ShouldDisplayPerkResetNotice() const {
+    return false;
+}
+
 bool UFSDSaveGame::ShouldDisplayFirstSchematicMessage() const {
     return false;
 }
@@ -99,10 +105,10 @@ void UFSDSaveGame::SetHasClaimSteamGroupLoot() {
 void UFSDSaveGame::SetFaction(EFSDFaction newFaction, bool Reasign) {
 }
 
-void UFSDSaveGame::SetEquippedItemID(EItemCategory Category, UPlayerCharacterID* PlayerId, UItemID* Item) {
+void UFSDSaveGame::SetEquippedItemID(EItemCategory Category, UPlayerCharacterID* playerID, UItemID* Item) {
 }
 
-void UFSDSaveGame::SetEquippedItem(EItemCategory Category, UPlayerCharacterID* PlayerId, TSubclassOf<AActor> Item) {
+void UFSDSaveGame::SetEquippedItem(EItemCategory Category, UPlayerCharacterID* playerID, TSubclassOf<AActor> Item) {
 }
 
 void UFSDSaveGame::SetDiscordReward(bool State) {
@@ -161,10 +167,17 @@ FString UFSDSaveGame::PromotedClassesString() {
 void UFSDSaveGame::MarkRetirementRewardScreenSeen(UPlayerCharacterID* characterID) {
 }
 
+void UFSDSaveGame::MarkPerkResetNoticeSeen() {
+}
+
 void UFSDSaveGame::MarkFirstSchematicMessageSeen() {
 }
 
 void UFSDSaveGame::LevelUpCharacter(UObject* WorldContext, UPlayerCharacterID* characterID) {
+}
+
+bool UFSDSaveGame::IsPerkMaxed(const UPerkAsset* Perk) const {
+    return false;
 }
 
 bool UFSDSaveGame::IsObsolete() const {
@@ -176,6 +189,18 @@ bool UFSDSaveGame::IsInMinersManual(FGuid ObjectID) const {
 }
 
 bool UFSDSaveGame::IsFirstRejoinAttempt() {
+    return false;
+}
+
+bool UFSDSaveGame::HasUnseenPerkCompletions() const {
+    return false;
+}
+
+bool UFSDSaveGame::HasUnlockProficiency(EProficiency Proficiency) const {
+    return false;
+}
+
+bool UFSDSaveGame::HasUnlockedProficiencies() const {
     return false;
 }
 
@@ -275,6 +300,14 @@ int32 UFSDSaveGame::GetPlayerRank() const {
     return 0;
 }
 
+int32 UFSDSaveGame::GetPerkXP(const UPerkAsset* Perk) const {
+    return 0;
+}
+
+float UFSDSaveGame::GetPerkProgress(const UPerkAsset* Perk) const {
+    return 0.0f;
+}
+
 int32 UFSDSaveGame::GetPerkPoints() const {
     return 0;
 }
@@ -311,15 +344,19 @@ EFSDFaction UFSDSaveGame::GetFaction() {
     return EFSDFaction::NoFaction;
 }
 
-UItemID* UFSDSaveGame::GetEquippedItemID(EItemCategory Category, UPlayerCharacterID* PlayerId) const {
+UItemID* UFSDSaveGame::GetEquippedItemID(EItemCategory Category, UPlayerCharacterID* playerID) const {
     return NULL;
 }
 
-TSubclassOf<AActor> UFSDSaveGame::GetEquippedItem(EItemCategory Category, UPlayerCharacterID* PlayerId) const {
+TSubclassOf<AActor> UFSDSaveGame::GetEquippedItem(EItemCategory Category, UPlayerCharacterID* playerID) const {
     return NULL;
 }
 
 int32 UFSDSaveGame::GetCredits() const {
+    return 0;
+}
+
+int32 UFSDSaveGame::GetCompletedMaintenancePerkCount() const {
     return 0;
 }
 
@@ -331,7 +368,7 @@ int32 UFSDSaveGame::GetClassLevel(UPlayerCharacterID* characterID) const {
     return 0;
 }
 
-int32 UFSDSaveGame::GetCharacterRetirementCount(const FGuid& PlayerId) const {
+int32 UFSDSaveGame::GetCharacterRetirementCount(const FGuid& playerID) const {
     return 0;
 }
 

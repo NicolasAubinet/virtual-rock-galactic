@@ -47,10 +47,16 @@ protected:
     int32 MaxStack;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool StacksDecrements;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float Duration;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool ApplyDurationAfterPop;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool FlashOnApplyDurationAfterPop;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool RemoveOnDeath;
@@ -81,6 +87,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static float GetStatusEffectDuration(TSubclassOf<UStatusEffect> StatusEffect);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    float GetDuration() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool CanTrigger(AActor* Target) const;

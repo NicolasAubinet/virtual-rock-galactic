@@ -25,6 +25,9 @@ void AFSDPlayerControllerBase::SetHUDVisible(bool IsVisible, EHUDVisibilityReaso
 void AFSDPlayerControllerBase::Server_Cheat_SwitchCharacter_Implementation(UPlayerCharacterID* NewCharacter) {
 }
 
+void AFSDPlayerControllerBase::Server_Cheat_RefreshCharacterStats_Implementation() {
+}
+
 
 
 

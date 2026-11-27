@@ -23,6 +23,9 @@ AFSDPlayerController::AFSDPlayerController(const FObjectInitializer& ObjectIniti
     this->bDetectGravityChanges = false;
 }
 
+void AFSDPlayerController::TriggerUserTraceBookmark() {
+}
+
 void AFSDPlayerController::ToggleVoiceOn(bool Enabled) {
 }
 
@@ -40,6 +43,9 @@ void AFSDPlayerController::SetPlayerStart(AActor* Start) {
 }
 
 void AFSDPlayerController::SetAchievementProgressFromServer_Implementation(UFSDAchievement* AchievementToSet, float Progress) {
+}
+
+void AFSDPlayerController::ServerSetSprintMode_Implementation(ESprintMode Value) {
 }
 
 void AFSDPlayerController::ServerSetUserHoldToRun_Implementation(bool Value) {
@@ -120,6 +126,10 @@ bool AFSDPlayerController::GetUseToggleTerrainScanner() {
 
 bool AFSDPlayerController::GetUseToggleLaserpointer() {
     return false;
+}
+
+ESprintMode AFSDPlayerController::GetSprintMode() {
+    return ESprintMode::PressToSprint;
 }
 
 bool AFSDPlayerController::GetUseHoldToRun() {

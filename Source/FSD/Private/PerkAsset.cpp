@@ -4,9 +4,11 @@
 UPerkAsset::UPerkAsset() {
     this->Icon = NULL;
     this->bIsEquippable = true;
+    this->bMaintenancePerk = true;
     this->ShoutOnUseCharge = NULL;
     this->MaxUseCharges = 0;
     this->CoolDownBetweenUse = 0.00f;
+    this->CoolDownAfterDropPodLanding = 0.00f;
     this->bIsHighlighted = false;
 }
 
@@ -24,6 +26,10 @@ void UPerkAsset::SetHighlighted(UObject* WorldContext, bool IsHighlighted) {
 void UPerkAsset::SetCharacterPerks(UObject* WorldContext, UPlayerCharacterID* characterID, const TArray<UPerkAsset*>& perks) {
 }
 
+bool UPerkAsset::RestoreCharge(APlayerController* PlayerController) {
+    return false;
+}
+
 bool UPerkAsset::IsUsageType(EPerkUsageType InType) const {
     return false;
 }
@@ -33,6 +39,10 @@ bool UPerkAsset::IsPerkAvailableInTier(int32 Tier) const {
 }
 
 bool UPerkAsset::IsEquippedBy(UObject* WorldContext, UPlayerCharacterID* characterID) const {
+    return false;
+}
+
+bool UPerkAsset::HasForcePassiveEffect() const {
     return false;
 }
 
@@ -64,7 +74,7 @@ int32 UPerkAsset::GetRankTier(int32 Rank) const {
     return 0;
 }
 
-FText UPerkAsset::GetRankDescription(int32 Rank) const {
+FText UPerkAsset::GetRankDescription(int32 Rank, bool bPreviewNextRank) const {
     return FText::GetEmpty();
 }
 
@@ -92,6 +102,10 @@ TArray<TSubclassOf<UPerkHUDActivationWidget>> UPerkAsset::GetHudActivationWidget
     return TArray<TSubclassOf<UPerkHUDActivationWidget>>();
 }
 
+TArray<FText> UPerkAsset::GetEffectDescriptions(int32 Rank, bool bPreviewNextRank) const {
+    return TArray<FText>();
+}
+
 UPerkDelegateItem* UPerkAsset::GetDelegates(UObject* WorldContext) const {
     return NULL;
 }
@@ -112,6 +126,10 @@ bool UPerkAsset::Equip(UObject* WorldContext, UPlayerCharacterID* characterID) {
     return false;
 }
 
+bool UPerkAsset::DeductPerkPoints(UObject* WorldContext, int32 Tier, bool ManualSave) {
+    return false;
+}
+
 void UPerkAsset::CheatSetCurrentRank(UObject* WorldContext, int32 InRank) {
 }
 
@@ -119,7 +137,15 @@ bool UPerkAsset::CanUseCharge(APlayerController* PlayerController) const {
     return false;
 }
 
+bool UPerkAsset::BuyPerkAtTierFree(UObject* WorldContext, int32 Tier) {
+    return false;
+}
+
 bool UPerkAsset::BuyPerkAtTier(UObject* WorldContext, int32 Tier) {
+    return false;
+}
+
+bool UPerkAsset::AddPerkPoints(UObject* WorldContext, int32 Tier, bool ManualSave) {
     return false;
 }
 

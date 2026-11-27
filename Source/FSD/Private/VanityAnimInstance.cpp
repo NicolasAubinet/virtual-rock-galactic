@@ -6,6 +6,7 @@ UVanityAnimInstance::UVanityAnimInstance() {
     this->ExternalForceMultiplier = 1.00f;
     this->MaxForce = 1000.00f;
     this->AlwaysShowAnimEffects = false;
+    this->LoopSound = NULL;
 }
 
 void UVanityAnimInstance::UpdateMeshes() {

@@ -51,10 +51,10 @@ ASharkEnemy::ASharkEnemy(const FObjectInitializer& ObjectInitializer) : Super(Ob
     this->EndParticleTime = 0.00f;
     this->DiveParticles = NULL;
     this->State = ESharkEnemyState::Idle;
+    this->AirTrailParticles->SetupAttachment(Mesh);
     this->CollisionSphere->SetupAttachment(Mesh);
     this->NearTargetSphere->SetupAttachment(Mesh);
     this->TearingGroundParticles->SetupAttachment(RootComponent);
-    this->AirTrailParticles->SetupAttachment(Mesh);
 }
 
 void ASharkEnemy::SetVulnerable() {

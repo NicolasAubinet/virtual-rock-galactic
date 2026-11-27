@@ -4,6 +4,7 @@
 #include "UObject/NoExportTypes.h"
 #include "Engine/EngineTypes.h"
 #include "ProjectileBase.h"
+#include "ProjectileImpact.h"
 #include "ProjectileState.h"
 #include "Templates/SubclassOf.h"
 #include "Projectile.generated.h"
@@ -20,7 +21,16 @@ UCLASS(Abstract, Blueprintable)
 class AProjectile : public AProjectileBase {
     GENERATED_BODY()
 public:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool StickOnImpact;
+    
 protected:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float CourageFleeThreshold;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_StuckImpact, meta=(AllowPrivateAccess=true))
+    FProjectileImpact StuckImpact;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_State, meta=(AllowPrivateAccess=true))
     FProjectileState State;
     
@@ -52,7 +62,13 @@ public:
     
 protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_Stick(const FProjectileImpact& Impact);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_DisableHoming();
+    
+    UFUNCTION(BlueprintCallable)
+    void OnRep_StuckImpact();
     
     UFUNCTION(BlueprintCallable)
     void OnRep_State(const FProjectileState& oldState);
@@ -66,6 +82,9 @@ public:
     
     UFUNCTION(BlueprintCallable)
     void OnBounce(const FHitResult& ImpactResult, const FVector& ImpactVelocity);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool GetIsStuck() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UFSDPhysicalMaterial* FindBoneIndexFromArmor(const FHitResult& HitResult, int32& outBoneIndex) const;

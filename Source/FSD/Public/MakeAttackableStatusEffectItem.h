@@ -12,7 +12,7 @@ class UMakeAttackableStatusEffectItem : public UStatusEffectItem {
 public:
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    float AttackCostModifier;
+    float AttackScoreModifier;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UAttackerPositioningComponent> ComponentClass;

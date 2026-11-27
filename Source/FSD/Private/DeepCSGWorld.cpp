@@ -28,36 +28,6 @@ ADeepCSGWorld::ADeepCSGWorld(const FObjectInitializer& ObjectInitializer) : Supe
 void ADeepCSGWorld::UnRegisterScannerComponent(UPrimitiveComponent* Component) {
 }
 
-void ADeepCSGWorld::TerrainOp_SpawnDebris_Implementation(const FTerrainSpawnDebrisOperationData& Data) {
-}
-
-void ADeepCSGWorld::TerrainOp_RemoveFloating_Implementation(const FRemoveFloatingIslandOperationData& Data) {
-}
-
-void ADeepCSGWorld::TerrainOp_PickAxe_Implementation(const FPickaxeDigOperationData& Data) {
-}
-
-void ADeepCSGWorld::TerrainOp_Melt_Implementation(const FMeltOperationData& Data) {
-}
-
-void ADeepCSGWorld::TerrainOp_Explode_Implementation(const FGrenadeExplodeOperationData& Data) {
-}
-
-void ADeepCSGWorld::TerrainOp_Drill_Implementation(const FDrillOperationData& Data) {
-}
-
-void ADeepCSGWorld::TerrainOp_CarveSTLMesh_Implementation(const FCarveWithSTLMeshOperationData& Data) {
-}
-
-void ADeepCSGWorld::TerrainOp_CarveSplineSegment_Implementation(const FSplineSegmentCarveOperationData& Data) {
-}
-
-void ADeepCSGWorld::TerrainOp_CarveCSG_Implementation(const FCSGBuildOperationData& Data) {
-}
-
-void ADeepCSGWorld::TerrainOp_CarveCollider_Implementation(const FCarveWithColliderOperationData& Data) {
-}
-
 void ADeepCSGWorld::TerrainMaterialDataLoaded() {
 }
 
@@ -74,9 +44,6 @@ void ADeepCSGWorld::SelectDebrisSettings() {
 }
 
 void ADeepCSGWorld::ResetEntireWorld() {
-}
-
-void ADeepCSGWorld::RemoveDebrisInstance_TerrainOp2_Implementation(int32 instance, int32 Component) {
 }
 
 void ADeepCSGWorld::RemoveDebrisInSphere(const FVector& Position, float Radius, bool onlyFragile, bool alsoDurable, ESpecialDebrisType onlyType) {

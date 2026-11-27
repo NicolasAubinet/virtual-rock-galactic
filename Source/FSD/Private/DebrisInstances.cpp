@@ -4,6 +4,7 @@ UDebrisInstances::UDebrisInstances(const FObjectInitializer& ObjectInitializer) 
     this->bSelectable = false;
     this->DebrisBase = NULL;
     this->DebrisIndex = 0;
+    this->AttachedDecalMaterial = NULL;
 }
 
 

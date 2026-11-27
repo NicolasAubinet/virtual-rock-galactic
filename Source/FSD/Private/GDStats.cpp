@@ -3,17 +3,24 @@
 FGDStats::FGDStats() {
     this->MaxAmmo = NULL;
     this->MaxShields = NULL;
+    this->MaxShieldsMultiplier = NULL;
+    this->ShieldRegenerationDelay = NULL;
     this->ShieldRegenerationRate = NULL;
     this->MaxHealth = NULL;
     this->DamageResistance = NULL;
+    this->AddiativeDamageResistance = NULL;
     this->FireResistance = NULL;
     this->ColdResistance = NULL;
     this->MeleeAttackDamage = NULL;
     this->MovementSpeed = NULL;
     this->AirControl = NULL;
+    this->JumpPower = NULL;
+    this->LedgeClimbVelocityScale = NULL;
+    this->TerminalVelocity = NULL;
     this->SprintSpeed = NULL;
     this->CarryingSpeedModifier = NULL;
     this->ReviveSpeed = NULL;
+    this->UsageSpeed = NULL;
     this->DepositSpeed = NULL;
     this->RessuplySpeed = NULL;
     this->RedSugarHeal = NULL;
@@ -23,6 +30,7 @@ FGDStats::FGDStats() {
     this->SlideDownIce = NULL;
     this->FriendlyFire = NULL;
     this->DamageFromPlayers = NULL;
+    this->IgnoreFriendlyFireReduction = NULL;
     this->DamageBonus = NULL;
     this->FlareThrowingStrength = NULL;
     this->CaveLeechSense = NULL;
@@ -32,15 +40,27 @@ FGDStats::FGDStats() {
     this->DirtMiningStrength = NULL;
     this->ResourceMiningStrength = NULL;
     this->PowerAttackCooldownRate = NULL;
+    this->CoolDownReduction = NULL;
+    this->WeakSpotDamageMultiplier = NULL;
     this->ImpactCompensation = NULL;
     this->MovementSpeedPenalty = NULL;
+    this->MoveSpeedCanRunOverride = NULL;
     this->MovementSpeedPenaltyReduction = NULL;
+    this->HitSlowReduction = NULL;
     this->MovementSpeedEnvironmentalPenalty = NULL;
     this->MovementSpeedEnvironmentalPenaltyReduction = NULL;
     this->CarriableThrowing = NULL;
     this->HoverBootsDuration = NULL;
     this->ExplodeOnDeath = NULL;
+    this->EnemyAttractivenessModifier = NULL;
+    this->PickAxeDamageMultiplier = NULL;
     this->CritChance = NULL;
     this->CritDamageBonus = NULL;
+    this->SpreadReduction = NULL;
+    this->RecoilReduction = NULL;
+    this->ReloadSpeed = NULL;
+    this->SmallEnemyShieldGain = NULL;
+    this->LargeEnemyShieldGain = NULL;
+    this->NearbyKillShieldGainRadius = NULL;
 }
 

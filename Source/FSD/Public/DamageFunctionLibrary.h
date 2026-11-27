@@ -26,6 +26,9 @@ public:
     static void SetPhysicalMaterialOnHit(UFSDPhysicalMaterial* PhysMat, UPARAM(Ref) FHitResult& Hit);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    static bool IsNukeDeath(const TArray<UDamageTag*>& Tags);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     static bool IsGibbedDeath(const TArray<UDamageTag*>& Tags);
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContext"))

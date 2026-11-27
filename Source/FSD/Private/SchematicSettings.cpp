@@ -13,6 +13,8 @@ USchematicSettings::USchematicSettings() {
     this->VanityCatHairColor = NULL;
     this->VanityCatSideburn = NULL;
     this->VanityCatSkinColor = NULL;
+    this->VanityCatTattooRight = NULL;
+    this->VanityCatTattooLeft = NULL;
     this->VanityCatVictoryPose = NULL;
     this->WeaponPaintJob = NULL;
     this->SchematicGATable = NULL;

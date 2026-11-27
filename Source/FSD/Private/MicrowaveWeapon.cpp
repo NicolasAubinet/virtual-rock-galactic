@@ -17,6 +17,10 @@ AMicrowaveWeapon::AMicrowaveWeapon(const FObjectInitializer& ObjectInitializer) 
     this->ExplodableBlisterClass = NULL;
     this->BlisteringNecrosisChance = 0.10f;
     this->MinTimeBetweenBlisteringNecrosis = 0.10f;
+    this->BrainWaveScramblerEffect = NULL;
+    this->MindControlComponent = NULL;
+    this->MindControlChance = 0.00f;
+    this->ConfusedBehaviorTree = NULL;
     this->FireEffect = NULL;
     this->NeuroToSpread = NULL;
     this->SlowEffect = NULL;
@@ -26,6 +30,7 @@ AMicrowaveWeapon::AMicrowaveWeapon(const FObjectInitializer& ObjectInitializer) 
     this->P_NeuroSpreadParticles = NULL;
     this->NeuroSpreadSound = NULL;
     this->MicrowaveMuzzle = NULL;
+    this->MicrowaveMuzzleSinusoidal = NULL;
     this->MuzzleComp = NULL;
     this->WeaponRange = 1000.00f;
     this->ShotWidth = 300.00f;
@@ -52,6 +57,7 @@ void AMicrowaveWeapon::UpdateMuzzleAnim(bool InIsFiring) {
 void AMicrowaveWeapon::SpawnExplosiveBoil(UPrimitiveComponent* Target, const FMultiHitscanHit& Hit) {
 }
 
+
 void AMicrowaveWeapon::ShowBoilerRayExplosion_Server_Implementation(FVector_NetQuantize Location, FRotator Rotation) {
 }
 
@@ -74,6 +80,15 @@ void AMicrowaveWeapon::OnRadiantSuperHeaterAoe() {
 }
 
 void AMicrowaveWeapon::OnPushedDamageEffect(UHealthComponentBase* healthComp) {
+}
+
+
+bool AMicrowaveWeapon::HasSinusoidalUpgrade() const {
+    return false;
+}
+
+float AMicrowaveWeapon::GetSinusValue() const {
+    return 0.0f;
 }
 
 

@@ -27,6 +27,7 @@ APickaxeItem::APickaxeItem(const FObjectInitializer& ObjectInitializer) : Super(
     this->MiningRange = 300.00f;
     this->DamageRadius = 50.00f;
     this->OnDamageEnemySlowdownEffect = NULL;
+    this->PickKillsPerkAsset = NULL;
     this->MiningSound = NULL;
     this->MineRumble = NULL;
     this->PartialMineRumble = NULL;
@@ -49,8 +50,8 @@ APickaxeItem::APickaxeItem(const FObjectInitializer& ObjectInitializer) : Super(
     this->PowerAttackEnabled = true;
     this->EquippedMaterial = NULL;
     this->FP_Root->SetupAttachment(RootComponent);
-    this->TP_Root->SetupAttachment(RootComponent);
     this->FP_Scale->SetupAttachment(FP_Root);
+    this->TP_Root->SetupAttachment(RootComponent);
     this->TP_Scale->SetupAttachment(TP_Root);
 }
 
@@ -92,13 +93,16 @@ float APickaxeItem::GetSpecialCooldownProgress() const {
     return 0.0f;
 }
 
+void APickaxeItem::DecreaseCooldown(float NewDecreaseCooldown) {
+}
+
 void APickaxeItem::All_SimulateHitBlock_Implementation(FVector_NetQuantize Position, int32 materia, bool removeDebris, bool isSpecial) {
 }
 
 void APickaxeItem::All_SimulateDigDebris_Implementation(FVector_NetQuantize Position, UFXSystemAsset* Particles, USoundCue* cue) {
 }
 
-void APickaxeItem::All_SimulateDigBlock_Implementation(FVector_NetQuantize Position, bool SpawnParticles, int32 Material, float Density, bool isSpecial) {
+void APickaxeItem::All_SimulateDigBlock_Implementation(FVector_NetQuantize Position, bool spawnParticles, int32 Material, float Density, bool isSpecial) {
 }
 
 void APickaxeItem::All_SimulateDamageTarget_Implementation(UPrimitiveComponent* TargetComponent, bool isSpecial, const FVector_NetQuantize& ImpactPoint, const FVector_NetQuantizeNormal& ImpactNormal, UFSDPhysicalMaterial* PhysMaterial, uint8 BoneIndex) {

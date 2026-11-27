@@ -7,6 +7,9 @@ UDamageComponent::UDamageComponent(const FObjectInitializer& ObjectInitializer) 
     this->Damage = 5.00f;
     this->armorDamageMultiplier = 1.00f;
     this->ArmorPenetration = 0.00f;
+    this->ProjectileLifetimeDamageMultiplier = 0.00f;
+    this->ProjectileLifetimeDamageMax = 0.00f;
+    this->DamagePercentageMultiplier = 1.00f;
     this->ShattersArmor = false;
     this->DamageClass = NULL;
     this->ArmorDamageType = EArmorDamageType::Normal;

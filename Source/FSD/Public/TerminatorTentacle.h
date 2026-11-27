@@ -87,7 +87,7 @@ protected:
     
 public:
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
-    void MoveToGrabTarget(AActor* Target, float grabDuration);
+    void MoveToGrabTarget(AActor* Target, float GrabDuration);
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void ChangeTentacleState(ETerminatorTentacleState NewState);

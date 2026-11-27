@@ -6,5 +6,6 @@ UENUM(BlueprintType)
 enum class EPawnStatType : uint8 {
     Multiplicative,
     Additive,
+    OneMinusMultiplicative,
 };
 

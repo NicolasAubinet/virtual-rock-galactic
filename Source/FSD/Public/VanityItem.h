@@ -13,6 +13,7 @@
 class AFSDPlayerState;
 class APlayerCharacter;
 class UCharacterVanityComponent;
+class UDLCBase;
 class UIconGenerationCameraKey;
 class UItemAquisitionBase;
 class UObject;
@@ -91,6 +92,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetRequiredPlayerRank() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UDLCBase* GetRequiredDLC() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetIsUnLockedFromStart() const;

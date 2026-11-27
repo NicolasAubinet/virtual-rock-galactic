@@ -22,8 +22,8 @@ ATreasureBox::ATreasureBox(const FObjectInitializer& ObjectInitializer) : Super(
     this->HologramRotationSpeed = 10.00f;
     this->ItemsInserted = 0;
     this->IsTreasureAvailable = false;
-    this->MiddlePlane->SetupAttachment(RootComponent);
     this->BoxMesh->SetupAttachment(RootComponent);
+    this->MiddlePlane->SetupAttachment(RootComponent);
 }
 
 void ATreasureBox::PlaceResources(AProceduralSetup* Setup, float Radius, UDebrisPositioning* DebrisPositioning, const TArray<FVector>& locationsToAvoid, UCurveFloat* AvoidCostCurve) {

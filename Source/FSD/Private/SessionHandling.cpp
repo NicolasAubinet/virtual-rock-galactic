@@ -132,6 +132,10 @@ bool USessionHandling::FSDIsEliteDeepDive(const FBlueprintSessionResult& Result)
     return false;
 }
 
+bool USessionHandling::FSDIsCrossplayEnabledServer(const FBlueprintSessionResult& Result) {
+    return false;
+}
+
 bool USessionHandling::FSDIsClassLocked(const FBlueprintSessionResult& Result) {
     return false;
 }

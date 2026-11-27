@@ -15,6 +15,7 @@ enum class EDiscordBiomeType : uint8 {
     CausticMire,
     AzureWeald,
     HollowBough,
+    OssuaryDepths,
     Spacerig,
 };
 

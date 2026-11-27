@@ -19,6 +19,7 @@
 #include "EFSDInputSource.h"
 #include "ENVidiaReflexMode.h"
 #include "ESaveSlotChangeProcedure.h"
+#include "ESprintMode.h"
 #include "ESteamSearchRegion.h"
 #include "ETurn180Mode.h"
 #include "EVolumeType.h"
@@ -29,6 +30,7 @@
 #include "LanguageChangedDelegate.h"
 #include "ModdingSettingsChangedDelegate.h"
 #include "ModdingUISettings.h"
+#include "SprintModeChangedDelegate.h"
 #include "StringConfigChangedDelegate.h"
 #include "UFSDStreamlineDLSSGMode.h"
 #include "FSDGameUserSettings.generated.h"
@@ -47,7 +49,7 @@ public:
     FDelegate OnSettingsChanged;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FBoolConfigChanged OnUseHoldToRunChanged;
+    FSprintModeChanged OnSprintModeChanged;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FFloatConfigChanged OnFOVChanged;
@@ -223,6 +225,10 @@ public:
     UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool InvertScroolWheel;
     
+    UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
+    ESprintMode SprintMode;
+    
+    // Removed in Season 7; kept so disconnected pre-Season-7 nodes still compile
     UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool UseHoldToRun;
     
@@ -463,9 +469,6 @@ public:
     UFUNCTION(BlueprintCallable)
     void SetUseManualGraphicsMode(bool bEnabled);
     
-    UFUNCTION(BlueprintCallable)
-    void SetUseHoldToRun(bool NewUseHoldToRun);
-    
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     void SetUseDefaultAudioOutputDevice(UObject* WorldContextObject, bool UseDefault);
     
@@ -498,6 +501,13 @@ public:
     
     UFUNCTION(BlueprintCallable)
     void SetStaticResolutionScale(float percentage);
+    
+    UFUNCTION(BlueprintCallable)
+    void SetSprintMode(ESprintMode InMode);
+    
+    // Removed in Season 7; kept so disconnected pre-Season-7 nodes still compile
+    UFUNCTION(BlueprintCallable)
+    void SetUseHoldToRun(bool NewUseHoldToRun);
     
     UFUNCTION(BlueprintCallable)
     void SetShowUIAnimations(bool shouldShow);
@@ -773,9 +783,6 @@ public:
     bool GetUseManualGraphicsMode();
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    bool GetUseHoldToRun() const;
-    
-    UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetUseDefaultAudioOutputDevice() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -804,6 +811,13 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetStaticResolutionScale();
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    ESprintMode GetSprintMode() const;
+    
+    // Removed in Season 7; kept so disconnected pre-Season-7 nodes still compile
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool GetUseHoldToRun() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetShowUIAnimations() const;

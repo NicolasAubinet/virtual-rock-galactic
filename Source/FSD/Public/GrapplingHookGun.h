@@ -9,6 +9,8 @@
 class AGrapplingHookGun;
 class UAnimMontage;
 class UCoolDownItemAggregator;
+class UMeshComponent;
+class USkinEffect;
 
 UCLASS(Abstract, Blueprintable)
 class AGrapplingHookGun : public AAnimatedItem, public IUpgradable {
@@ -63,6 +65,11 @@ protected:
     UFUNCTION(BlueprintCallable)
     bool StartGrapple();
     
+public:
+    UFUNCTION(BlueprintCallable)
+    void SkinAdditionalMeshes(USkinEffect* Skin, UMeshComponent* Mesh);
+    
+protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_SetState(const FGraplingGunState& NewState);
     
@@ -72,6 +79,9 @@ protected:
 public:
     UFUNCTION(BlueprintCallable)
     void OnReleaseHook();
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void OnItemSkinChanged(USkinEffect* Skin);
     
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)

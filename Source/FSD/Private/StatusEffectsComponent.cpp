@@ -51,6 +51,14 @@ int32 UStatusEffectsComponent::GetFullStackAmount(TSubclassOf<UStatusEffect> Sta
     return 0;
 }
 
+bool UStatusEffectsComponent::ForcePopActiveStatusEffectInstance(UStatusEffect* StatusEffect, AActor* Owner) {
+    return false;
+}
+
+bool UStatusEffectsComponent::ForcePopActiveStatusEffect(TSubclassOf<UStatusEffect> StatusEffect, AActor* Owner) {
+    return false;
+}
+
 UStatusEffect* UStatusEffectsComponent::CreateStatusEffectInstance(TSubclassOf<UStatusEffect> StatusEffect, UObject* Owner) {
     return NULL;
 }

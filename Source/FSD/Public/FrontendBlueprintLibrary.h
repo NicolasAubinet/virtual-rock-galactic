@@ -13,6 +13,9 @@ public:
     UFUNCTION(BlueprintCallable)
     static void OpenURLInExternalBrowser(const FString& URL);
     
+    UFUNCTION(BlueprintCallable)
+    static void OpenURLInBrowserWithUTMTracking(const FString& URL, const FString& Location, const FString& trackingID);
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static bool IsShippingBuild();
     

@@ -118,6 +118,7 @@ void AAmmoDrivenWeapon::EjectCasing() {
 }
 
 
+
 void AAmmoDrivenWeapon::Client_RefillAmmo_Implementation(float percentage) {
 }
 

@@ -2,6 +2,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "IconGeneratable.h"
+#include "ItemPreviewUpgradeMaterial.h"
 #include "Skinnable.h"
 #include "Templates/SubclassOf.h"
 #include "ItemPreviewActor.generated.h"
@@ -15,6 +16,9 @@ class AItemPreviewActor : public AActor, public ISkinnable, public IIconGenerata
     GENERATED_BODY()
 public:
 protected:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FItemPreviewUpgradeMaterial> UpgradeMaterials;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     UItemSkin* CurrentSkinColor;
     
@@ -51,6 +55,9 @@ protected:
     
     UFUNCTION(BlueprintCallable)
     void ChangeSkin(UItemSkin* skinMesh, UItemSkin* skinColor, bool isPreview);
+    
+    UFUNCTION(BlueprintCallable)
+    void ApplyUpgradeMaterials();
     
 
     // Fix for true pure virtual functions not being implemented

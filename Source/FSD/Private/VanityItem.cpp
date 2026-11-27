@@ -51,6 +51,10 @@ int32 UVanityItem::GetRequiredPlayerRank() const {
     return 0;
 }
 
+UDLCBase* UVanityItem::GetRequiredDLC() const {
+    return NULL;
+}
+
 bool UVanityItem::GetIsUnLockedFromStart() const {
     return false;
 }

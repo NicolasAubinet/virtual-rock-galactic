@@ -15,9 +15,9 @@ AFuelLineSegment::AFuelLineSegment(const FObjectInitializer& ObjectInitializer) 
     this->MaxLength = 500.00f;
     this->bHasMaxTurnAngle = false;
     this->MaxTurnAngle = 0.00f;
-    this->FuelLineSplineMesh->SetupAttachment(RootComponent);
-    this->FuelLineSplineComponent->SetupAttachment(RootComponent);
     this->FuelLineEndPostMesh->SetupAttachment(RootComponent);
+    this->FuelLineSplineComponent->SetupAttachment(RootComponent);
+    this->FuelLineSplineMesh->SetupAttachment(RootComponent);
     this->PreviewEndPostLocation->SetupAttachment(RootComponent);
 }
 

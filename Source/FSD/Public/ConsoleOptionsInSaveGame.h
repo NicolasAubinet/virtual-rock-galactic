@@ -5,6 +5,7 @@
 #include "ControllerSettings.h"
 #include "CustomKeyBinding.h"
 #include "EConsoleGraphicsMode.h"
+#include "ESprintMode.h"
 #include "HUDElements.h"
 #include "UFSDStreamlineDLSSGMode.h"
 #include "ConsoleOptionsInSaveGame.generated.h"
@@ -75,6 +76,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bHoldToSprint;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    ESprintMode SprintMode;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bToggleLaserPointer;

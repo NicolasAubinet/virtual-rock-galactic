@@ -9,6 +9,8 @@ enum class EVanitySlot : uint8 {
     Armor,
     BeardColor,
     SkinColor,
+    TattooLeftArm,
+    TattooRightArm,
     Moustache,
     Eyebrows,
     Sideburns,

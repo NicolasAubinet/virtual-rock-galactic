@@ -33,8 +33,8 @@ ACoilGun::ACoilGun(const FObjectInitializer& ObjectInitializer) : Super(ObjectIn
     this->TriBurstShotCarvingMultiplier = 0.00f;
     this->FirstDynamicIndex = 1;
     this->LastDynamicIndex = 5;
-    this->FullyChargedParticles->SetupAttachment(FPMesh);
     this->FP_OverchargeIndicatorParticles->SetupAttachment(FPMesh);
+    this->FullyChargedParticles->SetupAttachment(FPMesh);
     this->TP_FullyChargedParticles->SetupAttachment(TPMesh);
 }
 
@@ -47,10 +47,13 @@ void ACoilGun::SetDynamicMaterials() {
 void ACoilGun::Server_ToggleCharingBonuses_Implementation(bool Enabled) {
 }
 
-void ACoilGun::Server_SpawnTrail_Implementation(const FVector_NetQuantize& Location, const FRotator& Rotation, float HalfHeight, bool fireTrailEnabled) {
+void ACoilGun::Server_SpawnTrail_Implementation(const FVector_NetQuantize& Location, const FRotator& Rotation, float HalfHeight, bool fireTrailEnabled, float ShotModifier) {
 }
 
 void ACoilGun::Server_SpawnGroundTrail_Implementation(const FVector_NetQuantize& Location, const FVector& Direction, float chargeMultiplier) {
+}
+
+void ACoilGun::Server_ShowHitEffect_Implementation(const FVector_NetQuantize& Location, const FVector_NetQuantize& Direction) {
 }
 
 void ACoilGun::Server_SetShotPower_Implementation(const float& Power) {

@@ -14,7 +14,7 @@ protected:
     UDamageComponent* DamageComponent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
-    UDamageComponent* ShockWaveDamageComponent;
+    UDamageComponent* ShockwaveDamageComponent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float FearFactorOnFire;
@@ -34,12 +34,24 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ShockWaveDistance;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float IncendiaryDispersersRadius;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float IncendiaryDispersersLifetime;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float IncendiaryDispersersDistance;
+    
 public:
     ASawedOffShotgun(const FObjectInitializer& ObjectInitializer);
 
 protected:
     UFUNCTION(BlueprintCallable)
     void SetShockWaveDamageComponent(UDamageComponent* Component);
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void RecieveIncendiaryDispersersEvent(float Radius, float LifeTime, float Distance);
     
 };
 

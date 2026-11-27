@@ -15,8 +15,8 @@ AHangingFireCracker::AHangingFireCracker(const FObjectInitializer& ObjectInitial
     this->SparkSpeed = 20.00f;
     this->ExplodeRange = 40.00f;
     this->ExplodeImpulse = 100.00f;
-    this->MovingSparks->SetupAttachment(RootComponent);
     this->FuseSound->SetupAttachment(MovingSparks);
+    this->MovingSparks->SetupAttachment(RootComponent);
 }
 
 void AHangingFireCracker::StartFire() {

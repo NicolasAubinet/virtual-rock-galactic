@@ -8,6 +8,7 @@
 
 class AFSDPlayerState;
 class AItem;
+class UDamageClass;
 
 UCLASS(Blueprintable, EditInlineNew, MinimalAPI)
 class UChargedWeaponUpgrade : public UStandardItemUpgrade {
@@ -16,6 +17,9 @@ public:
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EChargedWeaponUpgrades upgradeType;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UDamageClass* BonusDamageClass;
     
 public:
     UChargedWeaponUpgrade();

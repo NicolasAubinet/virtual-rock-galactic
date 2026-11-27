@@ -22,8 +22,8 @@ ASplinePlant::ASplinePlant(const FObjectInitializer& ObjectInitializer) : Super(
     this->SplineInstance = NULL;
     this->SegmentMesh = NULL;
     this->Seed = -1;
-    this->PlantSpline->SetupAttachment(RootComponent);
     this->AudioComponent->SetupAttachment(RootComponent);
+    this->PlantSpline->SetupAttachment(RootComponent);
 }
 
 void ASplinePlant::SetTargetPlantLengthPercent(float InTargetPercent, float InPercentPerSecond, float InEaseExp) {

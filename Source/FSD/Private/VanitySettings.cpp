@@ -2,6 +2,7 @@
 
 UVanitySettings::UVanitySettings() {
     this->MedbayArmorItem = NULL;
+    this->TattooPreviewArmorItem = NULL;
     this->AlwaysLockedDLC = NULL;
 }
 

@@ -25,8 +25,8 @@ ATether::ATether(const FObjectInitializer& ObjectInitializer) : Super(ObjectInit
     this->IsOnGround = false;
     this->KnockBackForce = 300.00f;
     this->BaseMesh->SetupAttachment(RootComponent);
-    this->UseTrigger->SetupAttachment(BaseMesh);
     this->TetherBeam->SetupAttachment(BaseMesh);
+    this->UseTrigger->SetupAttachment(BaseMesh);
 }
 
 void ATether::SetIsOnGround(bool NewIsOnGround) {

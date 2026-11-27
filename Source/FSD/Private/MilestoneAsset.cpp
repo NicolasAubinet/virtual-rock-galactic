@@ -59,4 +59,7 @@ int32 UMilestoneAsset::ClaimNextTier(UObject* WorldContext) {
     return 0;
 }
 
+void UMilestoneAsset::CheatClaimAllTiers(UObject* WorldContext) {
+}
+
 

@@ -24,6 +24,9 @@ bool AGrapplingHookGun::StartGrapple() {
     return false;
 }
 
+void AGrapplingHookGun::SkinAdditionalMeshes(USkinEffect* Skin, UMeshComponent* Mesh) {
+}
+
 void AGrapplingHookGun::Server_SetState_Implementation(const FGraplingGunState& NewState) {
 }
 
@@ -32,6 +35,7 @@ void AGrapplingHookGun::OnRep_State(const FGraplingGunState& prevState) {
 
 void AGrapplingHookGun::OnReleaseHook() {
 }
+
 
 
 

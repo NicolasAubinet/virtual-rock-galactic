@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Aquisitionable.h"
+#include "EItemSkinCategory.h"
 #include "EItemSkinType.h"
 #include "SavablePrimaryDataAsset.h"
 #include "ItemSkin.generated.h"
@@ -32,6 +33,9 @@ public:
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FItemSkinEquipSignature OnSkinUnequipped;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
+    USkinEffect* SkinEffect;
+    
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UItemAquisitionBase* Aquisition;
@@ -45,8 +49,8 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UDynamicIcon* DynamicIcon;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
-    USkinEffect* SkinEffect;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    EItemSkinCategory SkinCategory;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UItemID* OwningItem;
@@ -80,6 +84,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FText GetSkinName() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    EItemSkinCategory GetSkinCategory() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UItemID* GetOwningItem() const;

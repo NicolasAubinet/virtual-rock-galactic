@@ -13,6 +13,7 @@ AFlare::AFlare(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitia
     this->ProductionTime = 15.00f;
     this->Duration = 0.00f;
     this->IsFlareOn = true;
+    this->IsInfiniteLight = false;
     this->DamageCauser = NULL;
     this->WeaponPreviewClass = NULL;
     this->LoadoutItem = NULL;
@@ -56,6 +57,7 @@ void AFlare::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimePr
     
     DOREPLIFETIME(AFlare, Duration);
     DOREPLIFETIME(AFlare, IsFlareOn);
+    DOREPLIFETIME(AFlare, IsInfiniteLight);
 }
 
 

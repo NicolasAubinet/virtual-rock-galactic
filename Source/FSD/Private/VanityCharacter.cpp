@@ -5,9 +5,11 @@
 
 AVanityCharacter::AVanityCharacter(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
     this->RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
-    this->ChildActorComponent = CreateDefaultSubobject<UChildActorComponent>(TEXT("ItemInstance"));
+    this->ChildActorComponent = CreateDefaultSubobject<UChildActorComponent>(TEXT("itemInstance"));
     this->Animation = NULL;
     this->skinColor = NULL;
+    this->RightTattoo = NULL;
+    this->LeftTattoo = NULL;
     this->BeardColor = NULL;
     this->DynamicBeardColor = NULL;
     this->Head = NULL;
@@ -25,8 +27,8 @@ AVanityCharacter::AVanityCharacter(const FObjectInitializer& ObjectInitializer) 
     this->itemClass = NULL;
     this->Framework = NULL;
     this->Paintjob = NULL;
-    this->Mesh->SetupAttachment(RootComponent);
     this->BodyMesh->SetupAttachment(RootComponent);
+    this->Mesh->SetupAttachment(RootComponent);
 }
 
 void AVanityCharacter::DisplayVanity() {

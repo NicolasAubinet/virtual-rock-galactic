@@ -16,13 +16,22 @@ class ARessuplyPodItem : public AAnimatedItem {
 public:
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bIsPerkUse;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<AActor> ResupplyBeacon;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UItemPlacerAggregator> ItemPlacerClass;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<UItemPlacerAggregator> ItemPlacerClassPerkUse;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     UItemPlacerAggregator* ItemPlacerInstance;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
+    UItemPlacerAggregator* ItemPlacerInstancePerkUse;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<ARessuplyPod> SupplyPodClass;
@@ -52,7 +61,10 @@ protected:
     void Server_Call_Resupply(const FVector& Location);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-    void ReceiveItemPlacerSpawned(UItemPlacerAggregator* InItemPlacer);
+    void ReceiveItemPlacerSpawned(UItemPlacerAggregator* InItemPlacer, bool bIsItemPlacerPerkUse);
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void Receive_OnIsPerkUseChanged(bool IsPerkUse);
     
     UFUNCTION(BlueprintCallable)
     void OnRep_Used();

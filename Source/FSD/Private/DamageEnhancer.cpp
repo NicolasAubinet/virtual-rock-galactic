@@ -23,9 +23,9 @@ ADamageEnhancer::ADamageEnhancer(const FObjectInitializer& ObjectInitializer) : 
     this->LifetimeMaxDamage = 1000.00f;
     this->EnabledDuration = 15.00f;
     this->TraceStepTime = 0.04f;
+    this->Box->SetupAttachment(RootComponent);
     this->Mesh->SetupAttachment(RootComponent);
     this->Sphere->SetupAttachment(RootComponent);
-    this->Box->SetupAttachment(RootComponent);
 }
 
 void ADamageEnhancer::HitByHitScan(UHitscanBaseComponent* Component, const FVector& HitPoint, const FVector& Origin) {

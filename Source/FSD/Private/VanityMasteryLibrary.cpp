@@ -33,7 +33,7 @@ FVanityMasteryResult UVanityMasteryLibrary::AddVanityMasteryXPFromCost(UObject* 
     return FVanityMasteryResult{};
 }
 
-FVanityMasteryResult UVanityMasteryLibrary::AddVanityMasteryXP(UObject* WorldContext, int32 XP, UPlayerCharacterID* PlayerId) {
+FVanityMasteryResult UVanityMasteryLibrary::AddVanityMasteryXP(UObject* WorldContext, int32 XP, UPlayerCharacterID* playerID) {
     return FVanityMasteryResult{};
 }
 

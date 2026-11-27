@@ -13,9 +13,9 @@ ASoapVacuumItem::ASoapVacuumItem(const FObjectInitializer& ObjectInitializer) : 
     this->MaxVacuumEffectStrength = 300.00f;
     this->VacuumEffectFoamSuckTime = 1.00f;
     this->LastPuddleSuckTime = 0.00f;
-    this->VacuumCapsule->SetupAttachment(FPMesh);
     this->NS_Vacuum_FP->SetupAttachment(FPMesh);
     this->NS_Vacuum_TP->SetupAttachment(TPMesh);
+    this->VacuumCapsule->SetupAttachment(FPMesh);
 }
 
 void ASoapVacuumItem::Server_StartVacuumingPuddle_Implementation(AActor* Target) {

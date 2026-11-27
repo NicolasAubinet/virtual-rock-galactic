@@ -73,7 +73,7 @@ public:
     
 private:
     UFUNCTION(BlueprintCallable)
-    void MatchParentDestroy(UHealthComponentBase* destroyed);
+    void MatchParentDestroy(UHealthComponentBase* Destroyed);
     
 protected:
     UFUNCTION(BlueprintCallable, BlueprintPure)

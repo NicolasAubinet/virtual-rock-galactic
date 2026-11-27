@@ -7,5 +7,6 @@ enum class EArmorDamageType : uint8 {
     Normal,
     Dissolve,
     Beam,
+    NoneParticles,
 };
 

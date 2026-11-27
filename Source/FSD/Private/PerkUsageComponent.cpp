@@ -2,6 +2,10 @@
 #include "Net/UnrealNetwork.h"
 
 UPerkUsageComponent::UPerkUsageComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->LateJoinTimeStamp = -1.00f;
+}
+
+void UPerkUsageComponent::Server_RestorePerkUse_Implementation(UPerkAsset* Perk) {
 }
 
 void UPerkUsageComponent::Server_MarkPerkUsed_Implementation(UPerkAsset* Perk) {
@@ -17,6 +21,7 @@ void UPerkUsageComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& 
     Super::GetLifetimeReplicatedProps(OutLifetimeProps);
     
     DOREPLIFETIME(UPerkUsageComponent, PerkUsageReplicated);
+    DOREPLIFETIME(UPerkUsageComponent, LateJoinTimeStamp);
 }
 
 

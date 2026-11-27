@@ -25,8 +25,10 @@ enum class ECoilgunUpgrades : uint8 {
     EBurnGround,
     EElectricTrail,
     EFireTrail,
+    EExplodingTrail,
     EPenetrationDepth,
     EPrimaryBonusShotWidth,
     EShieldDelay,
+    EShowFallbackShotEffects,
 };
 

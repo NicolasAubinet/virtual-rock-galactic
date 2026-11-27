@@ -12,5 +12,6 @@ enum class EHeavyParticleCannonUpgrade : uint8 {
     BulkyBeam,
     ProjectionModule,
     PlatformExplosions,
+    ShieldModuleField,
 };
 

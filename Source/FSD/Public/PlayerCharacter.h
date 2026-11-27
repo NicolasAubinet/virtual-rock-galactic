@@ -41,6 +41,7 @@
 #include "OnCallDonkeySignatureDelegate.h"
 #include "OnCharacterDeathChangeSignatureDelegate.h"
 #include "OnCharacterStateChangedSignatureDelegate.h"
+#include "OnExecutionerDelegate.h"
 #include "OnFlareThrownDelegate.h"
 #include "OnJumpPressedSignatureDelegate.h"
 #include "OnJumpReleasedSignatureDelegate.h"
@@ -74,6 +75,7 @@ class AFSDPlayerState;
 class AItem;
 class APlayerCharacter;
 class APlayerController;
+class AShieldDamageAndSoundActor;
 class AShieldGeneratorActor;
 class ATutorialManager;
 class AZipLineProjectile;
@@ -144,6 +146,7 @@ UCLASS(Abstract, Blueprintable, Config=Engine)
 class FSD_API APlayerCharacter : public ACharacter, public IGameplayTagAssetInterface, public ITargetable, public IRejoinListener, public IPlaySoundInterface {
     GENERATED_BODY()
 public:
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPerkSelectionRequested, bool, Activate);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FKilledGrabber, AActor*, Grabber);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FItemUseDelegate, AItem*, Item);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FGenericAnimNotifyDelegate, APlayerCharacter*, Player);
@@ -161,6 +164,9 @@ public:
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FFirePressedDelegate OnFireReleased;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FPerkSelectionRequested OnPerkSelectionChanged;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FBoolDelegate OnGrenadePressed;
@@ -188,6 +194,9 @@ public:
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FCollectedDrinkDelegate OnCollectedDrink;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FOnExecutioner OnExecutioner;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FCollectedVictoryPoseEvent OnCollectedVictoryPose;
@@ -349,6 +358,9 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool bIsBeingBittenByCaveLeech;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    bool bIsBeingBittenByPitJaw;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UWidgetInteractionComponent* WidgetInteraction;
     
@@ -491,6 +503,9 @@ protected:
     float RunBoostChargeTime;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float RunBoostGracePeriod;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundCue* RunBoostActivationSound;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -556,6 +571,15 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float ThrowCarriableProgress;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPawnAffliction* ShieldAffliction;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    AShieldDamageAndSoundActor* ShieldDischargeActor;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<AShieldDamageAndSoundActor> ShieldActorClass;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     TMap<uint8, UCharacterStateComponent*> CharacterStates;
     
@@ -573,6 +597,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ButtonMemoryDuration;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float AutoSprintResumeDelay;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     bool IsRunning;
@@ -639,6 +666,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool CanAim;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    bool CanUseJump;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool CanUseItem;
@@ -835,6 +865,12 @@ public:
     UFUNCTION(BlueprintCallable)
     void SetAttached(USceneComponent* AttachTo, bool DelayUntilLanded);
     
+    UFUNCTION(BlueprintCallable, Server, Unreliable)
+    void Server_TryUseTaunt();
+    
+    UFUNCTION(BlueprintCallable, Server, Unreliable)
+    void Server_TryUseFearTheBeard();
+    
 protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_TriggerDash();
@@ -905,11 +941,12 @@ public:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_InstantRevive(APlayerCharacter* ReviveTarget, EInputKeys Key);
     
-protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
-    void Server_EscapeFromGrabber();
+    void Server_FindInkBugEncounter();
     
-public:
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_EscapeFromGrabber(bool ShouldKillGrabber);
+    
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_ClearBiomeEffects();
     
@@ -997,6 +1034,9 @@ public:
     void RequestChangeInGravityScale(float newGravityScale);
     
 protected:
+    UFUNCTION(BlueprintCallable)
+    void RemoveShieldAffliction(AActor* DischargeActor);
+    
     UFUNCTION(BlueprintCallable)
     void RejectInvite();
     
@@ -1094,6 +1134,9 @@ public:
     bool IsSaluting() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsPerkSelectionActive() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsParalyzed() const;
     
     UFUNCTION(BlueprintCallable)
@@ -1180,6 +1223,9 @@ public:
     FLinearColor GetHeroColor() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    USkeletalMeshComponent* GetFPMesh() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     UPlayerFPAnimInstance* GetFPAnimInstance() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -1260,6 +1306,9 @@ public:
     void ConsumeCycleItemButton();
     
 protected:
+    UFUNCTION(BlueprintCallable, Client, Reliable)
+    void Client_UseDashCharge();
+    
     UFUNCTION(BlueprintCallable, Client, Unreliable)
     void Client_TargetDamaged(UObject* Health, float Damage, float DamageModifier, bool IsWeakPoint, bool IsRadial);
     
@@ -1323,6 +1372,9 @@ public:
     
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void All_CheatSetDanceForVanityCharacter(int32 InDanceIndex);
+    
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void All_CheatFlareInfiniteDuration(bool Enabled);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void All_CheatDestroyAllVanityCharacters();

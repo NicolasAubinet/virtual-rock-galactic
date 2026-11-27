@@ -21,7 +21,9 @@ class UFSDAudioComponent;
 class UFSDPhysicalMaterial;
 class UFirstPersonParticleSystemComponent;
 class UForceFeedbackEffect;
+class UMeshComponent;
 class UParticleSystem;
+class USkinEffect;
 
 UCLASS(Blueprintable)
 class ADoubleDrillItem : public ADualAnimatedItem, public IUpgradable, public IUpgradableGear, public IRejoinListener {
@@ -166,6 +168,12 @@ public:
 
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
+    UFUNCTION(BlueprintCallable)
+    void SkinAdditionalMeshes(USkinEffect* Skin, UMeshComponent* LeftMesh, UMeshComponent* RightMesh);
+    
+    UFUNCTION(BlueprintCallable)
+    void SetSkinColorOnEquip();
+    
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_StopMining();
     
@@ -193,6 +201,9 @@ public:
     UFUNCTION(BlueprintCallable)
     void OnRep_IsGunslinging();
     
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void OnDrillSkinChanged(USkinEffect* Skin);
+    
     UFUNCTION(BlueprintCallable)
     void OnDrillParticlesTimerElapsed();
     
@@ -206,7 +217,7 @@ public:
     void All_SimulateDigDebris(FVector_NetQuantize Position, int32 DebrisIndex);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
-    void All_SimulateDigBlock(FVector_NetQuantize Position, bool SpawnParticles, int32 Material);
+    void All_SimulateDigBlock(FVector_NetQuantize Position, bool spawnParticles, int32 Material);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
     void All_SimulateDamage(const TArray<FDoubleDrillDamageItem>& Targets);

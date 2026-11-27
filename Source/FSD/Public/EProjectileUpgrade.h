@@ -18,5 +18,6 @@ enum class EProjectileUpgrade : uint8 {
     MaxPropulsionTime,
     GravityScale,
     CustomEvent,
+    Penetrate,
 };
 

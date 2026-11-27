@@ -15,8 +15,11 @@ UFSDPhysicalMaterial::UFSDPhysicalMaterial() {
     this->MeleeImpactSound = NULL;
     this->UseImpactDecalOverrides = false;
     this->ImpactDecals.AddDefaulted(3);
+    this->UseMeleeImpactDecalOverrides = false;
+    this->MeleeImpactDecals.AddDefaulted(4);
     this->FirstPersonDamageIndicatorSound = NULL;
     this->IsWeakPoint = false;
+    this->IsArmor = false;
     this->AllowFrozenBonus = true;
     this->IsSubhealthCollider = false;
     this->DamageMultiplier = 1.00f;
@@ -39,6 +42,10 @@ UFXSystemComponent* UFSDPhysicalMaterial::SpawnImpactParticles(UObject* WorldCon
 }
 
 UFSDPhysicalMaterial* UFSDPhysicalMaterial::GetPhysicalMaterialFromPrimitive(UPrimitiveComponent* Component) {
+    return NULL;
+}
+
+UMaterialInstance* UFSDPhysicalMaterial::GetImpactMaterialOverride() const {
     return NULL;
 }
 

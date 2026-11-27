@@ -4,10 +4,10 @@
 UFSDCheatManager::UFSDCheatManager() {
     this->RoomJumpCount = 0;
     this->PreviousMaxDistanceBeforeCleanup = 0.00f;
-    this->UnlimitedScoutFlareDuration = false;
     this->SpawnPosMarker = NULL;
     this->EscortShowSmartRockDebug = false;
     this->IsUsingSavedCheats = false;
+    this->DisplayDamageTaken = false;
 }
 
 void UFSDCheatManager::ToggleDebugEvent(UFSDEvent* InEvent) {
@@ -60,6 +60,9 @@ void UFSDCheatManager::ResetSpacerigIntroMessage() {
 }
 
 void UFSDCheatManager::R_RemoveResources(int32 Number) {
+}
+
+void UFSDCheatManager::R_RemovePerkPoints(int32 amount) {
 }
 
 void UFSDCheatManager::R_RemoveCredits(int32 Number) {
@@ -121,11 +124,15 @@ bool UFSDCheatManager::IsFlyModeActive() const {
     return false;
 }
 
+bool UFSDCheatManager::IsFlareGunProjectilesInfinite() {
+    return false;
+}
+
 bool UFSDCheatManager::IsFastMovementActive() const {
     return false;
 }
 
-void UFSDCheatManager::InstantDropResuppyPod(ARessuplyPod* pod) {
+void UFSDCheatManager::InstantDropResuppyPod(ARessuplyPod* Pod) {
 }
 
 bool UFSDCheatManager::GetSavedCheatValue(const FName CheatName, int32& ValueToGet) {
@@ -133,6 +140,9 @@ bool UFSDCheatManager::GetSavedCheatValue(const FName CheatName, int32& ValueToG
 }
 
 void UFSDCheatManager::GetListOfRoomNames(TArray<FString>& roomNames) {
+}
+
+void UFSDCheatManager::FindInkBugEncounter() {
 }
 
 void UFSDCheatManager::DestroyAllInstances(TSubclassOf<AActor> destroy) {
@@ -198,6 +208,9 @@ void UFSDCheatManager::Cheat_ResetEquippedUpgrades(UObject* WorldContextObject) 
 void UFSDCheatManager::Cheat_RemoveResources(UObject* WorldContextObject, int32 amount) {
 }
 
+void UFSDCheatManager::Cheat_RemovePerkPoints(UObject* WorldContextObject, int32 amount) {
+}
+
 void UFSDCheatManager::Cheat_PickAxeVanity_UnlockAll(UObject* WorldContextObject) {
 }
 
@@ -219,6 +232,9 @@ void UFSDCheatManager::Cheat_ForceLostPack(UObject* WorldContextObject) {
 void UFSDCheatManager::Cheat_DeepDives_Refresh(UObject* WorldContextObject) {
 }
 
+void UFSDCheatManager::Cheat_DamagePlayer_Implementation(float amount, APlayerCharacter* Player) {
+}
+
 void UFSDCheatManager::Cheat_Campaign_Complete(UObject* WorldContextObject) {
 }
 
@@ -238,6 +254,9 @@ void UFSDCheatManager::C_Windows_PrintStack() const {
 }
 
 void UFSDCheatManager::C_Windows_CloseAll() const {
+}
+
+void UFSDCheatManager::C_WindowCleaner_FastClean() {
 }
 
 void UFSDCheatManager::C_WeaponMaintenance_Reset() {
@@ -285,6 +304,9 @@ void UFSDCheatManager::C_UnlockAll_PickaxeParts() {
 void UFSDCheatManager::C_UnlockAll_Perks() {
 }
 
+void UFSDCheatManager::C_UnlockAll_MileStones() {
+}
+
 void UFSDCheatManager::C_UnlockAll_Drinks() {
 }
 
@@ -300,10 +322,16 @@ void UFSDCheatManager::C_UnlockAll() {
 void UFSDCheatManager::C_Unlock_Facility() {
 }
 
+void UFSDCheatManager::C_TryRespawnBoneCollector() {
+}
+
 void UFSDCheatManager::C_Treasures_Track(int32 Mode) {
 }
 
 void UFSDCheatManager::C_Treasures_Reward(int32 Count) {
+}
+
+void UFSDCheatManager::C_ToggleShouts() {
 }
 
 void UFSDCheatManager::C_ToggleHoopGameMovement() {
@@ -345,6 +373,9 @@ void UFSDCheatManager::C_SpawnScriptedWave() {
 void UFSDCheatManager::C_SpawnNormalWave() {
 }
 
+void UFSDCheatManager::C_SpawnLootBug(int32 Count) {
+}
+
 void UFSDCheatManager::C_SpawnEvenRewarder() {
 }
 
@@ -358,6 +389,9 @@ void UFSDCheatManager::C_SpawnBarrelOnPlayer(int32 amount) {
 }
 
 void UFSDCheatManager::C_SpawnAllParticles() {
+}
+
+void UFSDCheatManager::C_Show_DamageTaken(bool Show) {
 }
 
 void UFSDCheatManager::C_SetUseSavedCheatsByDefault(bool useSavedCheats) {
@@ -423,6 +457,9 @@ void UFSDCheatManager::C_Seasons_ResetReroll() {
 void UFSDCheatManager::C_Seasons_ResetPlagueHeartsCollected() {
 }
 
+void UFSDCheatManager::C_Seasons_ResetBonusScripFragmentsCollected() {
+}
+
 void UFSDCheatManager::C_Seasons_PrintScripProgress() {
 }
 
@@ -456,6 +493,9 @@ void UFSDCheatManager::C_Seasons_AddHeartsCollecdted(int32 Number) {
 void UFSDCheatManager::C_Seasons_AddChallenge() {
 }
 
+void UFSDCheatManager::C_Seasons_AddBonusScripFragment(int32 Number) {
+}
+
 void UFSDCheatManager::C_Season_SetActiveSeason(UObject* WorldContextObject, int32 Index) {
 }
 
@@ -487,6 +527,9 @@ void UFSDCheatManager::C_Resupply() {
 }
 
 void UFSDCheatManager::C_ResetSteamAchievementStats() {
+}
+
+void UFSDCheatManager::C_ResetLatestAdvertisedId(UObject* WorldContextObject, const FString& AdvertisedId) {
 }
 
 void UFSDCheatManager::C_ResetForgingXP() {
@@ -582,6 +625,18 @@ void UFSDCheatManager::C_ProjectileDrawPaths() {
 void UFSDCheatManager::C_ProjectileDebugPrintToggle() {
 }
 
+void UFSDCheatManager::C_Proficiency_UnlockAll() {
+}
+
+void UFSDCheatManager::C_Proficiency_Unlock_Bit(uint8 Value) {
+}
+
+void UFSDCheatManager::C_Proficiency_Unlock(uint8 Value) {
+}
+
+void UFSDCheatManager::C_Proficiency_ResetAll() {
+}
+
 void UFSDCheatManager::C_PrintLoadout() {
 }
 
@@ -589,6 +644,21 @@ void UFSDCheatManager::C_PreventMeteors() {
 }
 
 void UFSDCheatManager::C_PlayNewMusic(int32 songIndex) const {
+}
+
+void UFSDCheatManager::C_Perks_ResetAll() {
+}
+
+void UFSDCheatManager::C_Perks_ClearReset3() {
+}
+
+void UFSDCheatManager::C_PerkMaintenance_Reset() {
+}
+
+void UFSDCheatManager::C_PerkMaintenance_MaxAllXP() {
+}
+
+void UFSDCheatManager::C_PerkMaintenance_AddXP(UPerkAsset* Perk, int32 XP) {
 }
 
 void UFSDCheatManager::C_MissionMap_TestDistribution() {
@@ -690,6 +760,9 @@ void UFSDCheatManager::C_FixedPLSSeed(int32 Seed) {
 void UFSDCheatManager::C_FixedMissionSeed(int32 Seed) {
 }
 
+void UFSDCheatManager::C_FindInkBug() {
+}
+
 void UFSDCheatManager::C_FailMission() {
 }
 
@@ -739,6 +812,9 @@ void UFSDCheatManager::C_DeepDives_List() {
 }
 
 void UFSDCheatManager::C_DebugTargetEnemySync(bool FindIt) {
+}
+
+void UFSDCheatManager::C_DamagePlayer(float amount) {
 }
 
 void UFSDCheatManager::C_CompleteObjectives() {

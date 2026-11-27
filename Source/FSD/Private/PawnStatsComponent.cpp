@@ -8,6 +8,10 @@ UPawnStatsComponent::UPawnStatsComponent(const FObjectInitializer& ObjectInitial
 void UPawnStatsComponent::RemoveModifier(UPawnStat* Stat, float Value) {
 }
 
+bool UPawnStatsComponent::HasModifier(UPawnStat* Stat, float Value) const {
+    return false;
+}
+
 float UPawnStatsComponent::GetStatValue(UPawnStat* Stat) const {
     return 0.0f;
 }

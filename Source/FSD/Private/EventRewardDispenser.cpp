@@ -49,7 +49,7 @@ AFSDPlayerState* AEventRewardDispenser::GetPlayer() const {
 void AEventRewardDispenser::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
     Super::GetLifetimeReplicatedProps(OutLifetimeProps);
     
-    DOREPLIFETIME(AEventRewardDispenser, PlayerId);
+    DOREPLIFETIME(AEventRewardDispenser, playerID);
     DOREPLIFETIME(AEventRewardDispenser, PoweredUp);
     DOREPLIFETIME(AEventRewardDispenser, IsActivated);
     DOREPLIFETIME(AEventRewardDispenser, SelectedReward);

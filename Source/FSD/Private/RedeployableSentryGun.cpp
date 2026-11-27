@@ -12,8 +12,10 @@ ARedeployableSentryGun::ARedeployableSentryGun(const FObjectInitializer& ObjectI
     this->PlasmaBeamClass = NULL;
     this->ElectrocutionActorClass = NULL;
     this->ElectrocutionActor = NULL;
+    this->ShieldActorClass = NULL;
     this->EMPDischargeActorClass = NULL;
-    this->EMPDiscargeCooldown = 3.00f;
+    this->EMPDischargeCooldown = 3.00f;
+    this->ShieldDischargeActor = NULL;
     this->ActorTrackingIcon->SetupAttachment(RootComponent);
 }
 

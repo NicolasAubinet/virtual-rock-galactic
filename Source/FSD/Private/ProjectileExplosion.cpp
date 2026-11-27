@@ -12,4 +12,7 @@ void UProjectileExplosion::SpawnEffectsFromHit(const FHitResult& Hit) {
 void UProjectileExplosion::SpawnEffects(FVector Location, FVector Normal) {
 }
 
+void UProjectileExplosion::ScaleProjectileExplosion(const float Scale) {
+}
+
 

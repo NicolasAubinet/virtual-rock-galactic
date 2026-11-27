@@ -51,6 +51,10 @@ bool USeasonsSubsystem::HasClaimedAllRewards() const {
     return false;
 }
 
+int32 USeasonsSubsystem::GetUnusedScripFragments() {
+    return 0;
+}
+
 int32 USeasonsSubsystem::GetUnusedHearts() {
     return 0;
 }
@@ -103,6 +107,9 @@ void USeasonsSubsystem::GetSeasonBought(bool& isBought) {
 void USeasonsSubsystem::GetScriptChallengeInfo(int32& Completed, int32& claimed, int32& Total) {
 }
 
+void USeasonsSubsystem::GetScripBonusState(int32 widgetIndex, int32& numberOfFragments, bool& bIsClaimed) {
+}
+
 int32 USeasonsSubsystem::GetNumberOfTokens(UObject* WorldContextObject) {
     return 0;
 }
@@ -134,12 +141,20 @@ USeason* USeasonsSubsystem::GetCurrentSeason() const {
     return NULL;
 }
 
+int32 USeasonsSubsystem::GetClaimedBonusScrips() {
+    return 0;
+}
+
 TArray<UDataAsset*> USeasonsSubsystem::GetAssetReferences(int32 ChallengeIndex, USeasonChallenge*& outChallenge) {
     return TArray<UDataAsset*>();
 }
 
 TArray<FChallengeInfo> USeasonsSubsystem::GetActiveChallenges(bool canGenerateNewChallenge) {
     return TArray<FChallengeInfo>();
+}
+
+bool USeasonsSubsystem::ConvertScripFragmentsToScrip(int32& scripGained) {
+    return false;
 }
 
 bool USeasonsSubsystem::ConvertHeartsToScrip(int32& scripGained) {

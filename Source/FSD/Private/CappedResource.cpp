@@ -51,7 +51,7 @@ float UCappedResource::GetCapacityPct() const {
     return 0.0f;
 }
 
-float UCappedResource::Deduct(float amount) {
+float UCappedResource::Deduct(float amount, bool bAllowNegativeBalance) {
     return 0.0f;
 }
 

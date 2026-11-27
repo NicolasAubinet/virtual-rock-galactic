@@ -6,5 +6,6 @@ UENUM(BlueprintType)
 enum class EPerkUsageType : uint8 {
     Passive,
     Active,
+    Proficiency,
 };
 

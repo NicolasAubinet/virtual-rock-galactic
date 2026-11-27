@@ -9,5 +9,6 @@ enum class EPerkTierState : uint8 {
     Locked,
     Unaffordable,
     NotAvailable,
+    ProficiencyLocked,
 };
 

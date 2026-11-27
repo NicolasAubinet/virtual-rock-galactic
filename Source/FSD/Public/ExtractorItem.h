@@ -251,7 +251,7 @@ public:
     UBoxComponent* GetRootCollider() const;
     
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
-    void All_SimulateDigBlock(FVector_NetQuantize Position, bool SpawnParticles, int32 Material);
+    void All_SimulateDigBlock(FVector_NetQuantize Position, bool spawnParticles, int32 Material);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
     void All_ChunkSplat(AResourceChunk* chunk);

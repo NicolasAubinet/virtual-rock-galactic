@@ -7,6 +7,8 @@ UReflectionHitscanComponent::UReflectionHitscanComponent(const FObjectInitialize
     this->bDamageOnReflections = false;
     this->StraightenReflectionFactor = 0.40f;
     this->ReflectionCount = 0;
+    this->StickyFriendlyBeamRadius = 50.00f;
+    this->StickyTurretBeamRadius = 50.00f;
 }
 
 void UReflectionHitscanComponent::Server_RegisterHit_Reflection_Implementation(const FReflectiveHitscanHit& Hit) {

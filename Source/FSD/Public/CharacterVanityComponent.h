@@ -53,7 +53,10 @@ protected:
     UMaterialInterface* SkinMaterial;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    TArray<FTattooArmorItem> Tattoos;
+    FTattooArmorItem RightArmTattoo;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    FTattooArmorItem LeftArmTattoo;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<UMaterialInterface*> CachedMaterials;
@@ -109,7 +112,16 @@ public:
     bool GetDesireSleevelessArmor() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    UMaterialInterface* GetClothMaterial() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     UCharacterVanityItems* GetAvailableVanityItems() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    USkeletalMeshComponent* GetArmorMeshComponent() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UMaterialInterface* GetArmorMaterial() const;
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     void EquipMedicalGown();

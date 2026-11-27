@@ -18,8 +18,8 @@ AStickyFlame::AStickyFlame(const FObjectInitializer& ObjectInitializer) : Super(
     this->FlameExtinguishTime = 1.50f;
     this->AudioFadeOutTime = 0.00f;
     this->IsActive = true;
-    this->FlameParticles->SetupAttachment(RootComponent);
     this->Audio->SetupAttachment(RootComponent);
+    this->FlameParticles->SetupAttachment(RootComponent);
 }
 
 void AStickyFlame::OnRep_IsActive() {

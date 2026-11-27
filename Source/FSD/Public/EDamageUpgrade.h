@@ -17,5 +17,8 @@ enum class EDamageUpgrade : uint8 {
     FriendlyFireModifier,
     ShattersArmor,
     ArmorPenetration,
+    ProjectileLifetimeDamageMultiplier,
+    SelfFriendlyFireMultiplier,
+    ProjectileLifetimeDamageMax,
 };
 

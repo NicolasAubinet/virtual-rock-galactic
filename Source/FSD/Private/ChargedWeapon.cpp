@@ -24,6 +24,8 @@ AChargedWeapon::AChargedWeapon(const FObjectInitializer& ObjectInitializer) : Su
     this->HeatPerSecondWhenCharged = 0.05f;
     this->HeatPerNormalShot = 0.20f;
     this->HeatPerChargedShot = 0.40f;
+    this->HeatBonusDamageMultiplier = 0.00f;
+    this->HeatBonusDamageClass = NULL;
 }
 
 void AChargedWeapon::SetOverheated(bool isOverheated) {
@@ -37,6 +39,13 @@ void AChargedWeapon::Server_SetIsCharging_Implementation(bool isCharging) {
 
 
 void AChargedWeapon::OnRep_Charging() {
+}
+
+void AChargedWeapon::OnHeatBonusProjectileSpawned(AProjectileBase* Projectile) {
+}
+
+float AChargedWeapon::GetTotalHeat() const {
+    return 0.0f;
 }
 
 bool AChargedWeapon::GetIsCharging() const {

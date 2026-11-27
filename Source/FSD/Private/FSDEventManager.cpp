@@ -2,6 +2,7 @@
 
 UFSDEventManager::UFSDEventManager() {
     this->NumFailedRequests = 0;
+    this->NumFailedActiveEventsRequests = 0;
     this->BackendDataValid = false;
     this->NextCheckTime = 0.00f;
     this->SeasonExpirationTimeValid = false;

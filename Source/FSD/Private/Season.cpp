@@ -9,9 +9,12 @@ USeason::USeason() {
     this->NumberOfScripChallenges = 0;
     this->ScripChallenge = NULL;
     this->SeasonWaveInMissionChance = 0.00f;
-    this->SeasonWarning = NULL;
     this->CaveDepthMultiplier = 1.00f;
     this->HeartsColledtedStat = NULL;
+    this->OssiumCrystalCollectedStat = NULL;
+    this->ScripFragmentCollectedStat = NULL;
+    this->FragmentsPerScrip = 3;
+    this->MaxScripsFromFragments = 15;
 }
 
 UTexture2D* USeason::GetTokenTexture(int32 tokenCount, bool hasEffect) const {

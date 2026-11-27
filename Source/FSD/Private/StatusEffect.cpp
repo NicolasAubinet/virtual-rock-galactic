@@ -9,8 +9,10 @@ UStatusEffect::UStatusEffect() {
     this->TriggerTwiceOnPush = false;
     this->CanStack = false;
     this->MaxStack = 10;
+    this->StacksDecrements = false;
     this->Duration = -1.00f;
     this->ApplyDurationAfterPop = false;
+    this->FlashOnApplyDurationAfterPop = false;
     this->RemoveOnDeath = true;
     this->RemoveOnTemperatureStateChange = false;
     this->AllowExternalSread = false;
@@ -22,6 +24,10 @@ bool UStatusEffect::ShouldInstantiate_Implementation() const {
 }
 
 float UStatusEffect::GetStatusEffectDuration(TSubclassOf<UStatusEffect> StatusEffect) {
+    return 0.0f;
+}
+
+float UStatusEffect::GetDuration() const {
     return 0.0f;
 }
 

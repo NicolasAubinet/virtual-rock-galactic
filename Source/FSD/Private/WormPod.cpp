@@ -22,8 +22,8 @@ AWormPod::AWormPod(const FObjectInitializer& ObjectInitializer) : Super(ObjectIn
     this->ParentDeathDelay = 1.00f;
     this->DeathDelayVariance = 0.50f;
     this->WormCount = 1;
-    this->ScalePoint->SetupAttachment(RootComponent);
     this->PodMesh->SetupAttachment(ScalePoint);
+    this->ScalePoint->SetupAttachment(RootComponent);
 }
 
 void AWormPod::SpawnWorms() {

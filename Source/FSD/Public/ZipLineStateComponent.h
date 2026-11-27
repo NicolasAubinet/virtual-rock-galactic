@@ -135,6 +135,9 @@ protected:
     void ReceiveSpeedBoostActivated();
     
     UFUNCTION(BlueprintCallable)
+    void OnStatusCharacterStateChanged(float DeltaSeconds, FVector OldLocation, FVector OldVelocity);
+    
+    UFUNCTION(BlueprintCallable)
     void OnRep_ZipLine();
     
     UFUNCTION(BlueprintCallable)

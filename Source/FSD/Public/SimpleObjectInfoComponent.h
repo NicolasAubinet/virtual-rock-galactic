@@ -55,6 +55,9 @@ public:
     USimpleObjectInfoComponent(const FObjectInitializer& ObjectInitializer);
 
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void SetInGameNameText(const FText& GameName);
+    
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void SetInGameName(const FString& GameName);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)

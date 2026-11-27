@@ -13,6 +13,9 @@ void UCapacityHoldingItemAggregator::UseAmmo(int32 Count) {
 void UCapacityHoldingItemAggregator::SetMaxAmmo(int32 InMaxAmmo, bool InChangeCurrentAmount) {
 }
 
+void UCapacityHoldingItemAggregator::SetAmmo(int32 Count) {
+}
+
 void UCapacityHoldingItemAggregator::Resupply(float percentage) {
 }
 

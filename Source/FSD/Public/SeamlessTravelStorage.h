@@ -33,6 +33,9 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TSet<USeamlessTravelEventKey*> EventKeys;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TMap<UPlayer*, int32> LiquidCourageCharges;
+    
     USeamlessTravelStorage();
 
     UFUNCTION(BlueprintCallable)

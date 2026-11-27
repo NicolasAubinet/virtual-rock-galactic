@@ -43,8 +43,8 @@ ACryosprayItem::ACryosprayItem(const FObjectInitializer& ObjectInitializer) : Su
     this->RePressureProgress = 0.00f;
     this->LongReachEnabled = false;
     this->AoEColdEnabled = false;
-    this->VelocityAudio->SetupAttachment(FPMesh);
     this->ChargeUpAudioComponent->SetupAttachment(RootComponent);
+    this->VelocityAudio->SetupAttachment(FPMesh);
 }
 
 void ACryosprayItem::ServerDoDamage_Implementation(FVector_NetQuantize Start, FVector_NetQuantize End, uint8 Power) {

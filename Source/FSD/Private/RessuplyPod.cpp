@@ -13,6 +13,7 @@ ARessuplyPod::ARessuplyPod(const FObjectInitializer& ObjectInitializer) : Super(
     this->KillRadius = 150.00f;
     this->DropHeight = 3500.00f;
     this->DropDelay = 0.00f;
+    this->DropSpeedMultiplier = 1.00f;
     this->MissionShoutDelay = 2.00f;
     this->ShoutDialogOrderAccepted = NULL;
     this->DialogOrderAccepted = NULL;
@@ -39,13 +40,14 @@ void ARessuplyPod::OnRep_State(ERessuplyPodState oldState) {
 
 
 
-AActor* ARessuplyPod::DropToTarget(UObject* WorldContextObject, TSubclassOf<ARessuplyPod> podClass, const FVector& Location, AActor* requester) {
+AActor* ARessuplyPod::DropToTarget(UObject* WorldContextObject, TSubclassOf<ARessuplyPod> podClass, const FVector& Location, AActor* requester, UDialogDataAsset* dialogOrderAcceptedOverride) {
     return NULL;
 }
 
 void ARessuplyPod::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
     Super::GetLifetimeReplicatedProps(OutLifetimeProps);
     
+    DOREPLIFETIME(ARessuplyPod, DropSpeedMultiplier);
     DOREPLIFETIME(ARessuplyPod, TargetLocation);
     DOREPLIFETIME(ARessuplyPod, State);
     DOREPLIFETIME(ARessuplyPod, ServerDropProgress);

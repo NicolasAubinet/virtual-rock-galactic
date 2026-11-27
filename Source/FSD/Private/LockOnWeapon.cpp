@@ -15,6 +15,7 @@ ALockOnWeapon::ALockOnWeapon(const FObjectInitializer& ObjectInitializer) : Supe
     this->bPrioritizeLowHitPoint = false;
     this->bAlwaysHitTarget = false;
     this->MaxLockOnDuration = -1.00f;
+    this->LockOnExpirationWarningTime = 1.00f;
     this->RateOfFireLockedOnModifier = 1.00f;
     this->bLockOnControlsSentryGun = false;
     this->bSentryGunShootsOnLockedShot = false;

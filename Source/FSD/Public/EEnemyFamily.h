@@ -18,5 +18,6 @@ enum class EEnemyFamily : uint8 {
     Lithophage,
     Infector,
     CoreSpawn,
+    Ossiran,
 };
 

@@ -9,5 +9,6 @@ enum class EFSDTargetPlatform : uint8 {
     Win10,
     PS4,
     PS5,
+    EOS,
 };
 

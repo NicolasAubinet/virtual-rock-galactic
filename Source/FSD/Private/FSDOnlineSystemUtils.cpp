@@ -12,6 +12,9 @@ void UFSDOnlineSystemUtils::ShowUpgradeAccountUI() {
 void UFSDOnlineSystemUtils::ShowAccountPicker(UFSDGameInstance* gInstance, const int32 GamePlayerID) {
 }
 
+void UFSDOnlineSystemUtils::OpenURLInOverlayWithUTM(const FString& URL, const FString& Location, const FString& trackingID, FOnShowWebUrlClosedBP OnOverlayClosed) {
+}
+
 void UFSDOnlineSystemUtils::OpenURLInOverlay(const FString& URL, FOnShowWebUrlClosedBP OnOverlayClosed) {
 }
 

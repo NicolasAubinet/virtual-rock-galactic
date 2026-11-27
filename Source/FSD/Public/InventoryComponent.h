@@ -25,6 +25,7 @@ class ATerrainScannerItem;
 class AThrownGrenadeItem;
 class UDialogDataAsset;
 class UInventoryList;
+class UItemID;
 class UItemUpgrade;
 class USoundCue;
 
@@ -62,9 +63,15 @@ public:
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FCarriableChangedDelegate OnCarriableChangedEvent;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FItemDelegate OnPerkItemInstanced;
+    
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UInventoryList* InventoryList;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    UItemID* RuntimePerkItemOverride;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<AThrownGrenadeItem> ThrownGrenadeClass;
@@ -125,6 +132,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     ARessuplyPodItem* ResupplyItem;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    AItem* PerkItem;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     ARecallableSentryGunItem* RecallableSentryGunItem;

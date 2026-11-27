@@ -83,7 +83,7 @@ protected:
     TSoftObjectPtr<UTexture2D> UsableIcon;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    float useDuration;
+    float UseDuration;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float Progress;

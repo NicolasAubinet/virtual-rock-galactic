@@ -8,6 +8,7 @@ class UAnimMontage;
 class UItemCharacterAnimationSet;
 class UPlayerAnimInstance;
 class USkeletalMeshComponent;
+class USkinnableComponent;
 
 UCLASS(Abstract, Blueprintable)
 class ADualAnimatedItem : public AItem {
@@ -31,6 +32,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* TPLMesh;
+    
+    UPROPERTY(AssetRegistrySearchable, BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
+    USkinnableComponent* Skinnable;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UAnimMontage* FP_EquipAnimation;

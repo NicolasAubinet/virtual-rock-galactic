@@ -31,7 +31,7 @@ void ATerminatorTentacle::OnGrabbedActorReleased(AActor* Actor, bool fullGrabEla
 void ATerminatorTentacle::OnDeathEvent(UHealthComponentBase* EnemyHealth) {
 }
 
-void ATerminatorTentacle::MoveToGrabTarget(AActor* Target, float grabDuration) {
+void ATerminatorTentacle::MoveToGrabTarget(AActor* Target, float GrabDuration) {
 }
 
 void ATerminatorTentacle::ChangeTentacleState(ETerminatorTentacleState NewState) {

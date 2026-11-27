@@ -1,6 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "HitNonOverhealDelegateDelegate.h"
+#include "HitNothingDelegateDelegate.h"
 #include "HitscanBaseComponent.h"
+#include "OverhealEffectDelegateDelegate.h"
 #include "ReflectiveHitscanHit.h"
 #include "ReflectionHitscanComponent.generated.h"
 
@@ -10,6 +13,18 @@ UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UReflectionHitscanComponent : public UHitscanBaseComponent {
     GENERATED_BODY()
 public:
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FOverhealEffectDelegate OnOverhealEffect;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FHitNothingDelegate OnNonPlayerTurretHit;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FHitNonOverhealDelegate OnNonOverhealHit;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FOverhealEffectDelegate OnPlayerHealHit;
+    
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UTerrainType* PlatformTerrainType;
@@ -28,6 +43,12 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 ReflectionCount;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float StickyFriendlyBeamRadius;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float StickyTurretBeamRadius;
     
 public:
     UReflectionHitscanComponent(const FObjectInitializer& ObjectInitializer);

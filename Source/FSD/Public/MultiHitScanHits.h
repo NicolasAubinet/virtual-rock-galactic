@@ -1,5 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "Engine/NetSerialization.h"
 #include "MultiHitscanHit.h"
 #include "MultiHitScanHits.generated.h"
 
@@ -18,6 +19,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<UFSDPhysicalMaterial*> PhysicalMaterials;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TArray<FVector_NetQuantize> SpawnLocations;
     
     FSD_API FMultiHitScanHits();
 };

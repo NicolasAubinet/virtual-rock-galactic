@@ -4,6 +4,7 @@
 
 UInventoryComponent::UInventoryComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
     this->InventoryList = NULL;
+    this->RuntimePerkItemOverride = NULL;
     this->ThrownGrenadeClass = NULL;
     this->flareClass = NULL;
     this->OutOfFlaresSound = NULL;
@@ -21,6 +22,7 @@ UInventoryComponent::UInventoryComponent(const FObjectInitializer& ObjectInitial
     this->LaserPointerItem = NULL;
     this->TerrainScannerItem = NULL;
     this->ResupplyItem = NULL;
+    this->PerkItem = NULL;
     this->RecallableSentryGunItem = NULL;
 }
 

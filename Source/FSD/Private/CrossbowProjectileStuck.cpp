@@ -26,7 +26,7 @@ void ACrossbowProjectileStuck::OnUsedBy(APlayerCharacter* Player, EInputKeys Key
 void ACrossbowProjectileStuck::OnRep_BansheePulseEnabled() {
 }
 
-void ACrossbowProjectileStuck::MatchParentDestroy(UHealthComponentBase* destroyed) {
+void ACrossbowProjectileStuck::MatchParentDestroy(UHealthComponentBase* Destroyed) {
 }
 
 bool ACrossbowProjectileStuck::IsLocallyControlled() const {

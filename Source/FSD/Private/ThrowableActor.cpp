@@ -1,12 +1,12 @@
 #include "ThrowableActor.h"
-#include "GameFramework/ProjectileMovementComponent.h"
+#include "GravityZoneAwareProjectileMovementComponent.h"
 #include "Net/UnrealNetwork.h"
 
 AThrowableActor::AThrowableActor(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
     this->bReplicates = true;
     const FProperty* p_RemoteRole = GetClass()->FindPropertyByName("RemoteRole");
     (*p_RemoteRole->ContainerPtrToValuePtr<TEnumAsByte<ENetRole>>(this)) = ROLE_SimulatedProxy;
-    this->Movement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovement"));
+    this->Movement = CreateDefaultSubobject<UGravityZoneAwareProjectileMovementComponent>(TEXT("ProjectileMovement"));
     this->IsMoving = true;
     this->IgnoreFellOutOfWorld = false;
     this->IgnoreOwnersCollision = true;

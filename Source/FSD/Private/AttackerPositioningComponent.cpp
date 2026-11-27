@@ -4,11 +4,12 @@ UAttackerPositioningComponent::UAttackerPositioningComponent(const FObjectInitia
     this->bAutoActivate = true;
     this->DebugPositions = false;
     this->MaxAttackers = 32;
+    this->BonusAttackers = 0;
     this->FreePositions.AddDefaulted(32);
     this->FlyingFreePositions.AddDefaulted(32);
     this->CharacterPersonalSphere = 60.00f;
     this->CharacterHalfHeight = 60.00f;
-    this->CostModifier = 1.00f;
+    this->ScoreModifier = 1.00f;
 }
 
 void UAttackerPositioningComponent::UnregisterAttacker(AActor* Attacker, bool IsFlying) {
@@ -21,6 +22,10 @@ void UAttackerPositioningComponent::OnFlyingAttackerDeath(UHealthComponentBase* 
 }
 
 void UAttackerPositioningComponent::OnAttackerDeath(UHealthComponentBase* HealthComponent) {
+}
+
+bool UAttackerPositioningComponent::IsAttackerRegistered(AActor* Attacker, bool IsFlying) {
+    return false;
 }
 
 FVector UAttackerPositioningComponent::GetFlyingAttackerPosition(AActor* Attacker, float AttackerRadius) {

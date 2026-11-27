@@ -2,9 +2,12 @@
 #include "Net/UnrealNetwork.h"
 
 ARessuplyPodItem::ARessuplyPodItem(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->bIsPerkUse = false;
     this->ResupplyBeacon = NULL;
     this->ItemPlacerClass = NULL;
+    this->ItemPlacerClassPerkUse = NULL;
     this->ItemPlacerInstance = NULL;
+    this->ItemPlacerInstancePerkUse = NULL;
     this->SupplyPodClass = NULL;
     this->ResourceCost = 0;
     this->CoolDown = 0.00f;
@@ -13,6 +16,7 @@ ARessuplyPodItem::ARessuplyPodItem(const FObjectInitializer& ObjectInitializer) 
 
 void ARessuplyPodItem::Server_Call_Resupply_Implementation(const FVector& Location) {
 }
+
 
 
 void ARessuplyPodItem::OnRep_Used() {

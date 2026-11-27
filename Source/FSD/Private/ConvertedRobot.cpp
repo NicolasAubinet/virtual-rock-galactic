@@ -62,6 +62,7 @@ AConvertedRobot::AConvertedRobot(const FObjectInitializer& ObjectInitializer) : 
     this->MaxParasiteSlots = 3;
     this->ChanceToSpawnParasite = 0.00f;
     this->ParasiteClass = NULL;
+    this->RepairStarted = false;
     this->SpinTurret = false;
     this->SpecialAttackProjectile = NULL;
     this->FriendlyProjectile = NULL;
@@ -90,16 +91,16 @@ AConvertedRobot::AConvertedRobot(const FObjectInitializer& ObjectInitializer) : 
     this->IsDoingSpecialAttack = false;
     this->TurretRotation = NULL;
     this->CurrentTarget = NULL;
-    this->TurretRoot->SetupAttachment(Mesh);
-    this->TurretMesh->SetupAttachment(TurretRoot);
-    this->MuzzleFlash->SetupAttachment(TurretMesh);
-    this->SpotLight->SetupAttachment(TurretMesh);
-    this->LightCone->SetupAttachment(TurretMesh);
-    this->LaserBeam->SetupAttachment(TurretMesh);
-    this->ShieldRoot->SetupAttachment(Mesh);
     this->InnerShield->SetupAttachment(ShieldRoot);
+    this->LaserBeam->SetupAttachment(TurretMesh);
+    this->LightCone->SetupAttachment(TurretMesh);
+    this->MuzzleFlash->SetupAttachment(TurretMesh);
     this->OuterShield->SetupAttachment(InnerShield);
     this->PulsatingSoundComp->SetupAttachment(Mesh);
+    this->ShieldRoot->SetupAttachment(Mesh);
+    this->SpotLight->SetupAttachment(TurretMesh);
+    this->TurretMesh->SetupAttachment(TurretRoot);
+    this->TurretRoot->SetupAttachment(Mesh);
 }
 
 void AConvertedRobot::UpdateGunsInsideTerrain() {
@@ -117,6 +118,9 @@ void AConvertedRobot::OnWeaponsFired(const FVector& aHitResult) {
 void AConvertedRobot::OnUsed(APlayerCharacter* aUser, EInputKeys Key) {
 }
 
+void AConvertedRobot::OnUseBegin(APlayerCharacter* aUser, EInputKeys Key) {
+}
+
 void AConvertedRobot::OnSeePawn(APawn* APawn) {
 }
 
@@ -127,6 +131,9 @@ void AConvertedRobot::OnRep_Target() {
 }
 
 void AConvertedRobot::OnRep_SpinTurret() {
+}
+
+void AConvertedRobot::OnRep_RepairStarted() {
 }
 
 void AConvertedRobot::OnRep_IsIntroducting() {
@@ -153,6 +160,10 @@ TArray<AActor*> AConvertedRobot::GetParasites() const {
     return TArray<AActor*>();
 }
 
+bool AConvertedRobot::GetHasRepairStarted() const {
+    return false;
+}
+
 bool AConvertedRobot::GetHasPoweredDown() const {
     return false;
 }
@@ -162,6 +173,7 @@ void AConvertedRobot::DestroyAttatchPoint_Implementation(USceneComponent* aCompo
 
 void AConvertedRobot::CannonEffects_Implementation() {
 }
+
 
 
 
@@ -176,6 +188,7 @@ void AConvertedRobot::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutL
     DOREPLIFETIME(AConvertedRobot, TargetShieldSize);
     DOREPLIFETIME(AConvertedRobot, IsFiring);
     DOREPLIFETIME(AConvertedRobot, Parasites);
+    DOREPLIFETIME(AConvertedRobot, RepairStarted);
     DOREPLIFETIME(AConvertedRobot, SpinTurret);
     DOREPLIFETIME(AConvertedRobot, HasLockedOn);
     DOREPLIFETIME(AConvertedRobot, StartedSpecialAttack);

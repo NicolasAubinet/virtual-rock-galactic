@@ -29,6 +29,9 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UTagVanityCategory* Sideburns;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UTagVanityCategory* Tattoos;
+    
     FSD_API FVanityTagCategories();
 };
 

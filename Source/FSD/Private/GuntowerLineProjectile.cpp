@@ -12,9 +12,9 @@ AGuntowerLineProjectile::AGuntowerLineProjectile(const FObjectInitializer& Objec
     this->PlatformDissolveSqueeze = 3.00f;
     this->HitParticles = NULL;
     this->TimeBetweenLineChecks = 0.00f;
+    this->BeamParticles->SetupAttachment(RootComponent);
     this->LeftLinePoint->SetupAttachment(RootComponent);
     this->RightLinePoint->SetupAttachment(RootComponent);
-    this->BeamParticles->SetupAttachment(RootComponent);
 }
 
 void AGuntowerLineProjectile::TurnOffParticles() {

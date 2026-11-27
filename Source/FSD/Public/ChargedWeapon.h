@@ -4,7 +4,9 @@
 #include "ChargeChangedSignatureDelegate.h"
 #include "ChargedWeapon.generated.h"
 
+class AProjectileBase;
 class UAnimMontage;
+class UDamageClass;
 class UFXSystemAsset;
 class UFXSystemComponent;
 class USoundCue;
@@ -86,6 +88,12 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float HeatPerChargedShot;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float HeatBonusDamageMultiplier;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UDamageClass* HeatBonusDamageClass;
+    
 public:
     AChargedWeapon(const FObjectInitializer& ObjectInitializer);
 
@@ -115,7 +123,13 @@ protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_Charging();
     
+    UFUNCTION(BlueprintCallable)
+    void OnHeatBonusProjectileSpawned(AProjectileBase* Projectile);
+    
 public:
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    float GetTotalHeat() const;
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetIsCharging() const;
     

@@ -35,6 +35,9 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContext"))
     static void GetPerkTierState(UObject* WorldContext, int32 Tier, bool& TierUnLocked, int32& NextRequiredCount, int32& NextProgressCount);
     
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    static int32 GetPerkResetCost();
+    
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContext"))
     static void GetPerkEquipSlots(UObject* WorldContext, EPerkUsageType InType, TSubclassOf<APlayerCharacter> InCharacterClass, int32& OutAvailableSlots, int32& OutUnavailableSlots, int32& OutPromotionLockedSlots);
     
@@ -67,6 +70,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContext"))
     static int32 CalculateClaimablePerkPoints(UObject* WorldContext);
+    
+    UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
+    static bool BuyPerkReset(UObject* WorldContext);
     
 };
 

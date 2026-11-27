@@ -6,6 +6,7 @@ UPlayerMovementComponent::UPlayerMovementComponent(const FObjectInitializer& Obj
     this->LedgeClimbZVelocity = 0.00f;
     this->MovementPenalty = 1.00f;
     this->Character = NULL;
+    this->TerminalVelocityDecelerationRate = 3000.00f;
 }
 
 void UPlayerMovementComponent::RemoveGravityModifier(AActor* SourceActor) {

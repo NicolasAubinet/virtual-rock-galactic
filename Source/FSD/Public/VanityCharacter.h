@@ -20,6 +20,8 @@ class UMoustacheVanityItem;
 class USideburnsVanityItem;
 class USkeletalMeshComponent;
 class USkinColorVanityItem;
+class UTattooLeftVanityItem;
+class UTattooRightVanityItem;
 
 UCLASS(Blueprintable)
 class AVanityCharacter : public AActor {
@@ -34,6 +36,12 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USkinColorVanityItem* skinColor;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UTattooRightVanityItem* RightTattoo;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UTattooLeftVanityItem* LeftTattoo;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UBeardColorVanityItem* BeardColor;

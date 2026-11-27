@@ -31,4 +31,12 @@ APlayerCharacter* UPlayerCharacterFunctionLibrary::GetNearestPlayer(AActor* from
     return NULL;
 }
 
+bool UPlayerCharacterFunctionLibrary::GetLocalCameraLocation(UObject* WorldContextObject, FVector& OutLocation, FRotator& OutRotation) {
+    return false;
+}
+
+bool UPlayerCharacterFunctionLibrary::GetClosestPointOnSegmentToLocalCamera(UObject* WorldContextObject, FVector SegmentStart, FVector SegmentEnd, FVector& OutLocation, float ForwardOffset) {
+    return false;
+}
+
 

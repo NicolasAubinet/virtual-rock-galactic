@@ -70,6 +70,12 @@ public:
     int32 GetFullStackAmount(TSubclassOf<UStatusEffect> StatusEffect) const;
     
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
+    bool ForcePopActiveStatusEffectInstance(UStatusEffect* StatusEffect, AActor* Owner);
+    
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
+    bool ForcePopActiveStatusEffect(TSubclassOf<UStatusEffect> StatusEffect, AActor* Owner);
+    
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     static UStatusEffect* CreateStatusEffectInstance(TSubclassOf<UStatusEffect> StatusEffect, UObject* Owner);
     
 };

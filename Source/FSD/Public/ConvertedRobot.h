@@ -199,6 +199,9 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<AParasiteEnemy> ParasiteClass;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_RepairStarted, meta=(AllowPrivateAccess=true))
+    bool RepairStarted;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_SpinTurret, meta=(AllowPrivateAccess=true))
     bool SpinTurret;
     
@@ -310,6 +313,9 @@ protected:
     UFUNCTION(BlueprintCallable)
     void OnUsed(APlayerCharacter* aUser, EInputKeys Key);
     
+    UFUNCTION(BlueprintCallable)
+    void OnUseBegin(APlayerCharacter* aUser, EInputKeys Key);
+    
 public:
     UFUNCTION(BlueprintCallable)
     void OnSeePawn(APawn* APawn);
@@ -323,6 +329,9 @@ protected:
     
     UFUNCTION(BlueprintCallable)
     void OnRep_SpinTurret();
+    
+    UFUNCTION(BlueprintCallable)
+    void OnRep_RepairStarted();
     
     UFUNCTION(BlueprintCallable)
     void OnRep_IsIntroducting();
@@ -347,6 +356,9 @@ public:
     TArray<AActor*> GetParasites() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool GetHasRepairStarted() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetHasPoweredDown() const;
     
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
@@ -362,6 +374,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void BP_OnShieldChanged(bool isGrowing);
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void BP_OnRepairStarted();
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void BP_OnInstroduce();

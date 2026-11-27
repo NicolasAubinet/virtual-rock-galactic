@@ -132,6 +132,9 @@ public:
     static bool FSDIsEliteDeepDive(const FBlueprintSessionResult& Result);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    static bool FSDIsCrossplayEnabledServer(const FBlueprintSessionResult& Result);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     static bool FSDIsClassLocked(const FBlueprintSessionResult& Result);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)

@@ -11,7 +11,6 @@ AAutoCannon::AAutoCannon(const FObjectInitializer& ObjectInitializer) : Super(Ob
     this->FireTimeOffsetForMaxRateOfFireBonus = -0.50f;
     this->StartLoopingSoundAt = 1.00f;
     this->StatusAtFullROF = NULL;
-    this->WPN_Fire_2 = NULL;
     this->CurrentFireTime = 0.00f;
 }
 

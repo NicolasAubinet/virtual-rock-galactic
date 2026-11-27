@@ -14,6 +14,7 @@
 AFSDGameState::AFSDGameState(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
     this->CurrentLevel = -1;
     this->EscapePod = NULL;
+    this->DropPodLandedTimeStamp = -1.00f;
     this->bTeamDown = false;
     this->CSGWorld = NULL;
     this->LastSupplyPodTimeStamp = 0;
@@ -21,6 +22,7 @@ AFSDGameState::AFSDGameState(const FObjectInitializer& ObjectInitializer) : Supe
     this->ProceduralSetup = NULL;
     this->DelayLateJoin = false;
     this->FakeMovementBase = NULL;
+    this->DeadPlayerCount = 0;
     this->PlayerSurvivalCreditBonus = 100;
     this->ResourceAmountPenalty = 0.25f;
     this->ObjectivesCreditPenalty = 0.25f;
@@ -215,6 +217,10 @@ UDifficultyManager* AFSDGameState::GetDifficultyManager() const {
     return NULL;
 }
 
+int32 AFSDGameState::GetDeadPlayerCount() {
+    return 0;
+}
+
 FGameDifficulty AFSDGameState::GetCurrentGameDifficulty() const {
     return FGameDifficulty{};
 }
@@ -233,6 +239,12 @@ TArray<UFSDEvent*> AFSDGameState::GetActiveEventsFromMission() const {
 
 UObjective* AFSDGameState::FindObjective(TSubclassOf<UObjective> SubClass) const {
     return NULL;
+}
+
+void AFSDGameState::DwarfRevived() {
+}
+
+void AFSDGameState::DwarfDied() {
 }
 
 void AFSDGameState::ClientNewMessage_Implementation(const FFSDChatMessage& Msg) {
@@ -262,6 +274,7 @@ void AFSDGameState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLif
     
     DOREPLIFETIME(AFSDGameState, CurrentLevel);
     DOREPLIFETIME(AFSDGameState, EscapePod);
+    DOREPLIFETIME(AFSDGameState, DropPodLandedTimeStamp);
     DOREPLIFETIME(AFSDGameState, FSDSessionID);
     DOREPLIFETIME(AFSDGameState, BoscoReviveCounter);
     DOREPLIFETIME(AFSDGameState, ActivePlayerCharacters);

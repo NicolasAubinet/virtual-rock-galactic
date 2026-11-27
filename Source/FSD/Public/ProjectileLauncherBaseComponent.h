@@ -2,6 +2,7 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "Engine/NetSerialization.h"
+#include "ProjectileSpreadChangedDelegateDelegate.h"
 #include "WeaponFireComponent.h"
 #include "ProjectileLauncherBaseComponent.generated.h"
 
@@ -30,6 +31,9 @@ public:
     float HorizontalSpread;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FProjectileSpreadChangedDelegate OnSpreadChanged;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FProjectileSpawned OnProjectileSpawned;
     
 protected:
@@ -55,6 +59,14 @@ protected:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_Fire(FTransform Transform, FVector_NetQuantizeNormal initialBonusVelocity, AProjectileBase* DormentProjectile, bool notifyClients);
     
+public:
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    float GetCurrentVerticalSpread() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    float GetCurrentHorizontalSpread() const;
+    
+protected:
     UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
     void All_ShowHit();
     

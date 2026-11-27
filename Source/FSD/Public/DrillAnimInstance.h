@@ -10,7 +10,7 @@ class UDrillAnimInstance : public UAnimInstance {
     GENERATED_BODY()
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    ARockCrackerDrill* Drill;
+    ARockCrackerDrill* drill;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float BuildProgress;

@@ -81,7 +81,7 @@ public:
     float GetCapacityPct() const;
     
     UFUNCTION(BlueprintCallable)
-    float Deduct(float amount);
+    float Deduct(float amount, bool bAllowNegativeBalance);
     
     UFUNCTION(BlueprintCallable)
     float Add(float amount);

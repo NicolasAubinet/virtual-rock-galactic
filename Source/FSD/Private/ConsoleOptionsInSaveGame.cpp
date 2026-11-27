@@ -20,6 +20,7 @@ FConsoleOptionsInSaveGame::FConsoleOptionsInSaveGame() {
     this->TinnitusProtection = false;
     this->OverlayIntensityScale = 0.00f;
     this->bHoldToSprint = false;
+    this->SprintMode = ESprintMode::PressToSprint;
     this->bToggleLaserPointer = false;
     this->bToggleTerrainScanner = false;
     this->bUseMouseSmoothing = false;

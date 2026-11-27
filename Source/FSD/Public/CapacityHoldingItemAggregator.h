@@ -31,6 +31,9 @@ public:
     void SetMaxAmmo(int32 InMaxAmmo, bool InChangeCurrentAmount);
     
     UFUNCTION(BlueprintCallable)
+    void SetAmmo(int32 Count);
+    
+    UFUNCTION(BlueprintCallable)
     void Resupply(float percentage);
     
 protected:

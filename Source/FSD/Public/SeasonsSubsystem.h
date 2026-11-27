@@ -111,6 +111,9 @@ public:
     bool HasClaimedAllRewards() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    int32 GetUnusedScripFragments();
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetUnusedHearts();
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -152,6 +155,9 @@ public:
     UFUNCTION(BlueprintCallable)
     void GetScriptChallengeInfo(int32& Completed, int32& claimed, int32& Total);
     
+    UFUNCTION(BlueprintCallable)
+    void GetScripBonusState(int32 widgetIndex, int32& numberOfFragments, bool& bIsClaimed);
+    
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     int32 GetNumberOfTokens(UObject* WorldContextObject);
     
@@ -176,11 +182,17 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     USeason* GetCurrentSeason() const;
     
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    int32 GetClaimedBonusScrips();
+    
     UFUNCTION(BlueprintCallable)
     TArray<UDataAsset*> GetAssetReferences(int32 ChallengeIndex, USeasonChallenge*& outChallenge);
     
     UFUNCTION(BlueprintCallable)
     TArray<FChallengeInfo> GetActiveChallenges(bool canGenerateNewChallenge);
+    
+    UFUNCTION(BlueprintCallable)
+    bool ConvertScripFragmentsToScrip(int32& scripGained);
     
     UFUNCTION(BlueprintCallable)
     bool ConvertHeartsToScrip(int32& scripGained);

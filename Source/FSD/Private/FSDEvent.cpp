@@ -11,6 +11,7 @@ UFSDEvent::UFSDEvent() {
     this->UseDifferentBarLightColor = false;
     this->bIsEventDebrisInDeepDives = true;
     this->bHasClaimableRewards = false;
+    this->bHasEventEndTime = false;
 }
 
 void UFSDEvent::MarkClaimableRewardsSeen(UObject* WorldContext) {

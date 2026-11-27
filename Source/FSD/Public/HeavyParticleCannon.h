@@ -2,20 +2,25 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
+#include "Engine/EngineTypes.h"
 #include "AmmoDrivenWeapon.h"
 #include "BoosterModuleActiveDelegate.h"
+#include "ChangeParticleCannonTargetSoundDelegate.h"
 #include "DecalData.h"
+#include "ETargetSound.h"
 #include "ReflectionTraceResult.h"
 #include "HeavyParticleCannon.generated.h"
 
 class AActor;
 class UDamageComponent;
+class UFSDAudioComponent;
 class UFSDPhysicalMaterial;
 class UFirstPersonNiagaraComponent;
 class UNiagaraComponent;
 class UNiagaraSystem;
 class UReflectionHitscanComponent;
 class USoundBase;
+class USoundCue;
 class UStickyFlameSpawner;
 class UTerrainType;
 
@@ -24,6 +29,30 @@ class AHeavyParticleCannon : public AAmmoDrivenWeapon {
     GENERATED_BODY()
 public:
 protected:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    USoundCue* ShieldChargingSound;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    USoundCue* ShieldOverchargingSound;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float ShieldSoundRandomStartMax;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float ShieldSoundFadeTime;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
+    UFSDAudioComponent* ShieldTransferAudio;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_TargetSound, meta=(AllowPrivateAccess=true))
+    ETargetSound CurrentTargetSound;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    USoundCue* ActiveShieldCue;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FChangeParticleCannonTargetSound ChangeTargetSoundDelegate;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UDamageComponent* Damage;
     
@@ -37,10 +66,22 @@ protected:
     UFirstPersonNiagaraComponent* FirstPersonBeam;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
+    TArray<UFirstPersonNiagaraComponent*> FirstPersonShotgunBeams;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UFirstPersonNiagaraComponent* FirstPersonLaserSight;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UNiagaraComponent* ThirdPersonBeam;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
+    TArray<UNiagaraComponent*> ThirdPersonShotgunBeams;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
+    TArray<UNiagaraComponent*> ReflectedBeams;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
+    TArray<UNiagaraComponent*> ShotgunBeams;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundBase* BeamHitLocationGenericSound;
@@ -82,7 +123,7 @@ protected:
     UNiagaraSystem* ProjectionModuleParticle;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
-    UNiagaraComponent* ImpactParticleComp;
+    TArray<UNiagaraComponent*> ImpactParticleComp;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FDecalData ImpactDecal_ShortTime;
@@ -156,6 +197,9 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_bIsBeamActive, meta=(AllowPrivateAccess=true))
     bool bIsBeamActive;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bDebugBeamHitSound;
+    
 public:
     AHeavyParticleCannon(const FObjectInitializer& ObjectInitializer);
 
@@ -181,10 +225,28 @@ protected:
     void OnTargetKilled(AActor* Target, UFSDPhysicalMaterial* PhysMat, bool wasDirectHit);
     
     UFUNCTION(BlueprintCallable)
+    void OnRep_TargetSound();
+    
+    UFUNCTION(BlueprintCallable)
     void OnRep_BoostActive();
     
     UFUNCTION(BlueprintCallable)
     void OnRep_bIsBeamActive();
+    
+    UFUNCTION(BlueprintCallable)
+    void OnPlayerHealHit(FVector Location, AActor* Target);
+    
+    UFUNCTION(BlueprintCallable)
+    void OnOverhealRadialDamage(FVector Location, AActor* Target);
+    
+    UFUNCTION(BlueprintCallable)
+    void OnNonOverhealHit();
+    
+    UFUNCTION(BlueprintCallable)
+    void OnHitNothing();
+    
+    UFUNCTION(BlueprintCallable)
+    void OnHit(const FHitResult& Hit, bool bAlwaysPenetrate);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void IsHittngEnemyChanged(bool isHittingEnemy);

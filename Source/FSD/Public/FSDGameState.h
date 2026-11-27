@@ -3,6 +3,8 @@
 #include "GameFramework/GameState.h"
 #include "Engine/LatentActionManager.h"
 #include "Engine/NetSerialization.h"
+#include "AnyDwarfDiedDelegate.h"
+#include "AnyDwarfRevivedDelegate.h"
 #include "BoolDelegateDelegate.h"
 #include "BoscoReviveCounterChangedDelegate.h"
 #include "CountDownStartedDelegate.h"
@@ -106,6 +108,9 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     ATeamTransport* EscapePod;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    float DropPodLandedTimeStamp;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_FSDSessionID, meta=(AllowPrivateAccess=true))
     FString FSDSessionID;
     
@@ -153,6 +158,15 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     UPrimitiveComponent* FakeMovementBase;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FAnyDwarfDied AnyDwarfDiedEvent;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FAnyDwarfRevived AnyDwarfRevivedEvent;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 DeadPlayerCount;
     
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -451,6 +465,9 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UDifficultyManager* GetDifficultyManager() const;
     
+    UFUNCTION(BlueprintCallable)
+    int32 GetDeadPlayerCount();
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FGameDifficulty GetCurrentGameDifficulty() const;
     
@@ -465,6 +482,12 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure=false)
     UObjective* FindObjective(TSubclassOf<UObjective> SubClass) const;
+    
+    UFUNCTION(BlueprintCallable)
+    void DwarfRevived();
+    
+    UFUNCTION(BlueprintCallable)
+    void DwarfDied();
     
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void ClientNewMessage(const FFSDChatMessage& Msg);

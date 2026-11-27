@@ -9,6 +9,7 @@
 #include "EEnemySignificance.h"
 #include "EVeteranScaling.h"
 #include "EnemyDebris.h"
+#include "EnemyRelocationParams.h"
 #include "SpawnRarityItem.h"
 #include "Templates/SubclassOf.h"
 #include "EnemyDescriptor.generated.h"
@@ -80,6 +81,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameplayTagQuery PlacementRoomQuery;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FEnemyRelocationParams EnemyRelocation;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float SpawnSpread;

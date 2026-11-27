@@ -5,6 +5,8 @@
 #include "ZipLineItem.generated.h"
 
 class UDialogDataAsset;
+class UMeshComponent;
+class USkinEffect;
 
 UCLASS(Abstract, Blueprintable)
 class AZipLineItem : public AAmmoDrivenWeapon {
@@ -29,6 +31,12 @@ protected:
 public:
     AZipLineItem(const FObjectInitializer& ObjectInitializer);
 
+    UFUNCTION(BlueprintCallable)
+    void SkinAdditionalMeshes(USkinEffect* Skin, UMeshComponent* Mesh);
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void OnItemSkinChanged(USkinEffect* Skin);
+    
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     bool CanFireWeapon(FText& FailMsg, UDialogDataAsset*& FailShout);

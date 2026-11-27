@@ -5,6 +5,8 @@ UEnemyRarityMutator::UEnemyRarityMutator() {
     this->SpawnAmountMultiplier = 1.00f;
     this->DifficultyMultiplier = 1.00f;
     this->EnemyDescriptor = NULL;
+    this->AddToEnemyPool = true;
+    this->PoolWeightMultiplier = 1.00f;
 }
 
 

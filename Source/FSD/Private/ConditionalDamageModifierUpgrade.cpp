@@ -3,6 +3,7 @@
 
 UConditionalDamageModifierUpgrade::UConditionalDamageModifierUpgrade() {
     this->Condition = NULL;
+    this->DamageComponentType = EDamageComponentType::Any;
 }
 
 FUpgradeValues UConditionalDamageModifierUpgrade::GetUpgradedValue(TSubclassOf<AActor> Item, AFSDPlayerState* Player) {

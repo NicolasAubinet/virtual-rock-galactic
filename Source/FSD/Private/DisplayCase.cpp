@@ -12,6 +12,7 @@ ADisplayCase::ADisplayCase(const FObjectInitializer& ObjectInitializer) : Super(
     this->RotationSpeed = 15.00f;
     this->BeerMugSpawnChancePercent = 0.00f;
     this->BarrelSpawnChancePercent = 0.10f;
+    this->bForceNeverPlayReactAnim = false;
     this->TimeMultiplier = 0.50f;
     this->SizeMultiplier = 1.00f;
     this->ContentIndex = -1;
@@ -35,7 +36,7 @@ bool ADisplayCase::IsSpecialContent() const {
 void ADisplayCase::InitializeCase() {
 }
 
-bool ADisplayCase::GetCurrentContent(FDisplayContent& currentContent) const {
+bool ADisplayCase::GetCurrentContent(FDisplayContent& CurrentContent) const {
     return false;
 }
 

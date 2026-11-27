@@ -22,10 +22,10 @@ bool UTerrainFunctionLibrary::DoesPathExist(UObject* WorldContextObject, FVector
     return false;
 }
 
-void UTerrainFunctionLibrary::CreateExplosionCrater2(UObject* WorldContextObject, FVector Location, float CarveDiameter, float carveNoiseSize, float carveBurnThickness, FVector Normal, float NormalOffset, float NormalSqueeze, bool allowCustomBurntMaterial, bool DissolvePlatforms, UTerrainMaterial* overrideBurnedMaterial) {
+void UTerrainFunctionLibrary::CreateExplosionCrater2(UObject* WorldContextObject, FVector Location, float CarveDiameter, float carveNoiseSize, float CarveBurnThickness, FVector Normal, float NormalOffset, float NormalSqueeze, bool allowCustomBurntMaterial, bool DissolvePlatforms, UTerrainMaterial* overrideBurnedMaterial) {
 }
 
-void UTerrainFunctionLibrary::CreateExplosionCrater(UObject* WorldContextObject, FVector Location, float CarveDiameter, float carveNoiseSize, float carveBurnThickness, bool allowCustomBurntMaterial, UTerrainMaterial* overrideBurnedMaterial) {
+void UTerrainFunctionLibrary::CreateExplosionCrater(UObject* WorldContextObject, FVector Location, float CarveDiameter, float carveNoiseSize, float CarveBurnThickness, bool allowCustomBurntMaterial, UTerrainMaterial* overrideBurnedMaterial) {
 }
 
 int32 UTerrainFunctionLibrary::CountDebrisOfType(UObject* WorldContextObject, ESpecialDebrisType debrisType) {

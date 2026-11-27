@@ -31,10 +31,10 @@ ANeedleSprayer::ANeedleSprayer(const FObjectInitializer& ObjectInitializer) : Su
     this->PlayAnimationOnReload = false;
     this->DrawDebugLines = false;
     this->DebugLinesDuration = 0.40f;
-    this->SKMesh->SetupAttachment(RootComponent);
+    this->ImpactParticleComponent->SetupAttachment(RootComponent);
     this->MuzzleFlashLight->SetupAttachment(SKMesh);
     this->MuzzleFlashParticleSys->SetupAttachment(MuzzleFlashLight);
-    this->ImpactParticleComponent->SetupAttachment(RootComponent);
+    this->SKMesh->SetupAttachment(RootComponent);
     this->ShotOriginPivot->SetupAttachment(SKMesh);
 }
 

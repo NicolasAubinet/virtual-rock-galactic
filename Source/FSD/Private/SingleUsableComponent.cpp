@@ -13,7 +13,7 @@ USingleUsableComponent::USingleUsableComponent(const FObjectInitializer& ObjectI
     this->TurnOffAfterUse = false;
     this->MultipleUse = false;
     this->bShowUsingUI = true;
-    this->useDuration = 0.00f;
+    this->UseDuration = 0.00f;
     this->Progress = 0.00f;
     this->DesiredProgress = 0.00f;
     this->userCount = 0;

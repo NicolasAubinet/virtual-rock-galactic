@@ -9,6 +9,7 @@ class AActor;
 class APlayerCharacter;
 class ARedeployableSentryGun;
 class ASentryElectroBeam;
+class AShieldDamageAndSoundActor;
 class UActorTrackingComponent;
 class UOutlineComponent;
 class USkeletalMeshComponent;
@@ -66,10 +67,16 @@ protected:
     AActor* ElectrocutionActor;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<AShieldDamageAndSoundActor> ShieldActorClass;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<AActor> EMPDischargeActorClass;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    float EMPDiscargeCooldown;
+    float EMPDischargeCooldown;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    AShieldDamageAndSoundActor* ShieldDischargeActor;
     
 public:
     ARedeployableSentryGun(const FObjectInitializer& ObjectInitializer);

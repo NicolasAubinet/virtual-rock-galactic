@@ -21,10 +21,10 @@ public:
     UEscortMuleAttackerPositioning(const FObjectInitializer& ObjectInitializer);
 
     UFUNCTION(BlueprintCallable)
-    void SetNewMaxAttackers(int32 newMaxAttackers);
+    void SetScoreModifier(float newModifier);
     
     UFUNCTION(BlueprintCallable)
-    void SetCostModifier(float newModifier);
+    void SetNewMaxAttackers(int32 newMaxAttackers);
     
 };
 

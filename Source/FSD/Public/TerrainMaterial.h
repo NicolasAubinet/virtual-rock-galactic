@@ -8,6 +8,7 @@
 #include "TerrainMaterial.generated.h"
 
 class UDialogDataAsset;
+class UFSDPhysicalMaterial;
 class UFXSystemAsset;
 class UFXSystemComponent;
 class UMaterialInstance;
@@ -108,10 +109,16 @@ public:
     bool IsPrecious() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    UFSDPhysicalMaterial* GetPhysicalMaterial() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     FText GetInGameName() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UMaterialInstance* GetDigParticlesMaterialOverride() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    USoundCue* GetCrumbleSound() const;
     
 };
 

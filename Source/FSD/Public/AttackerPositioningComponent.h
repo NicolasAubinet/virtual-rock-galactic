@@ -20,6 +20,9 @@ protected:
     int32 MaxAttackers;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    int32 BonusAttackers;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<FAttackerInfo> Attackers;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -38,7 +41,7 @@ protected:
     float CharacterHalfHeight;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    float CostModifier;
+    float ScoreModifier;
     
 public:
     UAttackerPositioningComponent(const FObjectInitializer& ObjectInitializer);
@@ -57,6 +60,9 @@ protected:
     void OnAttackerDeath(UHealthComponentBase* HealthComponent);
     
 public:
+    UFUNCTION(BlueprintCallable)
+    bool IsAttackerRegistered(AActor* Attacker, bool IsFlying);
+    
     UFUNCTION(BlueprintCallable)
     FVector GetFlyingAttackerPosition(AActor* Attacker, float AttackerRadius);
     

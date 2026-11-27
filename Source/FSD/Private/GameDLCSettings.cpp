@@ -1,6 +1,7 @@
 #include "GameDLCSettings.h"
 
 UGameDLCSettings::UGameDLCSettings() {
+    this->CurrentAdvertisedDLC = NULL;
 }
 
 TArray<UGameDLC*> UGameDLCSettings::GetStoreDLCs(UObject* WorldContext) {

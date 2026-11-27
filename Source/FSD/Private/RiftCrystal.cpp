@@ -70,21 +70,21 @@ ARiftCrystal::ARiftCrystal(const FObjectInitializer& ObjectInitializer) : Super(
     this->InitialCarvingDone = false;
     this->RotateBeamComponents = false;
     this->State = Default;
-    this->FlightRoot->SetupAttachment(RootComponent);
     this->Bobber->SetupAttachment(FlightRoot);
-    this->Rotator->SetupAttachment(Bobber);
+    this->CrystalIdleSound->SetupAttachment(CrystalMesh);
     this->CrystalMesh->SetupAttachment(Rotator);
-    this->WeakpointCollision->SetupAttachment(CrystalMesh);
-    this->Light->SetupAttachment(CrystalMesh);
-    this->LargeLight->SetupAttachment(CrystalMesh);
-    this->KnockBackCapsule->SetupAttachment(RootComponent);
-    this->SpaceCarver->SetupAttachment(RootComponent);
     this->EnergyParticles->SetupAttachment(CrystalMesh);
+    this->EscortBlocker->SetupAttachment(RootComponent);
+    this->FlightRoot->SetupAttachment(RootComponent);
+    this->InvulnerableParticles->SetupAttachment(CrystalMesh);
+    this->KnockBackCapsule->SetupAttachment(RootComponent);
+    this->LargeLight->SetupAttachment(CrystalMesh);
+    this->Light->SetupAttachment(CrystalMesh);
     this->PillarParticles->SetupAttachment(RootComponent);
     this->RockIdleSound->SetupAttachment(RootComponent);
-    this->CrystalIdleSound->SetupAttachment(CrystalMesh);
-    this->InvulnerableParticles->SetupAttachment(CrystalMesh);
-    this->EscortBlocker->SetupAttachment(RootComponent);
+    this->Rotator->SetupAttachment(Bobber);
+    this->SpaceCarver->SetupAttachment(RootComponent);
+    this->WeakpointCollision->SetupAttachment(CrystalMesh);
 }
 
 
@@ -147,7 +147,7 @@ void ARiftCrystal::DisableTerrainDetection() {
 void ARiftCrystal::All_ShowRiftSpawnEffects_Implementation(FVector_NetQuantize riftLocation) {
 }
 
-void ARiftCrystal::All_AddKnockBack_Implementation(FVector_NetQuantize Direction, float force) {
+void ARiftCrystal::All_AddKnockback_Implementation(FVector_NetQuantize Direction, float force) {
 }
 
 void ARiftCrystal::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {

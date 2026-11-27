@@ -11,6 +11,7 @@
 class UAnimSequenceBase;
 class UEnemyPlaySoundKey;
 class UEnemySpawnEffectsKey;
+class UFXSystemAsset;
 class UParticleSystem;
 class USoundCue;
 
@@ -89,7 +90,7 @@ protected:
     bool IsAirborne;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    UParticleSystem* FootStepParticle;
+    UFXSystemAsset* FootStepParticle;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     USoundCue* FootStepSound;

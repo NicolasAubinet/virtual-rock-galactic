@@ -6,6 +6,7 @@ UHealthComponent::UHealthComponent(const FObjectInitializer& ObjectInitializer) 
     this->CanDamageThroughSegments = true;
     this->LastDamageCauser = NULL;
     this->ShouldUseLargestSubhealthDamageTaken = false;
+    this->AlwaysReportHitEvents = false;
     this->InvulnerableToNonDefinedResistances = false;
     this->EnvironmentalDamageResistance = 1.00f;
     this->AffectedByGlobalWeakpointDamageMultiplier = true;
@@ -50,6 +51,9 @@ float UHealthComponent::GetArmorPct() const {
 
 float UHealthComponent::GetArmor() const {
     return 0.0f;
+}
+
+void UHealthComponent::Client_TotalDamageTaken_Implementation(float amount) {
 }
 
 void UHealthComponent::Client_ReceivedHit_Implementation(float amount, const FDamageData& DamageData, bool anyHealthLost) {

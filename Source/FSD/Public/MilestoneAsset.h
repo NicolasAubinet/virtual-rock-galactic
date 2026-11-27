@@ -100,5 +100,8 @@ public:
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
     int32 ClaimNextTier(UObject* WorldContext);
     
+    UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
+    void CheatClaimAllTiers(UObject* WorldContext);
+    
 };
 

@@ -47,9 +47,15 @@ ADoubleDrillItem::ADoubleDrillItem(const FObjectInitializer& ObjectInitializer) 
     this->DrillParticlesDuration = 0.25f;
     this->IsMining = false;
     this->IsGunslinging = false;
+    this->AudioComponent->SetupAttachment(RootComponent);
     this->FP_Left_DrillParticles->SetupAttachment(FPLMesh);
     this->FP_Right_DrillParticles->SetupAttachment(FPRMesh);
-    this->AudioComponent->SetupAttachment(RootComponent);
+}
+
+void ADoubleDrillItem::SkinAdditionalMeshes(USkinEffect* Skin, UMeshComponent* LeftMesh, UMeshComponent* RightMesh) {
+}
+
+void ADoubleDrillItem::SetSkinColorOnEquip() {
 }
 
 void ADoubleDrillItem::Server_StopMining_Implementation() {
@@ -75,6 +81,7 @@ void ADoubleDrillItem::OnRep_SimulatingMining() {
 void ADoubleDrillItem::OnRep_IsGunslinging() {
 }
 
+
 void ADoubleDrillItem::OnDrillParticlesTimerElapsed() {
 }
 
@@ -85,7 +92,7 @@ void ADoubleDrillItem::Client_Resupply_Implementation(float percentage) {
 void ADoubleDrillItem::All_SimulateDigDebris_Implementation(FVector_NetQuantize Position, int32 DebrisIndex) {
 }
 
-void ADoubleDrillItem::All_SimulateDigBlock_Implementation(FVector_NetQuantize Position, bool SpawnParticles, int32 Material) {
+void ADoubleDrillItem::All_SimulateDigBlock_Implementation(FVector_NetQuantize Position, bool spawnParticles, int32 Material) {
 }
 
 void ADoubleDrillItem::All_SimulateDamage_Implementation(const TArray<FDoubleDrillDamageItem>& Targets) {

@@ -2,13 +2,14 @@
 
 UInstancedNiagaraComponent::UInstancedNiagaraComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
     this->bAutoActivate = true;
+    this->NiagaraSystem = NULL;
     this->NiagaraComponent = NULL;
 }
 
-void UInstancedNiagaraComponent::SpawnParticlesFromName(const FVector Location, const FName EmitterName) {
+void UInstancedNiagaraComponent::SpawnSystemAtLocation(const FVector& InLocation) {
 }
 
-void UInstancedNiagaraComponent::SpawnParticles(const FVector Location, const int32 EmitterIndex) {
+void UInstancedNiagaraComponent::SpawnEmittersAtLocation(const FVector& InLocation, const TArray<int32> emitterIndices) {
 }
 
 

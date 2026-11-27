@@ -1,5 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "GameplayTagContainer.h"
 #include "AudioWithCooldown.h"
 #include "FullHealthSignatureDelegate.h"
 #include "HealthComponent.h"
@@ -7,6 +8,7 @@
 #include "HealthRegenerationParams.h"
 #include "HitSigDelegate.h"
 #include "RejoinListener.h"
+#include "ShieldGainedFromKillDelegate.h"
 #include "Templates/SubclassOf.h"
 #include "PlayerHealthComponent.generated.h"
 
@@ -18,6 +20,8 @@ class UParticleSystem;
 class UParticleSystemComponent;
 class UPlayerDamageTakenMutator;
 class USharedHealthMutator;
+class USoundBase;
+class USoundMix;
 class UStatusEffect;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -34,7 +38,16 @@ public:
     FHealthRegeneratingChanged OnHealthRegeneratingChanged;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FShieldGainedFromKill OnShieldGainedFromSmallKill;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FShieldGainedFromKill OnShieldGainedFromLargeKill;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FHitSig OnPlayerHit;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float SecondChanceDamageCap;
     
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_MaxHealth, meta=(AllowPrivateAccess=true))
@@ -76,6 +89,15 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FAudioWithCooldown AudioFriendlyFire;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    USoundBase* AudioShieldGainedFromSmallKill;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    USoundBase* AudioShieldGainedFromLargeKill;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    USoundMix* ShieldGainedFromKillSoundMix;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     UParticleSystemComponent* ShieldLinkInstance;
     
@@ -101,6 +123,18 @@ protected:
     float IronWillTimeToActivate;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TSubclassOf<UStatusEffect> SecondChanceStatusEffectClass;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    UStatusEffect* SecondChanceStatusEffect;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    float SecondChanceDuration;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    bool SecondChanceActive;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     USharedHealthMutator* SharedHealthMutator;
     
 public:
@@ -109,7 +143,16 @@ public:
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
     UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
+    UStatusEffect* SetSecondChanceStatusEffect(TSubclassOf<UStatusEffect> steClass);
+    
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
     UStatusEffect* SetIronWillStatusEffect(TSubclassOf<UStatusEffect> steClass);
+    
+    UFUNCTION(BlueprintCallable)
+    void SetInvulnerable(float Duration);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_TryActivateSecondChance();
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_TryActivateIronWill();
@@ -124,9 +167,21 @@ protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_ArmorDamage(float oldDamage);
     
+    UFUNCTION(BlueprintCallable)
+    void OnEnemyKilled(const FGameplayTagContainer& enemyTags, AActor* killedEnemy);
+    
 public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsLowHealth() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    float GetSecondChanceTimeRemaining() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    float GetSecondChanceDuration() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool GetSecondChanceActive() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetRemainingIronWillActivationTime() const;
@@ -141,6 +196,9 @@ public:
     float GetHealthRegeneratingTargetRatio() const;
     
 protected:
+    UFUNCTION(BlueprintCallable, Client, Unreliable)
+    void Client_ShieldGainedFromKill(float amount, bool isLargeEnemy);
+    
     UFUNCTION(BlueprintCallable, Client, Reliable)
     void Client_SetHealthRegenerating(bool isRegenerating);
     
@@ -151,6 +209,9 @@ protected:
     void Client_HealthFullCannotHeal();
     
 public:
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool CanActivateSecondChance() const;
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool CanActivateIronWill() const;
     

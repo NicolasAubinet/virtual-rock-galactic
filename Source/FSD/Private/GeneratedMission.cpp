@@ -22,6 +22,10 @@ bool UGeneratedMission::IsSingleMission() const {
     return false;
 }
 
+bool UGeneratedMission::IsRolledByMystery(UMissionWarning* Warning) const {
+    return false;
+}
+
 bool UGeneratedMission::IsPlagueMission() const {
     return false;
 }
@@ -34,11 +38,19 @@ bool UGeneratedMission::IsDeepDive() const {
     return false;
 }
 
+bool UGeneratedMission::HasUnresolvedMysteryWarning() const {
+    return false;
+}
+
 FObjectiveMissionIcon UGeneratedMission::GetSecondaryObjectiveIcon() const {
     return FObjectiveMissionIcon{};
 }
 
 TSubclassOf<AProceduralSetup> UGeneratedMission::GetPLS() const {
+    return NULL;
+}
+
+UMissionWarning* UGeneratedMission::GetMysteryRolledWarning(UMissionWarning* mystery) const {
     return NULL;
 }
 

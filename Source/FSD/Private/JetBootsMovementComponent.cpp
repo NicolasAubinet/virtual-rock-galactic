@@ -70,6 +70,10 @@ void UJetBootsMovementComponent::OnJumpPressed() {
 void UJetBootsMovementComponent::OnCameraModeChanged(ECharacterCameraMode NewCameraMode, ECharacterCameraMode OldCameraMode) {
 }
 
+bool UJetBootsMovementComponent::GetIsUsing() const {
+    return false;
+}
+
 void UJetBootsMovementComponent::Client_SetIsUsing_Implementation(bool NewIsUsing) {
 }
 

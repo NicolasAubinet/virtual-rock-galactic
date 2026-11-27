@@ -21,11 +21,14 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FOnYesNoClickedDelegate OnClickedCallback;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bIsClosable;
+    
 public:
     UYesNoPromptWidget();
 
     UFUNCTION(BlueprintCallable)
-    void Show(FText Title, FText Message, const UYesNoPromptWidget::FOnYesNoClickedDelegate& OnYesNoClicked);
+    void Show(FText Title, FText Message, const UYesNoPromptWidget::FOnYesNoClickedDelegate& OnYesNoClicked, bool IsClosable);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void SetMappedResources(const TMap<UResourceData*, int32>& Resources);

@@ -7,7 +7,7 @@ bool UPickaxeFunctionLibrary::RemovePickaxePartFromOwned(UObject* WorldContextOb
     return false;
 }
 
-void UPickaxeFunctionLibrary::RandomizePickaxe(UObject* WorldContextObject, UPlayerCharacterID* PlayerId) {
+void UPickaxeFunctionLibrary::RandomizePickaxe(UObject* WorldContextObject, UPlayerCharacterID* playerID) {
 }
 
 bool UPickaxeFunctionLibrary::IsPickaxePartEquipped(UObject* WorldContextObject, EPickaxePartLocation Location, UPickaxePart* part, UItemID* pickaxeID) {
@@ -40,7 +40,7 @@ UPickaxePart* UPickaxeFunctionLibrary::GetEquippedPickaxePart(UObject* WorldCont
 void UPickaxeFunctionLibrary::EquipPickaxePart(UObject* WorldContextObject, UPickaxePart* part, EPickaxePartLocation partLocation, UItemID* pickaxeID) {
 }
 
-void UPickaxeFunctionLibrary::CopyPastePickaxeLoadout(UObject* WorldContextObject, UPlayerCharacterID* PlayerId, int32 fromIndex, int32 toIndex) {
+void UPickaxeFunctionLibrary::CopyPastePickaxeLoadout(UObject* WorldContextObject, UPlayerCharacterID* playerID, int32 fromIndex, int32 toIndex) {
 }
 
 

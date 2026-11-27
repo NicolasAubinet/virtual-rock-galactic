@@ -3,6 +3,7 @@
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "Engine/NetSerialization.h"
+#include "GameplayTagContainer.h"
 #include "AmmoDrivenWeapon.h"
 #include "LensActivedDelegateDelegate.h"
 #include "LensDeactivedDelegateDelegate.h"
@@ -14,6 +15,9 @@
 
 class AActor;
 class ABoil;
+class UActorComponent;
+class UAudioComponent;
+class UBehaviorTree;
 class UCapsuleHitscanComponent;
 class UDamageComponent;
 class UEnemyTemperatureComponent;
@@ -59,6 +63,9 @@ public:
     FLensDeactivedDelegate OnLenseDeactivated;
     
 protected:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    TWeakObjectPtr<UAudioComponent> FireSoundTailInstance;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float SwitchTime;
     
@@ -79,6 +86,21 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MinTimeBetweenBlisteringNecrosis;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FGameplayTagQuery BrainWaveScramblerGameplayTagQuery;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<UStatusEffect> BrainWaveScramblerEffect;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<UActorComponent> MindControlComponent;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float MindControlChance;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UBehaviorTree* ConfusedBehaviorTree;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UStatusEffect> FireEffect;
@@ -109,6 +131,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UNiagaraSystem* MicrowaveMuzzle;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UNiagaraSystem* MicrowaveMuzzleSinusoidal;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UNiagaraComponent* MuzzleComp;
@@ -186,6 +211,9 @@ protected:
     UFUNCTION(BlueprintCallable)
     void SpawnExplosiveBoil(UPrimitiveComponent* Target, const FMultiHitscanHit& Hit);
     
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void SinusValueUpdated(float Value);
+    
     UFUNCTION(BlueprintCallable, Server, Unreliable)
     void ShowBoilerRayExplosion_Server(FVector_NetQuantize Location, FRotator Rotation);
     
@@ -212,6 +240,17 @@ protected:
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void HeatUpdated(float SmoothedTemperature);
+    
+public:
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool HasSinusoidalUpgrade() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    float GetSinusValue() const;
+    
+protected:
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void FireSoundTailStarted(UAudioComponent* TailSound, bool wasRelease);
     
     UFUNCTION(BlueprintCallable)
     void EndCharacterOverheatAnim();

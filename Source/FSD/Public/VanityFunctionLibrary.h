@@ -21,7 +21,7 @@ public:
     static void RandomizeAllRandomVanityLoadout(APlayerCharacter* currentCharacter);
     
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
-    static void CopyPasteVanityLoadout(UObject* WorldContextObject, UPlayerCharacterID* PlayerId, int32 fromIndex, int32 toIndex);
+    static void CopyPasteVanityLoadout(UObject* WorldContextObject, UPlayerCharacterID* playerID, int32 fromIndex, int32 toIndex);
     
 };
 

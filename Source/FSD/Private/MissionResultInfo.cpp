@@ -13,6 +13,8 @@ UMissionResultInfo::UMissionResultInfo() {
     this->TotalCreditsSum = 0.00f;
     this->TotalXPSum = 0.00f;
     this->wasSuccess = false;
+    this->NitraDebt = 0.00f;
+    this->HasNitraDebtMessage = false;
 }
 
 float UMissionResultInfo::GetWarningBonusSum() {

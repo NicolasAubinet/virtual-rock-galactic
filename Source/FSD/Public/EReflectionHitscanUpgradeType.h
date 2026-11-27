@@ -5,5 +5,6 @@
 UENUM(BlueprintType)
 enum class EReflectionHitscanUpgradeType : uint8 {
     ReflectionCount,
+    ArmorHeal,
 };
 

@@ -54,6 +54,9 @@ protected:
     bool ShouldUseLargestSubhealthDamageTaken;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool AlwaysReportHitEvents;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool InvulnerableToNonDefinedResistances;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -112,6 +115,9 @@ public:
     float GetArmor() const;
     
 protected:
+    UFUNCTION(BlueprintCallable, Client, Unreliable)
+    void Client_TotalDamageTaken(float amount);
+    
     UFUNCTION(BlueprintCallable, Client, Unreliable)
     void Client_ReceivedHit(float amount, const FDamageData& DamageData, bool anyHealthLost);
     

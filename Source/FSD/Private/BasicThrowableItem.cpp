@@ -22,8 +22,8 @@ ABasicThrowableItem::ABasicThrowableItem(const FObjectInitializer& ObjectInitial
     this->ImpactAudioResetTime = 0.20f;
     this->SquaredMinThrowforce = 10.00f;
     this->UseSphere->SetupAttachment(RootComponent);
-    this->WorldMeshComp->SetupAttachment(RootComponent);
     this->ViewMeshComp->SetupAttachment(RootComponent);
+    this->WorldMeshComp->SetupAttachment(RootComponent);
 }
 
 void ABasicThrowableItem::ThrowItem(const FVector& throwForce) {

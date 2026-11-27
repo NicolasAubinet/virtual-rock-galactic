@@ -62,6 +62,10 @@ APlayerCharacter* UGameFunctionLibrary::GetLocalPlayerCharacter(UObject* WorldCo
     return NULL;
 }
 
+float UGameFunctionLibrary::GetGravityZ(const AActor* Actor) {
+    return 0.0f;
+}
+
 UGoogleAnalyticsWrapper* UGameFunctionLibrary::GetGoogleAnalyticsWrapper(UObject* WorldContextObject) {
     return NULL;
 }

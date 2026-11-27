@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "OverclockUpgradeArray.h"
 #include "SchematicBlueprintLibrary.generated.h"
 
 class UItemUpgrade;
@@ -26,6 +27,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static bool HasAnyUnlockableSchematics(UObject* WorldContextObject, UPlayerCharacterID* characterID, TSet<USchematicCategory*>& Categories);
+    
+    UFUNCTION(BlueprintCallable)
+    static TMap<UPlayerCharacterID*, FOverclockUpgradeArray> GetOverclocksGroupedByCharacter();
     
     UFUNCTION(BlueprintCallable)
     static USchematicCategory* FindItemUpgradeSchematicCategory(UItemUpgrade* Upgrade);

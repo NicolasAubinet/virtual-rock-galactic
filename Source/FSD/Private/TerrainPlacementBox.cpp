@@ -2,5 +2,6 @@
 
 FTerrainPlacementBox::FTerrainPlacementBox() {
     this->PlacementType = ETerrainPlacementBoxType::NoTerrain;
+    this->bHighResCheck = false;
 }
 

@@ -1,9 +1,9 @@
 #include "FSDFindSessionsCallbackProxy.h"
-#include "FSDFindSteamSessions.h"
+#include "FSDFindSessions.h"
 
 UFSDFindSessionsCallbackProxy::UFSDFindSessionsCallbackProxy() {
     this->WorldContextObject = NULL;
-    this->FSDFindSteamSessions = CreateDefaultSubobject<UFSDFindSteamSessions>(TEXT("FSDFindSteamSessions"));
+    this->FSDFindSteamSessions = CreateDefaultSubobject<UFSDFindSessions>(TEXT("FSDFindSteamSessions"));
 }
 
 void UFSDFindSessionsCallbackProxy::OnFSDCompleted(bool bSuccess, const TArray<FBlueprintSessionResult>& Results) {

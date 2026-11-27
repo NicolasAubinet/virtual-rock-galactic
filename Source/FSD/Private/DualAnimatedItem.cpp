@@ -2,6 +2,7 @@
 #include "Components/SceneComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "FirstPersonSkeletalMeshComponent.h"
+#include "SkinnableComponent.h"
 
 ADualAnimatedItem::ADualAnimatedItem(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
     this->RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
@@ -11,13 +12,14 @@ ADualAnimatedItem::ADualAnimatedItem(const FObjectInitializer& ObjectInitializer
     this->FPLMesh = CreateDefaultSubobject<UFirstPersonSkeletalMeshComponent>(TEXT("FPLMesh"));
     this->TPRMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("TPRMesh"));
     this->TPLMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("TPLMesh"));
+    this->Skinnable = CreateDefaultSubobject<USkinnableComponent>(TEXT("Skinnable"));
     this->FP_EquipAnimation = NULL;
     this->TP_EquipAnimation = NULL;
     this->EquipDuration = 0.25f;
     this->CharacterAnimationSet = NULL;
-    this->TPLMesh->SetupAttachment(RootComponent);
-    this->FPRMesh->SetupAttachment(RootComponent);
     this->FPLMesh->SetupAttachment(RootComponent);
+    this->FPRMesh->SetupAttachment(RootComponent);
+    this->TPLMesh->SetupAttachment(RootComponent);
     this->TPRMesh->SetupAttachment(RootComponent);
 }
 

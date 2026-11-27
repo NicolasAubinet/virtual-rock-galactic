@@ -56,6 +56,9 @@ protected:
     TArray<UMissionWarning*> MissionWarnings;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TMap<UMissionWarning*, UMissionWarning*> MysteryRolledWarnings;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     UMissionMutator* MissionMutator;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -97,6 +100,9 @@ public:
     bool IsSingleMission() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsRolledByMystery(UMissionWarning* Warning) const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsPlagueMission() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -106,10 +112,16 @@ public:
     bool IsDeepDive() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool HasUnresolvedMysteryWarning() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     FObjectiveMissionIcon GetSecondaryObjectiveIcon() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TSubclassOf<AProceduralSetup> GetPLS() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UMissionWarning* GetMysteryRolledWarning(UMissionWarning* mystery) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<UMutator*> GetMutators(TSubclassOf<UMutator> mutatorClass) const;

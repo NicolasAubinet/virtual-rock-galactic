@@ -6,7 +6,7 @@ UAIFunctionLibrary::UAIFunctionLibrary() {
 void UAIFunctionLibrary::SetAICanSense(bool canSense) {
 }
 
-int32 UAIFunctionLibrary::MakeEnemiesFleeFromArea(UObject* WorldContextObject, const FVector& Center, float Radius, int32 maxEnemiesAffected) {
+int32 UAIFunctionLibrary::MakeEnemiesFleeFromArea(UObject* WorldContextObject, const FVector& Center, float Radius, int32 maxEnemiesAffected, float CourageFleeThreshold) {
     return 0;
 }
 

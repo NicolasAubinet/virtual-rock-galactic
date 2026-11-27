@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "PlayerCharacterFunctionLibrary.generated.h"
 
@@ -35,6 +36,12 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static APlayerCharacter* GetNearestPlayer(AActor* from, float MaxDistance, bool MustBeAlive, bool MustBeUnparalyzed, bool XYOnly);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static bool GetLocalCameraLocation(UObject* WorldContextObject, FVector& OutLocation, FRotator& OutRotation);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static bool GetClosestPointOnSegmentToLocalCamera(UObject* WorldContextObject, FVector SegmentStart, FVector SegmentEnd, FVector& OutLocation, float ForwardOffset);
     
 };
 

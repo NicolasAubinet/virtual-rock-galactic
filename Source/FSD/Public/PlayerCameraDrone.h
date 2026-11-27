@@ -38,6 +38,9 @@ protected:
     float MouseSensitivity;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float StickTurnRate;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float CameraRoll;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -113,6 +116,9 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     AActor* WeaponTrackActor;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    AActor* FocusTarget;
+    
 public:
     APlayerCameraDrone(const FObjectInitializer& ObjectInitializer);
 
@@ -122,6 +128,9 @@ protected:
     
     UFUNCTION(BlueprintCallable)
     void SetRotationalPivotToPlayer();
+    
+    UFUNCTION(BlueprintCallable)
+    void SetFocusOffset(float NewOffset);
     
     UFUNCTION(BlueprintCallable)
     void SetFlareLightSettings(float Intensity, float range, float Color);

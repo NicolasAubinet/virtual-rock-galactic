@@ -15,12 +15,18 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_PerkUsageReplicated, meta=(AllowPrivateAccess=true))
     TArray<FPerkUsage> PerkUsageReplicated;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    float LateJoinTimeStamp;
+    
 public:
     UPerkUsageComponent(const FObjectInitializer& ObjectInitializer);
 
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 protected:
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Server_RestorePerkUse(UPerkAsset* Perk);
+    
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Server_MarkPerkUsed(UPerkAsset* Perk);
     

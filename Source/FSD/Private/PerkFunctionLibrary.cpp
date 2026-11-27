@@ -25,6 +25,10 @@ int32 UPerkFunctionLibrary::GetRequiredPerkClaimsForTier(int32 Tier) {
 void UPerkFunctionLibrary::GetPerkTierState(UObject* WorldContext, int32 Tier, bool& TierUnLocked, int32& NextRequiredCount, int32& NextProgressCount) {
 }
 
+int32 UPerkFunctionLibrary::GetPerkResetCost() {
+    return 0;
+}
+
 void UPerkFunctionLibrary::GetPerkEquipSlots(UObject* WorldContext, EPerkUsageType InType, TSubclassOf<APlayerCharacter> InCharacterClass, int32& OutAvailableSlots, int32& OutUnavailableSlots, int32& OutPromotionLockedSlots) {
 }
 
@@ -66,6 +70,10 @@ FText UPerkFunctionLibrary::FormatRichText(const FText& SourceText, bool UpperCa
 
 int32 UPerkFunctionLibrary::CalculateClaimablePerkPoints(UObject* WorldContext) {
     return 0;
+}
+
+bool UPerkFunctionLibrary::BuyPerkReset(UObject* WorldContext) {
+    return false;
 }
 
 

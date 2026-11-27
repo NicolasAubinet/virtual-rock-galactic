@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "DamageBonusBaseUpgrade.h"
+#include "EDamageComponentType.h"
 #include "Templates/SubclassOf.h"
 #include "UpgradeValues.h"
 #include "DamageConversionUpgrade.generated.h"
@@ -24,7 +25,13 @@ protected:
     bool DamageIsAdded;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool IsPercentage;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<AActor> RequiredClass;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    EDamageComponentType DamageComponentType;
     
 public:
     UDamageConversionUpgrade();

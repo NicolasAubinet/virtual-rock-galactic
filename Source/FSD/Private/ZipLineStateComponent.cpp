@@ -48,6 +48,9 @@ void UZipLineStateComponent::ServerChangeDirection_Implementation() {
 
 
 
+void UZipLineStateComponent::OnStatusCharacterStateChanged(float DeltaSeconds, FVector OldLocation, FVector OldVelocity) {
+}
+
 void UZipLineStateComponent::OnRep_ZipLine() {
 }
 

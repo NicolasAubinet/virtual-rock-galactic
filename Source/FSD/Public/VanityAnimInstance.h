@@ -7,6 +7,8 @@
 #include "VanityAnimEffect.h"
 #include "VanityAnimInstance.generated.h"
 
+class USoundBase;
+
 UCLASS(Blueprintable, NonTransient)
 class UVanityAnimInstance : public UAnimInstance {
     GENERATED_BODY()
@@ -38,6 +40,12 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FVanityAnimEffect> VanityAnimEffects;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    USoundBase* LoopSound;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FName LoopSoundSocket;
     
 public:
     UVanityAnimInstance();

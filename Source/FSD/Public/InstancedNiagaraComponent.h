@@ -6,6 +6,7 @@
 #include "InstancedNiagaraComponent.generated.h"
 
 class UNiagaraComponent;
+class UNiagaraSystem;
 
 UCLASS(Blueprintable, EditInlineNew, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UInstancedNiagaraComponent : public USceneComponent {
@@ -13,7 +14,10 @@ class UInstancedNiagaraComponent : public USceneComponent {
 public:
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TArray<FEmitterConnection> Emitters;
+    TArray<FEmitterConnection> EmitterParameterConnections;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UNiagaraSystem* NiagaraSystem;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UNiagaraComponent* NiagaraComponent;
@@ -22,10 +26,10 @@ public:
     UInstancedNiagaraComponent(const FObjectInitializer& ObjectInitializer);
 
     UFUNCTION(BlueprintCallable)
-    void SpawnParticlesFromName(const FVector Location, const FName EmitterName);
+    void SpawnSystemAtLocation(const FVector& InLocation);
     
     UFUNCTION(BlueprintCallable)
-    void SpawnParticles(const FVector Location, const int32 EmitterIndex);
+    void SpawnEmittersAtLocation(const FVector& InLocation, const TArray<int32> emitterIndices);
     
 };
 

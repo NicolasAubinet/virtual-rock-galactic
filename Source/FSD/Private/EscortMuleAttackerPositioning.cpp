@@ -6,10 +6,10 @@ UEscortMuleAttackerPositioning::UEscortMuleAttackerPositioning(const FObjectInit
     this->Health = NULL;
 }
 
-void UEscortMuleAttackerPositioning::SetNewMaxAttackers(int32 newMaxAttackers) {
+void UEscortMuleAttackerPositioning::SetScoreModifier(float newModifier) {
 }
 
-void UEscortMuleAttackerPositioning::SetCostModifier(float newModifier) {
+void UEscortMuleAttackerPositioning::SetNewMaxAttackers(int32 newMaxAttackers) {
 }
 
 

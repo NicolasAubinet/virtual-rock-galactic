@@ -6,7 +6,7 @@ UCrossbowStuckProjectileEffectExploding::UCrossbowStuckProjectileEffectExploding
     this->ChemicalReactionDelay = 5.00f;
 }
 
-void UCrossbowStuckProjectileEffectExploding::StartTimeoutTimer(UHealthComponentBase* destroyed) {
+void UCrossbowStuckProjectileEffectExploding::StartTimeoutTimer(UHealthComponentBase* Destroyed) {
 }
 
 void UCrossbowStuckProjectileEffectExploding::EnableTimeOut() {

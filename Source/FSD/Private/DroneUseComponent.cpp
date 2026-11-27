@@ -4,7 +4,7 @@
 UDroneUseComponent::UDroneUseComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
     this->BoscoLaserpointerShout = NULL;
     this->Progress = 0.00f;
-    this->useDuration = 0.00f;
+    this->UseDuration = 0.00f;
     this->ResetOnFail = false;
     this->CanUse = false;
 }

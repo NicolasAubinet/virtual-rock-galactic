@@ -1,5 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "EImportantLocationVerticalCheck.h"
 #include "SpecialEventSpawner.h"
 #include "SimpleSpecialEventSpawner.generated.h"
 
@@ -19,6 +20,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float EventAvoidanceRadius;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    EImportantLocationVerticalCheck EventAvoidanceVerticalCheck;
     
 public:
     USimpleSpecialEventSpawner();

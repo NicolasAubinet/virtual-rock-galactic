@@ -1,10 +1,11 @@
 #include "ItemSkin.h"
 
 UItemSkin::UItemSkin() {
+    this->SkinEffect = NULL;
     this->Aquisition = NULL;
     this->SkinSet = NULL;
     this->DynamicIcon = NULL;
-    this->SkinEffect = NULL;
+    this->SkinCategory = EItemSkinCategory::Weapon;
     this->OwningItem = NULL;
     this->OwningCharacter = NULL;
 }
@@ -37,6 +38,10 @@ EItemSkinType UItemSkin::GetSkinType() const {
 
 FText UItemSkin::GetSkinName() const {
     return FText::GetEmpty();
+}
+
+EItemSkinCategory UItemSkin::GetSkinCategory() const {
+    return EItemSkinCategory::Weapon;
 }
 
 UItemID* UItemSkin::GetOwningItem() const {

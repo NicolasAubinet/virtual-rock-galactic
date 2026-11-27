@@ -5,8 +5,10 @@ UGameData::UGameData() {
     this->KPI_Settings = NULL;
     this->PromotionRewardsSettings = NULL;
     this->WeaponMaintenanceSettings = NULL;
+    this->PerkMaintenanceSettings = NULL;
     this->PropHuntSettings = NULL;
     this->FsdEventsSettings = NULL;
+    this->DLCSettings = NULL;
     this->GameActivitySettings = NULL;
     this->DanceSettings = NULL;
     this->AnimationSettings = NULL;
@@ -47,6 +49,7 @@ UGameData::UGameData() {
     this->Achievements = NULL;
     this->MissionSetup = NULL;
     this->SeasonSettings = NULL;
+    this->InstancedNiagaraSettings = NULL;
     this->DefaultCharacterID = NULL;
     this->DefaultEditorCharacterID = NULL;
 }

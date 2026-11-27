@@ -15,5 +15,7 @@ enum class EMicrowaveGunUpgrade : uint8 {
     BlisteringNecrosis,
     EGammaContaminationZone,
     ETemperatureAmplifier,
+    BrainWaveScrambler,
+    EMindControlChance,
 };
 

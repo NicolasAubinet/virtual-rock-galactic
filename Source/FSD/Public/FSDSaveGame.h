@@ -12,6 +12,7 @@
 #include "DrinkSave.h"
 #include "EFSDFaction.h"
 #include "EItemCategory.h"
+#include "EProficiency.h"
 #include "ESonyControllerLightMode.h"
 #include "ESonyControllerMotionMapping.h"
 #include "ESonyInputSettingsBools.h"
@@ -26,8 +27,11 @@
 #include "JettyBootsSave.h"
 #include "MilestoneSave.h"
 #include "MissionStatSave.h"
+#include "OnPerkMaintenanceRewardGrantedDelegate.h"
 #include "OptionsInSaveGame.h"
 #include "PerkClaimsSave.h"
+#include "PerkMaintenance.h"
+#include "PerkMaintenanceChangedDelegate.h"
 #include "PromotionRewardsSave.h"
 #include "ResourcesSave.h"
 #include "SchematicSave.h"
@@ -51,6 +55,7 @@ class UFSDSaveGame;
 class UItemID;
 class UItemSkin;
 class UObject;
+class UPerkAsset;
 class UPlayerCharacterID;
 class UResourceData;
 class UVanityItem;
@@ -154,6 +159,12 @@ public:
     FCharacterPerksSave RandomEquippedPerkLoadout;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    uint8 UnlockedProficienciesBits;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    uint8 RelockedProficienciesBits;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FVanityMasterySave VanityMasterySave;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -182,6 +193,15 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FWeaponMaintenance WeaponMaintenance;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FPerkMaintenanceChanged OnPerkMaintenanceChanged;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FOnPerkMaintenanceRewardGranted OnPerkMaintenanceRewardGranted;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FPerkMaintenance PerkMaintenance;
     
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -380,6 +400,9 @@ protected:
     bool ShowInfoScreen;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FString LastSeenInfoScreenId;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FString LastShownVersion;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -402,6 +425,9 @@ public:
     
     UFUNCTION(BlueprintCallable)
     bool TryBuyResource(UResourceData* Resource, int32 amount, int32& Price);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool ShouldDisplayPerkResetNotice() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool ShouldDisplayFirstSchematicMessage() const;
@@ -443,10 +469,10 @@ public:
     void SetFaction(EFSDFaction newFaction, bool Reasign);
     
     UFUNCTION(BlueprintCallable)
-    void SetEquippedItemID(EItemCategory Category, UPlayerCharacterID* PlayerId, UItemID* Item);
+    void SetEquippedItemID(EItemCategory Category, UPlayerCharacterID* playerID, UItemID* Item);
     
     UFUNCTION(BlueprintCallable)
-    void SetEquippedItem(EItemCategory Category, UPlayerCharacterID* PlayerId, TSubclassOf<AActor> Item);
+    void SetEquippedItem(EItemCategory Category, UPlayerCharacterID* playerID, TSubclassOf<AActor> Item);
     
     UFUNCTION(BlueprintCallable)
     void SetDiscordReward(bool State);
@@ -500,10 +526,16 @@ public:
     void MarkRetirementRewardScreenSeen(UPlayerCharacterID* characterID);
     
     UFUNCTION(BlueprintCallable)
+    void MarkPerkResetNoticeSeen();
+    
+    UFUNCTION(BlueprintCallable)
     void MarkFirstSchematicMessageSeen();
     
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"))
     void LevelUpCharacter(UObject* WorldContext, UPlayerCharacterID* characterID);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsPerkMaxed(const UPerkAsset* Perk) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsObsolete() const;
@@ -513,6 +545,15 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsFirstRejoinAttempt();
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool HasUnseenPerkCompletions() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool HasUnlockProficiency(EProficiency Proficiency) const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool HasUnlockedProficiencies() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool HasSeenRetirementRewardScreen() const;
@@ -589,6 +630,12 @@ public:
     int32 GetPlayerRank() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    int32 GetPerkXP(const UPerkAsset* Perk) const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    float GetPerkProgress(const UPerkAsset* Perk) const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetPerkPoints() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -616,13 +663,16 @@ public:
     EFSDFaction GetFaction();
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    UItemID* GetEquippedItemID(EItemCategory Category, UPlayerCharacterID* PlayerId) const;
+    UItemID* GetEquippedItemID(EItemCategory Category, UPlayerCharacterID* playerID) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    TSubclassOf<AActor> GetEquippedItem(EItemCategory Category, UPlayerCharacterID* PlayerId) const;
+    TSubclassOf<AActor> GetEquippedItem(EItemCategory Category, UPlayerCharacterID* playerID) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetCredits() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    int32 GetCompletedMaintenancePerkCount() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetClassXP(UPlayerCharacterID* characterID) const;
@@ -631,7 +681,7 @@ public:
     int32 GetClassLevel(UPlayerCharacterID* characterID) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    int32 GetCharacterRetirementCount(const FGuid& PlayerId) const;
+    int32 GetCharacterRetirementCount(const FGuid& playerID) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetBoscoAllowed() const;

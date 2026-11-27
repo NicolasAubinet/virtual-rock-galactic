@@ -30,6 +30,9 @@ public:
     static void ShowAccountPicker(UFSDGameInstance* gInstance, const int32 GamePlayerID);
     
     UFUNCTION(BlueprintCallable)
+    static void OpenURLInOverlayWithUTM(const FString& URL, const FString& Location, const FString& trackingID, FOnShowWebUrlClosedBP OnOverlayClosed);
+    
+    UFUNCTION(BlueprintCallable)
     static void OpenURLInOverlay(const FString& URL, FOnShowWebUrlClosedBP OnOverlayClosed);
     
     UFUNCTION(BlueprintCallable)

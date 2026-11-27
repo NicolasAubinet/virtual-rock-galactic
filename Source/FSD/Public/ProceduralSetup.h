@@ -9,6 +9,7 @@
 #include "DebrisCapsule.h"
 #include "ECriticalItemPass.h"
 #include "EDebrisItemPass.h"
+#include "EImportantLocationVerticalCheck.h"
 #include "ESpawnSettings.h"
 #include "EncounterSpecialItem.h"
 #include "EncountersSpawnedDelegateDelegate.h"
@@ -333,6 +334,9 @@ public:
     
     UFUNCTION(BlueprintCallable)
     void AddInfluenceToTunnelEntrances(UCaveInfluencer* Influencer, float range);
+    
+    UFUNCTION(BlueprintCallable)
+    void AddImportantLocationWithVerticalCheck(const FVector& Location, float Radius, EImportantLocationVerticalCheck verticalCheck);
     
     UFUNCTION(BlueprintCallable)
     void AddImportantLocation(const FVector& Location, float Radius);

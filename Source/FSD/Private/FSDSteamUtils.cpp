@@ -29,7 +29,15 @@ bool UFSDSteamUtils::InitializeFilterText() {
     return false;
 }
 
+bool UFSDSteamUtils::HasTranslatorRewardDLC() {
+    return false;
+}
+
 bool UFSDSteamUtils::HasSupporterUpgrade() {
+    return false;
+}
+
+bool UFSDSteamUtils::HasDLC(int32 dlcID) {
     return false;
 }
 

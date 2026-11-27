@@ -6,6 +6,7 @@
 #include "EChatSenderType.h"
 #include "EGameOwnerStatus.h"
 #include "EnemyKilledSignatureDelegate.h"
+#include "EnemyKilledSignatureWDamageDealerDelegate.h"
 #include "EquippedVanity.h"
 #include "FractionLevelGeneratedDelegateDelegate.h"
 #include "LevelGenerationStateSignatureDelegate.h"
@@ -52,6 +53,9 @@ public:
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FEnemyKilledSignature OnEnemyKilledEvent;
     
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FEnemyKilledSignatureWDamageDealer OnEnemyKilledEventWDamageDealerEvent;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     FEquippedVanity LatestEquipedVanity;
     
@@ -68,9 +72,11 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_GameOwnerStatus, meta=(AllowPrivateAccess=true))
     uint8 gameOwnerStatus;
     
+public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool IsOnSpaceRig;
     
+protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UPlayerStatsComponent* PlayerStatsComponent;
     

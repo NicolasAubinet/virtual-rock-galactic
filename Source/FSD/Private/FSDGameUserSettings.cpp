@@ -1,31 +1,30 @@
 #include "FSDGameUserSettings.h"
 
 UFSDGameUserSettings::UFSDGameUserSettings() {
-    this->bUseVSync = true;
-    this->bJukeboxStreamerMode = true;
+    this->bJukeboxStreamerMode = false;
     this->bGraphicSettingsChanged = false;
-    this->ServerSearchRegion = 0;
+    this->ServerSearchRegion = 1;
     this->ServerSearchPasswordRequired = false;
-    this->volumeCharacterVoice = 99.17f;
-    this->volumeMissionControl = 120.78f;
-    this->volumeMaster = 35.57f;
-    this->volumeSFX = 98.76f;
-    this->volumeMusic = 0.10f;
-    this->CurrentAudioOutputDeviceId = TEXT("0.0.0.00000000.e5f88e95-6344-4763-bd61-70b04ceb23f9");
+    this->volumeCharacterVoice = 100.00f;
+    this->volumeMissionControl = 100.00f;
+    this->volumeMaster = 32.55f;
+    this->volumeSFX = 100.00f;
+    this->volumeMusic = 100.00f;
+    this->CurrentAudioOutputDeviceId = TEXT("{0.0.0.00000000}.{f08cfe9d-43e1-44e6-940a-c68249a1ea57}");
     this->UseDefaultAudioOutputDevice = true;
     this->Sharpening = 0.00f;
     this->AntiAliasingType = 2;
     this->TemporalAAUpsamplingEnabled = false;
-    this->volumeVoice = 99.74f;
+    this->volumeVoice = 100.00f;
     this->UpscalingType = 0;
-    this->AmdFsrMode = 0;
-    this->AmdFsr2Mode = 2;
-    this->AmdFsrSharpness = 0.22f;
+    this->AmdFsrMode = 2;
+    this->AmdFsr2Mode = 3;
+    this->AmdFsrSharpness = 0.20f;
     this->AmdFsr2Sharpness = 0.20f;
     this->NvidiaDlssMode = UDLSSMode::Auto;
     this->NvidiaDlssSharpness = 0.50f;
     this->FSDResolutionScale = 1.00f;
-    this->ReflexMode = ENVidiaReflexMode::Disabled;
+    this->ReflexMode = ENVidiaReflexMode::Enabled;
     this->WeaponSpwayScale = 1.00f;
     this->RagdollQuality = 2;
     this->FrameGenerationMode = UFSDStreamlineDLSSGMode::Off;
@@ -39,19 +38,19 @@ UFSDGameUserSettings::UFSDGameUserSettings() {
     this->ChatFontSize = 14;
     this->bUseVoiceChat = true;
     this->bUsePushToTalk = true;
-    this->LocalGameServerName = TEXT("rusty bois only");
     this->AppearOffline = false;
-    this->AutoRefreshServerlist = false;
-    this->MouseXSensitivity = 900.92f;
+    this->AutoRefreshServerlist = true;
+    this->MouseXSensitivity = 600.00f;
     this->MouseYSensitivity = 600.00f;
     this->UseSeperateSensetivity = false;
     this->InvertMouse = false;
     this->InvertScroolWheel = false;
+    this->SprintMode = ESprintMode::PressToSprint;
     this->UseHoldToRun = false;
     this->UseToggleLaserpointer = false;
-    this->FOV = 100.89f;
-    this->HeadbobbingScale = 0.00f;
-    this->CameraShakeScale = 51.77f;
+    this->FOV = 100.00f;
+    this->HeadbobbingScale = 100.00f;
+    this->CameraShakeScale = 0.00f;
     this->ChatFadeTime = 10.00f;
     this->UseStreamerProgram = false;
     this->SoundOnChatMessage = true;
@@ -59,17 +58,17 @@ UFSDGameUserSettings::UFSDGameUserSettings() {
     this->TinnitusProtection = false;
     this->OverlayIntensityScale = 1.00f;
     this->ShowUIAnimations = true;
-    this->UseProfanityFilter = false;
+    this->UseProfanityFilter = true;
     this->ForceFeedbackScale = 1.00f;
     this->InvertFlightControls = false;
     this->EnableDx12ByDefault = false;
-    this->HDRColorGamma = 1.21f;
+    this->HDRColorGamma = 1.20f;
     this->ConsoleGraphicsMode = EConsoleGraphicsMode::Fidelity;
     this->StaticResoultionScale = 1.00f;
     this->UseManuelGrahpicsMode = false;
     this->DownedTurnDirection_Controller = 1.00f;
     this->DownedTurnDirection_Mouse = -1.00f;
-    this->UIDPIScale = 80.63f;
+    this->UIDPIScale = 90.00f;
     this->EnableCustomUIScale = false;
     this->CheckCursorOutOfBounds = false;
     this->VSyncToBeApplied = false;
@@ -81,20 +80,20 @@ UFSDGameUserSettings::UFSDGameUserSettings() {
     this->ResolutionToBeAppliedValid = false;
     this->EscMenuActive = false;
     this->bShowUpgradeExtraDetails = false;
-    this->LastNiagaraShaderVerions = 63118;
+    this->LastNiagaraShaderVerions = 0;
     this->HasKeyboardBeenConnected = false;
     this->CurrentInputSource = EFSDInputSource::MouseAndKeyboard;
     this->RequestedInputSource = EFSDInputSource::None;
     this->SwapControllerThumbsticks = false;
-    this->bTutorialHintsEnabled = false;
+    this->bTutorialHintsEnabled = true;
     this->bShowSubtitles = false;
-    this->bShowFPS = true;
+    this->bShowFPS = false;
     this->ShowNetInfoLevel = 0;
     this->bCanShowBlood = true;
     this->PreventLatejoinCharacterDuplication = false;
     this->TranslatorDebugModeEnabled = false;
-    this->SelectedDifficultyLevels.AddDefaulted(10);
-    this->DifficultyLevelsAddedByDefault.AddDefaulted(10);
+    this->SelectedDifficultyLevels.AddDefaulted(1);
+    this->DifficultyLevelsAddedByDefault.AddDefaulted(4);
 }
 
 void UFSDGameUserSettings::UpdateVolumeSettings(USoundClass* CharacterVoices, USoundClass* MissionControl, USoundClass* Master, USoundClass* Music, USoundClass* SFX, USoundClass* UI, USoundClass* Voice) {
@@ -147,9 +146,6 @@ void UFSDGameUserSettings::SetUseProfanityFilter(bool shouldUse) {
 void UFSDGameUserSettings::SetUseManualGraphicsMode(bool bEnabled) {
 }
 
-void UFSDGameUserSettings::SetUseHoldToRun(bool NewUseHoldToRun) {
-}
-
 void UFSDGameUserSettings::SetUseDefaultAudioOutputDevice(UObject* WorldContextObject, bool UseDefault) {
 }
 
@@ -181,6 +177,12 @@ void UFSDGameUserSettings::SetSteamSearchRegion(ESteamSearchRegion InRegion) {
 }
 
 void UFSDGameUserSettings::SetStaticResolutionScale(float percentage) {
+}
+
+void UFSDGameUserSettings::SetSprintMode(ESprintMode InMode) {
+}
+
+void UFSDGameUserSettings::SetUseHoldToRun(bool NewUseHoldToRun) {
 }
 
 void UFSDGameUserSettings::SetShowUIAnimations(bool shouldShow) {
@@ -472,10 +474,6 @@ bool UFSDGameUserSettings::GetUseManualGraphicsMode() {
     return false;
 }
 
-bool UFSDGameUserSettings::GetUseHoldToRun() const {
-    return false;
-}
-
 bool UFSDGameUserSettings::GetUseDefaultAudioOutputDevice() const {
     return false;
 }
@@ -514,6 +512,14 @@ ESteamSearchRegion UFSDGameUserSettings::GetSteamSearchRegion() const {
 
 float UFSDGameUserSettings::GetStaticResolutionScale() {
     return 0.0f;
+}
+
+ESprintMode UFSDGameUserSettings::GetSprintMode() const {
+    return ESprintMode::PressToSprint;
+}
+
+bool UFSDGameUserSettings::GetUseHoldToRun() const {
+    return false;
 }
 
 bool UFSDGameUserSettings::GetShowUIAnimations() const {

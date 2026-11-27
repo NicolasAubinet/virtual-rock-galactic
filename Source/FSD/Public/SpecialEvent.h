@@ -6,6 +6,7 @@
 class UMissionTemplate;
 class UMutator;
 class USeason;
+class USpecialEvent;
 class USpecialEventSpawner;
 
 UCLASS(Blueprintable)
@@ -20,6 +21,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UMutator*> BannedMutators;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<USpecialEvent*> BannedEvents;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     USpecialEventSpawner* EventSpawner;

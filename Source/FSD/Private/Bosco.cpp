@@ -42,6 +42,7 @@ ABosco::ABosco(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitia
     this->ReviveThankShout = NULL;
     this->GeneralCallShout = NULL;
     this->RiftCrystalShout = NULL;
+    this->ResiniteMassShout = NULL;
     this->VacuumShout = NULL;
     this->MineResponse = NULL;
     this->CombatResponse = NULL;
@@ -99,11 +100,11 @@ ABosco::ABosco(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitia
     this->CurrentState = EDroneAIState::Follow;
     this->BobbingComponent->SetupAttachment(RootComponent);
     this->BoscoMesh->SetupAttachment(BobbingComponent);
-    this->SpotLightComponent->SetupAttachment(BoscoMesh);
-    this->PointLightComponent->SetupAttachment(BoscoMesh);
     this->LTrail->SetupAttachment(BoscoMesh);
-    this->RTrail->SetupAttachment(BoscoMesh);
     this->MomentumSound->SetupAttachment(BoscoMesh);
+    this->PointLightComponent->SetupAttachment(BoscoMesh);
+    this->RTrail->SetupAttachment(BoscoMesh);
+    this->SpotLightComponent->SetupAttachment(BoscoMesh);
 }
 
 void ABosco::UsePlayerActivatedAbillity(EAbilityIndex Index, AActor* aTarget, const FVector& aLocation) {

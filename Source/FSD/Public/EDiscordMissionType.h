@@ -13,6 +13,7 @@ enum class EDiscordMissionType : uint8 {
     Refinery,
     Sabotage,
     Deepscan,
+    HeavyExtraction,
     Prophunt,
     None,
 };

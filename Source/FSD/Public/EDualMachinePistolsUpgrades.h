@@ -5,5 +5,8 @@
 UENUM(BlueprintType)
 enum class EDualMachinePistolsUpgrades : uint8 {
     TriggerStatusEffectOnEmptyClip,
+    FearNearbyEnemiesOnEmptyClip,
+    EmptyClipFearRadius,
+    RunAndGun,
 };
 

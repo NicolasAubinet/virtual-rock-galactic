@@ -31,6 +31,9 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UCharacterStateComponent> CurrentPhysUpdateState;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float TerminalVelocityDecelerationRate;
+    
 public:
     UPlayerMovementComponent(const FObjectInitializer& ObjectInitializer);
 

@@ -22,5 +22,6 @@ enum class EAmmoDrivenWeapnUpgradeType : uint8 {
     ShotCost,
     CustomEvent1,
     HeatReductionOnReload,
+    CrosshairUpgradedEvent,
 };
 

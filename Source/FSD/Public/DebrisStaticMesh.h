@@ -3,6 +3,7 @@
 #include "DecalData.h"
 #include "EDebrisMeshCollisionProfile.h"
 #include "EDebrisMeshShadows.h"
+#include "ParticleSystemData.h"
 #include "DebrisStaticMesh.generated.h"
 
 class UFXSystemAsset;
@@ -36,6 +37,9 @@ public:
     FDecalData Decal;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool ChangesFootsteps;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool Fragile;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -52,6 +56,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool OnlySpawnWhenCarving;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FParticleSystemData SpawnParticleSystem;
     
     FSD_API FDebrisStaticMesh();
 };

@@ -23,14 +23,26 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool hasBeenReleased;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool canPickUpBeforeReleased;
+    
 public:
     AGem(const FObjectInitializer& ObjectInitializer);
 
     UFUNCTION(BlueprintCallable)
     void SetHasBeenReleased(bool NewHasBeenReleased);
     
+    UFUNCTION(BlueprintCallable)
+    void SetCanPickUpBeforeReleased(bool NewCanPickUpBeforeReleased);
+    
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
+    void RollResourceAmount();
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetHasBeenReleased() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool GetCanPickUpBeforeReleased() const;
     
 };
 

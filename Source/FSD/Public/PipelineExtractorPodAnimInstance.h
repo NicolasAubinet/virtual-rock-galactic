@@ -36,7 +36,7 @@ protected:
     float RotationSpeed;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    TWeakObjectPtr<APipelineExtractorPod> pod;
+    TWeakObjectPtr<APipelineExtractorPod> Pod;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<APipelineSegment> ConnectedSegment;

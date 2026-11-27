@@ -17,6 +17,14 @@ void UProjectileLauncherBaseComponent::Server_StopFire_Implementation() {
 void UProjectileLauncherBaseComponent::Server_Fire_Implementation(FTransform Transform, FVector_NetQuantizeNormal initialBonusVelocity, AProjectileBase* DormentProjectile, bool notifyClients) {
 }
 
+float UProjectileLauncherBaseComponent::GetCurrentVerticalSpread() const {
+    return 0.0f;
+}
+
+float UProjectileLauncherBaseComponent::GetCurrentHorizontalSpread() const {
+    return 0.0f;
+}
+
 void UProjectileLauncherBaseComponent::All_ShowHit_Implementation() {
 }
 

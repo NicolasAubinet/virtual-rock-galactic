@@ -180,6 +180,10 @@ void UActorFunctionLibrary::FSDRemoveAllWidgets(UObject* WorldContextObject) {
 void UActorFunctionLibrary::FSDDumpCallStack(const FString& Msg) {
 }
 
+APlayerCharacter* UActorFunctionLibrary::FindNearestPlayerCharacterInCone(UObject* WorldContextObject, FVector fromLocation, FVector ConeForward, float MaxConeHalfAngle, float MaxRadius, bool MustBeAlive, bool MustBeUnparalyzed, bool MustHaveLineOfSight) {
+    return NULL;
+}
+
 APlayerCharacter* UActorFunctionLibrary::FindNearestPlayerCharacter(UObject* WorldContextObject, FVector fromLocation, float MaxRadius, bool MustBeAlive, bool MustBeUnparalyzed, bool MustHaveLineOfSight) {
     return NULL;
 }

@@ -8,6 +8,7 @@ AZipLineProjectile::AZipLineProjectile(const FObjectInitializer& ObjectInitializ
     this->LightCurve = NULL;
     this->OnUseStatusEffect = NULL;
     this->OnReleaseStatusEffect = NULL;
+    this->bRemoveDropEffectWhenGrounded = false;
 }
 
 void AZipLineProjectile::OnTimelineTick(float NewValue) {

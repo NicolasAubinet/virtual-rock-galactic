@@ -9,6 +9,7 @@ UDrinkableDataAsset::UDrinkableDataAsset() {
     this->SpecialEdition = NULL;
     this->RequiredDLC = NULL;
     this->bPlayFireworks = false;
+    this->bFreeIfWearingDLC = false;
     this->StatConsumed = NULL;
     this->StatRoundOrdered = NULL;
     this->OrderShout = NULL;

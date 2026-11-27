@@ -8,5 +8,6 @@ FVanityTagCategories::FVanityTagCategories() {
     this->Moustaches = NULL;
     this->Eyebrows = NULL;
     this->Sideburns = NULL;
+    this->Tattoos = NULL;
 }
 

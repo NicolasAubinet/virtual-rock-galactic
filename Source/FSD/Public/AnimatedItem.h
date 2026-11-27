@@ -2,6 +2,7 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "Item.h"
+#include "FirstPersonSkeletalMeshComponent.h" // VRG: FPMesh retyped below, full type needed by SetupAttachment(FPMesh) in subclasses
 #include "AnimatedItem.generated.h"
 
 class UAnimMontage;
